@@ -16,7 +16,7 @@ export const StudentInformationWrapper = styled('div')`
 
         h2 {
             position: relative;
-            font-size: 19px;
+            font-size: 21px;
             font-weight: 600;
             color: ${colors.customColors.blackColor};
             font-family: "SUSE", sans-serif;
