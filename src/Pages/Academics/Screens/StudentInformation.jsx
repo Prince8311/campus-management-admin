@@ -1,4 +1,4 @@
-import { StudentInformationWrapper } from "../../Styles/AcademicStyle";
+import { StudentInformationWrapper } from "../../../Styles/AcademicStyle";
 
 const StudentInformationPage = () => {
     return (
@@ -22,9 +22,37 @@ const StudentInformationPage = () => {
                     <div className="add_btn">
                         <button>
                             <i className="fa-solid fa-plus"></i>
-                            <p>Create Employee</p>
+                            <p>Add New Student</p>
                         </button>
                     </div>
+                </div>
+                <div className="table_sec">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Class</th>
+                                <th>Contact No.</th>
+                                <th>Enrollment Status</th>
+                                <th>App Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Joydeep Barik</td>
+                                <td>Class V</td>
+                                <td>91+ 9749708386</td>
+                                <td>Active</td>
+                                <td></td>
+                                <td>
+                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </StudentInformationWrapper>
         </>
