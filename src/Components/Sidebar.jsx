@@ -106,10 +106,10 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-file-pen"></i>
                                     <p>Student Information</p>
                                 </NavLink>
-                                <a>
+                                <NavLink to="/academics/classrooms">
                                     <i className="fa-solid fa-computer"></i>
-                                    <p>Classroom</p>
-                                </a>
+                                    <p>Classrooms</p>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-id-card-clip"></i>
                                     <p>Student Attendance</p>
@@ -131,10 +131,10 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <a>
+                                <NavLink to="/finance-management/fee-collection">
                                     <i className="fa-solid fa-hand-holding-dollar prefix"></i>
                                     <p>Fee Collection</p>
-                                </a>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-file-invoice prefix"></i>
                                     <p>Fee Transactions</p>

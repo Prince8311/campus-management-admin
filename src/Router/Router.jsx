@@ -5,7 +5,13 @@ import PageLayout from "../layouts/PageLayout";
 import DashboardPage from "../Pages/Dashboard";
 
 // Academics
-import StudentInformationPage from "../Pages/Academics/StudentInformation";
+import AcademicMainPage from "../Pages/Academics/Index";
+import StudentInformationPage from "../Pages/Academics/Screens/StudentInformation";
+import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
+
+// Finance Management 
+import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
+import FeeCollectionPage from "../Pages/FinanceManagement/Screens/FeeCollection";
 
 const Routers = () => {
     return (
@@ -15,7 +21,15 @@ const Routers = () => {
                     <Route path="/" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
                         <Route path="dashboard" element={<DashboardPage />} />
-                        <Route path="academics/student-information" element={<StudentInformationPage />} />
+                        <Route path="academics" element={<AcademicMainPage />}>
+                            <Route path="" element={<Navigate to="student-information" />} />
+                            <Route path="student-information" element={<StudentInformationPage />} />
+                            <Route path="classrooms" element={<ClassroomPage />} />
+                        </Route>
+                        <Route path="finance-management" element={<FinanceManagementMainPage />}>
+                            <Route path="" element={<Navigate to="fee-collection" />} />
+                            <Route path="fee-collection" element={<FeeCollectionPage />} />
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>
