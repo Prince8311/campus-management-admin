@@ -5,7 +5,7 @@ const colors = colorNames();
 export const StudentInformationWrapper = styled('div')`
     position: relative;
     width: 100%;
-    padding: 0 10px;
+    padding: 0 15px;
     display: flex;
     flex-direction: column;
 
@@ -122,7 +122,7 @@ export const StudentInformationWrapper = styled('div')`
     .table_sec {
         position: relative;
         width: 100%;
-        margin-top: 30px;
+        margin-top: 25px;
 
         table {
             position: relative;
@@ -204,7 +204,7 @@ export const StudentInformationWrapper = styled('div')`
 
                     td {
                         position: relative;
-                        padding: 10px 25px;
+                        padding: 12px 25px;
                         display: flex;
                         color: ${colors.customColors.blackColor};
                         font-size: 13px;
@@ -213,24 +213,70 @@ export const StudentInformationWrapper = styled('div')`
 
                         &:nth-of-type(1) {
                             width: 25%;
+                            display: flex;
+
+                            .left_table_sec {
+                                position: relative;
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 6px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border: 1px solid ${colors.customColors.borderColor1};
+
+                                h5 {
+                                    position: relative;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor2};
+                                    text-transform: uppercase;
+                                }
+                            }
+
+                            .right_table_sec {
+                                position: relative;
+                                width: calc(100% - 30px);
+                                padding-left: 10px;
+                                display: flex;
+                                flex-direction: column;
+
+                                h6 {
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                p {
+                                    font-size: 12px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor2};
+                                    /* margin-top: 3px; */
+                                }
+                            }
                         }
                         &:nth-of-type(2) {
                             width: 12%;
+                            align-items: center;
                             justify-content: center;
                         }
                         &:nth-of-type(3) {
+                            align-items: center;
                             width: 18%;
                         }
                         &:nth-of-type(4) {
                             width: 15%;
+                            align-items: center;
                             justify-content: center;
                         }
                         &:nth-of-type(5) {
                             width: 15%;
+                            align-items: center;
                             justify-content: center;
                         }
                         &:nth-of-type(6) {
                             width: 15%;
+                            align-items: center;
                             justify-content: center;
 
                             a {
