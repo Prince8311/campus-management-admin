@@ -88,7 +88,7 @@ const Sidebar = () => {
                                     <p>Student Attendance</p>
                                 </a>
                                 <a>
-                                    <i className="fa-solid fa-graduation-cap"></i>
+                                    <i className="fa-solid fa-pen-clip"></i>
                                     <p>Academics</p>
                                 </a>
                                 <a>
@@ -248,8 +248,12 @@ const Sidebar = () => {
                             </div>
                         </div>
                         <a>
-                            <i className="fa-solid fa-hand-holding-dollar prefix"></i>
+                            <i className="fa-solid fa-hand-holding-dollar"></i>
                             <p>Billing</p>
+                        </a>
+                        <a>
+                            <i className="fa-solid fa-graduation-cap"></i>
+                            <p>Alumni</p>
                         </a>
                     </ul>
                 </div>
