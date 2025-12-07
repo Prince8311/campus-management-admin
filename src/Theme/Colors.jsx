@@ -15,7 +15,7 @@ export const colorNames = () => {
         whiteColor1: "rgba(255, 255, 255, 0.8)",
         whiteColor2: "rgba(203, 203, 203, 0.6)",
         lightBackground: "rgb(244, 244, 244)",
-        lightBackground1: "rgba(255, 255, 255, 0.2)",
+        lightBackground1: "rgba(180, 180, 174, 0.2)",
         borderColor: "rgb(225, 224, 234)",
         borderColor1: "rgb(201, 201, 201)",
         redColor: "rgb(231, 57, 57)",
@@ -28,7 +28,7 @@ export const colorNames = () => {
         yellowColorLight: "rgba(255, 199, 108, 0.2)",
         blueColor1: "rgb(2, 192, 255)",
         blueColor2: "rgb(0, 114, 195)",
-        blueColorLight: "rgba(29, 160, 242, 0.25)",
+        blueColorLight: "rgba(2, 192, 255, 0.08)",
       }
     };
   }

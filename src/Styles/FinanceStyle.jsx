@@ -117,6 +117,12 @@ export const FeeCollectionWrapper = styled('div')`
                         align-items: center;
                         padding: 10px 16px;
                         cursor: pointer;
+                        border-radius: 8px 8px 0 0;
+                        transition: all 0.5s ease;
+
+                        &.active {
+                            background: ${colors.customColors.lightBackground1};
+                        }
 
                         .left_info {
                             position: relative;
@@ -272,6 +278,284 @@ export const FeeCollectionWrapper = styled('div')`
                                 position: relative;
                                 font-size: 14px;
                                 color: ${colors.customColors.blackColor2};
+                            }
+                        }
+                    }
+
+                    .bottom_part {
+                        position: relative;
+                        width: 100%;
+
+                        .bottom_inner {
+                            position: relative;
+                            width: 100%;
+                            padding: 15px;
+                            display: flex;
+                            flex-direction: column;
+
+                            .filter_search_sec {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                .search_sec {
+                                    position: relative;
+                                    height: 35px;
+                                    padding: 5px 0;
+                                    display: flex;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    border-radius: 6px;
+
+                                    i {
+                                        position: relative;
+                                        width: 40px;
+                                        height: 100%;
+                                        font-size: 13px;
+                                        color: ${colors.customColors.blackColor3};
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border-right: 1px solid ${colors.customColors.borderColor};
+                                    }
+
+                                    input {
+                                        position: relative;
+                                        width: 300px;
+                                        height: 100%;
+                                        border: none;
+                                        outline: none;
+                                        padding: 0 15px;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
+                                }
+
+                                .filter_sec {
+                                    position: relative;
+                                    margin-left: 20px;
+
+                                    .filter_btn {
+                                        position: relative;
+                                        width: 150px;
+                                        height: 35px;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        border-radius: 6px;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 5px 15px;
+                                        cursor: pointer;
+
+                                        p {
+                                            position: relative;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
+
+                                        i {
+                                            position: relative;
+                                            margin-left: auto;
+                                            color: ${colors.customColors.blackColor1};
+                                            font-size: 13px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .table_sec {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 15px;
+
+                                table {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    thead {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 40px;
+                                        background: ${colors.themeColor};
+                                        border-radius: 10px 10px 0px 0px;
+                                        border: 1px solid ${colors.themeColor};
+
+                                        tr {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                        }
+
+                                        th {
+                                            position: relative;
+                                            height: 100%;
+                                            display: flex;
+                                            align-items: center;
+                                            font-family: "Lemonada", cursive;
+                                            font-size: 12px;
+                                            word-break: break-all;
+                                            color: ${colors.customColors.whiteColor};
+                                            padding: 0 25px;
+                                            font-weight: 600;
+
+                                            &:nth-of-type(1) {
+                                                width: 25%;
+                                            }
+                                            &:nth-of-type(2) {
+                                                width: 20%;
+                                                justify-content: center;
+                                            }
+                                            &:nth-of-type(3) {
+                                                width: 18%;
+                                                justify-content: center;
+                                            }
+                                            &:nth-of-type(4) {
+                                                width: 18%;
+                                                justify-content: center;
+                                            }
+                                            &:nth-of-type(5) {
+                                                width: 19%;
+                                                justify-content: center;
+                                            }
+                                        }
+                                    }
+
+                                    tbody {
+                                        position: relative;
+                                        width: 100%;
+                                        border: 1px solid ${colors.customColors.whiteColor2};
+                                        border-top: none;
+                                        border-radius: 0px 0px 10px 10px;
+                                        display: flex;
+                                        flex-direction: column;
+                                        overflow: hidden;
+
+                                        tr {
+                                            position: relative;
+                                            width: 100%;
+                                            min-height: 40px;
+                                            display: flex;
+
+                                            &:nth-of-type(even) {
+                                                background: ${colors.customColors.blueColorLight};
+                                            }
+
+                                            td {
+                                                position: relative;
+                                                padding: 12px 25px;
+                                                display: flex;
+                                                color: ${colors.customColors.blackColor};
+                                                font-size: 13px;
+                                                word-break: break-all;
+                                                line-height: 1.5;
+
+                                                &:nth-of-type(1) {
+                                                    width: 25%;
+                                                    display: flex;
+
+                                                    .left_table_sec {
+                                                        position: relative;
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        border-radius: 6px;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: center;
+                                                        border: 1px solid ${colors.customColors.borderColor1};
+
+                                                        h5 {
+                                                            position: relative;
+                                                            font-size: 14px;
+                                                            font-weight: 500;
+                                                            color: ${colors.customColors.blackColor2};
+                                                            text-transform: uppercase;
+                                                        }
+                                                    }
+
+                                                    .right_table_sec {
+                                                        position: relative;
+                                                        width: calc(100% - 30px);
+                                                        padding-left: 10px;
+                                                        display: flex;
+                                                        flex-direction: column;
+
+                                                        h6 {
+                                                            font-size: 13px;
+                                                            font-weight: 400;
+                                                            color: ${colors.customColors.blackColor1};
+                                                        }
+
+                                                        p {
+                                                            font-size: 12px;
+                                                            font-weight: 400;
+                                                            color: ${colors.customColors.blackColor2};
+                                                            /* margin-top: 3px; */
+                                                        }
+                                                    }
+                                                }
+
+                                                &:nth-of-type(2) {
+                                                    width: 20%;
+                                                    align-items: center;
+                                                    justify-content: center;
+                                                }
+
+                                                &:nth-of-type(3) {
+                                                    width: 18%;
+                                                    align-items: center;
+                                                    justify-content: center;
+
+                                                    p {
+                                                        font-size: 15px;
+                                                        font-weight: 500;
+                                                        color: ${colors.customColors.greenColor};
+
+                                                        b {
+                                                            font-weight: 500;
+                                                            font-size: 12px;
+                                                        }
+                                                    }
+                                                }
+
+                                                &:nth-of-type(4) {
+                                                    width: 18%;
+                                                    align-items: center;
+                                                    justify-content: center;
+
+                                                    p {
+                                                        font-size: 15px;
+                                                        font-weight: 500;
+                                                        color: ${colors.customColors.redColor};
+
+                                                        b {
+                                                            font-weight: 500;
+                                                            font-size: 12px;
+                                                        }
+                                                    }
+                                                }
+
+                                                &:nth-of-type(5) {
+                                                    width: 19%;
+                                                    align-items: center;
+                                                    justify-content: center;
+
+                                                    a.collect_btn {
+                                                        position: relative;
+                                                        padding: 6px 15px;
+                                                        background: ${colors.customColors.blueColor1};
+                                                        font-size: 12px;
+                                                        font-weight: 500;
+                                                        color: ${colors.customColors.whiteColor};
+                                                        border-radius: 5px;
+                                                        cursor: pointer;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

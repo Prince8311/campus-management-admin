@@ -49,10 +49,38 @@ const StudentInformationPage = () => {
                                         <p>360 / 2025-26</p>
                                     </div>
                                 </td>
-                                <td>Class V</td>
+                                <td>10 - A</td>
                                 <td>9749708386</td>
-                                <td>Active</td>
-                                <td></td>
+                                <td>
+                                    <p className="active">Active</p>
+                                </td>
+                                <td>
+                                    <p className="active">Joined</p>
+                                </td>
+                                <td>
+                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className="left_table_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_table_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>360 / 2025-26</p>
+                                    </div>
+                                </td>
+                                <td>10 - A</td>
+                                <td>9749708386</td>
+                                <td>
+                                    <p className="">Inactive</p>
+                                </td>
+                                <td>
+                                    <p className="">Not Installed</p>
+                                </td>
                                 <td>
                                     <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
                                     <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>

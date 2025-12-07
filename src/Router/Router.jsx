@@ -12,6 +12,7 @@ import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
 // Finance Management 
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
 import FeeCollectionPage from "../Pages/FinanceManagement/Screens/FeeCollection";
+import FeeTransactionsPage from "../Pages/FinanceManagement/Screens/FeeTransactions";
 
 const Routers = () => {
     return (
@@ -29,6 +30,7 @@ const Routers = () => {
                         <Route path="finance-management" element={<FinanceManagementMainPage />}>
                             <Route path="" element={<Navigate to="fee-collection" />} />
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
+                            <Route path="fee-transactions" element={<FeeTransactionsPage />} />
                         </Route>
                     </Route>
                 </Routes>

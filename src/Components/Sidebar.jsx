@@ -14,9 +14,15 @@ const Sidebar = () => {
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
         };
-        const pathName = location.pathname.split('/').filter(Boolean).pop() || 'Dashboard';
+        const path = location.pathname;
+        const pathName = path.split('/').filter(Boolean).pop() || 'Dashboard';
         const formattedPageName = formatPathName(pathName);
         setPageName(formattedPageName);
+        if (path.startsWith('/academics')) {
+            setActiveDropdown(1);
+        } else if (path.startsWith('/finance-management')) {
+            setActiveDropdown(2);
+        }
     }, [location]);
 
     const toggleDropdown = (index) => {
@@ -135,10 +141,10 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-hand-holding-dollar prefix"></i>
                                     <p>Fee Collection</p>
                                 </NavLink>
-                                <a>
+                                <NavLink to="/finance-management/fee-transactions">
                                     <i className="fa-solid fa-file-invoice prefix"></i>
                                     <p>Fee Transactions</p>
-                                </a>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-gear prefix"></i>
                                     <p>Fee Configuration</p>

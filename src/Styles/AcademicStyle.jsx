@@ -160,21 +160,27 @@ export const StudentInformationWrapper = styled('div')`
                     &:nth-of-type(1) {
                         width: 25%;
                     }
+
                     &:nth-of-type(2) {
                         width: 12%;
                         justify-content: center;
                     }
+
                     &:nth-of-type(3) {
                         width: 18%;
+                        justify-content: center;
                     }
+
                     &:nth-of-type(4) {
                         width: 15%;
                         justify-content: center;
                     }
+
                     &:nth-of-type(5) {
                         width: 15%;
                         justify-content: center;
                     }
+
                     &:nth-of-type(6) {
                         width: 15%;
                         justify-content: center;
@@ -255,25 +261,67 @@ export const StudentInformationWrapper = styled('div')`
                                 }
                             }
                         }
+
                         &:nth-of-type(2) {
                             width: 12%;
                             align-items: center;
                             justify-content: center;
                         }
+
                         &:nth-of-type(3) {
                             align-items: center;
                             width: 18%;
+                            justify-content: center;
                         }
+
                         &:nth-of-type(4) {
                             width: 15%;
                             align-items: center;
                             justify-content: center;
+
+                            p {
+                                position: relative;
+                                font-size: 10px;
+                                font-weight: 500;
+                                line-height: 1;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 20px;
+                                padding: 4px 15px;
+                                color: ${colors.customColors.redColor};
+                                background: ${colors.customColors.redColorLight};
+
+                                &.active {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
+                                }
+                            }
                         }
+
                         &:nth-of-type(5) {
                             width: 15%;
                             align-items: center;
                             justify-content: center;
+
+                            p {
+                                position: relative;
+                                font-size: 10px;
+                                font-weight: 500;
+                                line-height: 1;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 20px;
+                                padding: 4px 15px;
+                                color: ${colors.customColors.yellowColor1};
+                                background: ${colors.customColors.yellowColorLight};
+
+                                &.active {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
+                                }
+                            }
                         }
+
                         &:nth-of-type(6) {
                             width: 15%;
                             align-items: center;
