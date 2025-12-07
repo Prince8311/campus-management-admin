@@ -35,7 +35,15 @@ const FeeTransactionsPage = () => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Joydeep Barik</td>
+                                <td>
+                                    <div className="left_table_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_table_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>360 / 2025-26</p>
+                                    </div>
+                                </td>
                                 <td>10 - A</td>
                                 <td>30,000</td>
                                 <td>SAS-2025-26-684</td>
@@ -46,7 +54,15 @@ const FeeTransactionsPage = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Joydeep Barik</td>
+                                <td>
+                                    <div className="left_table_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_table_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>360 / 2025-26</p>
+                                    </div>
+                                </td>
                                 <td>10 - A</td>
                                 <td>30,000</td>
                                 <td>SAS-2025-26-684</td>
