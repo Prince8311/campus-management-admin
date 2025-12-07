@@ -364,3 +364,289 @@ export const StudentInformationWrapper = styled('div')`
         }
     }
 `;
+
+export const ClassroomsWrapper = styled('div')`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 0 15px;
+
+        h2 {
+            position: relative;
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
+        }
+    }
+
+    .tab_sec {
+        position: relative;
+        margin-top: 25px;
+        width: 100%;
+        padding: 0 15px;
+
+        .tab_inner {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid ${colors.themeColor};
+
+            li {
+                position: relative;
+                list-style: none;
+                height: 100%;
+                padding: 0 20px;
+                padding-top: 2px;
+                display: flex;
+                align-items: center;
+                font-size: 12.5px;
+                color: ${colors.customColors.blackColor1};
+                border-radius: 6px 6px 0 0;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                
+                &:hover {
+                    color: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+                
+                &.active {
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+            }
+        }
+    }
+
+    .class_levels {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .class_level_box {
+            position: relative;
+            width: 100%;
+            margin-top: 16px;
+            padding-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 15px;
+                bottom: 0;
+                width: calc(100% - 30px);
+                height: 1px;
+                background: linear-gradient(to right, ${colors.customColors.borderColor} 70%, transparent);
+            }
+
+            &:last-of-type {
+                &::before {
+                    display: none;
+                }
+            }
+
+            .box_head {
+                position: relative;
+                width: 100%;
+                padding: 0 15px;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                padding-bottom: 10px;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 15px;
+                    bottom: 0;
+                    width: calc(100% - 30px);
+                    height: 1px;
+                    background: ${colors.customColors.borderColor};
+                }
+
+                span {
+                    position: relative;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor1};
+                    font-style: italic;
+                }
+
+                button {
+                    position: relative;
+                    width: 175px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 1px solid ${colors.customColors.greenColor};
+                    background: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+                    border-radius: 6px;
+                    font-size: 12.5px;
+                    font-weight: 500;
+
+                    i {
+                        margin-right: 8px;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            .box_items {
+                position: relative;
+                width: 100%;
+                display: flex;
+                margin-top: 5px;
+                padding: 5px;
+                flex-wrap: wrap;
+
+                .class_item {
+                    position: relative;
+                    width: 25%;
+                    max-width: 302.75px;
+                    padding: 10px;
+
+                    .item_inner {
+                        position: relative;
+                        width: 100%;
+                        padding: 12px 15px 15px 15px;
+                        background: ${colors.customColors.whiteColor};
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 8px;
+                        display: flex;
+                        flex-direction: column;
+                        box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+                        .top_part {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+
+                            span {
+                                position: relative;
+                                font-size: 16px;
+                                font-weight: 600;
+                                color: ${colors.customColors.blackColor1};
+                            }
+
+                            p {
+                                position: relative;
+                                margin-top: 3px;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
+
+                                b {
+                                    font-weight: 500;
+                                    margin-right: 4px;
+                                    font-style: italic;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+                            }
+                        }
+
+                        .bottom_part {
+                            position: relative;
+                            margin-top: 12px;
+                            width: 100%;
+                            display: flex;
+                            align-items: flex-end;
+                            justify-content: space-between;
+
+                            .students {
+                                position: relative;
+                                display: flex;
+                                align-items: center;
+
+                                ul {
+                                    position: relative;
+                                    display: flex;
+                                    align-items: center;
+
+                                    li {
+                                        position: relative;
+                                        list-style: none;
+                                        width: 33px;
+                                        height: 33px;
+                                        display: flex;
+                                        border-radius: 50%;
+                                        overflow: hidden;
+                                        border: 2px solid ${colors.customColors.whiteColor};
+                                        margin-left: -16.5px;
+
+                                        &:first-of-type {
+                                            margin-left: 0;
+                                        }
+
+                                        p {
+                                            position: relative; 
+                                            width: 100%;
+                                            height: 100%;
+                                            background: ${colors.themeColor};
+                                            color: ${colors.customColors.whiteColor};
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            font-size: 13px;
+                                            font-weight: 500;
+                                            letter-spacing: 0.55px;
+                                        }
+
+                                        img {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            object-fit: cover;
+                                        }
+                                    }
+                                }
+
+                                span {
+                                    position: relative;
+                                    width: 33px;
+                                    height: 33px;
+                                    background: ${colors.customColors.borderColor};
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 10px;
+                                    font-weight: 500;
+                                    border: 2px solid ${colors.customColors.whiteColor};
+                                    margin-left: -16.5px;
+                                    color: ${colors.customColors.blackColor};
+                                }
+                            }
+
+                            button {
+                                position: relative;
+                                padding: 5px 15px;
+                                font-size: 11px;
+                                background: ${colors.themeColor};
+                                border: none;
+                                border-radius: 5px;
+                                color: ${colors.customColors.whiteColor};
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;

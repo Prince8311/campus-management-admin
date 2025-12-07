@@ -25,7 +25,7 @@ export const FeeCollectionWrapper = styled('div')`
 
     .tab_sec {
         position: relative;
-        margin-top: 20px;
+        margin-top: 25px;
         width: 100%;
         padding: 0 15px;
 
@@ -67,17 +67,33 @@ export const FeeCollectionWrapper = styled('div')`
 
     .class_levels {
         position: relative;
-        margin-top: 20px;
         width: 100%;
         display: flex;
         flex-direction: column;
-
+        
         .class_level_box {
             position: relative;
             width: 100%;
-            margin-bottom: 25px;
+            margin-top: 16px;
+            padding-bottom: 25px;
             display: flex;
             flex-direction: column;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 15px;
+                bottom: 0;
+                width: calc(100% - 30px);
+                height: 1px;
+                background: linear-gradient(to right, ${colors.customColors.borderColor} 70%, transparent);
+            }
+
+            &:last-of-type {
+                &::before {
+                    display: none;
+                }
+            }
 
             .box_head {
                 position: relative;
