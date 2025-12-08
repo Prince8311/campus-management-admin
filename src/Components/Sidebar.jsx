@@ -33,7 +33,7 @@ const Sidebar = () => {
         <>
             <SidebarWrapper>
                 <div className="logo">
-                    <h3>Campus <span><b>C</b>onnect</span></h3>
+                    <h3>Edu <span><b>C</b>onnekt</span></h3>
                 </div>
                 <div className="institution_brief">
                     <div className="brief_inner">
