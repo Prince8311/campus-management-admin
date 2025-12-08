@@ -166,10 +166,10 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <a>
+                                <NavLink to="/communication/messaging">
                                     <i className="fa-solid fa-message prefix"></i>
                                     <p>Messaging</p>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
                         <div className={`dropdown_item ${activeDropdown === 4 ? 'active' : ''}`}>

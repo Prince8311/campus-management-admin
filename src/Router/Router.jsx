@@ -13,6 +13,11 @@ import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
 import FeeCollectionPage from "../Pages/FinanceManagement/Screens/FeeCollection";
 import FeeTransactionsPage from "../Pages/FinanceManagement/Screens/FeeTransactions";
+
+// Communication 
+import CommunicationMainPage from "../Pages/Communication/Index";
+import MessagingPage from "../Pages/Communication/Screens/Messaging";
+
 import AlumniPage from "../Pages/Alumni";
 
 const Routers = () => {
@@ -32,6 +37,10 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="fee-collection" />} />
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
                             <Route path="fee-transactions" element={<FeeTransactionsPage />} />
+                        </Route>
+                        <Route path="communication" element={<CommunicationMainPage />}>
+                            <Route path="" element={<Navigate to="messaging" />} />
+                            <Route path="messaging" element={<MessagingPage />} />
                         </Route>
                         <Route path="alumni" element={<AlumniPage />} />
                     </Route>
