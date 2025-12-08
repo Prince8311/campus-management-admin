@@ -33,7 +33,7 @@ const MessagingPage = () => {
                             <a><i className="fa-solid fa-arrows-rotate"></i>Automated</a>
                         </div>
                         <div className="box_body">
-                            <p>{"Dear Parent, {{ Name }} 's pending fee is {{ Amount }}. Pay online on Teachmint bit.ly/3K8zWwV Ignore if paid. Regards SRI SAI ANGELS SCHOOL via Teachmint"}</p>
+                            <p>{"Dear Parent, {{ Name }} 's pending fee is {{ Amount }}. Pay online on Teachmint bit.ly/3K8zWwV Ignore if paid. Regards SRI SAI ANGELS SCHOOL via Edu Connekt"}</p>
                         </div>
                         <div className="box_bottom">
                             <p><b>Created by :</b>Meghashree K M</p>
