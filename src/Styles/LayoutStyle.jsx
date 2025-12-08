@@ -316,6 +316,7 @@ export const SidebarWrapper = styled('div')`
                     height: 100%;
                     padding-left: 15px;
                     font-size: 13px;
+                    line-height: 1;
                     display: flex;
                     align-items: center;
                     color: ${colors.customColors.blackColor};
