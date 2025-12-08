@@ -13,6 +13,7 @@ import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
 import FeeCollectionPage from "../Pages/FinanceManagement/Screens/FeeCollection";
 import FeeTransactionsPage from "../Pages/FinanceManagement/Screens/FeeTransactions";
+import AlumniPage from "../Pages/Alumni";
 
 const Routers = () => {
     return (
@@ -32,6 +33,7 @@ const Routers = () => {
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
                             <Route path="fee-transactions" element={<FeeTransactionsPage />} />
                         </Route>
+                        <Route path="alumni" element={<AlumniPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

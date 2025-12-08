@@ -251,10 +251,10 @@ const Sidebar = () => {
                             <i className="fa-solid fa-hand-holding-dollar"></i>
                             <p>Billing</p>
                         </a>
-                        <a>
+                        <NavLink to="/alumni">
                             <i className="fa-solid fa-graduation-cap"></i>
                             <p>Alumni</p>
-                        </a>
+                        </NavLink>
                     </ul>
                 </div>
                 <div className="auth_btn">
