@@ -8,6 +8,8 @@ import DashboardPage from "../Pages/Dashboard";
 import AcademicMainPage from "../Pages/Academics/Index";
 import StudentInformationPage from "../Pages/Academics/Screens/StudentInformation";
 import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
+import StudentAttendencePage from "../Pages/Academics/Screens/StudentAttendence";
+
 
 // Finance Management 
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
@@ -36,6 +38,7 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="student-information" />} />
                             <Route path="student-information" element={<StudentInformationPage />} />
                             <Route path="classrooms" element={<ClassroomPage />} />
+                            <Route path="student-attendence" element={<StudentAttendencePage />} />
                         </Route>
                         <Route path="finance-management" element={<FinanceManagementMainPage />}>
                             <Route path="" element={<Navigate to="fee-collection" />} />

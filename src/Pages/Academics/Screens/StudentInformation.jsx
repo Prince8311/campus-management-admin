@@ -26,6 +26,13 @@ const StudentInformationPage = () => {
                         </button>
                     </div>
                 </div>
+                <div className="tab_sec">
+                    <div className="tab_inner">
+                        <li className="active">Primary</li>
+                        <li>Middle</li>
+                        <li>Secondary</li>
+                    </div>
+                </div>
                 <div className="table_sec">
                     <table>
                         <thead>
