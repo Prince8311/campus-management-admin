@@ -183,10 +183,10 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <a>
+                                <NavLink to="/staff-management/staff-information">
                                     <i className="fa-solid fa-file-pen prefix"></i>
                                     <p>Staff Information</p>
-                                </a>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-id-card-clip prefix"></i>
                                     <p>Staff Attendance</p>
