@@ -29,12 +29,14 @@ const StaffInformationPage = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Student Name</th>
+                                <th>Teacher Name</th>
+                                <th>Contact</th>
                                 <th>Class</th>
-                                <th>Contact No.</th>
-                                <th>Enrollment Status</th>
+                                <th>Subject</th>
+                                <th>Class Teacher</th>
+                                <th>Employment Status</th>
                                 <th>App Status</th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,8 +50,10 @@ const StaffInformationPage = () => {
                                         <p>360 / 2025-26</p>
                                     </div>
                                 </td>
-                                <td>10 - A</td>
                                 <td>9749708386</td>
+                                <td>10 - A</td>
+                                <td>Science</td>
+                                <td><i className="fa-solid fa-minus"></i></td>
                                 <td>
                                     <p className="active">Active</p>
                                 </td>
@@ -72,13 +76,15 @@ const StaffInformationPage = () => {
                                         <p>360 / 2025-26</p>
                                     </div>
                                 </td>
-                                <td>10 - A</td>
                                 <td>9749708386</td>
+                                <td>10 - A</td>
+                                <td>Science</td>
+                                <td><i className="fa-solid fa-minus"></i></td>
                                 <td>
-                                    <p className="">Inactive</p>
+                                    <p className="">Active</p>
                                 </td>
                                 <td>
-                                    <p className="">Not Installed</p>
+                                    <p className="">Joined</p>
                                 </td>
                                 <td>
                                     <a className="view_btn"><i className="fa-solid fa-eye"></i></a>

@@ -55,7 +55,7 @@ const StudentAttendencePage = () => {
                                     </td>
                                     <td>100</td>
                                     <td><i className="fa-solid fa-minus"></i></td>
-                                    <td><i class="fa-solid fa-minus"></i></td>
+                                    <td><i className="fa-solid fa-minus"></i></td>
                                     <td>
                                         <p className="">Not Marked</p>
                                     </td>

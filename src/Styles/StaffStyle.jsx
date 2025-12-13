@@ -165,35 +165,43 @@ export const StaffInformationWrapper = styled('div')`
                     font-size: 12px;
                     word-break: break-all;
                     color: ${colors.customColors.whiteColor};
-                    padding: 0 25px;
+                    padding: 0 20px;
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 25%;
+                        width: 17%;
                     }
 
                     &:nth-of-type(2) {
-                        width: 12%;
+                        width: 14%;
                         justify-content: center;
                     }
-
                     &:nth-of-type(3) {
-                        width: 18%;
+                        width: 10%;
                         justify-content: center;
                     }
-
                     &:nth-of-type(4) {
-                        width: 15%;
+                        width: 10%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(5) {
-                        width: 15%;
+                        width: 12%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(6) {
                         width: 15%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(7) {
+                        width: 12%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(8) {
+                        width: 10%;
                         justify-content: center;
                     }
                 }
@@ -221,7 +229,7 @@ export const StaffInformationWrapper = styled('div')`
 
                     td {
                         position: relative;
-                        padding: 12px 25px;
+                        padding: 12px 20px;
                         display: flex;
                         color: ${colors.customColors.blackColor};
                         font-size: 13px;
@@ -229,7 +237,7 @@ export const StaffInformationWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 25%;
+                            width: 17%;
                             display: flex;
 
                             .left_table_sec {
@@ -274,18 +282,28 @@ export const StaffInformationWrapper = styled('div')`
                         }
 
                         &:nth-of-type(2) {
-                            width: 12%;
+                            width: 14%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(3) {
                             align-items: center;
-                            width: 18%;
+                            width: 10%;
+                            justify-content: center;
+                        }
+                        &:nth-of-type(4) {
+                            align-items: center;
+                            width: 10%;
+                            justify-content: center;
+                        }
+                        &:nth-of-type(5) {
+                            align-items: center;
+                            width: 12%;
                             justify-content: center;
                         }
 
-                        &:nth-of-type(4) {
+                        &:nth-of-type(6) {
                             width: 15%;
                             align-items: center;
                             justify-content: center;
@@ -309,8 +327,8 @@ export const StaffInformationWrapper = styled('div')`
                             }
                         }
 
-                        &:nth-of-type(5) {
-                            width: 15%;
+                        &:nth-of-type(7) {
+                            width: 12%;
                             align-items: center;
                             justify-content: center;
 
@@ -333,8 +351,8 @@ export const StaffInformationWrapper = styled('div')`
                             }
                         }
 
-                        &:nth-of-type(6) {
-                            width: 15%;
+                        &:nth-of-type(8) {
+                            width: 10%;
                             align-items: center;
                             justify-content: center;
 
