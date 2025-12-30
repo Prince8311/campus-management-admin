@@ -10,11 +10,16 @@ import StudentInformationPage from "../Pages/Academics/Screens/StudentInformatio
 import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
 import StudentAttendencePage from "../Pages/Academics/Screens/StudentAttendence";
 
-
 // Finance Management 
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
 import FeeCollectionPage from "../Pages/FinanceManagement/Screens/FeeCollection";
 import FeeTransactionsPage from "../Pages/FinanceManagement/Screens/FeeTransactions";
+import FeeConfigurationPage from "../Pages/FinanceManagement/Screens/FeeConfiguration";
+import FeesStructurePage from "../Pages/FinanceManagement/Screens/FeesStructure";
+import DiscountPage from "../Pages/FinanceManagement/Screens/Discount";
+import BankAccountPage from "../Pages/FinanceManagement/Screens/BankAccounts";
+import AllAccountsPage from "../Pages/FinanceManagement/Screens/AllAccounts";
+import SplitAccountsPage from "../Pages/FinanceManagement/Screens/SplitAccounts";
 
 // Communication 
 import CommunicationMainPage from "../Pages/Communication/Index";
@@ -25,6 +30,7 @@ import StaffManagementMainPage from "../Pages/StaffManagement/Index";
 import StaffInformationPage from "../Pages/StaffManagement/Screens/StaffInformation";
 
 import AlumniPage from "../Pages/Alumni";
+import BillingPage from "../Pages/Billing";
 
 const Routers = () => {
     return (
@@ -44,6 +50,16 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="fee-collection" />} />
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
                             <Route path="fee-transactions" element={<FeeTransactionsPage />} />
+                            <Route path="fee-configuration" element={<FeeConfigurationPage />}>
+                                <Route path="" element={<Navigate to="fees-structure" />} />
+                                <Route path="fees-structure" element={<FeesStructurePage />} />
+                                <Route path="discount" element={<DiscountPage />} />
+                            </Route>
+                            <Route path="bank-accounts" element={<BankAccountPage />}>
+                                <Route path="" element={<Navigate to="all-accounts" />} />
+                                <Route path="all-accounts" element={<AllAccountsPage />} />
+                                <Route path="split-accounts" element={<SplitAccountsPage />} />
+                            </Route>
                         </Route>
                         <Route path="communication" element={<CommunicationMainPage />}>
                             <Route path="" element={<Navigate to="messaging" />} />
@@ -54,6 +70,7 @@ const Routers = () => {
                             <Route path="staff-information" element={<StaffInformationPage />} />
                         </Route>
                         <Route path="alumni" element={<AlumniPage />} />
+                        <Route path="billing" element={<BillingPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

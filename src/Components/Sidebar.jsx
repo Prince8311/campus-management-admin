@@ -145,14 +145,14 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-file-invoice prefix"></i>
                                     <p>Fee Transactions</p>
                                 </NavLink>
-                                <a>
+                                <NavLink to="/finance-management/fee-configuration">
                                     <i className="fa-solid fa-gear prefix"></i>
                                     <p>Fee Configuration</p>
-                                </a>
-                                <a>
+                                </NavLink>
+                                <NavLink to="/finance-management/bank-accounts">
                                     <i className="fa-solid fa-building-columns prefix"></i>
                                     <p>Bank Accounts</p>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
                         <div className={`dropdown_item ${activeDropdown === 3 ? 'active' : ''}`}>
@@ -247,10 +247,10 @@ const Sidebar = () => {
                                 </a>
                             </div>
                         </div>
-                        <a>
+                        <NavLink to="billing">
                             <i className="fa-solid fa-hand-holding-dollar"></i>
                             <p>Billing</p>
-                        </a>
+                        </NavLink>
                         <NavLink to="/alumni">
                             <i className="fa-solid fa-graduation-cap"></i>
                             <p>Alumni</p>
