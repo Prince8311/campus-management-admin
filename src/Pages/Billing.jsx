@@ -6,12 +6,6 @@ const BillingPage = () => {
             <BillingWrapper>
                 <div className="page_head">
                     <h2>Subcription Details</h2>
-                    <div className="add_btn">
-                        <button>
-                            <i className="fa-solid fa-plus"></i>
-                            <p>Create Subcription</p>
-                        </button>
-                    </div>
                 </div>
                 <div className="current_plan_sec"></div>
                 <div className="payment_schedule_sec">
