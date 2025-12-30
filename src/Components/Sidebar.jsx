@@ -237,10 +237,10 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-gear prefix"></i>
                                     <p>General Settings</p>
                                 </a>
-                                <a>
+                                <NavLink to="/settings/roles-permissions">
                                     <i className="fa-solid fa-file-shield prefix"></i>
                                     <p>Roles & Permissions</p>
-                                </a>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-hand-holding-hand prefix"></i>
                                     <p>Preferences</p>
