@@ -36,6 +36,17 @@ import RolesPermissionsPage from "../Pages/Settings/Screens/RolePermission";
 import AlumniPage from "../Pages/Alumni";
 import BillingPage from "../Pages/Billing";
 
+//Report
+import ReportMainPage from "../Pages/Reports/Index";
+import SchoolSthrengthPage from "../Pages/Reports/Screens/SchoolStrength";
+
+import StudentReportPage from "../Pages/Reports/Screens/StudentReport";
+import OverViewPage from "../Pages/Reports/Screens/OverView";
+import ClassWisePage from "../Pages/Reports/Screens/ClassWise";
+import StudentWisePage from "../Pages/Reports/Screens/StudentWise";
+
+import StaffReportPage from "../Pages/Reports/Screens/StaffReport";
+
 const Routers = () => {
     return (
         <>
@@ -44,6 +55,19 @@ const Routers = () => {
                     <Route path="/" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
                         <Route path="dashboard" element={<DashboardPage />} />
+                        <Route path="reports" element={<ReportMainPage />}>
+                            <Route path="" element={<Navigate to="school-strength" />} />
+                            <Route path="school-strength" element={<SchoolSthrengthPage />}>
+                                <Route path="" element={<Navigate to="student-report" />} />
+                                <Route path="student-report" element={<StudentReportPage />}>
+                                    <Route path="" element={<Navigate to="overview" />} />
+                                    <Route path="overview" element={<OverViewPage />} />
+                                    <Route path="class-wise" element={<ClassWisePage />} />
+                                    <Route path="student-wise" element={<StudentWisePage />} />
+                                </Route>
+                                <Route path="staff-report" element={<StaffReportPage />}></Route>
+                            </Route>
+                        </Route>
                         <Route path="academics" element={<AcademicMainPage />}>
                             <Route path="" element={<Navigate to="student-information" />} />
                             <Route path="student-information" element={<StudentInformationPage />} />

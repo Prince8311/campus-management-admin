@@ -75,10 +75,10 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <a>
+                                <NavLink to="/reports/school-strength">
                                     <i className="fa-solid fa-users"></i>
                                     <p>School Strength</p>
-                                </a>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-computer"></i>
                                     <p>Classroom Activity</p>
