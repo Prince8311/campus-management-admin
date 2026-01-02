@@ -32,6 +32,9 @@ import StaffInformationPage from "../Pages/StaffManagement/Screens/StaffInformat
 // Settings 
 import SettingsMainPage from "../Pages/Settings/Index";
 import RolesPermissionsPage from "../Pages/Settings/Screens/RolePermission";
+import ProfileSettingPage from "../Pages/Settings/Screens/ProfileSettings";
+import StudentPage from "../Pages/Settings/Screens/Student";
+import StaffPage from "../Pages/Settings/Screens/Staff";
 
 import AlumniPage from "../Pages/Alumni";
 import BillingPage from "../Pages/Billing";
@@ -100,6 +103,11 @@ const Routers = () => {
                         <Route path="settings" element={<SettingsMainPage />}>
                             <Route path="" element={<Navigate to="roles-permissions" />} />
                             <Route path="roles-permissions" element={<RolesPermissionsPage />} />
+                            <Route path="profile-settings" element={<ProfileSettingPage />}>
+                                <Route path="" element={<Navigate to="student" />} />
+                                <Route path="student" element={<StudentPage />} />
+                                <Route path="staff" element={<StaffPage />} />
+                            </Route>
                         </Route>
                         <Route path="alumni" element={<AlumniPage />} />
                         <Route path="billing" element={<BillingPage />} />

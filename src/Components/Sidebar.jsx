@@ -229,10 +229,10 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-mobile prefix"></i>
                                     <p>Device Settings</p>
                                 </a>
-                                <a>
+                                <NavLink to="/settings/profile-settings">
                                     <i className="fa-solid fa-user-gear prefix"></i>
                                     <p>Profile Settings</p>
-                                </a>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-gear prefix"></i>
                                     <p>General Settings</p>
