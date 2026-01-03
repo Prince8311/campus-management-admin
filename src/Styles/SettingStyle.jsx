@@ -277,8 +277,19 @@ export const StudentWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 padding: 0 15px;
+                padding-bottom: 6px;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 15px;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(to right, ${colors.customColors.borderColor1} 20%, transparent 100%);
+                }
 
                 .box_head {
                     position: relative;
@@ -287,7 +298,7 @@ export const StudentWrapper = styled('div')`
 
                     h6 {
                         position: relative;
-                        font-size: 14px;
+                        font-size: 15px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
                     }
@@ -310,14 +321,14 @@ export const StudentWrapper = styled('div')`
 
                         i {
                             position: relative;
-                            color: ${colors.customColors.blackColor};
+                            color: ${colors.customColors.greenColor};
                             font-size: 13px;
                         }
                         
                         p {
                             position: relative;
                             font-size: 12px;
-                            color: ${colors.customColors.blackColor};
+                            color: ${colors.customColors.greenColor};
                             margin-left: auto;
                         }
                     }
@@ -367,7 +378,7 @@ export const StudentWrapper = styled('div')`
                     .item_inner {
                         position: relative;
                         width: 100%;
-                        padding: 12px 15px 15px 15px;
+                        padding: 13px 15px;
                         background: ${colors.customColors.whiteColor};
                         border: 1px solid ${colors.customColors.borderColor};
                         border-radius: 8px;
@@ -392,24 +403,23 @@ export const StudentWrapper = styled('div')`
 
                         .inner_content {
                             position: relative;
-                            width: calc(100 - 45px);
+                            width: calc(100% - 45px);
                             display: flex;
                             flex-direction: column;
-                            padding: 0 10px;
+                            padding: 0 15px;
 
                             h6 {
                                 position: relative;
-                                font-size: 16px;
-                                font-weight: 600;
+                                font-size: 15px;
+                                font-weight: 500;
                                 color: ${colors.customColors.blackColor};
                             }
                             span {
                                 position: relative;
                                 display: flex;
-                                font-size: 12px;
-                                font-weight: 500;
+                                font-size: 11px;
                                 color: ${colors.customColors.blackColor1};
-                                margin-top: 5px;
+                                margin-top: 2px;
                             }
                         }
 
@@ -456,8 +466,19 @@ export const StaffWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 padding: 0 15px;
+                padding-bottom: 6px;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 15px;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(to right, ${colors.customColors.borderColor1} 20%, transparent 100%);
+                }
 
                 .box_head {
                     position: relative;
@@ -466,7 +487,7 @@ export const StaffWrapper = styled('div')`
 
                     h6 {
                         position: relative;
-                        font-size: 14px;
+                        font-size: 15px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
                     }
@@ -489,14 +510,14 @@ export const StaffWrapper = styled('div')`
 
                         i {
                             position: relative;
-                            color: ${colors.customColors.blackColor};
+                            color: ${colors.customColors.greenColor};
                             font-size: 13px;
                         }
                         
                         p {
                             position: relative;
                             font-size: 12px;
-                            color: ${colors.customColors.blackColor};
+                            color: ${colors.customColors.greenColor};
                             margin-left: auto;
                         }
                     }
@@ -546,7 +567,7 @@ export const StaffWrapper = styled('div')`
                     .item_inner {
                         position: relative;
                         width: 100%;
-                        padding: 12px 15px 15px 15px;
+                        padding: 13px 15px;
                         background: ${colors.customColors.whiteColor};
                         border: 1px solid ${colors.customColors.borderColor};
                         border-radius: 8px;
@@ -571,24 +592,23 @@ export const StaffWrapper = styled('div')`
 
                         .inner_content {
                             position: relative;
-                            width: calc(100 - 45px);
+                            width: calc(100% - 45px);
                             display: flex;
                             flex-direction: column;
-                            padding: 0 10px;
+                            padding: 0 15px;
 
                             h6 {
                                 position: relative;
-                                font-size: 16px;
-                                font-weight: 600;
+                                font-size: 15px;
+                                font-weight: 500;
                                 color: ${colors.customColors.blackColor};
                             }
                             span {
                                 position: relative;
                                 display: flex;
-                                font-size: 12px;
-                                font-weight: 500;
+                                font-size: 11px;
                                 color: ${colors.customColors.blackColor1};
-                                margin-top: 5px;
+                                margin-top: 2px;
                             }
                         }
 
