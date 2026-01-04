@@ -87,10 +87,10 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-id-card-clip"></i>
                                     <p>Student Attendance</p>
                                 </a>
-                                <a>
+                                <NavLink to="/reports/academics">
                                     <i className="fa-solid fa-pen-clip"></i>
                                     <p>Academics</p>
-                                </a>
+                                </NavLink>
                                 <a>
                                     <i className="fa-solid fa-money-bill"></i>
                                     <p>Fee</p>

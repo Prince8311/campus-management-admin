@@ -42,6 +42,10 @@ import BillingPage from "../Pages/Billing";
 //Report
 import ReportMainPage from "../Pages/Reports/Index";
 import SchoolSthrengthPage from "../Pages/Reports/Screens/SchoolStrength";
+import AcademicsPage from "../Pages/Reports/Screens/Academics";
+import StudentWiseAcademicPage from "../Pages/Reports/Screens/StedentWiseAcademic";
+import TeacherWiseAcademicPage from "../Pages/Reports/Screens/TeacherWiseAcademic";
+import ClassWiseAcademicPage from "../Pages/Reports/Screens/ClassWiseAcademic";
 
 import StudentReportPage from "../Pages/Reports/Screens/StudentReport";
 import OverViewPage from "../Pages/Reports/Screens/OverView";
@@ -49,6 +53,9 @@ import ClassWisePage from "../Pages/Reports/Screens/ClassWise";
 import StudentWisePage from "../Pages/Reports/Screens/StudentWise";
 
 import StaffReportPage from "../Pages/Reports/Screens/StaffReport";
+import StaffOverViewPage from "../Pages/Reports/Screens/StaffOverView";
+import TeachingStaffPage from "../Pages/Reports/Screens/TeachingStaff";
+import NonTeachingStaffPage from "../Pages/Reports/Screens/NonTeachingStaff";
 
 const Routers = () => {
     return (
@@ -68,7 +75,18 @@ const Routers = () => {
                                     <Route path="class-wise" element={<ClassWisePage />} />
                                     <Route path="student-wise" element={<StudentWisePage />} />
                                 </Route>
-                                <Route path="staff-report" element={<StaffReportPage />}></Route>
+                                <Route path="staff-report" element={<StaffReportPage />}>
+                                    <Route path="" element={<Navigate to="staffoverview" />} />
+                                    <Route path="staffoverview" element={<StaffOverViewPage />} />
+                                    <Route path="teaching-staff" element={<TeachingStaffPage />} />
+                                    <Route path="non-teaching-staff" element={<NonTeachingStaffPage />} />
+                                </Route>
+                            </Route>
+                            <Route path="academics" element={<AcademicsPage />}>
+                                <Route path="" element={<Navigate to="student-wise-academic" />} />
+                                <Route path="student-wise-academic" element={<StudentWiseAcademicPage />} />
+                                <Route path="teacher-wise-academic" element={<TeacherWiseAcademicPage />} />
+                                <Route path="class-wise-academic" element={<ClassWiseAcademicPage />} />
                             </Route>
                         </Route>
                         <Route path="academics" element={<AcademicMainPage />}>
