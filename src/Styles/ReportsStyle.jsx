@@ -1673,8 +1673,6 @@ export const StudentWiseAcademicWrapper = styled('div')`
         table {
             position: relative;
             width: max-content;
-            /* display: flex; */
-            /* flex-direction: column; */
             border-collapse: collapse;
             table-layout: fixed;
 
@@ -1690,13 +1688,11 @@ export const StudentWiseAcademicWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     height: 100%;
-                    /* display: flex; */
                 }
 
                 th {
                     position: relative;
                     height: 100%;
-                    /* display: flex; */
                     align-items: center;
                     font-family: "Lemonada", cursive;
                     font-size: 12px;
@@ -1719,6 +1715,7 @@ export const StudentWiseAcademicWrapper = styled('div')`
 
                     &:nth-of-type(3) {
                         width: 180px;
+                        text-align: left;
                     }
 
                     &:nth-of-type(4) {
@@ -1758,15 +1755,11 @@ export const StudentWiseAcademicWrapper = styled('div')`
                 border: 1px solid ${colors.customColors.whiteColor2};
                 border-top: none;
                 border-radius: 0px 0px 10px 10px;
-                /* display: flex; */
-                /* flex-direction: column; */
-                /* overflow: hidden; */
 
                 tr {
                     position: relative;
                     width: 100%;
                     min-height: 40px;
-                    /* display: flex; */
 
                     &:nth-of-type(even) {
                         background: ${colors.customColors.blueColorLight};
@@ -1779,10 +1772,9 @@ export const StudentWiseAcademicWrapper = styled('div')`
                     td {
                         position: relative;
                         padding: 12px 25px;
-                        /* display: flex; */
                         color: ${colors.customColors.blackColor};
                         font-size: 13px;
-                        /* word-break: break-all; */
+                        word-break: break-all;
                         line-height: 1.5;
                         text-align: center;
                         vertical-align: middle;
@@ -1860,6 +1852,156 @@ export const StudentWiseAcademicWrapper = styled('div')`
                             font-size: 13px;
                             color: ${colors.customColors.blackColor2};
                         }
+                    }
+
+                    &:first-of-type td:nth-of-type(3) {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const TeacherWiseAcademicWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .table_sec {
+        position: relative;
+        width: 100%;
+        margin-top: 25px;
+        padding: 0 15px;
+
+        table {
+            position: relative;
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+
+            thead {
+                position: relative;
+                width: 100%;
+                height: 40px;
+                background: ${colors.themeColor};
+                border-radius: 10px 10px 0px 0px;
+                border: 1px solid ${colors.themeColor};
+
+                tr {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                th {
+                    position: relative;
+                    height: 100%;
+                    align-items: center;
+                    font-family: "Lemonada", cursive;
+                    font-size: 12px;
+                    word-break: break-all;
+                    color: ${colors.customColors.whiteColor};
+                    padding: 0 25px;
+                    font-weight: 500;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+
+                    &:nth-of-type(1) {
+                        width: 20%;
+                        text-align: left; 
+                    }
+
+                    &:nth-of-type(2) {
+                        width: 10%;
+                    }
+
+                    &:nth-of-type(3) {
+                        width: 15%;
+                    }
+
+                    &:nth-of-type(4) {
+                        width: 25%;
+                    }
+
+                    &:nth-of-type(5) {
+                        width: 15%;
+                    }
+                    &:nth-of-type(6) {
+                        width: 15%;
+                    }
+                }
+            }
+
+            tbody {
+                position: relative;
+                width: 100%;
+                border: 1px solid ${colors.customColors.whiteColor2};
+                border-top: none;
+                border-radius: 0px 0px 10px 10px;
+                overflow: hidden;
+
+                tr {
+                    position: relative;
+                    width: 100%;
+                    min-height: 40px;
+
+                    &:nth-of-type(even) {
+                        background: ${colors.customColors.blueColorLight};
+                    }
+
+                    td {
+                        position: relative;
+                        padding: 12px 25px;
+                        color: ${colors.customColors.blackColor};
+                        font-size: 13px;
+                        word-break: break-all;
+                        line-height: 1.5;
+                        text-align: center;
+                        vertical-align: middle;
+                        word-break: break-word;
+
+                        &:nth-of-type(1) {
+                            width: 20%;
+                            text-align: left;
+                        }
+
+                        &:nth-of-type(2) {
+                            width: 10%;
+                        }
+
+                        &:nth-of-type(3) {
+                            width: 15%;
+                        }
+
+                        &:nth-of-type(4) {
+                            width: 25%;
+                        }
+
+                        &:nth-of-type(5) {
+                            width: 15%;
+                        }
+                        &:nth-of-type(6) {
+                            width: 15%;
+                        }
+
+                        &.empty_message {
+                            position: relative;
+                            width: 100%;
+                            padding: 12px 25px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor2};
+                        }
+                    }
+
+                    &:last-of-type td:nth-of-type(4) {
+                        text-align: center;
+                        vertical-align: middle;
                     }
                 }
             }
