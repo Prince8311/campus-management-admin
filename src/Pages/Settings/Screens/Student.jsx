@@ -1,6 +1,14 @@
+import { useState } from "react";
 import { StudentWrapper } from "../../../Styles/SettingStyle";
+import CreateSectionPage from "../../../Components/Modals/Setting/CreateSection";
 
 const StudentPage = () => {
+    const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
+
+    const handleOpenCreateSection = () => {
+        setIsCreateSectionOpen(true);
+    };
+
     return (
         <>
             <StudentWrapper>
@@ -17,7 +25,7 @@ const StudentPage = () => {
                                 </div>
                             </div>
                             <div className="add_btn">
-                                <button>
+                                <button onClick={handleOpenCreateSection}>
                                     <i className="fa-solid fa-plus"></i>
                                     <p>Create Section</p>
                                 </button>
@@ -188,6 +196,11 @@ const StudentPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <CreateSectionPage 
+                    isCreateSectionOpen={isCreateSectionOpen}
+                    setIsCreateSectionOpen={setIsCreateSectionOpen}
+                />
             </StudentWrapper>
         </>
     );

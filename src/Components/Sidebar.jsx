@@ -33,7 +33,7 @@ const Sidebar = () => {
         <>
             <SidebarWrapper>
                 <div className="logo">
-                    <h3>Edu <span><b>C</b>onnekt</span></h3>
+                    <img src="/images/logo.png" alt="" />
                 </div>
                 <div className="institution_brief">
                     <div className="brief_inner">

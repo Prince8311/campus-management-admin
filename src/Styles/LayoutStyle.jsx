@@ -71,25 +71,13 @@ export const SidebarWrapper = styled('div')`
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 0 35px;
 
-        h3 {
+        img {
             position: relative;
-            color: ${colors.themeColor};
-            font-family: 'Oleo Script', cursive;
-            font-size: 23px;
-
-            span {
-                position: relative;
-                text-transform: uppercase;
-                font-weight: 800;
-                font-size: 16px;
-                font-style: italic;
-
-                b {
-                    font-size: 21px;
-                    font-weight: 800;
-                }
-            }
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     }
 

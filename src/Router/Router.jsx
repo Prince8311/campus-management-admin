@@ -35,6 +35,7 @@ import RolesPermissionsPage from "../Pages/Settings/Screens/RolePermission";
 import ProfileSettingPage from "../Pages/Settings/Screens/ProfileSettings";
 import StudentPage from "../Pages/Settings/Screens/Student";
 import StaffPage from "../Pages/Settings/Screens/Staff";
+import SectionFieldsPage from "../Pages/Settings/Screens/SectionFields";
 
 import AlumniPage from "../Pages/Alumni";
 import BillingPage from "../Pages/Billing";
@@ -125,6 +126,7 @@ const Routers = () => {
                                 <Route path="" element={<Navigate to="student" />} />
                                 <Route path="student" element={<StudentPage />} />
                                 <Route path="staff" element={<StaffPage />} />
+                                <Route path="section-fields" element={<SectionFieldsPage />} />
                             </Route>
                         </Route>
                         <Route path="alumni" element={<AlumniPage />} />

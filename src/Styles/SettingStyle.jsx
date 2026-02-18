@@ -255,6 +255,7 @@ export const StudentWrapper = styled('div')`
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0 15px;
 
     .wrapper_content {
         position: relative;
@@ -278,14 +279,13 @@ export const StudentWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 align-items: flex-end;
-                padding: 0 15px;
                 padding-bottom: 6px;
 
                 &::after {
                     content: '';
                     position: absolute;
                     bottom: 0;
-                    left: 15px;
+                    left: 0;
                     width: 100%;
                     height: 1px;
                     background: linear-gradient(to right, ${colors.customColors.borderColor1} 20%, transparent 100%);
@@ -366,7 +366,7 @@ export const StudentWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                padding: 0 5px;
+                /* padding: 0 5px; */
                 margin-top: 20px;
 
                 .sec_item {
@@ -620,6 +620,329 @@ export const StaffWrapper = styled('div')`
                             font-size: 14px;
                             color: ${colors.customColors.blackColor2};
                             margin-left: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const SectionFieldsWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+
+    .wrapper_content {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .content_top {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 6px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: linear-gradient(to right, ${colors.customColors.borderColor1} 20%, transparent 100%);
+            }
+
+            .box_head {
+                position: relative;
+                width: 100%;
+                display: flex;
+
+                h6 {
+                    position: relative;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor1};
+                }
+            }
+
+            .preview_sec {
+                position: relative;
+                margin-left: auto;
+
+                .preview_btn {
+                    position: relative;
+                    width: 100px;
+                    height: 35px;
+                    border: 1px solid ${colors.customColors.greenColor};
+                    border-radius: 6px;
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 15px;
+                    cursor: pointer;
+
+                    i {
+                        position: relative;
+                        color: ${colors.customColors.greenColor};
+                        font-size: 13px;
+                    }
+                    
+                    p {
+                        position: relative;
+                        font-size: 12px;
+                        color: ${colors.customColors.greenColor};
+                        margin-left: auto;
+                    }
+                }
+            }
+
+            .add_btn {
+                position: relative;
+                margin-left: 20px;
+
+                button {
+                    position: relative;
+                    width: 200px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 1px solid ${colors.customColors.greenColor};
+                    background: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: 500;
+
+                    i {
+                        margin-right: 8px;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        .content_bottom {
+            position: relative;
+            width: 100%;
+            display: flex;
+            margin-top: 20px;
+            
+            .left_content {
+                position: relative;
+                width: 400px;
+                padding-right: 20px;
+                border-right: 1px solid ${colors.customColors.borderColor};
+
+                .left_content_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    li {
+                        position: relative;
+                        width: 100%;
+                        padding: 12px 15px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 6px;
+                        margin-bottom: 10px;
+                        list-style: none;
+                        cursor: pointer;
+
+                        p {
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor};
+                            font-weight: 400;
+                        }
+
+                        i {
+                            font-size: 14px;
+                            color: ${colors.customColors.blackColor2};
+                        }
+
+                        &.active {
+                            border: 1px solid ${colors.customColors.blueColor2};
+
+                            p {
+                                color: ${colors.customColors.blueColor2};
+                            }
+
+                            i {
+                                color: ${colors.customColors.blueColor2};
+                            }
+                        }
+                    }
+                }
+            }
+
+            .right_content {
+                position: relative;
+                width: calc(100% - 400px);
+                padding-left: 20px;
+
+                .right_content_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .inner_head {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+
+                        h6 {
+                            position: relative;
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+
+                    .inner_body {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 20px;
+
+                        .input_field_sec {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+
+                            .input_box {
+                                position: relative;
+                                width: calc(100% - 160px);
+                                padding-right: 20px;
+
+                                input {
+                                    position: relative;
+                                    width: 100%;
+                                    height: 40px;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    font-size: 12px;
+                                    border-radius: 5px;
+                                    padding: 5px 20px;
+                                    outline: none;
+                                    transition: all 0.5s ease;
+
+                                    &:focus,
+                                    &:valid {
+                                        border: 1px solid ${colors.customColors.blueColor1};
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+
+                                span {
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 15px;
+                                    padding: 0 5px;
+                                    font-size: 12px;
+                                    background: ${colors.customColors.whiteColor};
+                                    line-height: 1;
+                                    color: ${colors.customColors.blackColor2};
+                                    pointer-events: none;
+                                    transform: translateY(-50%);
+                                    transition: all 0.5s ease;
+                                }
+
+                                input:focus ~ span,
+                                input:valid ~ span {
+                                    transform: translateY(-25px);
+                                    font-size: 10px;
+                                    color: ${colors.themeColor};
+                                    font-weight: 500;
+                                    transition: all 0.5s ease;
+                                }
+                            }
+
+                            button {
+                                position: relative;
+                                width: 160px;
+                                height: 35px;
+                                font-size: 13px;
+                                font-weight: 500;
+                                cursor: pointer;
+                                border-radius: 6px;
+                                overflow: hidden;
+                                border: none;
+                                background: ${colors.customColors.blueColor1};
+                                color: ${colors.customColors.whiteColor};
+                            }
+                        }
+
+                        .mandatory_sec {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 20px;
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 12px 15px;
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 6px;
+
+                            p {
+                                position: relative;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor1};
+                                font-weight: 500;
+                            }
+
+                            .toggle_bar {
+                                position: relative;
+                                width: 100px;
+                                display: flex;
+                                justify-content: center;
+
+                                input[type="checkbox"] {
+                                    display: none;
+                                }
+
+                                label {
+                                    position: relative;
+                                    width: 40px;
+                                    height: 21px;
+                                    background: ${colors.customColors.whiteColor2};
+                                    border-radius: 25px;
+                                    padding: 3px;
+                                    display: flex;
+                                    align-items: center;
+                                    cursor: pointer;
+                                    transition: all 0.5s ease;
+
+                                    span {
+                                        position: relative;
+                                        width: 15px;
+                                        height: 100%;
+                                        background: ${colors.customColors.whiteColor};
+                                        border-radius: 50%;
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+
+                                input[type="checkbox"]:checked ~ label {
+                                    background: ${colors.customColors.blueColor1};
+                                    transition: all 0.5s ease;
+                                }
+
+                                input[type="checkbox"]:checked ~ label span {
+                                    transform: translateX(19px);
+                                    transition: all 0.5s ease;
+                                }
+                            }
                         }
                     }
                 }
