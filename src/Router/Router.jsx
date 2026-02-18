@@ -1,6 +1,9 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+// Authentication 
+import AuthenticationPage from "../Auth/Authentication";
+
 import PageLayout from "../layouts/PageLayout";
 import DashboardPage from "../Pages/Dashboard";
 
@@ -63,7 +66,8 @@ const Routers = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<PageLayout />}>
+                    <Route path="/" element={<AuthenticationPage />} />
+                    <Route path="admin" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
                         <Route path="dashboard" element={<DashboardPage />} />
                         <Route path="reports" element={<ReportMainPage />}>
