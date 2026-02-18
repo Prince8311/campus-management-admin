@@ -75,7 +75,7 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <NavLink to="/reports/school-strength">
+                                <NavLink to="/admin/reports/school-strength">
                                     <i className="fa-solid fa-users"></i>
                                     <p>School Strength</p>
                                 </NavLink>
@@ -87,7 +87,7 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-id-card-clip"></i>
                                     <p>Student Attendance</p>
                                 </a>
-                                <NavLink to="/reports/academics">
+                                <NavLink to="/admin/reports/academics">
                                     <i className="fa-solid fa-pen-clip"></i>
                                     <p>Academics</p>
                                 </NavLink>
@@ -108,15 +108,15 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <NavLink to="/academics/student-information">
+                                <NavLink to="/admin/academics/student-information">
                                     <i className="fa-solid fa-file-pen"></i>
                                     <p>Student Information</p>
                                 </NavLink>
-                                <NavLink to="/academics/classrooms">
+                                <NavLink to="/admin/academics/classrooms">
                                     <i className="fa-solid fa-computer"></i>
                                     <p>Classrooms</p>
                                 </NavLink>
-                                <NavLink to="/academics/student-attendence">
+                                <NavLink to="/admin/academics/student-attendence">
                                     <i className="fa-solid fa-id-card-clip"></i>
                                     <p>Student Attendance</p>
                                 </NavLink>
@@ -137,19 +137,19 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <NavLink to="/finance-management/fee-collection">
+                                <NavLink to="/admin/finance-management/fee-collection">
                                     <i className="fa-solid fa-hand-holding-dollar prefix"></i>
                                     <p>Fee Collection</p>
                                 </NavLink>
-                                <NavLink to="/finance-management/fee-transactions">
+                                <NavLink to="/admin/finance-management/fee-transactions">
                                     <i className="fa-solid fa-file-invoice prefix"></i>
                                     <p>Fee Transactions</p>
                                 </NavLink>
-                                <NavLink to="/finance-management/fee-configuration">
+                                <NavLink to="/admin/finance-management/fee-configuration">
                                     <i className="fa-solid fa-gear prefix"></i>
                                     <p>Fee Configuration</p>
                                 </NavLink>
-                                <NavLink to="/finance-management/bank-accounts">
+                                <NavLink to="/admin/finance-management/bank-accounts">
                                     <i className="fa-solid fa-building-columns prefix"></i>
                                     <p>Bank Accounts</p>
                                 </NavLink>
@@ -166,7 +166,7 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <NavLink to="/communication/messaging">
+                                <NavLink to="/admin/communication/messaging">
                                     <i className="fa-solid fa-message prefix"></i>
                                     <p>Messaging</p>
                                 </NavLink>
@@ -183,7 +183,7 @@ const Sidebar = () => {
                                 </li>
                             </div>
                             <div className="dropdown">
-                                <NavLink to="/staff-management/staff-information">
+                                <NavLink to="/admin/staff-management/staff-information">
                                     <i className="fa-solid fa-file-pen prefix"></i>
                                     <p>Staff Information</p>
                                 </NavLink>
@@ -229,7 +229,7 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-mobile prefix"></i>
                                     <p>Device Settings</p>
                                 </a>
-                                <NavLink to="/settings/profile-settings">
+                                <NavLink to="/admin/settings/profile-settings">
                                     <i className="fa-solid fa-user-gear prefix"></i>
                                     <p>Profile Settings</p>
                                 </NavLink>
@@ -237,7 +237,7 @@ const Sidebar = () => {
                                     <i className="fa-solid fa-gear prefix"></i>
                                     <p>General Settings</p>
                                 </a>
-                                <NavLink to="/settings/roles-permissions">
+                                <NavLink to="/admin/settings/roles-permissions">
                                     <i className="fa-solid fa-file-shield prefix"></i>
                                     <p>Roles & Permissions</p>
                                 </NavLink>
@@ -247,11 +247,11 @@ const Sidebar = () => {
                                 </a>
                             </div>
                         </div>
-                        <NavLink to="billing">
+                        <NavLink to="/admin/billing">
                             <i className="fa-solid fa-hand-holding-dollar"></i>
                             <p>Billing</p>
                         </NavLink>
-                        <NavLink to="/alumni">
+                        <NavLink to="/admin/alumni">
                             <i className="fa-solid fa-graduation-cap"></i>
                             <p>Alumni</p>
                         </NavLink>
