@@ -1064,3 +1064,31 @@ export const StudentAttendenceWrapper = styled('div')`
         }
     }
 `;
+
+export const AddStudentWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        display: flex;
+
+        h2 {
+            position: relative;
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
+
+            i {
+                position: relative;
+                margin-right: 10px;
+                color: ${colors.themeColor};
+            }
+        }
+    }
+`;
