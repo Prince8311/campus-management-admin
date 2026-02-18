@@ -60,7 +60,7 @@ const Sidebar = () => {
                 </div>
                 <div className="sidebar_items">
                     <ul className="items_inner">
-                        <NavLink to="/dashboard">
+                        <NavLink to="/admin/dashboard">
                             <i className="fa-solid fa-gauge"></i>
                             <p>Dashboard</p>
                         </NavLink>
