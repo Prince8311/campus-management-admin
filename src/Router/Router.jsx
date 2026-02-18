@@ -9,6 +9,7 @@ import AcademicMainPage from "../Pages/Academics/Index";
 import StudentInformationPage from "../Pages/Academics/Screens/StudentInformation";
 import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
 import StudentAttendencePage from "../Pages/Academics/Screens/StudentAttendence";
+import AddStudentPage from "../Pages/Academics/Screens/AddStudent";
 
 // Finance Management 
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
@@ -58,6 +59,7 @@ import StaffOverViewPage from "../Pages/Reports/Screens/StaffOverView";
 import TeachingStaffPage from "../Pages/Reports/Screens/TeachingStaff";
 import NonTeachingStaffPage from "../Pages/Reports/Screens/NonTeachingStaff";
 
+
 const Routers = () => {
     return (
         <>
@@ -95,6 +97,7 @@ const Routers = () => {
                             <Route path="student-information" element={<StudentInformationPage />} />
                             <Route path="classrooms" element={<ClassroomPage />} />
                             <Route path="student-attendence" element={<StudentAttendencePage />} />
+                            <Route path="add-student" element={<AddStudentPage />} />
                         </Route>
                         <Route path="finance-management" element={<FinanceManagementMainPage />}>
                             <Route path="" element={<Navigate to="fee-collection" />} />
