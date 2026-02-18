@@ -135,6 +135,9 @@ const AddStudentPage = () => {
                         </div>
                     </div>
                 </div>
+                <div className="btn_sec">
+                    <button><i className="fa-solid fa-plus"></i>Add Student</button>
+                </div>
             </AddStudentWrapper>
         </>
     );

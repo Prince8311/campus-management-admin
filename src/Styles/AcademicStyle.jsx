@@ -1465,4 +1465,28 @@ export const AddStudentWrapper = styled('div')`
             }
         }
     }
+
+    .btn_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 25px;
+
+        button {
+            position: relative;
+            padding: 8px 20px;
+            background: ${colors.themeColor};
+            border: none;
+            border-radius: 6px;
+            color: ${colors.customColors.whiteColor};
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+
+            i {
+                margin-right: 5px;
+            }
+        }
+    }
 `;
