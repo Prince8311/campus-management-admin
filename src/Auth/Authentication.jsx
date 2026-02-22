@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthWrapper } from "../Styles/AuthStyle";
+import { useNavigate } from "react-router-dom";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
 import { getApiEndpoints } from "../Services/Api/ApiConfig";
@@ -8,12 +9,22 @@ import ButtonLoader from "../Components/Loader/ButtonLoader";
 
 const AuthenticationPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const [loginByOtp, setLoginByOtp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [otp, setOtp] = useState('');
+    const [otpMail, setOtpMail] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const token = localStorage.getItem("authToken");
+
+    useEffect(() => {
+        if (token) {
+            navigate("/admin", { replace: true });
+        }
+    }, [token]);
 
     const maskEmail = (email) => {
         const [user, domain] = email.split("@");
@@ -36,6 +47,50 @@ const AuthenticationPage = () => {
 
         return true;
     })();
+
+    const handleSendOTP = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            name: userName
+        };
+        try {
+            const response = await axiosInstance.post(api.sendOtp, payload);
+            if (response.data.status === 200) {
+                toast.success(response?.data.message);
+                setIsOtpSent(true);
+                setOtpMail(response?.data.userEmail);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            name: userName,
+            loginByOtp: loginByOtp,
+            ...(loginByOtp ? { otp } : { password }),
+        };
+        try {
+            const response = await axiosInstance.post(api.login, payload);
+            if (response.data.status === 200) {
+                setIsOtpSent(false);
+                toast.success(response?.data.message);
+                localStorage.setItem("authToken", response?.data.authToken);
+                navigate("/admin", { replace: true });
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+            setLoginByOtp(false);
+        }
+    }
 
     return (
         <>
@@ -76,7 +131,7 @@ const AuthenticationPage = () => {
                             {
                                 (loginByOtp && isOtpSent) &&
                                 <div className="otp_sec">
-                                    <p>We have send a 6 digit OTP to <span>{maskEmail('sourishmondal.vizac@gmail.com')}</span></p>
+                                    <p>We have send a 6 digit OTP to <span>{maskEmail(otpMail)}</span></p>
                                     <div className="otp_input_sec">
                                         <OTPInput
                                             value={otp}
@@ -88,10 +143,23 @@ const AuthenticationPage = () => {
                                 </div>
                             }
                             <div className="form_btn">
-                                <button disabled={isButtonDisabled}>
-                                    {loginByOtp
-                                        ? (isOtpSent ? 'Verify & Login' : 'Send OTP')
-                                        : 'Login'}
+                                <button
+                                    className={`${isButtonDisabled ? 'disabled' : ''} ${isButtonLoading ? 'loading' : ''}`}
+                                    disabled={isButtonDisabled || isButtonLoading}
+                                    onClick={(loginByOtp && !isOtpSent) ? handleSendOTP : handleLogin}
+                                >
+                                    {
+                                        isButtonLoading ? (
+                                            <ButtonLoader />
+                                        ) : (
+                                            <>
+                                                {loginByOtp
+                                                    ? (isOtpSent ? 'Verify & Login' : 'Send OTP')
+                                                    : 'Login'
+                                                }
+                                            </>
+                                        )
+                                    }
                                 </button>
                             </div>
                             <div className="login_option">

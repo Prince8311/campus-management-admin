@@ -6,5 +6,7 @@ export const getApiEndpoints = () => {
         // Auth 
         login: `${apiURL}/auth/login.php`,
         sendOtp: `${apiURL}/auth/send-mail-otp.php`,
+        checkAuth: `${apiURL}/auth/check-auth.php`,
+        refreshToken: `${apiURL}/auth/refresh-token.php`,
     };
 }

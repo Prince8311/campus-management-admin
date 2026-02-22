@@ -231,7 +231,13 @@ export const AuthWrapper = styled('div')`
                             transition: all 0.5s ease;
                         }
 
-                        &:disabled {
+                        &.loading {
+                            opacity: 0.5;
+                            cursor: not-allowed;
+                            transition: all 0.5s ease;
+                        }
+
+                        &.disabled {
                             background: ${colors.customColors.lightBackground2};
                             cursor: not-allowed;
                             transition: all 0.5s ease;
