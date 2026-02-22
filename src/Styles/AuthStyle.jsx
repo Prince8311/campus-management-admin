@@ -39,7 +39,7 @@ export const AuthWrapper = styled('div')`
 
             h5 {
                 position: relative;
-                margin-top: 5px;
+                margin-top: 2px;
                 font-size: 18px;
                 font-weight: 600;
                 color: ${colors.customColors.blueColor2};
@@ -76,7 +76,6 @@ export const AuthWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         height: 37px;
-                        border: none;
                         outline: none;
                         font-size: 12px;
                         padding: 0 15px;
@@ -87,7 +86,7 @@ export const AuthWrapper = styled('div')`
 
                         &:focus,
                         &:valid {
-                            border: 1px solid ${colors.customColors.blueColor1};
+                            border: 1px solid ${colors.customColors.blackColor2};
                             transition: all 0.5s ease;
                         }
                     }
@@ -121,6 +120,7 @@ export const AuthWrapper = styled('div')`
                             position: relative;
                             font-size: 14px;
                             color: ${colors.customColors.blackColor2};
+                            transition: all 0.6s ease;
                         }
                     }
 
@@ -133,11 +133,66 @@ export const AuthWrapper = styled('div')`
                         color: ${colors.customColors.blueColor2};
                         transition: all 0.6s ease;
                     }
+
+                    input:focus ~ a i,
+                    input:valid ~ a i {
+                        color: ${colors.customColors.blueColor1};
+                        transition: all 0.6s ease;
+                    }
+                }
+
+                .otp_sec {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 15px;
+                    display: flex;
+                    flex-direction: column;
+
+                    p {
+                        position: relative;
+                        font-size: 11px;
+                        color: ${colors.customColors.blackColor2};
+
+                        span {
+                            color: ${colors.customColors.blackColor};
+                        }
+                    }
+
+                    .otp_input_sec {
+                        position: relative;
+                        width: 100%;
+                        margin-top: 5px;
+
+                        div {
+                            position: relative;
+                            width: 100%;
+
+                            input {
+                                position: relative;
+                                width: 40px !important;
+                                height: 37px;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor1};
+                                outline: none;
+                                border: 1px solid ${colors.customColors.borderColor};
+                                border-radius: 6px;
+                                transition: all 0.5s ease;
+                                margin-right: 10px;
+                                transition: all 0.5s ease;
+
+                                &:focus,
+                                &:valid {
+                                    border: 1px solid ${colors.customColors.blackColor2};
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 .login_option {
                     position: relative;
-                    margin-top: 5px;
+                    margin-top: 3px;
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
@@ -154,7 +209,7 @@ export const AuthWrapper = styled('div')`
 
                 .form_btn {
                     position: relative;
-                    margin-top: 20px;
+                    margin-top: 25px;
                     width: 100%;
 
                     button {
@@ -163,11 +218,30 @@ export const AuthWrapper = styled('div')`
                         height: 37px;
                         border: none;
                         cursor: pointer;
-                        background: ${colors.customColors.lightBackground2};
+                        background: ${colors.customColors.blueColor2};
                         border-radius: 6px;
                         font-size: 13px;
                         letter-spacing: 0.5px;
-                        color: ${colors.customColors.blackColor2};
+                        font-weight: 500;
+                        color: ${colors.customColors.whiteColor};
+                        transition: all 0.5s ease;
+                        
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.5s ease;
+                        }
+
+                        &.loading {
+                            opacity: 0.5;
+                            cursor: not-allowed;
+                            transition: all 0.5s ease;
+                        }
+
+                        &.disabled {
+                            background: ${colors.customColors.lightBackground2};
+                            cursor: not-allowed;
+                            transition: all 0.5s ease;
+                        }
                     }
                 }
             }
