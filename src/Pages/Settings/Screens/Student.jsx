@@ -17,6 +17,7 @@ const StudentPage = () => {
                         <div className="box_top_sec">
                             <div className="box_head">
                                 <h6>Profile Information</h6>
+                                <p>Create and edit profile sections in students' profile</p>
                             </div>
                             <div className="preview_sec">
                                 <div className="preview_btn">
@@ -107,7 +108,8 @@ const StudentPage = () => {
                     <div className="content_box">
                         <div className="box_top_sec">
                             <div className="box_head">
-                                <h6>Profile Information</h6>
+                                <h6>Documents</h6>
+                                <p>Create and edit document sections in students' profile</p>
                             </div>
                             <div className="preview_sec">
                                 <div className="preview_btn">

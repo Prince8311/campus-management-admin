@@ -9,6 +9,7 @@ const StaffPage = () => {
                         <div className="box_top_sec">
                             <div className="box_head">
                                 <h6>Profile Information</h6>
+                                <p>Create and edit profile sections in staffs' profile</p>
                             </div>
                             <div className="preview_sec">
                                 <div className="preview_btn">
@@ -99,7 +100,8 @@ const StaffPage = () => {
                     <div className="content_box">
                         <div className="box_top_sec">
                             <div className="box_head">
-                                <h6>Profile Information</h6>
+                                <h6>Documents</h6>
+                                <p>Create and edit document sections in staffs' profile</p>
                             </div>
                             <div className="preview_sec">
                                 <div className="preview_btn">

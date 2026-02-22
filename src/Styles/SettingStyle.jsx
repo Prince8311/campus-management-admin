@@ -255,7 +255,6 @@ export const StudentWrapper = styled('div')`
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 0 15px;
 
     .wrapper_content {
         position: relative;
@@ -280,13 +279,14 @@ export const StudentWrapper = styled('div')`
                 display: flex;
                 align-items: flex-end;
                 padding-bottom: 6px;
+                padding: 0 15px;
 
                 &::after {
                     content: '';
                     position: absolute;
                     bottom: 0;
-                    left: 0;
-                    width: 100%;
+                    left: 15px;
+                    width: calc(100% - 30px);
                     height: 1px;
                     background: linear-gradient(to right, ${colors.customColors.borderColor1} 20%, transparent 100%);
                 }
@@ -295,12 +295,19 @@ export const StudentWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     display: flex;
+                    flex-direction: column;
 
                     h6 {
                         position: relative;
                         font-size: 15px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
+                    }
+                    p {
+                        position: relative;
+                        font-size: 11px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor2};
                     }
                 }
 
@@ -366,8 +373,8 @@ export const StudentWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                /* padding: 0 5px; */
-                margin-top: 20px;
+                margin-top: 10px;
+                padding: 0 5px;
 
                 .sec_item {
                     position: relative;
@@ -467,15 +474,15 @@ export const StaffWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 align-items: flex-end;
-                padding: 0 15px;
                 padding-bottom: 6px;
+                padding: 0 15px;
 
                 &::after {
                     content: '';
                     position: absolute;
                     bottom: 0;
                     left: 15px;
-                    width: 100%;
+                    width: calc(100% - 30px);
                     height: 1px;
                     background: linear-gradient(to right, ${colors.customColors.borderColor1} 20%, transparent 100%);
                 }
@@ -484,12 +491,19 @@ export const StaffWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     display: flex;
+                    flex-direction: column;
 
                     h6 {
                         position: relative;
                         font-size: 15px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
+                    }
+                    p {
+                        position: relative;
+                        font-size: 11px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor2};
                     }
                 }
 
@@ -556,7 +570,7 @@ export const StaffWrapper = styled('div')`
                 display: flex;
                 flex-wrap: wrap;
                 padding: 0 5px;
-                margin-top: 20px;
+                margin-top: 10px;
 
                 .sec_item {
                     position: relative;
