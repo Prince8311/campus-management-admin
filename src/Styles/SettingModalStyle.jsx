@@ -27,7 +27,7 @@ export const CreateSectionWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 550px;
+        width: 500px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -96,50 +96,38 @@ export const CreateSectionWrapper = styled('div')`
 
                 .input_box {
                     position: relative;
+                    width: 100%;
+                    margin-top: 15px;
 
                     input {
                         position: relative;
                         width: 100%;
                         height: 40px;
-                        border: 1px solid ${colors.customColors.borderColor};
                         font-size: 12px;
                         border-radius: 5px;
                         padding: 5px 20px;
                         outline: none;
-                        transition: all 0.5s ease;
-
-                        &:focus,
-                        &:valid {
-                            border: 1px solid ${colors.customColors.blueColor1};
-                            transition: all 0.5s ease;
-                        }
+                        border: none;
+                        margin-top: 3px;
+                        background: ${colors.customColors.lightBackground2};
                     }
 
                     span {
-                        position: absolute;
-                        top: 50%;
-                        left: 15px;
-                        padding: 0 5px;
-                        font-size: 12px;
-                        background: ${colors.customColors.whiteColor};
-                        line-height: 1;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 13px;
+                        font-weight: 400;
                         color: ${colors.customColors.blackColor2};
-                        pointer-events: none;
-                        transform: translateY(-50%);
-                        transition: all 0.5s ease;
-                    }
 
-                    input:focus ~ span,
-                    input:valid ~ span {
-                        transform: translateY(-25px);
-                        font-size: 10px;
-                        color: ${colors.themeColor};
-                        font-weight: 500;
-                        transition: all 0.5s ease;
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
                     }
                 }
 
-                p {
+                a {
                     position: relative;
                     margin-top: 20px;
                     font-size: 12px;
@@ -173,6 +161,12 @@ export const CreateSectionWrapper = styled('div')`
                 border: none;
                 background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
+                transition: all 0.3s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.3s ease;
+                }
             }
         }
     }
@@ -203,7 +197,7 @@ export const CreateFieldsWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 750px;
+        width: 500px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -273,192 +267,89 @@ export const CreateFieldsWrapper = styled('div')`
 
                 .input_box {
                     position: relative;
-                    width: 48%;
+                    width: 100%;
+                    margin-top: 15px;
 
                     input {
                         position: relative;
                         width: 100%;
                         height: 40px;
-                        border: 1px solid ${colors.customColors.borderColor};
                         font-size: 12px;
                         border-radius: 5px;
                         padding: 5px 20px;
                         outline: none;
-                        transition: all 0.5s ease;
-
-                        &:focus,
-                        &:valid {
-                            border: 1px solid ${colors.customColors.blueColor1};
-                            transition: all 0.5s ease;
-                        }
+                        border: none;
+                        margin-top: 3px;
+                        background: ${colors.customColors.lightBackground2};
                     }
 
                     span {
-                        position: absolute;
-                        top: 50%;
-                        left: 15px;
-                        padding: 0 5px;
-                        font-size: 12px;
-                        background: ${colors.customColors.whiteColor};
-                        line-height: 1;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 13px;
+                        font-weight: 400;
                         color: ${colors.customColors.blackColor2};
-                        pointer-events: none;
-                        transform: translateY(-50%);
-                        transition: all 0.5s ease;
-                    }
 
-                    input:focus ~ span,
-                    input:valid ~ span {
-                        transform: translateY(-25px);
-                        font-size: 10px;
-                        color: ${colors.themeColor};
-                        font-weight: 500;
-                        transition: all 0.5s ease;
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
                     }
                 }
 
                 .select_box {
                     position: relative;
-                    width: 48%;
+                    width: 100%;
+                    margin-top: 15px;
 
-                    input {
-                        display: none;
+                    span {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 13px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
                     }
 
-                    .dropdown_btn {
+                    .dropdown_sec {
                         position: relative;
                         width: 100%;
                         height: 40px;
-                        border: 1px solid ${colors.customColors.borderColor};
-                        border-radius: 5px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        padding: 5px 20px;
-                        cursor: pointer;
+                        flex-direction: column;
+                        margin-top: 3px;
 
-                        span {
-                            position: absolute;
-                            top: 50%;
-                            left: 15px;
-                            padding: 0 5px;
-                            font-size: 12px;
-                            background: ${colors.customColors.whiteColor};
-                            line-height: 1;
-                            color: ${colors.customColors.blackColor2};
-                            pointer-events: none;
-                            transform: translateY(-50%);
-                            transition: all 0.5s ease;
-                        }
-
-                        p {
-                            position: relative;
-                            max-width: calc(100% - 15px);
-                            padding-right: 15px;
-                            font-size: 12px;
-                            line-height: 1.5;
-                            color: ${colors.customColors.blackColor1};
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-
-                        i {
-                            font-size: 12px;
-                            color: ${colors.customColors.blackColor2};
-                            transition: all 0.5s ease;
-
-                            &.active {
-                                transform: rotate(-180deg);
-                                transition: all 0.5s ease;
-                            }
-                        }
-                    }
-
-                    input:focus ~ .dropdown_btn,
-                    input:valid ~ .dropdown_btn {
-                        border: 1px solid ${colors.customColors.blueColor1};
-                        transition: 0.5s;
-                    }
-
-                    input:focus ~ .dropdown_btn span,
-                    input:valid ~ .dropdown_btn span {
-                        transform: translateY(-25px);
-                        font-size: 10px;
-                        color: ${colors.themeColor};
-                        font-weight: 500;
-                        transition: all 0.5s ease;
-                    }
-
-                    .dropdown {
-                        position: absolute;
-                        top: 100%;
-                        left: 0px;
-                        width: 100%;
-                        z-index: 15;
-                        background: ${colors.customColors.whiteColor};
-                        border-radius: 5px;
-                        box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor3};
-                        max-height: 0px;
-                        overflow: hidden;
-                        transition: all 0.5s ease;
-
-                        &.active {
-                            max-height: 200px;
-                            transition: all 0.5s ease;
-                        }
-
-                        .dropdown_inner {
+                        .dropdown_btn {
                             position: relative;
                             width: 100%;
-                            padding: 10px;
+                            height: 100%;
                             display: flex;
-                            flex-direction: column;
+                            align-items: center;
+                            border-radius: 5px;
+                            padding: 5px 20px;
+                            background: ${colors.customColors.lightBackground2};
 
-                            ul {
+                            p {
                                 position: relative;
-                                width: 100%;
+                                width: calc(100% - 25px);
                                 display: flex;
-                                flex-direction: column;
-                                max-height: 160px;
-                                overflow-y: auto;
-                                scrollbar-width: none;
-                                -ms-overflow-style: none;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor1};
+                            }
 
-                                &::-webkit-scrollbar {
-                                    display: none;
-                                }
-
-                                li {
-                                    position: relative;
-                                    width: 100%;
-                                    list-style: none;
-                                    padding: 7px 15px;
-                                    cursor: pointer;
-                                    font-size: 12px;
-                                    color: ${colors.customColors.blackColor1};
-                                    border-radius: 4px;
-                                    transition: all 0.5s ease;
-
-                                    &:hover {
-                                        background: ${colors.themeColor};
-                                        color: ${colors.customColors.whiteColor};
-                                        transition: all 0.5s ease;
-                                    }
-
-                                    &.empty_message {
-                                        pointer-events: none;
-                                        opacity: 0.5;
-                                    }
-                                }
-
-                                p {
-                                    position: relative;
-                                    width: 100%;
-                                    font-size: 12px;
-                                    padding: 3px 10px;
-                                    color: ${colors.customColors.blackColor3};
-                                }
+                            i {
+                                position: relative;
+                                width: 25px;
+                                display: flex;
+                                justify-content: flex-end;
+                                cursor: pointer;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
                             }
                         }
                     }
@@ -538,6 +429,12 @@ export const CreateFieldsWrapper = styled('div')`
                 background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
                 margin-left: auto;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.3s ease;
+                }
             }
         }
     }

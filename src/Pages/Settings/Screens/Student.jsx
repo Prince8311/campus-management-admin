@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StudentWrapper } from "../../../Styles/SettingStyle";
-import CreateSectionPage from "../../../Components/Modals/Setting/CreateSection";
+import CreateSectionModal from "../../../Components/Modals/Setting/CreateSection";
 
 const StudentPage = () => {
     const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
@@ -199,7 +199,7 @@ const StudentPage = () => {
                     </div>
                 </div>
 
-                <CreateSectionPage 
+                <CreateSectionModal 
                     isCreateSectionOpen={isCreateSectionOpen}
                     setIsCreateSectionOpen={setIsCreateSectionOpen}
                 />

@@ -1130,7 +1130,8 @@ export const AddStudentWrapper = styled('div')`
                        position: relative;
                         font-size: 15px;
                         color: ${colors.customColors.blackColor};
-                        font-weight: 500; 
+                        font-weight: 500;
+                        font-style: italic;
                     }
                 }
 
@@ -1175,11 +1176,13 @@ export const AddStudentWrapper = styled('div')`
                 }
             }
 
-            .box_bottom {
+            .upload_form_sec {
                 position: relative;
                 width: 100%;
+                display: flex;
+                flex-direction: column;
 
-                .bottom_inner {
+                .profile_image_sec {
                     position: relative;
                     width: 100%;
                     padding: 15px;
@@ -1200,14 +1203,14 @@ export const AddStudentWrapper = styled('div')`
 
                         a {
                             position: relative;
-                            font-size: 30px;
+                            font-size: 27px;
                             color: ${colors.themeColor};
                             text-decoration: none;
                         }
 
                         p {
                             position: relative;
-                            font-size: 16px;
+                            font-size: 13px;
                             color: ${colors.customColors.blackColor1};
                             font-weight: 400;
                             margin-top: 5px;
@@ -1218,7 +1221,7 @@ export const AddStudentWrapper = styled('div')`
                         }
                     }
 
-                    .manually_upload_sec {
+                    .sec_inner {
                         position: relative;
                         width: 100%;
                         border: 1px solid ${colors.customColors.borderColor1};
@@ -1229,7 +1232,7 @@ export const AddStudentWrapper = styled('div')`
 
                         h6 {
                             position: relative;
-                            font-size: 15px;
+                            font-size: 14px;
                             font-weight: 500;
                             color: ${colors.customColors.blackColor1};
                         }
@@ -1249,14 +1252,14 @@ export const AddStudentWrapper = styled('div')`
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                padding: 7px;
+                                padding: 5px;
 
                                 img {
                                     position: relative;
                                     width: 100%;
                                     height: 100%;
                                     object-fit: cover;
-                                    border-radius: 6px;
+                                    border-radius: 4px;
                                 }
                             }
 
@@ -1269,7 +1272,7 @@ export const AddStudentWrapper = styled('div')`
 
                                 p {
                                     position: relative;
-                                    font-size: 14px;
+                                    font-size: 13px;
                                     font-weight: 500;
                                     color: ${colors.customColors.blackColor1};
                                 }
@@ -1278,17 +1281,253 @@ export const AddStudentWrapper = styled('div')`
                                     position: relative;
                                     font-size: 12px;
                                     color: ${colors.customColors.blackColor2};
-                                    margin-top: 1px;
+                                    margin-top: 3px;
                                 }
 
                                 a {
                                     position: relative;
                                     margin-top: 7px;
-                                    font-size: 15px;
+                                    font-size: 13px;
                                     font-weight: 500;
                                     color: ${colors.themeColor};
-                                    text-decoration: none;
                                     cursor: pointer;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .student_details_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 15px;
+
+                    .details_box {
+                        position: relative;
+                        margin-top: 20px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 8px;
+                        box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+
+                        &:first-of-type {
+                            margin-top: 0;
+                        }
+
+                        .details_top {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            padding: 10px 16px;
+                            cursor: pointer;
+                            border-radius: 8px 8px 0 0;
+                            transition: all 0.5s ease;
+
+                            &.active {
+                                background: ${colors.customColors.lightBackground1};
+                            }
+
+                            h3 {
+                                position: relative;
+                                font-size: 14px;
+                                color: ${colors.customColors.blackColor};
+                                font-weight: 500;
+                            }
+
+                            .icon {
+                                position: relative;
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-left: auto;
+                                box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+
+                                i {
+                                    position: relative;
+                                    font-size: 14px;
+                                    color: ${colors.customColors.blackColor2};
+                                }
+                            }
+                        }
+
+                        .details_bottom {
+                            position: relative;
+                            width: 100%;
+
+                            .details_inner {
+                                position: relative;
+                                width: 100%;
+                                padding: 15px;
+                                padding-top: 0;
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: space-between;
+
+                                .input_box {
+                                    position: relative;
+                                    width: 32%;
+                                    margin-top: 15px;
+
+                                    input {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 40px;
+                                        font-size: 12px;
+                                        border-radius: 5px;
+                                        padding: 5px 20px;
+                                        outline: none;
+                                        border: none;
+                                        margin-top: 3px;
+                                        background: ${colors.customColors.lightBackground2};
+
+                                        &::-webkit-outer-spin-button,
+                                        &::-webkit-inner-spin-button {
+                                            -webkit-appearance: none;
+                                            margin: 0;
+                                        }
+
+                                        /* Firefox */
+                                        &[type="number"] {
+                                            -moz-appearance: textfield;
+                                        }
+                                    }
+
+                                    span {
+                                        position: relative;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 13px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        p {
+                                            color: ${colors.customColors.redColor};
+                                            margin-left: 2px;
+                                        }
+                                    }
+                                }
+
+                                .select_box {
+                                    position: relative;
+                                    width: 32%;
+                                    margin-top: 15px;
+
+                                    span {
+                                        position: relative;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 13px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        p {
+                                            color: ${colors.customColors.redColor};
+                                            margin-left: 2px;
+                                        }
+                                    }
+
+                                    .dropdown_sec {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 40px;
+                                        flex-direction: column;
+                                        margin-top: 3px;
+
+                                        .dropdown_btn {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                            align-items: center;
+                                            border-radius: 5px;
+                                            padding: 5px 20px;
+                                            background: ${colors.customColors.lightBackground2};
+
+                                            p {
+                                                position: relative;
+                                                width: calc(100% - 25px);
+                                                display: flex;
+                                                font-size: 12px;
+                                                color: ${colors.customColors.blackColor1};
+                                            }
+
+                                            i {
+                                                position: relative;
+                                                width: 25px;
+                                                display: flex;
+                                                justify-content: flex-end;
+                                                cursor: pointer;
+                                                font-size: 12px;
+                                                color: ${colors.customColors.blackColor2};
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .date_box {
+                                    position: relative;
+                                    width: 32%;
+                                    margin-top: 15px;
+
+                                    span {
+                                        position: relative;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 13px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor2};
+                                        
+                                        p {
+                                            color: ${colors.customColors.redColor};
+                                            margin-left: 2px;
+                                        }
+                                    }
+
+                                    .dropdown_sec {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 40px;
+                                        flex-direction: column;
+                                        margin-top: 3px;
+
+                                        .dropdown_btn {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                            align-items: center;
+                                            border-radius: 5px;
+                                            padding: 5px 20px;
+                                            background: ${colors.customColors.lightBackground2};
+
+                                            p {
+                                                position: relative;
+                                                width: calc(100% - 25px);
+                                                display: flex;
+                                                font-size: 12px;
+                                                color: ${colors.customColors.blackColor1};
+                                            }
+
+                                            i {
+                                                position: relative;
+                                                width: 25px;
+                                                display: flex;
+                                                justify-content: flex-end;
+                                                cursor: pointer;
+                                                font-size: 12px;
+                                                color: ${colors.customColors.blackColor2};
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1303,7 +1542,8 @@ export const AddStudentWrapper = styled('div')`
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 15px;
+            margin-top: 25px;
+            margin-bottom: 10px;
 
             a {
                 position: relative;
@@ -1340,127 +1580,6 @@ export const AddStudentWrapper = styled('div')`
                     height: 2px;
                     background: linear-gradient(to right, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
                     transform: translateY(-50%);
-                }
-            }
-        }
-    }
-
-    .student_details_sec {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin-top: 25px;
-
-        .details_box {
-            position: relative;
-            margin-top: 15px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid ${colors.customColors.borderColor};
-            border-radius: 8px;
-            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
-
-            .details_top {
-                position: relative;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                padding: 10px 16px;
-                cursor: pointer;
-                border-radius: 8px 8px 0 0;
-                transition: all 0.5s ease;
-
-                &.active {
-                    background: ${colors.customColors.lightBackground1};
-                }
-
-                h3 {
-                    position: relative;
-                    font-size: 15px;
-                    color: ${colors.customColors.blackColor};
-                    font-weight: 600;
-                }
-
-                .icon {
-                    position: relative;
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-left: auto;
-                    box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
-
-                    i {
-                        position: relative;
-                        font-size: 14px;
-                        color: ${colors.customColors.blackColor2};
-                    }
-                }
-            }
-
-            .details_bottom {
-                position: relative;
-                width: 100%;
-
-                .details_inner {
-                    position: relative;
-                    width: 100%;
-                    padding: 15px;
-                    padding-top: 0;
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-between;
-
-                    .input_box {
-                        position: relative;
-                        width: 32.5%;
-                        margin-top: 15px;
-
-                        input {
-                            position: relative;
-                            width: 100%;
-                            height: 40px;
-                            border: 1px solid ${colors.customColors.borderColor};
-                            font-size: 12px;
-                            border-radius: 5px;
-                            padding: 5px 20px;
-                            outline: none;
-                            transition: all 0.5s ease;
-
-                            &:focus,
-                            &:valid {
-                                border: 1px solid ${colors.customColors.blueColor1};
-                                transition: all 0.5s ease;
-                            }
-                        }
-
-                        span {
-                            position: absolute;
-                            top: 50%;
-                            left: 15px;
-                            padding: 0 5px;
-                            font-size: 12px;
-                            background: ${colors.customColors.whiteColor};
-                            line-height: 1;
-                            color: ${colors.customColors.blackColor2};
-                            pointer-events: none;
-                            transform: translateY(-50%);
-                            transition: all 0.5s ease;
-                        }
-
-                        input:focus ~ span,
-                        input:valid ~ span {
-                            transform: translateY(-25px);
-                            font-size: 10px;
-                            color: ${colors.themeColor};
-                            font-weight: 500;
-                            transition: all 0.5s ease;
-                        }
-                    }
                 }
             }
         }

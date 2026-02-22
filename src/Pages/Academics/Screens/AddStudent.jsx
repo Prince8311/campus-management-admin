@@ -19,8 +19,8 @@ const AddStudentPage = () => {
                                 <div className="icon"><i className="fa-solid fa-angle-right"></i></div>
                             </div>
                         </div>
-                        <div className="box_bottom">
-                            <div className="bottom_inner">
+                        <div className="upload_form_sec">
+                            <div className="profile_image_sec">
                                 <div className="bulk_upload_sec">
                                     <a href=""><i className="fa-solid fa-cloud-arrow-up"></i></a>
                                     <p>Drag and drop your file here or <span>browse</span></p>
@@ -40,9 +40,9 @@ const AddStudentPage = () => {
                                 <div className="icon"><i className="fa-solid fa-angle-right"></i></div>
                             </div>
                         </div>
-                        <div className="box_bottom">
-                            <div className="bottom_inner">
-                                <div className="manually_upload_sec">
+                        <div className="upload_form_sec">
+                            <div className="profile_image_sec">
+                                <div className="sec_inner">
                                     <h6>Manually Add Student</h6>
                                     <div className="sec_content">
                                         <div className="content_left">
@@ -56,80 +56,44 @@ const AddStudentPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="student_details_sec">
-                    <div className="details_box">
-                        <div className="details_top active">
-                            <h3>Basic Details</h3>
-                            <div className="icon"><i className="fa-solid fa-angle-right"></i></div>
-                        </div>
-                        <div className="details_bottom">
-                            <div className="details_inner">
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Class*</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Enrolment ID*</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>First Name*</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Middle Name</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Last Name</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Date of Admission*</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Class Roll Number</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Date of Birth</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Gender</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Blood Group</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Pick-up point (Transport Fee)</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Sats Number</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Bus Number</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Student Aadhaar Number</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>Class admitted at first admission</span>
-                                </div>
-                                <div className="input_box">
-                                    <input type="text" required />
-                                    <span>PEN</span>
+                            <div className="student_details_sec">
+                                <div className="details_box">
+                                    <div className="details_top active">
+                                        <h3>Basic Details</h3>
+                                        <div className="icon"><i className="fa-solid fa-angle-right"></i></div>
+                                    </div>
+                                    <div className="details_bottom">
+                                        <div className="details_inner">
+                                            <div className="input_box">
+                                                <span>Class <p>*</p></span>
+                                                <input type="text" />
+                                            </div>
+                                            <div className="input_box">
+                                                <span>Number <p>*</p></span>
+                                                <input type="number" className="no-spinner" />
+                                            </div>
+                                            <div className="select_box">
+                                                <span>Type <p>*</p></span>
+                                                <div className="dropdown_sec">
+                                                    <div className="dropdown_btn">
+                                                        <p>Type</p>
+                                                        <i className="fa-solid fa-angle-down"></i>
+                                                    </div>
+                                                    <div className="dropdown"></div>
+                                                </div>
+                                            </div>
+                                            <div className="date_box">
+                                                <span>Class <p>*</p></span>
+                                                <div className="dropdown_sec">
+                                                    <div className="dropdown_btn">
+                                                        <p>Date</p>
+                                                        <i className="fa-regular fa-calendar"></i>
+                                                    </div>
+                                                    <div className="dropdown"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

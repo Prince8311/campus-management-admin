@@ -278,8 +278,8 @@ export const StudentWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 align-items: flex-end;
-                padding-bottom: 6px;
                 padding: 0 15px;
+                padding-bottom: 10px;
 
                 &::after {
                     content: '';
@@ -325,6 +325,7 @@ export const StudentWrapper = styled('div')`
                         align-items: center;
                         padding: 5px 15px;
                         cursor: pointer;
+                        transition: all 0.3s ease;
 
                         i {
                             position: relative;
@@ -337,6 +338,11 @@ export const StudentWrapper = styled('div')`
                             font-size: 12px;
                             color: ${colors.customColors.greenColor};
                             margin-left: auto;
+                        }
+
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.3s ease;
                         }
                     }
                 }
@@ -359,10 +365,16 @@ export const StudentWrapper = styled('div')`
                         border-radius: 6px;
                         font-size: 13px;
                         font-weight: 500;
+                        transition: all 0.3s ease;
 
                         i {
                             margin-right: 8px;
                             font-size: 12px;
+                        }
+
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.3s ease;
                         }
                     }
                 }
@@ -522,6 +534,12 @@ export const StaffWrapper = styled('div')`
                         align-items: center;
                         padding: 5px 15px;
                         cursor: pointer;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.3s ease;
+                        }
 
                         i {
                             position: relative;
@@ -556,6 +574,12 @@ export const StaffWrapper = styled('div')`
                         border-radius: 6px;
                         font-size: 13px;
                         font-weight: 500;
+                        transition: all 0.3s ease;
+                        
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.3s ease;
+                        }
 
                         i {
                             margin-right: 8px;
@@ -700,6 +724,12 @@ export const SectionFieldsWrapper = styled('div')`
                     align-items: center;
                     padding: 5px 15px;
                     cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.3s ease;
+                    }
 
                     i {
                         position: relative;
@@ -734,6 +764,12 @@ export const SectionFieldsWrapper = styled('div')`
                     border-radius: 6px;
                     font-size: 13px;
                     font-weight: 500;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.3s ease;
+                    }
 
                     i {
                         margin-right: 8px;
@@ -896,6 +932,12 @@ export const SectionFieldsWrapper = styled('div')`
                                 border: none;
                                 background: ${colors.customColors.blueColor1};
                                 color: ${colors.customColors.whiteColor};
+                                transition: all 0.3s ease;
+
+                                &:hover {
+                                    border-radius: 25px;
+                                    transition: all 0.3s ease;
+                                }
                             }
                         }
 

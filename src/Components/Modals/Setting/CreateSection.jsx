@@ -1,6 +1,6 @@
 import { CreateSectionWrapper } from "../../../Styles/SettingModalStyle";
 
-const CreateSectionPage = ({ isCreateSectionOpen, setIsCreateSectionOpen }) => {
+const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen }) => {
 
     function closeModal() {
         setIsCreateSectionOpen(false);
@@ -19,10 +19,10 @@ const CreateSectionPage = ({ isCreateSectionOpen, setIsCreateSectionOpen }) => {
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="input_box">
-                                <input type="text" required />
-                                <span>Section name*</span>
+                                <span>Section Name <p>*</p></span>
+                                <input type="text" />
                             </div>
-                            <p><span>*</span>Note: You can't delete or edit profile section after creating</p>
+                            <a><span>*</span>Note: You can't delete or edit profile section after creating</a>
                         </div>
                     </div>
                     <div className="modal_btn">
@@ -34,4 +34,4 @@ const CreateSectionPage = ({ isCreateSectionOpen, setIsCreateSectionOpen }) => {
     );
 }
 
-export default CreateSectionPage;
+export default CreateSectionModal;

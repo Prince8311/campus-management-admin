@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CreateFieldsPage from "../../../Components/Modals/Setting/CreateFields";
+import CreateFieldsModal from "../../../Components/Modals/Setting/CreateFields";
 import { SectionFieldsWrapper } from "../../../Styles/SettingStyle";
 
 const SectionFieldsPage = () => {
@@ -79,7 +79,7 @@ const SectionFieldsPage = () => {
                     </div>
                 </div>
 
-                <CreateFieldsPage
+                <CreateFieldsModal
                     isCreateFieldsOpen={isCreateFieldsOpen}
                     setIsCreateFieldsOpen={setIsCreateFieldsOpen}
                 />

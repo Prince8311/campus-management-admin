@@ -1,6 +1,6 @@
 import { CreateFieldsWrapper } from "../../../Styles/SettingModalStyle";
 
-const CreateFieldsPage = ({ isCreateFieldsOpen, setIsCreateFieldsOpen }) => {
+const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen }) => {
 
     function closeModal() {
         setIsCreateFieldsOpen(false);
@@ -19,24 +19,17 @@ const CreateFieldsPage = ({ isCreateFieldsOpen, setIsCreateFieldsOpen }) => {
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="input_box">
-                                <input type="text" required />
-                                <span>Field title*</span>
+                                <span>Class <p>*</p></span>
+                                <input type="text" />
                             </div>
                             <div className="select_box">
-                                <input type="text" required />
-                                <div className="dropdown_btn">
-                                    {/* <span>Text Box</span> */}
-                                    <p>selectedAgeCategory</p>
-                                    <i className="fa-solid fa-angle-down"></i>
-                                </div>
-                                <div className="dropdown">
-                                    <div className="dropdown_inner">
-                                        <ul>
-                                            <li>Dropdown</li>
-                                            <li>Multi select dropdown</li>
-                                            <li>Date</li>
-                                        </ul>
+                                <span>Type <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn">
+                                        <p>Type</p>
+                                        <i className="fa-solid fa-angle-down"></i>
                                     </div>
+                                    <div className="dropdown"></div>
                                 </div>
                             </div>
                         </div>
@@ -57,4 +50,4 @@ const CreateFieldsPage = ({ isCreateFieldsOpen, setIsCreateFieldsOpen }) => {
     )
 };
 
-export default CreateFieldsPage;
+export default CreateFieldsModal;
