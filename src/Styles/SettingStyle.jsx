@@ -255,7 +255,6 @@ export const StudentWrapper = styled('div')`
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 0 15px;
 
     .wrapper_content {
         position: relative;
@@ -269,6 +268,7 @@ export const StudentWrapper = styled('div')`
             display: flex;
             flex-direction: column;
             margin-bottom: 20px;
+            padding: 0 15px;
 
             &:last-of-type {
                 margin-bottom: 0;
@@ -366,8 +366,7 @@ export const StudentWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                /* padding: 0 5px; */
-                margin-top: 20px;
+                margin-top: 10px;
 
                 .sec_item {
                     position: relative;
