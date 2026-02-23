@@ -135,6 +135,7 @@ export const AddInstitutionWrapper = styled('div')`
                         border-radius: 5px;
                         padding: 5px 20px;
                         border: none;
+                        outline: none;
                         margin-top: 3px;
                         background: ${colors.customColors.lightBackground3};
                         resize: none;
