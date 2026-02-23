@@ -19,7 +19,7 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen }) => {
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="input_box">
-                                <span>Class <p>*</p></span>
+                                <span>Field Name <p>*</p></span>
                                 <input type="text" />
                             </div>
                             <div className="select_box">

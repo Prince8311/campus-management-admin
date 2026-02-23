@@ -1,6 +1,14 @@
+import { useState } from "react";
+import AddInstitutionModal from "../../../Components/Modals/Institutions/AddInstitution";
 import { InstitutionListWrapper } from "../../../Styles/InstitutionStyle";
 
 const InstitutionListPage = () => {
+    const [isAddInstitutionOpen, setIsAddInstitutionOpen] = useState(false);
+
+    const handleOpenAddInstitutionModal = () => {
+        setIsAddInstitutionOpen(true);
+    };
+
     return (
         <>
             <InstitutionListWrapper>
@@ -13,9 +21,9 @@ const InstitutionListPage = () => {
                         <input type="text" placeholder="Search by Institutions name" />
                     </div>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={handleOpenAddInstitutionModal}>
                             <i className="fa-solid fa-plus"></i>
-                            <p>Add New Institution</p>
+                            <p>Add Institution</p>
                         </button>
                     </div>
                 </div>
@@ -65,6 +73,11 @@ const InstitutionListPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <AddInstitutionModal 
+                    isAddInstitutionOpen={isAddInstitutionOpen}
+                    setIsAddInstitutionOpen={setIsAddInstitutionOpen}
+                />
             </InstitutionListWrapper>
         </>
     );

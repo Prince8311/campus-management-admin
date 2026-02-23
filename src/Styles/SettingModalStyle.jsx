@@ -90,9 +90,8 @@ export const CreateSectionWrapper = styled('div')`
             .body_inner {
                 position: relative;
                 width: 100%;
-                max-height: 300px;
                 display: flex;
-                flex-direction: column;
+                flex-wrap: wrap;
 
                 .input_box {
                     position: relative;
@@ -260,10 +259,8 @@ export const CreateFieldsWrapper = styled('div')`
             .body_inner {
                 position: relative;
                 width: 100%;
-                max-height: 300px;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: space-between;
 
                 .input_box {
                     position: relative;
@@ -273,7 +270,7 @@ export const CreateFieldsWrapper = styled('div')`
                     input {
                         position: relative;
                         width: 100%;
-                        height: 40px;
+                        height: 37px;
                         font-size: 12px;
                         border-radius: 5px;
                         padding: 5px 20px;
@@ -320,7 +317,7 @@ export const CreateFieldsWrapper = styled('div')`
                     .dropdown_sec {
                         position: relative;
                         width: 100%;
-                        height: 40px;
+                        height: 37px;
                         flex-direction: column;
                         margin-top: 3px;
 

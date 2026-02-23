@@ -80,6 +80,12 @@ export const InstitutionListWrapper = styled('div')`
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.3s ease;
+                }
 
                 i {
                     margin-right: 8px;
