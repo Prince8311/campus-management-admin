@@ -279,7 +279,7 @@ export const StudentWrapper = styled('div')`
                 display: flex;
                 align-items: flex-end;
                 padding: 0 15px;
-                padding-bottom: 10px;
+                padding-bottom: 8px;
 
                 &::after {
                     content: '';
@@ -306,7 +306,6 @@ export const StudentWrapper = styled('div')`
                     p {
                         position: relative;
                         font-size: 11px;
-                        font-weight: 500;
                         color: ${colors.customColors.blackColor2};
                     }
                 }
@@ -488,7 +487,7 @@ export const StaffWrapper = styled('div')`
                 align-items: flex-end;
                 padding-bottom: 6px;
                 padding: 0 15px;
-                padding-bottom: 10px;
+                padding-bottom: 8px;
 
                 &::after {
                     content: '';
@@ -515,7 +514,6 @@ export const StaffWrapper = styled('div')`
                     p {
                         position: relative;
                         font-size: 11px;
-                        font-weight: 400;
                         color: ${colors.customColors.blackColor2};
                     }
                 }
