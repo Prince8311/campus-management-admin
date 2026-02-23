@@ -1304,6 +1304,7 @@ export const AddStudentWrapper = styled('div')`
                     display: flex;
                     flex-direction: column;
                     padding: 15px;
+                    padding-top: 0;
 
                     .details_box {
                         position: relative;
@@ -1387,7 +1388,7 @@ export const AddStudentWrapper = styled('div')`
                                         outline: none;
                                         border: none;
                                         margin-top: 3px;
-                                        background: ${colors.customColors.lightBackground2};
+                                        background: ${colors.customColors.lightBackground3};
 
                                         &::-webkit-outer-spin-button,
                                         &::-webkit-inner-spin-button {
@@ -1450,7 +1451,7 @@ export const AddStudentWrapper = styled('div')`
                                             align-items: center;
                                             border-radius: 5px;
                                             padding: 5px 20px;
-                                            background: ${colors.customColors.lightBackground2};
+                                            background: ${colors.customColors.lightBackground3};
 
                                             p {
                                                 position: relative;
@@ -1507,7 +1508,7 @@ export const AddStudentWrapper = styled('div')`
                                             align-items: center;
                                             border-radius: 5px;
                                             padding: 5px 20px;
-                                            background: ${colors.customColors.lightBackground2};
+                                            background: ${colors.customColors.lightBackground3};
 
                                             p {
                                                 position: relative;
@@ -1599,9 +1600,15 @@ export const AddStudentWrapper = styled('div')`
             border: none;
             border-radius: 6px;
             color: ${colors.customColors.whiteColor};
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 400;
             cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                border-radius: 25px;
+                transition: all 0.3s ease;
+            }
 
             i {
                 margin-right: 5px;

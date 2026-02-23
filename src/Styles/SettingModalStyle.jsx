@@ -109,7 +109,7 @@ export const CreateSectionWrapper = styled('div')`
                         outline: none;
                         border: none;
                         margin-top: 3px;
-                        background: ${colors.customColors.lightBackground2};
+                        background: ${colors.customColors.lightBackground3};
                     }
 
                     span {
@@ -280,7 +280,7 @@ export const CreateFieldsWrapper = styled('div')`
                         outline: none;
                         border: none;
                         margin-top: 3px;
-                        background: ${colors.customColors.lightBackground2};
+                        background: ${colors.customColors.lightBackground3};
                     }
 
                     span {
@@ -332,7 +332,7 @@ export const CreateFieldsWrapper = styled('div')`
                             align-items: center;
                             border-radius: 5px;
                             padding: 5px 20px;
-                            background: ${colors.customColors.lightBackground2};
+                            background: ${colors.customColors.lightBackground3};
 
                             p {
                                 position: relative;
