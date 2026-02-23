@@ -64,6 +64,10 @@ const Sidebar = () => {
                             <i className="fa-solid fa-gauge"></i>
                             <p>Dashboard</p>
                         </NavLink>
+                        <NavLink to="/admin/institutions">
+                            <i className="fa-solid fa-building-user"></i>
+                            <p>Institutions</p>
+                        </NavLink>
                         <div className={`dropdown_item ${activeDropdown === 0 ? 'active' : ''}`}>
                             <div className="dropdown_btn" onClick={() => toggleDropdown(0)}>
                                 <li>

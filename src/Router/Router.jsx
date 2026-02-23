@@ -7,6 +7,10 @@ import AuthenticationPage from "../Auth/Authentication";
 import PageLayout from "../layouts/PageLayout";
 import DashboardPage from "../Pages/Dashboard";
 
+// Institutions 
+import InstitutionMainPage from "../Pages/Institutions/Index";
+import InstitutionListPage from "../Pages/Institutions/Screens/InstitutionList";
+
 // Academics
 import AcademicMainPage from "../Pages/Academics/Index";
 import StudentInformationPage from "../Pages/Academics/Screens/StudentInformation";
@@ -62,7 +66,6 @@ import StaffOverViewPage from "../Pages/Reports/Screens/StaffOverView";
 import TeachingStaffPage from "../Pages/Reports/Screens/TeachingStaff";
 import NonTeachingStaffPage from "../Pages/Reports/Screens/NonTeachingStaff";
 
-
 const Routers = () => {
     return (
         <>
@@ -72,6 +75,10 @@ const Routers = () => {
                     <Route path="admin" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
                         <Route path="dashboard" element={<DashboardPage />} />
+                        <Route path="institutions" element={<InstitutionMainPage />}>
+                            <Route path="" element={<Navigate to="institution-list" />} />
+                            <Route path="institution-list" element={<InstitutionListPage />} />
+                        </Route>
                         <Route path="reports" element={<ReportMainPage />}>
                             <Route path="" element={<Navigate to="school-strength" />} />
                             <Route path="school-strength" element={<SchoolSthrengthPage />}>
