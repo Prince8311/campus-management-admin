@@ -83,7 +83,7 @@ export const AddInstitutionWrapper = styled('div')`
         .modal_body {
             position: relative;
             width: 100%;
-            padding: 15px;
+            padding: 13px 20px;
             display: flex;
             flex-direction: column;
 
@@ -92,7 +92,7 @@ export const AddInstitutionWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                
+                margin-bottom: 7px;
 
                 .input_box {
                     position: relative;
@@ -167,7 +167,7 @@ export const AddInstitutionWrapper = styled('div')`
         .modal_btn {
             position: relative;
             width: 100%;
-            padding: 13px 15px;
+            padding: 13px 20px;
             display: flex;
             align-items: center;
             justify-content: flex-end;
