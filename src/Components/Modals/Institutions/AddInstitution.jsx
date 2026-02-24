@@ -1,6 +1,15 @@
+import { useState } from "react";
 import { AddInstitutionWrapper } from "../../../Styles/InstitutionModalStyle";
+import { toast } from "react-toastify";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
 const AddInstitutionModal = ({isAddInstitutionOpen, setIsAddInstitutionOpen}) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [location, setLocation] = useState('');
 
     function closeModal() {
         setIsAddInstitutionOpen(false);
@@ -32,7 +41,7 @@ const AddInstitutionModal = ({isAddInstitutionOpen, setIsAddInstitutionOpen}) =>
                             </div>
                             <div className="input_box">
                                 <span>Location <a>(Google map location)</a><p>*</p></span>
-                                <textarea ></textarea>
+                                <textarea></textarea>
                             </div>
                         </div>
                     </div>

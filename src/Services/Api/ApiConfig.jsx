@@ -8,5 +8,8 @@ export const getApiEndpoints = () => {
         sendOtp: `${apiURL}/auth/send-mail-otp.php`,
         checkAuth: `${apiURL}/auth/check-auth.php`,
         refreshToken: `${apiURL}/auth/refresh-token.php`,
+
+        // Institutions 
+        addInstitution: `${apiURL}/api/institutions/create.php`,
     };
 }

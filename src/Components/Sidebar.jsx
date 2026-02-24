@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { SidebarWrapper } from "../Styles/LayoutStyle";
 import { NavLink, useLocation } from "react-router-dom";
 import { UserData } from "../Context/PageContext";
+import SkeletonLoader from "./Loader/SkeletonLoader";
 
 const Sidebar = () => {
     const location = useLocation();
-    const { setPageName } = UserData();
+    const { setPageName, isAuthLoading, userDetails } = UserData();
     const [activeDropdown, setActiveDropdown] = useState(null);
 
     useEffect(() => {
@@ -59,207 +60,249 @@ const Sidebar = () => {
                     </div>
                 </div>
                 <div className="sidebar_items">
-                    <ul className="items_inner">
-                        <NavLink to="/admin/dashboard">
-                            <i className="fa-solid fa-gauge"></i>
-                            <p>Dashboard</p>
-                        </NavLink>
-                        <NavLink to="/admin/institutions">
-                            <i className="fa-solid fa-building-user"></i>
-                            <p>Institutions</p>
-                        </NavLink>
-                        <div className={`dropdown_item ${activeDropdown === 0 ? 'active' : ''}`}>
-                            <div className="dropdown_btn" onClick={() => toggleDropdown(0)}>
-                                <li>
-                                    <i className="fa-solid fa-chart-bar prefix"></i>
-                                    <span>
-                                        <p>Reports</p>
-                                        <i className="fa-solid fa-angle-right suffix"></i>
-                                    </span>
-                                </li>
+                    {
+                        isAuthLoading ? (
+                            <div className="items_inner">
+                                {
+                                    Array.from({ length: 4 }).map((_, i) => (
+                                        <SkeletonLoader width="100%" height="40px" margin="0 0 10px 0" />
+                                    ))
+                                }
                             </div>
-                            <div className="dropdown">
-                                <NavLink to="/admin/reports/school-strength">
-                                    <i className="fa-solid fa-users"></i>
-                                    <p>School Strength</p>
+                        ) : (
+                            <ul className="items_inner">
+                                <NavLink to="/admin/dashboard">
+                                    <i className="fa-solid fa-gauge"></i>
+                                    <p>Dashboard</p>
                                 </NavLink>
-                                <a>
-                                    <i className="fa-solid fa-computer"></i>
-                                    <p>Classroom Activity</p>
-                                </a>
-                                <a>
-                                    <i className="fa-solid fa-id-card-clip"></i>
-                                    <p>Student Attendance</p>
-                                </a>
-                                <NavLink to="/admin/reports/academics">
-                                    <i className="fa-solid fa-pen-clip"></i>
-                                    <p>Academics</p>
-                                </NavLink>
-                                <a>
-                                    <i className="fa-solid fa-money-bill"></i>
-                                    <p>Fee</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className={`dropdown_item ${activeDropdown === 1 ? 'active' : ''}`}>
-                            <div className="dropdown_btn" onClick={() => toggleDropdown(1)}>
-                                <li>
-                                    <i className="fa-solid fa-book prefix"></i>
-                                    <span>
-                                        <p>Academics</p>
-                                        <i className="fa-solid fa-angle-right suffix"></i>
-                                    </span>
-                                </li>
-                            </div>
-                            <div className="dropdown">
-                                <NavLink to="/admin/academics/student-information">
-                                    <i className="fa-solid fa-file-pen"></i>
-                                    <p>Student Information</p>
-                                </NavLink>
-                                <NavLink to="/admin/academics/classrooms">
-                                    <i className="fa-solid fa-computer"></i>
-                                    <p>Classrooms</p>
-                                </NavLink>
-                                <NavLink to="/admin/academics/student-attendence">
-                                    <i className="fa-solid fa-id-card-clip"></i>
-                                    <p>Student Attendance</p>
-                                </NavLink>
-                                <a>
-                                    <i className="fa-solid fa-file-lines"></i>
-                                    <p>Report Card</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className={`dropdown_item ${activeDropdown === 2 ? 'active' : ''}`}>
-                            <div className="dropdown_btn" onClick={() => toggleDropdown(2)}>
-                                <li>
-                                    <i className="fa-solid fa-sack-dollar prefix"></i>
-                                    <span>
-                                        <p>Finance Management</p>
-                                        <i className="fa-solid fa-angle-right suffix"></i>
-                                    </span>
-                                </li>
-                            </div>
-                            <div className="dropdown">
-                                <NavLink to="/admin/finance-management/fee-collection">
-                                    <i className="fa-solid fa-hand-holding-dollar prefix"></i>
-                                    <p>Fee Collection</p>
-                                </NavLink>
-                                <NavLink to="/admin/finance-management/fee-transactions">
-                                    <i className="fa-solid fa-file-invoice prefix"></i>
-                                    <p>Fee Transactions</p>
-                                </NavLink>
-                                <NavLink to="/admin/finance-management/fee-configuration">
-                                    <i className="fa-solid fa-gear prefix"></i>
-                                    <p>Fee Configuration</p>
-                                </NavLink>
-                                <NavLink to="/admin/finance-management/bank-accounts">
-                                    <i className="fa-solid fa-building-columns prefix"></i>
-                                    <p>Bank Accounts</p>
-                                </NavLink>
-                            </div>
-                        </div>
-                        <div className={`dropdown_item ${activeDropdown === 3 ? 'active' : ''}`}>
-                            <div className="dropdown_btn" onClick={() => toggleDropdown(3)}>
-                                <li>
-                                    <i className="fa-solid fa-headphones prefix"></i>
-                                    <span>
-                                        <p>Communication</p>
-                                        <i className="fa-solid fa-angle-right suffix"></i>
-                                    </span>
-                                </li>
-                            </div>
-                            <div className="dropdown">
-                                <NavLink to="/admin/communication/messaging">
-                                    <i className="fa-solid fa-message prefix"></i>
-                                    <p>Messaging</p>
-                                </NavLink>
-                            </div>
-                        </div>
-                        <div className={`dropdown_item ${activeDropdown === 4 ? 'active' : ''}`}>
-                            <div className="dropdown_btn" onClick={() => toggleDropdown(4)}>
-                                <li>
-                                    <i className="fa-solid fa-users-gear prefix"></i>
-                                    <span>
-                                        <p>Staff Management</p>
-                                        <i className="fa-solid fa-angle-right suffix"></i>
-                                    </span>
-                                </li>
-                            </div>
-                            <div className="dropdown">
-                                <NavLink to="/admin/staff-management/staff-information">
-                                    <i className="fa-solid fa-file-pen prefix"></i>
-                                    <p>Staff Information</p>
-                                </NavLink>
-                                <a>
-                                    <i className="fa-solid fa-id-card-clip prefix"></i>
-                                    <p>Staff Attendance</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className={`dropdown_item ${activeDropdown === 5 ? 'active' : ''}`}>
-                            <div className="dropdown_btn" onClick={() => toggleDropdown(5)}>
-                                <li>
-                                    <i className="fa-solid fa-user-shield prefix"></i>
-                                    <span>
-                                        <p>Administration</p>
-                                        <i className="fa-solid fa-angle-right suffix"></i>
-                                    </span>
-                                </li>
-                            </div>
-                            <div className="dropdown">
-                                <a>
-                                    <i className="fa-solid fa-certificate prefix"></i>
-                                    <p>Certificates</p>
-                                </a>
-                                <a>
-                                    <i className="fa-solid fa-id-card-clip prefix"></i>
-                                    <p>Id Cards</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
-                            <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
-                                <li>
-                                    <i className="fa-solid fa-gears prefix"></i>
-                                    <span>
-                                        <p>Settings</p>
-                                        <i className="fa-solid fa-angle-right suffix"></i>
-                                    </span>
-                                </li>
-                            </div>
-                            <div className="dropdown">
-                                <a>
-                                    <i className="fa-solid fa-mobile prefix"></i>
-                                    <p>Device Settings</p>
-                                </a>
-                                <NavLink to="/admin/settings/profile-settings">
-                                    <i className="fa-solid fa-user-gear prefix"></i>
-                                    <p>Profile Settings</p>
-                                </NavLink>
-                                <a>
-                                    <i className="fa-solid fa-gear prefix"></i>
-                                    <p>General Settings</p>
-                                </a>
-                                <NavLink to="/admin/settings/roles-permissions">
-                                    <i className="fa-solid fa-file-shield prefix"></i>
-                                    <p>Roles & Permissions</p>
-                                </NavLink>
-                                <a>
-                                    <i className="fa-solid fa-hand-holding-hand prefix"></i>
-                                    <p>Preferences</p>
-                                </a>
-                            </div>
-                        </div>
-                        <NavLink to="/admin/billing">
-                            <i className="fa-solid fa-hand-holding-dollar"></i>
-                            <p>Billing</p>
-                        </NavLink>
-                        <NavLink to="/admin/alumni">
-                            <i className="fa-solid fa-graduation-cap"></i>
-                            <p>Alumni</p>
-                        </NavLink>
-                    </ul>
+                                {
+                                    userDetails.user_type === 'super_admin' &&
+                                    <NavLink to="/admin/institutions">
+                                        <i className="fa-solid fa-building-user"></i>
+                                        <p>Institutions</p>
+                                    </NavLink>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 0 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(0)}>
+                                            <li>
+                                                <i className="fa-solid fa-chart-bar prefix"></i>
+                                                <span>
+                                                    <p>Reports</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/reports/school-strength">
+                                                <i className="fa-solid fa-users"></i>
+                                                <p>School Strength</p>
+                                            </NavLink>
+                                            <a>
+                                                <i className="fa-solid fa-computer"></i>
+                                                <p>Classroom Activity</p>
+                                            </a>
+                                            <a>
+                                                <i className="fa-solid fa-id-card-clip"></i>
+                                                <p>Student Attendance</p>
+                                            </a>
+                                            <NavLink to="/admin/reports/academics">
+                                                <i className="fa-solid fa-pen-clip"></i>
+                                                <p>Academics</p>
+                                            </NavLink>
+                                            <a>
+                                                <i className="fa-solid fa-money-bill"></i>
+                                                <p>Fee</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 1 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(1)}>
+                                            <li>
+                                                <i className="fa-solid fa-book prefix"></i>
+                                                <span>
+                                                    <p>Academics</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/academics/student-information">
+                                                <i className="fa-solid fa-file-pen"></i>
+                                                <p>Student Information</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/academics/classrooms">
+                                                <i className="fa-solid fa-computer"></i>
+                                                <p>Classrooms</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/academics/student-attendence">
+                                                <i className="fa-solid fa-id-card-clip"></i>
+                                                <p>Student Attendance</p>
+                                            </NavLink>
+                                            <a>
+                                                <i className="fa-solid fa-file-lines"></i>
+                                                <p>Report Card</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 2 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(2)}>
+                                            <li>
+                                                <i className="fa-solid fa-sack-dollar prefix"></i>
+                                                <span>
+                                                    <p>Finance Management</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/finance-management/fee-collection">
+                                                <i className="fa-solid fa-hand-holding-dollar prefix"></i>
+                                                <p>Fee Collection</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/finance-management/fee-transactions">
+                                                <i className="fa-solid fa-file-invoice prefix"></i>
+                                                <p>Fee Transactions</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/finance-management/fee-configuration">
+                                                <i className="fa-solid fa-gear prefix"></i>
+                                                <p>Fee Configuration</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/finance-management/bank-accounts">
+                                                <i className="fa-solid fa-building-columns prefix"></i>
+                                                <p>Bank Accounts</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 3 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(3)}>
+                                            <li>
+                                                <i className="fa-solid fa-headphones prefix"></i>
+                                                <span>
+                                                    <p>Communication</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/communication/messaging">
+                                                <i className="fa-solid fa-message prefix"></i>
+                                                <p>Messaging</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 4 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(4)}>
+                                            <li>
+                                                <i className="fa-solid fa-users-gear prefix"></i>
+                                                <span>
+                                                    <p>Staff Management</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/staff-management/staff-information">
+                                                <i className="fa-solid fa-file-pen prefix"></i>
+                                                <p>Staff Information</p>
+                                            </NavLink>
+                                            <a>
+                                                <i className="fa-solid fa-id-card-clip prefix"></i>
+                                                <p>Staff Attendance</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 5 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(5)}>
+                                            <li>
+                                                <i className="fa-solid fa-user-shield prefix"></i>
+                                                <span>
+                                                    <p>Administration</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <a>
+                                                <i className="fa-solid fa-certificate prefix"></i>
+                                                <p>Certificates</p>
+                                            </a>
+                                            <a>
+                                                <i className="fa-solid fa-id-card-clip prefix"></i>
+                                                <p>Id Cards</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
+                                            <li>
+                                                <i className="fa-solid fa-gears prefix"></i>
+                                                <span>
+                                                    <p>Settings</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <a>
+                                                <i className="fa-solid fa-mobile prefix"></i>
+                                                <p>Device Settings</p>
+                                            </a>
+                                            <NavLink to="/admin/settings/profile-settings">
+                                                <i className="fa-solid fa-user-gear prefix"></i>
+                                                <p>Profile Settings</p>
+                                            </NavLink>
+                                            <a>
+                                                <i className="fa-solid fa-gear prefix"></i>
+                                                <p>General Settings</p>
+                                            </a>
+                                            <NavLink to="/admin/settings/roles-permissions">
+                                                <i className="fa-solid fa-file-shield prefix"></i>
+                                                <p>Roles & Permissions</p>
+                                            </NavLink>
+                                            <a>
+                                                <i className="fa-solid fa-hand-holding-hand prefix"></i>
+                                                <p>Preferences</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <NavLink to="/admin/billing">
+                                        <i className="fa-solid fa-hand-holding-dollar"></i>
+                                        <p>Billing</p>
+                                    </NavLink>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <NavLink to="/admin/alumni">
+                                        <i className="fa-solid fa-graduation-cap"></i>
+                                        <p>Alumni</p>
+                                    </NavLink>
+                                }
+                            </ul>
+                        )
+                    }
                 </div>
                 <div className="auth_btn">
                     <a>

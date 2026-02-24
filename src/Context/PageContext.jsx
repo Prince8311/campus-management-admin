@@ -10,11 +10,12 @@ export const UserProvider = ({ children }) => {
     const [userDetails, setUserDetails] = useState({});
     const [pageName, setPageName] = useState('Dashboard');
     const [authStatus, setAuthStatus] = useState("loading");
+    const [isAuthLoading, setIsAuthLoading] = useState(false);
 
     const checkAuth = async () => {
+        setIsAuthLoading(true);
         try {
             const response = await axiosInstance.get(api.checkAuth);
-
             if (response?.data?.status === 200) {
                 setUserDetails(response.data.user);
                 setAuthStatus("authenticated");
@@ -24,6 +25,8 @@ export const UserProvider = ({ children }) => {
             }
         } catch {
             setAuthStatus("unauthenticated");
+        } finally {
+            setIsAuthLoading(false);
         }
     };
 
@@ -38,7 +41,7 @@ export const UserProvider = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ authToken, setAuthToken, pageName, setPageName, authStatus, userDetails, setUserDetails }}>
+        <UserContext.Provider value={{ authToken, setAuthToken, pageName, setPageName, isAuthLoading, authStatus, userDetails, setUserDetails }}>
             {children}
         </UserContext.Provider>
     );
