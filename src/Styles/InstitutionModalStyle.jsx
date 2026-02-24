@@ -36,6 +36,14 @@ export const AddInstitutionWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow: hidden;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -109,7 +117,7 @@ export const AddInstitutionWrapper = styled('div')`
                         height: 37px;
                         font-size: 12px;
                         border-radius: 5px;
-                        padding: 5px 20px;
+                        padding: 5px 15px;
                         outline: none;
                         border: none;
                         margin-top: 3px;
@@ -133,7 +141,7 @@ export const AddInstitutionWrapper = styled('div')`
                         height: 80px;
                         font-size: 12px;
                         border-radius: 5px;
-                        padding: 5px 20px;
+                        padding: 10px 15px;
                         border: none;
                         outline: none;
                         margin-top: 3px;
