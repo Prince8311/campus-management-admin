@@ -542,16 +542,24 @@ export const NavbarWrapper = styled('div')`
 
             .notification_box {
                 position: relative;
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid ${colors.customColors.blackColor2};
+                
 
                 a {
                     position: relative;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: ${colors.customColors.blackColor1};
+                    color: ${colors.customColors.blackColor2};
                     border-radius: 50%;
                     cursor: pointer;
-                    font-size: 21px;
+                    font-size: 15px;
                 }
             }
 
@@ -564,8 +572,8 @@ export const NavbarWrapper = styled('div')`
 
                 .profile_img {
                     position: relative;
-                    width: 30px;
-                    height: 30px;
+                    width: 32px;
+                    height: 32px;
                     border-radius: 50%;
                     overflow: hidden;
                     border: 1px solid ${colors.customColors.blackColor2};

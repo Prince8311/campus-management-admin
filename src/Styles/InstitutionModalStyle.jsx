@@ -130,7 +130,7 @@ export const AddInstitutionWrapper = styled('div')`
                     textarea {
                         position: relative;
                         width: 100%;
-                        height: 100px;
+                        height: 80px;
                         font-size: 12px;
                         border-radius: 5px;
                         padding: 5px 20px;
@@ -145,12 +145,12 @@ export const AddInstitutionWrapper = styled('div')`
                         position: relative;
                         display: flex;
                         align-items: center;
-                        font-size: 13px;
+                        font-size: 12px;
                         font-weight: 400;
                         color: ${colors.customColors.blackColor2};
 
                         a {
-                            font-size: 11px;
+                            font-size: 10px;
                             color: ${colors.customColors.blackColor3};
                             margin-left: 2px;
                         }

@@ -115,7 +115,7 @@ export const CreateSectionWrapper = styled('div')`
                         position: relative;
                         display: flex;
                         align-items: center;
-                        font-size: 13px;
+                        font-size: 12px;
                         font-weight: 400;
                         color: ${colors.customColors.blackColor2};
 
@@ -284,7 +284,7 @@ export const CreateFieldsWrapper = styled('div')`
                         position: relative;
                         display: flex;
                         align-items: center;
-                        font-size: 13px;
+                        font-size: 12px;
                         font-weight: 400;
                         color: ${colors.customColors.blackColor2};
 
@@ -304,7 +304,7 @@ export const CreateFieldsWrapper = styled('div')`
                         position: relative;
                         display: flex;
                         align-items: center;
-                        font-size: 13px;
+                        font-size: 12px;
                         font-weight: 400;
                         color: ${colors.customColors.blackColor2};
 
