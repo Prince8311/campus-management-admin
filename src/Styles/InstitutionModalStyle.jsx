@@ -128,11 +128,6 @@ export const AddInstitutionWrapper = styled('div')`
                             -webkit-appearance: none;
                             margin: 0;
                         }
-
-                        /* Firefox */
-                        &[type="number"] {
-                            -moz-appearance: textfield;
-                        }
                     }
 
                     textarea {
@@ -198,6 +193,12 @@ export const AddInstitutionWrapper = styled('div')`
 
                 &:hover {
                     border-radius: 25px;
+                    transition: all 0.3s ease;
+                }
+
+                &:disabled {
+                    opacity: 0.4;
+                    cursor: not-allowed;
                     transition: all 0.3s ease;
                 }
             }

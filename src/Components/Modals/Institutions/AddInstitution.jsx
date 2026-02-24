@@ -6,14 +6,39 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
 const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) => {
+    const api = getApiEndpoints();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [location, setLocation] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
     const isFormValid = name.trim() !== '' && email.trim() !== '' && phone.trim() !== '' && location.trim() !== '';
 
     function closeModal() {
         setIsAddInstitutionOpen(false);
+    }
+
+    const handleAddInstitution = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            institutionName: name,
+            phone: phone,
+            email: email,
+            location: location
+        };
+        try {
+            const response = await axiosInstance.post(api.addInstitution, payload);
+            if(response?.data.status === 200) {
+                toast.success(response?.data.message);
+                setIsAddInstitutionOpen(false);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
     }
 
     return (
@@ -53,7 +78,15 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) 
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button disabled={!isFormValid}>Save</button>
+                        <button onClick={handleAddInstitution} disabled={!isFormValid}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </AddInstitutionWrapper>
