@@ -564,8 +564,8 @@ export const NavbarWrapper = styled('div')`
 
                 .profile_img {
                     position: relative;
-                    width: 35px;
-                    height: 35px;
+                    width: 30px;
+                    height: 30px;
                     border-radius: 50%;
                     overflow: hidden;
                     border: 1px solid ${colors.customColors.blackColor2};
@@ -582,7 +582,7 @@ export const NavbarWrapper = styled('div')`
                 p {
                     position: relative;
                     margin-left: 8px;
-                    font-size: 13px;
+                    font-size: 12px;
                     font-weight: 500;
                     overflow: hidden;
                     white-space: nowrap;
