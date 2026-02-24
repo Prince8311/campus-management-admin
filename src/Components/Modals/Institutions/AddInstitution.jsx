@@ -10,6 +10,7 @@ const AddInstitutionModal = ({isAddInstitutionOpen, setIsAddInstitutionOpen}) =>
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [location, setLocation] = useState('');
+    const isFormValid = name.trim() !== '' || email.trim() !== '' || phone.trim() !== '' || location.trim() !== '';
 
     function closeModal() {
         setIsAddInstitutionOpen(false);
@@ -29,24 +30,24 @@ const AddInstitutionModal = ({isAddInstitutionOpen, setIsAddInstitutionOpen}) =>
                         <div className="body_inner">
                             <div className="input_box">
                                 <span>Institution Name <p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
                             <div className="input_box">
                                 <span>Email Address <p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             <div className="input_box">
                                 <span>Contact No. <p>*</p></span>
-                                <input type="number" className="no-spinner" />
+                                <input type="number" className="no-spinner" value={phone} onChange={(e) => setPhone(e.target.value)} />
                             </div>
                             <div className="input_box">
                                 <span>Location <a>(Google map location)</a><p>*</p></span>
-                                <textarea></textarea>
+                                <textarea value={location} onChange={(e) => setLocation(e.target.value)}></textarea>
                             </div>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={isFormValid}>Save</button>
                     </div>
                 </div>
             </AddInstitutionWrapper>
