@@ -5,12 +5,12 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddInstitutionModal = ({isAddInstitutionOpen, setIsAddInstitutionOpen}) => {
+const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [location, setLocation] = useState('');
-    const isFormValid = name.trim() !== '' || email.trim() !== '' || phone.trim() !== '' || location.trim() !== '';
+    const isFormValid = name.trim() !== '' && email.trim() !== '' && phone.trim() !== '' && location.trim() !== '';
 
     function closeModal() {
         setIsAddInstitutionOpen(false);
@@ -38,7 +38,13 @@ const AddInstitutionModal = ({isAddInstitutionOpen, setIsAddInstitutionOpen}) =>
                             </div>
                             <div className="input_box">
                                 <span>Contact No. <p>*</p></span>
-                                <input type="number" className="no-spinner" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                <input
+                                    type="tel"
+                                    pattern="[0-9]*"
+                                    className="no-spinner"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                />
                             </div>
                             <div className="input_box">
                                 <span>Location <a>(Google map location)</a><p>*</p></span>
@@ -47,7 +53,7 @@ const AddInstitutionModal = ({isAddInstitutionOpen, setIsAddInstitutionOpen}) =>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button disabled={isFormValid}>Save</button>
+                        <button disabled={!isFormValid}>Save</button>
                     </div>
                 </div>
             </AddInstitutionWrapper>
