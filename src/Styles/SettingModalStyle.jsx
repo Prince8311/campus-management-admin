@@ -159,11 +159,17 @@ export const CreateSectionWrapper = styled('div')`
                 border: none;
                 background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
-                transition: all 0.3s ease;
+                transition: all 0.5s ease;
 
                 &:hover {
                     border-radius: 25px;
-                    transition: all 0.3s ease;
+                    transition: all 0.5s ease;
+                }
+
+                &:disabled {
+                    cursor: not-allowed;
+                    opacity: 0.4;
+                    transition: all 0.5s ease;
                 }
             }
         }

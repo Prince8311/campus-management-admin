@@ -12,5 +12,9 @@ export const getApiEndpoints = () => {
 
         // Institutions 
         addInstitution: `${apiURL}/api/institutions/create.php`,
+
+        // Student Form 
+        createStudentFormSection: `${apiURL}/api/student/create-form-section.php`,
+        fetchStudentFormSection: `${apiURL}/api/student/form-section-list.php`,
     };
 }
