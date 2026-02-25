@@ -6,6 +6,7 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 
 const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen }) => {
     const api = getApiEndpoints();
+    const [name, setName] = useState('');
 
     function closeModal() {
         setIsCreateSectionOpen(false);
@@ -25,7 +26,7 @@ const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen }) => 
                         <div className="body_inner">
                             <div className="input_box">
                                 <span>Section Name <p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
                             <a><span>*</span>Note: You can't delete or edit profile section after creating</a>
                         </div>
