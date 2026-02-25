@@ -96,12 +96,11 @@ export const CreateSectionWrapper = styled('div')`
                 .input_box {
                     position: relative;
                     width: 100%;
-                    margin-top: 15px;
 
                     input {
                         position: relative;
                         width: 100%;
-                        height: 40px;
+                        height: 37px;
                         font-size: 12px;
                         border-radius: 5px;
                         padding: 5px 20px;
@@ -265,7 +264,7 @@ export const CreateFieldsWrapper = styled('div')`
                 .input_box {
                     position: relative;
                     width: 100%;
-                    margin-top: 15px;
+                    margin-bottom: 15px;
 
                     input {
                         position: relative;
@@ -298,7 +297,7 @@ export const CreateFieldsWrapper = styled('div')`
                 .select_box {
                     position: relative;
                     width: 100%;
-                    margin-top: 15px;
+                    margin-bottom: 15px;
 
                     span {
                         position: relative;
