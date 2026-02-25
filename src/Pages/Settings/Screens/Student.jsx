@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { StudentWrapper } from "../../../Styles/SettingStyle";
 import CreateSectionModal from "../../../Components/Modals/Setting/CreateSection";
 import { toast } from "react-toastify";
@@ -6,11 +7,16 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 
 const StudentPage = () => {
+    const navigate = useNavigate();
     const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
 
     const handleOpenCreateSection = () => {
         setIsCreateSectionOpen(true);
     };
+
+    const handleOpenFieldRedirectionPage = () => {
+        navigate("/admin/settings/profile-settings/section-fields");
+    }
 
     return (
         <>
@@ -36,7 +42,7 @@ const StudentPage = () => {
                             </div>
                         </div>
                         <div className="box_bottom_sec">
-                            <div className="sec_item">
+                            <div className="sec_item" onClick={handleOpenFieldRedirectionPage}>
                                 <div className="item_inner">
                                     <a><i class="fa-solid fa-thumbtack"></i></a>
                                     <div className="inner_content">
