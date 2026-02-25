@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StudentWrapper } from "../../../Styles/SettingStyle";
 import CreateSectionModal from "../../../Components/Modals/Setting/CreateSection";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 
 const StudentPage = () => {
     const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);

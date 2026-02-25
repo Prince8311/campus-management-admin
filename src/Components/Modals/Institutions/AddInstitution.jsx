@@ -29,12 +29,11 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) 
         };
         try {
             const response = await axiosInstance.post(api.addInstitution, payload);
-            if(response?.data.status === 200) {
+            if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 setIsAddInstitutionOpen(false);
             }
         } catch (error) {
-            console.log(error);
             toast.error(error.response?.data.message || error.message);
         } finally {
             setIsButtonLoading(false);
@@ -78,7 +77,7 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) 
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button onClick={handleAddInstitution} disabled={!isFormValid}>
+                        <button onClick={handleAddInstitution} disabled={!isFormValid || isButtonLoading}>
                             {
                                 isButtonLoading ? (
                                     <ButtonLoader />

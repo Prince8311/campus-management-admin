@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { CreateSectionWrapper } from "../../../Styles/SettingModalStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 
 const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen }) => {
+    const api = getApiEndpoints();
 
     function closeModal() {
         setIsCreateSectionOpen(false);

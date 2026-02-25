@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import { SidebarWrapper } from "../Styles/LayoutStyle";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { UserData } from "../Context/PageContext";
 import SkeletonLoader from "./Loader/SkeletonLoader";
+import { toast } from "react-toastify";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../Services/Api/ApiConfig";
+import ButtonLoader from "./Loader/ButtonLoader";
 
 const Sidebar = () => {
+    const api = getApiEndpoints();
+    const navigate = useNavigate();
     const location = useLocation();
-    const { setPageName, isAuthLoading, userDetails } = UserData();
+    const { setAuthToken, setPageName, isAuthLoading, userDetails, setUserDetails } = UserData();
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     useEffect(() => {
         const formatPathName = (pathName) => {
@@ -29,6 +36,24 @@ const Sidebar = () => {
     const toggleDropdown = (index) => {
         setActiveDropdown(prev => (prev === index ? null : index));
     };
+
+    const handleLogout = async () => {
+        setIsLoggingOut(true);
+        try {
+            const response = await axiosInstance.post(api.logout);
+            if (response?.data.status === 200) {
+                toast.success(response?.data.message);
+                setAuthToken('');
+                setUserDetails({});
+                localStorage.removeItem("authToken");
+                navigate("/", { replace: true });
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsLoggingOut(false);
+        }
+    }
 
     return (
         <>
@@ -305,9 +330,17 @@ const Sidebar = () => {
                     }
                 </div>
                 <div className="auth_btn">
-                    <a>
-                        <i className="fa-solid fa-right-from-bracket"></i>
-                        <span>Log Out</span>
+                    <a className={isLoggingOut ? 'disable' : ''} onClick={handleLogout}>
+                        {
+                            isLoggingOut ? (
+                                <ButtonLoader />
+                            ) : (
+                                <>
+                                    <i className="fa-solid fa-right-from-bracket"></i>
+                                    <span>Log Out</span>
+                                </>
+                            )
+                        }
                     </a>
                 </div>
             </SidebarWrapper>

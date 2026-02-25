@@ -496,6 +496,11 @@ export const SidebarWrapper = styled('div')`
                 margin-right: 6px;
                 font-size: 14px;
             }
+
+            &.disable {
+                pointer-events: none;
+                opacity: 0.4;
+            }
         }
     }
 `;
