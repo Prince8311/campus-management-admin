@@ -403,7 +403,7 @@ export const StudentWrapper = styled('div')`
 
                                 h6 {
                                     position: relative;
-                                    max-width: calc(100% - 100px);
+                                    max-width: calc(100% - 85px);
                                     font-size: 13.5px;
                                     font-style: italic;
                                     font-weight: 500;
