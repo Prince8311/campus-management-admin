@@ -310,42 +310,6 @@ export const StudentWrapper = styled('div')`
                     }
                 }
 
-                .preview_sec {
-                    position: relative;
-                    margin-left: auto;
-
-                    .preview_btn {
-                        position: relative;
-                        width: 100px;
-                        height: 35px;
-                        border: 1px solid ${colors.customColors.greenColor};
-                        border-radius: 6px;
-                        display: flex;
-                        align-items: center;
-                        padding: 5px 15px;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-
-                        i {
-                            position: relative;
-                            color: ${colors.customColors.greenColor};
-                            font-size: 13px;
-                        }
-                        
-                        p {
-                            position: relative;
-                            font-size: 12px;
-                            color: ${colors.customColors.greenColor};
-                            margin-left: auto;
-                        }
-
-                        &:hover {
-                            border-radius: 25px;
-                            transition: all 0.3s ease;
-                        }
-                    }
-                }
-
                 .add_btn {
                     position: relative;
                     margin-left: 20px;
@@ -439,10 +403,14 @@ export const StudentWrapper = styled('div')`
 
                                 h6 {
                                     position: relative;
+                                    max-width: calc(100% - 100px);
                                     font-size: 13.5px;
                                     font-style: italic;
                                     font-weight: 500;
                                     color: ${colors.customColors.blackColor};
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
                                 }
                                 span {
                                     position: relative;
@@ -505,13 +473,12 @@ export const StudentWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     display: flex;
-                    padding: 10px;
+                    padding: 0 10px;
 
                     p {
                         position: relative;
                         font-size: 13px;
-                        color: ${colors.customColors.blackColor2};
-                        font-weight: 500;
+                        color: ${colors.customColors.blackColor3};
                     }
                 }
             }

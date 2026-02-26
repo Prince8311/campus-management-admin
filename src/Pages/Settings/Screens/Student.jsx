@@ -80,12 +80,6 @@ const StudentPage = () => {
                                 <h6>Profile Information</h6>
                                 <p>Create and edit profile sections in students' profile</p>
                             </div>
-                            <div className="preview_sec">
-                                <div className="preview_btn">
-                                    <i className="fa-solid fa-eye"></i>
-                                    <p>Preview</p>
-                                </div>
-                            </div>
                             <div className="add_btn">
                                 <button onClick={() => handleOpenCreateSection('profile_info')}>
                                     <i className="fa-solid fa-plus"></i>
@@ -117,12 +111,6 @@ const StudentPage = () => {
                                 <h6>Documents</h6>
                                 <p>Create and edit document sections in students' profile</p>
                             </div>
-                            <div className="preview_sec">
-                                <div className="preview_btn">
-                                    <i className="fa-solid fa-eye"></i>
-                                    <p>Preview</p>
-                                </div>
-                            </div>
                             <div className="add_btn">
                                 <button onClick={() => handleOpenCreateSection('document')}>
                                     <i className="fa-solid fa-plus"></i>
@@ -132,7 +120,7 @@ const StudentPage = () => {
                         </div>
                         <div className="box_bottom_sec">
                             <div className="empty_messege">
-                                <p>No Section Created</p>
+                                <p>No Section available.</p>
                             </div>
                         </div>
                     </div>
