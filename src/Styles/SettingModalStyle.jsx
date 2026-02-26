@@ -103,7 +103,7 @@ export const CreateSectionWrapper = styled('div')`
                         height: 37px;
                         font-size: 12px;
                         border-radius: 5px;
-                        padding: 5px 20px;
+                        padding: 5px 15px;
                         outline: none;
                         border: none;
                         margin-top: 3px;
@@ -278,7 +278,7 @@ export const CreateFieldsWrapper = styled('div')`
                         height: 37px;
                         font-size: 12px;
                         border-radius: 5px;
-                        padding: 5px 20px;
+                        padding: 5px 15px;
                         outline: none;
                         border: none;
                         margin-top: 3px;
@@ -333,7 +333,7 @@ export const CreateFieldsWrapper = styled('div')`
                             display: flex;
                             align-items: center;
                             border-radius: 5px;
-                            padding: 5px 20px;
+                            padding: 5px 15px;
                             background: ${colors.customColors.lightBackground3};
 
                             p {
@@ -412,9 +412,7 @@ export const CreateFieldsWrapper = styled('div')`
 
             p {
                 position: relative;
-                margin-left: 10px;
-                font-size: 13px;
-                font-weight: 500;
+                font-size: 12px;
                 color: ${colors.customColors.blackColor1};
             }
 

@@ -908,7 +908,7 @@ export const SectionFieldsWrapper = styled('div')`
 
                                     &:focus,
                                     &:valid {
-                                        border: 1px solid ${colors.customColors.blueColor1};
+                                        border: 1px solid ${colors.customColors.blackColor};
                                         transition: all 0.5s ease;
                                     }
                                 }
@@ -1008,7 +1008,7 @@ export const SectionFieldsWrapper = styled('div')`
                                 }
 
                                 input[type="checkbox"]:checked ~ label {
-                                    background: ${colors.customColors.blueColor1};
+                                    background: ${colors.customColors.greenColor};
                                     transition: all 0.5s ease;
                                 }
 
