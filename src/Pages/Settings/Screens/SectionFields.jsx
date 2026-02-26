@@ -17,12 +17,6 @@ const SectionFieldsPage = () => {
                         <div className="box_head">
                             <h6>Address Details</h6>
                         </div>
-                        <div className="preview_sec">
-                            <div className="preview_btn">
-                                <i className="fa-solid fa-eye"></i>
-                                <p>Preview</p>
-                            </div>
-                        </div>
                         <div className="add_btn">
                             <button onClick={handleOpenCreateFieldsModal}>
                                 <i className="fa-solid fa-plus"></i>
@@ -60,7 +54,7 @@ const SectionFieldsPage = () => {
                                     <div className="input_field_sec">
                                         <div className="input_box">
                                             <input type="text" required />
-                                            <span>Field Title*</span>
+                                            <span>Field Name</span>
                                         </div>
                                         <button>Save</button>
                                     </div>

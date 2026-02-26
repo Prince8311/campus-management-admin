@@ -712,7 +712,7 @@ export const SectionFieldsWrapper = styled('div')`
             width: 100%;
             display: flex;
             align-items: flex-end;
-            padding-bottom: 6px;
+            padding-bottom: 7px;
 
             &::after {
                 content: '';
@@ -737,49 +737,13 @@ export const SectionFieldsWrapper = styled('div')`
                 }
             }
 
-            .preview_sec {
-                position: relative;
-                margin-left: auto;
-
-                .preview_btn {
-                    position: relative;
-                    width: 100px;
-                    height: 35px;
-                    border: 1px solid ${colors.customColors.greenColor};
-                    border-radius: 6px;
-                    display: flex;
-                    align-items: center;
-                    padding: 5px 15px;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-
-                    &:hover {
-                        border-radius: 25px;
-                        transition: all 0.3s ease;
-                    }
-
-                    i {
-                        position: relative;
-                        color: ${colors.customColors.greenColor};
-                        font-size: 13px;
-                    }
-                    
-                    p {
-                        position: relative;
-                        font-size: 12px;
-                        color: ${colors.customColors.greenColor};
-                        margin-left: auto;
-                    }
-                }
-            }
-
             .add_btn {
                 position: relative;
                 margin-left: 20px;
 
                 button {
                     position: relative;
-                    width: 200px;
+                    width: 170px;
                     height: 35px;
                     display: flex;
                     align-items: center;
@@ -809,14 +773,23 @@ export const SectionFieldsWrapper = styled('div')`
         .content_bottom {
             position: relative;
             width: 100%;
+            height: calc(100vh - 240px);
             display: flex;
-            margin-top: 20px;
+            margin-top: 15px;
             
             .left_content {
                 position: relative;
                 width: 400px;
-                padding-right: 20px;
+                height: 100%;
+                padding-right: 15px;
                 border-right: 1px solid ${colors.customColors.borderColor};
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
 
                 .left_content_inner {
                     position: relative;
@@ -827,7 +800,7 @@ export const SectionFieldsWrapper = styled('div')`
                     li {
                         position: relative;
                         width: 100%;
-                        padding: 12px 15px;
+                        padding: 10px 15px;
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
@@ -850,6 +823,7 @@ export const SectionFieldsWrapper = styled('div')`
 
                         &.active {
                             border: 1px solid ${colors.customColors.blueColor2};
+                            background: ${colors.customColors.blueColorLight};
 
                             p {
                                 color: ${colors.customColors.blueColor2};
@@ -866,7 +840,15 @@ export const SectionFieldsWrapper = styled('div')`
             .right_content {
                 position: relative;
                 width: calc(100% - 400px);
-                padding-left: 20px;
+                height: 100%;
+                padding-left: 15px;
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
 
                 .right_content_inner {
                     position: relative;
@@ -881,7 +863,7 @@ export const SectionFieldsWrapper = styled('div')`
 
                         h6 {
                             position: relative;
-                            font-size: 15px;
+                            font-size: 13px;
                             font-weight: 500;
                             color: ${colors.customColors.blackColor1};
                         }
@@ -892,7 +874,7 @@ export const SectionFieldsWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        margin-top: 20px;
+                        margin-top: 15px;
 
                         .input_field_sec {
                             position: relative;
@@ -903,7 +885,7 @@ export const SectionFieldsWrapper = styled('div')`
                             .input_box {
                                 position: relative;
                                 width: calc(100% - 160px);
-                                padding-right: 20px;
+                                padding-right: 15px;
 
                                 input {
                                     position: relative;
@@ -912,7 +894,7 @@ export const SectionFieldsWrapper = styled('div')`
                                     border: 1px solid ${colors.customColors.borderColor};
                                     font-size: 12px;
                                     border-radius: 5px;
-                                    padding: 5px 20px;
+                                    padding: 5px 15px;
                                     outline: none;
                                     transition: all 0.5s ease;
 
@@ -971,7 +953,7 @@ export const SectionFieldsWrapper = styled('div')`
                         .mandatory_sec {
                             position: relative;
                             width: 100%;
-                            margin-top: 20px;
+                            margin-top: 15px;
                             display: flex;
                             justify-content: space-between;
                             padding: 12px 15px;
