@@ -303,7 +303,7 @@ export const CreateFieldsWrapper = styled('div')`
                 .select_box {
                     position: relative;
                     width: 100%;
-                    margin-bottom: 15px;
+                    margin-bottom: 8px;
 
                     span {
                         position: relative;
@@ -334,6 +334,7 @@ export const CreateFieldsWrapper = styled('div')`
                             align-items: center;
                             border-radius: 5px;
                             padding: 5px 15px;
+                            cursor: pointer;
                             background: ${colors.customColors.lightBackground3};
 
                             p {
@@ -346,12 +347,87 @@ export const CreateFieldsWrapper = styled('div')`
 
                             i {
                                 position: relative;
-                                width: 25px;
+                                margin-left: auto;
                                 display: flex;
                                 justify-content: flex-end;
                                 cursor: pointer;
                                 font-size: 12px;
                                 color: ${colors.customColors.blackColor2};
+                                transition: all 0.5s ease;
+                                
+                                &.active {
+                                    transform: rotate(-180deg);
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+
+                        .dropdown {
+                            position: absolute;
+                            top: 100%;
+                            left: 0px;
+                            width: 100%;
+                            z-index: 15;
+                            background: ${colors.customColors.whiteColor};
+                            border-radius: 5px;
+                            box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                            max-height: 0px;
+                            overflow: hidden;
+                            transition: all 0.5s ease;
+
+                            &.active {
+                                max-height: 200px;
+                                transition: all 0.5s ease;
+                            }
+
+                            .dropdown_inner {
+                                position: relative;
+                                width: 100%;
+                                padding: 10px;
+                                display: flex;
+                                flex-direction: column;
+
+                                ul {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    max-height: 160px;
+                                    overflow-y: auto;
+                                    scrollbar-width: none;
+                                    -ms-overflow-style: none;
+
+                                    &::-webkit-scrollbar {
+                                        display: none;
+                                    }
+
+                                    li {
+                                        position: relative;
+                                        width: 100%;
+                                        list-style: none;
+                                        padding: 7px 15px;
+                                        cursor: pointer;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor1};
+                                        border-radius: 4px;
+                                        transition: all 0.5s ease;
+
+                                        &:hover {
+                                            background: ${colors.themeColor};
+                                            color: ${colors.customColors.whiteColor};
+                                            transition: all 0.5s ease;
+                                        }
+
+                                        &.active {
+                                            background: ${colors.customColors.lightBackground};
+                                            color: ${colors.customColors.blackColor};
+
+                                            &:hover {
+                                                color: ${colors.customColors.blackColor};
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -429,11 +505,17 @@ export const CreateFieldsWrapper = styled('div')`
                 background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
                 margin-left: auto;
-                transition: all 0.3s ease;
+                transition: all 0.5s ease;
 
                 &:hover {
                     border-radius: 25px;
-                    transition: all 0.3s ease;
+                    transition: all 0.5s ease;
+                }
+
+                &:disabled {
+                    cursor: not-allowed;
+                    opacity: 0.4;
+                    transition: all 0.5s ease;
                 }
             }
         }
