@@ -400,57 +400,114 @@ export const StudentWrapper = styled('div')`
                         padding: 13px 15px;
                         background: ${colors.customColors.whiteColor};
                         border: 1px solid ${colors.customColors.borderColor};
+                        border-left: 4px solid ${colors.customColors.greenColor};
                         border-radius: 8px;
                         display: flex;
+                        flex-direction: column;
                         box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
                                     -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                        a {
+                        .inner_top {
                             position: relative;
-                            width: 25px;
-                            height: 25px;
-                            border-radius: 50%;
-                            background: ${colors.customColors.borderColor};
+                            width: 100%;
+                            display: flex;
+                            padding-bottom: 10px;
+                            border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                            a {
+                                position: relative;
+                                width: 28px;
+                                height: 28px;
+                                border-radius: 50%;
+                                background: ${colors.customColors.greenColorLight};
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 12px;
+                                color: ${colors.customColors.greenColor};
+                                text-decoration: none;
+                                cursor: pointer;
+                            }
+
+                            .inner_content {
+                                position: relative;
+                                width: calc(100% - 45px);
+                                display: flex;
+                                flex-direction: column;
+                                padding: 0 15px;
+
+                                h6 {
+                                    position: relative;
+                                    font-size: 15px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                }
+                                span {
+                                    position: relative;
+                                    width: max-content;
+                                    display: flex;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.greenColor};
+                                    margin-top: 2px;
+                                    background: ${colors.customColors.greenColorLight};
+                                    border-radius: 25px;
+                                    padding: 5px 15px;
+                                }
+                            }
+                        }
+
+                        .inner_btn {
+                            position: relative;
+                            width: 100%;
                             display: flex;
                             align-items: center;
-                            justify-content: center;
-                            font-size: 10px;
-                            color: ${colors.customColors.blackColor};
-                            text-decoration: none;
-                            cursor: pointer;
-                        }
-
-                        .inner_content {
-                            position: relative;
-                            width: calc(100% - 45px);
-                            display: flex;
-                            flex-direction: column;
-                            padding: 0 15px;
-
-                            h6 {
-                                position: relative;
-                                font-size: 15px;
-                                font-weight: 500;
-                                color: ${colors.customColors.blackColor};
-                            }
-                            span {
-                                position: relative;
-                                display: flex;
-                                font-size: 11px;
-                                color: ${colors.customColors.blackColor1};
-                                margin-top: 2px;
-                            }
-                        }
-
-                        p {
-                            position: relative;
-                            width: 20px;
-                            display: flex;
+                            margin-top: 10px;
                             justify-content: flex-end;
-                            font-size: 14px;
-                            color: ${colors.customColors.blackColor2};
-                            margin-left: auto;
+
+                            button {
+                                position: relative;
+                                width: max-content;
+                                height: 30px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border: none;
+                                padding: 0 12px;
+
+                                &.details {
+                                    background: ${colors.customColors.blueColorLight};
+                                    color: ${colors.customColors.blueColor2};
+                                    font-size: 11px;
+                                    cursor: pointer;
+                                    font-weight: 400;
+                                    border-bottom-left-radius: 4px;
+                                    border-top-left-radius: 4px;
+                                }
+
+                                &.delete {
+                                    background: ${colors.customColors.redColorLight};
+                                    color:  ${colors.customColors.redColor};
+                                    font-size: 13px;
+                                    cursor: pointer;
+                                    border-top-right-radius: 4px;
+                                    border-bottom-right-radius: 4px;
+                                }
+                            }
                         }
+                    }
+                }
+
+                .empty_messege {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    padding: 10px;
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor2};
+                        font-weight: 500;
                     }
                 }
             }

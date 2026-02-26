@@ -5,6 +5,7 @@ import CreateSectionModal from "../../../Components/Modals/Setting/CreateSection
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import { type } from "@testing-library/user-event/dist/type";
 
 const StudentPage = () => {
     const api = getApiEndpoints();
@@ -14,6 +15,8 @@ const StudentPage = () => {
     const [sectionType, setSectionType] = useState('');
     const [loadProfileFormSections, setLoadProfileFormSections] = useState(false);
     const [isProfileFormSectionsLoading, setIsProfileFormSectionsLoading] = useState(false);
+    const [loadDocumentFormSections, setLoadDocumentFormSections] = useState(false);
+    const [isDocumentFormSectionsLoading, setIsDocumentsFormSectionsLoading] = useState(false);
 
     const handleOpenCreateSection = (section) => {
         setIsCreateSectionOpen(true);
@@ -27,8 +30,8 @@ const StudentPage = () => {
             const response = await axiosInstance.get(api.fetchStudentFormSection, {
                 params: { type: 'profile_info' }
             });
-            if (response?.data.status === 200) { 
-                console.log(response);
+            if (response?.data.status === 200) {
+                console.log("Profile Fetch", response.data);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -41,6 +44,27 @@ const StudentPage = () => {
     useEffect(() => {
         fetchProfileFormSections();
     }, [loadProfileFormSections]);
+
+    const fetchDocumentsFormSection = async () => {
+        setIsDocumentsFormSectionsLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchStudentFormSection, {
+                params: { type: 'document' }
+            });
+            if(response?.data.status === 200) {
+                console.log("Documents Fetch", response.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setLoadDocumentFormSections(false);
+            setIsDocumentsFormSectionsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchDocumentsFormSection();
+    }, [loadDocumentFormSections]);
 
     const handleOpenFieldRedirectionPage = () => {
         navigate("/admin/settings/profile-settings/section-fields");
@@ -72,12 +96,17 @@ const StudentPage = () => {
                         <div className="box_bottom_sec">
                             <div className="sec_item" onClick={handleOpenFieldRedirectionPage}>
                                 <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
+                                    <div className="inner_top">
+                                        <a><i class="fa-solid fa-thumbtack"></i></a>
+                                        <div className="inner_content">
+                                            <h6>Admin</h6>
+                                            <span>20 fields</span>
+                                        </div>
                                     </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
+                                    <div className="inner_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,15 +131,8 @@ const StudentPage = () => {
                             </div>
                         </div>
                         <div className="box_bottom_sec">
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
+                            <div className="empty_messege">
+                                <p>No Section Created</p>
                             </div>
                         </div>
                     </div>
