@@ -898,7 +898,7 @@ export const SectionFieldsWrapper = styled('div')`
                                 input {
                                     position: relative;
                                     width: 100%;
-                                    height: 40px;
+                                    height: 37px;
                                     border: 1px solid ${colors.customColors.borderColor};
                                     font-size: 12px;
                                     border-radius: 5px;
@@ -940,7 +940,7 @@ export const SectionFieldsWrapper = styled('div')`
                             button {
                                 position: relative;
                                 width: 160px;
-                                height: 35px;
+                                height: 37px;
                                 font-size: 13px;
                                 font-weight: 500;
                                 cursor: pointer;
@@ -963,16 +963,16 @@ export const SectionFieldsWrapper = styled('div')`
                             width: 100%;
                             margin-top: 15px;
                             display: flex;
+                            align-items: center;
                             justify-content: space-between;
-                            padding: 12px 15px;
+                            padding: 10px 15px;
                             border: 1px solid ${colors.customColors.borderColor};
                             border-radius: 6px;
 
                             p {
                                 position: relative;
-                                font-size: 13px;
+                                font-size: 12px;
                                 color: ${colors.customColors.blackColor1};
-                                font-weight: 500;
                             }
 
                             .toggle_bar {
