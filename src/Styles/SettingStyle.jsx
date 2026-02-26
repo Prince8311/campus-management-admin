@@ -728,12 +728,20 @@ export const SectionFieldsWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
+                align-items: center;
 
                 h6 {
                     position: relative;
                     font-size: 15px;
                     font-weight: 500;
                     color: ${colors.customColors.blackColor1};
+                }
+                
+                span {
+                    position: relative;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor3};
+                    margin: 0 8px;
                 }
             }
 

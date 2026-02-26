@@ -15,6 +15,8 @@ const SectionFieldsPage = () => {
                 <div className="wrapper_content">
                     <div className="content_top">
                         <div className="box_head">
+                            <h6>Student</h6>
+                            <span><i className="fa-solid fa-angle-right"></i></span>
                             <h6>Address Details</h6>
                         </div>
                         <div className="add_btn">
