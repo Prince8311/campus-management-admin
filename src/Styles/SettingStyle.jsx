@@ -732,7 +732,7 @@ export const SectionFieldsWrapper = styled('div')`
 
                 h6 {
                     position: relative;
-                    font-size: 15px;
+                    font-size: 13px;
                     font-weight: 500;
                     color: ${colors.customColors.blackColor1};
                 }
@@ -740,7 +740,7 @@ export const SectionFieldsWrapper = styled('div')`
                 span {
                     position: relative;
                     font-size: 13px;
-                    color: ${colors.customColors.blackColor3};
+                    color: ${colors.customColors.blackColor1};
                     margin: 0 8px;
                 }
             }
