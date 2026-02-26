@@ -1,11 +1,11 @@
-import { NavLink, Outlet, useMatch } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useMatch } from "react-router-dom";
 import { ProfileSettingsWrapper } from "../../../Styles/SettingStyle";
 
 const ProfileSettingPage = () => {
-    const isStudent = useMatch("/profile-settings/student");
-    const isStaff = useMatch("/profile-settings/staff");
+    const location = useLocation();
+    const currentPage = location.pathname.split("/").pop();
 
-    const showTabs = isStudent || isStaff;
+    const showTabs = currentPage === "student" || currentPage === "staff";
 
     return (
         <>
