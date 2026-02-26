@@ -397,7 +397,8 @@ export const StudentWrapper = styled('div')`
                     .item_inner {
                         position: relative;
                         width: 100%;
-                        padding: 13px 15px;
+                        padding: 12px;
+                        padding-left: 15px;
                         background: ${colors.customColors.whiteColor};
                         border: 1px solid ${colors.customColors.borderColor};
                         border-left: 4px solid ${colors.customColors.greenColor};
@@ -411,7 +412,8 @@ export const StudentWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             display: flex;
-                            padding-bottom: 10px;
+                            align-items: center;
+                            padding-bottom: 8px;
                             border-bottom: 1px solid ${colors.customColors.borderColor};
 
                             a {
@@ -431,14 +433,14 @@ export const StudentWrapper = styled('div')`
 
                             .inner_content {
                                 position: relative;
-                                width: calc(100% - 45px);
+                                width: calc(100% - 28px);
                                 display: flex;
-                                flex-direction: column;
-                                padding: 0 15px;
+                                padding-left: 12px;
 
                                 h6 {
                                     position: relative;
-                                    font-size: 15px;
+                                    font-size: 13.5px;
+                                    font-style: italic;
                                     font-weight: 500;
                                     color: ${colors.customColors.blackColor};
                                 }
@@ -451,7 +453,9 @@ export const StudentWrapper = styled('div')`
                                     margin-top: 2px;
                                     background: ${colors.customColors.greenColorLight};
                                     border-radius: 25px;
-                                    padding: 5px 15px;
+                                    padding: 3px 15px;
+                                    margin-left: auto;
+                                    font-weight: 500;
                                 }
                             }
                         }
@@ -461,13 +465,13 @@ export const StudentWrapper = styled('div')`
                             width: 100%;
                             display: flex;
                             align-items: center;
-                            margin-top: 10px;
+                            margin-top: 8px;
                             justify-content: flex-end;
 
                             button {
                                 position: relative;
                                 width: max-content;
-                                height: 30px;
+                                height: 25px;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
@@ -477,9 +481,9 @@ export const StudentWrapper = styled('div')`
                                 &.details {
                                     background: ${colors.customColors.blueColorLight};
                                     color: ${colors.customColors.blueColor2};
-                                    font-size: 11px;
+                                    font-size: 10px;
                                     cursor: pointer;
-                                    font-weight: 400;
+                                    font-weight: 500;
                                     border-bottom-left-radius: 4px;
                                     border-top-left-radius: 4px;
                                 }
@@ -487,7 +491,7 @@ export const StudentWrapper = styled('div')`
                                 &.delete {
                                     background: ${colors.customColors.redColorLight};
                                     color:  ${colors.customColors.redColor};
-                                    font-size: 13px;
+                                    font-size: 10px;
                                     cursor: pointer;
                                     border-top-right-radius: 4px;
                                     border-bottom-right-radius: 4px;
