@@ -5,13 +5,14 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userType, setUserType, sectionType, setSectionType }) => {
+const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userType, setUserType, sectionType, setSectionType, setLoadProfileFormSections, setLoadDocumentFormSections }) => {
     const api = getApiEndpoints();
     const [name, setName] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     function closeModal() {
         setIsCreateSectionOpen(false);
+        setName('');
         setUserType('');
         setSectionType('');
     }
@@ -27,6 +28,11 @@ const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userT
             const response = await axiosInstance.post(api.createStudentFormSection, payload);
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
+                if (sectionType === 'profile_info') {
+                    setLoadProfileFormSections(true);
+                } else {
+                    setLoadDocumentFormSections(true);
+                }
                 closeModal();
             }
         } catch (error) {

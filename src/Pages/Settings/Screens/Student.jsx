@@ -5,7 +5,7 @@ import CreateSectionModal from "../../../Components/Modals/Setting/CreateSection
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
-import { type } from "@testing-library/user-event/dist/type";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const StudentPage = () => {
     const api = getApiEndpoints();
@@ -13,8 +13,10 @@ const StudentPage = () => {
     const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
     const [userType, setUserType] = useState('');
     const [sectionType, setSectionType] = useState('');
+    const [profileFormSections, setProfileFormSections] = useState([]);
     const [loadProfileFormSections, setLoadProfileFormSections] = useState(false);
     const [isProfileFormSectionsLoading, setIsProfileFormSectionsLoading] = useState(false);
+    const [documentFormSections, setDocumentFormSections] = useState([]);
     const [loadDocumentFormSections, setLoadDocumentFormSections] = useState(false);
     const [isDocumentFormSectionsLoading, setIsDocumentsFormSectionsLoading] = useState(false);
 
@@ -32,6 +34,7 @@ const StudentPage = () => {
             });
             if (response?.data.status === 200) {
                 console.log("Profile Fetch", response.data);
+                setProfileFormSections(response?.data.sections);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -51,8 +54,9 @@ const StudentPage = () => {
             const response = await axiosInstance.get(api.fetchStudentFormSection, {
                 params: { type: 'document' }
             });
-            if(response?.data.status === 200) {
+            if (response?.data.status === 200) {
                 console.log("Documents Fetch", response.data);
+                setDocumentFormSections(response?.data.sections);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -88,21 +92,37 @@ const StudentPage = () => {
                             </div>
                         </div>
                         <div className="box_bottom_sec">
-                            <div className="sec_item" onClick={handleOpenFieldRedirectionPage}>
-                                <div className="item_inner">
-                                    <div className="inner_top">
-                                        <a><i class="fa-solid fa-thumbtack"></i></a>
-                                        <div className="inner_content">
-                                            <h6>Admin</h6>
-                                            <span>20 fields</span>
+                            {
+                                isProfileFormSectionsLoading ? (
+                                    Array.from({ length: 4 }).map((_, i) => (
+                                        <div key={i} className="sec_item">
+                                            <SkeletonLoader width="100%" height="100px" />
                                         </div>
+                                    ))
+                                ) : profileFormSections.length > 0 ? (
+                                    profileFormSections.map((section, i) =>
+                                        <div key={i} className="sec_item">
+                                            <div className="item_inner">
+                                                <div className="inner_top">
+                                                    <a><i class="fa-solid fa-thumbtack"></i></a>
+                                                    <div className="inner_content">
+                                                        <h6>{section.name}</h6>
+                                                        <span>{section.total_fields} {section.total_fields > 1 ? 'fields' : 'field'}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="inner_btn">
+                                                    <button className="details" onClick={handleOpenFieldRedirectionPage}>View Details</button>
+                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                ) : (
+                                    <div className="empty_messege">
+                                        <p>No Section available.</p>
                                     </div>
-                                    <div className="inner_btn">
-                                        <button className="details">View Details</button>
-                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="content_box">
@@ -119,9 +139,33 @@ const StudentPage = () => {
                             </div>
                         </div>
                         <div className="box_bottom_sec">
-                            <div className="empty_messege">
-                                <p>No Section available.</p>
-                            </div>
+                            {
+                                isDocumentFormSectionsLoading ? (
+                                    <></>
+                                ) : documentFormSections.length > 0 ? (
+                                    documentFormSections.map((section, i) =>
+                                        <div key={i} className="sec_item" onClick={handleOpenFieldRedirectionPage}>
+                                            <div className="item_inner">
+                                                <div className="inner_top">
+                                                    <a><i class="fa-solid fa-thumbtack"></i></a>
+                                                    <div className="inner_content">
+                                                        <h6>Admin</h6>
+                                                        <span>20 fields</span>
+                                                    </div>
+                                                </div>
+                                                <div className="inner_btn">
+                                                    <button className="details">View Details</button>
+                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                ) : (
+                                    <div className="empty_messege">
+                                        <p>No Section available.</p>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
@@ -133,6 +177,8 @@ const StudentPage = () => {
                     setUserType={setUserType}
                     sectionType={sectionType}
                     setSectionType={setSectionType}
+                    setLoadProfileFormSections={setLoadProfileFormSections}
+                    setLoadDocumentFormSections={setLoadDocumentFormSections}
                 />
             </StudentWrapper>
         </>
