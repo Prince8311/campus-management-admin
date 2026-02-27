@@ -614,3 +614,172 @@ export const NavbarWrapper = styled('div')`
         }
     }
 `;
+
+export const FormFieldWrapper = styled('div')`
+    position: relative;
+    width: 33.33%;
+    margin-bottom: 10px;
+    padding: 0 8px;
+
+    .field_inner {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 400;
+            color: ${colors.customColors.blackColor2};
+
+            p {
+                color: ${colors.customColors.redColor};
+                margin-left: 2px;
+            }
+        }
+
+        .input_box {
+            position: relative;
+            width: 100%;
+            height: 37px;
+            margin-top: 3px;
+
+            input {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                font-size: 12px;
+                border-radius: 5px;
+                padding: 5px 15px;
+                outline: none;
+                border: none;
+                background: ${colors.customColors.lightBackground3};
+
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                /* Firefox */
+                &[type="number"] {
+                    -moz-appearance: textfield;
+                }
+            }
+        }
+
+        .select_box {
+            position: relative;
+            width: 100%;
+            height: 37px;
+            flex-direction: column;
+            margin-top: 3px;
+
+            .select_btn {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                border-radius: 5px;
+                padding: 5px 15px;
+                background: ${colors.customColors.lightBackground3};
+
+                p {
+                    position: relative;
+                    width: calc(100% - 25px);
+                    display: flex;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor1};
+                }
+
+                i {
+                    position: relative;
+                    width: 25px;
+                    display: flex;
+                    justify-content: flex-end;
+                    cursor: pointer;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor2};
+                }
+            }
+        }
+
+        .multi_select_box {
+            position: relative;
+            width: 100%;
+            height: 37px;
+            flex-direction: column;
+            margin-top: 3px;
+
+            .select_btn {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                border-radius: 5px;
+                padding: 5px 15px;
+                background: ${colors.customColors.lightBackground3};
+
+                p {
+                    position: relative;
+                    width: calc(100% - 25px);
+                    display: flex;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor1};
+                }
+
+                i {
+                    position: relative;
+                    width: 25px;
+                    display: flex;
+                    justify-content: flex-end;
+                    cursor: pointer;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor2};
+                }
+            }
+        }
+
+        .date_box {
+            position: relative;
+            width: 100%;
+            height: 37px;
+            flex-direction: column;
+            margin-top: 3px;
+
+            .date_btn {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                border-radius: 5px;
+                padding: 5px 15px;
+                background: ${colors.customColors.lightBackground3};
+
+                p {
+                    position: relative;
+                    width: calc(100% - 25px);
+                    display: flex;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor1};
+                }
+
+                i {
+                    position: relative;
+                    width: 25px;
+                    display: flex;
+                    justify-content: flex-end;
+                    cursor: pointer;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor2};
+                }
+            }
+        }
+    }
+`;

@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { StudentInformationWrapper } from "../../../Styles/AcademicStyle";
 
 const StudentInformationPage = () => {
-    // /admin/academics/add-student
+    const navigate = useNavigate();
+
+    const redirectAddStudentScreen = () => {
+        navigate("/admin/academics/add-student");
+    }
     return (
         <>
             <StudentInformationWrapper>
@@ -21,7 +26,7 @@ const StudentInformationPage = () => {
                         <div className="filter_dropdown"></div>
                     </div>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={redirectAddStudentScreen}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add New Student</p>
                         </button>
