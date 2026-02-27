@@ -356,7 +356,6 @@ export const StudentWrapper = styled('div')`
                     width: 25%;
                     max-width: 302.75px;
                     padding: 10px;
-                    cursor: pointer;
 
                     .item_inner {
                         position: relative;

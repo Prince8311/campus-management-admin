@@ -17,6 +17,8 @@ const SectionFieldsPage = () => {
                         <div className="box_head">
                             <h6>Student</h6>
                             <span><i className="fa-solid fa-angle-right"></i></span>
+                            <h6>Student Profile</h6>
+                            <span><i className="fa-solid fa-angle-right"></i></span>
                             <h6>Address Details</h6>
                         </div>
                         <div className="add_btn">
