@@ -11,7 +11,7 @@ const StudentPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
     const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
-    const [userType, setUserType] = useState('');
+    const userType = 'Student';
     const [sectionType, setSectionType] = useState('');
     const [profileFormSections, setProfileFormSections] = useState([]);
     const [documentFormSections, setDocumentFormSections] = useState([]);
@@ -20,7 +20,6 @@ const StudentPage = () => {
 
     const handleOpenCreateSection = (section) => {
         setIsCreateSectionOpen(true);
-        setUserType('Student');
         setSectionType(section);
     };
 
@@ -67,7 +66,7 @@ const StudentPage = () => {
         fetchDocumentsFormSection(true);
     }, []);
 
-    const handleOpenFieldRedirectionPage = (id, name) => {
+    const handleOpenFieldRedirectionPage = (id, name, sectionType) => {
         const sectionData = {
             userType: userType,
             sectionType: sectionType,
@@ -115,7 +114,7 @@ const StudentPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="inner_btn">
-                                                    <button className="details" onClick={() => handleOpenFieldRedirectionPage(section.id, section.name)}>View Details</button>
+                                                    <button className="details" onClick={() => handleOpenFieldRedirectionPage(section.id, section.name, 'profile_info')}>View Details</button>
                                                     <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                                 </div>
                                             </div>
@@ -178,7 +177,6 @@ const StudentPage = () => {
                     isCreateSectionOpen={isCreateSectionOpen}
                     setIsCreateSectionOpen={setIsCreateSectionOpen}
                     userType={userType}
-                    setUserType={setUserType}
                     sectionType={sectionType}
                     setSectionType={setSectionType}
                     refreshProfileSections={() => fetchProfileFormSections(false)}

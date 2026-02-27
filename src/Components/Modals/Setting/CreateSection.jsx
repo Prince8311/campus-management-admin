@@ -5,7 +5,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userType, setUserType, sectionType, setSectionType, refreshProfileSections, refreshDocumentSections }) => {
+const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userType, sectionType, setSectionType, refreshProfileSections, refreshDocumentSections }) => {
     const api = getApiEndpoints();
     const [name, setName] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -13,7 +13,6 @@ const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userT
     function closeModal() {
         setIsCreateSectionOpen(false);
         setName('');
-        setUserType('');
         setSectionType('');
     }
 

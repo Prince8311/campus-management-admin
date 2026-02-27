@@ -1,6 +1,7 @@
 import { StudentInformationWrapper } from "../../../Styles/AcademicStyle";
 
 const StudentInformationPage = () => {
+    // /admin/academics/add-student
     return (
         <>
             <StudentInformationWrapper>

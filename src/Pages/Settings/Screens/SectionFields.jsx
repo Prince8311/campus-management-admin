@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CreateFieldsModal from "../../../Components/Modals/Setting/CreateFields";
 import { SectionFieldsWrapper } from "../../../Styles/SettingStyle";
 
 const SectionFieldsPage = () => {
+    const navigate = useNavigate();
+    const sectionData = JSON.parse(localStorage.getItem("sectionData"));
     const [isCreateFieldsOpen, setIsCreateFieldsOpen] = useState(false);
+
+    useEffect(() => {
+        if (!sectionData) {
+            navigate("/admin/settings/profile-settings/student");
+        }
+    }, [sectionData, navigate]);
 
     const handleOpenCreateFieldsModal = () => {
         setIsCreateFieldsOpen(true);
@@ -15,11 +24,11 @@ const SectionFieldsPage = () => {
                 <div className="wrapper_content">
                     <div className="content_top">
                         <div className="box_head">
-                            <h6>Student</h6>
+                            <h6>{sectionData.userType}</h6>
                             <span><i className="fa-solid fa-angle-right"></i></span>
-                            <h6>Student Profile</h6>
+                            <h6>{sectionData.sectionType === 'profile_info' ? 'Profile Information' : 'Documents'}</h6>
                             <span><i className="fa-solid fa-angle-right"></i></span>
-                            <h6>Address Details</h6>
+                            <h6>{sectionData.sectionName}</h6>
                         </div>
                         <div className="add_btn">
                             <button onClick={handleOpenCreateFieldsModal}>
