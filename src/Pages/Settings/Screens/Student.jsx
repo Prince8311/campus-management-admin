@@ -14,11 +14,9 @@ const StudentPage = () => {
     const [userType, setUserType] = useState('');
     const [sectionType, setSectionType] = useState('');
     const [profileFormSections, setProfileFormSections] = useState([]);
-    const [loadProfileFormSections, setLoadProfileFormSections] = useState(false);
-    const [isProfileFormSectionsLoading, setIsProfileFormSectionsLoading] = useState(false);
     const [documentFormSections, setDocumentFormSections] = useState([]);
-    const [loadDocumentFormSections, setLoadDocumentFormSections] = useState(false);
-    const [isDocumentFormSectionsLoading, setIsDocumentsFormSectionsLoading] = useState(false);
+    const [isInitialProfileLoading, setIsInitialProfileLoading] = useState(true);
+    const [isInitialDocumentLoading, setIsInitialDocumentLoading] = useState(true);
 
     const handleOpenCreateSection = (section) => {
         setIsCreateSectionOpen(true);
@@ -26,8 +24,10 @@ const StudentPage = () => {
         setSectionType(section);
     };
 
-    const fetchProfileFormSections = async () => {
-        setIsProfileFormSectionsLoading(true);
+    const fetchProfileFormSections = async (showSkeleton = false) => {
+        if (showSkeleton) {
+            setIsInitialProfileLoading(true);
+        }
         try {
             const response = await axiosInstance.get(api.fetchStudentFormSection, {
                 params: { type: 'profile_info' }
@@ -39,17 +39,14 @@ const StudentPage = () => {
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
         } finally {
-            setLoadProfileFormSections(false);
-            setIsProfileFormSectionsLoading(false);
+            setIsInitialProfileLoading(false);
         }
     }
 
-    useEffect(() => {
-        fetchProfileFormSections();
-    }, [loadProfileFormSections]);
-
-    const fetchDocumentsFormSection = async () => {
-        setIsDocumentsFormSectionsLoading(true);
+    const fetchDocumentsFormSection = async (showSkeleton = false) => {
+        if (showSkeleton) {
+            setIsInitialDocumentLoading(true);
+        }
         try {
             const response = await axiosInstance.get(api.fetchStudentFormSection, {
                 params: { type: 'document' }
@@ -61,16 +58,23 @@ const StudentPage = () => {
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
         } finally {
-            setLoadDocumentFormSections(false);
-            setIsDocumentsFormSectionsLoading(false);
+            setIsInitialDocumentLoading(false);
         }
     }
 
     useEffect(() => {
-        fetchDocumentsFormSection();
-    }, [loadDocumentFormSections]);
+        fetchProfileFormSections(true);
+        fetchDocumentsFormSection(true);
+    }, []);
 
-    const handleOpenFieldRedirectionPage = () => {
+    const handleOpenFieldRedirectionPage = (id, name) => {
+        const sectionData = {
+            userType: userType,
+            sectionType: sectionType,
+            sectionId: id,
+            sectionName: name
+        };
+        localStorage.setItem("sectionData", JSON.stringify(sectionData));
         navigate("/admin/settings/profile-settings/section-fields");
     }
 
@@ -93,7 +97,7 @@ const StudentPage = () => {
                         </div>
                         <div className="box_bottom_sec">
                             {
-                                isProfileFormSectionsLoading ? (
+                                isInitialProfileLoading ? (
                                     Array.from({ length: 4 }).map((_, i) => (
                                         <div key={i} className="sec_item">
                                             <SkeletonLoader width="100%" height="100px" />
@@ -111,7 +115,7 @@ const StudentPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="inner_btn">
-                                                    <button className="details" onClick={handleOpenFieldRedirectionPage}>View Details</button>
+                                                    <button className="details" onClick={() => handleOpenFieldRedirectionPage(section.id, section.name)}>View Details</button>
                                                     <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                                 </div>
                                             </div>
@@ -140,11 +144,11 @@ const StudentPage = () => {
                         </div>
                         <div className="box_bottom_sec">
                             {
-                                isDocumentFormSectionsLoading ? (
+                                isInitialDocumentLoading ? (
                                     <></>
                                 ) : documentFormSections.length > 0 ? (
                                     documentFormSections.map((section, i) =>
-                                        <div key={i} className="sec_item" onClick={handleOpenFieldRedirectionPage}>
+                                        <div key={i} className="sec_item">
                                             <div className="item_inner">
                                                 <div className="inner_top">
                                                     <a><i class="fa-solid fa-thumbtack"></i></a>
@@ -177,8 +181,8 @@ const StudentPage = () => {
                     setUserType={setUserType}
                     sectionType={sectionType}
                     setSectionType={setSectionType}
-                    setLoadProfileFormSections={setLoadProfileFormSections}
-                    setLoadDocumentFormSections={setLoadDocumentFormSections}
+                    refreshProfileSections={() => fetchProfileFormSections(false)}
+                    refreshDocumentSections={() => fetchDocumentsFormSection(false)}
                 />
             </StudentWrapper>
         </>

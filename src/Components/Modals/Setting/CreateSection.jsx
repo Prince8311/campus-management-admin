@@ -5,7 +5,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userType, setUserType, sectionType, setSectionType, setLoadProfileFormSections, setLoadDocumentFormSections }) => {
+const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userType, setUserType, sectionType, setSectionType, refreshProfileSections, refreshDocumentSections }) => {
     const api = getApiEndpoints();
     const [name, setName] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -29,9 +29,9 @@ const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userT
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 if (sectionType === 'profile_info') {
-                    setLoadProfileFormSections(true);
+                    refreshProfileSections();
                 } else {
-                    setLoadDocumentFormSections(true);
+                    refreshDocumentSections();
                 }
                 closeModal();
             }
