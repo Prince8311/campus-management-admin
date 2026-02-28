@@ -1,29 +1,62 @@
 import { useState } from "react";
 import { CreateFieldsWrapper } from "../../../Styles/SettingModalStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
-const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen }) => {
+const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshFormFields }) => {
+    const api = getApiEndpoints();
+    const sectionData = JSON.parse(localStorage.getItem("sectionData"));
     const [name, setName] = useState('');
     const types = [
-        {key: 'textbox', value: 'Text'},
-        {key: 'number', value: 'Number'},
-        {key: 'date', value: 'Date'},
-        {key: 'dropdown', value: 'Dropdown'},
-        {key: 'multi-select-dropdown', value: 'Multi-select Dropdown'},
+        { key: 'textbox', value: 'Textbox' },
+        { key: 'number', value: 'Number' },
+        { key: 'date', value: 'Date' },
+        { key: 'dropdown', value: 'Dropdown' },
+        { key: 'multi-select-dropdown', value: 'Multi-select Dropdown' },
     ];
     const [selectedType, setSelectedType] = useState({});
     const [showTypesDropdown, setShowTypesDropdown] = useState(false);
+    const [isRequired, setIsRequired] = useState(false);
     const isFormValid = name.trim() !== '' && selectedType.key;
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     function closeModal() {
         setName('');
         setSelectedType({});
+        setIsRequired(false); 
+        setShowTypesDropdown(false);
         setIsCreateFieldsOpen(false);
     }
 
     const handleSelectType = (type) => {
-        if(type !== selectedType) {
+        if (type.key !== selectedType.key) {
             setSelectedType(type);
             setShowTypesDropdown(false);
+        }
+    }
+
+    const handleAddFormField = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            sectionId: sectionData.sectionId,
+            fieldName: name,
+            fieldType: selectedType.key,
+            isRequired: isRequired
+        };
+        try {
+            const response = await axiosInstance.post(api.createStudentFormFields, payload);
+            if (response?.data.status === 200) {
+                toast.success(response?.data.message);
+                refreshFormFields();
+                closeModal();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
         }
     }
 
@@ -67,13 +100,26 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen }) => {
                     </div>
                     <div className="modal_btn">
                         <div className="toggle_bar">
-                            <input type="checkbox" id="toggle" />
+                            <input
+                                type="checkbox"
+                                id="toggle"
+                                checked={isRequired}
+                                onChange={(e) => setIsRequired(e.target.checked)}
+                            />
                             <label htmlFor="toggle">
                                 <span></span>
                             </label>
                         </div>
                         <p>Make this field mandatory</p>
-                        <button disabled={!isFormValid}>Save</button>
+                        <button disabled={!isFormValid || isButtonLoading} onClick={handleAddFormField}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </CreateFieldsWrapper>

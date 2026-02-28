@@ -762,11 +762,11 @@ export const SectionFieldsWrapper = styled('div')`
                     border-radius: 6px;
                     font-size: 13px;
                     font-weight: 500;
-                    transition: all 0.3s ease;
+                    transition: all 0.5s ease;
 
                     &:hover {
                         border-radius: 25px;
-                        transition: all 0.3s ease;
+                        transition: all 0.5s ease;
                     }
 
                     i {
@@ -816,6 +816,7 @@ export const SectionFieldsWrapper = styled('div')`
                         margin-bottom: 10px;
                         list-style: none;
                         cursor: pointer;
+                        transition: all 0.5s ease;
 
                         p {
                             font-size: 12px;
@@ -831,6 +832,7 @@ export const SectionFieldsWrapper = styled('div')`
                         &.active {
                             border: 1px solid ${colors.customColors.blueColor2};
                             background: ${colors.customColors.blueColorLight};
+                            transition: all 0.5s ease;
 
                             p {
                                 color: ${colors.customColors.blueColor2};
@@ -839,6 +841,11 @@ export const SectionFieldsWrapper = styled('div')`
                             i {
                                 color: ${colors.customColors.blueColor2};
                             }
+                        }
+
+                        &:hover {
+                            background: ${colors.customColors.lightBackground};
+                            transition: all 0.5s ease;
                         }
                     }
                 }
@@ -863,161 +870,188 @@ export const SectionFieldsWrapper = styled('div')`
                     display: flex;
                     flex-direction: column;
 
-                    .inner_head {
+                    h6 {
                         position: relative;
-                        width: 100%;
-                        display: flex;
-
-                        h6 {
-                            position: relative;
-                            font-size: 13px;
-                            font-weight: 500;
-                            color: ${colors.customColors.blackColor1};
+                        font-size: 12px;
+                        font-weight: 400;
+                        font-style: italic;
+                        color: ${colors.customColors.blackColor1};
+                        
+                        span {
+                            font-style: normal;
+                            color: ${colors.customColors.blackColor};
                         }
                     }
 
-                    .inner_body {
+                    .input_field_sec {
                         position: relative;
                         width: 100%;
                         display: flex;
-                        flex-direction: column;
+                        align-items: center;
                         margin-top: 15px;
 
-                        .input_field_sec {
+                        .input_box {
                             position: relative;
-                            width: 100%;
-                            display: flex;
-                            align-items: center;
+                            width: calc(100% - 160px);
+                            padding-right: 15px;
 
-                            .input_box {
+                            input {
                                 position: relative;
-                                width: calc(100% - 160px);
-                                padding-right: 15px;
+                                width: 100%;
+                                height: 37px;
+                                border: 1px solid ${colors.customColors.borderColor};
+                                font-size: 12px;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                outline: none;
+                                transition: all 0.5s ease;
 
-                                input {
-                                    position: relative;
-                                    width: 100%;
-                                    height: 37px;
-                                    border: 1px solid ${colors.customColors.borderColor};
-                                    font-size: 12px;
-                                    border-radius: 5px;
-                                    padding: 5px 15px;
-                                    outline: none;
-                                    transition: all 0.5s ease;
-
-                                    &:focus,
-                                    &:valid {
-                                        border: 1px solid ${colors.customColors.blackColor};
-                                        transition: all 0.5s ease;
-                                    }
-                                }
-
-                                span {
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 15px;
-                                    padding: 0 5px;
-                                    font-size: 12px;
-                                    background: ${colors.customColors.whiteColor};
-                                    line-height: 1;
-                                    color: ${colors.customColors.blackColor2};
-                                    pointer-events: none;
-                                    transform: translateY(-50%);
-                                    transition: all 0.5s ease;
-                                }
-
-                                input:focus ~ span,
-                                input:valid ~ span {
-                                    transform: translateY(-25px);
-                                    font-size: 10px;
-                                    color: ${colors.themeColor};
-                                    font-weight: 500;
+                                &:focus,
+                                &:valid {
+                                    border: 1px solid ${colors.customColors.blackColor};
                                     transition: all 0.5s ease;
                                 }
                             }
 
-                            button {
-                                position: relative;
-                                width: 160px;
-                                height: 37px;
-                                font-size: 13px;
-                                font-weight: 500;
-                                cursor: pointer;
-                                border-radius: 6px;
-                                overflow: hidden;
-                                border: none;
-                                background: ${colors.customColors.blueColor1};
-                                color: ${colors.customColors.whiteColor};
-                                transition: all 0.3s ease;
+                            span {
+                                position: absolute;
+                                top: 50%;
+                                left: 15px;
+                                padding: 0 5px;
+                                font-size: 12px;
+                                background: ${colors.customColors.whiteColor};
+                                line-height: 1;
+                                color: ${colors.customColors.blackColor2};
+                                pointer-events: none;
+                                transform: translateY(-50%);
+                                transition: all 0.5s ease;
+                            }
 
-                                &:hover {
-                                    border-radius: 25px;
-                                    transition: all 0.3s ease;
-                                }
+                            input:focus ~ span,
+                            input:valid ~ span {
+                                transform: translateY(-25px);
+                                font-size: 10px;
+                                color: ${colors.themeColor};
+                                font-weight: 500;
+                                transition: all 0.5s ease;
                             }
                         }
 
-                        .mandatory_sec {
+                        button {
                             position: relative;
-                            width: 100%;
-                            margin-top: 15px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            padding: 10px 15px;
-                            border: 1px solid ${colors.customColors.borderColor};
+                            width: 160px;
+                            height: 37px;
+                            font-size: 13px;
+                            font-weight: 500;
+                            cursor: pointer;
                             border-radius: 6px;
+                            overflow: hidden;
+                            border: none;
+                            background: ${colors.customColors.blueColor1};
+                            color: ${colors.customColors.whiteColor};
+                            transition: all 0.5s ease;
 
-                            p {
-                                position: relative;
-                                font-size: 12px;
-                                color: ${colors.customColors.blackColor1};
+                            &:hover {
+                                border-radius: 25px;
+                                transition: all 0.5s ease;
                             }
 
-                            .toggle_bar {
-                                position: relative;
-                                width: 100px;
-                                display: flex;
-                                justify-content: center;
-
-                                input[type="checkbox"] {
-                                    display: none;
-                                }
-
-                                label {
-                                    position: relative;
-                                    width: 40px;
-                                    height: 21px;
-                                    background: ${colors.customColors.whiteColor2};
-                                    border-radius: 25px;
-                                    padding: 3px;
-                                    display: flex;
-                                    align-items: center;
-                                    cursor: pointer;
-                                    transition: all 0.5s ease;
-
-                                    span {
-                                        position: relative;
-                                        width: 15px;
-                                        height: 100%;
-                                        background: ${colors.customColors.whiteColor};
-                                        border-radius: 50%;
-                                        transition: all 0.5s ease;
-                                    }
-                                }
-
-                                input[type="checkbox"]:checked ~ label {
-                                    background: ${colors.customColors.greenColor};
-                                    transition: all 0.5s ease;
-                                }
-
-                                input[type="checkbox"]:checked ~ label span {
-                                    transform: translateX(19px);
-                                    transition: all 0.5s ease;
-                                }
+                            &:disabled {
+                                cursor: not-allowed;
+                                opacity: 0.4;
                             }
                         }
                     }
+
+                    .mandatory_sec {
+                        position: relative;
+                        width: 100%;
+                        margin-top: 15px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 10px 15px;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 6px;
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        .toggle_bar {
+                            position: relative;
+                            width: 100px;
+                            display: flex;
+                            justify-content: center;
+
+                            input[type="checkbox"] {
+                                display: none;
+                            }
+
+                            label {
+                                position: relative;
+                                width: 40px;
+                                height: 21px;
+                                background: ${colors.customColors.whiteColor2};
+                                border-radius: 25px;
+                                padding: 3px;
+                                display: flex;
+                                align-items: center;
+                                cursor: pointer;
+                                transition: all 0.5s ease;
+
+                                span {
+                                    position: relative;
+                                    width: 15px;
+                                    height: 100%;
+                                    background: ${colors.customColors.whiteColor};
+                                    border-radius: 50%;
+                                    transition: all 0.5s ease;
+                                }
+                            }
+
+                            input[type="checkbox"]:checked ~ label {
+                                background: ${colors.customColors.greenColor};
+                                transition: all 0.5s ease;
+                            }
+
+                            input[type="checkbox"]:checked ~ label span {
+                                transform: translateX(19px);
+                                transition: all 0.5s ease;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .empty_box {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 35px;
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                img {
+                    position: relative;
+                    width: 300px;
+                    opacity: 0.5;
+                }
+
+                p {
+                    position: relative;
+                    margin-top: 10px;
+                    font-size: 14px;
+                    opacity: 0.4;
                 }
             }
         }
