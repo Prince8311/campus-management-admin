@@ -1,3 +1,4 @@
+import FormField from "../../../Components/FormField";
 import { AddStudentWrapper } from "../../../Styles/AcademicStyle";
 
 const AddStudentPage = () => {
@@ -64,34 +65,22 @@ const AddStudentPage = () => {
                                     </div>
                                     <div className="details_bottom">
                                         <div className="details_inner">
-                                            <div className="input_box">
-                                                <span>Class <p>*</p></span>
-                                                <input type="text" />
-                                            </div>
-                                            <div className="input_box">
-                                                <span>Number <p>*</p></span>
-                                                <input type="number" className="no-spinner" />
-                                            </div>
-                                            <div className="select_box">
-                                                <span>Type <p>*</p></span>
-                                                <div className="dropdown_sec">
-                                                    <div className="dropdown_btn">
-                                                        <p>Type</p>
-                                                        <i className="fa-solid fa-angle-down"></i>
-                                                    </div>
-                                                    <div className="dropdown"></div>
-                                                </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>Class <p>*</p></span>
-                                                <div className="dropdown_sec">
-                                                    <div className="dropdown_btn">
-                                                        <p>Date</p>
-                                                        <i className="fa-regular fa-calendar"></i>
-                                                    </div>
-                                                    <div className="dropdown"></div>
-                                                </div>
-                                            </div>
+                                            <FormField
+                                                label='First Name'
+                                                type='textbox'
+                                            />
+                                            <FormField
+                                                label='Contact No.'
+                                                type='number'
+                                            />
+                                            <FormField
+                                                label='DOB'
+                                                type='date'
+                                            />
+                                            <FormField
+                                                label='Blood Group'
+                                                type='dropdown'
+                                            />
                                         </div>
                                     </div>
                                 </div>
