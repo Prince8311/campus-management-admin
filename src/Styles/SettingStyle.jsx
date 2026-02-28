@@ -743,15 +743,19 @@ export const SectionFieldsWrapper = styled('div')`
                 h6 {
                     position: relative;
                     font-size: 13px;
-                    font-weight: 500;
+                    font-weight: 400;
                     color: ${colors.customColors.blackColor1};
+                    
+                    &:last-of-type {
+                        color: ${colors.customColors.blueColor1};
+                    }
                 }
                 
                 span {
                     position: relative;
-                    font-size: 13px;
+                    font-size: 10px;
                     color: ${colors.customColors.blackColor1};
-                    margin: 0 8px;
+                    margin: 0 6px;
                 }
             }
 

@@ -110,6 +110,12 @@ export const StudentInformationWrapper = styled('div')`
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
 
                 i {
                     margin-right: 8px;
@@ -1465,11 +1471,11 @@ export const AddStudentWrapper = styled('div')`
             font-size: 13px;
             font-weight: 400;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             
             &:hover {
                 border-radius: 25px;
-                transition: all 0.3s ease;
+                transition: all 0.5s ease;
             }
 
             i {
