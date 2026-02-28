@@ -472,11 +472,22 @@ export const StudentWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
                     padding: 0 10px;
+                    margin-top: 10px;
+
+                    img {
+                        position: relative;
+                        width: 150px;
+                        opacity: 0.5;
+                    }
 
                     p {
                         position: relative;
                         font-size: 13px;
+                        margin-top: 10px;
                         color: ${colors.customColors.blackColor3};
                     }
                 }
