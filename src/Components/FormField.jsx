@@ -1,6 +1,34 @@
+import { useEffect, useRef, useState } from "react";
 import { FormFieldWrapper } from "../Styles/LayoutStyle";
+import Calender from "./Calender";
 
 const FormField = ({ label, type }) => {
+    const dropdownRef = useRef(null);
+    const [isDropUp, setIsDropUp] = useState(false);
+
+    const checkPosition = () => {
+        if (dropdownRef.current) {
+            const rect = dropdownRef.current.getBoundingClientRect();
+            const spaceFromBottom = window.innerHeight - rect.bottom;
+
+            if (spaceFromBottom <= 70) {
+                setIsDropUp(true);
+            } else {
+                setIsDropUp(false);
+            }
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("resize", checkPosition);
+        window.addEventListener("scroll", checkPosition);
+
+        return () => {
+            window.removeEventListener("resize", checkPosition);
+            window.removeEventListener("scroll", checkPosition);
+        };
+    }, []);
+
     return (
         <>
             <FormFieldWrapper>
@@ -25,7 +53,16 @@ const FormField = ({ label, type }) => {
                                 <p>Type</p>
                                 <i className="fa-solid fa-angle-down"></i>
                             </div>
-                            <div className="dropdown"></div>
+                            <div className={`dropdown ${isDropUp ? "drop-up" : ""}`} ref={dropdownRef}>
+                                <div className="dropdown_inner">
+                                    <ul>
+                                        <li>A-</li>
+                                        <li>A+</li>
+                                        <li>B+</li>
+                                        <li>B-</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     }
                     {
@@ -35,7 +72,20 @@ const FormField = ({ label, type }) => {
                                 <p>MultiType</p>
                                 <i className="fa-solid fa-angle-down"></i>
                             </div>
-                            <div className="dropdown"></div>
+                            <div className="dropdown">
+                                <div className="dropdown_inner">
+                                    <ul>
+                                        <li>
+                                            <p>Option 1</p>
+                                            <span></span>
+                                        </li>
+                                        <li>
+                                            <p>Option 2</p>
+                                            <span><img src="/images/check-icon.png" alt="" /></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     }
                     {
@@ -45,7 +95,9 @@ const FormField = ({ label, type }) => {
                                 <p>Date</p>
                                 <i className="fa-regular fa-calendar"></i>
                             </div>
-                            <div className="dropdown"></div>
+                            <div className="dropdown">
+                                <Calender />
+                            </div>
                         </div>
                     }
                 </div>

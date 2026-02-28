@@ -1,7 +1,33 @@
+import { useEffect, useState } from "react";
 import FormField from "../../../Components/FormField";
 import { AddStudentWrapper } from "../../../Styles/AcademicStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const AddStudentPage = () => {
+    const api = getApiEndpoints();
+    const [isFormLoading, setIsFormLoading] = useState(false);
+
+    const fetchStudentForm = async () => {
+        setIsFormLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchStudentUploadForm);
+            if (response?.data.status === 200) { 
+                console.log("Form", response?.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsFormLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchStudentForm();
+    }, []);
+
     return (
         <>
             <AddStudentWrapper>
@@ -80,6 +106,10 @@ const AddStudentPage = () => {
                                             <FormField
                                                 label='Blood Group'
                                                 type='dropdown'
+                                            />
+                                            <FormField
+                                                label='Multi Options'
+                                                type='multi-select-dropdown'
                                             />
                                         </div>
                                     </div>

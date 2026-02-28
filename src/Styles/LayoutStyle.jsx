@@ -664,7 +664,6 @@ export const FormFieldWrapper = styled('div')`
                     margin: 0;
                 }
 
-                /* Firefox */
                 &[type="number"] {
                     -moz-appearance: textfield;
                 }
@@ -706,6 +705,75 @@ export const FormFieldWrapper = styled('div')`
                     color: ${colors.customColors.blackColor2};
                 }
             }
+
+            .dropdown {
+                position: absolute;
+                top: 100%;
+                left: 0px;
+                width: 100%;
+                z-index: 15;
+                background: ${colors.customColors.whiteColor};
+                border-radius: 5px;
+                box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                max-height: 0px;
+                overflow: hidden;
+                transition: all 0.5s ease;
+                
+                &.active {
+                    max-height: 200px;
+                    transition: all 0.5s ease;
+                }
+
+                .dropdown_inner {
+                    position: relative;
+                    width: 100%;
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+
+                    ul {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        max-height: 160px;
+                        overflow-y: auto;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+
+                        li {
+                            position: relative;
+                            width: 100%;
+                            list-style: none;
+                            padding: 7px 15px;
+                            cursor: pointer;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                            border-radius: 4px;
+                            transition: all 0.5s ease;
+
+                            &:hover {
+                                background: ${colors.themeColor};
+                                color: ${colors.customColors.whiteColor};
+                                transition: all 0.5s ease;
+                            }
+
+                            &.active {
+                                background: ${colors.customColors.lightBackground};
+                                color: ${colors.customColors.blackColor};
+
+                                &:hover {
+                                    color: ${colors.customColors.blackColor};
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         .multi_select_box {
@@ -743,6 +811,88 @@ export const FormFieldWrapper = styled('div')`
                     color: ${colors.customColors.blackColor2};
                 }
             }
+
+            .dropdown {
+                position: absolute;
+                top: 100%;
+                left: 0px;
+                width: 100%;
+                z-index: 15;
+                background: ${colors.customColors.whiteColor};
+                border-radius: 5px;
+                box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                max-height: 0px;
+                overflow: hidden;
+                transition: all 0.5s ease;
+                
+                &.active {
+                    max-height: 200px;
+                    transition: all 0.5s ease;
+                }
+
+                .dropdown_inner {
+                    position: relative;
+                    width: 100%;
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+
+                    ul {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        max-height: 160px;
+                        overflow-y: auto;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+
+                        li {
+                            position: relative;
+                            width: 100%;
+                            list-style: none;
+                            padding: 7px 15px;
+                            cursor: pointer;
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 4px;
+                            margin-bottom: 8px;
+                            display: flex;
+                            align-items: center;
+                            transition: all 0.5s ease;
+
+                            &:last-of-type {
+                                margin-bottom: 0;
+                            }
+
+                            p {
+                                position: relative;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
+                            }
+
+                            span {
+                                position: relative;
+                                margin-left: auto;
+                                width: 15px;
+                                height: 15px;
+                                border: 1px solid ${colors.customColors.borderColor};
+                                border-radius: 3px;
+
+                                img {
+                                    position: absolute;
+                                    left: 1px;
+                                    bottom: 2px;
+                                    width: 18px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         .date_box {
@@ -778,6 +928,134 @@ export const FormFieldWrapper = styled('div')`
                     cursor: pointer;
                     font-size: 12px;
                     color: ${colors.customColors.blackColor2};
+                }
+            }
+
+            .dropdown {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                z-index: 99;
+                width: 100%;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: all 0.5s ease;
+            }
+        }
+    }
+`;
+
+export const CalenderBox = styled('div')`
+    position: relative;
+    width: 100%;
+    background: #FFF;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    .calender_inner {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        .calender_head {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-bottom: 1px solid ${colors.customColors.borderColor};
+
+            a {
+                position: relative;
+                text-decoration: none;
+                cursor: pointer;
+                font-size: 13px;
+                color: #333;
+            }
+
+            b {
+                position: relative;
+                font-size: 13px;
+                font-weight: 500;
+                color: #222;
+            }
+        }
+
+        .calender_days {
+            position: relative;
+            margin-top: 10px;
+            width: 100%;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+
+            li {
+                position: relative;
+                width: calc(100% / 7);
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: 500;
+                color: ${colors.themeColor};
+            }
+        }
+
+        .calender_dates {
+            position: relative;
+            width: 100%;
+            margin: 10px 0;
+            padding: 0 15px;
+            display: flex;
+            flex-wrap: wrap;
+
+            li {
+                position: relative;
+                list-style: none;
+                width: calc(100% / 7);
+                padding: 3px;
+
+                b {
+                    position: relative;
+                    width: 100%;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    color: rgb(60, 60, 60);
+                    border-radius: 4px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.4s ease;
+
+                    &:hover {
+                        background: rgb(233, 233, 233);
+                        transition: all 0.4s ease;
+                    }
+                }
+
+                &.prev-month b {
+                    pointer-events: none;
+                    opacity: 0.3;
+                }
+
+                &.next-month b {
+                    pointer-events: none;
+                    opacity: 0.3;
+                }
+
+                &.today b {
+                    border: 1px solid rgb(63, 228, 79);
+                    color: rgb(63, 228, 79);
+                }
+
+                &.selected b {
+                    background: rgb(63, 228, 79);
+                    color: #FFF;
                 }
             }
         }
