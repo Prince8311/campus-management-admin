@@ -15,8 +15,10 @@ const AddStudentPage = () => {
                                 <h4>Bulk Upload</h4>
                             </div>
                             <div className="top_right">
-                                <span><i className="fa-solid fa-download"></i></span>
-                                <p>Sample List</p>
+                                <div className="download_btn">
+                                    <span><i className="fa-solid fa-cloud-arrow-down"></i></span>
+                                    <p>Sample List</p>
+                                </div>
                                 <div className="icon"><i className="fa-solid fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -24,7 +26,7 @@ const AddStudentPage = () => {
                             <div className="profile_image_sec">
                                 <div className="bulk_upload_sec">
                                     <a href=""><i className="fa-solid fa-cloud-arrow-up"></i></a>
-                                    <p>Drag and drop your file here or <span>browse</span></p>
+                                    <p>Drag and drop your file here or <span>browse files</span></p>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +54,7 @@ const AddStudentPage = () => {
                                         <div className="content_right">
                                             <p>Upload passport size photo</p>
                                             <span>(File size: max 10MB | Formats: .PNG, .JPG)</span>
-                                            <a>Upload</a>
+                                            <a><i className="fa-solid fa-cloud-arrow-down"></i>Upload Image</a>
                                         </div>
                                     </div>
                                 </div>
