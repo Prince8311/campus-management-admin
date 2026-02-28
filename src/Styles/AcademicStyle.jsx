@@ -110,6 +110,12 @@ export const StudentInformationWrapper = styled('div')`
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
 
                 i {
                     margin-right: 8px;
@@ -1141,20 +1147,29 @@ export const AddStudentWrapper = styled('div')`
                     display: flex;
                     align-items: center;
 
-                    span {
+                    .download_btn {
                         position: relative;
-                        font-size: 15px;
-                        color: ${colors.customColors.blueColor1};
+                        /* width: 100px; */
+                        height: 35px;
+                        border: 1px solid ${colors.customColors.blueColor1};
+                        border-radius: 25px;
+                        display: flex;
+                        align-items: center;
+                        padding: 5px 15px;
                         cursor: pointer;
-                    }
 
-                    p {
-                        position: relative;
-                        margin-left: 8px;
-                        font-size: 14px;
-                        font-weight: 500;
-                        color: ${colors.customColors.blackColor1};
-                        margin-right: 40px;
+                        span {
+                            position: relative;
+                            font-size: 13px;
+                            color: ${colors.customColors.blueColor1};
+                        }
+
+                        p {
+                            position: relative;
+                            margin-left: 6px;
+                            font-size: 12px;
+                            color: ${colors.customColors.blueColor1};
+                        }
                     }
 
                     .icon {
@@ -1166,6 +1181,7 @@ export const AddStudentWrapper = styled('div')`
                         align-items: center;
                         justify-content: center;
                         box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                        margin-left: 20px;
 
                         i {
                             position: relative;
@@ -1245,7 +1261,7 @@ export const AddStudentWrapper = styled('div')`
 
                             .content_left {
                                 position: relative;
-                                width: 120px;
+                                width: 100px;
                                 height: 100px;
                                 border: 1px dashed ${colors.customColors.borderColor1};
                                 border-radius: 6px;
@@ -1265,7 +1281,7 @@ export const AddStudentWrapper = styled('div')`
 
                             .content_right {
                                 position: relative;
-                                width: calc(100% - 120px);
+                                width: calc(100% - 100px);
                                 padding-left: 20px;
                                 display: flex;
                                 flex-direction: column;
@@ -1287,11 +1303,21 @@ export const AddStudentWrapper = styled('div')`
                                 a {
                                     position: relative;
                                     margin-top: 7px;
-                                    font-size: 13px;
-                                    font-weight: 500;
+                                    font-size: 12px;
+                                    font-weight: 400;
                                     color: ${colors.themeColor};
                                     cursor: pointer;
-                                    text-decoration: underline;
+                                    text-decoration: none;
+                                    transition: all 0.3s ease;
+                                    
+                                    i {
+                                        margin-right: 5px;
+                                    }
+                                    
+                                    &:hover {
+                                        text-decoration: underline;
+                                        transition: all 0.3s ease;
+                                    }
                                 }
                             }
                         }
@@ -1445,11 +1471,11 @@ export const AddStudentWrapper = styled('div')`
             font-size: 13px;
             font-weight: 400;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             
             &:hover {
                 border-radius: 25px;
-                transition: all 0.3s ease;
+                transition: all 0.5s ease;
             }
 
             i {

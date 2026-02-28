@@ -122,6 +122,7 @@ const StudentPage = () => {
                                     )
                                 ) : (
                                     <div className="empty_messege">
+                                        <img src="/images/no-fields.svg" alt="" />
                                         <p>No Section available.</p>
                                     </div>
                                 )
@@ -165,6 +166,7 @@ const StudentPage = () => {
                                     )
                                 ) : (
                                     <div className="empty_messege">
+                                        <img src="/images/no-fields.svg" alt="" />
                                         <p>No Section available.</p>
                                     </div>
                                 )
