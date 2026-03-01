@@ -141,8 +141,16 @@ const AddStudentPage = () => {
                                     <div className={`upload_form_sec ${displayBulkUpload ? 'active' : ''}`}>
                                         <div className="bulk_upload_inner">
                                             <div className="bulk_upload_sec">
-                                                <a href=""><i className="fa-solid fa-cloud-arrow-up"></i></a>
-                                                <p>Drag and drop your file here or <span>browse files</span></p>
+                                                <input
+                                                    type="file"
+                                                    accept=".csv"
+                                                    id="fileUpload"
+                                                    hidden
+                                                />
+                                                <label htmlFor="fileUpload" className="upload_label">
+                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                    <p>Drag and drop your file here or <span>browse files</span></p>
+                                                </label>
                                             </div>
                                             <div className="upload_file_sec">
                                                 <div className="file_sec_inner"></div>
