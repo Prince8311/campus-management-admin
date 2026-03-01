@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormField from "../../../Components/FormField";
 import { AddStudentWrapper } from "../../../Styles/AcademicStyle";
 import { toast } from "react-toastify";
@@ -10,6 +11,7 @@ import { saveAs } from "file-saver";
 
 const AddStudentPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const [displayBulkUpload, setDisplayBulkUpload] = useState(true);
     const [displayManualUpload, setDisplayManualUpload] = useState(false);
     const [isFormLoading, setIsFormLoading] = useState(false);
@@ -96,6 +98,10 @@ const AddStudentPage = () => {
         }));
 
         console.log(formattedData);
+    }
+
+    const redirectToProfilePage = () => {
+        navigate("/admin/settings/profile-settings/student");
     }
 
     return (
@@ -207,7 +213,7 @@ const AddStudentPage = () => {
                         ) : (
                             <div className="empty_box">
                                 <img src="/images/no-fields.svg" alt="" />
-                                <p>No sections & fields are available. <span>Create Now</span></p>
+                                <p>No sections & fields are available. <span onClick={redirectToProfilePage}>Create Now</span></p>
                             </div>
                         )
                     }
