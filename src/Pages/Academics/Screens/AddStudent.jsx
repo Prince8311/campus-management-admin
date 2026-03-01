@@ -131,11 +131,9 @@ const AddStudentPage = () => {
                                         </div>
                                     </div>
                                     <div className={`upload_form_sec ${displayBulkUpload ? 'active' : ''}`}>
-                                        <div className="profile_image_sec">
-                                            <div className="bulk_upload_sec">
-                                                <a href=""><i className="fa-solid fa-cloud-arrow-up"></i></a>
-                                                <p>Drag and drop your file here or <span>browse files</span></p>
-                                            </div>
+                                        <div className="bulk_upload_sec">
+                                            <a href=""><i className="fa-solid fa-cloud-arrow-up"></i></a>
+                                            <p>Drag and drop your file here or <span>browse files</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -198,16 +196,19 @@ const AddStudentPage = () => {
                                                 )
                                             }
                                         </div>
+                                        <div className="btn_sec">
+                                            <button onClick={handleFormSubmit}><i className="fa-solid fa-plus"></i>Add Student</button>
+                                        </div>
                                     </div>
                                 </div>
                             </>
                         ) : (
-                            <div className="empty_box"></div>
+                            <div className="empty_box">
+                                <img src="/images/no-fields.svg" alt="" />
+                                <p>No sections & fields are available. <span>Create Now</span></p>
+                            </div>
                         )
                     }
-                </div>
-                <div className="btn_sec">
-                    <button onClick={handleFormSubmit}><i className="fa-solid fa-plus"></i>Add Student</button>
                 </div>
             </AddStudentWrapper>
         </>

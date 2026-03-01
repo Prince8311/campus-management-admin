@@ -1215,44 +1215,44 @@ export const AddStudentWrapper = styled('div')`
                     transition: all 0.6s ease;
                 }
 
+                .bulk_upload_sec {
+                    position: relative;
+                    width: 100%;
+                    height: 120px;
+                    border: 1px dashed ${colors.customColors.borderColor1};
+                    border-radius: 6px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+
+                    a {
+                        position: relative;
+                        font-size: 27px;
+                        color: ${colors.themeColor};
+                        text-decoration: none;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor1};
+                        font-weight: 400;
+                        margin-top: 5px;
+
+                        span {
+                            color: ${colors.themeColor};
+                        }
+                    }
+                }
+
                 .profile_image_sec {
                     position: relative;
                     width: 100%;
                     padding: 15px;
                     display: flex;
                     flex-direction: column;
-
-                    .bulk_upload_sec {
-                        position: relative;
-                        width: 100%;
-                        height: 120px;
-                        border: 1px dashed ${colors.customColors.borderColor1};
-                        border-radius: 6px;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-
-                        a {
-                            position: relative;
-                            font-size: 27px;
-                            color: ${colors.themeColor};
-                            text-decoration: none;
-                        }
-
-                        p {
-                            position: relative;
-                            font-size: 13px;
-                            color: ${colors.customColors.blackColor1};
-                            font-weight: 400;
-                            margin-top: 5px;
-
-                            span {
-                                color: ${colors.themeColor};
-                            }
-                        }
-                    }
 
                     .sec_inner {
                         position: relative;
@@ -1419,6 +1419,69 @@ export const AddStudentWrapper = styled('div')`
                         }
                     }
                 }
+
+                .btn_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 25px;
+
+                    button {
+                        position: relative;
+                        padding: 8px 20px;
+                        background: ${colors.themeColor};
+                        border: none;
+                        border-radius: 6px;
+                        color: ${colors.customColors.whiteColor};
+                        font-size: 13px;
+                        font-weight: 400;
+                        cursor: pointer;
+                        transition: all 0.5s ease;
+                        
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.5s ease;
+                        }
+
+                        i {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .empty_box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 35px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            img {
+                position: relative;
+                width: 200px;
+                opacity: 0.5;
+            }
+
+            p {
+                position: relative;
+                margin-top: 10px;
+                font-size: 13px;
+                color: ${colors.customColors.blackColor2};
+
+                span {
+                    color: ${colors.customColors.blueColor1};
+                }
             }
         }
 
@@ -1467,36 +1530,6 @@ export const AddStudentWrapper = styled('div')`
                     background: linear-gradient(to right, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
                     transform: translateY(-50%);
                 }
-            }
-        }
-    }
-
-    .btn_sec {
-        position: relative;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 25px;
-
-        button {
-            position: relative;
-            padding: 8px 20px;
-            background: ${colors.themeColor};
-            border: none;
-            border-radius: 6px;
-            color: ${colors.customColors.whiteColor};
-            font-size: 13px;
-            font-weight: 400;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            
-            &:hover {
-                border-radius: 25px;
-                transition: all 0.5s ease;
-            }
-
-            i {
-                margin-right: 5px;
             }
         }
     }
