@@ -715,13 +715,13 @@ export const FormFieldWrapper = styled('div')`
                 background: ${colors.customColors.whiteColor};
                 border-radius: 5px;
                 box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
-                max-height: 0px;
+                height: max-content;
                 overflow: hidden;
                 transition: all 0.5s ease;
-                
-                &.active {
-                    max-height: 200px;
-                    transition: all 0.5s ease;
+
+                &.drop_up {
+                    top: inherit;
+                    bottom: 100%;
                 }
 
                 .dropdown_inner {
@@ -821,13 +821,13 @@ export const FormFieldWrapper = styled('div')`
                 background: ${colors.customColors.whiteColor};
                 border-radius: 5px;
                 box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
-                max-height: 0px;
+                height: max-content;
                 overflow: hidden;
                 transition: all 0.5s ease;
                 
-                &.active {
-                    max-height: 200px;
-                    transition: all 0.5s ease;
+                &.drop_up {
+                    top: inherit;
+                    bottom: 100%;
                 }
 
                 .dropdown_inner {
@@ -937,10 +937,12 @@ export const FormFieldWrapper = styled('div')`
                 right: 0;
                 z-index: 99;
                 width: 100%;
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
                 transition: all 0.5s ease;
+
+                &.drop_up {
+                    top: inherit;
+                    bottom: 100%;
+                }
             }
         }
     }
@@ -976,11 +978,83 @@ export const CalenderBox = styled('div')`
                 color: #333;
             }
 
-            b {
+            .month_year_sec {
                 position: relative;
-                font-size: 13px;
-                font-weight: 500;
-                color: #222;
+
+                b {
+                    position: relative;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: #222;
+                    cursor: pointer;
+                }
+
+                .month_year_picker {
+                    position: absolute;
+                    top: 25px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: max-content;
+                    max-height: 200px;
+                    background: ${colors.customColors.whiteColor};
+                    border-radius: 5px;
+                    z-index: 49;
+                    box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1},
+                                -2px -2px 3px ${colors.boxShadowColors.shadowColor2};
+
+                    .picker_inner {
+                        position: relative;
+                        width: auto;
+                        display: flex;
+                        padding: 8px 10px;
+
+                        ul {
+                            position: relative;
+                            display: flex;
+                            flex-direction: column;
+                            max-height: 150px;
+                            overflow-y: auto;
+                            scrollbar-width: none;
+                            -ms-overflow-style: none;
+
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+
+                            &.months_list {
+                                padding-right: 8px;
+                                border-right: 1px solid ${colors.customColors.borderColor};
+                            }
+
+                            &.years_list {
+                                padding-left: 10px;
+                            }
+
+                            li {
+                                position: relative;
+                                list-style: none;
+                                font-size: 11px;
+                                cursor: pointer;
+                                margin-bottom: 6px;
+                                color: ${colors.customColors.blackColor2};
+                                transition: all 0.5s ease;
+
+                                &:last-of-type {
+                                    margin-bottom: 0;
+                                }
+
+                                &:hover {
+                                    color: ${colors.customColors.blackColor};
+                                }
+
+                                &.active {
+                                    font-style: italic;
+                                    color: ${colors.customColors.blueColor1};
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

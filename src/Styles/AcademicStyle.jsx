@@ -1103,6 +1103,7 @@ export const AddStudentWrapper = styled('div')`
         width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
         margin-top: 25px;
 
         .item_box {
@@ -1113,6 +1114,7 @@ export const AddStudentWrapper = styled('div')`
             flex-direction: column;
             border: 1px solid ${colors.customColors.borderColor};
             border-radius: 8px;
+            overflow: hidden;
             box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
 
             .box_top {
@@ -1124,10 +1126,6 @@ export const AddStudentWrapper = styled('div')`
                 cursor: pointer;
                 border-radius: 8px 8px 0 0;
                 transition: all 0.5s ease;
-
-                &.active {
-                    background: ${colors.customColors.lightBackground1};
-                }
 
                 .top_left {
                     position: relative;
@@ -1149,7 +1147,6 @@ export const AddStudentWrapper = styled('div')`
 
                     .download_btn {
                         position: relative;
-                        /* width: 100px; */
                         height: 35px;
                         border: 1px solid ${colors.customColors.blueColor1};
                         border-radius: 25px;
@@ -1187,6 +1184,18 @@ export const AddStudentWrapper = styled('div')`
                             position: relative;
                             font-size: 14px;
                             color: ${colors.customColors.blackColor2};
+                            transition: all 0.3s ease;
+                        }
+                    }
+                }
+
+                &.active {
+                    background: ${colors.customColors.lightBackground1};
+
+                    .top_right {
+                        .icon i {
+                            transform: rotate(90deg);
+                            transition: all 0.3s ease;
                         }
                     }
                 }
@@ -1197,6 +1206,14 @@ export const AddStudentWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
+                height: 0;
+                overflow: hidden;
+                transition: all 0.6s ease;
+                
+                &.active {
+                    height: max-content;
+                    transition: all 0.6s ease;
+                }
 
                 .profile_image_sec {
                     position: relative;
@@ -1435,7 +1452,7 @@ export const AddStudentWrapper = styled('div')`
                     right: 100%;
                     top: 50%;
                     width: 150px;
-                    height: 2px;
+                    height: 1px;
                     background: linear-gradient(to right, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
                     transform: rotateY(180deg) translateY(-50%);
                 }
@@ -1446,7 +1463,7 @@ export const AddStudentWrapper = styled('div')`
                     left: 100%;
                     top: 50%;
                     width: 150px;
-                    height: 2px;
+                    height: 1px;
                     background: linear-gradient(to right, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
                     transform: translateY(-50%);
                 }

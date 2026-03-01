@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { CalenderBox } from "../Styles/LayoutStyle";
 
-const Calender = () => {
-
+const Calender = ({ setFinalSelectedDate }) => {
     const today = new Date();
     const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(today.getDate());
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
+    const [showMonthYearPicker, setShowMonthYearPicker] = useState(false);
 
     const handlePrevMonth = () => {
         setCurrentDate(new Date(year, month - 1, 1));
@@ -18,6 +18,17 @@ const Calender = () => {
         setCurrentDate(new Date(year, month + 1, 1));
     };
 
+    const months = Array.from({ length: 12 }, (_, i) =>
+        new Date(0, i).toLocaleString("default", { month: "long" })
+    );
+
+    const currentYear = new Date().getFullYear();
+
+    const years = [];
+    for (let y = 1950; y <= currentYear; y++) {
+        years.push(y);
+    }
+
     const renderDates = () => {
         const dates = [];
 
@@ -26,7 +37,7 @@ const Calender = () => {
             month === today.getMonth() &&
             year === today.getFullYear();
         const isSelected = (d) => selectedDate === d;
-      
+
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const prevMonthDays = new Date(year, month, 0).getDate();
@@ -39,7 +50,7 @@ const Calender = () => {
 
             return `${dayNum} ${monthName}, ${yearNum}`;
         };
-      
+
         // Step 1: Fill previous month dates
         for (let i = firstDayOfMonth - 1; i >= 0; i--) {
             dates.push(
@@ -48,7 +59,7 @@ const Calender = () => {
                 </li>
             );
         }
-      
+
         // Step 2: Fill current month dates
         for (let i = 1; i <= daysInMonth; i++) {
             const classes = ["date", "current-month"];
@@ -57,16 +68,16 @@ const Calender = () => {
             if (todayMatch) classes.push("today");
             if (selectedMatch) classes.push("selected");
             dates.push(
-                <li className={classes.join(" ")} key={`curr-${i}`}>
+                <li className={classes.join(" ")} key={`curr-${i}`} onClick={() => { setSelectedDate(i); setFinalSelectedDate(formatDate(i)) }}>
                     <b>{i}</b>
                 </li>
             );
         }
-      
+
         // Step 3: Fill next month dates only in the last row if needed
         const remainder = dates.length % 7;
         const nextDaysCount = remainder === 0 ? 0 : 7 - remainder;
-      
+
         for (let i = 1; i <= nextDaysCount; i++) {
             dates.push(
                 <li className="date next-month" key={`next-${i}`}>
@@ -74,18 +85,58 @@ const Calender = () => {
                 </li>
             );
         }
-      
+
         return dates;
     };
-      
 
-    return(
+    const handleMonthSelect = (monthIndex) => {
+        setCurrentDate(new Date(year, monthIndex, 1));
+    };
+
+    const handleYearSelect = (selectedYear) => {
+        setCurrentDate(new Date(selectedYear, month, 1));
+    };
+
+    return (
         <>
             <CalenderBox>
                 <div className="calender_inner">
                     <div className="calender_head">
                         <a onClick={handlePrevMonth}><i className="fa-solid fa-angle-left"></i></a>
-                        <b>{currentDate.toLocaleString("default", { month: "long" })}, {year}</b>
+                        <div className="month_year_sec">
+                            <b onClick={() => setShowMonthYearPicker(prev => !prev)}>
+                                {currentDate.toLocaleString("default", { month: "long" })}, {year}
+                            </b>
+                            {
+                                showMonthYearPicker &&
+                                <div className="month_year_picker">
+                                    <div className="picker_inner">
+                                        <ul className="months_list">
+                                            {months.map((m, index) => (
+                                                <li
+                                                    key={m}
+                                                    className={`picker_item ${month === index ? "active" : ""}`}
+                                                    onClick={() => handleMonthSelect(index)}
+                                                >
+                                                    {m}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <ul className="years_list">
+                                            {years.map((y) => (
+                                                <li
+                                                    key={y}
+                                                    className={`picker_item ${year === y ? "active" : ""}`}
+                                                    onClick={() => handleYearSelect(y)}
+                                                >
+                                                    {y}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                         <a onClick={handleNextMonth}><i className="fa-solid fa-angle-right"></i></a>
                     </div>
                     <div className="calender_days">
@@ -101,6 +152,5 @@ const Calender = () => {
         </>
     );
 }
-
 
 export default Calender;
