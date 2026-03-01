@@ -82,17 +82,6 @@ const AddStudentPage = () => {
         });
 
         saveAs(blob, "Student_Sample_List.xlsx");
-        // Create download link
-        const link = document.createElement("a");
-        const url = URL.createObjectURL(blob);
-
-        link.setAttribute("href", url);
-        link.setAttribute("download", "Student-Sample-List.csv");
-        link.style.visibility = "hidden";
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
     };
 
     const handleFieldChange = (fieldId, value) => {
