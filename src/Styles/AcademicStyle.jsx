@@ -1432,7 +1432,9 @@ export const AddStudentWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
-                    margin-top: 25px;
+                    margin-top: 5px;
+                    padding: 15px;
+                    padding-top: 0;
 
                     button {
                         position: relative;
