@@ -1247,6 +1247,13 @@ export const AddStudentWrapper = styled('div')`
                         align-items: center;
                         justify-content: center;
                         cursor: pointer;
+                        transition: all 0.5s ease;
+                        
+                        &.dragging {
+                            border: 1px dashed ${colors.customColors.borderColor1};
+                            background: ${colors.customColors.lightBackground};
+                            transition: all 0.5s ease;
+                        }
 
                         label {
                             position: relative;
@@ -1265,7 +1272,7 @@ export const AddStudentWrapper = styled('div')`
                                 font-size: 13px;
                                 color: ${colors.customColors.blackColor1};
                                 font-weight: 400;
-                                margin-top: 5px;
+                                margin-top: 8px;
 
                                 span {
                                     color: ${colors.themeColor};
@@ -1287,33 +1294,22 @@ export const AddStudentWrapper = styled('div')`
                             position: relative;
                             display: flex;
 
-                            .image_sec {
+                            img {
                                 position: relative;
                                 width: 80px;
-                                height: 100px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                padding: 5px;
-                                border-radius: 4px;
-                                border: 1px solid ${colors.customColors.borderColor1};
-
-                                img {
-                                    position: relative;
-                                    width: 55px;
-                                    object-fit: cover;
-                                    border-radius: 4px;
-                                }
+                                height: auto;
                             }
 
                             .file_items {
                                 position: relative;
                                 display: flex;
                                 flex-direction: column;
-                                margin-left: 25px;
+                                margin-left: 20px;
+                                padding-top: 20px;
 
                                 p {
                                     position: relative;
+                                    width: max-content;
                                     max-width: 250px;
                                     font-size: 11px;
                                     overflow: hidden;
@@ -1334,7 +1330,7 @@ export const AddStudentWrapper = styled('div')`
                                         border-radius: 5px;
                                         display: flex;
                                         align-items: center;
-                                        font-size: 12px;
+                                        font-size: 11px;
                                         cursor: pointer;
                                         border: none;
 

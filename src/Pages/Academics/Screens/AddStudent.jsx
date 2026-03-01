@@ -86,23 +86,27 @@ const AddStudentPage = () => {
         document.body.removeChild(link);
     };
 
-    const handleFieldChange = (fieldId, sectionId, value) => {
+    const handleFieldChange = (sectionId, fieldName, value) => {
         setFormData(prev => ({
             ...prev,
-            [fieldId]: {
-                section_id: sectionId,
-                value: value
+            [sectionId]: {
+                ...(prev[sectionId] || {}),
+                [fieldName]: value
             }
         }));
     };
 
     const handleFormSubmit = () => {
-        const formattedData = Object.entries(formData).map(([fieldId, data]) => ({
-            section_id: data.section_id,
-            field_id: fieldId,
-            value: data.value
-        }));
-
+        const formattedData = [];
+        Object.entries(formData).forEach(([sectionId, fields]) => {
+            Object.entries(fields).forEach(([fieldName, value]) => {
+                formattedData.push({
+                    section_id: sectionId,
+                    field_name: fieldName,
+                    value: value
+                });
+            });
+        });
         console.log(formattedData);
     };
 
@@ -144,6 +148,85 @@ const AddStudentPage = () => {
         console.log("Selected file:", file);
     };
 
+    const createFieldMap = () => {
+        const map = {};
+
+        form.forEach(section => {
+            section.fields.forEach(field => {
+                const cleanName = field.name.trim();
+                map[cleanName] = {
+                    section_id: section.id,
+                    field_name: field.name
+                };
+            });
+        });
+
+        return map;
+    };
+
+    const handleCSVUpload = () => {
+        if (!selectedFile) {
+            toast.warn("Please select a file first");
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            const text = event.target.result.trim();
+
+            if (!text) {
+                console.log("No data in the file");
+                toast.warn("No data in the file");
+                return;
+            }
+
+            const rows = text.split("\n").map(row => row.split(","));
+
+            if (rows.length <= 1) {
+                console.log("No data in the file");
+                toast.warn("No data in the file");
+                return;
+            }
+
+            const dataRows = rows.slice(1).filter(row =>
+                row.some(cell => cell.trim() !== "")
+            );
+
+            if (dataRows.length === 0) {
+                console.log("No data in the file");
+                toast.warn("No data in the file");
+                return;
+            }
+
+            const headers = rows[0].map(h => h.replace("*", "").trim());
+            const fieldMap = createFieldMap();
+            const formattedData = [];
+
+            dataRows.forEach(row => {
+                headers.forEach((header, index) => {
+                    if (fieldMap[header]) {
+                        formattedData.push({
+                            section_id: fieldMap[header].section_id,
+                            field_name: fieldMap[header].field_name,
+                            value: row[index]?.trim() || ""
+                        });
+                    }
+                });
+            });
+            console.log(formattedData);
+        };
+        reader.readAsText(selectedFile);
+    };
+
+    const handleRemoveFile = () => {
+        setSelectedFile(null);
+        const fileInput = document.getElementById("fileUpload");
+        if (fileInput) {
+            fileInput.value = "";
+        }
+    };
+
     return (
         <>
             <AddStudentWrapper>
@@ -178,33 +261,45 @@ const AddStudentPage = () => {
                                     </div>
                                     <div className={`upload_form_sec ${displayBulkUpload ? 'active' : ''}`}>
                                         <div className="bulk_upload_inner">
-                                            <div className={`bulk_upload_sec ${isDragging ? "dragging" : ""}`}>
-                                                <input
-                                                    type="file"
-                                                    accept=".csv"
-                                                    id="fileUpload"
-                                                    hidden
-                                                    onChange={handleFileSelect}
-                                                />
-                                                <label htmlFor="fileUpload" className="upload_label">
-                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
-                                                    <p>Drag and drop your file here or <span>browse files</span></p>
-                                                </label>
-                                            </div>
-                                            <div className="upload_file_sec">
-                                                <div className="file_sec_inner">
-                                                    <div className="image_sec">
-                                                        <img src="/images/excel-icon.png" alt="" />
-                                                    </div>
-                                                    <div className="file_items">
-                                                        <p>File Name</p>
-                                                        <div className="btns">
-                                                            <button><i className="fa-solid fa-cloud-arrow-up"></i>Upload</button>
-                                                            <button><i className="fa-solid fa-trash"></i>Remove</button>
+                                            {
+                                                selectedFile ? (
+                                                    <div className="upload_file_sec">
+                                                        <div className="file_sec_inner">
+                                                            <img src="/images/excel-icon.webp" alt="" />
+                                                            <div className="file_items">
+                                                                <p>{selectedFile.name}</p>
+                                                                <div className="btns">
+                                                                    <button onClick={handleCSVUpload}><i className="fa-solid fa-cloud-arrow-up"></i>Upload</button>
+                                                                    <button onClick={handleRemoveFile}><i className="fa-solid fa-trash"></i>Remove</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                ) : (
+                                                    <div className={`bulk_upload_sec ${isDragging ? "dragging" : ""}`} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
+                                                        <input
+                                                            type="file"
+                                                            accept=".csv"
+                                                            id="fileUpload"
+                                                            hidden
+                                                            onChange={handleFileSelect}
+                                                        />
+                                                        {
+                                                            isDragging ? (
+                                                                <label className="upload_label">
+                                                                    <i className="fa-solid fa-arrows-up-down-left-right"></i>
+                                                                    <p>Drop your file here</p>
+                                                                </label>
+                                                            ) : (
+                                                                <label htmlFor="fileUpload" className="upload_label">
+                                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                                    <p>Drag and drop your file here or <span>browse files</span></p>
+                                                                </label>
+                                                            )
+                                                        }
+                                                    </div>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -255,7 +350,7 @@ const AddStudentPage = () => {
                                                                             label={field.name}
                                                                             type={field.type}
                                                                             isrequired={field.is_required}
-                                                                            value={formData[field.id] || ""}
+                                                                            value={formData[section.id]?.[field.name] || ""}
                                                                             onChange={handleFieldChange}
                                                                             activeDropdownId={activeDropdownId}
                                                                             setActiveDropdownId={setActiveDropdownId}

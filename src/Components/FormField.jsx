@@ -77,13 +77,13 @@ const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, ac
                     {
                         type === 'textbox' &&
                         <div className="input_box">
-                            <input type="text" value={value} onChange={(e) => onChange(sectionId, id, e.target.value)} />
+                            <input type="text" value={value} onChange={(e) => onChange(sectionId, label, e.target.value)} />
                         </div>
                     }
                     {
                         type === 'number' &&
                         <div className="input_box">
-                            <input type="number" value={value} onChange={(e) => onChange(sectionId, id, e.target.value)} />
+                            <input type="number" value={value} onChange={(e) => onChange(sectionId, label, e.target.value)} />
                         </div>
                     }
                     {
@@ -99,7 +99,7 @@ const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, ac
                                     <div className="dropdown_inner">
                                         <ul>
                                             <li onClick={() => {
-                                                onChange(sectionId, id, "A+");
+                                                onChange(sectionId, label, "A+");
                                                 setActiveDropdownId(null);
                                             }}>
                                                 A+
@@ -151,7 +151,7 @@ const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, ac
                                 <div className={`dropdown ${isDropUp ? "drop_up" : ""}`} ref={dropdownRef}>
                                     <Calender
                                         setFinalSelectedDate={(date) => {
-                                            onChange(sectionId, id, date);
+                                            onChange(sectionId, label, date);
                                             setActiveDropdownId(null);
                                         }}
                                     />
