@@ -100,7 +100,7 @@ const AddStudentPage = () => {
         console.log(formattedData);
     }
 
-    const redirectToProfilePage = () => {
+    const redirectToProfileSettingPage = () => {
         navigate("/admin/settings/profile-settings/student");
     }
 
@@ -213,7 +213,7 @@ const AddStudentPage = () => {
                         ) : (
                             <div className="empty_box">
                                 <img src="/images/no-fields.svg" alt="" />
-                                <p>No sections & fields are available. <span onClick={redirectToProfilePage}>Create Now</span></p>
+                                <p>No sections & fields are available. <span onClick={redirectToProfileSettingPage}>Create Now</span></p>
                             </div>
                         )
                     }
