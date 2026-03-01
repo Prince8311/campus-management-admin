@@ -49,6 +49,10 @@ const AddStudentPage = () => {
         setDisplayBulkUpload(false);
     }
 
+    const redirectToProfileSettingPage = () => {
+        navigate("/admin/settings/profile-settings/student");
+    }
+
     const downloadSampleExcel = () => {
         if (!form.length) return;
 
@@ -102,9 +106,43 @@ const AddStudentPage = () => {
         console.log(formattedData);
     };
 
-    const redirectToProfileSettingPage = () => {
-        navigate("/admin/settings/profile-settings/student");
-    }
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+    };
+
+    const handleDragLeave = () => {
+        setIsDragging(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+
+        const file = e.dataTransfer.files[0];
+        if (!file) return;
+
+        if (!file.name.endsWith(".csv")) {
+            toast.warn("Only CSV files are allowed");
+            return;
+        }
+
+        setSelectedFile(file);
+        console.log("Dropped file:", file);
+    };
+
+    const handleFileSelect = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (!file.name.endsWith(".csv")) {
+            toast.warn("Only CSV files are allowed");
+            return;
+        }
+
+        setSelectedFile(file);
+        console.log("Selected file:", file);
+    };
 
     return (
         <>
@@ -140,12 +178,13 @@ const AddStudentPage = () => {
                                     </div>
                                     <div className={`upload_form_sec ${displayBulkUpload ? 'active' : ''}`}>
                                         <div className="bulk_upload_inner">
-                                            <div className="bulk_upload_sec">
+                                            <div className={`bulk_upload_sec ${isDragging ? "dragging" : ""}`}>
                                                 <input
                                                     type="file"
                                                     accept=".csv"
                                                     id="fileUpload"
                                                     hidden
+                                                    onChange={handleFileSelect}
                                                 />
                                                 <label htmlFor="fileUpload" className="upload_label">
                                                     <i className="fa-solid fa-cloud-arrow-up"></i>
