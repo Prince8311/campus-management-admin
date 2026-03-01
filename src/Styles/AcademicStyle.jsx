@@ -1215,34 +1215,41 @@ export const AddStudentWrapper = styled('div')`
                     transition: all 0.6s ease;
                 }
 
-                .bulk_upload_sec {
+                .bulk_upload_inner {
                     position: relative;
                     width: 100%;
-                    height: 120px;
-                    border: 1px dashed ${colors.customColors.borderColor1};
-                    border-radius: 6px;
+                    padding: 15px;
                     display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
 
-                    a {
+                    .bulk_upload_sec {
                         position: relative;
-                        font-size: 27px;
-                        color: ${colors.themeColor};
-                        text-decoration: none;
-                    }
+                        width: 100%;
+                        height: 120px;
+                        border: 1px dashed ${colors.customColors.borderColor1};
+                        border-radius: 6px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
 
-                    p {
-                        position: relative;
-                        font-size: 13px;
-                        color: ${colors.customColors.blackColor1};
-                        font-weight: 400;
-                        margin-top: 5px;
-
-                        span {
+                        a {
+                            position: relative;
+                            font-size: 27px;
                             color: ${colors.themeColor};
+                            text-decoration: none;
+                        }
+
+                        p {
+                            position: relative;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor1};
+                            font-weight: 400;
+                            margin-top: 5px;
+
+                            span {
+                                color: ${colors.themeColor};
+                            }
                         }
                     }
                 }
