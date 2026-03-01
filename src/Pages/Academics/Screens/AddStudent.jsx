@@ -72,7 +72,7 @@ const AddStudentPage = () => {
         const url = URL.createObjectURL(blob);
 
         link.setAttribute("href", url);
-        link.setAttribute("download", "Student_Sample_List.csv");
+        link.setAttribute("download", "Student-Sample-List.csv");
         link.style.visibility = "hidden";
 
         document.body.appendChild(link);
