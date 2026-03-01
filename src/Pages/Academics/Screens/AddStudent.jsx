@@ -153,7 +153,18 @@ const AddStudentPage = () => {
                                                 </label>
                                             </div>
                                             <div className="upload_file_sec">
-                                                <div className="file_sec_inner"></div>
+                                                <div className="file_sec_inner">
+                                                    <div className="image_sec">
+                                                        <img src="/images/excel-icon.png" alt="" />
+                                                    </div>
+                                                    <div className="file_items">
+                                                        <p>File Name</p>
+                                                        <div className="btns">
+                                                            <button><i className="fa-solid fa-cloud-arrow-up"></i>Upload</button>
+                                                            <button><i className="fa-solid fa-trash"></i>Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

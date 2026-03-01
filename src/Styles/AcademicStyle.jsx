@@ -1154,18 +1154,32 @@ export const AddStudentWrapper = styled('div')`
                         align-items: center;
                         padding: 5px 15px;
                         cursor: pointer;
-
+                        transition: all 0.5s ease;
+                        
                         span {
                             position: relative;
                             font-size: 13px;
                             color: ${colors.customColors.blueColor1};
                         }
-
+                        
                         p {
                             position: relative;
                             margin-left: 6px;
                             font-size: 12px;
                             color: ${colors.customColors.blueColor1};
+                        }
+                        
+                        &:hover {
+                            background: ${colors.customColors.blueColor1};
+                            transition: all 0.5s ease;
+                            
+                            span {
+                                color: ${colors.customColors.whiteColor};
+                            }
+
+                            p {
+                                color: ${colors.customColors.whiteColor};
+                            }
                         }
                     }
 
@@ -1220,6 +1234,7 @@ export const AddStudentWrapper = styled('div')`
                     width: 100%;
                     padding: 15px;
                     display: flex;
+                    flex-direction: column;
 
                     .bulk_upload_sec {
                         position: relative;
@@ -1233,22 +1248,28 @@ export const AddStudentWrapper = styled('div')`
                         justify-content: center;
                         cursor: pointer;
 
-                        a {
+                        label {
                             position: relative;
-                            font-size: 27px;
-                            color: ${colors.themeColor};
-                            text-decoration: none;
-                        }
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
 
-                        p {
-                            position: relative;
-                            font-size: 13px;
-                            color: ${colors.customColors.blackColor1};
-                            font-weight: 400;
-                            margin-top: 5px;
-
-                            span {
+                            i {
+                                position: relative;
+                                font-size: 27px;
                                 color: ${colors.themeColor};
+                            }
+
+                            p {
+                                position: relative;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor1};
+                                font-weight: 400;
+                                margin-top: 5px;
+
+                                span {
+                                    color: ${colors.themeColor};
+                                }
                             }
                         }
                     }
@@ -1260,9 +1281,81 @@ export const AddStudentWrapper = styled('div')`
                         border: 1px dashed ${colors.customColors.borderColor1};
                         border-radius: 6px;
                         display: flex;
-                        flex-direction: column;
-                        align-items: center;
                         justify-content: center;
+
+                        .file_sec_inner {
+                            position: relative;
+                            display: flex;
+
+                            .image_sec {
+                                position: relative;
+                                width: 80px;
+                                height: 100px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 5px;
+                                border-radius: 4px;
+                                border: 1px solid ${colors.customColors.borderColor1};
+
+                                img {
+                                    position: relative;
+                                    width: 55px;
+                                    object-fit: cover;
+                                    border-radius: 4px;
+                                }
+                            }
+
+                            .file_items {
+                                position: relative;
+                                display: flex;
+                                flex-direction: column;
+                                margin-left: 25px;
+
+                                p {
+                                    position: relative;
+                                    max-width: 250px;
+                                    font-size: 11px;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    color: ${colors.customColors.blackColor1};
+                                    border-bottom: 1px dashed ${colors.customColors.borderColor1};
+                                }
+
+                                .btns {
+                                    position: relative;
+                                    display: flex;
+                                    margin-top: auto;
+
+                                    button {
+                                        position: relative;
+                                        padding: 5px 20px;
+                                        border-radius: 5px;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 12px;
+                                        cursor: pointer;
+                                        border: none;
+
+                                        &:first-of-type {
+                                            background: ${colors.customColors.blueColorLight};
+                                            color: ${colors.customColors.blueColor1};
+                                            margin-right: 15px;
+                                        }
+
+                                        &:last-of-type {
+                                            background: ${colors.customColors.redColorLight};
+                                            color: ${colors.customColors.redColor};
+                                        }
+
+                                        i {
+                                            margin-right: 4px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
