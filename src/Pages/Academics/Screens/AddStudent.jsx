@@ -18,6 +18,8 @@ const AddStudentPage = () => {
     const [form, setForm] = useState([]);
     const [activeDropdownId, setActiveDropdownId] = useState(null);
     const [formData, setFormData] = useState({});
+    const [isDragging, setIsDragging] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const fetchStudentForm = async () => {
         setIsFormLoading(true);
