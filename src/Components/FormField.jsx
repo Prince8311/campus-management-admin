@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FormFieldWrapper } from "../Styles/LayoutStyle";
 import Calender from "./Calender";
 
-const FormField = ({ id, label, type, isrequired, value, onChange, activeDropdownId, setActiveDropdownId }) => {
+const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, activeDropdownId, setActiveDropdownId }) => {
     const wrapperRef = useRef(null);
     const dropdownRef = useRef(null);
     const [isDropUp, setIsDropUp] = useState(false);
@@ -77,13 +77,13 @@ const FormField = ({ id, label, type, isrequired, value, onChange, activeDropdow
                     {
                         type === 'textbox' &&
                         <div className="input_box">
-                            <input type="text" value={value} onChange={(e) => onChange(id, e.target.value)} />
+                            <input type="text" value={value} onChange={(e) => onChange(sectionId, id, e.target.value)} />
                         </div>
                     }
                     {
                         type === 'number' &&
                         <div className="input_box">
-                            <input type="number" value={value} onChange={(e) => onChange(id, e.target.value)} />
+                            <input type="number" value={value} onChange={(e) => onChange(sectionId, id, e.target.value)} />
                         </div>
                     }
                     {
@@ -99,7 +99,7 @@ const FormField = ({ id, label, type, isrequired, value, onChange, activeDropdow
                                     <div className="dropdown_inner">
                                         <ul>
                                             <li onClick={() => {
-                                                onChange(id, "A+");
+                                                onChange(sectionId, id, "A+");
                                                 setActiveDropdownId(null);
                                             }}>
                                                 A+
@@ -151,7 +151,7 @@ const FormField = ({ id, label, type, isrequired, value, onChange, activeDropdow
                                 <div className={`dropdown ${isDropUp ? "drop_up" : ""}`} ref={dropdownRef}>
                                     <Calender
                                         setFinalSelectedDate={(date) => {
-                                            onChange(id, date);
+                                            onChange(sectionId, id, date);
                                             setActiveDropdownId(null);
                                         }}
                                     />
