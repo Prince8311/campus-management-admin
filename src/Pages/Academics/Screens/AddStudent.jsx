@@ -168,7 +168,7 @@ const AddStudentPage = () => {
                                                     <div className="content_right">
                                                         <p>Upload passport size photo</p>
                                                         <span>(File size: max 10MB | Formats: .PNG, .JPG)</span>
-                                                        <a><i className="fa-solid fa-cloud-arrow-down"></i>Upload Image</a>
+                                                        <a><i className="fa-solid fa-cloud-arrow-up"></i>Upload Image</a>
                                                     </div>
                                                 </div>
                                             </div>
