@@ -1478,18 +1478,19 @@ export const AddStudentWrapper = styled('div')`
 
             img {
                 position: relative;
-                width: 200px;
+                width: 350px;
                 opacity: 0.5;
             }
 
             p {
                 position: relative;
-                margin-top: 10px;
+                margin-top: 25px;
                 font-size: 13px;
                 color: ${colors.customColors.blackColor2};
 
                 span {
                     color: ${colors.customColors.blueColor1};
+                    cursor: pointer;
                 }
             }
         }

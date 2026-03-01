@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormField from "../../../Components/FormField";
 import { AddStudentWrapper } from "../../../Styles/AcademicStyle";
 import { toast } from "react-toastify";
@@ -8,6 +9,7 @@ import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const AddStudentPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const [displayBulkUpload, setDisplayBulkUpload] = useState(true);
     const [displayManualUpload, setDisplayManualUpload] = useState(false);
     const [isFormLoading, setIsFormLoading] = useState(false);
@@ -98,6 +100,10 @@ const AddStudentPage = () => {
         console.log(formattedData);
     };
 
+    const redirectToProfileSettingPage = () => {
+        navigate("/admin/settings/profile-settings/student");
+    }
+
     return (
         <>
             <AddStudentWrapper>
@@ -162,7 +168,7 @@ const AddStudentPage = () => {
                                                     <div className="content_right">
                                                         <p>Upload passport size photo</p>
                                                         <span>(File size: max 10MB | Formats: .PNG, .JPG)</span>
-                                                        <a><i className="fa-solid fa-cloud-arrow-down"></i>Upload Image</a>
+                                                        <a><i className="fa-solid fa-cloud-arrow-up"></i>Upload Image</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,7 +214,7 @@ const AddStudentPage = () => {
                         ) : (
                             <div className="empty_box">
                                 <img src="/images/no-fields.svg" alt="" />
-                                <p>No sections & fields are available. <span>Create Now</span></p>
+                                <p>No sections & fields are available. <span onClick={redirectToProfileSettingPage}>Create Now</span></p>
                             </div>
                         )
                     }
