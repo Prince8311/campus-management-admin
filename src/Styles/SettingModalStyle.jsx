@@ -432,6 +432,71 @@ export const CreateFieldsWrapper = styled('div')`
                         }
                     }
                 }
+
+                .item_box {
+                    position: relative;
+                    width: 100%;
+                    margin-bottom: 8px;
+
+                    span {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
+
+                        a {
+                            position: relative;
+                            font-size: 9px;
+                            color: ${colors.customColors.blackColor2};
+                            margin-left: 2px;
+                            text-decoration: none;
+                        }
+                    }
+
+                    .box_content {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-top: 3px;
+                        padding: 5px;
+                        background: ${colors.customColors.lightBackground3};
+                        border-radius: 5px;
+
+                        li {
+                            position: relative;
+                            width: max-content;
+                            display: flex;
+                            align-items: center;
+                            list-style: none;
+                            padding: 5px 5px 5px 10px;
+                            border-radius: 4px;
+                            background: ${colors.customColors.blueColor1};
+                            margin: 5px;
+
+                            p {
+                                position: relative;
+                                font-size: 11px;
+                                color: ${colors.customColors.whiteColor};
+                            }
+
+                            span {
+                                position: relative;
+                                font-size: 12px;
+                                color: ${colors.customColors.whiteColor};
+                                margin-left: 6px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
             }
         }
 

@@ -96,6 +96,59 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
                                     </div>
                                 </div>
                             </div>
+                            <div className="item_box">
+                                <span>Items<p>*</p><a>(Please press enter after typing each item name.)</a></span>
+                                <div className="box_content">
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                    <li>
+                                        <p>Male</p>
+                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
+                                    </li>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="modal_btn">
