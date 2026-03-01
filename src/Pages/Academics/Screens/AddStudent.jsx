@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 const AddStudentPage = () => {
     const api = getApiEndpoints();
@@ -50,7 +52,7 @@ const AddStudentPage = () => {
     const downloadSampleExcel = () => {
         if (!form.length) return;
 
-        // Collect all field names
+        // Collect all field names from all sections
         const headers = [];
 
         form.forEach(section => {
@@ -59,46 +61,44 @@ const AddStudentPage = () => {
             });
         });
 
-        // Convert headers to CSV format
-        const csvContent = headers.join(",") + "\n";
+        // Create empty sample row
+        const sampleData = [headers];
 
-        // Create blob
-        const blob = new Blob([csvContent], {
-            type: "text/csv;charset=utf-8;"
+        // Create worksheet
+        const ws = XLSX.utils.aoa_to_sheet(sampleData);
+
+        // Create workbook
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Student Sample");
+
+        // Generate buffer
+        const excelBuffer = XLSX.write(wb, {
+            bookType: "xlsx",
+            type: "array"
         });
 
-        // Create download link
-        const link = document.createElement("a");
-        const url = URL.createObjectURL(blob);
+        const blob = new Blob([excelBuffer], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        });
 
-        link.setAttribute("href", url);
-        link.setAttribute("download", "Student_Sample_List.csv");
-        link.style.visibility = "hidden";
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        saveAs(blob, "Student_Sample_List.xlsx");
     };
 
-    const handleFieldChange = (fieldId, sectionId, value) => {
+    const handleFieldChange = (fieldId, value) => {
         setFormData(prev => ({
             ...prev,
-            [fieldId]: {
-                section_id: sectionId,
-                value: value
-            }
+            [fieldId]: value
         }));
     };
 
     const handleFormSubmit = () => {
-        const formattedData = Object.entries(formData).map(([fieldId, data]) => ({
-            section_id: data.section_id,
-            field_id: fieldId,
-            value: data.value
+        const formattedData = Object.entries(formData).map(([id, value]) => ({
+            field_id: id,
+            value: value
         }));
 
         console.log(formattedData);
-    };
+    }
 
     const redirectToProfileSettingPage = () => {
         navigate("/admin/settings/profile-settings/student");
@@ -188,7 +188,6 @@ const AddStudentPage = () => {
                                                                         <FormField
                                                                             key={i}
                                                                             id={field.id}
-                                                                            sectionId={section.id}
                                                                             label={field.name}
                                                                             type={field.type}
                                                                             isrequired={field.is_required}

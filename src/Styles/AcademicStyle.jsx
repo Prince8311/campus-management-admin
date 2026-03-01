@@ -1252,6 +1252,18 @@ export const AddStudentWrapper = styled('div')`
                             }
                         }
                     }
+
+                    .upload_file_sec {
+                        position: relative;
+                        width: 100%;
+                        padding: 25px 0;
+                        border: 1px dashed ${colors.customColors.borderColor1};
+                        border-radius: 6px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                    }
                 }
 
                 .profile_image_sec {
