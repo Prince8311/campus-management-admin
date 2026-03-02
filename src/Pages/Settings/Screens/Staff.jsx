@@ -11,12 +11,6 @@ const StaffPage = () => {
                                 <h6>Profile Information</h6>
                                 <p>Create and edit profile sections in staffs' profile</p>
                             </div>
-                            <div className="preview_sec">
-                                <div className="preview_btn">
-                                    <i className="fa-solid fa-eye"></i>
-                                    <p>Preview</p>
-                                </div>
-                            </div>
                             <div className="add_btn">
                                 <button>
                                     <i className="fa-solid fa-plus"></i>
@@ -27,72 +21,32 @@ const StaffPage = () => {
                         <div className="box_bottom_sec">
                             <div className="sec_item">
                                 <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
+                                    <div className="inner_top">
+                                        <a><i class="fa-solid fa-thumbtack"></i></a>
+                                        <div className="inner_content">
+                                            <h6>Admin</h6>
+                                            <span>20 fields</span>
+                                        </div>
                                     </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
+                                    <div className="inner_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                    </div>
                                 </div>
                             </div>
                             <div className="sec_item">
                                 <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
+                                    <div className="inner_top">
+                                        <a><i class="fa-solid fa-thumbtack"></i></a>
+                                        <div className="inner_content">
+                                            <h6>Admin</h6>
+                                            <span>20 fields</span>
+                                        </div>
                                     </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
+                                    <div className="inner_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                     </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
                                 </div>
                             </div>
                         </div>
@@ -103,12 +57,6 @@ const StaffPage = () => {
                                 <h6>Documents</h6>
                                 <p>Create and edit document sections in staffs' profile</p>
                             </div>
-                            <div className="preview_sec">
-                                <div className="preview_btn">
-                                    <i className="fa-solid fa-eye"></i>
-                                    <p>Preview</p>
-                                </div>
-                            </div>
                             <div className="add_btn">
                                 <button>
                                     <i className="fa-solid fa-plus"></i>
@@ -117,75 +65,9 @@ const StaffPage = () => {
                             </div>
                         </div>
                         <div className="box_bottom_sec">
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-thumbtack"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
-                            </div>
-                            <div className="sec_item">
-                                <div className="item_inner">
-                                    <a><i class="fa-solid fa-xmark"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                        <span>20 fields</span>
-                                    </div>
-                                    <p><i className="fa-solid fa-angle-right"></i></p>
-                                </div>
+                            <div className="empty_messege">
+                                <img src="/images/no-fields.svg" alt="" />
+                                <p>No Section available.</p>
                             </div>
                         </div>
                     </div>

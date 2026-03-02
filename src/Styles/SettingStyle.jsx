@@ -73,48 +73,124 @@ export const RolePermissionWrapper = styled('div')`
                 .item_inner {
                     position: relative;
                     width: 100%;
-                    padding: 12px 15px 15px 15px;
+                    padding: 12px;
+                    padding-left: 15px;
                     background: ${colors.customColors.whiteColor};
                     border: 1px solid ${colors.customColors.borderColor};
+                    border-left: 4px solid ${colors.customColors.blueColor1};
                     border-radius: 8px;
                     display: flex;
                     flex-direction: column;
                     box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
                                 -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                    .top_part {
+                    .inner_top {
                         position: relative;
                         width: 100%;
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
 
-                        span {
+                        a {
                             position: relative;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            background: ${colors.customColors.blueColorLight};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                             font-size: 16px;
-                            font-weight: 600;
-                            color: ${colors.customColors.blackColor1};
+                            color: ${colors.customColors.blueColor1};
+                            text-decoration: none;
+                            cursor: pointer;
                         }
 
-                        p {
+                        .inner_content {
                             position: relative;
-                            font-size: 14px;
-                            color: ${colors.customColors.blackColor2};
+                            width: calc(100% - 28px);
+                            display: flex;
+                            padding-left: 12px;
+
+                            h6 {
+                                position: relative;
+                                max-width: 100%;
+                                font-size: 13.5px;
+                                font-style: italic;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor};
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                            }
+                        }
+                    }
+
+                    .inner_btn {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        margin-top: 6px;
+                        justify-content: flex-end;
+                        padding-bottom: 6px;
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                        button {
+                            position: relative;
+                            width: max-content;
+                            height: 25px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border: none;
+                            padding: 0 12px;
+
+                            &.edit {
+                                background: ${colors.customColors.greenColorLight};
+                                color: ${colors.customColors.greenColor};
+                                font-size: 10px;
+                                cursor: pointer;
+                                font-weight: 500;
+                                border-bottom-left-radius: 4px;
+                                border-top-left-radius: 4px;
+
+                                i {
+                                    font-size: 11px;
+                                    margin-right: 8px;
+                                }
+                            }
+
+                            &.delete {
+                                background: ${colors.customColors.redColorLight};
+                                color:  ${colors.customColors.redColor};
+                                font-size: 10px;
+                                cursor: pointer;
+                                border-top-right-radius: 4px;
+                                border-bottom-right-radius: 4px;
+                            }
                         }
                     }
 
                     .bottom_part {
                         position: relative;
-                        margin-top: 12px;
+                        margin-top: 6px;
                         width: 100%;
                         display: flex;
-                        align-items: flex-end;
-                        justify-content: space-between;
+                        align-items: center;
+                        justify-content: flex-end;
+
+                        a {
+                            position: relative;
+                            font-size: 11px;
+                            color: ${colors.customColors.blackColor};
+                            text-decoration: none;
+                        }
 
                         .students {
                             position: relative;
                             display: flex;
                             align-items: center;
+                            margin-left: 10px;
 
                             ul {
                                 position: relative;
@@ -124,8 +200,8 @@ export const RolePermissionWrapper = styled('div')`
                                 li {
                                     position: relative;
                                     list-style: none;
-                                    width: 33px;
-                                    height: 33px;
+                                    width: 30px;
+                                    height: 30px;
                                     display: flex;
                                     border-radius: 50%;
                                     overflow: hidden;
@@ -145,7 +221,7 @@ export const RolePermissionWrapper = styled('div')`
                                         display: flex;
                                         align-items: center;
                                         justify-content: center;
-                                        font-size: 13px;
+                                        font-size: 9px;
                                         font-weight: 500;
                                         letter-spacing: 0.55px;
                                     }
@@ -161,14 +237,14 @@ export const RolePermissionWrapper = styled('div')`
 
                             span {
                                 position: relative;
-                                width: 33px;
-                                height: 33px;
+                                width: 30px;
+                                height: 30px;
                                 background: ${colors.customColors.borderColor};
                                 border-radius: 50%;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                font-size: 10px;
+                                font-size: 7.5px;
                                 font-weight: 500;
                                 border: 2px solid ${colors.customColors.whiteColor};
                                 margin-left: -16.5px;
@@ -556,43 +632,7 @@ export const StaffWrapper = styled('div')`
                         color: ${colors.customColors.blackColor2};
                     }
                 }
-
-                .preview_sec {
-                    position: relative;
-                    margin-left: auto;
-
-                    .preview_btn {
-                        position: relative;
-                        width: 100px;
-                        height: 35px;
-                        border: 1px solid ${colors.customColors.greenColor};
-                        border-radius: 6px;
-                        display: flex;
-                        align-items: center;
-                        padding: 5px 15px;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-
-                        &:hover {
-                            border-radius: 25px;
-                            transition: all 0.3s ease;
-                        }
-
-                        i {
-                            position: relative;
-                            color: ${colors.customColors.greenColor};
-                            font-size: 13px;
-                        }
-                        
-                        p {
-                            position: relative;
-                            font-size: 12px;
-                            color: ${colors.customColors.greenColor};
-                            margin-left: auto;
-                        }
-                    }
-                }
-
+                
                 .add_btn {
                     position: relative;
                     margin-left: 20px;
@@ -643,60 +683,135 @@ export const StaffWrapper = styled('div')`
                     .item_inner {
                         position: relative;
                         width: 100%;
-                        padding: 13px 15px;
+                        padding: 12px;
+                        padding-left: 15px;
                         background: ${colors.customColors.whiteColor};
                         border: 1px solid ${colors.customColors.borderColor};
+                        border-left: 4px solid ${colors.customColors.greenColor};
                         border-radius: 8px;
                         display: flex;
+                        flex-direction: column;
                         box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
                                     -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                        a {
+                        .inner_top {
                             position: relative;
-                            width: 25px;
-                            height: 25px;
-                            border-radius: 50%;
-                            background: ${colors.customColors.borderColor};
+                            width: 100%;
                             display: flex;
                             align-items: center;
-                            justify-content: center;
-                            font-size: 10px;
-                            color: ${colors.customColors.blackColor};
-                            text-decoration: none;
-                            cursor: pointer;
-                        }
+                            padding-bottom: 8px;
+                            border-bottom: 1px solid ${colors.customColors.borderColor};
 
-                        .inner_content {
-                            position: relative;
-                            width: calc(100% - 45px);
-                            display: flex;
-                            flex-direction: column;
-                            padding: 0 15px;
-
-                            h6 {
+                            a {
                                 position: relative;
-                                font-size: 15px;
-                                font-weight: 500;
-                                color: ${colors.customColors.blackColor};
-                            }
-                            span {
-                                position: relative;
+                                width: 28px;
+                                height: 28px;
+                                border-radius: 50%;
+                                background: ${colors.customColors.greenColorLight};
                                 display: flex;
-                                font-size: 11px;
-                                color: ${colors.customColors.blackColor1};
-                                margin-top: 2px;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 12px;
+                                color: ${colors.customColors.greenColor};
+                                text-decoration: none;
+                                cursor: pointer;
+                            }
+
+                            .inner_content {
+                                position: relative;
+                                width: calc(100% - 28px);
+                                display: flex;
+                                padding-left: 12px;
+
+                                h6 {
+                                    position: relative;
+                                    max-width: calc(100% - 85px);
+                                    font-size: 13.5px;
+                                    font-style: italic;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                }
+                                span {
+                                    position: relative;
+                                    width: max-content;
+                                    display: flex;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.greenColor};
+                                    margin-top: 2px;
+                                    background: ${colors.customColors.greenColorLight};
+                                    border-radius: 25px;
+                                    padding: 3px 15px;
+                                    margin-left: auto;
+                                    font-weight: 500;
+                                }
                             }
                         }
 
-                        p {
+                        .inner_btn {
                             position: relative;
-                            width: 20px;
+                            width: 100%;
                             display: flex;
+                            align-items: center;
+                            margin-top: 8px;
                             justify-content: flex-end;
-                            font-size: 14px;
-                            color: ${colors.customColors.blackColor2};
-                            margin-left: auto;
+
+                            button {
+                                position: relative;
+                                width: max-content;
+                                height: 25px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border: none;
+                                padding: 0 12px;
+
+                                &.details {
+                                    background: ${colors.customColors.blueColorLight};
+                                    color: ${colors.customColors.blueColor2};
+                                    font-size: 10px;
+                                    cursor: pointer;
+                                    font-weight: 500;
+                                    border-bottom-left-radius: 4px;
+                                    border-top-left-radius: 4px;
+                                }
+
+                                &.delete {
+                                    background: ${colors.customColors.redColorLight};
+                                    color:  ${colors.customColors.redColor};
+                                    font-size: 10px;
+                                    cursor: pointer;
+                                    border-top-right-radius: 4px;
+                                    border-bottom-right-radius: 4px;
+                                }
+                            }
                         }
+                    }
+                }
+
+                .empty_messege {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0 10px;
+                    margin-top: 10px;
+
+                    img {
+                        position: relative;
+                        width: 150px;
+                        opacity: 0.5;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        margin-top: 10px;
+                        color: ${colors.customColors.blackColor3};
                     }
                 }
             }

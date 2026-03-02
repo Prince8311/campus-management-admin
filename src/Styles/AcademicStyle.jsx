@@ -276,13 +276,13 @@ export const StudentInformationWrapper = styled('div')`
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                border: 1px solid ${colors.customColors.borderColor1};
+                                background: ${colors.customColors.blueColor2};
 
                                 h5 {
                                     position: relative;
                                     font-size: 14px;
                                     font-weight: 500;
-                                    color: ${colors.customColors.blackColor2};
+                                    color: ${colors.customColors.whiteColor};
                                     text-transform: uppercase;
                                 }
                             }
