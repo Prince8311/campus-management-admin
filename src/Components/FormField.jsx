@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { FormFieldWrapper } from "../Styles/LayoutStyle";
 import Calender from "./Calender";
 
-const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, activeDropdownId, setActiveDropdownId }) => {
+const FormField = ({ id, sectionId, label, type, isrequired, items, value, onChange, activeDropdownId, setActiveDropdownId }) => {
     const wrapperRef = useRef(null);
     const dropdownRef = useRef(null);
     const [isDropUp, setIsDropUp] = useState(false);
     const isOpen = activeDropdownId === id;
+    const textRef = useRef(null);
+    const [displayText, setDisplayText] = useState('');
 
     const checkPosition = () => {
         if (!dropdownRef.current || !wrapperRef.current) return;
@@ -69,6 +71,59 @@ const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, ac
             document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    const handleMultiSelect = (item) => {
+        let updatedValues = [];
+        const currentValues = value || [];
+
+        if (currentValues.includes(item)) {
+            updatedValues = currentValues.filter(v => v !== item);
+        } else {
+            updatedValues = [...currentValues, item];
+        }
+
+        onChange(sectionId, label, updatedValues);
+    };
+
+    useEffect(() => {
+        if (!value || value.length === 0) {
+            setDisplayText("");
+            return;
+        }
+
+        if (!textRef.current) return;
+
+        const containerWidth = textRef.current.offsetWidth;
+        const temp = document.createElement("span");
+        temp.style.visibility = "hidden";
+        temp.style.whiteSpace = "nowrap";
+        temp.style.position = "absolute";
+        document.body.appendChild(temp);
+
+        let visibleItems = [];
+        let hiddenCount = 0;
+
+        for (let i = 0; i < value.length; i++) {
+            const testText = [...visibleItems, value[i]].join(", ");
+            temp.innerText = testText;
+
+            if (temp.offsetWidth > containerWidth) {
+                hiddenCount = value.length - visibleItems.length;
+                break;
+            } else {
+                visibleItems.push(value[i]);
+            }
+        }
+
+        document.body.removeChild(temp);
+
+        if (hiddenCount > 0) {
+            setDisplayText(`${visibleItems.join(", ")} (+${hiddenCount})`);
+        } else {
+            setDisplayText(visibleItems.join(", "));
+        }
+
+    }, [value]);
+
     return (
         <>
             <FormFieldWrapper>
@@ -91,22 +146,31 @@ const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, ac
                         <div className="select_box" ref={wrapperRef}>
                             <div className="select_btn" onClick={handleToggle}>
                                 <p>{value}</p>
-                                <i className="fa-solid fa-angle-down"></i>
+                                <i className={`fa-solid fa-angle-down ${isOpen ? 'rotate' : ''}`}></i>
                             </div>
                             {
                                 isOpen &&
                                 <div className={`dropdown ${isDropUp ? "drop_up" : ""}`} ref={dropdownRef}>
                                     <div className="dropdown_inner">
                                         <ul>
-                                            <li onClick={() => {
-                                                onChange(sectionId, label, "A+");
-                                                setActiveDropdownId(null);
-                                            }}>
-                                                A+
-                                            </li>
-                                            <li>A+</li>
-                                            <li>B+</li>
-                                            <li>B-</li>
+                                            {
+                                                items.length > 0 ? (
+                                                    items.map((item, i) =>
+                                                        <li
+                                                            className={item === value ? 'selected' : ''}
+                                                            onClick={() => {
+                                                                if (item === value) return;
+                                                                onChange(sectionId, label, item);
+                                                                setActiveDropdownId(null);
+                                                            }}
+                                                        >
+                                                            {item}
+                                                        </li>
+                                                    )
+                                                ) : (
+                                                    <li className="empty_message">No items available</li>
+                                                )
+                                            }
                                         </ul>
                                     </div>
                                 </div>
@@ -117,22 +181,38 @@ const FormField = ({ id, sectionId, label, type, isrequired, value, onChange, ac
                         type === 'multi-select-dropdown' &&
                         <div className="multi_select_box" ref={wrapperRef}>
                             <div className="select_btn" onClick={handleToggle}>
-                                <p></p>
-                                <i className="fa-solid fa-angle-down"></i>
+                                <p ref={textRef}>{displayText}</p>
+                                <i className={`fa-solid fa-angle-down ${isOpen ? 'rotate' : ''}`}></i>
                             </div>
                             {
                                 isOpen &&
                                 <div className={`dropdown ${isDropUp ? "drop_up" : ""}`} ref={dropdownRef}>
                                     <div className="dropdown_inner">
                                         <ul>
-                                            <li>
-                                                <p>Option 1</p>
-                                                <span></span>
-                                            </li>
-                                            <li>
-                                                <p>Option 2</p>
-                                                <span><img src="/images/check-icon.png" alt="" /></span>
-                                            </li>
+                                            {
+                                                items && items.length > 0 ? (
+                                                    items.map((item, i) => {
+                                                        const isSelected = value?.includes(item);
+
+                                                        return (
+                                                            <li
+                                                                key={i}
+                                                                onClick={() => handleMultiSelect(item)}
+                                                                className={isSelected ? "selected" : ""}
+                                                            >
+                                                                <p>{item}</p>
+                                                                <span>
+                                                                    {isSelected && (
+                                                                        <img src="/images/check-icon.png" alt="selected" />
+                                                                    )}
+                                                                </span>
+                                                            </li>
+                                                        );
+                                                    })
+                                                ) : (
+                                                    <li className="empty_message">No items available</li>
+                                                )
+                                            }
                                         </ul>
                                     </div>
                                 </div>

@@ -686,6 +686,7 @@ export const FormFieldWrapper = styled('div')`
                 border-radius: 5px;
                 padding: 5px 15px;
                 background: ${colors.customColors.lightBackground3};
+                cursor: pointer;
 
                 p {
                     position: relative;
@@ -697,12 +698,18 @@ export const FormFieldWrapper = styled('div')`
 
                 i {
                     position: relative;
-                    width: 25px;
+                    margin-left: auto;
                     display: flex;
                     justify-content: flex-end;
                     cursor: pointer;
                     font-size: 12px;
                     color: ${colors.customColors.blackColor2};
+                    transition: all 0.5s ease;
+                    
+                    &.rotate {
+                        transform: rotate(-180deg);
+                        transition: all 0.5s ease;
+                    }
                 }
             }
 
@@ -762,13 +769,19 @@ export const FormFieldWrapper = styled('div')`
                                 transition: all 0.5s ease;
                             }
 
-                            &.active {
+                            &.selected {
                                 background: ${colors.customColors.lightBackground};
                                 color: ${colors.customColors.blackColor};
 
                                 &:hover {
                                     color: ${colors.customColors.blackColor};
                                 }
+                            }
+
+                            &.empty_message {
+                                padding: 5px 10px;
+                                color: ${colors.customColors.blackColor3};
+                                pointer-events: none;
                             }
                         }
                     }
@@ -792,23 +805,33 @@ export const FormFieldWrapper = styled('div')`
                 border-radius: 5px;
                 padding: 5px 15px;
                 background: ${colors.customColors.lightBackground3};
+                cursor: pointer;
 
                 p {
                     position: relative;
                     width: calc(100% - 25px);
-                    display: flex;
+                    display: block;
                     font-size: 12px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                     color: ${colors.customColors.blackColor1};
                 }
 
                 i {
                     position: relative;
-                    width: 25px;
+                    margin-left: auto;
                     display: flex;
                     justify-content: flex-end;
                     cursor: pointer;
                     font-size: 12px;
                     color: ${colors.customColors.blackColor2};
+                    transition: all 0.5s ease;
+
+                    &.rotate {
+                        transform: rotate(-180deg);
+                        transition: all 0.5s ease;
+                    }
                 }
             }
 
@@ -889,6 +912,15 @@ export const FormFieldWrapper = styled('div')`
                                     width: 18px;
                                 }
                             }
+
+                            &.empty_message {
+                                padding: 5px 10px;
+                                color: ${colors.customColors.blackColor3};
+                                border: none;
+                                padding: 5px 10px;
+                                font-size: 12px;
+                                pointer-events: none;
+                            }
                         }
                     }
                 }
@@ -911,6 +943,7 @@ export const FormFieldWrapper = styled('div')`
                 border-radius: 5px;
                 padding: 5px 15px;
                 background: ${colors.customColors.lightBackground3};
+                cursor: pointer;
 
                 p {
                     position: relative;

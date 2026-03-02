@@ -24,7 +24,8 @@ const SectionFieldsPage = () => {
     const [selectedFormField, setSelectedFormField] = useState({});
     const [editedName, setEditedName] = useState('');
     const [editedRequired, setEditedRequired] = useState(false);
-    const isChanged = editedName !== selectedFormField?.form_field || editedRequired !== selectedFormField?.is_required;
+    const [editedItems, setEditedItems] = useState([]);
+    const [itemInput, setItemInput] = useState('');
 
     useEffect(() => {
         if (!sectionData) {
@@ -65,12 +66,33 @@ const SectionFieldsPage = () => {
         if (selectedFormField?.id) {
             setEditedName(selectedFormField.form_field || '');
             setEditedRequired(!!selectedFormField.is_required);
+            setEditedItems(selectedFormField.items || []);
         }
     }, [selectedFormField]);
 
-    const handleOpenCreateFieldsModal = () => {
-        setIsCreateFieldsOpen(true);
-    }
+    const isDropdownType = selectedFormField.field_type === 'dropdown' || selectedFormField.field_type === 'multi-select-dropdown';
+
+    const handleItemKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const trimmedValue = itemInput.trim();
+            if (!trimmedValue) return;
+
+            if (editedItems.includes(trimmedValue)) {
+                toast.error("Item already added");
+                return;
+            }
+
+            setEditedItems([...editedItems, trimmedValue]);
+            setItemInput('');
+        }
+    };
+
+    const handleRemoveItem = (indexToRemove) => {
+        setEditedItems(editedItems.filter((_, index) => index !== indexToRemove));
+    };
+
+    const isChanged = editedName !== selectedFormField?.form_field || editedRequired !== selectedFormField?.is_required || JSON.stringify(editedItems) !== JSON.stringify(selectedFormField?.items || []);
 
     return (
         <>
@@ -85,7 +107,7 @@ const SectionFieldsPage = () => {
                             <h6>{sectionData.sectionName}</h6>
                         </div>
                         <div className="add_btn">
-                            <button onClick={handleOpenCreateFieldsModal}>
+                            <button onClick={() => setIsCreateFieldsOpen(true)}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Create Field</p>
                             </button>
@@ -141,20 +163,31 @@ const SectionFieldsPage = () => {
                                                 </div>
                                                 <button disabled={!isChanged}>Save</button>
                                             </div>
-                                            <div className="item_box">
-                                                <div className="box_content">
-                                                    <li>
-                                                        <p>Student</p>
-                                                        <span>
-                                                            <i className="fa-solid fa-circle-xmark"></i>
-                                                        </span>
-                                                    </li>
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Type item name"
-                                                    />
-                                                </div>
-                                            </div>
+                                            {
+                                                isDropdownType && (
+                                                    <div className="item_box">
+                                                        <div className="box_content">
+                                                            {
+                                                                editedItems.map((item, index) => (
+                                                                    <li key={index}>
+                                                                        <p>{item}</p>
+                                                                        <span onClick={() => handleRemoveItem(index)}>
+                                                                            <i className="fa-solid fa-circle-xmark"></i>
+                                                                        </span>
+                                                                    </li>
+                                                                ))
+                                                            }
+                                                            <input
+                                                                type="text"
+                                                                placeholder="Type item name"
+                                                                value={itemInput}
+                                                                onChange={(e) => setItemInput(e.target.value)}
+                                                                onKeyDown={handleItemKeyDown}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
                                             <div className="mandatory_sec">
                                                 <p>Make this field mandatory</p>
                                                 <div className="toggle_bar">

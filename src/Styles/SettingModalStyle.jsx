@@ -507,6 +507,7 @@ export const CreateFieldsWrapper = styled('div')`
                             background: transparent;
                             padding: 0 5px;
                             font-size: 11px;
+                            height: 23px;
                         }
                     }
                 }

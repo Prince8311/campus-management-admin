@@ -1111,7 +1111,6 @@ export const SectionFieldsWrapper = styled('div')`
                             display: flex;
                             flex-wrap: wrap;
                             align-items: flex-start;
-                            margin-top: 3px;
                             padding: 7px;
                             border: 1px solid ${colors.customColors.blackColor};
                             border-radius: 5px;
@@ -1151,6 +1150,7 @@ export const SectionFieldsWrapper = styled('div')`
                                 background: transparent;
                                 padding: 0 5px;
                                 font-size: 11px;
+                                height: 23px;
                             }
                         }
                     }

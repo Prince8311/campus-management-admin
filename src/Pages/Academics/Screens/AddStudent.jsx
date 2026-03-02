@@ -350,6 +350,7 @@ const AddStudentPage = () => {
                                                                             label={field.name}
                                                                             type={field.type}
                                                                             isrequired={field.is_required}
+                                                                            items={field.items}
                                                                             value={formData[section.id]?.[field.name] || ""}
                                                                             onChange={handleFieldChange}
                                                                             activeDropdownId={activeDropdownId}

@@ -19,10 +19,10 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
     const [selectedType, setSelectedType] = useState({});
     const [showTypesDropdown, setShowTypesDropdown] = useState(false);
     const [isRequired, setIsRequired] = useState(false);
-    const isFormValid = name.trim() !== '' && selectedType.key;
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const [items, setItems] = useState([]);
     const [itemInput, setItemInput] = useState('');
+    const isFormValid = name.trim() !== '' && selectedType.key && (selectedType.key !== 'dropdown' && selectedType.key !== 'multi-select-dropdown' || items.length > 0);
 
     function closeModal() {
         setName('');
@@ -70,7 +70,11 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
             sectionId: sectionData.sectionId,
             fieldName: name,
             fieldType: selectedType.key,
-            isRequired: isRequired
+            isRequired: isRequired,
+            ...(selectedType.key === 'dropdown' || selectedType.key === 'multi-select-dropdown'
+                ? { items: JSON.stringify(items) }
+                : {}
+            )
         };
         try {
             const response = await axiosInstance.post(api.createStudentFormFields, payload);
