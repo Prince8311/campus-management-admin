@@ -21,11 +21,15 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
     const [isRequired, setIsRequired] = useState(false);
     const isFormValid = name.trim() !== '' && selectedType.key;
     const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const [items, setItems] = useState([]);
+    const [itemInput, setItemInput] = useState('');
 
     function closeModal() {
         setName('');
         setSelectedType({});
-        setIsRequired(false); 
+        setItemInput('');
+        setItems([]);
+        setIsRequired(false);
         setShowTypesDropdown(false);
         setIsCreateFieldsOpen(false);
     }
@@ -36,6 +40,28 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
             setShowTypesDropdown(false);
         }
     }
+
+    const handleItemKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+
+            const trimmedValue = itemInput.trim();
+            if (!trimmedValue) return;
+
+            // Prevent duplicate values (optional but recommended)
+            if (items.includes(trimmedValue)) {
+                toast.error("Item already added");
+                return;
+            }
+
+            setItems([...items, trimmedValue]);
+            setItemInput('');
+        }
+    };
+
+    const handleRemoveItem = (indexToRemove) => {
+        setItems(items.filter((_, index) => index !== indexToRemove));
+    };
 
     const handleAddFormField = async (e) => {
         e.preventDefault();
@@ -96,59 +122,31 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
                                     </div>
                                 </div>
                             </div>
-                            <div className="item_box">
-                                <span>Items<p>*</p><a>(Please press enter after typing each item name.)</a></span>
-                                <div className="box_content">
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
-                                    <li>
-                                        <p>Male</p>
-                                        <span><i className="fa-solid fa-circle-xmark"></i></span>
-                                    </li>
+                            {
+                                (selectedType.key === 'dropdown' || selectedType.key === 'multi-select-dropdown') &&
+                                <div className="item_box">
+                                    <span>Items<p>*</p><a>(Please press enter after typing each item name.)</a></span>
+                                    <div className="box_content">
+                                        {
+                                            items.map((item, index) => (
+                                                <li key={index}>
+                                                    <p>{item}</p>
+                                                    <span onClick={() => handleRemoveItem(index)}>
+                                                        <i className="fa-solid fa-circle-xmark"></i>
+                                                    </span>
+                                                </li>
+                                            ))
+                                        }
+                                        <input
+                                            type="text"
+                                            placeholder="Type item name"
+                                            value={itemInput}
+                                            onChange={(e) => setItemInput(e.target.value)}
+                                            onKeyDown={handleItemKeyDown}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         </div>
                     </div>
                     <div className="modal_btn">

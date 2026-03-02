@@ -463,10 +463,12 @@ export const CreateFieldsWrapper = styled('div')`
                     .box_content {
                         position: relative;
                         width: 100%;
+                        min-height: 80px;
                         display: flex;
                         flex-wrap: wrap;
+                        align-items: flex-start;
                         margin-top: 3px;
-                        padding: 5px;
+                        padding: 7px;
                         background: ${colors.customColors.lightBackground3};
                         border-radius: 5px;
 
@@ -479,7 +481,7 @@ export const CreateFieldsWrapper = styled('div')`
                             padding: 5px 5px 5px 10px;
                             border-radius: 4px;
                             background: ${colors.customColors.blueColor1};
-                            margin: 5px;
+                            margin: 3px;
 
                             p {
                                 position: relative;
@@ -494,6 +496,17 @@ export const CreateFieldsWrapper = styled('div')`
                                 margin-left: 6px;
                                 cursor: pointer;
                             }
+                        }
+
+                        input {
+                            position: relative;
+                            margin: 5px;
+                            width: max-content;
+                            border: none;
+                            outline: none;
+                            background: transparent;
+                            padding: 0 5px;
+                            font-size: 11px;
                         }
                     }
                 }
