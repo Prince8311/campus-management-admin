@@ -141,6 +141,20 @@ const SectionFieldsPage = () => {
                                                 </div>
                                                 <button disabled={!isChanged}>Save</button>
                                             </div>
+                                            <div className="item_box">
+                                                <div className="box_content">
+                                                    <li>
+                                                        <p>Student</p>
+                                                        <span>
+                                                            <i className="fa-solid fa-circle-xmark"></i>
+                                                        </span>
+                                                    </li>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Type item name"
+                                                    />
+                                                </div>
+                                            </div>
                                             <div className="mandatory_sec">
                                                 <p>Make this field mandatory</p>
                                                 <div className="toggle_bar">
