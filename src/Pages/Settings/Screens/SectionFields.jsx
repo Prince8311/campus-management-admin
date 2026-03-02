@@ -145,10 +145,15 @@ const SectionFieldsPage = () => {
                                         <div className="left_content_inner">
                                             {
                                                 formFields.map((field, i) =>
-                                                    <li key={i} className={selectedFormField.id === field.id ? 'active' : ''} onClick={() => setSelectedFormField(field)}>
-                                                        <p>{field.form_field}</p>
-                                                        <i className="fa-solid fa-angle-right"></i>
-                                                    </li>
+                                                    <div className="field_box" key={i}>
+                                                        <div className="field_image">
+                                                            <img src="/images/drag-icon.png" alt="" />
+                                                        </div>
+                                                        <li className={selectedFormField.id === field.id ? 'active' : ''} onClick={() => setSelectedFormField(field)}>
+                                                            <p>{field.form_field}</p>
+                                                            <i className="fa-solid fa-angle-right"></i>
+                                                        </li>
+                                                    </div>
                                                 )
                                             }
                                         </div>

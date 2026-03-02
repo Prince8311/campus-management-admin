@@ -940,48 +940,68 @@ export const SectionFieldsWrapper = styled('div')`
                     display: flex;
                     flex-direction: column;
 
-                    li {
+                    .field_box {
                         position: relative;
                         width: 100%;
-                        padding: 10px 15px;
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
-                        border: 1px solid ${colors.customColors.borderColor};
-                        border-radius: 6px;
                         margin-bottom: 10px;
-                        list-style: none;
-                        cursor: pointer;
-                        transition: all 0.5s ease;
 
-                        p {
-                            font-size: 12px;
-                            color: ${colors.customColors.blackColor};
-                            font-weight: 400;
+                        .field_image {
+                            position: relative;
+                            width: 11px;
+                            display: flex;
+
+                            img {
+                                position: relative;
+                                width: 100%;
+                            }
                         }
 
-                        i {
-                            font-size: 14px;
-                            color: ${colors.customColors.blackColor2};
-                        }
-
-                        &.active {
-                            border: 1px solid ${colors.customColors.blueColor2};
-                            background: ${colors.customColors.blueColorLight};
+                        li {
+                            position: relative;
+                            width: calc(100% - 21px);
+                            height: 100%;
+                            margin-left: 10px;
+                            padding: 10px 12px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 6px;
+                            list-style: none;
+                            cursor: pointer;
                             transition: all 0.5s ease;
 
                             p {
-                                color: ${colors.customColors.blueColor2};
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor};
+                                font-weight: 400;
                             }
 
                             i {
-                                color: ${colors.customColors.blueColor2};
+                                font-size: 14px;
+                                color: ${colors.customColors.blackColor2};
                             }
-                        }
 
-                        &:hover {
-                            background: ${colors.customColors.lightBackground};
-                            transition: all 0.5s ease;
+                            &.active {
+                                border: 1px solid ${colors.customColors.blueColor2};
+                                background: ${colors.customColors.blueColorLight};
+                                transition: all 0.5s ease;
+
+                                p {
+                                    color: ${colors.customColors.blueColor2};
+                                }
+
+                                i {
+                                    color: ${colors.customColors.blueColor2};
+                                }
+                            }
+
+                            &:hover {
+                                background: ${colors.customColors.lightBackground};
+                                transition: all 0.5s ease;
+                            }
                         }
                     }
                 }
