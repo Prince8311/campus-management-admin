@@ -176,7 +176,6 @@ const AddStudentPage = () => {
             const text = event.target.result.trim();
 
             if (!text) {
-                console.log("No data in the file");
                 toast.warn("No data in the file");
                 return;
             }
@@ -184,7 +183,6 @@ const AddStudentPage = () => {
             const rows = text.split("\n").map(row => row.split(","));
 
             if (rows.length <= 1) {
-                console.log("No data in the file");
                 toast.warn("No data in the file");
                 return;
             }
@@ -194,28 +192,32 @@ const AddStudentPage = () => {
             );
 
             if (dataRows.length === 0) {
-                console.log("No data in the file");
                 toast.warn("No data in the file");
                 return;
             }
 
             const headers = rows[0].map(h => h.replace("*", "").trim());
             const fieldMap = createFieldMap();
-            const formattedData = [];
 
-            dataRows.forEach(row => {
+            const formattedData = dataRows.map(row => {
+                const studentData = [];
+
                 headers.forEach((header, index) => {
                     if (fieldMap[header]) {
-                        formattedData.push({
+                        studentData.push({
                             section_id: fieldMap[header].section_id,
                             field_name: fieldMap[header].field_name,
                             value: row[index]?.trim() || ""
                         });
                     }
                 });
+
+                return studentData;
             });
+
             console.log(formattedData);
         };
+
         reader.readAsText(selectedFile);
     };
 

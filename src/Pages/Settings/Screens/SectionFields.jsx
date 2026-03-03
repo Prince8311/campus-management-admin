@@ -1,11 +1,47 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { arrayMove, SortableContext, verticalListSortingStrategy, useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import CreateFieldsModal from "../../../Components/Modals/Setting/CreateFields";
 import { SectionFieldsWrapper } from "../../../Styles/SettingStyle";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+
+const SortableItem = ({ field, selectedId, onSelect }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: field.id });
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} className="field_box">
+
+            {/* 🔥 DRAG HANDLE ONLY */}
+            <div
+                className="field_image"
+                {...attributes}
+                {...listeners}
+                style={{ cursor: "grab" }}
+            >
+                <img src="/images/drag-icon.png" alt="" />
+            </div>
+
+            {/* Normal Clickable Item */}
+            <li
+                className={selectedId === field.id ? "active" : ""}
+                onClick={() => onSelect(field)}
+            >
+                <p>{field.form_field}</p>
+                <i className="fa-solid fa-angle-right"></i>
+            </li>
+
+        </div>
+    );
+};
 
 const SectionFieldsPage = () => {
     const api = getApiEndpoints();
@@ -92,6 +128,32 @@ const SectionFieldsPage = () => {
         setEditedItems(editedItems.filter((_, index) => index !== indexToRemove));
     };
 
+    const handleDragEnd = async (event) => {
+        const { active, over } = event;
+        if (!over || active.id === over.id) return;
+
+        const oldIndex = formFields.findIndex(i => i.id === active.id);
+        const newIndex = formFields.findIndex(i => i.id === over.id);
+
+        const newOrder = arrayMove(formFields, oldIndex, newIndex);
+        setFormFields(newOrder);
+
+        try {
+            const payload = newOrder.map((item, index) => ({
+                id: item.id,
+                sort_order: index + 1
+            }));
+
+            await axiosInstance.post(api.updateStudentFormFieldOrder, {
+                sectionId: sectionData.sectionId,
+                fields: payload
+            });
+        } catch (error) {
+            toast.error("Failed to update order");
+        }
+    };
+
+
     const isChanged = editedName !== selectedFormField?.form_field || editedRequired !== selectedFormField?.is_required || JSON.stringify(editedItems) !== JSON.stringify(selectedFormField?.items || []);
 
     return (
@@ -143,19 +205,21 @@ const SectionFieldsPage = () => {
                                 <>
                                     <div className="left_content">
                                         <div className="left_content_inner">
-                                            {
-                                                formFields.map((field, i) =>
-                                                    <div className="field_box" key={i}>
-                                                        <div className="field_image">
-                                                            <img src="/images/drag-icon.png" alt="" />
-                                                        </div>
-                                                        <li className={selectedFormField.id === field.id ? 'active' : ''} onClick={() => setSelectedFormField(field)}>
-                                                            <p>{field.form_field}</p>
-                                                            <i className="fa-solid fa-angle-right"></i>
-                                                        </li>
-                                                    </div>
-                                                )
-                                            }
+                                            <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                                                <SortableContext
+                                                    items={formFields.map(f => f.id)}
+                                                    strategy={verticalListSortingStrategy}
+                                                >
+                                                    {formFields.map(field => (
+                                                        <SortableItem
+                                                            key={field.id}
+                                                            field={field}
+                                                            selectedId={selectedFormField?.id}
+                                                            onSelect={setSelectedFormField}
+                                                        />
+                                                    ))}
+                                                </SortableContext>
+                                            </DndContext>
                                         </div>
                                     </div>
                                     <div className="right_content">

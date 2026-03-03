@@ -147,6 +147,7 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
                                             value={itemInput}
                                             onChange={(e) => setItemInput(e.target.value)}
                                             onKeyDown={handleItemKeyDown}
+                                            className={items.length > 0 ? 'active' : ''}
                                         />
                                     </div>
                                 </div>
