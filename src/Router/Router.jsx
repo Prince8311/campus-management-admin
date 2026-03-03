@@ -6,6 +6,7 @@ import AuthenticationPage from "../Auth/Authentication";
 
 import PageLayout from "../layouts/PageLayout";
 import DashboardPage from "../Pages/Dashboard";
+import SessionPage from "../Pages/Session";
 
 // Institutions 
 import InstitutionMainPage from "../Pages/Institutions/Index";
@@ -75,6 +76,7 @@ const Routers = () => {
                     <Route path="admin" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
                         <Route path="dashboard" element={<DashboardPage />} />
+                        <Route path="session" element={<SessionPage />} />
                         <Route path="institutions" element={<InstitutionMainPage />}>
                             <Route path="" element={<Navigate to="institution-list" />} />
                             <Route path="institution-list" element={<InstitutionListPage />} />
