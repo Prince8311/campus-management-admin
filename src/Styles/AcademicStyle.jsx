@@ -430,6 +430,48 @@ export const ClassroomsWrapper = styled('div')`
             color: ${colors.customColors.blackColor};
             font-family: "SUSE", sans-serif;
         }
+
+        .btns_sec {
+            position: relative;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+
+            button {
+                position: relative;
+                width: max-content;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                padding: 0 12px;
+                font-size: 12.5px;
+                font-weight: 500;
+
+                &.academic {
+                    background: ${colors.customColors.blueColor1};
+                    border: 1px solid ${colors.customColors.blueColor1};
+                    color: ${colors.customColors.whiteColor};
+                    cursor: pointer;
+                    border-bottom-left-radius: 4px;
+                    border-top-left-radius: 4px;
+                }
+                
+                &.add_class {
+                    background: ${colors.customColors.whiteColor};
+                    border: 1px solid ${colors.customColors.blueColor1};
+                    color:  ${colors.customColors.blueColor1};
+                    cursor: pointer;
+                    border-top-right-radius: 4px;
+                    border-bottom-right-radius: 4px;
+                }
+
+                i {
+                    margin-right: 5px;
+                }
+            }
+        }
     }
 
     .tab_sec {
@@ -479,46 +521,32 @@ export const ClassroomsWrapper = styled('div')`
         width: 100%;
         display: flex;
         flex-direction: column;
+        padding: 0 15px;
 
         .class_level_box {
             position: relative;
             width: 100%;
             margin-top: 16px;
-            padding-bottom: 25px;
             display: flex;
             flex-direction: column;
-
-            &::before {
-                content: '';
-                position: absolute;
-                left: 15px;
-                bottom: 0;
-                width: calc(100% - 30px);
-                height: 1px;
-                background: linear-gradient(to right, ${colors.customColors.borderColor} 70%, transparent);
-            }
-
-            &:last-of-type {
-                &::before {
-                    display: none;
-                }
-            }
+            border-radius: 8px;
+            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
             .box_head {
                 position: relative;
                 width: 100%;
-                padding: 0 15px;
+                padding: 20px;
                 display: flex;
                 align-items: flex-end;
                 justify-content: space-between;
-                padding-bottom: 10px;
 
                 &::before {
                     content: '';
                     position: absolute;
-                    left: 15px;
+                    left: 20px;
                     bottom: 0;
-                    width: calc(100% - 30px);
+                    width: calc(100% - 40px);
                     height: 1px;
                     background: ${colors.customColors.borderColor};
                 }
@@ -545,10 +573,16 @@ export const ClassroomsWrapper = styled('div')`
                     border-radius: 6px;
                     font-size: 12.5px;
                     font-weight: 500;
+                    transition: all 0.5s ease;
 
                     i {
                         margin-right: 8px;
                         font-size: 12px;
+                    }
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.5s ease;
                     }
                 }
             }
@@ -557,8 +591,7 @@ export const ClassroomsWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                margin-top: 5px;
-                padding: 5px;
+                padding: 10px;
                 flex-wrap: wrap;
 
                 .class_item {
@@ -570,9 +603,11 @@ export const ClassroomsWrapper = styled('div')`
                     .item_inner {
                         position: relative;
                         width: 100%;
-                        padding: 12px 15px 15px 15px;
+                        padding: 12px;
+                        padding-left: 15px;
                         background: ${colors.customColors.whiteColor};
                         border: 1px solid ${colors.customColors.borderColor};
+                        border-left: 4px solid ${colors.customColors.blueColor1};
                         border-radius: 8px;
                         display: flex;
                         flex-direction: column;
@@ -583,114 +618,142 @@ export const ClassroomsWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             display: flex;
-                            flex-direction: column;
+                            padding-bottom: 8px;
+                            border-bottom: 1px solid ${colors.customColors.borderColor};
 
-                            span {
+                            a {
                                 position: relative;
-                                font-size: 16px;
-                                font-weight: 600;
-                                color: ${colors.customColors.blackColor1};
-                            }
-
-                            p {
-                                position: relative;
-                                margin-top: 3px;
-                                font-size: 12px;
-                                color: ${colors.customColors.blackColor2};
-
-                                b {
-                                    font-weight: 500;
-                                    margin-right: 4px;
-                                    font-style: italic;
-                                    color: ${colors.customColors.blackColor1};
-                                }
-                            }
-                        }
-
-                        .bottom_part {
-                            position: relative;
-                            margin-top: 12px;
-                            width: 100%;
-                            display: flex;
-                            align-items: flex-end;
-                            justify-content: space-between;
-
-                            .students {
-                                position: relative;
+                                width: 28px;
+                                height: 28px;
+                                border-radius: 50%;
+                                background: ${colors.customColors.blueColorLight};
                                 display: flex;
                                 align-items: center;
+                                justify-content: center;
+                                font-size: 12px;
+                                color: ${colors.customColors.blueColor1};
+                                text-decoration: none;
+                                cursor: pointer;
+                            }
 
-                                ul {
+                            .part_content {
+                                position: relative;
+                                width: calc(100% - 28px);
+                                display: flex;
+                                flex-direction: column;
+                                padding-left: 12px;
+
+                                .content_name {
                                     position: relative;
+                                    width: 100%;
                                     display: flex;
                                     align-items: center;
-
-                                    li {
+                                    
+                                    h6 {
                                         position: relative;
-                                        list-style: none;
-                                        width: 33px;
-                                        height: 33px;
-                                        display: flex;
-                                        border-radius: 50%;
+                                        max-width: calc(100% - 85px);
+                                        font-size: 13.5px;
+                                        font-style: italic;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
                                         overflow: hidden;
-                                        border: 2px solid ${colors.customColors.whiteColor};
-                                        margin-left: -16.5px;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                    }
 
-                                        &:first-of-type {
-                                            margin-left: 0;
-                                        }
-
-                                        p {
-                                            position: relative; 
-                                            width: 100%;
-                                            height: 100%;
-                                            background: ${colors.themeColor};
-                                            color: ${colors.customColors.whiteColor};
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            font-size: 13px;
-                                            font-weight: 500;
-                                            letter-spacing: 0.55px;
-                                        }
-
-                                        img {
-                                            position: relative;
-                                            width: 100%;
-                                            height: 100%;
-                                            object-fit: cover;
-                                        }
+                                    span {
+                                        position: relative;
+                                        width: max-content;
+                                        display: flex;
+                                        font-size: 10px;
+                                        color: ${colors.customColors.orangeColor};
+                                        margin-top: 2px;
+                                        background: ${colors.customColors.yellowColorLight};
+                                        border-radius: 25px;
+                                        padding: 3px 15px;
+                                        margin-left: auto;
+                                        font-weight: 500;
                                     }
                                 }
 
-                                span {
+                                p {
                                     position: relative;
-                                    width: 33px;
-                                    height: 33px;
-                                    background: ${colors.customColors.borderColor};
-                                    border-radius: 50%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    font-size: 10px;
-                                    font-weight: 500;
-                                    border: 2px solid ${colors.customColors.whiteColor};
-                                    margin-left: -16.5px;
-                                    color: ${colors.customColors.blackColor};
+                                    margin-top: 5px;
+                                    font-size: 11px;
+                                    color: ${colors.customColors.blackColor2};
+
+                                    b {
+                                        font-weight: 500;
+                                        margin-right: 4px;
+                                        font-style: italic;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
                                 }
                             }
+                        }
+
+                        .bottom_btn {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            margin-top: 8px;
+                            justify-content: flex-end;
 
                             button {
                                 position: relative;
-                                padding: 5px 15px;
-                                font-size: 11px;
-                                background: ${colors.themeColor};
+                                width: max-content;
+                                height: 25px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
                                 border: none;
-                                border-radius: 5px;
-                                color: ${colors.customColors.whiteColor};
-                                cursor: pointer;
+                                padding: 0 12px;
+
+                                &.details {
+                                    background: ${colors.customColors.blueColorLight};
+                                    color: ${colors.customColors.blueColor2};
+                                    font-size: 10px;
+                                    cursor: pointer;
+                                    font-weight: 500;
+                                    border-bottom-left-radius: 4px;
+                                    border-top-left-radius: 4px;
+                                }
+
+                                &.delete {
+                                    background: ${colors.customColors.redColorLight};
+                                    color:  ${colors.customColors.redColor};
+                                    font-size: 10px;
+                                    cursor: pointer;
+                                    border-top-right-radius: 4px;
+                                    border-bottom-right-radius: 4px;
+                                }
                             }
                         }
+                    }
+                }
+
+                .empty_messege {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0 10px;
+                    margin-top: 10px;
+
+                    img {
+                        position: relative;
+                        width: 150px;
+                        opacity: 0.5;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        margin-top: 10px;
+                        color: ${colors.customColors.blackColor3};
                     }
                 }
             }

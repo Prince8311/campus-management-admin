@@ -6,6 +6,10 @@ const ClassroomPage = () => {
             <ClassroomsWrapper>
                 <div className="page_head">
                     <h2>Classroom Setup</h2>
+                    <div className="btns_sec">
+                        <button className="academic"><i className="fa-solid fa-plus"></i>Add Academic label</button>
+                        <button className="add_class"><i className="fa-solid fa-plus"></i>Add Class</button>
+                    </div>
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
@@ -28,201 +32,76 @@ const ClassroomPage = () => {
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
+                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                        <div className="part_content">
+                                            <div className="content_name">
+                                                <h6>1 - A</h6>
+                                                <span>1000 Students</span>
+                                            </div>
+                                            <p><b>Class Teacher :</b>Poonam C K</p>
                                         </div>
-                                        <button>View Details</button>
+
+                                    </div>
+                                    <div className="bottom_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                     </div>
                                 </div>
                             </div>
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
+                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                        <div className="part_content">
+                                            <div className="content_name">
+                                                <h6>1 - A</h6>
+                                                <span>1000 Students</span>
+                                            </div>
+                                            <p><b>Class Teacher :</b>Poonam C K</p>
                                         </div>
-                                        <button>View Details</button>
+
+                                    </div>
+                                    <div className="bottom_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                     </div>
                                 </div>
                             </div>
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
+                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                        <div className="part_content">
+                                            <div className="content_name">
+                                                <h6>1 - A</h6>
+                                                <span>1000 Students</span>
+                                            </div>
+                                            <p><b>Class Teacher :</b>Poonam C K</p>
                                         </div>
-                                        <button>View Details</button>
+
+                                    </div>
+                                    <div className="bottom_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                     </div>
                                 </div>
                             </div>
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
+                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                        <div className="part_content">
+                                            <div className="content_name">
+                                                <h6>1 - A</h6>
+                                                <span>1000 Students</span>
+                                            </div>
+                                            <p><b>Class Teacher :</b>Poonam C K</p>
                                         </div>
-                                        <button>View Details</button>
+
                                     </div>
-                                </div>
-                            </div>
-                            <div className="class_item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
-                                        </div>
-                                        <button>View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="class_level_box">
-                        <div className="box_head">
-                            <span>Class - 1</span>
-                            <button>
-                                <i className="fa-solid fa-plus"></i>
-                                <p>Add New Section</p>
-                            </button>
-                        </div>
-                        <div className="box_items">
-                            <div className="class_item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
-                                        </div>
-                                        <button>View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="class_item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
-                                        </div>
-                                        <button>View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="class_item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
-                                        </div>
-                                        <button>View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="class_item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
-                                        </div>
-                                        <button>View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="class_item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <span>1 - A</span>
-                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                    </div>
-                                    <div className="bottom_part">
-                                        <div className="students">
-                                            <ul>
-                                                <li><p>PB</p></li>
-                                                <li><img src="/images/profile-image.png" alt="" /></li>
-                                                <li><p>AK</p></li>
-                                            </ul>
-                                            <span>+25</span>
-                                        </div>
-                                        <button>View Details</button>
+                                    <div className="bottom_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                     </div>
                                 </div>
                             </div>
