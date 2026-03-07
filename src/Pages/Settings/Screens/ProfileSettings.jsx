@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation, useMatch } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { ProfileSettingsWrapper } from "../../../Styles/SettingStyle";
 
 const ProfileSettingPage = () => {
