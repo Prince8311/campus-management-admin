@@ -107,7 +107,7 @@ const StudentPage = () => {
                                         <div key={i} className="sec_item">
                                             <div className="item_inner">
                                                 <div className="inner_top">
-                                                    <a><i class="fa-solid fa-thumbtack"></i></a>
+                                                    <a><i className="fa-solid fa-thumbtack"></i></a>
                                                     <div className="inner_content">
                                                         <h6>{section.name}</h6>
                                                         <span>{section.total_fields} {section.total_fields > 1 ? 'fields' : 'field'}</span>
