@@ -212,10 +212,17 @@ const AddStudentPage = () => {
                     }
                 });
 
-                return studentData;
+                return {
+                    student_fields: studentData
+                };
             });
 
-            console.log(formattedData);
+            const payload = {
+                students: formattedData,
+                isBulkUpload: true
+            };
+
+            console.log("Payload", payload);
         };
 
         reader.readAsText(selectedFile);
