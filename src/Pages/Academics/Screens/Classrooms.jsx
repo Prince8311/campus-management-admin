@@ -1,14 +1,28 @@
+import { useState } from "react";
+import CreateAcademicLabelModal from "../../../Components/Modals/AcademicsModals/CreateAcademicLabel";
 import { ClassroomsWrapper } from "../../../Styles/AcademicStyle";
+import CreateClassModal from "../../../Components/Modals/AcademicsModals/CreateClass";
 
 const ClassroomPage = () => {
+    const [isCreateAcademicLabelOpen, setIsCreateAcademicLabelOpen] = useState(false);
+    const [isCreateClassOpen, setIsCreateClassOpen] = useState(false);
+
+    const handleOpenCreateAcademicLabel = () => {
+        setIsCreateAcademicLabelOpen(true);
+    };
+
+    const handleOpenCreateClass = () => {
+        setIsCreateClassOpen(true);
+    };
+
     return (
         <>
             <ClassroomsWrapper>
                 <div className="page_head">
                     <h2>Classroom Setup</h2>
                     <div className="btns_sec">
-                        <button className="academic"><i className="fa-solid fa-plus"></i>Add Academic label</button>
-                        <button className="add_class"><i className="fa-solid fa-plus"></i>Add Class</button>
+                        <button className="academic" onClick={handleOpenCreateAcademicLabel}><i className="fa-solid fa-plus"></i>Add Academic label</button>
+                        <button className="add_class" onClick={handleOpenCreateClass}><i className="fa-solid fa-plus"></i>Add Class</button>
                     </div>
                 </div>
                 <div className="tab_sec">
@@ -108,6 +122,15 @@ const ClassroomPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <CreateAcademicLabelModal
+                    isCreateAcademicLabelOpen={isCreateAcademicLabelOpen}
+                    setIsCreateAcademicLabelOpen={setIsCreateAcademicLabelOpen}
+                />
+                <CreateClassModal
+                    isCreateClassOpen={isCreateClassOpen}
+                    setIsCreateClassOpen={setIsCreateClassOpen}
+                />
             </ClassroomsWrapper>
         </>
     );
