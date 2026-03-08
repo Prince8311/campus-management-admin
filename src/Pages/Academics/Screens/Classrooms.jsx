@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import CreateAcademicLabelModal from "../../../Components/Modals/AcademicsModals/CreateAcademicLabel";
 import { ClassroomsWrapper } from "../../../Styles/AcademicStyle";
 import CreateClassModal from "../../../Components/Modals/AcademicsModals/CreateClass";
@@ -27,10 +29,16 @@ const ClassroomPage = () => {
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
-                        <li className="active">Primary</li>
-                        <li>Middle</li>
-                        <li>Secondary</li>
-                        <li>Custom</li>
+                        <Swiper
+                            slidesPerView={'auto'}
+                            spaceBetween={0}
+                            className="mySwiper"
+                        >
+                            <SwiperSlide><li className="active">Primary</li></SwiperSlide>
+                            <SwiperSlide><li>Middle</li></SwiperSlide>
+                            <SwiperSlide><li>Secondary</li></SwiperSlide>
+                            <SwiperSlide><li>Custom</li></SwiperSlide>
+                        </Swiper>
                     </div>
                 </div>
                 <div className="class_levels">

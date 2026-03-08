@@ -445,17 +445,16 @@ export const ClassroomsWrapper = styled('div')`
                 align-items: center;
                 justify-content: center;
                 border: none;
-                padding: 0 12px;
+                padding: 0 22px;
                 font-size: 12.5px;
-                font-weight: 500;
 
                 &.academic {
                     background: ${colors.customColors.blueColor1};
                     border: 1px solid ${colors.customColors.blueColor1};
                     color: ${colors.customColors.whiteColor};
                     cursor: pointer;
-                    border-bottom-left-radius: 4px;
-                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 6px;
+                    border-top-left-radius: 6px;
                 }
                 
                 &.add_class {
@@ -463,12 +462,13 @@ export const ClassroomsWrapper = styled('div')`
                     border: 1px solid ${colors.customColors.blueColor1};
                     color:  ${colors.customColors.blueColor1};
                     cursor: pointer;
-                    border-top-right-radius: 4px;
-                    border-bottom-right-radius: 4px;
+                    border-top-right-radius: 6px;
+                    border-bottom-right-radius: 6px;
                 }
 
                 i {
-                    margin-right: 5px;
+                    font-size: 10px;
+                    margin-right: 4px;
                 }
             }
         }
@@ -487,6 +487,17 @@ export const ClassroomsWrapper = styled('div')`
             display: flex;
             align-items: center;
             border-bottom: 2px solid ${colors.themeColor};
+
+            .swiper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .swiper-slide {
+                    position: relative;
+                    width: max-content !important;
+                }
+            }
 
             li {
                 position: relative;

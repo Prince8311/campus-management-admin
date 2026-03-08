@@ -13,6 +13,10 @@ export const getApiEndpoints = () => {
         // Institutions 
         addInstitution: `${apiURL}/api/institutions/create.php`,
 
+        // Academic 
+        createAcademicLevel: `${apiURL}/api/institutions/academic/academic-level/create.php`,
+        fetchAcademicLevels: `${apiURL}/api/institutions/academic/academic-level/list.php`,
+
         // Student Form 
         createStudentFormSection: `${apiURL}/api/student/create-form-section.php`,
         fetchStudentFormSection: `${apiURL}/api/student/form-section-list.php`,
