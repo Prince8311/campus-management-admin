@@ -15,6 +15,7 @@ const ClassroomPage = () => {
     const [isCreateClassOpen, setIsCreateClassOpen] = useState(false);
     const [isInitialLevelsLoading, setIsInitialLevelsLoading] = useState(false);
     const [academicLevels, setAcademicLevels] = useState([]);
+    const [selectedAcademicLevel, setSelectedAcademicLevel] = useState({});
 
     const fetchAcademicLevels = async (showSkeleton = false) => {
         if (showSkeleton) {
@@ -23,8 +24,12 @@ const ClassroomPage = () => {
         try {
             const response = await axiosInstance.get(api.fetchAcademicLevels);
             if (response?.data.status === 200) {
+                const levels = response?.data.levels || [];
                 console.log(response);
-                setAcademicLevels(response?.data.levels);
+                setAcademicLevels(levels);
+                if (levels.length > 0 && !selectedAcademicLevel?.id) {
+                    setSelectedAcademicLevel(levels[0]);
+                }
             }
         } catch (error) {
             setAcademicLevels([]);
@@ -59,7 +64,7 @@ const ClassroomPage = () => {
                 {
                     isInitialLevelsLoading ? (
                         <>
-                            <div className="tab_sec">
+                            <div className="tab_sec i">
                                 <div className="tab_inner" style={{ borderBottom: 'none' }}>
                                     <Swiper
                                         slidesPerView={'auto'}
@@ -68,9 +73,7 @@ const ClassroomPage = () => {
                                     >
                                         {
                                             Array.from({ length: 6 }).map((_, i) => (
-                                                <div key={i} className="sec_item">
-                                                    <SwiperSlide><SkeletonLoader width="88px" height="100%" margin="0 15px 0 0" /></SwiperSlide>
-                                                </div>
+                                                <SwiperSlide key={i}><SkeletonLoader width="88px" height="100%" margin="0 15px 0 0" /></SwiperSlide>
                                             ))
                                         }
                                     </Swiper>
@@ -88,17 +91,25 @@ const ClassroomPage = () => {
                         </>
                     ) : academicLevels.length > 0 ? (
                         <>
-                            <div className="tab_sec">
+                            <div className="tab_sec dhgdhdt">
                                 <div className="tab_inner">
                                     <Swiper
                                         slidesPerView={'auto'}
                                         spaceBetween={0}
                                         className="mySwiper"
                                     >
-                                        <SwiperSlide><li className="active">Primary</li></SwiperSlide>
-                                        <SwiperSlide><li>Middle</li></SwiperSlide>
-                                        <SwiperSlide><li>Secondary</li></SwiperSlide>
-                                        <SwiperSlide><li>Custom</li></SwiperSlide>
+                                        {
+                                            academicLevels.map((level, i) =>
+                                                <SwiperSlide key={i}>
+                                                    <li
+                                                        className={level.id === selectedAcademicLevel.id ? 'active' : ''}
+                                                        onClick={() => setSelectedAcademicLevel(level)}
+                                                    >
+                                                        {level.level_name}
+                                                    </li>
+                                                </SwiperSlide>
+                                            )
+                                        }
                                     </Swiper>
                                 </div>
                             </div>
@@ -217,6 +228,7 @@ const ClassroomPage = () => {
                 <CreateAcademicLabelModal
                     isCreateAcademicLabelOpen={isCreateAcademicLabelOpen}
                     setIsCreateAcademicLabelOpen={setIsCreateAcademicLabelOpen}
+                    refreshAcademicLevels={() => fetchAcademicLevels(false)}
                 />
                 <CreateClassModal
                     isCreateClassOpen={isCreateClassOpen}

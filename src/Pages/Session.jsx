@@ -26,10 +26,13 @@ const SessionPage = () => {
                             <h6>All Sessions</h6>
                         </a>
                         <a className="part_box">
+                            <h6>Ongoing</h6>
+                        </a>
+                        <a className="part_box">
                             <h6>Upcoming</h6>
                         </a>
                         <a className="part_box">
-                            <h6>Delete</h6>
+                            <h6>Concluded</h6>
                         </a>
                     </div>
                 </div>
@@ -59,7 +62,7 @@ const SessionPage = () => {
                                     <div className="inner_content">
                                         <a><i className="fa-solid fa-graduation-cap"></i></a>
                                         <h6>AY 2025-26</h6>
-                                        <span className="upcoming">Ongoing</span>
+                                        <span className="upcoming">Upcoming</span>
                                     </div>
                                     <div className="session_name">
                                         <p>01 Apr 2025 - 31 Mar 2026</p>
@@ -77,7 +80,7 @@ const SessionPage = () => {
                                     <div className="inner_content">
                                         <a><i className="fa-solid fa-graduation-cap"></i></a>
                                         <h6>AY 2025-26</h6>
-                                        <span className="concluded">Ongoing</span>
+                                        <span className="concluded">Concluded</span>
                                     </div>
                                     <div className="session_name">
                                         <p>01 Apr 2025 - 31 Mar 2026</p>
