@@ -53,8 +53,6 @@ const SessionPage = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="box_items">
                         <div className="session_item">
                             <div className="item_inner">
                                 <div className="inner_top">
@@ -73,8 +71,6 @@ const SessionPage = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="box_items">
                         <div className="session_item">
                             <div className="item_inner">
                                 <div className="inner_top">
