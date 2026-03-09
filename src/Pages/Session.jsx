@@ -54,6 +54,46 @@ const SessionPage = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="box_items">
+                        <div className="session_item">
+                            <div className="item_inner">
+                                <div className="inner_top">
+                                    <div className="inner_content">
+                                        <a><i className="fa-solid fa-graduation-cap"></i></a>
+                                        <h6>AY 2025-26</h6>
+                                        <span className="upcoming">Ongoing</span>
+                                    </div>
+                                    <div className="session_name">
+                                        <p>01 Apr 2025 - 31 Mar 2026</p>
+                                    </div>
+                                </div>
+                                <div className="inner_btn">
+                                    <button className="edit"><i className="fa-solid fa-pen-to-square"></i>Edit</button>
+                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="box_items">
+                        <div className="session_item">
+                            <div className="item_inner">
+                                <div className="inner_top">
+                                    <div className="inner_content">
+                                        <a><i className="fa-solid fa-graduation-cap"></i></a>
+                                        <h6>AY 2025-26</h6>
+                                        <span className="concluded">Ongoing</span>
+                                    </div>
+                                    <div className="session_name">
+                                        <p>01 Apr 2025 - 31 Mar 2026</p>
+                                    </div>
+                                </div>
+                                <div className="inner_btn">
+                                    <button className="edit"><i className="fa-solid fa-pen-to-square"></i>Edit</button>
+                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <CreateSessionsModal
                     isCreateSessionOpen={isCreateSessionOpen}
