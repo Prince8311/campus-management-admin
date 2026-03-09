@@ -38,40 +38,13 @@ const SessionPage = () => {
                         <div className="session_item">
                             <div className="item_inner">
                                 <div className="inner_top">
-                                    <a><i className="fa-solid fa-graduation-cap"></i></a>
                                     <div className="inner_content">
+                                        <a><i className="fa-solid fa-graduation-cap"></i></a>
                                         <h6>AY 2025-26</h6>
                                         <span className="ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                                <div className="inner_btn">
-                                    <button className="edit"><i className="fa-solid fa-pen-to-square"></i>Edit</button>
-                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="session_item">
-                            <div className="item_inner">
-                                <div className="inner_top">
-                                    <a><i className="fa-solid fa-graduation-cap"></i></a>
-                                    <div className="inner_content">
-                                        <h6>AY 2025-26</h6>
-                                        <span className="upcoming">Upcoming</span>
-                                    </div>
-                                </div>
-                                <div className="inner_btn">
-                                    <button className="edit"><i className="fa-solid fa-pen-to-square"></i>Edit</button>
-                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="session_item">
-                            <div className="item_inner">
-                                <div className="inner_top">
-                                    <a><i className="fa-solid fa-graduation-cap"></i></a>
-                                    <div className="inner_content">
-                                        <h6>AY 2025-26</h6>
-                                        <span className="concluded">Concluded</span>
+                                    <div className="session_name">
+                                        <p>01 Apr 2025 - 31 Mar 2026</p>
                                     </div>
                                 </div>
                                 <div className="inner_btn">

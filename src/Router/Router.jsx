@@ -76,7 +76,7 @@ const Routers = () => {
                     <Route path="admin" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
                         <Route path="dashboard" element={<DashboardPage />} />
-                        <Route path="session" element={<SessionPage />} />
+                        <Route path="sessions" element={<SessionPage />} />
                         <Route path="institutions" element={<InstitutionMainPage />}>
                             <Route path="" element={<Navigate to="institution-list" />} />
                             <Route path="institution-list" element={<InstitutionListPage />} />

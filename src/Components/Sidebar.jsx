@@ -55,6 +55,10 @@ const Sidebar = () => {
         }
     }
 
+    const handleOpenSessionsPage = () => {
+        navigate("/admin/sessions");
+    }
+
     return (
         <>
             <SidebarWrapper>
@@ -79,7 +83,7 @@ const Sidebar = () => {
                             </li>
                             <div className="btn_sec">
                                 <button className="view_btn">View Details</button>
-                                <a className="manage_btn">Manage Sessions<i className="fa-solid fa-angle-right"></i></a>
+                                <a className="manage_btn" onClick={handleOpenSessionsPage}>Manage Sessions<i className="fa-solid fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>

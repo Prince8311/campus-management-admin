@@ -16,6 +16,7 @@ export const AddInstitutionWrapper = styled('div')`
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    padding-left: 265px;
     transition: all 0.3s ease;
     
     &.active {
