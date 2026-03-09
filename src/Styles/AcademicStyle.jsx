@@ -618,67 +618,67 @@ export const ClassroomsWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             display: flex;
+                            flex-direction: column;
                             padding-bottom: 8px;
                             border-bottom: 1px solid ${colors.customColors.borderColor};
 
-                            a {
-                                position: relative;
-                                width: 28px;
-                                height: 28px;
-                                border-radius: 50%;
-                                background: ${colors.customColors.blueColorLight};
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-size: 12px;
-                                color: ${colors.customColors.blueColor1};
-                                text-decoration: none;
-                                cursor: pointer;
-                            }
-
                             .part_content {
                                 position: relative;
-                                width: calc(100% - 28px);
+                                width: 100%;
                                 display: flex;
-                                flex-direction: column;
-                                padding-left: 12px;
-
-                                .content_name {
+                                align-items: center;
+                                
+                                a {
                                     position: relative;
-                                    width: 100%;
+                                    width: 28px;
+                                    height: 28px;
+                                    border-radius: 50%;
+                                    background: ${colors.customColors.blueColorLight};
                                     display: flex;
                                     align-items: center;
-                                    
-                                    h6 {
-                                        position: relative;
-                                        max-width: calc(100% - 85px);
-                                        font-size: 13.5px;
-                                        font-style: italic;
-                                        font-weight: 500;
-                                        color: ${colors.customColors.blackColor};
-                                        overflow: hidden;
-                                        white-space: nowrap;
-                                        text-overflow: ellipsis;
-                                    }
-
-                                    span {
-                                        position: relative;
-                                        width: max-content;
-                                        display: flex;
-                                        font-size: 10px;
-                                        color: ${colors.customColors.orangeColor};
-                                        margin-top: 2px;
-                                        background: ${colors.customColors.yellowColorLight};
-                                        border-radius: 25px;
-                                        padding: 3px 15px;
-                                        margin-left: auto;
-                                        font-weight: 500;
-                                    }
+                                    justify-content: center;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blueColor1};
+                                    text-decoration: none;
+                                    cursor: pointer;
                                 }
+                                
+                                h6 {
+                                    position: relative;
+                                    padding-left: 12px;
+                                    max-width: calc(100% - 85px);
+                                    font-size: 13.5px;
+                                    font-style: italic;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                }
+
+                                span {
+                                    position: relative;
+                                    width: max-content;
+                                    display: flex;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.orangeColor};
+                                    margin-top: 2px;
+                                    background: ${colors.customColors.yellowColorLight};
+                                    border-radius: 25px;
+                                    padding: 3px 15px;
+                                    margin-left: auto;
+                                    font-weight: 500;
+                                }
+                            }
+
+                            .teacher_name_sec {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                margin-top: 5px;
 
                                 p {
                                     position: relative;
-                                    margin-top: 5px;
                                     font-size: 11px;
                                     color: ${colors.customColors.blackColor2};
 

@@ -21,7 +21,7 @@ const ClassroomPage = () => {
                 <div className="page_head">
                     <h2>Classroom Setup</h2>
                     <div className="btns_sec">
-                        <button className="academic" onClick={handleOpenCreateAcademicLabel}><i className="fa-solid fa-plus"></i>Add Academic label</button>
+                        <button className="academic" onClick={handleOpenCreateAcademicLabel}><i className="fa-solid fa-plus"></i>Add Academic level</button>
                         <button className="add_class" onClick={handleOpenCreateClass}><i className="fa-solid fa-plus"></i>Add Class</button>
                     </div>
                 </div>
@@ -46,15 +46,14 @@ const ClassroomPage = () => {
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
                                         <div className="part_content">
-                                            <div className="content_name">
-                                                <h6>1 - A</h6>
-                                                <span>1000 Students</span>
-                                            </div>
-                                            <p><b>Class Teacher :</b>Poonam C K</p>
+                                            <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                            <h6>1 - A</h6>
+                                            <span>1000 Students</span>
                                         </div>
-
+                                        <div className="teacher_name_sec">
+                                        <p><b>Class Teacher :</b>Poonam C K</p>
+                                        </div>
                                     </div>
                                     <div className="bottom_btn">
                                         <button className="details">View Details</button>
@@ -65,15 +64,14 @@ const ClassroomPage = () => {
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
                                         <div className="part_content">
-                                            <div className="content_name">
-                                                <h6>1 - A</h6>
-                                                <span>1000 Students</span>
-                                            </div>
-                                            <p><b>Class Teacher :</b>Poonam C K</p>
+                                            <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                            <h6>1 - A</h6>
+                                            <span>1000 Students</span>
                                         </div>
-
+                                        <div className="teacher_name_sec">
+                                        <p><b>Class Teacher :</b>Poonam C K</p>
+                                        </div>
                                     </div>
                                     <div className="bottom_btn">
                                         <button className="details">View Details</button>
@@ -84,15 +82,14 @@ const ClassroomPage = () => {
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
                                         <div className="part_content">
-                                            <div className="content_name">
-                                                <h6>1 - A</h6>
-                                                <span>1000 Students</span>
-                                            </div>
-                                            <p><b>Class Teacher :</b>Poonam C K</p>
+                                            <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                            <h6>1 - A</h6>
+                                            <span>1000 Students</span>
                                         </div>
-
+                                        <div className="teacher_name_sec">
+                                        <p><b>Class Teacher :</b>Poonam C K</p>
+                                        </div>
                                     </div>
                                     <div className="bottom_btn">
                                         <button className="details">View Details</button>
@@ -103,15 +100,32 @@ const ClassroomPage = () => {
                             <div className="class_item">
                                 <div className="item_inner">
                                     <div className="top_part">
-                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
                                         <div className="part_content">
-                                            <div className="content_name">
-                                                <h6>1 - A</h6>
-                                                <span>1000 Students</span>
-                                            </div>
-                                            <p><b>Class Teacher :</b>Poonam C K</p>
+                                            <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                            <h6>1 - A</h6>
+                                            <span>1000 Students</span>
                                         </div>
-
+                                        <div className="teacher_name_sec">
+                                        <p><b>Class Teacher :</b>Poonam C K</p>
+                                        </div>
+                                    </div>
+                                    <div className="bottom_btn">
+                                        <button className="details">View Details</button>
+                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="class_item">
+                                <div className="item_inner">
+                                    <div className="top_part">
+                                        <div className="part_content">
+                                            <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                            <h6>1 - A</h6>
+                                            <span>1000 Students</span>
+                                        </div>
+                                        <div className="teacher_name_sec">
+                                        <p><b>Class Teacher :</b>Poonam C K</p>
+                                        </div>
                                     </div>
                                     <div className="bottom_btn">
                                         <button className="details">View Details</button>

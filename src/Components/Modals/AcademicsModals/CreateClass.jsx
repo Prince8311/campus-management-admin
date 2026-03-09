@@ -11,7 +11,7 @@ const CreateClassModal = ({isCreateClassOpen, setIsCreateClassOpen}) => {
             <CreateClassWrapper className={isCreateClassOpen ? 'active' : ''}>
                 <div className={`modal_box ${isCreateClassOpen ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Create class academic label wise</h4>
+                        <h4>Create class academic level wise</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -19,7 +19,7 @@ const CreateClassModal = ({isCreateClassOpen, setIsCreateClassOpen}) => {
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="select_box">
-                                <span>Type <p>*</p></span>
+                                <span>Select Academic Level <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn">
                                         <p>Label Type</p>
@@ -35,7 +35,7 @@ const CreateClassModal = ({isCreateClassOpen, setIsCreateClassOpen}) => {
                                 </div>
                             </div>
                             <div className="input_box">
-                                <span>Field Name <p>*</p></span>
+                                <span>Class <p>*</p></span>
                                 <input />
                             </div>
                         </div>
