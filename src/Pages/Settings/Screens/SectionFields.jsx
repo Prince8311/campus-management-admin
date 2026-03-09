@@ -19,8 +19,6 @@ const SortableItem = ({ field, selectedId, onSelect }) => {
 
     return (
         <div ref={setNodeRef} style={style} className="field_box">
-
-            {/* 🔥 DRAG HANDLE ONLY */}
             <div
                 className="field_image"
                 {...attributes}
@@ -29,8 +27,6 @@ const SortableItem = ({ field, selectedId, onSelect }) => {
             >
                 <img src="/images/drag-icon.png" alt="" />
             </div>
-
-            {/* Normal Clickable Item */}
             <li
                 className={selectedId === field.id ? "active" : ""}
                 onClick={() => onSelect(field)}
