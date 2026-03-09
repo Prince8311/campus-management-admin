@@ -209,7 +209,7 @@ const ClassroomPage = () => {
                     ) : (
                         <div className="empty_messege">
                             <img src="/images/no-fields.svg" alt="" />
-                            <p>No Section available.</p>
+                            <p>No Data available.</p>
                         </div>
                     )
                 }

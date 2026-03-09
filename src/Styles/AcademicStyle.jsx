@@ -779,17 +779,17 @@ export const ClassroomsWrapper = styled('div')`
         justify-content: center;
         align-items: center;
         padding: 0 10px;
-        margin-top: 10px;
+        margin-top: 100px;
 
         img {
             position: relative;
-            width: 260px;
+            width: 300px;
             opacity: 0.5;
         }
 
         p {
             position: relative;
-            font-size: 13px;
+            font-size: 15px;
             margin-top: 10px;
             color: ${colors.customColors.blackColor3};
         }
