@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalenderBox } from "../Styles/LayoutStyle";
 
 const Calender = ({ setFinalSelectedDate }) => {
@@ -9,6 +9,7 @@ const Calender = ({ setFinalSelectedDate }) => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const [showMonthYearPicker, setShowMonthYearPicker] = useState(false);
+    const pickerRef = useRef(null);
 
     const handlePrevMonth = () => {
         setCurrentDate(new Date(year, month - 1, 1));
@@ -25,9 +26,21 @@ const Calender = ({ setFinalSelectedDate }) => {
     const currentYear = new Date().getFullYear();
 
     const years = [];
-    for (let y = 1950; y <= currentYear; y++) {
+    for (let y = 1950; y <= currentYear + 4; y++) {
         years.push(y);
     }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (pickerRef.current && !pickerRef.current.contains(event.target)) {
+                setShowMonthYearPicker(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     const renderDates = () => {
         const dates = [];
@@ -103,8 +116,8 @@ const Calender = ({ setFinalSelectedDate }) => {
                 <div className="calender_inner">
                     <div className="calender_head">
                         <a onClick={handlePrevMonth}><i className="fa-solid fa-angle-left"></i></a>
-                        <div className="month_year_sec">
-                            <b onClick={() => setShowMonthYearPicker(prev => !prev)}>
+                        <div className="month_year_sec" ref={pickerRef}>
+                            <b onClick={(e) => setShowMonthYearPicker(prev => !prev)}>
                                 {currentDate.toLocaleString("default", { month: "long" })}, {year}
                             </b>
                             {

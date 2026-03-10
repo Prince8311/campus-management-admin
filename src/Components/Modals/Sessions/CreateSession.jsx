@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CreateSessionsWrapper } from "../../../Styles/SessionModalStyle";
+import Calender from "../../Calender";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
-const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen }) => {
+const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen, refreshSessions }) => {
+    const api = getApiEndpoints();
     const [showStatusDropdown, setShowStatusDropdown] = useState(false);
-    const statusList = [ 'Upcoming', 'Ongoing'];
+    const statusList = ['Upcoming', 'Ongoing'];
     const [selectedStatus, setSelectedStatus] = useState('');
+    const [showStartDateDropdown, setShowStartDateDropdown] = useState(false);
+    const [showEndDateDropdown, setShowEndDateDropdown] = useState(false);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [sessionName, setSessionName] = useState('');
+    const startDateRef = useRef(null);
+    const endDateRef = useRef(null);
+    const prevStartDate = useRef(startDate);
+    const prevEndDate = useRef(endDate);
 
     const handleSelectStatus = (status) => {
         if (status !== selectedStatus) {
@@ -14,8 +30,63 @@ const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen }) =>
     }
 
     function closeModal() {
+        setSelectedStatus('');
+        setStartDate('');
+        setEndDate('');
+        setSessionName('');
         setIsCreateSessionOpen(false);
     }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (startDateRef.current && !startDateRef.current.contains(event.target)) {
+                setShowStartDateDropdown(false);
+            }
+            if (endDateRef.current && !endDateRef.current.contains(event.target)) {
+                setShowEndDateDropdown(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const parseDate = (dateStr) => {
+        if (!dateStr) return null;
+        return new Date(dateStr.replace(",", ""));
+    };
+
+    useEffect(() => {
+        if (startDate && endDate) {
+            const start = parseDate(startDate);
+            const end = parseDate(endDate);
+    
+            if (end < start) {
+                toast.error("End date cannot be earlier than start date");
+    
+                if (prevStartDate.current !== startDate) {
+                    setStartDate(prevStartDate.current);
+                } else if (prevEndDate.current !== endDate) {
+                    setEndDate(prevEndDate.current);
+                }
+    
+                return;
+            }
+    
+            const startYear = start.getFullYear();
+            const endYear = end.getFullYear();
+            const shortEndYear = String(endYear).slice(-2);
+    
+            setSessionName(`EC ${startYear}-${shortEndYear}`);
+        }
+    
+        prevStartDate.current = startDate;
+        prevEndDate.current = endDate;
+    
+    }, [startDate, endDate]);
+
+    const isFormValid = selectedStatus !== '' && startDate.trim() !== '' && endDate.trim() !== '' && sessionName.trim() !== '';
 
     return (
         <>
@@ -49,30 +120,48 @@ const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen }) =>
                                     </div>
                                 </div>
                             </div>
-                            <div className="date_box">
+                            <div className="date_box" ref={startDateRef}>
                                 <span>Start Date <p>*</p></span>
-                                <div className="date_btn">
-                                    <p>01 Apr 2026</p>
+                                <div className="date_btn" onClick={() => setShowStartDateDropdown(prev => !prev)}>
+                                    <p>{startDate}</p>
                                     <i className="fa-regular fa-calendar"></i>
                                 </div>
-                                <div className="dropdown"></div>
+                                {
+                                    showStartDateDropdown &&
+                                    <div className="dropdown">
+                                        <Calender setFinalSelectedDate={setStartDate} />
+                                    </div>
+                                }
                             </div>
-                            <div className="date_box">
+                            <div className="date_box" ref={endDateRef}>
                                 <span>End Date <p>*</p></span>
-                                <div className="date_btn">
-                                    <p>01 Apr 2027</p>
+                                <div className="date_btn" onClick={() => setShowEndDateDropdown(prev => !prev)}>
+                                    <p>{endDate}</p>
                                     <i className="fa-regular fa-calendar"></i>
                                 </div>
-                                <div className="dropdown"></div>
+                                {
+                                    showEndDateDropdown &&
+                                    <div className="dropdown">
+                                        <Calender setFinalSelectedDate={setEndDate} />
+                                    </div>
+                                }
                             </div>
                             <div className="input_box">
                                 <span>Session Name<p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={sessionName} readOnly />
                             </div>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={!isFormValid || isButtonLoading}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </CreateSessionsWrapper>

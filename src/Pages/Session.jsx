@@ -30,11 +30,10 @@ const SessionPage = () => {
                 }
             });
             if (response?.data.status === 200) {
-                console.log(response);
                 setSessions(response?.data.sessions);
             }
         } catch (error) {
-            console.log(error);
+            setSessions([]);
             toast.error(error.response?.data.message || error.message);
         } finally {
             setIsInitialSessionsLoading(false);
