@@ -85,24 +85,26 @@ const SessionPage = () => {
                                     </div>
                                 ))
                             ) : sessions.length > 0 ? (
-                                <div className="session_item">
-                                    <div className="item_inner">
-                                        <div className="inner_top">
-                                            <div className="inner_content">
-                                                <a><i className="fa-solid fa-graduation-cap"></i></a>
-                                                <h6>AY 2025-26</h6>
-                                                <span className="ongoing">Ongoing</span>
+                                sessions.map((section, i) =>
+                                    <div className="session_item">
+                                        <div className="item_inner">
+                                            <div className="inner_top">
+                                                <div className="inner_content">
+                                                    <a><i className="fa-solid fa-graduation-cap"></i></a>
+                                                    <h6>{section.sesssion_name}</h6>
+                                                    <span className={section.status.toLowerCase()}>{section.status}</span>
+                                                </div>
+                                                <div className="session_name">
+                                                    <p>{section.start_date} - {section.end_date}</p>
+                                                </div>
                                             </div>
-                                            <div className="session_name">
-                                                <p>01 Apr 2025 - 31 Mar 2026</p>
+                                            <div className="inner_btn">
+                                                <button className="edit"><i className="fa-solid fa-pen-to-square"></i>Edit</button>
+                                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                             </div>
-                                        </div>
-                                        <div className="inner_btn">
-                                            <button className="edit"><i className="fa-solid fa-pen-to-square"></i>Edit</button>
-                                            <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                         </div>
                                     </div>
-                                </div>
+                                )
                             ) : (
                                 <div className="empty_box">
                                     <img src="/images/no-fields.svg" alt="" />
