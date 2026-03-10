@@ -76,7 +76,6 @@ const SectionFieldsPage = () => {
             if (response?.data.status === 200) {
                 const fields = response?.data.fields || [];
                 setFormFields(fields);
-                console.log("Fields Fetch", response.data);
                 if (fields.length > 0 && !selectedFormField?.id) {
                     setSelectedFormField(fields[0]);
                 }
