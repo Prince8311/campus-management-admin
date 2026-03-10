@@ -112,7 +112,7 @@ const AuthenticationPage = () => {
                                     onChange={(e) => setUserName(e.target.value)}
                                     required
                                 />
-                                <span>Email / Contact No.</span>
+                                <span>{loginByOtp ? 'Email Address' : 'Email / Contact No.'}</span>
                             </div>
                             {
                                 !loginByOtp &&
