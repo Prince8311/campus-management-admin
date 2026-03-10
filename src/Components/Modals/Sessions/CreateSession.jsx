@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { CreateSessionsWrapper } from "../../../Styles/SessionModalStyle";
 
-const CreateSessionsModal = ({isCreateSessionOpen, setIsCreateSessionOpen}) => {
+const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen }) => {
+    const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+    const statusList = [ 'Upcoming', 'Ongoing'];
+    const [selectedStatus, setSelectedStatus] = useState('');
+
+    const handleSelectStatus = (status) => {
+        if (status !== selectedStatus) {
+            setSelectedStatus(status);
+            setShowStatusDropdown(false);
+        }
+    }
 
     function closeModal() {
         setIsCreateSessionOpen(false);
@@ -21,38 +32,22 @@ const CreateSessionsModal = ({isCreateSessionOpen, setIsCreateSessionOpen}) => {
                             <div className="select_box">
                                 <span>Session Status <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
-                                        <p>Session</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                    <div className="dropdown_btn" onClick={() => setShowStatusDropdown(!showStatusDropdown)}>
+                                        <p>{selectedStatus}</p>
+                                        <i className={`fa-solid fa-angle-down ${showStatusDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showStatusDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li>Upcoming</li>
+                                                {
+                                                    statusList.map((status, i) =>
+                                                        <li key={i} className={selectedStatus === status ? 'active' : ''} onClick={() => handleSelectStatus(status)}>{status}</li>
+                                                    )
+                                                }
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="select_box">
-                                <span>Calendar Year <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
-                                        <p>2026 - 2027</p>
-                                        <i className="fa-solid fa-angle-down"></i>
-                                    </div>
-                                    <div className="dropdown">
-                                        <div className="dropdown_inner">
-                                            <ul>
-                                                <li>2026 - 2027</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="input_box">
-                                <span>Academic Session Name<p>*</p></span>
-                                <input type="text" />
                             </div>
                             <div className="date_box">
                                 <span>Start Date <p>*</p></span>
@@ -69,6 +64,10 @@ const CreateSessionsModal = ({isCreateSessionOpen, setIsCreateSessionOpen}) => {
                                     <i className="fa-regular fa-calendar"></i>
                                 </div>
                                 <div className="dropdown"></div>
+                            </div>
+                            <div className="input_box">
+                                <span>Session Name<p>*</p></span>
+                                <input type="text" />
                             </div>
                         </div>
                     </div>
