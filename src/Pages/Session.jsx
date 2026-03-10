@@ -105,7 +105,10 @@ const SessionPage = () => {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="empty_box"></div>
+                                <div className="empty_box">
+                                    <img src="/images/no-fields.svg" alt="" />
+                                    <p>No Session available.</p>
+                                </div>
                             )
                         }
                     </div>
