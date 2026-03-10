@@ -88,6 +88,29 @@ const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen, refr
 
     const isFormValid = selectedStatus !== '' && startDate.trim() !== '' && endDate.trim() !== '' && sessionName.trim() !== '';
 
+    const handleCreateSessionField = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            sessionName: sessionName,
+            startDate: startDate,
+            endDate: endDate,
+            status: selectedStatus
+        };
+        try {
+            const response = await axiosInstance.post(api.createSession, payload);
+            if (response?.data.status === 200) {
+                toast.success(response?.data.message);
+                refreshSessions();
+                closeModal();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+
     return (
         <>
             <CreateSessionsWrapper className={isCreateSessionOpen ? 'active' : ''}>
@@ -152,7 +175,7 @@ const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen, refr
                             </div>
                         </div>
                     </div>
-                    <div className="modal_btn">
+                    <div className="modal_btn" onClick={handleCreateSessionField}>
                         <button disabled={!isFormValid || isButtonLoading}>
                             {
                                 isButtonLoading ? (
