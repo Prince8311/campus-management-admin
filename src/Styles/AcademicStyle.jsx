@@ -1743,3 +1743,578 @@ export const AddStudentWrapper = styled('div')`
         }
     }
 `;
+
+export const ClassroomDetailsWrapper = styled('div')`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 0 15px;
+
+        h2 {
+            position: relative;
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
+        }
+    }
+
+    .tab_sec {
+        position: relative;
+        margin-top: 25px;
+        width: 100%;
+        padding: 0 15px;
+
+        .tab_inner {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid ${colors.themeColor};
+
+            .swiper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .swiper-slide {
+                    position: relative;
+                    width: max-content !important;
+                }
+            }
+
+            li {
+                position: relative;
+                list-style: none;
+                height: 100%;
+                padding: 0 20px;
+                padding-top: 2px;
+                display: flex;
+                align-items: center;
+                font-size: 12.5px;
+                color: ${colors.customColors.blackColor1};
+                background: ${colors.customColors.lightBackground};
+                border-radius: 6px 6px 0 0;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                
+                &:hover {
+                    color: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+                
+                &.active {
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+            }
+        }
+    }
+
+    .class_teacher_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0 15px;
+
+        .sec_inner {
+            position: relative;
+            width: 100%;
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+            .inner_top_sec {
+                position: relative;
+                width: 100%;
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                h5 {
+                    position: relative;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor1};
+                    font-style: italic;
+                }
+
+                p {
+                    position: relative;
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: ${colors.customColors.blackColor2};
+                    margin-top: 5px;
+                }
+            }
+
+            .inner_bottom_sec {
+                position: relative;
+                width: 100%;
+                padding: 15px;
+                display: flex;
+
+                .teacher_name_sec {
+                    position: relative;
+                    width: calc(100% - 100px);
+                    display: flex;
+
+                    .left_sec {
+                        position: relative;
+                        width: 35px;
+                        height: 35px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 6px;
+                        background: ${colors.customColors.blueColor1};
+
+                        h6 {
+                            position: relative;
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: ${colors.customColors.whiteColor};
+                            text-transform: uppercase;
+                        }
+                    }
+
+                    .right_sec {
+                        position: relative;
+                        width: calc(100% - 35px);
+                        padding-left: 10px;
+                        display: flex;
+                        flex-direction: column;
+
+                        p {
+                            position: relative;
+                            font-size: 13px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        span {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor2};
+                            margin-top: 2px;
+                        }
+                    }
+                }
+
+                .btn_sec {
+                    position: relative;
+                    width: 100px;
+                    display: flex;
+
+                    button {
+                        position: relative;
+                        width: 100%;
+                        height: 27px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 12px;
+                        color: ${colors.customColors.redColor};
+                        background: ${colors.customColors.redColorLight};
+                        border-radius: 25px;
+                        font-weight: 400;
+                        cursor: pointer;
+                        border: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .class_details_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0 15px;
+
+        .details_box {
+            position: relative;
+            width: 100%;
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+            .box_head_sec {
+                position: relative;
+                width: 100%;
+                display: flex;
+                padding: 20px;
+                border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                .head_content {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+
+                    h4 {
+                        position: relative;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor1};
+                        font-style: italic;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+                        margin-top: 5px;
+                    }
+
+                    .search_sec {
+                        position: relative;
+                        height: 35px;
+                        padding: 5px 0;
+                        display: flex;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 6px;
+                        margin-top: 8px;
+
+                        i {
+                            position: relative;
+                            width: 40px;
+                            height: 100%;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor3};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-right: 1px solid ${colors.customColors.borderColor};
+                        }
+
+                        input {
+                            position: relative;
+                            width: 300px;
+                            height: 100%;
+                            border: none;
+                            outline: none;
+                            padding: 0 15px;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+                }
+
+                .add_btn {
+                    position: relative;
+                    margin-left: auto;
+
+                    button {
+                        position: relative;
+                        width: 200px;
+                        height: 35px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        border: 1px solid ${colors.customColors.greenColor};
+                        background: ${colors.customColors.greenColor};
+                        color: ${colors.customColors.whiteColor};
+                        border-radius: 6px;
+                        font-size: 13px;
+                        font-weight: 500;
+                        transition: all 0.5s ease;
+
+                        i {
+                            margin-right: 8px;
+                            font-size: 12px;
+                        }
+
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.5s ease;
+                        }
+                    }
+                }
+            }
+
+            .box_item_sec {
+                position: relative;
+                width: 100%;
+                display: flex;
+                padding: 10px;
+                flex-wrap: wrap;
+
+                .item {
+                    position: relative;
+                    width: 33.33%;
+                    max-width: 380px;
+                    padding: 10px;
+
+                    .item_inner {
+                        position: relative;
+                        width: 100%;
+                        padding: 12px;
+                        padding-left: 15px;
+                        background: ${colors.customColors.whiteColor};
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-left: 4px solid ${colors.customColors.blueColor1};
+                        border-radius: 8px;
+                        display: flex;
+                        flex-direction: column;
+                        box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+                        .top_part {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            padding-bottom: 8px;
+                            border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                            .part_content {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                
+                                a {
+                                    position: relative;
+                                    width: 28px;
+                                    height: 28px;
+                                    border-radius: 50%;
+                                    background: ${colors.customColors.blueColorLight};
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blueColor1};
+                                    text-decoration: none;
+                                    cursor: pointer;
+                                }
+                                
+                                h6 {
+                                    position: relative;
+                                    padding-left: 12px;
+                                    max-width: calc(100% - 85px);
+                                    font-size: 13.5px;
+                                    font-style: italic;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                }
+
+                                span {
+                                    position: relative;
+                                    width: max-content;
+                                    display: flex;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.orangeColor};
+                                    margin-top: 2px;
+                                    background: ${colors.customColors.yellowColorLight};
+                                    border-radius: 25px;
+                                    padding: 3px 15px;
+                                    margin-left: auto;
+                                    font-weight: 500;
+                                }
+                            }
+
+                            .teacher_sec {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                margin-top: 8px;
+
+                                .teacher_box {
+                                    position: relative;
+                                    width: 49%;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    .teacher_heading {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+
+                                        h5 {
+                                            position: relative;
+                                            font-size: 10px;
+                                            font-weight: 500;
+                                            font-style: italic;
+                                            color: ${colors.customColors.blackColor};
+                                        }
+
+                                        li {
+                                            position: relative;
+                                            display: flex;
+                                            align-items: center;
+                                            list-style: none;
+                                            margin-left: 5px;
+
+                                            a {
+                                                position: relative;
+                                                width: max-content;
+                                                padding: 5px 10px;
+                                                font-size: 9px;
+                                                cursor: pointer;
+                                                text-decoration: none;
+
+                                                i {
+                                                    margin-right: 4px;
+                                                }
+
+                                                &.edit {
+                                                    background: ${colors.customColors.blueColorLight};
+                                                    color: ${colors.customColors.blueColor2};
+                                                    border-bottom-left-radius: 4px;
+                                                    border-top-left-radius: 4px;
+                                                }
+
+                                                &.add {
+                                                    background: ${colors.customColors.greenColorLight};
+                                                    color:  ${colors.customColors.greenColor};
+                                                    border-top-right-radius: 4px;
+                                                    border-bottom-right-radius: 4px;
+                                                }
+                                            }
+
+                                            button {
+                                                position: relative;
+                                                width: max-content;
+                                                padding: 5px 10px;
+                                                font-size: 9px;
+                                                cursor: pointer;
+                                                border: none;
+                                                border-radius: 25px;
+
+                                                &.add {
+                                                    background: ${colors.customColors.greenColorLight};
+                                                    color:  ${colors.customColors.greenColor};
+                                                }
+
+                                                &.remove {
+                                                    background: ${colors.customColors.redColorLight};
+                                                    color:  ${colors.customColors.redColor};
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    p {
+                                        position: relative;
+                                        max-width: 100%;
+                                        font-size: 10px;
+                                        color: ${colors.customColors.blackColor1};
+                                        margin: 3px 0;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                    }
+
+                                    span {
+                                        position: relative;
+                                        font-size: 9px;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
+                                }
+                            }
+                        }
+
+                        .bottom_btn {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            margin-top: 8px;
+
+                            .left_btns {
+                                position: relative;
+                                width: max-content;
+                                display: flex;
+                                padding: 4px;
+                                background: ${colors.customColors.lightBackground};
+                                border-radius: 4px;
+
+                                .left_box {
+                                    position: relative;
+                                    padding: 4px 12px;
+                                    cursor: pointer;
+                                    border-radius: 4px;
+                                    text-decoration: none;
+                                    
+                                    &.active {
+                                        background: ${colors.customColors.blueColor1};
+                                    }
+
+                                    h6 {
+                                        position: relative;
+                                        font-size: 10px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
+                                    
+                                    &.active h6 {
+                                        color: ${colors.customColors.whiteColor};
+                                    }
+                                }
+                            }
+
+                            .right_btns {
+                                position: relative;
+                                margin-left: auto;
+                                display: flex;
+
+                                button {
+                                    position: relative;
+                                    width: max-content;
+                                    height: 25px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border: none;
+                                    padding: 0 10px;
+
+                                    &.edit {
+                                        background: ${colors.customColors.blueColorLight};
+                                        color: ${colors.customColors.blueColor2};
+                                        font-size: 10px;
+                                        cursor: pointer;
+                                        font-weight: 500;
+                                        border-bottom-left-radius: 4px;
+                                        border-top-left-radius: 4px;
+                                    }
+
+                                    &.delete {
+                                        background: ${colors.customColors.redColorLight};
+                                        color:  ${colors.customColors.redColor};
+                                        font-size: 10px;
+                                        cursor: pointer;
+                                        border-top-right-radius: 4px;
+                                        border-bottom-right-radius: 4px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;

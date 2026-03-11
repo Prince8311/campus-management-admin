@@ -18,6 +18,7 @@ import StudentInformationPage from "../Pages/Academics/Screens/StudentInformatio
 import ClassroomPage from "../Pages/Academics/Screens/Classrooms";
 import StudentAttendencePage from "../Pages/Academics/Screens/StudentAttendence";
 import AddStudentPage from "../Pages/Academics/Screens/AddStudent";
+import ClassroomDetailsPage from "../Pages/Academics/Screens/ClassroomDetails";
 
 // Finance Management 
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
@@ -111,6 +112,7 @@ const Routers = () => {
                             <Route path="classrooms" element={<ClassroomPage />} />
                             <Route path="student-attendence" element={<StudentAttendencePage />} />
                             <Route path="add-student" element={<AddStudentPage />} />
+                            <Route path="classroom-details" element={<ClassroomDetailsPage />} />
                         </Route>
                         <Route path="finance-management" element={<FinanceManagementMainPage />}>
                             <Route path="" element={<Navigate to="fee-collection" />} />
