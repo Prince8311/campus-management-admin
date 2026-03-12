@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import CreateAcademicLabelModal from "../../../Components/Modals/AcademicsModals/CreateAcademicLabel";
@@ -11,6 +12,7 @@ import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const ClassroomPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const [isCreateAcademicLabelOpen, setIsCreateAcademicLabelOpen] = useState(false);
     const [isCreateClassOpen, setIsCreateClassOpen] = useState(false);
     const [isInitialLevelsLoading, setIsInitialLevelsLoading] = useState(false);
@@ -50,6 +52,10 @@ const ClassroomPage = () => {
     const handleOpenCreateClass = () => {
         setIsCreateClassOpen(true);
     };
+
+    const handleRedirectionClassroomDetailsPage = () => {
+        navigate("/admin/academics/classroom-details");
+    }
 
     return (
         <>
@@ -136,7 +142,7 @@ const ClassroomPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="bottom_btn">
-                                                    <button className="details">View Details</button>
+                                                    <button className="details" onClick={handleRedirectionClassroomDetailsPage}>View Details</button>
                                                     <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                                 </div>
                                             </div>
