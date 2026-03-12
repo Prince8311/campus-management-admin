@@ -1235,6 +1235,41 @@ export const SectionFieldsWrapper = styled('div')`
                             }
                         }
                     }
+
+                    .remove_btn {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: flex-start;
+                        margin-top: 15px;
+
+                        button {
+                            position: relative;
+                            width: 160px;
+                            height: 37px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 13px;
+                            font-weight: 500;
+                            color: ${colors.customColors.whiteColor};
+                            background: ${colors.customColors.redColor};
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            transition: all 0.5s ease;
+
+                            i {
+                                margin-right: 6px;
+                                font-size: 14px;
+                            }
+
+                            &:hover {
+                                border-radius: 25px;
+                                transition: all 0.5s ease;
+                            }
+                        }
+                    }
                 }
             }
 

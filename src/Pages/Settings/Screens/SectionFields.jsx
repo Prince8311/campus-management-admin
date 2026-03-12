@@ -266,6 +266,9 @@ const SectionFieldsPage = () => {
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div className="remove_btn">
+                                                <button><i className="fa-solid fa-trash"></i>Remove</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </>
