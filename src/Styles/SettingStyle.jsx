@@ -1260,8 +1260,8 @@ export const SectionFieldsWrapper = styled('div')`
                             transition: all 0.5s ease;
 
                             i {
-                                margin-right: 6px;
-                                font-size: 14px;
+                                margin-right: 10px;
+                                font-size: 18px;
                             }
 
                             &:hover {
