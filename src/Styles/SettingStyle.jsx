@@ -1304,3 +1304,185 @@ export const SectionFieldsWrapper = styled('div')`
         }
     }
 `;
+
+export const SubjectSettingsWrapper = styled('div')`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        display: flex;
+        margin-top: 20px;
+        padding: 0 15px;
+
+        h2 {
+            position: relative;
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
+        }
+
+        .add_btn {
+            position: relative;
+            margin-left: auto;
+
+            button {
+                position: relative;
+                width: 200px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border: 1px solid ${colors.customColors.greenColor};
+                background: ${colors.customColors.greenColor};
+                color: ${colors.customColors.whiteColor};
+                border-radius: 6px;
+                font-size: 13px;
+                font-weight: 500;
+
+                i {
+                    margin-right: 8px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .subjects_levels {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 15px;
+        padding: 0 5px;
+
+        .subject_box {
+            position: relative;
+            width: 25%;
+            max-width: 302.75px;
+            padding: 10px;
+
+            .box_inner {
+                position: relative;
+                width: 100%;
+                padding: 12px;
+                padding-left: 15px;
+                background: ${colors.customColors.whiteColor};
+                border: 1px solid ${colors.customColors.borderColor};
+                border-left: 4px solid ${colors.customColors.greenColor};
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+                .top_part {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                    .part_content {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        
+                        a {
+                            position: relative;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            background: ${colors.customColors.greenColorLight};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 12px;
+                            color: ${colors.customColors.greenColor};
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                        
+                        h6 {
+                            position: relative;
+                            padding-left: 12px;
+                            max-width: calc(100% - 28px);
+                            font-size: 13.5px;
+                            font-style: italic;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor};
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
+                    .subject_assigning_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        margin-top: 5px;
+
+                        p {
+                            position: relative;
+                            font-size: 11px;
+                            color: ${colors.customColors.blackColor2};
+
+                            b {
+                                font-weight: 500;
+                                margin-right: 4px;
+                                font-style: italic;
+                                color: ${colors.customColors.blackColor1};
+                            }
+                        }
+                    }
+                }
+
+                .bottom_btn {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 8px;
+                    justify-content: flex-end;
+
+                    button {
+                        position: relative;
+                        width: max-content;
+                        height: 25px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: none;
+                        padding: 0 12px;
+
+                        &.details {
+                            background: ${colors.customColors.blueColorLight};
+                            color: ${colors.customColors.blueColor2};
+                            font-size: 10px;
+                            cursor: pointer;
+                            font-weight: 500;
+                            border-bottom-left-radius: 4px;
+                            border-top-left-radius: 4px;
+                        }
+
+                        &.delete {
+                            background: ${colors.customColors.redColorLight};
+                            color:  ${colors.customColors.redColor};
+                            font-size: 10px;
+                            cursor: pointer;
+                            border-top-right-radius: 4px;
+                            border-bottom-right-radius: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
