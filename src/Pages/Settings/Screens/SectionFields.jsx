@@ -74,6 +74,7 @@ const SectionFieldsPage = () => {
                 params: { sectionId: sectionData.sectionId }
             });
             if (response?.data.status === 200) {
+                console.log(response);
                 const fields = response?.data.fields || [];
                 setFormFields(fields);
                 if (fields.length > 0 && !selectedFormField?.id) {
