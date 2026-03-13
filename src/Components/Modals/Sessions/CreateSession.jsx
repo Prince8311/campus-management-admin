@@ -78,7 +78,7 @@ const CreateSessionsModal = ({ isCreateSessionOpen, setIsCreateSessionOpen, refr
             const endYear = end.getFullYear();
             const shortEndYear = String(endYear).slice(-2);
     
-            setSessionName(`EC ${startYear}-${shortEndYear}`);
+            setSessionName(`AY ${startYear}-${shortEndYear}`);
         }
     
         prevStartDate.current = startDate;
