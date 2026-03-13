@@ -1261,7 +1261,7 @@ export const SectionFieldsWrapper = styled('div')`
 
                             i {
                                 margin-right: 10px;
-                                font-size: 18px;
+                                font-size: 12px;
                             }
 
                             &:hover {
