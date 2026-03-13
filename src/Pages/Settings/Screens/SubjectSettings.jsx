@@ -22,7 +22,7 @@ const SubjectSettingsPage = () => {
                                     <h6>English</h6>
                                 </div>
                                 <div className="subject_assigning_sec">
-                                    <p><b>Subject Assigning :</b>1 - A</p>
+                                    <p><b>Class Assigning :</b>1 - A</p>
                                 </div>
                             </div>
                             <div className="bottom_btn">
