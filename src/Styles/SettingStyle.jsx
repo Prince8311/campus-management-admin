@@ -961,6 +961,12 @@ export const SectionFieldsWrapper = styled('div')`
                                 position: relative;
                                 width: 100%;
                             }
+
+                            i {
+                                position: relative;
+                                font-size: 15px;
+                                color: ${colors.customColors.blueColor1};
+                            }
                         }
 
                         li {
