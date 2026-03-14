@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import CreateAcademicLabelModal from "../../../Components/Modals/AcademicsModals/CreateAcademicLabel";
+import CreateAcademicLabelModal from "../../../Components/Modals/Academics/CreateAcademicLabel";
 import { ClassroomsWrapper } from "../../../Styles/AcademicStyle";
-import CreateClassModal from "../../../Components/Modals/AcademicsModals/CreateClass";
+import CreateClassModal from "../../../Components/Modals/Academics/CreateClass";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
@@ -18,6 +18,16 @@ const ClassroomPage = () => {
     const [isInitialLevelsLoading, setIsInitialLevelsLoading] = useState(false);
     const [academicLevels, setAcademicLevels] = useState([]);
     const [selectedAcademicLevel, setSelectedAcademicLevel] = useState({});
+    const [isInitialClassesLoading, setIsInitialClassesLoading] = useState(false);
+    const [academicClasses, setAcademicClasses] = useState([]);
+
+    const handleOpenCreateAcademicLabel = () => {
+        setIsCreateAcademicLabelOpen(true);
+    };
+
+    const handleOpenCreateClass = () => {
+        setIsCreateClassOpen(true);
+    };
 
     const fetchAcademicLevels = async (showSkeleton = false) => {
         if (showSkeleton) {
@@ -27,7 +37,6 @@ const ClassroomPage = () => {
             const response = await axiosInstance.get(api.fetchAcademicLevels);
             if (response?.data.status === 200) {
                 const levels = response?.data.levels || [];
-                console.log(response);
                 setAcademicLevels(levels);
                 if (levels.length > 0 && !selectedAcademicLevel?.id) {
                     setSelectedAcademicLevel(levels[0]);
@@ -45,13 +54,31 @@ const ClassroomPage = () => {
         fetchAcademicLevels(true);
     }, []);
 
-    const handleOpenCreateAcademicLabel = () => {
-        setIsCreateAcademicLabelOpen(true);
-    };
+    const fetchClasses = async (showSkeleton = false) => {
+        if (showSkeleton) {
+            setIsInitialClassesLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchClasses, {
+                params: { levelId: selectedAcademicLevel.id }
+            });
+            if (response?.data.status === 200) {
+                setAcademicClasses(response?.data.classes);
+                console.log("classes", response);
+            }
+        } catch (error) {
+            setAcademicClasses([]);
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialClassesLoading(false);
+        }
+    }
 
-    const handleOpenCreateClass = () => {
-        setIsCreateClassOpen(true);
-    };
+    useEffect(() => {
+        if (selectedAcademicLevel?.id) {
+            fetchClasses(true);
+        }
+    }, [selectedAcademicLevel]);
 
     const handleRedirectionClassroomDetailsPage = () => {
         navigate("/admin/academics/classroom-details");
@@ -89,7 +116,7 @@ const ClassroomPage = () => {
                                 {
                                     Array.from({ length: 2 }).map((_, i) => (
                                         <div key={i} className="sec_item">
-                                            <SkeletonLoader width="100%" height="200px" margin="20px 0 0 0" />
+                                            <SkeletonLoader width="100%" height="250px" margin="0 0 16px 0" />
                                         </div>
                                     ))
                                 }
@@ -120,107 +147,57 @@ const ClassroomPage = () => {
                                 </div>
                             </div>
                             <div className="class_levels">
-                                <div className="class_level_box">
-                                    <div className="box_head">
-                                        <span>Class - 1</span>
-                                        <button>
-                                            <i className="fa-solid fa-plus"></i>
-                                            <p>Add New Section</p>
-                                        </button>
-                                    </div>
-                                    <div className="box_items">
-                                        <div className="class_item">
-                                            <div className="item_inner">
-                                                <div className="top_part">
-                                                    <div className="part_content">
-                                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                        <h6>1 - A</h6>
-                                                        <span>1000 Students</span>
-                                                    </div>
-                                                    <div className="teacher_name_sec">
-                                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                                    </div>
+                                {
+                                    isInitialClassesLoading ? (
+                                        Array.from({ length: 2 }).map((_, i) => (
+                                            <div key={i} className="sec_item">
+                                                <SkeletonLoader width="100%" height="250px" margin="0 0 16px 0" />
+                                            </div>
+                                        ))
+                                    ) : academicClasses.length > 0 ? (
+                                        academicClasses.map((academicClass, index) =>
+                                            <div className="class_level_box" key={index}>
+                                                <div className="box_head">
+                                                    <span>Class - {academicClass.class}</span>
+                                                    <button>
+                                                        <i className="fa-solid fa-plus"></i>
+                                                        <p>Add New Section</p>
+                                                    </button>
                                                 </div>
-                                                <div className="bottom_btn">
-                                                    <button className="details" onClick={handleRedirectionClassroomDetailsPage}>View Details</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                <div className="box_items">
+                                                    {
+                                                        academicClass.length > 0 ? (
+                                                            academicClass.map((section, i) =>
+                                                                <div className="class_item" key={i}>
+                                                                    <div className="item_inner">
+                                                                        <div className="top_part">
+                                                                            <div className="part_content">
+                                                                                <a><i className="fa-solid fa-chalkboard-user"></i></a>
+                                                                                <h6>1 - A</h6>
+                                                                                <span>1000 Students</span>
+                                                                            </div>
+                                                                            <div className="teacher_name_sec">
+                                                                                <p><b>Class Teacher :</b>Poonam C K</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="bottom_btn">
+                                                                            <button className="details" onClick={handleRedirectionClassroomDetailsPage}>View Details</button>
+                                                                            <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        ) : (
+                                                            <div className="empty_box"></div>
+                                                        )
+                                                    }
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="class_item">
-                                            <div className="item_inner">
-                                                <div className="top_part">
-                                                    <div className="part_content">
-                                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                        <h6>1 - A</h6>
-                                                        <span>1000 Students</span>
-                                                    </div>
-                                                    <div className="teacher_name_sec">
-                                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                                    </div>
-                                                </div>
-                                                <div className="bottom_btn">
-                                                    <button className="details">View Details</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="class_item">
-                                            <div className="item_inner">
-                                                <div className="top_part">
-                                                    <div className="part_content">
-                                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                        <h6>1 - A</h6>
-                                                        <span>1000 Students</span>
-                                                    </div>
-                                                    <div className="teacher_name_sec">
-                                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                                    </div>
-                                                </div>
-                                                <div className="bottom_btn">
-                                                    <button className="details">View Details</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="class_item">
-                                            <div className="item_inner">
-                                                <div className="top_part">
-                                                    <div className="part_content">
-                                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                        <h6>1 - A</h6>
-                                                        <span>1000 Students</span>
-                                                    </div>
-                                                    <div className="teacher_name_sec">
-                                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                                    </div>
-                                                </div>
-                                                <div className="bottom_btn">
-                                                    <button className="details">View Details</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="class_item">
-                                            <div className="item_inner">
-                                                <div className="top_part">
-                                                    <div className="part_content">
-                                                        <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                        <h6>1 - A</h6>
-                                                        <span>1000 Students</span>
-                                                    </div>
-                                                    <div className="teacher_name_sec">
-                                                        <p><b>Class Teacher :</b>Poonam C K</p>
-                                                    </div>
-                                                </div>
-                                                <div className="bottom_btn">
-                                                    <button className="details">View Details</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        )
+                                    ) : (
+                                        <div className="empty_box"></div>
+                                    )
+                                }
                             </div>
                         </>
                     ) : (
@@ -239,6 +216,8 @@ const ClassroomPage = () => {
                 <CreateClassModal
                     isCreateClassOpen={isCreateClassOpen}
                     setIsCreateClassOpen={setIsCreateClassOpen}
+                    academicLevels={academicLevels}
+                    refreshClasses={() => fetchClasses(false)}
                 />
             </ClassroomsWrapper>
         </>

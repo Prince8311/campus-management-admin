@@ -1,9 +1,36 @@
+import { useState } from "react";
 import { CreateSubjectsWrapper } from "../../../Styles/SettingModalStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
-const CreateSubjectsModal = ({isCreateSubjectOpen, setIsCreateSubjectOpen}) => {
+const CreateSubjectsModal = ({ isCreateSubjectOpen, setIsCreateSubjectOpen, refreshSubjects }) => {
+    const api = getApiEndpoints();
+    const [name, setName] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     function closeModal() {
+        setName('');
         setIsCreateSubjectOpen(false);
+    }
+
+    const handleAddSubject = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = { subject: name };
+        try {
+            const response = await axiosInstance.post(api.addSubject, payload);
+            if (response?.data.status === 200) { 
+                toast.success(response?.data.message);
+                refreshSubjects();
+                closeModal();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
     }
 
     return (
@@ -20,12 +47,20 @@ const CreateSubjectsModal = ({isCreateSubjectOpen, setIsCreateSubjectOpen}) => {
                         <div className="body_inner">
                             <div className="input_box">
                                 <span>Subject Name <p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={name.trim() === '' || isButtonLoading} onClick={handleAddSubject}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </CreateSubjectsWrapper>

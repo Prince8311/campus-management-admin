@@ -22,7 +22,7 @@ const AddStudentPage = () => {
     const fetchStudentForm = async () => {
         setIsFormLoading(true);
         try {
-            const response = await axiosInstance.get(api.fetchStudentUploadForm);
+            const response = await axiosInstance.get(api.studentUploadForm);
             if (response?.data.status === 200) {
                 console.log("Form", response?.data);
                 setForm(response?.data.form);
@@ -334,7 +334,7 @@ const AddStudentPage = () => {
                                                     </div>
                                                     <div className="content_right">
                                                         <p>Upload passport size photo</p>
-                                                        <span>(File size: max 10MB | Formats: .PNG, .JPG)</span>
+                                                        <span>( File size: max 10MB | Formats: '.png', '.jpg', '.jpeg' )</span>
                                                         <a><i className="fa-solid fa-cloud-arrow-up"></i>Upload Image</a>
                                                     </div>
                                                 </div>

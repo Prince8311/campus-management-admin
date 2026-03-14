@@ -24,13 +24,21 @@ export const getApiEndpoints = () => {
         // Students 
         studentUploadForm: `${apiURL}/api/student/form.php`,
 
-        // Sections 
+        // Form Sections 
         createStudentFormSection: `${apiURL}/api/student/sections/create.php`,
         fetchStudentFormSection: `${apiURL}/api/student/sections/list.php`,
 
-        // Fields
+        // Form Fields
         createStudentFormFields: `${apiURL}/api/student/fields/create.php`,
         fetchStudentFormFields: `${apiURL}/api/student/fields/list.php`,
         updateStudentFormFieldOrder: `${apiURL}/api/student/fields/update-order.php`,
+
+        // Subjects 
+        addSubject: `${apiURL}/api/institutions/subjects/create.php`,
+        fetchSubjects: `${apiURL}/api/institutions/subjects/list.php`,
+
+        // Class & Section 
+        createClass: `${apiURL}/api/institutions/academic/class/create.php`,
+        fetchClasses: `${apiURL}/api/institutions/academic/class/list.php`,
     };
 }

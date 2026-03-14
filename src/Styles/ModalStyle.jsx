@@ -460,6 +460,12 @@ export const CreateClassWrapper = styled('div')`
                                                 color: ${colors.customColors.blackColor};
                                             }
                                         }
+
+                                        &.empty_message {
+                                            padding: 5px 10px;
+                                            pointer-events: none;
+                                            color: ${colors.customColors.blackColor3};
+                                        }
                                     }
                                 }
                             }

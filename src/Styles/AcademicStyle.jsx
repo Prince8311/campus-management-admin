@@ -445,7 +445,7 @@ export const ClassroomsWrapper = styled('div')`
                 align-items: center;
                 justify-content: center;
                 border: none;
-                padding: 0 22px;
+                padding: 0 25px;
                 font-size: 12.5px;
 
                 &.academic {
@@ -533,11 +533,12 @@ export const ClassroomsWrapper = styled('div')`
         display: flex;
         flex-direction: column;
         padding: 0 15px;
+        padding-top: 16px;
 
         .class_level_box {
             position: relative;
             width: 100%;
-            margin-top: 16px;
+            margin-bottom: 16px;
             display: flex;
             flex-direction: column;
             border-radius: 8px;
@@ -548,6 +549,7 @@ export const ClassroomsWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 padding: 20px;
+                padding-bottom: 10px;
                 display: flex;
                 align-items: flex-end;
                 justify-content: space-between;
@@ -1505,6 +1507,7 @@ export const AddStudentWrapper = styled('div')`
                             .content_right {
                                 position: relative;
                                 width: calc(100% - 100px);
+                                padding: 3px 0;
                                 padding-left: 20px;
                                 display: flex;
                                 flex-direction: column;
@@ -1518,14 +1521,14 @@ export const AddStudentWrapper = styled('div')`
 
                                 span {
                                     position: relative;
-                                    font-size: 12px;
+                                    font-size: 11px;
                                     color: ${colors.customColors.blackColor2};
                                     margin-top: 3px;
                                 }
 
                                 a {
                                     position: relative;
-                                    margin-top: 7px;
+                                    margin-top: auto;
                                     font-size: 12px;
                                     font-weight: 400;
                                     color: ${colors.themeColor};

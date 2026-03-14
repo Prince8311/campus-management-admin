@@ -563,7 +563,7 @@ export const StudentWrapper = styled('div')`
                     justify-content: center;
                     align-items: center;
                     padding: 0 10px;
-                    margin-top: 10px;
+                    margin-top: 15px;
 
                     img {
                         position: relative;
