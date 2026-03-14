@@ -301,18 +301,6 @@ export const CreateSubjectsWrapper = styled('div')`
                         }
                     }
                 }
-
-                a {
-                    position: relative;
-                    margin-top: 20px;
-                    font-size: 12px;
-                    color: ${colors.customColors.redColor};
-
-                    span {
-                        color: ${colors.customColors.redColor};
-                        margin-right: 5px;
-                    }
-                }
             }
         }
 
@@ -351,6 +339,139 @@ export const CreateSubjectsWrapper = styled('div')`
             }
         }
     }
+`;
+
+export const DeleteSubjectsWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    padding-left: 265px;
+    transition: all 0.3s ease;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: initial;
+        transition: all 0.3s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 400px;
+        max-height: 100%;
+        background: ${colors.customColors.whiteColor3};
+        box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(-150px);
+        transition: transform 0.8s ease;
+
+        &.active {
+            transform: translateY(0);
+            transition: transform 0.8s ease;
+        }
+
+        .modal_body {
+            position: relative;
+            width: 100%;
+            padding: 11px 20px;
+            display: flex;
+            flex-direction: column;
+
+            .body_inner {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .image_box {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    img {
+                        position: relative;
+                        width: 125px;
+                        height: auto;
+                        object-fit: contain;
+                    }
+                }
+
+                p {
+                    position: relative;
+                    margin-bottom: 5px;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor2};
+
+                    span {
+                        color: ${colors.customColors.blackColor1};
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+
+        .modal_btn {
+            position: relative;
+            width: 100%;
+            padding: 13px 20px;
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid ${colors.customColors.borderColor};
+
+            button {
+                position: relative;
+                width: 130px;
+                height: 35px;
+                font-size: 13px;
+                font-weight: 500;
+                cursor: pointer;
+                border-radius: 6px;
+                overflow: hidden;
+                border: none;
+                background: ${colors.customColors.blueColor1};
+                color: ${colors.customColors.whiteColor};
+                transition: all 0.5s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
+
+                &:disabled {
+                    cursor: not-allowed;
+                    opacity: 0.4;
+                    transition: all 0.5s ease;
+                }
+
+                &.cancel {
+                    background: ${colors.customColors.redColor};
+                    color: ${colors.customColors.whiteColor};
+                    margin-right: 15px;
+                }
+
+                &.confirm {
+                    background: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+                }
+            }
+        }
+    }    
 `;
 
 export const CreateFieldsWrapper = styled('div')`

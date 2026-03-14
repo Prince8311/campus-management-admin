@@ -1,12 +1,19 @@
 import { useState } from "react";
 import CreateSubjectsModal from "../../../Components/Modals/Setting/CreateSubjects";
 import { SubjectSettingsWrapper } from "../../../Styles/SettingStyle";
+import DeleteSubjectsModal from "../../../Components/Modals/Setting/DeleteSubjects";
 
 const SubjectSettingsPage = () => {
     const [isCreateSubjectOpen, setIsCreateSubjectOpen] = useState(false);
+    const [isDeleteSubjectOpen, setIsDeleteSubjectOpen] = useState(false);
 
     const handleOpenCreateSubject = () => {
         setIsCreateSubjectOpen(true);
+    };
+
+    const handleDeleteSubject = () => {
+        setIsDeleteSubjectOpen(true);
+        setIsCreateSubjectOpen(false);
     };
 
     return (
@@ -21,7 +28,7 @@ const SubjectSettingsPage = () => {
                         <input type="text" placeholder="Search by Subjects..." />
                     </div>
                     <div className="add_btn">
-                        <button onClick={setIsCreateSubjectOpen}>
+                        <button onClick={handleOpenCreateSubject}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add Subject</p>
                         </button>
@@ -41,7 +48,7 @@ const SubjectSettingsPage = () => {
                             </div>
                             <div className="bottom_btn">
                                 <button className="details">Edit Name</button>
-                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                <button className="delete" onClick={handleDeleteSubject}><i className="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
                     </div>
@@ -49,6 +56,10 @@ const SubjectSettingsPage = () => {
                 <CreateSubjectsModal
                     isCreateSubjectOpen={isCreateSubjectOpen}
                     setIsCreateSubjectOpen={setIsCreateSubjectOpen}
+                />
+                <DeleteSubjectsModal
+                    isDeleteSubjectOpen={isDeleteSubjectOpen}
+                    setIsDeleteSubjectOpen={setIsDeleteSubjectOpen}
                 />
             </SubjectSettingsWrapper>
         </>
