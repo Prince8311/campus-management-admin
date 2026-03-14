@@ -1,13 +1,27 @@
+import { useState } from "react";
+import CreateSubjectsModal from "../../../Components/Modals/Setting/CreateSubjects";
 import { SubjectSettingsWrapper } from "../../../Styles/SettingStyle";
 
 const SubjectSettingsPage = () => {
+    const [isCreateSubjectOpen, setIsCreateSubjectOpen] = useState(false);
+
+    const handleOpenCreateSubject = () => {
+        setIsCreateSubjectOpen(true);
+    };
+
     return (
         <>
             <SubjectSettingsWrapper>
                 <div className="page_head">
                     <h2>All Subjects</h2>
+                </div>
+                <div className="subject_search_sec">
+                    <div className="search_sec">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search by Subjects..." />
+                    </div>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={setIsCreateSubjectOpen}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add Subject</p>
                         </button>
@@ -32,6 +46,10 @@ const SubjectSettingsPage = () => {
                         </div>
                     </div>
                 </div>
+                <CreateSubjectsModal
+                    isCreateSubjectOpen={isCreateSubjectOpen}
+                    setIsCreateSubjectOpen={setIsCreateSubjectOpen}
+                />
             </SubjectSettingsWrapper>
         </>
     );

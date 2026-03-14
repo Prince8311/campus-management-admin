@@ -80,10 +80,16 @@ export const StaffInformationWrapper = styled('div')`
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
+                transition: all 0.5s ease;
 
                 i {
                     margin-right: 8px;
                     font-size: 12px;
+                }
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
                 }
             }
         }

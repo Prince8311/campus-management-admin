@@ -1314,8 +1314,6 @@ export const SubjectSettingsWrapper = styled('div')`
         position: relative;
         width: 100%;
         display: flex;
-        margin-top: 20px;
-        padding: 0 15px;
 
         h2 {
             position: relative;
@@ -1323,6 +1321,46 @@ export const SubjectSettingsWrapper = styled('div')`
             font-weight: 600;
             color: ${colors.customColors.blackColor};
             font-family: "SUSE", sans-serif;
+        }
+    }
+
+    .subject_search_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+
+        .search_sec {
+            position: relative;
+            height: 35px;
+            padding: 5px 0;
+            display: flex;
+            border: 1px solid ${colors.customColors.borderColor};
+            border-radius: 6px;
+
+            i {
+                position: relative;
+                width: 40px;
+                height: 100%;
+                font-size: 13px;
+                color: ${colors.customColors.blackColor3};
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-right: 1px solid ${colors.customColors.borderColor};
+            }
+
+            input {
+                position: relative;
+                width: 300px;
+                height: 100%;
+                border: none;
+                outline: none;
+                padding: 0 15px;
+                font-size: 12px;
+                color: ${colors.customColors.blackColor1};
+            }
         }
 
         .add_btn {
@@ -1343,10 +1381,16 @@ export const SubjectSettingsWrapper = styled('div')`
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
-
+                transition: all 0.5s ease;
+                
                 i {
                     margin-right: 8px;
                     font-size: 12px;
+                }
+                
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
                 }
             }
         }
