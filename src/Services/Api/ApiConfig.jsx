@@ -21,12 +21,16 @@ export const getApiEndpoints = () => {
         createAcademicLevel: `${apiURL}/api/institutions/academic/academic-level/create.php`,
         fetchAcademicLevels: `${apiURL}/api/institutions/academic/academic-level/list.php`,
 
-        // Student Form 
-        createStudentFormSection: `${apiURL}/api/student/create-form-section.php`,
-        fetchStudentFormSection: `${apiURL}/api/student/form-section-list.php`,
-        createStudentFormFields: `${apiURL}/api/student/create-form-fields.php`,
-        fetchStudentFormFields: `${apiURL}/api/student/form-field-list.php`,
-        updateStudentFormFieldOrder: `${apiURL}/api/student/update-form-field-order.php`,
-        fetchStudentUploadForm: `${apiURL}/api/student/fetch-upload-form.php`,
+        // Students 
+        studentUploadForm: `${apiURL}/api/student/form.php`,
+
+        // Sections 
+        createStudentFormSection: `${apiURL}/api/student/sections/create.php`,
+        fetchStudentFormSection: `${apiURL}/api/student/sections/list.php`,
+
+        // Fields
+        createStudentFormFields: `${apiURL}/api/student/fields/create.php`,
+        fetchStudentFormFields: `${apiURL}/api/student/fields/list.php`,
+        updateStudentFormFieldOrder: `${apiURL}/api/student/fields/update-order.php`,
     };
 }

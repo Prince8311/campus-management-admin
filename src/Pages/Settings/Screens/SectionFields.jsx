@@ -11,7 +11,7 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const SortableItem = ({ field, selectedId, onSelect }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: field.id });
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: field.id, disabled: !field.isRemoval });
     const style = {
         transform: CSS.Transform.toString(transform),
         transition
@@ -23,9 +23,15 @@ const SortableItem = ({ field, selectedId, onSelect }) => {
                 className="field_image"
                 {...attributes}
                 {...listeners}
-                style={{ cursor: "grab" }}
+                style={{ cursor: field.isRemoval ? "grab" : "not-allowed" }}
             >
-                <img src="/images/drag-icon.png" alt="" />
+                {
+                    field.isRemoval ? (
+                        <img src="/images/drag-icon.png" alt="" />
+                    ) : (
+                        <i className="fa-solid fa-thumbtack"></i>
+                    )
+                }
             </div>
             <li
                 className={selectedId === field.id ? "active" : ""}
@@ -74,6 +80,7 @@ const SectionFieldsPage = () => {
                 params: { sectionId: sectionData.sectionId }
             });
             if (response?.data.status === 200) {
+                console.log(response);
                 const fields = response?.data.fields || [];
                 setFormFields(fields);
                 if (fields.length > 0 && !selectedFormField?.id) {
@@ -266,9 +273,12 @@ const SectionFieldsPage = () => {
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div className="remove_btn">
-                                                <button><i className="fa-solid fa-trash"></i>Remove</button>
-                                            </div>
+                                            {
+                                                selectedFormField.isRemoval &&
+                                                <div className="remove_btn">
+                                                    <button><i className="fa-solid fa-trash"></i>Remove</button>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </>

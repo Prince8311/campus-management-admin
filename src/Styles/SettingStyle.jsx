@@ -535,6 +535,11 @@ export const StudentWrapper = styled('div')`
                                     font-weight: 500;
                                     border-bottom-left-radius: 4px;
                                     border-top-left-radius: 4px;
+
+                                    &.not_removal {
+                                        border-bottom-right-radius: 4px;
+                                        border-top-right-radius: 4px;
+                                    }
                                 }
 
                                 &.delete {
@@ -955,6 +960,12 @@ export const SectionFieldsWrapper = styled('div')`
                             img {
                                 position: relative;
                                 width: 100%;
+                            }
+
+                            i {
+                                position: relative;
+                                font-size: 15px;
+                                color: ${colors.customColors.blueColor1};
                             }
                         }
 

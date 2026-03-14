@@ -114,8 +114,11 @@ const StudentPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="inner_btn">
-                                                    <button className="details" onClick={() => handleOpenFieldRedirectionPage(section.id, section.name, 'profile_info')}>View Details</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                    <button className={`details ${section.isRemoval ? '' : 'not_removal'}`} onClick={() => handleOpenFieldRedirectionPage(section.id, section.name, 'profile_info')}>View Details</button>
+                                                    {
+                                                        section.isRemoval &&
+                                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
