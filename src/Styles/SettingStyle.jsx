@@ -1325,6 +1325,7 @@ export const SubjectSettingsWrapper = styled('div')`
         position: relative;
         width: 100%;
         display: flex;
+        padding: 0 15px;
 
         h2 {
             position: relative;
@@ -1341,6 +1342,7 @@ export const SubjectSettingsWrapper = styled('div')`
         display: flex;
         align-items: center;
         margin-top: 20px;
+        padding: 0 15px;
 
         .search_sec {
             position: relative;
