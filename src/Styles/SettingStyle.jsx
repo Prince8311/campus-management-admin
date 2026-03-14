@@ -1271,7 +1271,7 @@ export const SectionFieldsWrapper = styled('div')`
                             transition: all 0.5s ease;
 
                             i {
-                                margin-right: 10px;
+                                margin-right: 8px;
                                 font-size: 12px;
                             }
 
