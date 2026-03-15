@@ -67,7 +67,7 @@ const ClassroomDetailsPage = () => {
                             <div className="add_btn">
                                 <button>
                                     <i className="fa-solid fa-plus"></i>
-                                    <p>Create Subject</p>
+                                    <p>Add Subject</p>
                                 </button>
                             </div>
                         </div>
