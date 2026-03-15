@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import AddSubjectClassWiseModal from "../../../Components/Modals/Academics/AddSubjectClassWise";
 
 const ClassroomPage = () => {
     const api = getApiEndpoints();
@@ -20,6 +21,7 @@ const ClassroomPage = () => {
     const [selectedAcademicLevel, setSelectedAcademicLevel] = useState({});
     const [isInitialClassesLoading, setIsInitialClassesLoading] = useState(false);
     const [academicClasses, setAcademicClasses] = useState([]);
+    const [isSubjectAddModalOpen, setIsSubjectAddModalOpen] = useState(false);
 
     const handleOpenCreateAcademicLabel = () => {
         setIsCreateAcademicLabelOpen(true);
@@ -28,6 +30,10 @@ const ClassroomPage = () => {
     const handleOpenCreateClass = () => {
         setIsCreateClassOpen(true);
     };
+
+    const handleOpenSubjectAddModal = () => {
+        setIsSubjectAddModalOpen(true);
+    }
 
     const fetchAcademicLevels = async (showSkeleton = false) => {
         if (showSkeleton) {
@@ -159,7 +165,7 @@ const ClassroomPage = () => {
                                             <div className="class_level_box" key={index}>
                                                 <div className="box_head">
                                                     <span>Class - {academicClass.class}</span>
-                                                    <button className="new_Subject">
+                                                    <button className="new_Subject" onClick={handleOpenSubjectAddModal}>
                                                         <i className="fa-solid fa-plus"></i>
                                                         <p>Add New Subject</p>
                                                     </button>
@@ -228,6 +234,10 @@ const ClassroomPage = () => {
                     setIsCreateClassOpen={setIsCreateClassOpen}
                     academicLevels={academicLevels}
                     refreshClasses={() => fetchClasses(false)}
+                />
+                <AddSubjectClassWiseModal
+                    isSubjectAddModalOpen={isSubjectAddModalOpen}
+                    setIsSubjectAddModalOpen={setIsSubjectAddModalOpen}
                 />
             </ClassroomsWrapper>
         </>
