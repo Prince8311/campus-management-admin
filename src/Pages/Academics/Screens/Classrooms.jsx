@@ -24,7 +24,9 @@ const ClassroomPage = () => {
     const [academicClasses, setAcademicClasses] = useState([]);
     const [isSubjectAddModalOpen, setIsSubjectAddModalOpen] = useState(false);
     const [isSectionButtonLoading, setIsSectionButtonLoading] = useState(false);
-    const [currentClass, setCurrentClass] = useState('');
+    const [currentClass, setCurrentClass] = useState({});
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [deletePayload, setDeletePayload] = useState({});
 
     const handleOpenCreateAcademicLabel = () => {
         setIsCreateAcademicLabelOpen(true);
@@ -113,6 +115,15 @@ const ClassroomPage = () => {
         }
     }
 
+    const handleSectionDelete = (className, section) => {
+        const payload = {
+            academicLevelId: selectedAcademicLevel.id,
+            class: className,
+            section: section
+        };
+        setDeletePayload(payload);
+    }
+
     return (
         <>
             <ClassroomsWrapper>
@@ -188,7 +199,7 @@ const ClassroomPage = () => {
                                             <div className="class_level_box" key={index}>
                                                 <div className="box_head">
                                                     <span>Class - {academicClass.class}</span>
-                                                    <button className="new_Subject" onClick={() => handleOpenSubjectAddModal(academicClass.class)}>
+                                                    <button className="new_Subject" onClick={() => handleOpenSubjectAddModal(academicClass)}>
                                                         <i className="fa-solid fa-plus"></i>
                                                         <p>Add New Subject</p>
                                                     </button>
@@ -271,6 +282,13 @@ const ClassroomPage = () => {
                     setIsSubjectAddModalOpen={setIsSubjectAddModalOpen}
                     currentClass={currentClass}
                     setCurrentClass={setCurrentClass}
+                />
+                <DeleteConfirmationModal 
+                    isModalOpen={openDeleteModal}
+                    setIsModalOpen={setOpenDeleteModal}
+                    deleteObject="Section" 
+                    payload={deletePayload}
+                    endPoint={api.deleteSection}
                 />
             </ClassroomsWrapper>
         </>

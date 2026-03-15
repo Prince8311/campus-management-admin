@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { DeleteConfirmationWrapper } from "../../Styles/SettingModalStyle";
 
-const DeleteConfirmationModal = ({isModalOpen, setIsModalOpen}) => {
-
-    function closeModal  () {
+const DeleteConfirmationModal = ({ isModalOpen, setIsModalOpen, deleteObject, payload, endPoint }) => {
+    const [isConfirmButtonLoading, setIsConfirmButtonLoading] = useState(false);
+    function closeModal() {
         setIsModalOpen(false);
     }
+
+    const handleSubmit = async () => {}
+
     return (
         <>
             <DeleteConfirmationWrapper className={isModalOpen ? 'active' : ''}>
@@ -14,7 +18,7 @@ const DeleteConfirmationModal = ({isModalOpen, setIsModalOpen}) => {
                             <div className="image_box">
                                 <img src="/images/warning.gif" alt="" />
                             </div>
-                            <p>Are you sure, you want to delete this <span>Subject</span></p>
+                            <p>Are you sure, you want to delete this <span>{deleteObject}</span></p>
                         </div>
                     </div>
                     <div className="modal_btn">
