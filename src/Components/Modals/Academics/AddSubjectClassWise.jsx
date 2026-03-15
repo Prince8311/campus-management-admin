@@ -12,6 +12,7 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
     const [selectedSubject, setSelectedSubject] = useState({});
 
     function closeModal() {
+        setSelectedSubject({});
         setIsSubjectAddModalOpen(false);
     }
 
