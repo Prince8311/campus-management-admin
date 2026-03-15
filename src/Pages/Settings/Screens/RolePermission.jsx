@@ -19,24 +19,12 @@ const RolesPermissionsPage = () => {
                             <div className="item_inner">
                                 <div className="inner_top">
                                     <a><i className="fa-brands fa-creative-commons-by"></i></a>
-                                    <div className="inner_content">
-                                        <h6>Admin</h6>
-                                    </div>
+                                    <h6>Admin</h6>
+                                    <span>1000 Members</span>
                                 </div>
                                 <div className="inner_btn">
                                     <button className="edit"><i className="fa-solid fa-pen-to-square"></i>Edit</button>
                                     <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                </div>
-                                <div className="bottom_part">
-                                    <a>Assigned Members</a>
-                                    <div className="students">
-                                        <ul>
-                                            <li><p>PB</p></li>
-                                            <li><img src="/images/profile-image.png" alt="" /></li>
-                                            <li><p>AK</p></li>
-                                        </ul>
-                                        <span>+25</span>
-                                    </div>
                                 </div>
                             </div>
                         </div>

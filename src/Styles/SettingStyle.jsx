@@ -95,6 +95,8 @@ export const RolePermissionWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         align-items: center;
+                        padding-bottom: 8px;
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
 
                         a {
                             position: relative;
@@ -111,23 +113,31 @@ export const RolePermissionWrapper = styled('div')`
                             cursor: pointer;
                         }
 
-                        .inner_content {
+                        h6 {
                             position: relative;
-                            width: calc(100% - 28px);
-                            display: flex;
                             padding-left: 12px;
+                            max-width: calc(100% - 85px);
+                            font-size: 13.5px;
+                            font-style: italic;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor};
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
 
-                            h6 {
-                                position: relative;
-                                max-width: 100%;
-                                font-size: 13.5px;
-                                font-style: italic;
-                                font-weight: 500;
-                                color: ${colors.customColors.blackColor};
-                                overflow: hidden;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;
-                            }
+                        span {
+                            position: relative;
+                            width: max-content;
+                            display: flex;
+                            font-size: 10px;
+                            color: ${colors.customColors.orangeColor};
+                            margin-top: 2px;
+                            background: ${colors.customColors.yellowColorLight};
+                            border-radius: 25px;
+                            padding: 3px 15px;
+                            margin-left: auto;
+                            font-weight: 500;
                         }
                     }
 
@@ -136,10 +146,8 @@ export const RolePermissionWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         align-items: center;
-                        margin-top: 6px;
+                        margin-top: 8px;
                         justify-content: flex-end;
-                        padding-bottom: 6px;
-                        border-bottom: 1px solid ${colors.customColors.borderColor};
 
                         button {
                             position: relative;
@@ -173,88 +181,6 @@ export const RolePermissionWrapper = styled('div')`
                                 cursor: pointer;
                                 border-top-right-radius: 4px;
                                 border-bottom-right-radius: 4px;
-                            }
-                        }
-                    }
-
-                    .bottom_part {
-                        position: relative;
-                        margin-top: 6px;
-                        width: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-
-                        a {
-                            position: relative;
-                            font-size: 11px;
-                            color: ${colors.customColors.blackColor};
-                            text-decoration: none;
-                        }
-
-                        .students {
-                            position: relative;
-                            display: flex;
-                            align-items: center;
-                            margin-left: 10px;
-
-                            ul {
-                                position: relative;
-                                display: flex;
-                                align-items: center;
-
-                                li {
-                                    position: relative;
-                                    list-style: none;
-                                    width: 30px;
-                                    height: 30px;
-                                    display: flex;
-                                    border-radius: 50%;
-                                    overflow: hidden;
-                                    border: 2px solid ${colors.customColors.whiteColor};
-                                    margin-left: -16.5px;
-
-                                    &:first-of-type {
-                                        margin-left: 0;
-                                    }
-
-                                    p {
-                                        position: relative; 
-                                        width: 100%;
-                                        height: 100%;
-                                        background: ${colors.themeColor};
-                                        color: ${colors.customColors.whiteColor};
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        font-size: 9px;
-                                        font-weight: 500;
-                                        letter-spacing: 0.55px;
-                                    }
-
-                                    img {
-                                        position: relative;
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                    }
-                                }
-                            }
-
-                            span {
-                                position: relative;
-                                width: 30px;
-                                height: 30px;
-                                background: ${colors.customColors.borderColor};
-                                border-radius: 50%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-size: 7.5px;
-                                font-weight: 500;
-                                border: 2px solid ${colors.customColors.whiteColor};
-                                margin-left: -16.5px;
-                                color: ${colors.customColors.blackColor};
                             }
                         }
                     }
