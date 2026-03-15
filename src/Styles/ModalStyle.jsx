@@ -773,6 +773,39 @@ export const AddSubjectClassWiseWrapper = styled('div')`
                                 display: flex;
                                 flex-direction: column;
 
+                                .search_sec {
+                                    position: relative;
+                                    height: 35px;
+                                    padding: 5px 0;
+                                    display: flex;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    border-radius: 6px;
+                                    margin-bottom: 10px;
+
+                                    i {
+                                        position: relative;
+                                        width: 40px;
+                                        height: 100%;
+                                        font-size: 13px;
+                                        color: ${colors.customColors.blackColor3};
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border-right: 1px solid ${colors.customColors.borderColor};
+                                    }
+
+                                    input {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 100%;
+                                        border: none;
+                                        outline: none;
+                                        padding: 0 15px;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
+                                }
+
                                 ul {
                                     position: relative;
                                     width: 100%;

@@ -62,6 +62,10 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
                                     </div>
                                     <div className={`dropdown ${showSubjectDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
+                                            <div className="search_sec">
+                                                <i className="fa-solid fa-magnifying-glass"></i>
+                                                <input type="text" placeholder="Search by Subject Name..." />
+                                            </div>
                                             <ul>
                                                 {
                                                     subjects.length > 0 ? (
