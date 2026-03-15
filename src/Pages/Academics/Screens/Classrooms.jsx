@@ -24,6 +24,7 @@ const ClassroomPage = () => {
     const [academicClasses, setAcademicClasses] = useState([]);
     const [isSubjectAddModalOpen, setIsSubjectAddModalOpen] = useState(false);
     const [isSectionButtonLoading, setIsSectionButtonLoading] = useState(false);
+    const [currentClass, setCurrentClass] = useState('');
 
     const handleOpenCreateAcademicLabel = () => {
         setIsCreateAcademicLabelOpen(true);
@@ -33,8 +34,9 @@ const ClassroomPage = () => {
         setIsCreateClassOpen(true);
     };
 
-    const handleOpenSubjectAddModal = () => {
+    const handleOpenSubjectAddModal = (className) => {
         setIsSubjectAddModalOpen(true);
+        setCurrentClass(className)
     }
 
     const fetchAcademicLevels = async (showSkeleton = false) => {
@@ -186,7 +188,7 @@ const ClassroomPage = () => {
                                             <div className="class_level_box" key={index}>
                                                 <div className="box_head">
                                                     <span>Class - {academicClass.class}</span>
-                                                    <button className="new_Subject" onClick={handleOpenSubjectAddModal}>
+                                                    <button className="new_Subject" onClick={() => handleOpenSubjectAddModal(academicClass.class)}>
                                                         <i className="fa-solid fa-plus"></i>
                                                         <p>Add New Subject</p>
                                                     </button>
@@ -267,6 +269,8 @@ const ClassroomPage = () => {
                 <AddSubjectClassWiseModal
                     isSubjectAddModalOpen={isSubjectAddModalOpen}
                     setIsSubjectAddModalOpen={setIsSubjectAddModalOpen}
+                    currentClass={currentClass}
+                    setCurrentClass={setCurrentClass}
                 />
             </ClassroomsWrapper>
         </>
