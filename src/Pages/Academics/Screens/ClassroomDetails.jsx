@@ -96,7 +96,7 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Co Teacher</h5>
                                                     <li>
-                                                        <button className='add'>Add</button>
+                                                        <button className='add'>Add/Remove<i className="fa-solid fa-angle-right"></i></button>
                                                     </li>
                                                 </div>
                                                 <p>SOMASHEKAR M BHAIRANATTI</p>
@@ -144,7 +144,7 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Co Teacher</h5>
                                                     <li>
-                                                        <button className='add'>Add</button>
+                                                        <button className='add'>Add/Remove<i className="fa-solid fa-angle-right"></i></button>
                                                     </li>
                                                 </div>
                                                 <p>SOMASHEKAR M BHAIRANATTI</p>
@@ -192,7 +192,7 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Co Teacher</h5>
                                                     <li>
-                                                        <button className='add'>Add</button>
+                                                        <button className='add'>Add/Remove<i className="fa-solid fa-angle-right"></i></button>
                                                     </li>
                                                 </div>
                                                 <p>SOMASHEKAR M BHAIRANATTI</p>

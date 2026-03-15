@@ -1983,6 +1983,7 @@ export const ClassroomDetailsWrapper = styled('div')`
         display: flex;
         flex-direction: column;
         padding: 0 15px;
+        margin-bottom: 15px;
 
         .details_box {
             position: relative;
@@ -2241,16 +2242,16 @@ export const ClassroomDetailsWrapper = styled('div')`
                                                 font-size: 9px;
                                                 cursor: pointer;
                                                 border: none;
-                                                border-radius: 25px;
+                                                border-radius: 4px;
 
                                                 &.add {
                                                     background: ${colors.customColors.greenColorLight};
                                                     color:  ${colors.customColors.greenColor};
                                                 }
 
-                                                &.remove {
-                                                    background: ${colors.customColors.redColorLight};
-                                                    color:  ${colors.customColors.redColor};
+                                                i {
+                                                    margin-left: 5px;
+                                                    font-size: 8px;
                                                 }
                                             }
                                         }
