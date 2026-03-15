@@ -28,7 +28,7 @@ export const SelectFeesStructureTypeWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 650px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -84,7 +84,7 @@ export const SelectFeesStructureTypeWrapper = styled('div')`
         .modal_body {
             position: relative;
             width: 100%;
-            padding: 11px 20px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
 
@@ -93,10 +93,58 @@ export const SelectFeesStructureTypeWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                padding: 10px;
-                padding-top: 25px;
 
-                
+                .inner_box {
+                    position: relative;
+                    width: 33.33%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+
+                    .box_item {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 18px 10px 10px;
+                        border: 1px solid ${colors.customColors.borderColor1};
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: all 0.5s ease;
+
+                        img {
+                            position: relative;
+                            width: auto;
+                            height: 50px;
+                        }
+
+                        p {
+                            position: relative;
+                            margin-top: 8px;
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        span {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            text-align: center;
+                            font-size: 10px;
+                            font-weight: 400;
+                            margin-top: 3px;
+                            color: ${colors.customColors.blackColor2};
+                        }
+                    }
+
+                    &:hover .box_item {
+                        box-shadow: 0px 0px 10px ${colors.boxShadowColors.shadowColor3};
+                        transition: all 0.5s ease;
+                    }
+                }
                 
             }
         }
