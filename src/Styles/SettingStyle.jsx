@@ -1542,4 +1542,28 @@ export const SubjectSettingsWrapper = styled('div')`
             }
         }
     }
+
+    .empty_box {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+        margin-top: 80px;
+
+        img {
+            position: relative;
+            width: 300px;
+            opacity: 0.5;
+        }
+
+        p {
+            position: relative;
+            font-size: 15px;
+            margin-top: 10px;
+            color: ${colors.customColors.blackColor3};
+        }
+    }
 `;

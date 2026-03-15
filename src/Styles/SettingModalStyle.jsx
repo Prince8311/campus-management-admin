@@ -341,7 +341,7 @@ export const CreateSubjectsWrapper = styled('div')`
     }
 `;
 
-export const DeleteSubjectsWrapper = styled('div')`
+export const DeleteConfirmationWrapper = styled('div')`
     position: fixed;
     top: 0;
     right: 0;

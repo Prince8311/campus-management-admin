@@ -1,14 +1,14 @@
-import { DeleteSubjectsWrapper } from "../../../Styles/SettingModalStyle";
+import { DeleteConfirmationWrapper } from "../../Styles/SettingModalStyle";
 
-const DeleteSubjectsModal = ({isDeleteSubjectOpen, setIsDeleteSubjectOpen}) => {
+const DeleteConfirmationModal = ({isModalOpen, setIsModalOpen}) => {
 
     function closeModal  () {
-        setIsDeleteSubjectOpen(false);
+        setIsModalOpen(false);
     }
     return (
         <>
-            <DeleteSubjectsWrapper className={isDeleteSubjectOpen ? 'active' : ''}>
-                <div className={`modal_box ${isDeleteSubjectOpen ? 'active' : ''}`}>
+            <DeleteConfirmationWrapper className={isModalOpen ? 'active' : ''}>
+                <div className={`modal_box ${isModalOpen ? 'active' : ''}`}>
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="image_box">
@@ -22,9 +22,9 @@ const DeleteSubjectsModal = ({isDeleteSubjectOpen, setIsDeleteSubjectOpen}) => {
                         <button className="confirm">Confirm</button>
                     </div>
                 </div>
-            </DeleteSubjectsWrapper>
+            </DeleteConfirmationWrapper>
         </>
     );
 }
 
-export default DeleteSubjectsModal;
+export default DeleteConfirmationModal;

@@ -188,14 +188,20 @@ const ClassroomPage = () => {
                                                                 </div>
                                                             )
                                                         ) : (
-                                                            <div className="empty_box"></div>
+                                                            <div className="empty_box">
+                                                                <img src="/images/no-fields.svg" alt="" />
+                                                                <p>No Section available.</p>
+                                                            </div>
                                                         )
                                                     }
                                                 </div>
                                             </div>
                                         )
                                     ) : (
-                                        <div className="empty_box"></div>
+                                        <div className="empty_box">
+                                            <img src="/images/no-fields.svg" alt="" />
+                                            <p>No Class available.</p>
+                                        </div>
                                     )
                                 }
                             </div>

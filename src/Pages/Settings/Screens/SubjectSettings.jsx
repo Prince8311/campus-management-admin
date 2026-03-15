@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import CreateSubjectsModal from "../../../Components/Modals/Setting/CreateSubjects";
 import { SubjectSettingsWrapper } from "../../../Styles/SettingStyle";
-import DeleteSubjectsModal from "../../../Components/Modals/Setting/DeleteSubjects";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import DeleteConfirmationModal from "../../../Components/Modals/DeleteConfirmation";
 
 const SubjectSettingsPage = () => {
     const api = getApiEndpoints();
@@ -95,7 +95,10 @@ const SubjectSettingsPage = () => {
                                 </div>
                             )
                         ) : (
-                            <div className="empty_box"></div>
+                            <div className="empty_box">
+                                <img src="/images/no-fields.svg" alt="" />
+                                <p>No Subject available.</p>
+                            </div>
                         )
                     }
                 </div>
@@ -104,9 +107,9 @@ const SubjectSettingsPage = () => {
                     setIsCreateSubjectOpen={setIsCreateSubjectOpen}
                     refreshSubjects={() => fetchSubjects(false)}
                 />
-                <DeleteSubjectsModal
-                    isDeleteSubjectOpen={isDeleteSubjectOpen}
-                    setIsDeleteSubjectOpen={setIsDeleteSubjectOpen}
+                <DeleteConfirmationModal
+                    isModalOpen={isDeleteSubjectOpen}
+                    setIsModalOpen={setIsDeleteSubjectOpen}
                 />
             </SubjectSettingsWrapper>
         </>
