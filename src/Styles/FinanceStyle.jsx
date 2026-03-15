@@ -987,10 +987,16 @@ export const FeesStructureWrapper = styled('div')`
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
+                transition: all 0.5s ease;
 
                 i {
                     margin-right: 8px;
                     font-size: 12px;
+                }
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
                 }
             }
         }
@@ -1121,6 +1127,10 @@ export const FeesStructureWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         margin-top: 15px;
+
+                        &:first-of-type {
+                            margin-top: 0;
+                        }
 
                         table {
                             position: relative;
