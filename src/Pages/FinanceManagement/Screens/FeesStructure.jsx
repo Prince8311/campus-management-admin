@@ -1,13 +1,20 @@
+import { useState } from "react";
+import SelectFeesStructureTypeModal from "../../../Components/Modals/FinanceManagement/SelectFeesStructureType";
 import { FeesStructureWrapper } from "../../../Styles/FinanceStyle";
 
 const FeesStructurePage = () => {
+    const [isFeesStructureOpen, setIsFeesStructureOpen] = useState(false);
+
+    const handleOpenFeesStructure = () => {
+        setIsFeesStructureOpen(true);
+    };
     return (
         <>
             <FeesStructureWrapper>
                 <div className="page_head">
                     <h2>Fees Structure</h2>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={setIsFeesStructureOpen}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Create Structure</p>
                         </button>
@@ -94,6 +101,11 @@ const FeesStructurePage = () => {
                         </div>
                     </div>
                 </div>
+
+                <SelectFeesStructureTypeModal
+                    isFeesStructureOpen={isFeesStructureOpen}
+                    setIsFeesStructureOpen={setIsFeesStructureOpen}
+                />
             </FeesStructureWrapper>
         </>
     );
