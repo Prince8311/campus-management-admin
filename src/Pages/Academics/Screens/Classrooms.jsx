@@ -11,6 +11,7 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import AddSubjectClassWiseModal from "../../../Components/Modals/Academics/AddSubjectClassWise";
 import ButtonLoader from "../../../Components/Loader/ButtonLoader";
+import DeleteConfirmationModal from "../../../Components/Modals/DeleteConfirmation";
 
 const ClassroomPage = () => {
     const api = getApiEndpoints();
