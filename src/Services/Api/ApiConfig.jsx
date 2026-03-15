@@ -42,5 +42,6 @@ export const getApiEndpoints = () => {
         createClass: `${apiURL}/api/institutions/academic/class/create.php`,
         fetchClasses: `${apiURL}/api/institutions/academic/class/list.php`,
         createSection: `${apiURL}/api/institutions/academic/section/create.php`,
+        deleteSection: `${apiURL}/api/institutions/academic/section/delete.php`,
     };
 }

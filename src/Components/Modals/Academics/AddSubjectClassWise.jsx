@@ -10,6 +10,7 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
     const [showSubjectDropdown, setShowSubjectDropdown] = useState(false);
     const [subjects, setSubjects] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState({});
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     function closeModal() {
         setSelectedSubject({});
@@ -43,12 +44,32 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
         setShowSubjectDropdown(false);
     }
 
+    const handleAddSubjectClassWise = async () => {
+        setIsButtonLoading(true);
+        const payload = {
+            academicLevelId: currentClass.level_id,
+            class: currentClass.class,
+            subject: selectedSubject.subject_name
+        };
+        try {
+            const response = await axiosInstance.post(api.addSubjectClassWise, payload);
+            if (response?.data.status === 200) { 
+                toast.success(response?.data.message);
+                setSelectedSubject({});
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+
     return (
         <>
             <AddSubjectClassWiseWrapper className={isSubjectAddModalOpen ? 'active' : ''}>
                 <div className={`modal_box ${isSubjectAddModalOpen ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Subject to Class {currentClass}</h4>
+                        <h4>Add Subject to Class {currentClass.class}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -65,7 +86,7 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
                                     <div className={`dropdown ${showSubjectDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             {
-                                                subjects.length > 8 && (
+                                                subjects.length > 5 && (
                                                     <div className="search_sec">
                                                         <i className="fa-solid fa-magnifying-glass"></i>
                                                         <input type="text" placeholder="Search by Subject Name..." />
@@ -96,7 +117,15 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={!selectedSubject.id || isButtonLoading} onClick={handleAddSubjectClassWise}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </AddSubjectClassWiseWrapper>
