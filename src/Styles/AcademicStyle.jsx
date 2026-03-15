@@ -602,7 +602,12 @@ export const ClassroomsWrapper = styled('div')`
                         border: 1px solid ${colors.customColors.blueColor1};
                         background: ${colors.customColors.blueColor1};
                         margin-left: auto;
-                        margin-right: 25px;
+                        margin-right: 10px;
+                    }
+
+                    &:disabled {
+                        opacity: 0.4;
+                        pointer-events: none;
                     }
                 }
             }
