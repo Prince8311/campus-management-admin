@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import ButtonLoader from "../../../Components/Loader/ButtonLoader";
 
 const ClassroomPage = () => {
     const api = getApiEndpoints();
@@ -20,6 +21,7 @@ const ClassroomPage = () => {
     const [selectedAcademicLevel, setSelectedAcademicLevel] = useState({});
     const [isInitialClassesLoading, setIsInitialClassesLoading] = useState(false);
     const [academicClasses, setAcademicClasses] = useState([]);
+    const [isSectionButtonLoading, setIsSectionButtonLoading] = useState(false);
 
     const handleOpenCreateAcademicLabel = () => {
         setIsCreateAcademicLabelOpen(true);
@@ -82,6 +84,25 @@ const ClassroomPage = () => {
 
     const handleRedirectionClassroomDetailsPage = () => {
         navigate("/admin/academics/classroom-details");
+    }
+
+    const handleAddSection = async (className) => {
+        setIsSectionButtonLoading(true);
+        const payload = {
+            academicLevelId: selectedAcademicLevel.id,
+            class: className
+        };
+        try {
+            const response = await axiosInstance.post(api.createSection, payload);
+            if (response?.data.status === 200) {
+                toast.success(response?.data.message);
+                fetchClasses(false);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsSectionButtonLoading(false);
+        }
     }
 
     return (
@@ -159,21 +180,29 @@ const ClassroomPage = () => {
                                             <div className="class_level_box" key={index}>
                                                 <div className="box_head">
                                                     <span>Class - {academicClass.class}</span>
-                                                    <button>
-                                                        <i className="fa-solid fa-plus"></i>
-                                                        <p>Add New Section</p>
+                                                    <button disabled={isSectionButtonLoading} onClick={() => handleAddSection(academicClass.class)}>
+                                                        {
+                                                            isSectionButtonLoading ? (
+                                                                <ButtonLoader />
+                                                            ) : (
+                                                                <>
+                                                                    <i className="fa-solid fa-plus"></i>
+                                                                    <p>Add New Section</p>
+                                                                </>
+                                                            )
+                                                        }
                                                     </button>
                                                 </div>
                                                 <div className="box_items">
                                                     {
-                                                        academicClass.length > 0 ? (
-                                                            academicClass.map((section, i) =>
+                                                        academicClass.sections.length > 0 ? (
+                                                            academicClass.sections.map((section, i) =>
                                                                 <div className="class_item" key={i}>
                                                                     <div className="item_inner">
                                                                         <div className="top_part">
                                                                             <div className="part_content">
                                                                                 <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                                                <h6>1 - A</h6>
+                                                                                <h6>1 - {section}</h6>
                                                                                 <span>1000 Students</span>
                                                                             </div>
                                                                             <div className="teacher_name_sec">
