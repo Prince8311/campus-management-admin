@@ -20,7 +20,7 @@ const CreateSubjectsModal = ({ isCreateSubjectOpen, setIsCreateSubjectOpen, refr
         setIsButtonLoading(true);
         const payload = { subject: name };
         try {
-            const response = await axiosInstance.post(api.addSubject, payload);
+            const response = await axiosInstance.post(api.createSubject, payload);
             if (response?.data.status === 200) { 
                 toast.success(response?.data.message);
                 refreshSubjects();

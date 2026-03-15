@@ -34,8 +34,9 @@ export const getApiEndpoints = () => {
         updateStudentFormFieldOrder: `${apiURL}/api/student/fields/update-order.php`,
 
         // Subjects 
-        addSubject: `${apiURL}/api/institutions/subjects/create.php`,
+        createSubject: `${apiURL}/api/institutions/subjects/create.php`,
         fetchSubjects: `${apiURL}/api/institutions/subjects/list.php`,
+        addSubjectClassWise: `${apiURL}/api/institutions/academic/class/add-subject.php`,
 
         // Class & Section 
         createClass: `${apiURL}/api/institutions/academic/class/create.php`,

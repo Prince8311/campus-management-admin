@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalOpen }) => {
+const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalOpen, currentClass, setCurrentClass }) => {
     const api = getApiEndpoints();
     const [showSubjectDropdown, setShowSubjectDropdown] = useState(false);
     const [subjects, setSubjects] = useState([]);
@@ -13,6 +13,7 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
 
     function closeModal() {
         setSelectedSubject({});
+        setCurrentClass('');
         setIsSubjectAddModalOpen(false);
     }
 
@@ -47,7 +48,7 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
             <AddSubjectClassWiseWrapper className={isSubjectAddModalOpen ? 'active' : ''}>
                 <div className={`modal_box ${isSubjectAddModalOpen ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Subject to Class - 1</h4>
+                        <h4>Add Subject to Class {currentClass}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -63,10 +64,14 @@ const AddSubjectClassWiseModal = ({ isSubjectAddModalOpen, setIsSubjectAddModalO
                                     </div>
                                     <div className={`dropdown ${showSubjectDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
-                                            <div className="search_sec">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input type="text" placeholder="Search by Subject Name..." />
-                                            </div>
+                                            {
+                                                subjects.length > 8 && (
+                                                    <div className="search_sec">
+                                                        <i className="fa-solid fa-magnifying-glass"></i>
+                                                        <input type="text" placeholder="Search by Subject Name..." />
+                                                    </div>
+                                                )
+                                            }
                                             <ul>
                                                 {
                                                     subjects.length > 0 ? (
