@@ -180,6 +180,10 @@ const ClassroomPage = () => {
                                             <div className="class_level_box" key={index}>
                                                 <div className="box_head">
                                                     <span>Class - {academicClass.class}</span>
+                                                    <button className="new_Subject">
+                                                        <i className="fa-solid fa-plus"></i>
+                                                        <p>Add New Subject</p>
+                                                    </button>
                                                     <button disabled={isSectionButtonLoading} onClick={() => handleAddSection(academicClass.class)}>
                                                         {
                                                             isSectionButtonLoading ? (

@@ -597,6 +597,18 @@ export const ClassroomsWrapper = styled('div')`
                         border-radius: 25px;
                         transition: all 0.5s ease;
                     }
+
+                    &.new_Subject {
+                        border: 1px solid ${colors.customColors.blueColor1};
+                        background: ${colors.customColors.blueColor1};
+                        margin-left: auto;
+                        margin-right: 10px;
+                    }
+
+                    &:disabled {
+                        opacity: 0.4;
+                        pointer-events: none;
+                    }
                 }
             }
 
