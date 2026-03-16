@@ -128,7 +128,7 @@ export const SidebarWrapper = styled('div')`
 
                     i {
                         position: relative;
-                        font-size: 13px;
+                        font-size: 14px;
                         color: ${colors.customColors.whiteColor};
                     }
                 }
@@ -144,8 +144,8 @@ export const SidebarWrapper = styled('div')`
                     h4 {
                         position: relative;
                         width: 100%;
-                        font-size: 13px;
-                        font-weight: 600;
+                        font-size: 12.5px;
+                        font-weight: 500;
                         color: ${colors.customColors.blackColor};
                         white-space: nowrap;
                         overflow: hidden;

@@ -6,10 +6,13 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import { UserData } from "../../../Context/PageContext";
+import CircleLoader from "../../../Components/Loader/CircleLoader";
 
 const AddStudentPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
+    const { userDetails } = UserData();
     const [displayBulkUpload, setDisplayBulkUpload] = useState(true);
     const [displayManualUpload, setDisplayManualUpload] = useState(false);
     const [isFormLoading, setIsFormLoading] = useState(false);
@@ -18,6 +21,7 @@ const AddStudentPage = () => {
     const [formData, setFormData] = useState({});
     const [isDragging, setIsDragging] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [isBulkUploading, setIsBulkUploading] = useState(false);
 
     const fetchStudentForm = async () => {
         setIsFormLoading(true);
@@ -164,65 +168,84 @@ const AddStudentPage = () => {
         return map;
     };
 
-    const handleCSVUpload = () => {
+    const handleCSVUpload = async () => {
         if (!selectedFile) {
             toast.warn("Please select a file first");
             return;
         }
 
+        setIsBulkUploading(true);
         const reader = new FileReader();
 
-        reader.onload = (event) => {
-            const text = event.target.result.trim();
+        reader.onload = async (event) => {
+            try {
 
-            if (!text) {
-                toast.warn("No data in the file");
-                return;
-            }
+                const text = event.target.result?.trim();
+                if (!text) {
+                    toast.warn("No data in the file");
+                    setIsBulkUploading(false);
+                    return;
+                }
 
-            const rows = text.split("\n").map(row => row.split(","));
+                const rows = text.split("\n").map(row => row.split(","));
+                if (rows.length <= 1) {
+                    toast.warn("No data in the file");
+                    setIsBulkUploading(false);
+                    return;
+                }
 
-            if (rows.length <= 1) {
-                toast.warn("No data in the file");
-                return;
-            }
+                const dataRows = rows.slice(1).filter(row =>
+                    row.some(cell => cell.trim() !== "")
+                );
 
-            const dataRows = rows.slice(1).filter(row =>
-                row.some(cell => cell.trim() !== "")
-            );
+                if (dataRows.length === 0) {
+                    toast.warn("No data in the file");
+                    setIsBulkUploading(false);
+                    return;
+                }
 
-            if (dataRows.length === 0) {
-                toast.warn("No data in the file");
-                return;
-            }
+                const headers = rows[0].map(h => h.replace("*", "").trim());
+                const fieldMap = createFieldMap();
 
-            const headers = rows[0].map(h => h.replace("*", "").trim());
-            const fieldMap = createFieldMap();
+                const formattedData = dataRows.map(row => {
+                    const studentData = [];
 
-            const formattedData = dataRows.map(row => {
-                const studentData = [];
+                    headers.forEach((header, index) => {
+                        if (fieldMap[header]) {
+                            studentData.push({
+                                section_id: fieldMap[header].section_id,
+                                field_name: fieldMap[header].field_name,
+                                value: row[index]?.trim() || ""
+                            });
+                        }
+                    });
 
-                headers.forEach((header, index) => {
-                    if (fieldMap[header]) {
-                        studentData.push({
-                            section_id: fieldMap[header].section_id,
-                            field_name: fieldMap[header].field_name,
-                            value: row[index]?.trim() || ""
-                        });
-                    }
+                    return { student_fields: studentData };
                 });
 
-                return {
-                    student_fields: studentData
+                const payload = {
+                    students: formattedData,
+                    session: userDetails?.session?.name,
+                    isBulkUpload: true
                 };
-            });
 
-            const payload = {
-                students: formattedData,
-                isBulkUpload: true
-            };
+                console.log("Payload", payload);
+                const response = await axiosInstance.post(api.addStudent, payload);
 
-            console.log("Payload", payload);
+                if (response?.data.status === 200) {
+                    toast.success(response.data?.message || "Students uploaded successfully");
+                    handleRemoveFile();
+                }
+            } catch (error) {
+                toast.error(error.response?.data?.message || error.message);
+            } finally {
+                setIsBulkUploading(false);
+            }
+        };
+
+        reader.onerror = () => {
+            toast.error("Failed to read file");
+            setIsBulkUploading(false);
         };
 
         reader.readAsText(selectedFile);
@@ -278,7 +301,15 @@ const AddStudentPage = () => {
                                                             <div className="file_items">
                                                                 <p>{selectedFile.name}</p>
                                                                 <div className="btns">
-                                                                    <button onClick={handleCSVUpload}><i className="fa-solid fa-cloud-arrow-up"></i>Upload</button>
+                                                                    <button disabled={isBulkUploading} onClick={handleCSVUpload}>
+                                                                        {
+                                                                            isBulkUploading ? (
+                                                                                <>Uploading<CircleLoader margin="0 0 0 7px" color="blueColor1" /></>
+                                                                            ) : (
+                                                                                <><i className="fa-solid fa-cloud-arrow-up"></i>Upload</>
+                                                                            )
+                                                                        }
+                                                                    </button>
                                                                     <button onClick={handleRemoveFile}><i className="fa-solid fa-trash"></i>Remove</button>
                                                                 </div>
                                                             </div>

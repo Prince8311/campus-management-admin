@@ -123,6 +123,7 @@ const ClassroomPage = () => {
             section: section
         };
         setDeletePayload(payload);
+        setOpenDeleteModal(true);
     }
 
     return (
@@ -235,7 +236,7 @@ const ClassroomPage = () => {
                                                                         </div>
                                                                         <div className="bottom_btn">
                                                                             <button className="details" onClick={handleRedirectionClassroomDetailsPage}>View Details</button>
-                                                                            <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                                            <button className="delete" onClick={() => handleSectionDelete(academicClass.class, section)}><i className="fa-solid fa-trash"></i></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -290,6 +291,7 @@ const ClassroomPage = () => {
                     deleteObject="Section" 
                     payload={deletePayload}
                     endPoint={api.deleteSection}
+                    refreshData={() => fetchClasses(false)}
                 />
             </ClassroomsWrapper>
         </>

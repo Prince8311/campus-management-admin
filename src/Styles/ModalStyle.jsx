@@ -34,6 +34,20 @@ export const SkeletonBoxWrapper = styled('div')`
     }
 `;
 
+export const CircleLoaderWrapper = styled('div')`
+    position: relative;
+    border: 2px solid ${colors.customColors.greenColor};
+    border-right: none;
+    border-bottom: none;
+    border-radius: 50%;
+    animation: rotate 1s linear infinite;
+
+    @keyframes rotate {
+        from { transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+    }
+`;
+
 export const CreateAcademicLabelWrapper = styled('div')`
     position: fixed;
     top: 0;

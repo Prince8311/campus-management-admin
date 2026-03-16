@@ -72,14 +72,14 @@ const Sidebar = () => {
                                 <i className="fa-solid fa-school"></i>
                             </div>
                             <li>
-                                <h4>Sri Sai Angels School</h4>
-                                <p><b>INT ID :</b>SRI894</p>
+                                <h4>{userDetails.name}</h4>
+                                <p><b>INT ID :</b>{userDetails.inst_id}</p>
                             </li>
                         </div>
                         <div className="bottom_part">
                             <li>
                                 <p>Ongoing Session :</p>
-                                <span>AY 2025-26</span>
+                                <span>{userDetails.session?.name}</span>
                             </li>
                             <div className="btn_sec">
                                 <button className="view_btn">View Details</button>

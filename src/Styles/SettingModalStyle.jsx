@@ -369,7 +369,7 @@ export const DeleteConfirmationWrapper = styled('div')`
         position: relative;
         width: 400px;
         max-height: 100%;
-        background: ${colors.customColors.whiteColor3};
+        background: rgb(249, 249, 249);
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
         border-radius: 10px;
         display: flex;
