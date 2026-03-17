@@ -21,7 +21,7 @@ export const getApiEndpoints = () => {
         createAcademicLevel: `${apiURL}/api/institutions/academic/academic-level/create.php`,
         fetchAcademicLevels: `${apiURL}/api/institutions/academic/academic-level/list.php`,
 
-        // Students 
+        // ====================== Students ======================
         studentUploadForm: `${apiURL}/api/student/form.php`,
         addStudent: `${apiURL}/api/student/create.php`,
 
@@ -31,8 +31,22 @@ export const getApiEndpoints = () => {
 
         // Form Fields
         createStudentFormFields: `${apiURL}/api/student/fields/create.php`,
+        deleteStudentFormField: `${apiURL}/api/student/fields/delete.php`,
         fetchStudentFormFields: `${apiURL}/api/student/fields/list.php`,
         updateStudentFormFieldOrder: `${apiURL}/api/student/fields/update-order.php`,
+        
+        // ====================== Staffs ======================
+        // Form Sections 
+        createStaffFormSection: `${apiURL}/api/staff/sections/create.php`,
+        deleteStaffFormSection: `${apiURL}/api/staff/sections/delete.php`,
+        fetchStaffFormSection: `${apiURL}/api/staff/sections/list.php`,
+        
+        // Form Fields
+        createStaffFormFields: `${apiURL}/api/staff/fields/create.php`,
+        deleteStaffFormField: `${apiURL}/api/staff/fields/delete.php`,
+        fetchStaffFormFields: `${apiURL}/api/staff/fields/list.php`,
+        updateStaffFormFieldOrder: `${apiURL}/api/staff/fields/update-order.php`,
+
 
         // Subjects 
         createSubject: `${apiURL}/api/institutions/subjects/create.php`,

@@ -76,8 +76,9 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
                 : {}
             )
         };
+        const apiURL = sectionData.userType === 'Student' ? api.createStudentFormFields : api.createStaffFormFields;
         try {
-            const response = await axiosInstance.post(api.createStudentFormFields, payload);
+            const response = await axiosInstance.post(apiURL, payload);
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 refreshFormFields();

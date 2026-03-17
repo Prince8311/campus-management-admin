@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import DeleteConfirmationModal from "../../../Components/Modals/DeleteConfirmation";
 
 const StudentPage = () => {
     const api = getApiEndpoints();
@@ -17,6 +18,8 @@ const StudentPage = () => {
     const [documentFormSections, setDocumentFormSections] = useState([]);
     const [isInitialProfileLoading, setIsInitialProfileLoading] = useState(true);
     const [isInitialDocumentLoading, setIsInitialDocumentLoading] = useState(true);
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [deletePayload, setDeletePayload] = useState({});
 
     const handleOpenCreateSection = (section) => {
         setIsCreateSectionOpen(true);
@@ -51,7 +54,6 @@ const StudentPage = () => {
                 params: { type: 'document' }
             });
             if (response?.data.status === 200) {
-                console.log("Documents Fetch", response.data);
                 setDocumentFormSections(response?.data.sections);
             }
         } catch (error) {
@@ -75,6 +77,16 @@ const StudentPage = () => {
         };
         localStorage.setItem("sectionData", JSON.stringify(sectionData));
         navigate("/admin/settings/profile-settings/section-fields");
+    }
+
+    const handleDeleteSection = (id, section, type) => {
+        const payload = {
+            sectionId: id,
+            section: section
+        };
+        setSectionType(type);
+        setDeletePayload(payload);
+        setOpenDeleteModal(true);
     }
 
     return (
@@ -117,7 +129,7 @@ const StudentPage = () => {
                                                     <button className={`details ${section.isRemoval ? '' : 'not_removal'}`} onClick={() => handleOpenFieldRedirectionPage(section.id, section.name, 'profile_info')}>View Details</button>
                                                     {
                                                         section.isRemoval &&
-                                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                        <button className="delete" onClick={() => handleDeleteSection(section.id, section.name, 'profile_info')}><i className="fa-solid fa-trash"></i></button>
                                                     }
                                                 </div>
                                             </div>
@@ -156,13 +168,16 @@ const StudentPage = () => {
                                                 <div className="inner_top">
                                                     <a><i class="fa-solid fa-thumbtack"></i></a>
                                                     <div className="inner_content">
-                                                        <h6>Admin</h6>
-                                                        <span>20 fields</span>
+                                                        <h6>{section.name}</h6>
+                                                        <span>{section.total_fields} {section.total_fields > 1 ? 'fields' : 'field'}</span>
                                                     </div>
                                                 </div>
                                                 <div className="inner_btn">
-                                                    <button className="details">View Details</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                    <button className={`details ${section.isRemoval ? '' : 'not_removal'}`} onClick={() => handleOpenFieldRedirectionPage(section.id, section.name, 'document')}>View Details</button>
+                                                    {
+                                                        section.isRemoval &&
+                                                        <button className="delete" onClick={() => handleDeleteSection(section.id, section.name, 'document')}><i className="fa-solid fa-trash"></i></button>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -186,6 +201,20 @@ const StudentPage = () => {
                     setSectionType={setSectionType}
                     refreshProfileSections={() => fetchProfileFormSections(false)}
                     refreshDocumentSections={() => fetchDocumentsFormSection(false)}
+                />
+                <DeleteConfirmationModal
+                    isModalOpen={openDeleteModal}
+                    setIsModalOpen={setOpenDeleteModal}
+                    deleteObject="Form section"
+                    payload={deletePayload}
+                    endPoint={api.deleteStaffFormSection}
+                    refreshData={() => {
+                        if (sectionType === 'profile_info') {
+                            fetchProfileFormSections(false);
+                        } else if (sectionType === 'document') {
+                            fetchDocumentsFormSection(false);
+                        }
+                    }}
                 />
             </StudentWrapper>
         </>

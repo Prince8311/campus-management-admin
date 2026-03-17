@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import DeleteConfirmationModal from "../../../Components/Modals/DeleteConfirmation";
 
 const SortableItem = ({ field, selectedId, onSelect }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: field.id, disabled: !field.isRemoval });
@@ -64,6 +65,8 @@ const SectionFieldsPage = () => {
     const [editedRequired, setEditedRequired] = useState(false);
     const [editedItems, setEditedItems] = useState([]);
     const [itemInput, setItemInput] = useState('');
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [deletePayload, setDeletePayload] = useState({});
 
     useEffect(() => {
         if (!sectionData) {
@@ -75,11 +78,13 @@ const SectionFieldsPage = () => {
         if (showSkeleton) {
             setIsInitialFieldsLoading(true);
         }
+        const apiURL = sectionData.userType === 'Student' ? api.fetchStudentFormFields : api.fetchStaffFormFields;
         try {
-            const response = await axiosInstance.get(api.fetchStudentFormFields, {
+            const response = await axiosInstance.get(apiURL, {
                 params: { sectionId: sectionData.sectionId }
             });
             if (response?.data.status === 200) {
+                console.log("fields", response.data);
                 const fields = response?.data.fields || [];
                 setFormFields(fields);
                 if (fields.length > 0 && !selectedFormField?.id) {
@@ -138,14 +143,14 @@ const SectionFieldsPage = () => {
 
         const newOrder = arrayMove(formFields, oldIndex, newIndex);
         setFormFields(newOrder);
-
+        const apiURL = sectionData.userType === 'Student' ? api.updateStudentFormFieldOrder : api.updateStaffFormFieldOrder;
         try {
             const payload = newOrder.map((item, index) => ({
                 id: item.id,
                 sort_order: index + 1
             }));
 
-            await axiosInstance.post(api.updateStudentFormFieldOrder, {
+            await axiosInstance.post(apiURL, {
                 sectionId: sectionData.sectionId,
                 fields: payload
             });
@@ -154,8 +159,16 @@ const SectionFieldsPage = () => {
         }
     };
 
-
     const isChanged = editedName !== selectedFormField?.form_field || editedRequired !== selectedFormField?.is_required || JSON.stringify(editedItems) !== JSON.stringify(selectedFormField?.items || []);
+
+    const handleDeleteField = () => {
+        const payload = {
+            sectionId: selectedFormField.section_id,
+            fieldId: selectedFormField.id
+        };
+        setDeletePayload(payload);
+        setOpenDeleteModal(true);
+    }
 
     return (
         <>
@@ -275,7 +288,7 @@ const SectionFieldsPage = () => {
                                             {
                                                 selectedFormField.isRemoval &&
                                                 <div className="remove_btn">
-                                                    <button><i className="fa-solid fa-trash"></i>Remove</button>
+                                                    <button onClick={handleDeleteField}><i className="fa-solid fa-trash"></i>Remove</button>
                                                 </div>
                                             }
                                         </div>
@@ -295,6 +308,14 @@ const SectionFieldsPage = () => {
                     isCreateFieldsOpen={isCreateFieldsOpen}
                     setIsCreateFieldsOpen={setIsCreateFieldsOpen}
                     refreshFormFields={() => fetchFormFields(false)}
+                />
+                <DeleteConfirmationModal 
+                    isModalOpen={openDeleteModal}
+                    setIsModalOpen={setOpenDeleteModal}
+                    deleteObject="Field" 
+                    payload={deletePayload}
+                    endPoint={sectionData.userType === 'Student' ? api.deleteStudentFormField : api.deleteStaffFormField}
+                    refreshData={() => fetchFormFields(false)}
                 />
             </SectionFieldsWrapper>
         </>

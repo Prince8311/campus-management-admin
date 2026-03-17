@@ -23,8 +23,9 @@ const CreateSectionModal = ({ isCreateSectionOpen, setIsCreateSectionOpen, userT
             section: name,
             sectionType: sectionType
         };
+        const apiURL = userType === 'Student' ? api.createStudentFormSection : api.createStaffFormSection;
         try {
-            const response = await axiosInstance.post(api.createStudentFormSection, payload);
+            const response = await axiosInstance.post(apiURL, payload);
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 if (sectionType === 'profile_info') {
