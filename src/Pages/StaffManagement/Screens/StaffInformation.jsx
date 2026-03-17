@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { StaffInformationWrapper } from "../../../Styles/StaffStyle";
 
 const StaffInformationPage = () => {
+    const navigate = useNavigate();
+
+    const redirectAddStaffScreen = () => {
+        navigate("/admin/staff-management/add-staff");
+    }
     return (
         <>
             <StaffInformationWrapper>
@@ -13,7 +19,7 @@ const StaffInformationPage = () => {
                         <input type="text" placeholder="Search by Mobile Number" />
                     </div>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={redirectAddStaffScreen}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add New Staff</p>
                         </button>

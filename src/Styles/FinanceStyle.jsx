@@ -971,6 +971,7 @@ export const FeesStructureWrapper = styled('div')`
 
         .add_btn {
             position: relative;
+            display: flex;
             margin-left: auto;
 
             button {
@@ -997,6 +998,10 @@ export const FeesStructureWrapper = styled('div')`
                 &:hover {
                     border-radius: 25px;
                     transition: all 0.5s ease;
+                }
+
+                &:first-of-type {
+                    margin-right: 15px;
                 }
             }
         }
@@ -1956,6 +1961,28 @@ export const SplitAccountsWrapper = styled('div')`
                     }
                 }
             }
+        }
+    }
+`;
+
+export const AddFeesStructureWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        padding: 0 15px;
+        display: flex;
+
+        h2 {
+            position: relative;
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
         }
     }
 `;

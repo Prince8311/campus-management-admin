@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { SelectFeesStructureTypeWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 
 const SelectFeesStructureTypeModal = ({ isFeesStructureOpen, setIsFeesStructureOpen }) => {
+    const navigate = useNavigate();
+
+    const handleRedirectionAddFeesStructurePage = () => {
+        navigate("/admin/finance-management/add-fees-structure");
+        setIsFeesStructureOpen(false);
+    }
 
     function closeModal() {
         setIsFeesStructureOpen(false);
@@ -17,7 +24,7 @@ const SelectFeesStructureTypeModal = ({ isFeesStructureOpen, setIsFeesStructureO
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="inner_box">
+                            <div className="inner_box" onClick={handleRedirectionAddFeesStructurePage}>
                                 <div className="box_item">
                                     <img src="/images/recurring-fee.svg" alt="" />
                                     <p>Recurring Fee</p>

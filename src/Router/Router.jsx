@@ -30,6 +30,7 @@ import DiscountPage from "../Pages/FinanceManagement/Screens/Discount";
 import BankAccountPage from "../Pages/FinanceManagement/Screens/BankAccounts";
 import AllAccountsPage from "../Pages/FinanceManagement/Screens/AllAccounts";
 import SplitAccountsPage from "../Pages/FinanceManagement/Screens/SplitAccounts";
+import AddFeesStructure from "../Pages/FinanceManagement/Screens/AddFeesStructure";
 
 // Communication 
 import CommunicationMainPage from "../Pages/Communication/Index";
@@ -38,6 +39,7 @@ import MessagingPage from "../Pages/Communication/Screens/Messaging";
 // Staff Management 
 import StaffManagementMainPage from "../Pages/StaffManagement/Index";
 import StaffInformationPage from "../Pages/StaffManagement/Screens/StaffInformation";
+import AddStaffPage from "../Pages/StaffManagement/Screens/AddStaff";
 
 // Settings 
 import SettingsMainPage from "../Pages/Settings/Index";
@@ -119,6 +121,7 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="fee-collection" />} />
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
                             <Route path="fee-transactions" element={<FeeTransactionsPage />} />
+                            <Route path="add-fees-structure" element={<AddFeesStructure />} />
                             <Route path="fee-configuration" element={<FeeConfigurationPage />}>
                                 <Route path="" element={<Navigate to="fees-structure" />} />
                                 <Route path="fees-structure" element={<FeesStructurePage />} />
@@ -137,6 +140,7 @@ const Routers = () => {
                         <Route path="staff-management" element={<StaffManagementMainPage />}>
                             <Route path="" element={<Navigate to="staff-information" />} />
                             <Route path="staff-information" element={<StaffInformationPage />} />
+                            <Route path="add-staff" element={<AddStaffPage />} />
                         </Route>
                         <Route path="settings" element={<SettingsMainPage />}>
                             <Route path="" element={<Navigate to="roles-permissions" />} />
