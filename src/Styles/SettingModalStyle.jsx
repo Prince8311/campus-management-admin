@@ -956,7 +956,6 @@ export const AddStateCitiesWrapper = styled('div')`
                 position: relative;
                 max-width: calc(100% - 40px);
                 font-size: 14px;
-                line-height: 1;
                 font-weight: 600;
                 font-style: italic;
                 color: ${colors.customColors.blackColor1};
@@ -1087,7 +1086,7 @@ export const AddStateCitiesWrapper = styled('div')`
                                     width: 100%;
                                     display: flex;
                                     flex-direction: column;
-                                    max-height: 160px;
+                                    max-height: 130px;
                                     overflow-y: auto;
                                     scrollbar-width: none;
                                     -ms-overflow-style: none;
@@ -1128,10 +1127,24 @@ export const AddStateCitiesWrapper = styled('div')`
                     }
                 }
 
-                .item_box {
+                .input_box {
                     position: relative;
                     width: 100%;
-                    margin-bottom: 8px;
+                    margin-top: 5px;
+                    margin-bottom: 10px;
+
+                    input {
+                        position: relative;
+                        width: 100%;
+                        height: 37px;
+                        font-size: 12px;
+                        border-radius: 5px;
+                        padding: 5px 15px;
+                        outline: none;
+                        border: none;
+                        margin-top: 3px;
+                        background: ${colors.customColors.lightBackground3};
+                    }
 
                     span {
                         position: relative;
@@ -1144,68 +1157,6 @@ export const AddStateCitiesWrapper = styled('div')`
                         p {
                             color: ${colors.customColors.redColor};
                             margin-left: 2px;
-                        }
-
-                        a {
-                            position: relative;
-                            font-size: 9px;
-                            color: ${colors.customColors.blackColor2};
-                            margin-left: 2px;
-                            text-decoration: none;
-                        }
-                    }
-
-                    .box_content {
-                        position: relative;
-                        width: 100%;
-                        min-height: 80px;
-                        display: flex;
-                        flex-wrap: wrap;
-                        align-items: flex-start;
-                        margin-top: 3px;
-                        padding: 7px;
-                        background: ${colors.customColors.lightBackground3};
-                        border-radius: 5px;
-
-                        li {
-                            position: relative;
-                            width: max-content;
-                            display: flex;
-                            align-items: center;
-                            list-style: none;
-                            padding: 5px 5px 5px 10px;
-                            border-radius: 4px;
-                            background: ${colors.customColors.blueColor1};
-                            margin: 3px;
-
-                            p {
-                                position: relative;
-                                font-size: 11px;
-                                color: ${colors.customColors.whiteColor};
-                            }
-
-                            span {
-                                position: relative;
-                                font-size: 12px;
-                                color: ${colors.customColors.whiteColor};
-                                margin-left: 6px;
-                                cursor: pointer;
-                            }
-                        }
-
-                        input {
-                            position: relative;
-                            margin: 5px;
-                            width: max-content;
-                            border: none;
-                            outline: none;
-                            background: transparent;
-                            padding: 0 5px;
-                            font-size: 11px;
-
-                            &.active {
-                                height: 23px;
-                            }
                         }
                     }
                 }
@@ -1284,6 +1235,7 @@ export const SelectAddressWrapper = styled('div')`
         border-radius: 10px;
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
 
@@ -1304,7 +1256,6 @@ export const SelectAddressWrapper = styled('div')`
                 position: relative;
                 max-width: calc(100% - 40px);
                 font-size: 14px;
-                line-height: 1;
                 font-weight: 600;
                 font-style: italic;
                 color: ${colors.customColors.blackColor1};
@@ -1365,8 +1316,8 @@ export const SelectAddressWrapper = styled('div')`
 
                 .select_box {
                     position: relative;
-                    width: 48.5%;
-                    margin-bottom: 10px;
+                    width: 48.9%;
+                    margin-bottom: 13px;
 
                     span {
                         position: relative;
@@ -1501,7 +1452,7 @@ export const SelectAddressWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     align-items: center;
-                    margin-bottom: 10px;
+                    margin-bottom: 13px;
 
                     .search_sec {
                         position: relative;
@@ -1540,7 +1491,7 @@ export const SelectAddressWrapper = styled('div')`
                 .map_box {
                     position: relative;
                     width: 100%;
-                    height: 240px;
+                    height: 235px;
                     margin-bottom: 10px;
                     padding: 10px;
                     display: flex;
@@ -1551,7 +1502,7 @@ export const SelectAddressWrapper = styled('div')`
                 .text_box {
                     position: relative;
                     width: 100%;
-                    margin-bottom: 15px;
+                    margin-bottom: 10px;
 
                     textarea {
                         position: relative;

@@ -48,6 +48,102 @@ export const CircleLoaderWrapper = styled('div')`
     }
 `;
 
+export const PaginationWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    button {
+        position: relative;
+        width: 100px;
+        height: 30px;
+        background: ${colors.themeColor};
+        color: ${colors.customColors.whiteColor};
+        font-size: 12px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: all 0.5s ease;
+        box-shadow: 3px 4px 8px ${colors.boxShadowColors.shadowColor1},
+                    -2px -2px 6px ${colors.boxShadowColors.shadowColor2};
+
+        &:hover {
+            border-radius: 25px;
+            transition: all 0.5s ease;
+        }
+
+        &.disable {
+            pointer-events: none;
+            box-shadow: none;
+            background: ${colors.customColors.whiteColor2};
+        }
+
+        i {
+            position: relative;
+            font-size: 11px;
+        }
+
+        &.prev_btn i {
+            margin-right: 5px;
+        }
+
+        &.next_btn i {
+            margin-left: 5px;
+        }
+    }
+
+    ul {
+        position: relative;
+        margin: 0 4px;
+        display: flex;
+        align-items: center;
+
+        li {
+            position: relative;
+            list-style: none;
+            margin: 0 2px;
+            width: 30px;
+            height: 30px;
+            background: ${colors.customColors.whiteColor};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: ${colors.customColors.blackColor2};
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 3px 4px 8px ${colors.boxShadowColors.shadowColor1},
+                        -2px -2px 6px ${colors.boxShadowColors.shadowColor2};
+            transition: all 0.5s ease;
+
+            &:hover {
+                background: ${colors.customColors.blueColor1};
+                color: ${colors.customColors.whiteColor};
+                transition: all 0.5s ease;
+            }
+
+            &.active {
+                background: ${colors.themeColor};
+                color: ${colors.customColors.whiteColor};
+            }
+        }
+
+        span {
+            position: relative;
+            width: 25px;
+            height: 35px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 19px;
+            color: ${colors.customColors.blackColor3};
+        }
+    }
+`;
+
 export const CreateAcademicLabelWrapper = styled('div')`
     position: fixed;
     top: 0;

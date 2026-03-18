@@ -279,50 +279,59 @@ const Sidebar = () => {
                                         </div>
                                     </div>
                                 }
-                                {
-                                    userDetails.user_type === 'inst_admin' &&
-                                    <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
-                                        <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
-                                            <li>
-                                                <i className="fa-solid fa-gears prefix"></i>
-                                                <span>
-                                                    <p>Settings</p>
-                                                    <i className="fa-solid fa-angle-right suffix"></i>
-                                                </span>
-                                            </li>
-                                        </div>
-                                        <div className="dropdown">
-                                            <a>
-                                                <i className="fa-solid fa-mobile prefix"></i>
-                                                <p>Device Settings</p>
-                                            </a>
+                                <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
+                                    <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
+                                        <li>
+                                            <i className="fa-solid fa-gears prefix"></i>
+                                            <span>
+                                                <p>Settings</p>
+                                                <i className="fa-solid fa-angle-right suffix"></i>
+                                            </span>
+                                        </li>
+                                    </div>
+                                    <div className="dropdown">
+                                        <a>
+                                            <i className="fa-solid fa-mobile prefix"></i>
+                                            <p>Device Settings</p>
+                                        </a>
+                                        {
+                                            userDetails.user_type === 'inst_admin' &&
                                             <NavLink to="/admin/settings/profile-settings">
                                                 <i className="fa-solid fa-user-gear prefix"></i>
                                                 <p>Profile Settings</p>
                                             </NavLink>
+                                        }
+                                        {
+                                            userDetails.user_type === 'inst_admin' &&
                                             <NavLink to="/admin/settings/subject-settings">
                                                 <i className="fa-solid fa-book-open"></i>
                                                 <p>Subject Settings</p>
                                             </NavLink>
-                                            <a>
-                                                <i className="fa-solid fa-gear prefix"></i>
-                                                <p>General Settings</p>
-                                            </a>
+                                        }
+                                        <a>
+                                            <i className="fa-solid fa-gear prefix"></i>
+                                            <p>General Settings</p>
+                                        </a>
+                                        {
+                                            userDetails.user_type === 'super_admin' &&
                                             <NavLink to="/admin/settings/state-cities">
                                                 <i className="fa-solid fa-city prefix"></i>
                                                 <p>State & Cities</p>
                                             </NavLink>
-                                            <NavLink to="/admin/settings/roles-permissions">
-                                                <i className="fa-solid fa-file-shield prefix"></i>
-                                                <p>Roles & Permissions</p>
-                                            </NavLink>
+                                        }
+                                        <NavLink to="/admin/settings/roles-permissions">
+                                            <i className="fa-solid fa-file-shield prefix"></i>
+                                            <p>Roles & Permissions</p>
+                                        </NavLink>
+                                        {
+                                            userDetails.user_type === 'inst_admin' &&
                                             <a>
                                                 <i className="fa-solid fa-hand-holding-hand prefix"></i>
                                                 <p>Preferences</p>
                                             </a>
-                                        </div>
+                                        }
                                     </div>
-                                }
+                                </div>
                                 {
                                     userDetails.user_type === 'inst_admin' &&
                                     <NavLink to="/admin/billing">

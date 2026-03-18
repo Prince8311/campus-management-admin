@@ -56,7 +56,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                             <div className="search_sec_box">
                                 <div className="search_sec">
                                     <i className="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" placeholder="Search by State & Cities..." />
+                                    <input type="text" placeholder="Search your location..." />
                                 </div>
                             </div>
                             <div className="map_box"></div>

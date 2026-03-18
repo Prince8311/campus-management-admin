@@ -10,6 +10,13 @@ export const getApiEndpoints = () => {
         refreshToken: `${apiURL}/auth/refresh-token.php`,
         logout: `${apiURL}/auth/logout.php`,
 
+        // State & Cities 
+        createCity: `${apiURL}/api/state-cities/create.php`,
+        fetchStatesCities: `${apiURL}/api/state-cities/list.php`,
+        updateCityName: `${apiURL}/api/state-cities/city-update.php`,
+        deleteStatesCities: `${apiURL}/api/state-cities/delete-state-city.php`,
+        fetchCitiesStatewise: `${apiURL}/api/state-cities/city-list.php`,
+
         // Institutions 
         addInstitution: `${apiURL}/api/institutions/create.php`,
 
