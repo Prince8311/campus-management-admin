@@ -308,6 +308,10 @@ const Sidebar = () => {
                                                 <i className="fa-solid fa-gear prefix"></i>
                                                 <p>General Settings</p>
                                             </a>
+                                            <NavLink to="/admin/settings/state-cities">
+                                                <i className="fa-solid fa-city prefix"></i>
+                                                <p>State & Cities</p>
+                                            </NavLink>
                                             <NavLink to="/admin/settings/roles-permissions">
                                                 <i className="fa-solid fa-file-shield prefix"></i>
                                                 <p>Roles & Permissions</p>
