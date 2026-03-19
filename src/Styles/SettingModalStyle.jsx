@@ -1503,8 +1503,7 @@ export const SelectAddressWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
+                flex-direction: column;
 
                 .country_name_sec {
                     position: relative;
@@ -1525,137 +1524,177 @@ export const SelectAddressWrapper = styled('div')`
                     }
                 }
 
-                .select_box {
+                .state_city_sec {
                     position: relative;
-                    width: 48.9%;
-                    margin-bottom: 13px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
 
-                    span {
+                    .select_box {
                         position: relative;
-                        display: flex;
-                        align-items: center;
-                        font-size: 12px;
-                        font-weight: 400;
-                        color: ${colors.customColors.blackColor2};
+                        width: 48.9%;
+                        margin-bottom: 13px;
 
-                        p {
-                            color: ${colors.customColors.redColor};
-                            margin-left: 2px;
-                        }
-                    }
-
-                    .dropdown_sec {
-                        position: relative;
-                        width: 100%;
-                        height: 37px;
-                        flex-direction: column;
-                        margin-top: 3px;
-
-                        .dropdown_btn {
+                        span {
                             position: relative;
-                            width: 100%;
-                            height: 100%;
                             display: flex;
                             align-items: center;
-                            border-radius: 5px;
-                            padding: 5px 15px;
-                            cursor: pointer;
-                            background: ${colors.customColors.lightBackground3};
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor2};
 
                             p {
-                                position: relative;
-                                width: calc(100% - 25px);
-                                display: flex;
-                                font-size: 12px;
-                                color: ${colors.customColors.blackColor1};
-                            }
-
-                            i {
-                                position: relative;
-                                margin-left: auto;
-                                display: flex;
-                                justify-content: flex-end;
-                                cursor: pointer;
-                                font-size: 12px;
-                                color: ${colors.customColors.blackColor2};
-                                transition: all 0.5s ease;
-                                
-                                &.active {
-                                    transform: rotate(-180deg);
-                                    transition: all 0.5s ease;
-                                }
+                                color: ${colors.customColors.redColor};
+                                margin-left: 2px;
                             }
                         }
 
-                        .dropdown {
-                            position: absolute;
-                            top: 100%;
-                            left: 0px;
+                        .dropdown_sec {
+                            position: relative;
                             width: 100%;
-                            z-index: 15;
-                            background: ${colors.customColors.whiteColor};
-                            border-radius: 5px;
-                            box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
-                            max-height: 0px;
-                            overflow: hidden;
-                            transition: all 0.5s ease;
+                            height: 37px;
+                            flex-direction: column;
+                            margin-top: 3px;
 
-                            &.active {
-                                max-height: 200px;
-                                transition: all 0.5s ease;
-                            }
-
-                            .dropdown_inner {
+                            .dropdown_btn {
                                 position: relative;
                                 width: 100%;
-                                padding: 10px;
+                                height: 100%;
                                 display: flex;
-                                flex-direction: column;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                cursor: pointer;
+                                background: ${colors.customColors.lightBackground3};
 
-                                ul {
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 25px);
+                                    display: flex;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                i {
+                                    position: relative;
+                                    margin-left: auto;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor2};
+                                    transition: all 0.5s ease;
+                                    
+                                    &.active {
+                                        transform: rotate(-180deg);
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+                            }
+
+                            .dropdown {
+                                position: absolute;
+                                top: 100%;
+                                left: 0px;
+                                width: 100%;
+                                z-index: 15;
+                                background: ${colors.customColors.whiteColor};
+                                border-radius: 5px;
+                                box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                                max-height: 0px;
+                                overflow: hidden;
+                                transition: all 0.5s ease;
+
+                                &.active {
+                                    max-height: 200px;
+                                    transition: all 0.5s ease;
+                                }
+
+                                .dropdown_inner {
                                     position: relative;
                                     width: 100%;
+                                    padding: 10px;
                                     display: flex;
                                     flex-direction: column;
-                                    max-height: 160px;
-                                    overflow-y: auto;
-                                    scrollbar-width: none;
-                                    -ms-overflow-style: none;
 
-                                    &::-webkit-scrollbar {
-                                        display: none;
+                                    .search_sec {
+                                        position: relative;
+                                        height: 35px;
+                                        padding: 5px 0;
+                                        display: flex;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        border-radius: 6px;
+                                        margin-bottom: 10px;
+
+                                        i {
+                                            position: relative;
+                                            width: 40px;
+                                            height: 100%;
+                                            font-size: 13px;
+                                            color: ${colors.customColors.blackColor3};
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            border-right: 1px solid ${colors.customColors.borderColor};
+                                        }
+
+                                        input {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            border: none;
+                                            outline: none;
+                                            padding: 0 15px;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
                                     }
 
-                                    li {
+                                    ul {
                                         position: relative;
                                         width: 100%;
-                                        list-style: none;
-                                        padding: 7px 15px;
-                                        cursor: pointer;
-                                        font-size: 12px;
-                                        color: ${colors.customColors.blackColor1};
-                                        border-radius: 4px;
-                                        transition: all 0.5s ease;
+                                        display: flex;
+                                        flex-direction: column;
+                                        max-height: 160px;
+                                        overflow-y: auto;
+                                        scrollbar-width: none;
+                                        -ms-overflow-style: none;
 
-                                        &:hover {
-                                            background: ${colors.themeColor};
-                                            color: ${colors.customColors.whiteColor};
-                                            transition: all 0.5s ease;
+                                        &::-webkit-scrollbar {
+                                            display: none;
                                         }
 
-                                        &.active {
-                                            background: ${colors.customColors.lightBackground};
-                                            color: ${colors.customColors.blackColor};
+                                        li {
+                                            position: relative;
+                                            width: 100%;
+                                            list-style: none;
+                                            padding: 7px 15px;
+                                            cursor: pointer;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor1};
+                                            border-radius: 4px;
+                                            transition: all 0.5s ease;
 
                                             &:hover {
-                                                color: ${colors.customColors.blackColor};
+                                                background: ${colors.themeColor};
+                                                color: ${colors.customColors.whiteColor};
+                                                transition: all 0.5s ease;
                                             }
-                                        }
 
-                                        &.empty_message {
-                                            padding: 5px 10px;
-                                            color: ${colors.customColors.blackColor3};
-                                            pointer-events: none;
+                                            &.active {
+                                                background: ${colors.customColors.lightBackground};
+                                                color: ${colors.customColors.blackColor};
+
+                                                &:hover {
+                                                    color: ${colors.customColors.blackColor};
+                                                }
+                                            }
+
+                                            &.empty_message {
+                                                padding: 5px 10px;
+                                                color: ${colors.customColors.blackColor3};
+                                                pointer-events: none;
+                                            }
                                         }
                                     }
                                 }
@@ -1727,7 +1766,7 @@ export const SelectAddressWrapper = styled('div')`
                         height: 60px;
                         font-size: 12px;
                         border-radius: 5px;
-                        padding: 5px 15px;
+                        padding: 10px 15px;
                         outline: none;
                         border: none;
                         resize: none;

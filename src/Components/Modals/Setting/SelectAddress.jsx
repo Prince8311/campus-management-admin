@@ -177,62 +177,68 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                             <div className="country_name_sec">
                                 <p>Country : <span>India</span></p>
                             </div>
-                            <div className="select_box">
-                                <span>Select State <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={toggleStateDropdown}>
-                                        <p>{selectedState}</p>
-                                        <i className={`fa-solid fa-angle-down ${stateDropdownShow ? 'active' : ''}`}></i>
-                                    </div>
-                                    <div className={`dropdown ${stateDropdownShow ? 'active' : ''}`}>
-                                        <div className="dropdown_inner">
-                                            <ul>
-                                                {
-                                                    states && states.length > 0 ? (
-                                                        states.map((state, i) =>
-                                                            <li
-                                                                key={i}
-                                                                onClick={() => handleSelectState(state.name)}
-                                                                className={state.name === selectedState ? 'active' : ''}
-                                                            >
-                                                                {state.name}
-                                                            </li>
+                            <div className="state_city_sec">
+                                <div className="select_box">
+                                    <span>Select State <p>*</p></span>
+                                    <div className="dropdown_sec">
+                                        <div className="dropdown_btn" onClick={toggleStateDropdown}>
+                                            <p>{selectedState}</p>
+                                            <i className={`fa-solid fa-angle-down ${stateDropdownShow ? 'active' : ''}`}></i>
+                                        </div>
+                                        <div className={`dropdown ${stateDropdownShow ? 'active' : ''}`}>
+                                            <div className="dropdown_inner">
+                                                <ul>
+                                                    {
+                                                        states && states.length > 0 ? (
+                                                            states.map((state, i) =>
+                                                                <li
+                                                                    key={i}
+                                                                    onClick={() => handleSelectState(state.name)}
+                                                                    className={state.name === selectedState ? 'active' : ''}
+                                                                >
+                                                                    {state.name}
+                                                                </li>
+                                                            )
+                                                        ) : (
+                                                            <li className="empty_message">No state found</li>
                                                         )
-                                                    ) : (
-                                                        <li className="empty_message">No state found</li>
-                                                    )
-                                                }
-                                            </ul>
+                                                    }
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="select_box">
-                                <span>Select City <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={toggleCityDropdown}>
-                                        <p>{selectedCity}</p>
-                                        <i className={`fa-solid fa-angle-down ${cityDropdownShow ? 'active' : ''}`}></i>
-                                    </div>
-                                    <div className={`dropdown ${cityDropdownShow ? 'active' : ''}`}>
-                                        <div className="dropdown_inner">
-                                            <ul>
-                                                {
-                                                    cities.length > 0 ? (
-                                                        cities.map((city, i) =>
-                                                            <li
-                                                                key={i}
-                                                                onClick={() => handleSelectCity(city.name)}
-                                                                className={city.name === selectedCity ? 'active' : ''}
-                                                            >
-                                                                {city.name}
-                                                            </li>
+                                <div className="select_box">
+                                    <span>Select City <p>*</p></span>
+                                    <div className="dropdown_sec">
+                                        <div className="dropdown_btn" onClick={toggleCityDropdown}>
+                                            <p>{selectedCity}</p>
+                                            <i className={`fa-solid fa-angle-down ${cityDropdownShow ? 'active' : ''}`}></i>
+                                        </div>
+                                        <div className={`dropdown ${cityDropdownShow ? 'active' : ''}`}>
+                                            <div className="dropdown_inner">
+                                                <div className="search_sec">
+                                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                                    <input type="text" placeholder="Search by City Name..." />
+                                                </div>
+                                                <ul>
+                                                    {
+                                                        cities.length > 0 ? (
+                                                            cities.map((city, i) =>
+                                                                <li
+                                                                    key={i}
+                                                                    onClick={() => handleSelectCity(city.name)}
+                                                                    className={city.name === selectedCity ? 'active' : ''}
+                                                                >
+                                                                    {city.name}
+                                                                </li>
+                                                            )
+                                                        ) : (
+                                                            <li className="empty_message">No cities available</li>
                                                         )
-                                                    ) : (
-                                                        <li className="empty_message">No cities available</li>
-                                                    )
-                                                }
-                                            </ul>
+                                                    }
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
