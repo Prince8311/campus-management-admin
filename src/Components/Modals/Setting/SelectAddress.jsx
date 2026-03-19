@@ -28,6 +28,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
     const [address, setAddress] = useState("");
 
     const isSearchEnabled = selectedState && selectedCity;
+    const circleRef = useRef(null);
 
     function closeModal() {
         setIsShowAddressModal(false);
@@ -308,11 +309,24 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                                         {highlightCenter && (
                                             <Circle
                                                 center={highlightCenter}
-                                                radius={100000}
+                                                radius={zoomLevel >= 10 ? 20000 : 100000}
                                                 options={{
                                                     fillColor: "#1DA1F2",
                                                     fillOpacity: 0.2,
                                                     strokeColor: "#1DA1F2"
+                                                }}
+                                                onLoad={(circle) => {
+                                                    // 🔥 remove old circle manually
+                                                    if (circleRef.current) {
+                                                        circleRef.current.setMap(null);
+                                                    }
+                                                    circleRef.current = circle;
+                                                }}
+                                                onUnmount={() => {
+                                                    if (circleRef.current) {
+                                                        circleRef.current.setMap(null);
+                                                        circleRef.current = null;
+                                                    }
                                                 }}
                                             />
                                         )}
