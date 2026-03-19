@@ -29,7 +29,7 @@ const AddStateCitiesModal = ({ isShowAddCityModal, setIsShowAddCityModal, refres
         };
         try {
             const response = await axiosInstance.post(api.createCity, payload);
-            if (response?.data.status === 200) { 
+            if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 setCityName('');
                 refreshData();
@@ -64,7 +64,7 @@ const AddStateCitiesModal = ({ isShowAddCityModal, setIsShowAddCityModal, refres
                                         <div className="dropdown_inner">
                                             <ul>
                                                 {
-                                                    states && states.length > 0 ?
+                                                    states && states.length > 0 ? (
                                                         states.map((state, i) =>
                                                             <li
                                                                 key={i}
@@ -76,8 +76,9 @@ const AddStateCitiesModal = ({ isShowAddCityModal, setIsShowAddCityModal, refres
                                                                 {state.name}
                                                             </li>
                                                         )
-                                                        :
-                                                        <p>No state found</p>
+                                                    ) : (
+                                                        <li className="empty_message">No state found</li>
+                                                    )
                                                 }
                                             </ul>
                                         </div>

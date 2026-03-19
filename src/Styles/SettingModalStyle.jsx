@@ -1420,8 +1420,14 @@ export const SelectAddressWrapper = styled('div')`
         display: flex;
         flex-direction: column;
         overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -1623,6 +1629,12 @@ export const SelectAddressWrapper = styled('div')`
                                             &:hover {
                                                 color: ${colors.customColors.blackColor};
                                             }
+                                        }
+
+                                        &.empty_message {
+                                            padding: 5px 10px;
+                                            color: ${colors.customColors.blackColor3};
+                                            pointer-events: none;
                                         }
                                     }
                                 }
