@@ -1202,6 +1202,190 @@ export const AddStateCitiesWrapper = styled('div')`
     }
 `;
 
+export const EditStateCitiesWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    padding-left: 265px;
+    transition: all 0.3s ease;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: initial;
+        transition: all 0.3s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 500px;
+        max-height: 100%;
+        background: ${colors.customColors.whiteColor};
+        box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(-150px);
+        transition: transform 0.8s ease;
+
+        &.active {
+            transform: translateY(0);
+            transition: transform 0.8s ease;
+        }
+
+        .modal_head {
+            position: relative;
+            width: 100%;
+            padding: 13px 20px;
+            border-bottom: 1px solid ${colors.customColors.borderColor};
+            display: flex;
+            align-items: center;
+
+            h4 {
+                position: relative;
+                max-width: calc(100% - 40px);
+                font-size: 14px;
+                font-weight: 600;
+                font-style: italic;
+                color: ${colors.customColors.blackColor1};
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                span {
+                    color: ${colors.customColors.greenColor};
+                }
+            }
+
+            .close_sec {
+                position: relative;
+                margin-left: auto;
+                width: 40px;
+                display: flex;
+                justify-content: flex-end;
+
+                a {
+                    position: relative;
+                    margin-left: auto;
+                    font-size: 15px;
+                    color: ${colors.customColors.blackColor1};
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .modal_body {
+            position: relative;
+            width: 100%;
+            padding: 11px 15px;
+            display: flex;
+            flex-direction: column;
+
+            .body_inner {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+
+                .city {
+                    position: relative;
+                    padding: 5px;
+
+                    li {
+                        position: relative;
+                        list-style: none;
+                        display: flex;
+                        align-items: center;
+                        padding: 8px 8px 8px 12px;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 4px;
+                        background: ${colors.customColors.whiteColor};
+                        box-shadow: 5px 6px 8px ${colors.boxShadowColors.shadowColor2},
+                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+                        transition: all 0.5s ease;
+
+                        input {
+                            width: 0;
+                            border: none;
+                            outline: none;
+                            font-size: 12px;
+                            transition: all 0.3s ease;
+
+                            &.show {
+                                width: 150px;
+                                border-bottom: 1px solid ${colors.customColors.borderColor};
+                            }
+                        }
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                            font-weight: 500;
+                            transition: all 0.5s ease;
+                        }
+
+                        span {
+                            position: relative;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 3px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 8px;
+                            color: ${colors.customColors.whiteColor};
+                            cursor: pointer;
+                            transition: all 0.5s ease;
+
+                            &.edit_btn {
+                                margin-left: 10px;
+                                background: ${colors.customColors.blueColor1};
+                            }
+
+                            &.confirm_btn {
+                                margin-left: 10px;
+                                font-size: 12px;
+                                background: ${colors.customColors.greenColor};
+                            }
+
+                            &.delete_btn {
+                                margin-left: 5px;
+                                background: ${colors.customColors.redColor};
+                            }
+                        }
+                    }
+                }
+
+                .empty_message {
+                    position: relative;
+                    width: 100%;
+                    height: 70px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    p {
+                        position: relative;
+                        font-size: 14px;
+                        color: ${colors.customColors.blackColor3};
+                    }
+                }
+            }
+        }
+    }
+`;
+
 export const SelectAddressWrapper = styled('div')`
     position: fixed;
     top: 0;

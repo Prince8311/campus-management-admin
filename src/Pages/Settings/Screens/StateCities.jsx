@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import EditStateCitiesModal from "../../../Components/Modals/Setting/EditStateCities";
 
 const StateCityPage = () => {
     const api = getApiEndpoints();
     const [isShowAddCityModal, setIsShowAddCityModal] = useState(false);
     const [isShowAddressModal, setIsShowAddressModal] = useState(false);
+    const [showEditCityModal, setShowEditCityModal] = useState(false);
     const [page, setPage] = useState(1);
     const [stateData, setStateData] = useState([]);
     const [isInitialDataLoading, setIsInitialDataLoading] = useState(true);
@@ -22,6 +24,10 @@ const StateCityPage = () => {
 
     const handleOpenAddressModal = () => {
         setIsShowAddressModal(true);
+    };
+
+    const handleOpenEditCityModal = () => {
+        setShowEditCityModal(true);
     };
 
     const fetchStateCities = async (showSkeleton = false, pageNumber = 1) => {
@@ -104,7 +110,7 @@ const StateCityPage = () => {
                                                 }
                                             </td>
                                             <td>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="edit_btn" onClick={handleOpenEditCityModal}><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>)
@@ -127,6 +133,10 @@ const StateCityPage = () => {
                 <SelectAddressModal
                     isShowAddressModal={isShowAddressModal}
                     setIsShowAddressModal={setIsShowAddressModal}
+                />
+                <EditStateCitiesModal
+                    showEditCityModal={showEditCityModal}
+                    setShowEditCityModal={setShowEditCityModal}
                 />
             </StateCitiesWrapper >
         </>
