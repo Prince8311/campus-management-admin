@@ -1710,7 +1710,7 @@ export const SelectAddressWrapper = styled('div')`
                     width: 100%;
                     height: 235px;
                     margin-bottom: 10px;
-                    padding: 10px;
+                    padding: 5px;
                     display: flex;
                     border: 1px solid ${colors.customColors.borderColor};
                     border-radius: 5px;

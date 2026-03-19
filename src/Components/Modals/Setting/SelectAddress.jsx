@@ -15,15 +15,19 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
     const [selectedCity, setSelectedCity] = useState('');
 
     const defaultCenter = { lat: 20.5937, lng: 78.9629 };
+
     const [mapCenter, setMapCenter] = useState(defaultCenter);
     const [markerPosition, setMarkerPosition] = useState(defaultCenter);
-    const [autocomplete, setAutocomplete] = useState(null);
-
     const [highlightCenter, setHighlightCenter] = useState(null);
+
     const [zoomLevel, setZoomLevel] = useState(5);
 
+    const [autocomplete, setAutocomplete] = useState(null);
+    const [searchBounds, setSearchBounds] = useState(null);
+
     const [address, setAddress] = useState("");
-    const inputRef = useRef(null);
+
+    const isSearchEnabled = selectedState && selectedCity;
 
     function closeModal() {
         setIsShowAddressModal(false);
@@ -45,14 +49,37 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
             });
 
             const location = result.geometry.location;
+            const bounds = result.geometry.viewport;
 
             return {
                 lat: location.lat(),
                 lng: location.lng(),
+                bounds
             };
         } catch (error) {
-            console.error("Geocode error:", error);
+            console.error(error);
             return null;
+        }
+    };
+
+    const reverseGeocode = async (lat, lng) => {
+        try {
+            const geocoder = new window.google.maps.Geocoder();
+
+            const result = await new Promise((resolve, reject) => {
+                geocoder.geocode(
+                    { location: { lat, lng } },
+                    (results, status) => {
+                        if (status === "OK") resolve(results[0]);
+                        else reject(status);
+                    }
+                );
+            });
+
+            return result.formatted_address;
+        } catch (error) {
+            console.error("Reverse geocode error:", error);
+            return "";
         }
     };
 
@@ -62,6 +89,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
         setSelectedState(state);
         setSelectedCity('');
         setStateDropdownShow(false);
+        setSearchBounds(null);
 
         const coords = await geocodeLocation(`${state}, India`);
 
@@ -99,30 +127,39 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
         setStateDropdownShow(false);
     }
 
-    const handleSelectCity = (city) => {
+    const handleSelectCity = async (city) => {
         if (city === selectedCity) return;
         setSelectedCity(city);
         setCityDropdownShow(false);
+
+        const coords = await geocodeLocation(`${city}, ${selectedState}, India`);
+
+        if (coords) {
+            setMapCenter(coords);
+            setMarkerPosition(coords);
+            setHighlightCenter(coords);
+            setZoomLevel(12);
+            setSearchBounds(coords.bounds);
+        }
     }
 
     const onPlaceChanged = () => {
-        if (autocomplete) {
-            const place = autocomplete.getPlace();
+        if (!autocomplete) return;
+        const place = autocomplete.getPlace();
 
-            if (place.geometry) {
-                const lat = place.geometry.location.lat();
-                const lng = place.geometry.location.lng();
+        if (place.geometry) {
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
 
-                const coords = { lat, lng };
+            const coords = { lat, lng };
 
-                setMapCenter(coords);
-                setMarkerPosition(coords);
-                setHighlightCenter(coords);
-                setZoomLevel(10);
-                setAddress(place.formatted_address || "");
-            }
+            setMapCenter(coords);
+            setMarkerPosition(coords);
+            setHighlightCenter(coords);
+            setZoomLevel(15);
+            setAddress(place.formatted_address || "");
         }
-    }
+    };
 
     return (
         <>
@@ -200,7 +237,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                                 </div>
                             </div>
                             <LoadScript
-                                googleMapsApiKey="AIzaSyBddFpy9FF5AebcYkXt-jHaISoKOmezByQ"
+                                googleMapsApiKey="AIzaSyDKX4TjlGMne-DIIucVFT6FRmTiMXKkcqs"
                                 libraries={["places"]}
                             >
                                 <div className="search_sec_box">
@@ -211,13 +248,22 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                                             onLoad={(auto) => setAutocomplete(auto)}
                                             onPlaceChanged={onPlaceChanged}
                                             options={{
+                                                bounds: searchBounds || undefined,
+                                                strictBounds: true,
                                                 componentRestrictions: { country: "in" }
                                             }}
                                         >
                                             <input
-                                                ref={inputRef}
                                                 type="text"
-                                                placeholder="Search your location..."
+                                                placeholder={
+                                                    isSearchEnabled
+                                                        ? "Search location..."
+                                                        : "Select state & city first"
+                                                }
+                                                disabled={!isSearchEnabled}
+                                                style={{
+                                                    opacity: isSearchEnabled ? 1 : 0.5
+                                                }}
                                             />
                                         </Autocomplete>
 
@@ -229,39 +275,53 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                                         center={highlightCenter || mapCenter}
                                         zoom={zoomLevel}
                                         onClick={(e) => {
-                                            const lat = e.latLng.lat();
-                                            const lng = e.latLng.lng();
-
-                                            const coords = { lat, lng };
+                                            const coords = {
+                                                lat: e.latLng.lat(),
+                                                lng: e.latLng.lng()
+                                            };
 
                                             setMarkerPosition(coords);
                                             setMapCenter(coords);
                                             setHighlightCenter(coords);
                                         }}
                                     >
-                                        <Marker position={markerPosition} />
+                                        <Marker
+                                            position={markerPosition}
+                                            draggable={true}
+                                            onDragEnd={async (e) => {
+                                                const lat = e.latLng.lat();
+                                                const lng = e.latLng.lng();
 
-                                        {/* 🔥 CIRCLE HIGHLIGHT */}
+                                                const coords = { lat, lng };
+
+                                                setMarkerPosition(coords);
+                                                setMapCenter(coords);
+                                                setHighlightCenter(coords);
+
+                                                const address = await reverseGeocode(lat, lng);
+                                                if (address) {
+                                                    setAddress(address);
+                                                }
+                                            }}
+                                        />
+
                                         {highlightCenter && (
                                             <Circle
                                                 center={highlightCenter}
-                                                radius={100000} // 100km
+                                                radius={100000}
                                                 options={{
-                                                    fillColor: "#1976D2",
+                                                    fillColor: "#1DA1F2",
                                                     fillOpacity: 0.2,
-                                                    strokeColor: "#1976D2",
-                                                    strokeOpacity: 0.6,
-                                                    strokeWeight: 2,
+                                                    strokeColor: "#1DA1F2"
                                                 }}
                                             />
                                         )}
-
                                     </GoogleMap>
                                 </div>
                             </LoadScript>
                             <div className="text_box">
                                 <span>Location <p>*</p></span>
-                                <textarea id=""></textarea>
+                                <textarea value={address} readOnly />
                             </div>
                         </div>
                     </div>
