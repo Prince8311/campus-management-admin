@@ -1052,252 +1052,212 @@ export const FeesStructureWrapper = styled('div')`
     .fees_structure_levels {
         position: relative;
         width: 100%;
-        padding: 0 15px;
+        padding: 0 5px;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        margin-top: 25px;
 
         .level_box {
             position: relative;
-            margin-top: 15px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid ${colors.customColors.borderColor};
-            border-radius: 8px;
-            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+            width: 25%;
+            max-width: 302.75px;
+            padding: 10px;
 
-            .top_part {
+            .box_inner {
                 position: relative;
                 width: 100%;
+                padding: 12px;
+                padding-left: 15px;
+                background: ${colors.customColors.whiteColor};
+                border: 1px solid ${colors.customColors.borderColor};
+                border-left: 4px solid ${colors.customColors.greenColor};
+                border-radius: 8px;
                 display: flex;
-                align-items: center;
-                padding: 10px 16px;
-                cursor: pointer;
-                border-radius: 8px 8px 0 0;
-                transition: all 0.5s ease;
+                flex-direction: column;
+                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                &.active {
-                    background: ${colors.customColors.lightBackground1};
-                }
-
-                .left_info {
-                    position: relative;
-
-                    li {
-                        position: relative;
-                        list-style: none;
-                        display: flex;
-
-                        p {
-                            position: relative;
-                            font-size: 14px;
-                            font-weight: 500;
-                            color: ${colors.customColors.blackColor2};
-                            font-style: italic;
-                        }
-                    }
-                }
-
-                .icon {
-                    position: relative;
-                    margin-left: auto;
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
-
-                    i {
-                        position: relative;
-                        font-size: 14px;
-                        color: ${colors.customColors.blackColor2};
-                    }
-                }
-            }
-
-            .bottom_part {
-                position: relative;
-                width: 100%;
-
-                .bottom_inner {
+                .top_part {
                     position: relative;
                     width: 100%;
-                    padding: 15px;
                     display: flex;
                     flex-direction: column;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid ${colors.customColors.borderColor};
 
-                    .table_sec {
+                    .part_content {
                         position: relative;
                         width: 100%;
-                        margin-top: 15px;
-
-                        &:first-of-type {
-                            margin-top: 0;
+                        display: flex;
+                        align-items: center;
+                        
+                        a {
+                            position: relative;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            background: ${colors.customColors.greenColorLight};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 12px;
+                            color: ${colors.customColors.greenColor};
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                        
+                        h6 {
+                            position: relative;
+                            padding-left: 12px;
+                            max-width: calc(100% - 85px);
+                            font-size: 13.5px;
+                            font-style: italic;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor};
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
                         }
 
-                        table {
+                        span {
+                            position: relative;
+                            width: max-content;
+                            display: flex;
+                            font-size: 10px;
+                            color: ${colors.customColors.orangeColor};
+                            margin-top: 2px;
+                            background: ${colors.customColors.yellowColorLight};
+                            border-radius: 25px;
+                            padding: 3px 15px;
+                            margin-left: auto;
+                            font-weight: 500;
+                        }
+                    }
+
+                    a {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor};
+                        text-decoration: none;
+                        margin-top: 3px;
+                    }
+
+                    .fees_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 5px;
+
+                        h6 {
+                            position: relative;
+                            font-size: 11px;
+                            font-weight: 400;
+                            font-style: italic;
+                            color: ${colors.customColors.blackColor};
+                        }
+
+                        .installments_sec {
                             position: relative;
                             width: 100%;
                             display: flex;
                             flex-direction: column;
-
-                            thead {
+                            
+                            li {
                                 position: relative;
+                                list-style: none;
                                 width: 100%;
-                                height: 40px;
-                                background: ${colors.themeColor};
-                                border-radius: 10px 10px 0px 0px;
-                                border: 1px solid ${colors.themeColor};
+                                display: flex;
+                                align-items: center;
+                                font-size: 10px;
+                                color: ${colors.customColors.blackColor};
+                                margin-top: 3px;
 
-                                tr {
-                                    position: relative;
-                                    width: 100%;
-                                    height: 100%;
-                                    display: flex;
-                                }
-
-                                th {
-                                    position: relative;
-                                    height: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    font-family: "Lemonada", cursive;
-                                    font-size: 12px;
-                                    word-break: break-all;
-                                    color: ${colors.customColors.whiteColor};
-                                    padding: 0 25px;
-                                    font-weight: 600;
-
-                                    &:nth-of-type(1) {
-                                        width: 15%;
-                                    }
-                                    &:nth-of-type(2) {
-                                        width: 20%;
-                                        justify-content: center;
-                                    }
-                                    &:nth-of-type(3) {
-                                        width: 15%;
-                                        justify-content: center;
-                                    }
-                                    &:nth-of-type(4) {
-                                        width: 15%;
-                                        justify-content: center;
-                                    }
-                                    &:nth-of-type(5) {
-                                        width: 20%;
-                                        justify-content: center;
-                                    }
-                                    &:nth-of-type(6) {
-                                        width: 15%;
-                                        justify-content: center;
-                                    }
+                                span {
+                                    margin-left: 5px;
                                 }
                             }
+                        }
+                    }
 
-                            tbody {
-                                position: relative;
-                                width: 100%;
-                                border: 1px solid ${colors.customColors.whiteColor2};
-                                border-top: none;
-                                border-radius: 0px 0px 10px 10px;
-                                display: flex;
-                                flex-direction: column;
-                                overflow: hidden;
+                    p {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        font-size: 10px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor1};
+                        margin-top: 3px;
 
-                                tr {
-                                    position: relative;
-                                    width: 100%;
-                                    min-height: 40px;
-                                    display: flex;
+                        span {
+                            color: ${colors.customColors.blackColor2};
+                            margin-left: 5px;
+                        }
+                    }
+                }
 
-                                    &:nth-of-type(even) {
-                                        background: ${colors.customColors.blueColorLight};
-                                    }
+                .bottom_btn {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 8px;
 
-                                    td {
-                                        position: relative;
-                                        padding: 12px 25px;
-                                        display: flex;
-                                        color: ${colors.customColors.blackColor};
-                                        font-size: 13px;
-                                        word-break: break-all;
-                                        line-height: 1.5;
+                    .total_sec {
+                        position: relative;
+                        width: max-content;
+                        display: flex;
+                        align-items: center;
 
-                                        &:nth-of-type(1) {
-                                            width: 15%;
-                                            display: flex;
-                                            align-items: center;
-                                        }
+                        h5 {
+                            position: relative;
+                            font-size: 13.5px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor};
+                            
+                            span {
+                                color: ${colors.customColors.blackColor};
+                                margin-left: 5px;
+                            }
+                        }
+                    }
 
-                                        &:nth-of-type(2) {
-                                            width: 20%;
-                                            align-items: center;
-                                            justify-content: center;
-                                        }
+                    .btns_sec {
+                        position: relative;
+                        margin-left: auto;
+                        display: flex;
 
-                                        &:nth-of-type(3) {
-                                            width: 15%;
-                                            align-items: center;
-                                            justify-content: center;
+                        button {
+                            position: relative;
+                            width: max-content;
+                            height: 25px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border: none;
+                            padding: 0 10px;
 
-                                            li {
-                                                position: relative;
-                                                list-style: none;
-                                                display: flex;
-                                                align-items: center;
+                            &.edit {
+                                background: ${colors.customColors.blueColorLight};
+                                color: ${colors.customColors.blueColor2};
+                                font-size: 10px;
+                                cursor: pointer;
+                                font-weight: 500;
+                                border-bottom-left-radius: 4px;
+                                border-top-left-radius: 4px;
+                            }
 
-                                                p {
-                                                    font-size: 13px;
-                                                    font-weight: 500;
-                                                    color: ${colors.customColors.greenColor};
-                                                }
-                                                
-                                                i {
-                                                    font-size: 11px;
-                                                    margin-left: 4px;
-                                                    color: ${colors.customColors.blackColor2};
-                                                    cursor: pointer;
-                                                }
-                                            }
-                                        }
-
-                                        &:nth-of-type(4) {
-                                            width: 15%;
-                                            align-items: center;
-                                            justify-content: center;
-                                        }
-
-                                        &:nth-of-type(5) {
-                                            width: 20%;
-                                            align-items: center;
-                                            justify-content: center;
-                                        }
-
-                                        &:nth-of-type(6) {
-                                            width: 15%;
-                                            align-items: center;
-                                            justify-content: center;
-
-                                            a {
-                                                position: relative;
-                                                text-decoration: none;
-                                                cursor: pointer;
-                                                font-size: 13px;
-
-                                                &.edit_btn {
-                                                    color: ${colors.customColors.greenColor};
-                                                    margin-right: 10px;
-                                                }
-
-                                                &.delete_btn {
-                                                    color: ${colors.customColors.redColor};
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                            &.delete {
+                                background: ${colors.customColors.redColorLight};
+                                color:  ${colors.customColors.redColor};
+                                font-size: 10px;
+                                cursor: pointer;
+                                border-top-right-radius: 4px;
+                                border-bottom-right-radius: 4px;
                             }
                         }
                     }
