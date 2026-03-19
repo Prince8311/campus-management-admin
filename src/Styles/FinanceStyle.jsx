@@ -1164,10 +1164,12 @@ export const FeesStructureWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             display: flex;
-                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-between;
                             
                             li {
                                 position: relative;
+                                width: 49%;
                                 list-style: none;
                                 width: 100%;
                                 display: flex;
