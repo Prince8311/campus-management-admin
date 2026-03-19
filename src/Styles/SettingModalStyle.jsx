@@ -1287,98 +1287,119 @@ export const EditStateCitiesWrapper = styled('div')`
         .modal_body {
             position: relative;
             width: 100%;
-            padding: 11px 15px;
+            padding: 11px 20px;
             display: flex;
             flex-direction: column;
 
             .body_inner {
                 position: relative;
                 width: 100%;
-                display: flex;
-                flex-wrap: wrap;
+                min-height: 70px;
+                border: 1px solid ${colors.customColors.borderColor};
+                border-radius: 7px;
+                padding: 10px;
 
-                .city {
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .inner_city {
                     position: relative;
-                    padding: 5px;
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    max-height: 250px;
+                    overflow-y: auto;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
 
-                    li {
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+
+                    .city {
                         position: relative;
-                        list-style: none;
-                        display: flex;
-                        align-items: center;
-                        padding: 8px 8px 8px 12px;
-                        border: 1px solid ${colors.customColors.borderColor};
-                        border-radius: 4px;
-                        background: ${colors.customColors.whiteColor};
-                        box-shadow: 5px 6px 8px ${colors.boxShadowColors.shadowColor2},
-                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
-                        transition: all 0.5s ease;
+                        padding: 5px;
 
-                        input {
-                            width: 0;
-                            border: none;
-                            outline: none;
-                            font-size: 12px;
-                            transition: all 0.3s ease;
-
-                            &.show {
-                                width: 150px;
-                                border-bottom: 1px solid ${colors.customColors.borderColor};
-                            }
-                        }
-
-                        p {
+                        li {
                             position: relative;
-                            font-size: 12px;
-                            color: ${colors.customColors.blackColor1};
-                            font-weight: 500;
-                            transition: all 0.5s ease;
-                        }
-
-                        span {
-                            position: relative;
-                            width: 20px;
-                            height: 20px;
-                            border-radius: 3px;
+                            list-style: none;
                             display: flex;
                             align-items: center;
-                            justify-content: center;
-                            font-size: 8px;
-                            color: ${colors.customColors.whiteColor};
-                            cursor: pointer;
+                            padding: 8px 8px 8px 12px;
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 4px;
+                            background: ${colors.customColors.whiteColor};
+                            box-shadow: 5px 6px 8px ${colors.boxShadowColors.shadowColor2},
+                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
                             transition: all 0.5s ease;
 
-                            &.edit_btn {
-                                margin-left: 10px;
-                                background: ${colors.customColors.blueColor1};
-                            }
-
-                            &.confirm_btn {
-                                margin-left: 10px;
+                            input {
+                                width: 0;
+                                border: none;
+                                outline: none;
                                 font-size: 12px;
-                                background: ${colors.customColors.greenColor};
+                                transition: all 0.3s ease;
+
+                                &.show {
+                                    width: 150px;
+                                    border-bottom: 1px solid ${colors.customColors.borderColor};
+                                }
                             }
 
-                            &.delete_btn {
-                                margin-left: 5px;
-                                background: ${colors.customColors.redColor};
+                            p {
+                                position: relative;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor1};
+                                font-weight: 500;
+                                transition: all 0.5s ease;
+                            }
+
+                            span {
+                                position: relative;
+                                width: 20px;
+                                height: 20px;
+                                border-radius: 3px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 8px;
+                                color: ${colors.customColors.whiteColor};
+                                cursor: pointer;
+                                transition: all 0.5s ease;
+
+                                &.edit_btn {
+                                    margin-left: 10px;
+                                    background: ${colors.customColors.blueColor1};
+                                }
+
+                                &.confirm_btn {
+                                    margin-left: 10px;
+                                    font-size: 12px;
+                                    background: ${colors.customColors.greenColor};
+                                }
+
+                                &.delete_btn {
+                                    margin-left: 5px;
+                                    background: ${colors.customColors.redColor};
+                                }
                             }
                         }
                     }
-                }
 
-                .empty_message {
-                    position: relative;
-                    width: 100%;
-                    height: 70px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    p {
+                    .empty_message {
                         position: relative;
-                        font-size: 14px;
-                        color: ${colors.customColors.blackColor3};
+                        width: 100%;
+                        height: 70px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        p {
+                            position: relative;
+                            font-size: 14px;
+                            color: ${colors.customColors.blackColor3};
+                        }
                     }
                 }
             }
