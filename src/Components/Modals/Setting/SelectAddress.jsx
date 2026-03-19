@@ -271,7 +271,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                                 </div>
                                 <div className="map_box">
                                     <GoogleMap
-                                        mapContainerStyle={{ width: "100%", height: "100%" }}
+                                        mapContainerStyle={{ width: "100%", height: "100%", borderRadius: "3px" }}
                                         center={highlightCenter || mapCenter}
                                         zoom={zoomLevel}
                                         onClick={(e) => {
