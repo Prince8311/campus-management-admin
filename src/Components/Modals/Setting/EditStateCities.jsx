@@ -1,6 +1,6 @@
 import { EditStateCitiesWrapper } from "../../../Styles/SettingModalStyle";
 
-const EditStateCitiesModal = ({showEditCityModal, setShowEditCityModal}) => {
+const EditStateCitiesModal = ({ showEditCityModal, setShowEditCityModal }) => {
 
     function closeModal() {
         setShowEditCityModal(false);
@@ -17,12 +17,14 @@ const EditStateCitiesModal = ({showEditCityModal, setShowEditCityModal}) => {
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="city">
-                                <li>
-                                    <p>kolkata</p>
-                                    <span className="edit_btn"><i className="fa-solid fa-pen"></i></span>
-                                    <span className="delete_btn"><i className="fa-solid fa-trash"></i></span>
-                                </li>
+                            <div className="inner_city">
+                                <div className="city">
+                                    <li>
+                                        <p>kolkata</p>
+                                        <span className="edit_btn"><i className="fa-solid fa-pen"></i></span>
+                                        <span className="delete_btn"><i className="fa-solid fa-trash"></i></span>
+                                    </li>
+                                </div>
                             </div>
                         </div>
                     </div>
