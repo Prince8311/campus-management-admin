@@ -1619,7 +1619,7 @@ export const SelectAddressWrapper = styled('div')`
 
                                     .search_sec {
                                         position: relative;
-                                        height: 35px;
+                                        height: 32px;
                                         padding: 5px 0;
                                         display: flex;
                                         border: 1px solid ${colors.customColors.borderColor};
@@ -1630,7 +1630,7 @@ export const SelectAddressWrapper = styled('div')`
                                             position: relative;
                                             width: 40px;
                                             height: 100%;
-                                            font-size: 13px;
+                                            font-size: 12px;
                                             color: ${colors.customColors.blackColor3};
                                             display: flex;
                                             align-items: center;
@@ -1645,7 +1645,7 @@ export const SelectAddressWrapper = styled('div')`
                                             border: none;
                                             outline: none;
                                             padding: 0 15px;
-                                            font-size: 12px;
+                                            font-size: 10px;
                                             color: ${colors.customColors.blackColor1};
                                         }
                                     }

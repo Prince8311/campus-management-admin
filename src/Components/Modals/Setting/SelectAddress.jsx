@@ -13,6 +13,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
     const [cityDropdownShow, setCityDropdownShow] = useState(false);
     const [cities, setCities] = useState([]);
     const [selectedCity, setSelectedCity] = useState('');
+    const [searchInput, setSearchInput] = useState('');
 
     const defaultCenter = { lat: 20.5937, lng: 78.9629 };
 
@@ -31,6 +32,18 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
     const circleRef = useRef(null);
 
     function closeModal() {
+        circleRef.current = null;
+        setSelectedState('');
+        setSelectedCity('');
+        setCities([]);
+        setSearchInput('');
+        setMapCenter(defaultCenter);
+        setMarkerPosition(defaultCenter);
+        setHighlightCenter(null);
+        setZoomLevel(5);
+        setAutocomplete(null);
+        setSearchBounds(null);
+        setAddress("");
         setIsShowAddressModal(false);
     }
 
@@ -105,7 +118,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
     const fetchCities = async () => {
         try {
             const response = await axiosInstance.get(api.fetchCitiesStatewise, {
-                params: { name: selectedState }
+                params: { name: selectedState, search: searchInput }
             });
             if (response?.data.status === 200) {
                 setCities(response?.data.cities);
@@ -121,7 +134,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
         if (selectedState) {
             fetchCities();
         }
-    }, [selectedState]);
+    }, [selectedState, searchInput]);
 
     const toggleCityDropdown = () => {
         setCityDropdownShow(!cityDropdownShow);
@@ -217,10 +230,18 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                                         </div>
                                         <div className={`dropdown ${cityDropdownShow ? 'active' : ''}`}>
                                             <div className="dropdown_inner">
-                                                <div className="search_sec">
-                                                    <i className="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" placeholder="Search by City Name..." />
-                                                </div>
+                                                {
+                                                    cities.length > 8 &&
+                                                    <div className="search_sec">
+                                                        <i className="fa-solid fa-magnifying-glass"></i>
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Search by City Name..."
+                                                            value={searchInput}
+                                                            onChange={(e) => setSearchInput(e.target.value)}
+                                                        />
+                                                    </div>
+                                                }
                                                 <ul>
                                                     {
                                                         cities.length > 0 ? (
@@ -322,7 +343,6 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                                                     strokeColor: "#1DA1F2"
                                                 }}
                                                 onLoad={(circle) => {
-                                                    // 🔥 remove old circle manually
                                                     if (circleRef.current) {
                                                         circleRef.current.setMap(null);
                                                     }
