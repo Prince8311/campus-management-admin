@@ -187,6 +187,36 @@ const AddFeesStructure = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="amount_sec">
+                        <div className="sec_head">
+                            <span>Add amount to the installments</span>
+                        </div>
+                        <div className="sec_items">
+                            <div className="installments_sec">
+                                <div className="installment_box">
+                                    <p>1. 31 May, 2026</p>
+                                    <div className="amount">
+                                        <span>₹</span>
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                                <div className="installment_box">
+                                    <p>1. 31 May, 2026</p>
+                                    <div className="amount">
+                                        <span>₹</span>
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                                <div className="tax_sec">
+                                    <a>Total fee : <span>₹50000</span></a>
+                                    <a>Tax applied : <span>₹1020</span></a>
+                                </div>
+                                <div className="grand_total_sec">
+                                    <p>Total fee including tax : <span>₹100000</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </AddFeesStructureWrapper>
         </>

@@ -1989,7 +1989,7 @@ export const AddFeesStructureWrapper = styled('div')`
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin-top: 25px;
+        margin-top: 35px;
 
         .criteria_sec {
             position: relative;
@@ -2000,7 +2000,7 @@ export const AddFeesStructureWrapper = styled('div')`
             .sec_head {
                 position: relative;
                 width: 100%;
-                padding: 0 20px;
+                padding: 0 15px;
 
                 span {
                     position: relative;
@@ -2248,7 +2248,7 @@ export const AddFeesStructureWrapper = styled('div')`
                                             width: 100%;
                                             display: flex;
                                             flex-wrap: wrap;
-                                            max-height: 250px;
+                                            max-height: 100px;
                                             overflow-y: auto;
                                             scrollbar-width: none;
                                             -ms-overflow-style: none;
@@ -2330,13 +2330,13 @@ export const AddFeesStructureWrapper = styled('div')`
         .fees_sec {
             position: relative;
             width: 100%;
-            display: flex;
+            display: none;
             flex-direction: column;
 
             .sec_head {
                 position: relative;
                 width: 100%;
-                padding: 0 20px;
+                padding: 0 15px;
 
                 span {
                     position: relative;
@@ -2351,7 +2351,7 @@ export const AddFeesStructureWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                margin-top: 25px;
+                margin-top: 20px;
                 flex-direction: column;
 
                 .fees_type_sec {
@@ -2546,7 +2546,7 @@ export const AddFeesStructureWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    margin-top: 25px;
+                    margin-top: 20px;
 
                     .fees_head {
                         position: relative;
@@ -2653,6 +2653,149 @@ export const AddFeesStructureWrapper = styled('div')`
                                     border-radius: 25px;
                                     transition: all 0.5s ease;
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .amount_sec {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            
+            .sec_head {
+                position: relative;
+                width: 100%;
+                padding: 0 15px;
+
+                span {
+                    position: relative;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: ${colors.customColors.blackColor1};
+                    font-style: italic;
+                }
+            }
+
+            .sec_items {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                padding:  0 15px;
+                margin-top: 20px;
+
+                .installments_sec {
+                    position: relative;
+                    width: max-content;
+                    display: flex;
+                    flex-direction: column;
+
+                    .installment_box {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 15px;
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        .amount {
+                            position: relative;
+                            width: max-content;
+                            height: 37px;
+                            border-radius: 5px;
+                            display: flex;
+                            align-items: center;
+                            margin-left: 30px;
+                            background: ${colors.customColors.lightBackground3};
+                            
+                            input {
+                                width: 200px;
+                                height: 100%;
+                                font-size: 12px;
+                                border-radius: 5px;
+                                outline: none;
+                                border: none;
+                                padding: 5px 15px;
+                                background: transparent;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor2};
+                            }
+
+                            span {
+                                position: relative;
+                                width: 37px;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor2};
+
+                                &::after {
+                                    position: absolute;
+                                    content: '';
+                                    top: 0;
+                                    right: 0;
+                                    height: 100%;
+                                    width: 1px;
+                                    background: ${colors.customColors.borderColor};
+                                }
+                            }
+                        }
+                    }
+
+                    .tax_sec {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+                        padding: 10px 0;
+                        border-top: 1px solid ${colors.customColors.borderColor1};
+                        border-bottom: 1px solid ${colors.customColors.borderColor1};
+
+                        a {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            text-decoration: none;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                            margin-bottom: 8px;
+
+                            span {
+                                color: ${colors.customColors.blackColor2};
+                                margin-left: 5px;
+                            }
+
+                            &:last-of-type {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+
+                    .grand_total_sec {
+                        position: relative;
+                        margin-top: 10px;
+                        display: flex;
+                        justify-content: flex-end;
+
+                        p {
+                            position: relative;
+                            font-size: 14px;
+                            color: ${colors.customColors.blackColor};
+                            font-weight: 500;
+
+                            span {
+                                margin-left: 5px;
+                                color: ${colors.customColors.blackColor1};
                             }
                         }
                     }
