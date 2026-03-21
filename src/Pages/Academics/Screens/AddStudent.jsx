@@ -91,13 +91,20 @@ const AddStudentPage = () => {
     };
 
     const handleFieldChange = (sectionId, fieldName, value) => {
-        setFormData(prev => ({
-            ...prev,
-            [sectionId]: {
-                ...(prev[sectionId] || {}),
-                [fieldName]: value
+        setFormData(prev => {
+            const updated = {
+                ...prev,
+                [sectionId]: {
+                    ...(prev[sectionId] || {}),
+                    [fieldName]: value
+                }
+            };
+            if (fieldName === "Class / Standard") {
+                updated[sectionId]["Section"] = "";
             }
-        }));
+
+            return updated;
+        });
     };
 
     const handleFormSubmit = () => {
@@ -390,11 +397,13 @@ const AddStudentPage = () => {
                                                                             label={field.name}
                                                                             type={field.type}
                                                                             isrequired={field.is_required}
+                                                                            source={field.source}
                                                                             items={field.items}
                                                                             value={formData[section.id]?.[field.name] || ""}
                                                                             onChange={handleFieldChange}
                                                                             activeDropdownId={activeDropdownId}
                                                                             setActiveDropdownId={setActiveDropdownId}
+                                                                            formData={formData}
                                                                         />
                                                                     )
                                                                 }

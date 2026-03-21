@@ -31,6 +31,7 @@ export const getApiEndpoints = () => {
         // ====================== Students ======================
         studentUploadForm: `${apiURL}/api/student/form.php`,
         addStudent: `${apiURL}/api/student/create.php`,
+        fetchStudents: `${apiURL}/api/student/list.php`,
 
         // Form Sections 
         createStudentFormSection: `${apiURL}/api/student/sections/create.php`,

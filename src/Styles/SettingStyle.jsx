@@ -1669,21 +1669,13 @@ export const StateCitiesWrapper = styled('div')`
                                 position: relative;
                                 list-style: none;
                                 line-height: 1;
-                                margin: 5px 10px;
-                                padding-left: 10px;
+                                padding: 6px 12px;
+                                margin: 5px;
+                                font-size: 11px;
                                 height: max-content;
-
-                                &::before {
-                                    content: '';
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 0;
-                                    width: 5px;
-                                    height: 5px;
-                                    background: ${colors.customColors.blackColor2};
-                                    border-radius: 50%;
-                                    transform: translateY(-50%);
-                                }
+                                background: ${colors.customColors.blueColorLight};
+                                border-radius: 20px;
+                                border: 1px solid ${colors.customColors.blueColor1};
                             }
                         }
                         &:nth-of-type(3) {

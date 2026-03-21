@@ -1263,6 +1263,8 @@ export const EditStateCitiesWrapper = styled('div')`
                 text-overflow: ellipsis;
 
                 span {
+                    margin-left: 3px;
+                    font-style: italic;
                     color: ${colors.customColors.greenColor};
                 }
             }
@@ -1287,7 +1289,7 @@ export const EditStateCitiesWrapper = styled('div')`
         .modal_body {
             position: relative;
             width: 100%;
-            padding: 11px 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
 
@@ -1330,7 +1332,7 @@ export const EditStateCitiesWrapper = styled('div')`
                             border: 1px solid ${colors.customColors.borderColor};
                             border-radius: 4px;
                             background: ${colors.customColors.whiteColor};
-                            box-shadow: 5px 6px 8px ${colors.boxShadowColors.shadowColor2},
+                            box-shadow: 3px 3px 8px ${colors.boxShadowColors.shadowColor2},
                             -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
                             transition: all 0.5s ease;
 
@@ -1351,7 +1353,6 @@ export const EditStateCitiesWrapper = styled('div')`
                                 position: relative;
                                 font-size: 12px;
                                 color: ${colors.customColors.blackColor1};
-                                font-weight: 500;
                                 transition: all 0.5s ease;
                             }
 

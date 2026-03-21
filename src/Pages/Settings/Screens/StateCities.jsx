@@ -17,6 +17,7 @@ const StateCityPage = () => {
     const [stateData, setStateData] = useState([]);
     const [isInitialDataLoading, setIsInitialDataLoading] = useState(true);
     const [totalStateData, setTotalStateData] = useState('');
+    const [selectedStateData, setSelectedStateData] = useState([]);
 
     const handleOpenAddCityModal = () => {
         setIsShowAddCityModal(true);
@@ -24,10 +25,6 @@ const StateCityPage = () => {
 
     const handleOpenAddressModal = () => {
         setIsShowAddressModal(true);
-    };
-
-    const handleOpenEditCityModal = () => {
-        setShowEditCityModal(true);
     };
 
     const fetchStateCities = async (showSkeleton = false, pageNumber = 1) => {
@@ -51,7 +48,7 @@ const StateCityPage = () => {
     }
 
     useEffect(() => {
-        fetchStateCities(true);
+        fetchStateCities(true, page);
     }, [page]);
 
     return (
@@ -110,7 +107,15 @@ const StateCityPage = () => {
                                                 }
                                             </td>
                                             <td>
-                                                <a className="edit_btn" onClick={handleOpenEditCityModal}><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a
+                                                    className="edit_btn"
+                                                    onClick={() => {
+                                                        setShowEditCityModal(true);
+                                                        setSelectedStateData(state);
+                                                    }}
+                                                >
+                                                    <i className="fa-solid fa-pen-to-square"></i>
+                                                </a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>)
@@ -137,6 +142,9 @@ const StateCityPage = () => {
                 <EditStateCitiesModal
                     showEditCityModal={showEditCityModal}
                     setShowEditCityModal={setShowEditCityModal}
+                    selectedStateData={selectedStateData}
+                    setSelectedStateData={setSelectedStateData}
+                    refreshData={() => fetchStateCities(false)}
                 />
             </StateCitiesWrapper >
         </>

@@ -138,6 +138,17 @@ export const StudentInformationWrapper = styled('div')`
             align-items: center;
             border-bottom: 2px solid ${colors.themeColor};
 
+            .swiper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .swiper-slide {
+                    position: relative;
+                    width: max-content !important;
+                }
+            }
+
             li {
                 position: relative;
                 list-style: none;
@@ -165,11 +176,11 @@ export const StudentInformationWrapper = styled('div')`
             }
         }
     }
-
+    
     .table_sec {
         position: relative;
         width: 100%;
-        margin-top: 25px;
+        margin-top: 20px;
 
         table {
             position: relative;
@@ -290,7 +301,7 @@ export const StudentInformationWrapper = styled('div')`
                             .right_table_sec {
                                 position: relative;
                                 width: calc(100% - 30px);
-                                padding-left: 10px;
+                                padding-left: 7px;
                                 display: flex;
                                 flex-direction: column;
 
@@ -301,10 +312,9 @@ export const StudentInformationWrapper = styled('div')`
                                 }
 
                                 p {
-                                    font-size: 12px;
+                                    font-size: 10px;
                                     font-weight: 400;
                                     color: ${colors.customColors.blackColor2};
-                                    /* margin-top: 3px; */
                                 }
                             }
                         }

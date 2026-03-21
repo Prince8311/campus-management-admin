@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { FormFieldWrapper } from "../Styles/LayoutStyle";
 import Calender from "./Calender";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../Services/Api/ApiConfig";
+import { toast } from "react-toastify";
 
-const FormField = ({ id, sectionId, label, type, isrequired, items, value, onChange, activeDropdownId, setActiveDropdownId }) => {
+const FormField = ({ id, sectionId, label, type, isrequired, source, items, value, onChange, activeDropdownId, setActiveDropdownId, formData }) => {
     const wrapperRef = useRef(null);
     const dropdownRef = useRef(null);
     const [isDropUp, setIsDropUp] = useState(false);
     const isOpen = activeDropdownId === id;
     const textRef = useRef(null);
     const [displayText, setDisplayText] = useState('');
+    const [serverItems, setServerItems] = useState([]);
+    const selectedClass = formData?.[sectionId]?.["Class / Standard"];
 
     const checkPosition = () => {
         if (!dropdownRef.current || !wrapperRef.current) return;
@@ -124,6 +129,47 @@ const FormField = ({ id, sectionId, label, type, isrequired, items, value, onCha
 
     }, [value]);
 
+    useEffect(() => {
+        const fetchServerItems = async () => {
+            if (source !== "server" || !items) return;
+            try {
+                const endpoints = getApiEndpoints();
+                const url = endpoints[items];
+
+                if (!url) {
+                    console.error("Invalid API key:", items);
+                    return;
+                }
+
+                const res = await axiosInstance.get(url, {
+                    params: { isForm: true }
+                });
+
+                console.log("svsdbdthj", res);
+
+                const data = res?.data?.data || [];
+                setServerItems(data);
+            } catch (error) {
+                toast.error(error.response?.data.message || error.message);
+            }
+        };
+
+        fetchServerItems();
+    }, [source, items]);
+
+    let finalItems = items;
+    if (label === "Class / Standard") {
+        finalItems = serverItems.map(item => item.class)
+    } else if (label === "Section") {
+        const selectedClassObj = serverItems.find(
+            cls => cls.class === selectedClass
+        );
+        finalItems = selectedClassObj?.sections || [];
+        console.log("yfcgvubhijnkml", selectedClassObj);
+    } else {
+        finalItems = serverItems.map(item => item.name);
+    }
+
     return (
         <>
             <FormFieldWrapper>
@@ -154,8 +200,8 @@ const FormField = ({ id, sectionId, label, type, isrequired, items, value, onCha
                                     <div className="dropdown_inner">
                                         <ul>
                                             {
-                                                items.length > 0 ? (
-                                                    items.map((item, i) =>
+                                                finalItems && finalItems.length > 0 ? (
+                                                    finalItems.map((item, i) =>
                                                         <li
                                                             className={item === value ? 'selected' : ''}
                                                             onClick={() => {
@@ -190,8 +236,8 @@ const FormField = ({ id, sectionId, label, type, isrequired, items, value, onCha
                                     <div className="dropdown_inner">
                                         <ul>
                                             {
-                                                items && items.length > 0 ? (
-                                                    items.map((item, i) => {
+                                                finalItems && finalItems.length > 0 ? (
+                                                    finalItems.map((item, i) => {
                                                         const isSelected = value?.includes(item);
 
                                                         return (

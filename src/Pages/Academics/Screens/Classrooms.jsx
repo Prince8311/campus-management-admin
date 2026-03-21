@@ -139,7 +139,7 @@ const ClassroomPage = () => {
                 {
                     isInitialLevelsLoading ? (
                         <>
-                            <div className="tab_sec i">
+                            <div className="tab_sec">
                                 <div className="tab_inner" style={{ borderBottom: 'none' }}>
                                     <Swiper
                                         slidesPerView={'auto'}
@@ -166,7 +166,7 @@ const ClassroomPage = () => {
                         </>
                     ) : academicLevels.length > 0 ? (
                         <>
-                            <div className="tab_sec dhgdhdt">
+                            <div className="tab_sec">
                                 <div className="tab_inner">
                                     <Swiper
                                         slidesPerView={'auto'}
