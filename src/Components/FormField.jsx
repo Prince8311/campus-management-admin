@@ -141,9 +141,16 @@ const FormField = ({ id, sectionId, label, type, isrequired, source, items, valu
                     return;
                 }
 
-                const res = await axiosInstance.get(url, {
-                    params: { isForm: true }
-                });
+                let params = {};
+
+                if (label === "Section") {
+                    if (!selectedClass) return;
+                    params = { class: selectedClass, isForm: true };
+                } else {
+                    params = { isForm: true };
+                }
+
+                const res = await axiosInstance.get(url, { params });
 
                 console.log("svsdbdthj", res);
 
@@ -155,17 +162,13 @@ const FormField = ({ id, sectionId, label, type, isrequired, source, items, valu
         };
 
         fetchServerItems();
-    }, [source, items]);
+    }, [source, items, label, selectedClass]);
 
     let finalItems = items;
     if (label === "Class / Standard") {
         finalItems = serverItems.map(item => item.class)
     } else if (label === "Section") {
-        const selectedClassObj = serverItems.find(
-            cls => cls.class === selectedClass
-        );
-        finalItems = selectedClassObj?.sections || [];
-        console.log("yfcgvubhijnkml", selectedClassObj);
+        finalItems = serverItems;
     } else {
         finalItems = serverItems.map(item => item.name);
     }
