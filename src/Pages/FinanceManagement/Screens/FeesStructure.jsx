@@ -51,8 +51,8 @@ const FeesStructurePage = () => {
                                 <div className="fees_sec">
                                     <h6>Installments : </h6>
                                     <div className="installments_sec">
-                                        <li>1. May - <span>₹30000.00</span></li>
-                                        <li>2. May - <span>₹30000.00</span></li>
+                                        <li>1. May<span>₹30000.00</span></li>
+                                        <li>2. May<span>₹30000.00</span></li>
                                     </div>
                                 </div>
                                 <p>Receipt Serial No. : <span>SSA - 00</span></p>

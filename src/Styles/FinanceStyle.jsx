@@ -1171,15 +1171,15 @@ export const FeesStructureWrapper = styled('div')`
                                 position: relative;
                                 width: 49%;
                                 list-style: none;
-                                width: 100%;
                                 display: flex;
                                 align-items: center;
                                 font-size: 10px;
                                 color: ${colors.customColors.blackColor};
-                                margin-top: 3px;
+                                margin-top: 2px;
 
                                 span {
                                     margin-left: 5px;
+                                    font-size: 11px;
                                 }
                             }
                         }
@@ -1193,7 +1193,7 @@ export const FeesStructureWrapper = styled('div')`
                         font-size: 10px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
-                        margin-top: 3px;
+                        margin-top: 5px;
 
                         span {
                             color: ${colors.customColors.blackColor2};
