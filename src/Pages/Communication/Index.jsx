@@ -1,11 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 const CommunicationMainPage = () => {
-    return (
-        <>
-            <Outlet />
-        </>
-    );
+    return <Outlet />;
 }
 
 export default CommunicationMainPage;
