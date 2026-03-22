@@ -1971,6 +1971,15 @@ export const AddFeesStructureWrapper = styled('div')`
                 font-size: 13px;
                 color: ${colors.customColors.blackColor2};
             }
+
+            &.active {
+                border: 1px solid ${colors.customColors.greenColor};
+                background: ${colors.customColors.greenColor};
+
+                p {
+                    color: ${colors.customColors.whiteColor};
+                }
+            }
         }
 
         .line {
@@ -1980,6 +1989,10 @@ export const AddFeesStructureWrapper = styled('div')`
             border-radius: 25px;
             background: ${colors.customColors.lightBackground3};
             margin: 0 10px;
+
+            &.active {
+                background: ${colors.customColors.greenColor};  
+            }
         }
     }
 
@@ -1993,7 +2006,7 @@ export const AddFeesStructureWrapper = styled('div')`
         .criteria_sec {
             position: relative;
             width: 100%;
-            display: none;
+            display: flex;
             flex-direction: column;
 
             .sec_head {
@@ -2342,7 +2355,7 @@ export const AddFeesStructureWrapper = styled('div')`
         .fees_sec {
             position: relative;
             width: 100%;
-            display: none;
+            display: flex;
             flex-direction: column;
 
             .sec_head {
