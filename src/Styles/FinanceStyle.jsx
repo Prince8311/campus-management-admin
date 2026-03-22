@@ -1969,8 +1969,7 @@ export const AddFeesStructureWrapper = styled('div')`
             p {
                 position: relative;
                 font-size: 13px;
-                color: ${colors.customColors.blackColor};
-                font-weight: 500;
+                color: ${colors.customColors.blackColor2};
             }
         }
 
@@ -2149,11 +2148,7 @@ export const AddFeesStructureWrapper = styled('div')`
                                     padding: 10px 16px;
                                     cursor: pointer;
                                     border-radius: 8px 8px 0 0;
-                                    transition: all 0.5s ease;
-
-                                    &.active {
-                                        background: ${colors.customColors.lightBackground1};
-                                    }
+                                    background: ${colors.customColors.lightBackground1};
 
                                     .top_left {
                                         position: relative;
@@ -2212,24 +2207,6 @@ export const AddFeesStructureWrapper = styled('div')`
                                                     transition: all 0.4s ease;
                                                 }
                                             }
-                                        }
-                                    }
-
-                                    .icon {
-                                        position: relative;
-                                        margin-left: auto;
-                                        width: 35px;
-                                        height: 35px;
-                                        border-radius: 50%;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
-
-                                        i {
-                                            position: relative;
-                                            font-size: 14px;
-                                            color: ${colors.customColors.blackColor2};
                                         }
                                     }
                                 }
@@ -2322,6 +2299,41 @@ export const AddFeesStructureWrapper = styled('div')`
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            .btn_sec {
+                position: relative;
+                width: 100%;
+                margin-top: 20px;
+                padding: 0 15px;
+                display: flex;
+                justify-content: flex-end;
+
+                button {
+                    position: relative;
+                    width: 150px;
+                    height: 35px;
+                    border-radius: 6px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.customColors.greenColor};
+                    border: none;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+
+                    i {
+                        margin-left: 6px;
+                    }
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.5s ease;
                     }
                 }
             }
@@ -2658,6 +2670,41 @@ export const AddFeesStructureWrapper = styled('div')`
                     }
                 }
             }
+
+            .btn_sec {
+                position: relative;
+                width: 100%;
+                margin-top: 20px;
+                padding: 0 15px;
+                display: flex;
+                justify-content: flex-end;
+
+                button {
+                    position: relative;
+                    width: 150px;
+                    height: 35px;
+                    border-radius: 6px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.customColors.greenColor};
+                    border: none;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+
+                    i {
+                        margin-left: 6px;
+                    }
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.5s ease;
+                    }
+                }
+            }
         }
 
         .amount_sec {
@@ -2797,6 +2844,36 @@ export const AddFeesStructureWrapper = styled('div')`
                                 margin-left: 5px;
                                 color: ${colors.customColors.blackColor1};
                             }
+                        }
+                    }
+                }
+
+                .btn_sec {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 20px;
+                    display: flex;
+                    justify-content: flex-end;
+
+                    button {
+                        position: relative;
+                        width: 150px;
+                        height: 35px;
+                        border-radius: 6px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 12px;
+                        color: ${colors.customColors.whiteColor};
+                        background: ${colors.customColors.greenColor};
+                        border: none;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.5s ease;
+
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.5s ease;
                         }
                     }
                 }

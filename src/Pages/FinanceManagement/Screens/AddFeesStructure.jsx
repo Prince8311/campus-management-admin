@@ -40,7 +40,7 @@ const AddFeesStructure = () => {
                                 <div className="bottom_part">
                                     <div className="bottom_inner">
                                         <div className="class_box">
-                                            <div className="box_top active">
+                                            <div className="box_top">
                                                 <div className="top_left">
                                                     <input type="checkbox" id="class" />
                                                     <label htmlFor="class">
@@ -48,7 +48,6 @@ const AddFeesStructure = () => {
                                                         <p>Class - 1</p>
                                                     </label>
                                                 </div>
-                                                <div className="icon"><i className="fa-solid fa-angle-right"></i></div>
                                             </div>
                                             <div className="box_bottom">
                                                 <div className="bottom_inner">
@@ -88,7 +87,7 @@ const AddFeesStructure = () => {
                                             </div>
                                         </div>
                                         <div className="class_box">
-                                            <div className="box_top active">
+                                            <div className="box_top">
                                                 <div className="top_left">
                                                     <input type="checkbox" id="class" />
                                                     <label htmlFor="class">
@@ -96,7 +95,6 @@ const AddFeesStructure = () => {
                                                         <p>Class - 2</p>
                                                     </label>
                                                 </div>
-                                                <div className="icon"><i className="fa-solid fa-angle-right"></i></div>
                                             </div>
                                             <div className="box_bottom">
                                                 <div className="bottom_inner">
@@ -118,6 +116,9 @@ const AddFeesStructure = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="btn_sec">
+                            <button>Next <i class="fa-solid fa-angle-right"></i></button>
                         </div>
                     </div>
                     <div className="fees_sec">
@@ -186,6 +187,9 @@ const AddFeesStructure = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="btn_sec">
+                            <button>Next <i class="fa-solid fa-angle-right"></i></button>
+                        </div>
                     </div>
                     <div className="amount_sec">
                         <div className="sec_head">
@@ -214,6 +218,9 @@ const AddFeesStructure = () => {
                                 <div className="grand_total_sec">
                                     <p>Total fee including tax : <span>₹100000</span></p>
                                 </div>
+                            </div>
+                            <div className="btn_sec">
+                                <button>Publish</button>
                             </div>
                         </div>
                     </div>
