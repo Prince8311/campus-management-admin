@@ -1958,8 +1958,8 @@ export const AddFeesStructureWrapper = styled('div')`
 
         .sec_box {
             position: relative;
-            width: 40px;
-            height: 40px;
+            width: 37px;
+            height: 37px;
             border-radius: 50%;
             border: 1px solid ${colors.customColors.borderColor1};
             display: flex;
