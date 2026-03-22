@@ -72,6 +72,14 @@ import StaffOverViewPage from "../Pages/Reports/Screens/StaffOverView";
 import TeachingStaffPage from "../Pages/Reports/Screens/TeachingStaff";
 import NonTeachingStaffPage from "../Pages/Reports/Screens/NonTeachingStaff";
 
+// Transport
+import TransportMainPage from "../Pages/Transport/Index";
+import PassengersPage from "../Pages/Transport/Screens/Passengers";
+import StopagesPage from "../Pages/Transport/Screens/Stopages";
+import VehiclesPage from "../Pages/Transport/Screens/Vehicles";
+import VehicleStaffsPage from "../Pages/Transport/Screens/VehicleStaffs";
+import VehicleRoutesPage from "../Pages/Transport/Screens/VehicleRoutes";
+
 const Routers = () => {
     return (
         <>
@@ -142,6 +150,14 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="staff-information" />} />
                             <Route path="staff-information" element={<StaffInformationPage />} />
                             <Route path="add-staff" element={<AddStaffPage />} />
+                        </Route>
+                        <Route path="transport-management" element={<TransportMainPage />}>
+                            <Route path="" element={<Navigate to="passengers" />} />
+                            <Route path="passengers" element={<PassengersPage />} />
+                            <Route path="stopages" element={<StopagesPage />} />
+                            <Route path="vehicles" element={<VehiclesPage />} />
+                            <Route path="staffs" element={<VehicleStaffsPage />} />
+                            <Route path="routes" element={<VehicleRoutesPage />} />
                         </Route>
                         <Route path="settings" element={<SettingsMainPage />}>
                             <Route path="" element={<Navigate to="roles-permissions" />} />

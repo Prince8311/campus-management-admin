@@ -1,11 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 const StaffManagementMainPage = () => {
-    return (
-        <>
-            <Outlet />
-        </>
-    );
+    return <Outlet />;
 }
 
 export default StaffManagementMainPage;

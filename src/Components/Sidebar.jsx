@@ -276,6 +276,10 @@ const Sidebar = () => {
                                                 <i className="fa-solid fa-id-card-clip prefix"></i>
                                                 <p>Id Cards</p>
                                             </a>
+                                            <NavLink to="/admin/transport-management">
+                                                <i className="fa-solid fa-bus"></i>
+                                                <p>Transport</p>
+                                            </NavLink>
                                         </div>
                                     </div>
                                 }

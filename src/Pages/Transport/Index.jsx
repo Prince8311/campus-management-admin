@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-const AcademicMainPage = () => {
+const TransportMainPage = () => {
     return <Outlet />;
 }
 
-export default AcademicMainPage;
+export default TransportMainPage;

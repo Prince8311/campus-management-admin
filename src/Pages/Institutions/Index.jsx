@@ -1,11 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 const InstitutionMainPage = () => {
-    return (
-        <>
-            <Outlet />
-        </>
-    );
+    return <Outlet />;
 }
 
 export default InstitutionMainPage;
