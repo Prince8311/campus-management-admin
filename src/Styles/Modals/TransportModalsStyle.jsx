@@ -823,7 +823,7 @@ export const StopageAddWrapper = styled('div')`
                     textarea {
                         position: relative;
                         width: 100%;
-                        height: 50px;
+                        height: 70px;
                         font-size: 12px;
                         border-radius: 5px;
                         padding: 10px 15px;
