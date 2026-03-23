@@ -1,18 +1,25 @@
+import { useState } from "react";
+import PassengerAddModal from "../../../Components/Modals/Transport/PassengerAdd";
 import { PassengersWrapper } from "../../../Styles/TransportStyle";
 
 const PassengersPage = () => {
+    const [isAddPassenger, setIsAddPassenger] = useState(false);
+
+    const handleOpenAddPassengerModal = () => {
+        setIsAddPassenger(true);
+    }
     return (
         <>
             <PassengersWrapper>
                 <div className="head_sec">
-                    <h6>Passengers Derectory</h6>
+                    <h6>Passengers Directory</h6>
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input type="text" placeholder="Search by Passengers name..." />
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={handleOpenAddPassengerModal}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Add Passenger</p>
                             </button>
@@ -53,6 +60,11 @@ const PassengersPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <PassengerAddModal
+                    isAddPassenger={isAddPassenger}
+                    setIsAddPassenger={setIsAddPassenger}
+                />
             </PassengersWrapper>
         </>
     );

@@ -24,10 +24,14 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                 </div>
                             </div>
                             <div className="map_box"></div>
+                            <div className="text_box">
+                                <span>Location <p>*</p></span>
+                                <textarea ></textarea>
+                            </div>
                             <div className="distance_sec">
-                                <div className="text_box">
-                                    <span>Location <p>*</p></span>
-                                    <textarea ></textarea>
+                                <div className="input_box">
+                                    <span>Stopage Name <p>*</p></span>
+                                    <input type="text" />
                                 </div>
                                 <div className="input_box">
                                     <span>Distance <p>*</p></span>

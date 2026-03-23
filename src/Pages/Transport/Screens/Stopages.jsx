@@ -12,7 +12,7 @@ const StopagesPage = () => {
         <>
             <StopagesWrapper>
                 <div className="head_sec">
-                    <h6>Stopages Derectory</h6>
+                    <h6>Stopages Directory</h6>
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>

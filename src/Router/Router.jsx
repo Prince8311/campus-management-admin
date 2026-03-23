@@ -79,6 +79,7 @@ import StopagesPage from "../Pages/Transport/Screens/Stopages";
 import VehiclesPage from "../Pages/Transport/Screens/Vehicles";
 import VehicleStaffsPage from "../Pages/Transport/Screens/VehicleStaffs";
 import VehicleRoutesPage from "../Pages/Transport/Screens/VehicleRoutes";
+import AddRoutesPage from "../Pages/Transport/Screens/AddRoutes";
 
 const Routers = () => {
     return (
@@ -159,6 +160,7 @@ const Routers = () => {
                             <Route path="staffs" element={<VehicleStaffsPage />} />
                             <Route path="routes" element={<VehicleRoutesPage />} />
                         </Route>
+                            <Route path="add-routes" element={<AddRoutesPage />} />
                         <Route path="settings" element={<SettingsMainPage />}>
                             <Route path="" element={<Navigate to="roles-permissions" />} />
                             <Route path="roles-permissions" element={<RolesPermissionsPage />} />

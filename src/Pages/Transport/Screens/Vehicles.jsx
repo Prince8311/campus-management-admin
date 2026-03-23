@@ -14,7 +14,7 @@ const VehiclesPage = () => {
         <>
             <VehicleWrapper>
                 <div className="head_sec">
-                    <h6>Vehicles Derectory</h6>
+                    <h6>Vehicles Directory</h6>
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>

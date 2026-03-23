@@ -1,18 +1,24 @@
+import { useNavigate } from "react-router-dom";
 import { VehicleRoutesWrapper } from "../../../Styles/TransportStyle";
 
 const VehicleRoutesPage = () => {
+    const navigate = useNavigate();
+
+    const handleRedirectionAddRoutesPage = () => {
+        navigate("/admin/add-routes");
+    }
     return (
         <>
             <VehicleRoutesWrapper>
                 <div className="head_sec">
-                    <h6>VehiclesRoutes Derectory</h6>
+                    <h6>VehiclesRoutes Directory</h6>
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input type="text" placeholder="Search by VehiclesRoutes..." />
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={handleRedirectionAddRoutesPage}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Add Routes</p>
                             </button>
