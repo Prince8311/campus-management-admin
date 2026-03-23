@@ -1,6 +1,13 @@
+import { useState } from "react";
+import StopageAddModal from "../../../Components/Modals/Transport/StopageAdd";
 import { StopagesWrapper } from "../../../Styles/TransportStyle";
 
 const StopagesPage = () => {
+    const [isStopageAdd, setIsStopageAdd] = useState(false);
+
+    const handleOpenAddStopageModal = () => {
+        setIsStopageAdd(true);
+    }
     return (
         <>
             <StopagesWrapper>
@@ -12,7 +19,7 @@ const StopagesPage = () => {
                             <input type="text" placeholder="Search by Stopages..." />
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={handleOpenAddStopageModal}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Add Stopage</p>
                             </button>
@@ -48,6 +55,11 @@ const StopagesPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <StopageAddModal
+                    isStopageAdd={isStopageAdd}
+                    setIsStopageAdd={setIsStopageAdd}
+                />
             </StopagesWrapper>
         </>
     );

@@ -1,6 +1,15 @@
+import { useState } from "react";
 import { VehicleWrapper } from "../../../Styles/TransportStyle";
+import AddVehicleModal from "../../../Components/Modals/Transport/AddVehicle";
 
 const VehiclesPage = () => {
+
+    const [isAddVehicleModal, setIsAddVehicleModal] = useState(false);
+
+    const handleOpenAddVehicleModal = () => {
+        setIsAddVehicleModal(true);
+    };
+
     return (
         <>
             <VehicleWrapper>
@@ -12,7 +21,7 @@ const VehiclesPage = () => {
                             <input type="text" placeholder="Search by Vehicles..." />
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={handleOpenAddVehicleModal}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Add Vehicle</p>
                             </button>
@@ -48,6 +57,11 @@ const VehiclesPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <AddVehicleModal
+                    isAddVehicleModal={isAddVehicleModal}
+                    setIsAddVehicleModal={setIsAddVehicleModal}
+                />
             </VehicleWrapper>
         </>
     );
