@@ -44,6 +44,8 @@ export const getApiEndpoints = () => {
         updateStudentFormFieldOrder: `${apiURL}/api/student/fields/update-order.php`,
         
         // ====================== Staffs ======================
+        staffUploadForm: `${apiURL}/api/staff/form.php`,
+
         // Form Sections 
         createStaffFormSection: `${apiURL}/api/staff/sections/create.php`,
         deleteStaffFormSection: `${apiURL}/api/staff/sections/delete.php`,

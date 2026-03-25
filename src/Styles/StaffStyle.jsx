@@ -549,7 +549,7 @@ export const AddStaffWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                /* height: 0; */
+                height: 0;
                 overflow: hidden;
                 transition: all 0.6s ease;
                 

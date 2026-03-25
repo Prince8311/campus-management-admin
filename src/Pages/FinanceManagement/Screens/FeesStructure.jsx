@@ -4,7 +4,8 @@ import { FeesStructureWrapper } from "../../../Styles/FinanceStyle";
 import AddNewFeesTypeModal from "../../../Components/Modals/FinanceManagement/AddNewFeesType";
 
 const FeesStructurePage = () => {
-    const tabs = []
+    const tabs = ['Recurring Fee', 'One Time Fee', 'Transfort Fee'];
+    const [selectedTab, setSelectedTab] = useState(tabs[0]);
     const [isFeesStructureOpen, setIsFeesStructureOpen] = useState(false);
     const [isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen] = useState(false);
 
@@ -34,9 +35,17 @@ const FeesStructurePage = () => {
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
-                        <li className="active">Recurring Fee</li>
-                        <li>One Time Fee</li>
-                        <li>Transfort Fee</li>
+                        {
+                            tabs.map((tab, i) =>
+                                <li
+                                    key={i}
+                                    className={selectedTab === tab ? 'active' : ''}
+                                    onClick={() => setSelectedTab(tab)}
+                                >
+                                    {tab}
+                                </li>
+                            )
+                        }
                     </div>
                 </div>
                 <div className="fees_structure_levels">

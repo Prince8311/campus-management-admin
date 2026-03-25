@@ -28,7 +28,6 @@ const AddStudentPage = () => {
         try {
             const response = await axiosInstance.get(api.studentUploadForm);
             if (response?.data.status === 200) {
-                console.log("Form", response?.data);
                 setForm(response?.data.form);
             }
         } catch (error) {

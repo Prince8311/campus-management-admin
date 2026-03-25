@@ -1009,7 +1009,7 @@ export const FeesStructureWrapper = styled('div')`
 
     .tab_sec {
         position: relative;
-        margin-top: 25px;
+        margin-top: 15px;
         width: 100%;
         padding: 0 15px;
 
