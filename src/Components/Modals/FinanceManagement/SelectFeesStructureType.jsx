@@ -40,7 +40,7 @@ const SelectFeesStructureTypeModal = ({ isFeesStructureOpen, setIsFeesStructureO
                                     <span>Create one time fees like admission fees, uniform fees etc.</span>
                                 </div>
                             </div>
-                            <div className="inner_box">
+                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('transpost')}>
                                 <div className="box_item">
                                     <img src="/images/transport-fee.svg" alt="" />
                                     <p>Transfort Fee</p>

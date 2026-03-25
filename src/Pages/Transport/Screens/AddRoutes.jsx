@@ -8,6 +8,7 @@ const AddRoutesPage = () => {
                     <div className="left_items">
                         <div className="item_inner">
                             <div className="page_head">
+                                <div className="icon"><i className="fa-solid fa-angle-left"></i></div>
                                 <h2>Add Routes</h2>
                             </div>
                             <div className="top_sec">
