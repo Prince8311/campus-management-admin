@@ -48,7 +48,6 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
             const trimmedValue = itemInput.trim();
             if (!trimmedValue) return;
 
-            // Prevent duplicate values (optional but recommended)
             if (items.includes(trimmedValue)) {
                 toast.error("Item already added");
                 return;

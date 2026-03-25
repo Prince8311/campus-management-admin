@@ -69,5 +69,7 @@ export const getApiEndpoints = () => {
         fetchClassSections: `${apiURL}/api/institutions/academic/section/list.php`,
 
         // Fee Configuration 
+        createFeesType: `${apiURL}/api/fees/types/create.php`,
+        fetchFeesTypes: `${apiURL}/api/fees/types/list.php`,
     };
 }
