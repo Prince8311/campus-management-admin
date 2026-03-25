@@ -1055,7 +1055,7 @@ export const FeesStructureWrapper = styled('div')`
         padding: 0 5px;
         display: flex;
         flex-wrap: wrap;
-        margin-top: 25px;
+        margin-top: 10px;
 
         .level_box {
             position: relative;
@@ -1150,7 +1150,7 @@ export const FeesStructureWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        margin-top: 5px;
+                        margin-top: 8px;
 
                         h6 {
                             position: relative;
@@ -1193,7 +1193,7 @@ export const FeesStructureWrapper = styled('div')`
                         font-size: 10px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
-                        margin-top: 5px;
+                        margin-top: 8px;
 
                         span {
                             color: ${colors.customColors.blackColor2};
@@ -1206,7 +1206,7 @@ export const FeesStructureWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     display: flex;
-                    align-items: center;
+                    align-items: flex-end;
                     margin-top: 8px;
 
                     .total_sec {
@@ -1217,13 +1217,13 @@ export const FeesStructureWrapper = styled('div')`
 
                         h5 {
                             position: relative;
-                            font-size: 13.5px;
+                            font-size: 13px;
                             font-weight: 500;
                             color: ${colors.customColors.blackColor};
                             
                             span {
                                 color: ${colors.customColors.blackColor};
-                                margin-left: 5px;
+                                margin-left: 3px;
                             }
                         }
                     }

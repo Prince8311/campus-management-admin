@@ -3,11 +3,14 @@ import { AddNewFeesTypeWrapper } from "../../../Styles/Modals/FinanceModalsStyle
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
 const AddNewFeesTypeModal = ({ isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen }) => {
     const api = getApiEndpoints();
     const [items, setItems] = useState([]);
+    const [originalItems, setOriginalItems] = useState([]);
     const [itemInput, setItemInput] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     function closeModal() {
         setIsAddNewFeesTypeOpen(false);
@@ -17,8 +20,8 @@ const AddNewFeesTypeModal = ({ isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen }) 
         try {
             const response = await axiosInstance.get(api.fetchFeesTypes);
             if (response?.data.status === 200) {
-                console.log("types", response);
                 setItems(response?.data.types || []);
+                setOriginalItems(response?.data.types || []);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -51,6 +54,24 @@ const AddNewFeesTypeModal = ({ isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen }) 
     const handleRemoveItem = (indexToRemove) => {
         setItems(items.filter((_, index) => index !== indexToRemove));
     };
+
+    const isChanged = JSON.stringify(items) !== JSON.stringify(originalItems);
+
+    const handleAddFeesType = async () => {
+        setIsButtonLoading(true);
+        const payload = { types: JSON.stringify(items) };
+        try {
+            const response = await axiosInstance.post(api.createFeesType, payload);
+            if (response?.data.status === 200) { 
+                toast.success(response?.data.message);
+                closeModal();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false)
+        }
+    }
 
     return (
         <>
@@ -90,7 +111,15 @@ const AddNewFeesTypeModal = ({ isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen }) 
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={!isChanged || isButtonLoading} onClick={handleAddFeesType}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </AddNewFeesTypeWrapper>

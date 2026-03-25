@@ -4,6 +4,7 @@ import { FeesStructureWrapper } from "../../../Styles/FinanceStyle";
 import AddNewFeesTypeModal from "../../../Components/Modals/FinanceManagement/AddNewFeesType";
 
 const FeesStructurePage = () => {
+    const tabs = []
     const [isFeesStructureOpen, setIsFeesStructureOpen] = useState(false);
     const [isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen] = useState(false);
 
