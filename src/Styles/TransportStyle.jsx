@@ -1369,3 +1369,592 @@ export const StopagesWrapper = styled('div')`
         }
     }
 `;
+
+export const AddRoutesWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .page_items {
+        position: relative;
+        width: 100%;
+        display: flex;
+
+        .left_items {
+            position: relative;
+            width: calc(100% - 350px);
+            height: calc(100vh - 130px);
+            display: flex;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .item_inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .page_head {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    padding: 0 15px;
+
+                    h2 {
+                        position: relative;
+                        font-size: 21px;
+                        font-weight: 600;
+                        color: ${colors.customColors.blackColor};
+                        font-family: "SUSE", sans-serif;
+                    }
+                }
+
+                .top_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 0 7px;
+                    margin-top: 20px;
+
+                    .input_box {
+                        position: relative;
+                        width: 33.33%;
+                        margin-bottom: 10px;
+                        padding: 0 8px;
+
+                        input {
+                            position: relative;
+                            width: 100%;
+                            height: 37px;
+                            font-size: 12px;
+                            border-radius: 5px;
+                            padding: 5px 15px;
+                            outline: none;
+                            border: none;
+                            margin-top: 3px;
+                            background: ${colors.customColors.lightBackground3};
+                        }
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor2};
+
+                            p {
+                                color: ${colors.customColors.redColor};
+                                margin-left: 2px;
+                            }
+                        }
+                    }
+
+                    .select_box {
+                        position: relative;
+                        width: 33.33%;
+                        margin-bottom: 10px;
+                        padding: 0 8px;
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor2};
+
+                            p {
+                                color: ${colors.customColors.redColor};
+                                margin-left: 2px;
+                            }
+                        }
+
+                        .dropdown_sec {
+                            position: relative;
+                            width: 100%;
+                            height: 37px;
+                            flex-direction: column;
+                            margin-top: 3px;
+
+                            .dropdown_btn {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                cursor: pointer;
+                                background: ${colors.customColors.lightBackground3};
+
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 25px);
+                                    display: flex;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                i {
+                                    position: relative;
+                                    margin-left: auto;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor2};
+                                    transition: all 0.5s ease;
+                                    
+                                    &.active {
+                                        transform: rotate(-180deg);
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+                            }
+
+                            .dropdown {
+                                position: absolute;
+                                top: 100%;
+                                left: 0px;
+                                width: 100%;
+                                z-index: 15;
+                                background: ${colors.customColors.whiteColor};
+                                border-radius: 5px;
+                                box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                                max-height: 0px;
+                                overflow: hidden;
+                                transition: all 0.5s ease;
+
+                                &.active {
+                                    max-height: 200px;
+                                    transition: all 0.5s ease;
+                                }
+
+                                .dropdown_inner {
+                                    position: relative;
+                                    width: 100%;
+                                    padding: 10px;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    ul {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        max-height: 160px;
+                                        overflow-y: auto;
+                                        scrollbar-width: none;
+                                        -ms-overflow-style: none;
+
+                                        &::-webkit-scrollbar {
+                                            display: none;
+                                        }
+
+                                        li {
+                                            position: relative;
+                                            width: 100%;
+                                            list-style: none;
+                                            padding: 7px 15px;
+                                            cursor: pointer;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor1};
+                                            border-radius: 4px;
+                                            transition: all 0.5s ease;
+
+                                            &:hover {
+                                                background: ${colors.themeColor};
+                                                color: ${colors.customColors.whiteColor};
+                                                transition: all 0.5s ease;
+                                            }
+
+                                            &.active {
+                                                background: ${colors.customColors.lightBackground};
+                                                color: ${colors.customColors.blackColor};
+
+                                                &:hover {
+                                                    color: ${colors.customColors.blackColor};
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .date_box {
+                        position: relative;
+                        width: 33.33%;
+                        margin-bottom: 10px;
+                        padding: 0 8px;
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor2};
+
+                            p {
+                                color: ${colors.customColors.redColor};
+                                margin-left: 2px;
+                            }
+                        }
+
+                        .date_btn {
+                            position: relative;
+                            width: 100%;
+                            height: 37px;
+                            display: flex;
+                            align-items: center;
+                            border-radius: 5px;
+                            padding: 5px 15px;
+                            background: ${colors.customColors.lightBackground3};
+                            cursor: pointer;
+                            margin-top: 3px;
+
+                            p {
+                                position: relative;
+                                width: calc(100% - 25px);
+                                display: flex;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor1};
+                            }
+
+                            i {
+                                position: relative;
+                                width: 25px;
+                                display: flex;
+                                justify-content: flex-end;
+                                cursor: pointer;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
+                            }
+                        }
+                    }
+                }
+
+                .stopage_sections {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 20px;
+
+                    .sec_head {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        padding: 0 15px;
+
+                        h6 {
+                            position: relative;
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+
+                    .sec_content {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        padding:  0 15px;
+                        
+                        .content_box {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            padding: 15px;
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 6px;
+                            margin-top: 15px;
+
+                            a {
+                                position: relative;
+                                width: max-content;
+                                padding: 4px 10px;
+                                border-radius: 25px;
+                                background: ${colors.customColors.blueColor2};
+                                font-size: 11px;
+                                text-decoration: none;
+                                color: ${colors.customColors.whiteColor};
+                            }
+
+                            .box_items {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: space-between;
+                                margin-top: 10px;
+
+                                .select_box {
+                                    position: relative;
+                                    width: 45%;
+                                    margin-bottom: 8px;
+
+                                    span {
+                                        position: relative;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 12px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        p {
+                                            color: ${colors.customColors.redColor};
+                                            margin-left: 2px;
+                                        }
+                                    }
+
+                                    .dropdown_sec {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 37px;
+                                        flex-direction: column;
+                                        margin-top: 3px;
+
+                                        .dropdown_btn {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                            align-items: center;
+                                            border-radius: 5px;
+                                            padding: 5px 15px;
+                                            cursor: pointer;
+                                            background: ${colors.customColors.lightBackground3};
+
+                                            p {
+                                                position: relative;
+                                                width: calc(100% - 25px);
+                                                display: flex;
+                                                font-size: 12px;
+                                                color: ${colors.customColors.blackColor1};
+                                            }
+
+                                            i {
+                                                position: relative;
+                                                margin-left: auto;
+                                                display: flex;
+                                                justify-content: flex-end;
+                                                cursor: pointer;
+                                                font-size: 12px;
+                                                color: ${colors.customColors.blackColor2};
+                                                transition: all 0.5s ease;
+                                                
+                                                &.active {
+                                                    transform: rotate(-180deg);
+                                                    transition: all 0.5s ease;
+                                                }
+                                            }
+                                        }
+
+                                        .dropdown {
+                                            position: absolute;
+                                            top: 100%;
+                                            left: 0px;
+                                            width: 100%;
+                                            z-index: 15;
+                                            background: ${colors.customColors.whiteColor};
+                                            border-radius: 5px;
+                                            box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                                            max-height: 0px;
+                                            overflow: hidden;
+                                            transition: all 0.5s ease;
+
+                                            &.active {
+                                                max-height: 200px;
+                                                transition: all 0.5s ease;
+                                            }
+
+                                            .dropdown_inner {
+                                                position: relative;
+                                                width: 100%;
+                                                padding: 10px;
+                                                display: flex;
+                                                flex-direction: column;
+
+                                                ul {
+                                                    position: relative;
+                                                    width: 100%;
+                                                    display: flex;
+                                                    flex-direction: column;
+                                                    max-height: 160px;
+                                                    overflow-y: auto;
+                                                    scrollbar-width: none;
+                                                    -ms-overflow-style: none;
+
+                                                    &::-webkit-scrollbar {
+                                                        display: none;
+                                                    }
+
+                                                    li {
+                                                        position: relative;
+                                                        width: 100%;
+                                                        list-style: none;
+                                                        padding: 7px 15px;
+                                                        cursor: pointer;
+                                                        font-size: 12px;
+                                                        color: ${colors.customColors.blackColor1};
+                                                        border-radius: 4px;
+                                                        transition: all 0.5s ease;
+
+                                                        &:hover {
+                                                            background: ${colors.themeColor};
+                                                            color: ${colors.customColors.whiteColor};
+                                                            transition: all 0.5s ease;
+                                                        }
+
+                                                        &.active {
+                                                            background: ${colors.customColors.lightBackground};
+                                                            color: ${colors.customColors.blackColor};
+
+                                                            &:hover {
+                                                                color: ${colors.customColors.blackColor};
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .date_box {
+                                    position: relative;
+                                    width: 25%;
+                                    margin-bottom: 8px;
+
+                                    span {
+                                        position: relative;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 12px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        p {
+                                            color: ${colors.customColors.redColor};
+                                            margin-left: 2px;
+                                        }
+                                    }
+
+                                    .date_btn {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 37px;
+                                        display: flex;
+                                        align-items: center;
+                                        border-radius: 5px;
+                                        padding: 5px 15px;
+                                        background: ${colors.customColors.lightBackground3};
+                                        cursor: pointer;
+                                        margin-top: 3px;
+
+                                        p {
+                                            position: relative;
+                                            width: calc(100% - 25px);
+                                            display: flex;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
+
+                                        i {
+                                            position: relative;
+                                            width: 25px;
+                                            display: flex;
+                                            justify-content: flex-end;
+                                            cursor: pointer;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor2};
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .add_sec {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            margin-top: 10px;
+
+                            span {
+                                position: relative;
+                                font-size: 13px;
+                                color: ${colors.customColors.greenColor};
+                                font-weight: 500;
+                                cursor: pointer;
+
+                                i {
+                                    margin-right: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .right_items {
+            position: relative;
+            width: 350px;
+            height: calc(100vh - 130px);
+            display: flex;
+            padding: 10px;
+
+            .item_inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                border-radius: 6px;
+                box-shadow: 5px 5px 10px ${colors.boxShadowColors.shadowColor1},
+                        -4px -4px 10px ${colors.boxShadowColors.shadowColor1};
+            }
+        }
+    }
+
+    .btn_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            position: relative;
+            width: 160px;
+            height: 35px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            overflow: hidden;
+            border: none;
+            background: ${colors.customColors.blueColor1};
+            color: ${colors.customColors.whiteColor};
+            transition: all 0.5s ease;
+
+            &:hover {
+                border-radius: 25px;
+                transition: all 0.5s ease;
+            }
+        }
+    }
+`;

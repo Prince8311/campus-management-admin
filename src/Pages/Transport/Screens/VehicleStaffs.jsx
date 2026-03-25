@@ -1,20 +1,27 @@
+import { useState } from "react";
 import { VehicleStaffWrapper } from "../../../Styles/TransportStyle";
+import AddStaffModal from "../../../Components/Modals/Transport/AddStaff";
 
 const VehicleStaffsPage = () => {
+    const [isStaffAddModal, setIsStaffAddModal] = useState(false);
+
+    const handleOpenAddStaffModal = () => {
+        setIsStaffAddModal(true);
+    };
     return (
         <>
             <VehicleStaffWrapper>
                 <div className="head_sec">
-                    <h6>VehicleStaff Derectory</h6>
+                    <h6>Vehicle Staff Directory</h6>
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input type="text" placeholder="Search by VehiclesStaff..." />
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={handleOpenAddStaffModal}>
                                 <i className="fa-solid fa-plus"></i>
-                                <p>Add VehicleStaff</p>
+                                <p>Add Vehicle Staff</p>
                             </button>
                         </div>
                     </div>
@@ -48,6 +55,11 @@ const VehicleStaffsPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <AddStaffModal
+                    isStaffAddModal={isStaffAddModal}
+                    setIsStaffAddModal={setIsStaffAddModal}
+                />
             </VehicleStaffWrapper>
         </>
     );

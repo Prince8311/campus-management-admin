@@ -1,18 +1,27 @@
+import { useState } from "react";
 import { VehicleWrapper } from "../../../Styles/TransportStyle";
+import AddVehicleModal from "../../../Components/Modals/Transport/AddVehicle";
 
 const VehiclesPage = () => {
+
+    const [isAddVehicleModal, setIsAddVehicleModal] = useState(false);
+
+    const handleOpenAddVehicleModal = () => {
+        setIsAddVehicleModal(true);
+    };
+
     return (
         <>
             <VehicleWrapper>
                 <div className="head_sec">
-                    <h6>Vehicles Derectory</h6>
+                    <h6>Vehicles Directory</h6>
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input type="text" placeholder="Search by Vehicles..." />
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={handleOpenAddVehicleModal}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Add Vehicle</p>
                             </button>
@@ -48,6 +57,11 @@ const VehiclesPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <AddVehicleModal
+                    isAddVehicleModal={isAddVehicleModal}
+                    setIsAddVehicleModal={setIsAddVehicleModal}
+                />
             </VehicleWrapper>
         </>
     );
