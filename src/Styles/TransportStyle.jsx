@@ -1405,7 +1405,27 @@ export const AddRoutesWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     display: flex;
-                    padding: 0 15px;
+                    align-items: center;
+                    padding: 10px 15px;
+
+                    .icon {
+                        position: relative;
+                        margin-right: 15px;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+
+                        i {
+                            position: relative;
+                            font-size: 14px;
+                            color: ${colors.customColors.blackColor2};
+                        }
+                    }
 
                     h2 {
                         position: relative;

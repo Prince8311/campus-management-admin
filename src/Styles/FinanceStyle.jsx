@@ -2319,7 +2319,7 @@ export const AddFeesStructureWrapper = styled('div')`
             .btn_sec {
                 position: relative;
                 width: 100%;
-                margin-top: 20px;
+                margin-top: 50px;
                 padding: 0 15px;
                 display: flex;
                 justify-content: flex-end;
@@ -2334,7 +2334,7 @@ export const AddFeesStructureWrapper = styled('div')`
                     justify-content: center;
                     font-size: 12px;
                     color: ${colors.customColors.whiteColor};
-                    background: ${colors.customColors.greenColor};
+                    background: ${colors.customColors.blueColor1};
                     border: none;
                     font-weight: 500;
                     cursor: pointer;
@@ -2687,10 +2687,10 @@ export const AddFeesStructureWrapper = styled('div')`
             .btn_sec {
                 position: relative;
                 width: 100%;
-                margin-top: 20px;
+                margin-top: 50px;
                 padding: 0 15px;
                 display: flex;
-                justify-content: flex-end;
+                justify-content: space-between;
 
                 button {
                     position: relative;
@@ -2702,14 +2702,14 @@ export const AddFeesStructureWrapper = styled('div')`
                     justify-content: center;
                     font-size: 12px;
                     color: ${colors.customColors.whiteColor};
-                    background: ${colors.customColors.greenColor};
+                    background: ${colors.customColors.blueColor1};
                     border: none;
                     font-weight: 500;
                     cursor: pointer;
                     transition: all 0.5s ease;
 
                     i {
-                        margin-left: 6px;
+                        margin: 0 6px;
                     }
 
                     &:hover {
@@ -2864,9 +2864,9 @@ export const AddFeesStructureWrapper = styled('div')`
                 .btn_sec {
                     position: relative;
                     width: 100%;
-                    margin-top: 20px;
+                    margin-top: 50px;
                     display: flex;
-                    justify-content: flex-end;
+                    justify-content: space-between;
 
                     button {
                         position: relative;
@@ -2878,11 +2878,15 @@ export const AddFeesStructureWrapper = styled('div')`
                         justify-content: center;
                         font-size: 12px;
                         color: ${colors.customColors.whiteColor};
-                        background: ${colors.customColors.greenColor};
+                        background: ${colors.customColors.blueColor1};
                         border: none;
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.5s ease;
+
+                        i {
+                            margin: 0 6px;
+                        }
 
                         &:hover {
                             border-radius: 25px;

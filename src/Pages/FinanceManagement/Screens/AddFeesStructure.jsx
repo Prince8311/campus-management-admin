@@ -124,7 +124,7 @@ const AddFeesStructure = () => {
                                 </div>
                             </div>
                             <div className="btn_sec">
-                                <button onClick={() => setStep(2)}>Next <i className="fa-solid fa-angle-right"></i></button>
+                                <button onClick={() => setStep(2)}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
                             </div>
                         </div>
                     }
@@ -200,7 +200,8 @@ const AddFeesStructure = () => {
                                 </div>
                             </div>
                             <div className="btn_sec">
-                                <button onClick={() => setStep(3)}>Next <i className="fa-solid fa-angle-right"></i></button>
+                                <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Previous</button>
+                                <button onClick={() => setStep(3)}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
                             </div>
                         </div>
                     }
@@ -235,7 +236,8 @@ const AddFeesStructure = () => {
                                     </div>
                                 </div>
                                 <div className="btn_sec">
-                                    <button>Publish</button>
+                                    <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Previous</button>
+                                    <button><i className="fa-solid fa-cloud-arrow-up"></i> Publish</button>
                                 </div>
                             </div>
                         </div>
