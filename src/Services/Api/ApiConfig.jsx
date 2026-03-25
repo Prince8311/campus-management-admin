@@ -67,5 +67,7 @@ export const getApiEndpoints = () => {
         createSection: `${apiURL}/api/institutions/academic/section/create.php`,
         deleteSection: `${apiURL}/api/institutions/academic/section/delete.php`,
         fetchClassSections: `${apiURL}/api/institutions/academic/section/list.php`,
+
+        // Fee Configuration 
     };
 }

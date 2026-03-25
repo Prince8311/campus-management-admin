@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { AddNewFeesTypeWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 
 const AddNewFeesTypeModal = ({isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen}) => {
+    const [items, setItems] = useState([]);
+    const [itemInput, setItemInput] = useState('');
 
     function closeModal() {
         setIsAddNewFeesTypeOpen(false);

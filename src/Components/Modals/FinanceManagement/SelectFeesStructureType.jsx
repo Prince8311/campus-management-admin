@@ -4,7 +4,9 @@ import { SelectFeesStructureTypeWrapper } from "../../../Styles/Modals/FinanceMo
 const SelectFeesStructureTypeModal = ({ isFeesStructureOpen, setIsFeesStructureOpen }) => {
     const navigate = useNavigate();
 
-    const handleRedirectionAddFeesStructurePage = () => {
+    // 'recurring', 'oneTime', 'transpost'
+    const handleRedirectionAddFeesStructurePage = (type) => {
+        sessionStorage.setItem("feesStructureType", type);
         navigate("/admin/finance-management/add-fees-structure");
         setIsFeesStructureOpen(false);
     }
@@ -24,14 +26,14 @@ const SelectFeesStructureTypeModal = ({ isFeesStructureOpen, setIsFeesStructureO
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="inner_box" onClick={handleRedirectionAddFeesStructurePage}>
+                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('recurring')}>
                                 <div className="box_item">
                                     <img src="/images/recurring-fee.svg" alt="" />
                                     <p>Recurring Fee</p>
                                     <span>Create recurring fees like tution fees, maintance fees etc.</span>
                                 </div>
                             </div>
-                            <div className="inner_box">
+                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('oneTime')}>
                                 <div className="box_item">
                                     <img src="/images/one-time-fee.svg" alt="" />
                                     <p>One Time Fee</p>

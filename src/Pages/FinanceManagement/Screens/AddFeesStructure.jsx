@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AddFeesStructureWrapper } from "../../../Styles/FinanceStyle";
 
 const AddFeesStructure = () => {
+    const feesStructureType = sessionStorage.getItem("feesStructureType");
     const [step, setStep] = useState(1);
 
     return (
@@ -189,9 +190,12 @@ const AddFeesStructure = () => {
 
                                             </div>
                                         </div>
-                                        <div className="add_btn">
-                                            <button><i class="fa-solid fa-plus"></i>Add more</button>
-                                        </div>
+                                        {
+                                            feesStructureType === 'recurring' &&
+                                            <div className="add_btn">
+                                                <button><i class="fa-solid fa-plus"></i>Add more</button>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
