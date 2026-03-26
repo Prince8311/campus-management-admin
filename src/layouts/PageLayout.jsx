@@ -20,6 +20,9 @@ const PageLayout = () => {
                             <div className="content_inner">
                                 <Outlet />
                             </div>
+                            <div className="footer_content">
+                                <p>Copyright© Edu Connekt  by Shetty Ticket Counter Private Limited . All rights reserved</p>
+                            </div>
                         </div>
                     </div>
                 </PageWrapper>
