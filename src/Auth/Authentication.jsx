@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from "react";
 import { AuthWrapper } from "../Styles/AuthStyle";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,7 @@ const AuthenticationPage = () => {
         if (token) {
             navigate("/admin", { replace: true });
         }
-    }, [token]);
+    }, [navigate, token]);
 
     const maskEmail = (email) => {
         const [user, domain] = email.split("@");

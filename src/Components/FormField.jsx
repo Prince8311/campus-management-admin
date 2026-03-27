@@ -165,12 +165,16 @@ const FormField = ({ id, sectionId, label, type, isrequired, source, items, valu
     }, [source, items, label, selectedClass]);
 
     let finalItems = items;
-    if (label === "Class / Standard") {
-        finalItems = serverItems.map(item => item.class)
-    } else if (label === "Section") {
-        finalItems = serverItems;
+    if (source === "server") {
+        if (label === "Class / Standard") {
+            finalItems = serverItems.map(item => item.class)
+        } else if (label === "Section") {
+            finalItems = serverItems;
+        } else {
+            finalItems = serverItems.map(item => item.name);
+        }
     } else {
-        finalItems = serverItems.map(item => item.name);
+        finalItems = items;
     }
 
     return (

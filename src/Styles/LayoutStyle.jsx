@@ -53,24 +53,6 @@ export const PageWrapper = styled('div')`
                     display: none;
                 }
             }
-
-            .footer_content {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                height: 45px;
-                width: 100%;
-                padding: 0 30px;
-                border-top: 1px solid ${colors.customColors.borderColor1};
-                display: flex;
-                align-items: center;
-
-                p {
-                    position: relative;
-                    font-size: 12px;
-                    color: ${colors.customColors.blackColor1};
-                }
-            }
         }
     }
 `;
