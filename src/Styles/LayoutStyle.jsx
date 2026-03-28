@@ -666,6 +666,7 @@ export const FormFieldWrapper = styled('div')`
                 }
 
                 &[type="number"] {
+                    appearance: textfield;
                     -moz-appearance: textfield;
                 }
             }
