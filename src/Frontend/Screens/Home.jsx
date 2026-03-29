@@ -80,6 +80,13 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
+
+                <div className="registration_sec">
+                    <div className="sec_content">
+                        <div className="image_sec"></div>
+                        <div className="form_sec"></div>
+                    </div>
+                </div>
             </HomePageWrapper>
         </>
     );

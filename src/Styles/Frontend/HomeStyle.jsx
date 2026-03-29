@@ -285,4 +285,31 @@ export const HomePageWrapper = styled('div')`
             }
         }
     }
+
+    .registration_sec {
+        position: relative;
+        width: 100%;
+        padding: 35px 0;
+        display: flex;
+        justify-content: center;
+
+        .sec_content {
+            position: relative;
+            width: 1320px;
+            display: flex;
+
+            .image_sec {
+                position: relative;
+                width: 400px;
+                display: flex;
+            }
+
+            .form_sec {
+                position: relative;
+                width: calc(100% - 400px);
+                padding-left: 40px;
+                display: flex;
+            }
+        }
+    }
 `;
