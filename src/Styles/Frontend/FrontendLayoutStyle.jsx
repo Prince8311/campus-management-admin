@@ -173,7 +173,7 @@ export const FooterFrontendWrapper = styled('div')`
 
             .left_inner {
                 position: relative;
-                width: 300px;
+                width: 350px;
                 display: flex;
                 flex-direction: column;
 
@@ -199,9 +199,9 @@ export const FooterFrontendWrapper = styled('div')`
 
             .right_inner {
                 position: relative;
-                width: calc(100% - 300px);
+                width: calc(100% - 350px);
                 display: flex;
-                padding-left: 30px;
+                padding-left: 50px;
 
                 .inner_box {
                     position: relative;
