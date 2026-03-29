@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // Authentication 
 import AuthenticationPage from "../Auth/Authentication";
 
-import PageLayout from "../layouts/PageLayout";
+import PageLayout from "../Layouts/PageLayout";
 import DashboardPage from "../Pages/Dashboard";
 import SessionPage from "../Pages/Session";
 
