@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { FooterFrontendWrapper } from "../../Styles/Frontend/FrontendLayoutStyle";
 
 const FooterFrontend = () => {
@@ -52,16 +53,16 @@ const FooterFrontend = () => {
                                 <h5>Legal</h5>
                                 <ul>
                                     <li>
-                                        <a>
+                                        <NavLink to="/privacy-policy">
                                             <i className="fa-solid fa-angle-right"></i>
                                             <span>Privacy Policy</span>
-                                        </a>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <a>
+                                        <NavLink to="/terms-conditions">
                                             <i className="fa-solid fa-angle-right"></i>
                                             <span>Terms & Conditions</span>
-                                        </a>
+                                        </NavLink>
                                     </li>
                                 </ul>
                             </div>
