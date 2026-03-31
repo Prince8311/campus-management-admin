@@ -131,6 +131,32 @@ const HomePage = () => {
                     </div>
                 </div>
 
+                <div className="about_sec">
+                    <div className="sec_content">
+                        <div className="about_content_left">
+                            <div className="left_items">
+                                <div className="item_head">
+                                    <h4>About Us</h4>
+                                    <p>At Edu Connekt by Shetty Ticket Counter Pvt Ltd, we are passionate about leveraging technology to drive growth and efficiency for businesses and educational institutions. Based in Chikkamagaluru, our mission is to deliver innovative solutions that transform the way organizations operate, communicate, and engage with their Customers/Users.</p>
+                                </div>
+                                <div className="bottom_items">
+                                    <div className="item_box">
+                                        <p>Mission</p>
+                                        <span>We believe every business deserves a powerful digital presence, so we craft personalized design and marketing solutions that are effective, affordable, and built around you.</span>
+                                    </div>
+                                    <div className="item_box">
+                                        <p>Vision</p>
+                                        <span>We are building a globally recognized name — one that stands for creativity, results, and the kind of tailored web design and marketing that transforms businesses from the inside out.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="about_content_right">
+                            <div className="right_item"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="contact_sec">
                     <div className="sec_content">
                         <div className="content_left">

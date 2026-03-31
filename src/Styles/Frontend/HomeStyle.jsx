@@ -525,6 +525,108 @@ export const HomePageWrapper = styled('div')`
         }
     }
 
+    .about_sec {
+        position: relative;
+        width: 100%;
+        padding: 35px 0;
+        display: flex;
+        justify-content: center;
+
+        .sec_content {
+            position: relative;
+            width: 1320px;
+            display: flex;
+
+            .about_content_left {
+                position: relative;
+                width: calc(100% - 550px);
+                padding-right: 40px;
+                display: flex;
+
+                .left_items {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .item_head {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+
+                        h4 {
+                            position: relative;
+                            font-size: 21px;
+                            color: ${colors.customColors.blackColor};
+                            font-weight: 500;
+                            line-height: 1;
+                        }
+
+                        p {
+                            position: relative;
+                            width: 100%;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor2};
+                            margin-top: 10px;
+                        }
+                    }
+
+                    .bottom_items {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        margin-top: 30px;
+
+                        .item_box {
+                            position: relative;
+                            width: 48%;
+                            display: flex;
+                            flex-direction: column;
+                            padding: 20px;
+                            border-radius: 10px;
+                            background: ${colors.customColors.whiteColor};
+                            box-shadow: 0 0 10px ${colors.boxShadowColors.shadowColor1};
+
+                            p {
+                                position: relative;
+                                font-size: 14px;
+                                color: ${colors.customColors.blackColor1};
+                                font-weight: 500;
+                            }
+
+                            span {
+                                position: relative;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
+                                font-weight: 400;
+                                margin-top: 7px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .about_content_right {
+                position: relative;
+                width: 550px;
+                display: flex;
+
+                .right_item {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 20px;
+                    border-radius: 10px;
+                    background: ${colors.customColors.whiteColor};
+                    box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+                }
+            }
+        }
+    }
+
     .contact_sec {
         position: relative;
         width: 100%;
