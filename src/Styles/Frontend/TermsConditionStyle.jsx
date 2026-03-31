@@ -26,7 +26,7 @@ export const TermsConditionsPageWrapper = styled('div')`
             h2 {
                 position: relative;
                 width: 100%;
-                font-size: 31px;
+                font-size: 23px;
                 color: ${colors.customColors.blackColor};
                 font-weight: 600;
             }
@@ -125,6 +125,7 @@ export const TermsConditionsPageWrapper = styled('div')`
                         position: relative;
                         font-size: 13px;
                         color: ${colors.customColors.blackColor1};
+                        margin-bottom: 5px;
                     }
 
                     ul {
@@ -165,6 +166,14 @@ export const TermsConditionsPageWrapper = styled('div')`
                                 }
                             }
                         }
+                    }
+
+                    a {
+                        position: relative;
+                        color: ${colors.customColors.blackColor1};
+                        text-decoration: none;
+                        margin-top: 5px;
+                        font-size: 12px;
                     }
                 }
 

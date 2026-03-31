@@ -151,6 +151,128 @@ const TermsConditionsPage = () => {
                                 </ul>
                             </div>
                         </div>
+                        <div className="content_box">
+                            <h3>10. Third-Party Integrations</h3>
+                            <div className="box_item">
+                                <p>The platform may integrate with:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>SMS / WhatsApp APIs</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Payment gateways</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Cloud hosting providers</span></li>
+                                </ul>
+                                <a>We are not responsible for downtime or issues caused by third-party services.</a>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>11. Intellectual Property Rights</h3>
+                            <div className="box_item">
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>All software, UI/UX, branding, and code belong to Edu Connekt</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Institutions cannot copy, resell, or redistribute the platform</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Custom developments remain property of the Company unless agreed</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>12. Confidentiality</h3>
+                            <div className="box_item">
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Both parties agree to keep sensitive data confidential</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>This includes student records, internal communication, and credentials</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>13. Service Availability (SLA)</h3>
+                            <div className="box_item">
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>We aim for high uptime but do not guarantee uninterrupted service</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Maintenance or updates may cause temporary downtime</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Emergency outages may occur beyond our control</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>14. Account Suspension & Termination</h3>
+                            <div className="box_item">
+                                <p>We may suspend or terminate accounts if:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Terms are violated</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Payment is overdue</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Suspicious or illegal activity is detected</span></li>
+                                </ul>
+                            </div>
+                            <div className="box_item">
+                                <p>Upon termination:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Access will be revoked</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Data may be deleted after a defined period</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>15. Limitation of Liability</h3>
+                            <div className="box_item">
+                                <p>Edu Connekt shall NOT be liable for:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Indirect or consequential damages</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Data inaccuracies entered by users</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Business loss or academic decisions based on system data</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Third-party service failures</span></li>
+                                </ul>
+                                <a>Maximum liability (if applicable) shall not exceed the fees paid in last 3 months.</a>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>16. Indemnification</h3>
+                            <div className="box_item">
+                                <p>You agree to indemnify and hold harmless Edu Connekt against:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Legal claims arising from misuse</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Data breaches caused by institution negligence</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Violation of applicable laws</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>17. Force Majeure</h3>
+                            <div className="box_item">
+                                <p>We are not responsible for failure due to events beyond control:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Natural disasters</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Government actions</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Internet failures</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>18. Updates & Modifications</h3>
+                            <div className="box_item">
+                                <p>We are not responsible for failure due to events beyond control:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Terms may be updated at any time</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Continued use = acceptance of updated Terms</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>19. Governing Law & Jurisdiction</h3>
+                            <div className="box_item">
+                                <p>We are not responsible for failure due to events beyond control:</p>
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>Governed by the laws of India</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>Jurisdiction: Karnataka, Chikkamagaluru</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>20. Contact Information</h3>
+                            <div className="box_item">
+                                <p>Email: support@educonnekt.in</p>
+                                <p>Phone: +91 9449618559</p>
+                                <p>Address: THE MERIDIAN Luxury Hotel, District Stadium Main Road (Kurvangi main road), Dhantaramakki, Chikkamagaluru - 577101, Karnataka, India</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </TermsConditionsPageWrapper>

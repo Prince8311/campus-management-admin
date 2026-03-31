@@ -26,7 +26,7 @@ export const PrivacyPolicyPageWrapper = styled('div')`
             h2 {
                 position: relative;
                 width: 100%;
-                font-size: 31px;
+                font-size: 23px;
                 color: ${colors.customColors.blackColor};
                 font-weight: 600;
             }
