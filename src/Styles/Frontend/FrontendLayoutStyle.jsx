@@ -159,6 +159,7 @@ export const FooterFrontendWrapper = styled('div')`
     background: ${colors.customColors.whiteColor};
     display: flex;
     flex-direction: column;
+    border-top: 1px solid ${colors.customColors.borderColor};
 
     .footer_top {
         position: relative;

@@ -7,7 +7,6 @@ export const HomePageWrapper = styled('div')`
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-bottom: 15px;
 
     .banner_sec {
         position: relative;
@@ -100,7 +99,7 @@ export const HomePageWrapper = styled('div')`
                                 border: 1px solid ${colors.customColors.borderColor1};
                                 color: ${colors.customColors.blackColor};
                                 background: ${colors.customColors.whiteColor};
-                                margin-left: 25px;
+                                margin-left: 20px;
                             }
 
                             i {
