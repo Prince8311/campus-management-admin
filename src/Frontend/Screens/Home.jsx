@@ -1,6 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useNavigate } from "react-router-dom";
 import { HomePageWrapper } from "../../Styles/Frontend/HomeStyle";
 
 const HomePage = () => {
+    const navigate = useNavigate();
+
+    const handleGetStarted = () => {
+        navigate("/auth", { replace: true });
+    };
+
     return (
         <>
             <HomePageWrapper>
@@ -12,13 +20,43 @@ const HomePage = () => {
                                 <h1>The All-in-One <span>Command Center</span> for Your Campus</h1>
                                 <p>Empower your institution with an editorial-grade interface thats transform complex date into actiable intelligence. Academic planing finance and student traking in one cognitive sanctuary.</p>
                                 <div className="banner_btns">
-                                    <button>Get Started Now</button>
+                                    <button onClick={handleGetStarted}>Get Started Now</button>
                                     <button><i className="fa-regular fa-circle-play"></i>Watch Demo</button>
                                 </div>
                             </div>
                         </div>
                         <div className="right_content">
+                            <img src="/images/dashboard.png" alt="" />
+                        </div>
+                    </div>
+                </div>
 
+                <div className="about_sec">
+                    <div className="sec_content">
+                        <div className="about_content_left">
+                            <div className="left_items">
+                                <div className="item_head">
+                                    <h4>About Us</h4>
+                                    <p>At Edu Connekt by Shetty Ticket Counter Pvt Ltd, we are passionate about leveraging technology to drive growth and efficiency for businesses and educational institutions. Based in Chikkamagaluru, our mission is to deliver innovative solutions that transform the way organizations operate, communicate, and engage with their Customers/Users.</p>
+                                </div>
+                                <div className="bottom_items">
+                                    <div className="item_box">
+                                        <div className="icon"><img src="/images/mission.svg" alt="" /></div>
+                                        <p>Mission</p>
+                                        <span>We believe every business deserves a powerful digital presence, so we craft personalized design and marketing solutions that are effective, affordable, and built around you.</span>
+                                    </div>
+                                    <div className="item_box">
+                                        <div className="icon"><img src="/images/vision.svg" alt="" /></div>
+                                        <p>Vision</p>
+                                        <span>We are building a globally recognized name — one that stands for creativity, results, and the kind of tailored web design and marketing that transforms businesses from the inside out.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="about_content_right">
+                            <div className="right_item">
+                                <img src="/images/about-us.png" alt="" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,7 +121,9 @@ const HomePage = () => {
 
                 <div className="registration_sec">
                     <div className="sec_content">
-                        <div className="image_sec"></div>
+                        <div className="image_sec">
+                            <img src="/images/connect.png" alt="" />
+                        </div>
                         <div className="sec_items">
                             <div className="item_inner">
                                 <div className="form_head">
@@ -108,7 +148,7 @@ const HomePage = () => {
                                         <textarea placeholder="Enter your institution's location" />
                                     </div>
                                     <div className="btn_box">
-                                        <button>Request Demo</button>
+                                        <button>Register</button>
                                     </div>
                                 </div>
                             </div>
@@ -127,32 +167,6 @@ const HomePage = () => {
                                 <button>Request a Demo</button>
                                 <button>View Pricing</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="about_sec">
-                    <div className="sec_content">
-                        <div className="about_content_left">
-                            <div className="left_items">
-                                <div className="item_head">
-                                    <h4>About Us</h4>
-                                    <p>At Edu Connekt by Shetty Ticket Counter Pvt Ltd, we are passionate about leveraging technology to drive growth and efficiency for businesses and educational institutions. Based in Chikkamagaluru, our mission is to deliver innovative solutions that transform the way organizations operate, communicate, and engage with their Customers/Users.</p>
-                                </div>
-                                <div className="bottom_items">
-                                    <div className="item_box">
-                                        <p>Mission</p>
-                                        <span>We believe every business deserves a powerful digital presence, so we craft personalized design and marketing solutions that are effective, affordable, and built around you.</span>
-                                    </div>
-                                    <div className="item_box">
-                                        <p>Vision</p>
-                                        <span>We are building a globally recognized name — one that stands for creativity, results, and the kind of tailored web design and marketing that transforms businesses from the inside out.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="about_content_right">
-                            <div className="right_item"></div>
                         </div>
                     </div>
                 </div>

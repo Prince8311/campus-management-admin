@@ -8,14 +8,14 @@ export const HomePageWrapper = styled('div')`
     display: flex;
     flex-direction: column;
     padding-bottom: 15px;
-    padding-top: 20px;
 
     .banner_sec {
         position: relative;
         width: 100%;
-        padding: 35px 0;
+        padding: 40px 0;
         display: flex;
         justify-content: center;
+        background: linear-gradient(to bottom, #F6FAFE, #F6FAFE);
 
         .sec_content {
             position: relative;
@@ -26,6 +26,7 @@ export const HomePageWrapper = styled('div')`
                 position: relative;
                 width: calc(100% - 650px);
                 padding-right: 40px;
+                padding-top: 10px;
                 display: flex;
 
                 .content_inner {
@@ -41,7 +42,7 @@ export const HomePageWrapper = styled('div')`
                         border-radius: 25px;
                         background: ${colors.customColors.greenColorLight};
                         color: ${colors.customColors.greenColor};
-                        font-size: 12px;
+                        font-size: 11px;
                         font-weight: 500;
                         text-decoration: none;
                     }
@@ -50,13 +51,15 @@ export const HomePageWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         font-size: 41px;
+                        margin-top: 6px;
                         color: ${colors.customColors.blackColor};
                         font-weight: 700;
                         letter-spacing: 0.3px;
-                        margin: 15px 0;
+                        line-height: 1.2;
 
                         span {
                             margin: 0 5px;
+                            line-height: 1.2;
                             background: linear-gradient(90deg, #1FA2D6 0%, #2BB673 100%);
                             -webkit-background-clip: text;
                             -webkit-text-fill-color: transparent;
@@ -65,6 +68,7 @@ export const HomePageWrapper = styled('div')`
 
                     p {
                         position: relative;
+                        margin-top: 18px;
                         width: 100%;
                         display: flex;
                         color: ${colors.customColors.blackColor1};
@@ -117,10 +121,17 @@ export const HomePageWrapper = styled('div')`
             .right_content {
                 position: relative;
                 width: 650px;
-                padding: 15px;
+                padding: 5px;
                 border-radius: 10px;
                 background: ${colors.customColors.whiteColor};
                 box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+                display: flex;
+
+                img {
+                    position: relative;
+                    width: 100%;
+                    border-radius: 7px;
+                }
             }
         }
     }
@@ -128,9 +139,10 @@ export const HomePageWrapper = styled('div')`
     .scale_sec {
         position: relative;
         width: 100%;
-        padding: 35px 0;
+        padding: 40px 0;
         display: flex;
         justify-content: center;
+        background: ${colors.customColors.lightBackground3};
 
         .sec_content {
             position: relative;
@@ -168,7 +180,7 @@ export const HomePageWrapper = styled('div')`
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
-                margin-top: 40px;
+                margin-top: 25px;
 
                 .item_box {
                     position: relative;
@@ -184,6 +196,7 @@ export const HomePageWrapper = styled('div')`
                         padding: 20px;
                         padding-bottom: 27px;
                         box-shadow: 0 0 10px ${colors.boxShadowColors.shadowColor1};
+                        background: ${colors.customColors.whiteColor};
                         border-radius: 10px;
 
                         a {
@@ -261,8 +274,8 @@ export const HomePageWrapper = styled('div')`
                 a {
                     position: relative;
                     font-size: 33px;
-                    font-weight: 700;
-                    margin-bottom: 8px;
+                    font-weight: 600;
+                    margin-bottom: 6px;
                     text-decoration: none;
 
                     &.blue {
@@ -290,6 +303,7 @@ export const HomePageWrapper = styled('div')`
         position: relative;
         width: 100%;
         padding: 35px 0;
+        margin-top: 25px;
         display: flex;
         justify-content: center;
 
@@ -302,12 +316,19 @@ export const HomePageWrapper = styled('div')`
                 position: relative;
                 width: 650px;
                 display: flex;
+
+                img {
+                    position: relative;
+                    width: 100%;
+                    border-radius: 15px;
+                    box-shadow: 10px 15px 20px rgba(57, 211, 83, 0.2), -8px -8px 15px rgba(0, 175, 239, 0.277);
+                }
             }
 
             .sec_items {
                 position: relative;
                 width: calc(100% - 650px);
-                padding-left: 50px;
+                padding-left: 60px;
                 display: flex;
 
                 .item_inner {
@@ -315,7 +336,7 @@ export const HomePageWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    padding: 20px;
+                    padding: 20px 25px;
                     border-radius: 10px;
                     background: ${colors.customColors.whiteColor};
                     box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -328,7 +349,7 @@ export const HomePageWrapper = styled('div')`
 
                         h3 {
                             position: relative;
-                            font-size: 21px;
+                            font-size: 20px;
                             color: ${colors.customColors.blackColor};
                             font-weight: 600;
                             line-height: 1.2;
@@ -428,11 +449,17 @@ export const HomePageWrapper = styled('div')`
                                 height: 37px;
                                 background: linear-gradient(135deg, #2ea6d6, #0d7fa6);
                                 color: ${colors.customColors.whiteColor};
-                                font-size: 12px;
+                                font-size: 13px;
                                 font-weight: 500;
                                 border: none;
                                 border-radius: 5px;
                                 cursor: pointer;
+                                transition: all 0.5s ease;
+
+                                &:hover {
+                                    border-radius: 25px;
+                                    transition: all 0.5s ease;
+                                }
                             }
                         }
                     }
@@ -528,7 +555,7 @@ export const HomePageWrapper = styled('div')`
     .about_sec {
         position: relative;
         width: 100%;
-        padding: 35px 0;
+        padding: 40px 0;
         display: flex;
         justify-content: center;
 
@@ -539,8 +566,9 @@ export const HomePageWrapper = styled('div')`
 
             .about_content_left {
                 position: relative;
-                width: calc(100% - 550px);
+                width: calc(100% - 575px);
                 padding-right: 40px;
+                padding-top: 10px;
                 display: flex;
 
                 .left_items {
@@ -568,7 +596,7 @@ export const HomePageWrapper = styled('div')`
                             width: 100%;
                             font-size: 12px;
                             color: ${colors.customColors.blackColor2};
-                            margin-top: 10px;
+                            margin-top: 12px;
                         }
                     }
 
@@ -577,20 +605,36 @@ export const HomePageWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         justify-content: space-between;
-                        margin-top: 30px;
+                        margin-top: 40px;
 
                         .item_box {
                             position: relative;
-                            width: 48%;
+                            width: 47%;
                             display: flex;
                             flex-direction: column;
-                            padding: 20px;
+                            padding: 20px 24px;
                             border-radius: 10px;
-                            background: ${colors.customColors.whiteColor};
+                            background: #F1F5F9;
                             box-shadow: 0 0 10px ${colors.boxShadowColors.shadowColor1};
+
+                            .icon {
+                                position: relative;
+                                width: 40px;
+                                height: 40px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: ${colors.customColors.blueColorLight};
+                                border-radius: 5px;
+                            }
+
+                            &.item_box:nth-of-type(2) .icon {
+                                background: ${colors.customColors.greenColorLight};
+                            }
 
                             p {
                                 position: relative;
+                                margin-top: 10px;
                                 font-size: 14px;
                                 color: ${colors.customColors.blackColor1};
                                 font-weight: 500;
@@ -610,18 +654,25 @@ export const HomePageWrapper = styled('div')`
 
             .about_content_right {
                 position: relative;
-                width: 550px;
+                width: 575px;
                 display: flex;
+                padding-left: 20px;
 
                 .right_item {
                     position: relative;
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    padding: 20px;
+                    padding: 5px;
                     border-radius: 10px;
                     background: ${colors.customColors.whiteColor};
                     box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+
+                    img {
+                        position: relative;
+                        width: 100%;
+                        border-radius: 7px;
+                    }
                 }
             }
         }

@@ -84,7 +84,7 @@ export const NavbarFrontendWrapper = styled('div')`
                     a {
                         position: relative;
                         height: 100%;
-                        padding: 0 20px;
+                        padding: 0 15px;
                         display: flex;
                         align-items: center;
                         cursor: pointer;
@@ -97,13 +97,13 @@ export const NavbarFrontendWrapper = styled('div')`
                             content: '';
                             position: absolute;
                             left: 0;
-                            bottom: 0;
+                            bottom: -3px;
                             height: 2px;
                             width: 100%;
+                            border-radius: 20px;
                             background: ${colors.customColors.blueColor2};
-
                             transform: scaleX(0);
-                            transform-origin: left;
+                            transform-origin: right;
                             transition: transform 0.35s ease;
                         }
                     }
@@ -114,6 +114,7 @@ export const NavbarFrontendWrapper = styled('div')`
 
                             &::after {
                                 transform: scaleX(1);
+                                transform-origin: left;
                             }
                         }
                     }

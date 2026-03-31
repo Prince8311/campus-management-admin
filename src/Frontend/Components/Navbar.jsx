@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Link } from "react-router-dom";
 import { NavbarFrontendWrapper } from "../../Styles/Frontend/FrontendLayoutStyle";
 
 const NavbarFrontend = () => {
@@ -10,14 +12,13 @@ const NavbarFrontend = () => {
                             <img src="/images/logo.png" alt="" />
                         </div>
                         <div className="nav_items_part">
-                            <li><a>Dashboard</a></li>
-                            <li><a>Admission</a></li>
-                            <li><a>Faculty</a></li>
-                            <li><a>Finance</a></li>
-                            <li><a>Report</a></li>
+                            <li><a>Home</a></li>
+                            <li><a>About Us</a></li>
+                            <li><a>Register</a></li>
+                            <li><a>Contact Us</a></li>
                         </div>
                         <div className="nav_btn">
-                            <a>Get Started</a>
+                            <Link to="/auth">Get Started</Link>
                         </div>
                     </div>
                 </div>
