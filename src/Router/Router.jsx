@@ -3,6 +3,9 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 // Frontend Layout
 import FrontendLayout from "../Layouts/FrontendLayout";
+import HomePage from "../Frontend/Screens/Home";
+import TermsConditionsPage from "../Frontend/Screens/TermsCondition";
+import PrivacyPolicyPage from "../Frontend/Screens/PrivacyPolicy";
 
 // Authentication 
 import AuthenticationPage from "../Auth/Authentication";
@@ -88,7 +91,11 @@ const Routers = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<FrontendLayout />} />
+                    <Route path="/" element={<FrontendLayout />} >
+                        <Route index element={<HomePage />} />
+                        <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+                        <Route path="terms-conditions" element={<TermsConditionsPage />} />
+                    </Route>
                     <Route path="auth" element={<AuthenticationPage />} />
                     <Route path="admin" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
@@ -163,7 +170,7 @@ const Routers = () => {
                             <Route path="staffs" element={<VehicleStaffsPage />} />
                             <Route path="routes" element={<VehicleRoutesPage />} />
                         </Route>
-                            <Route path="add-routes" element={<AddRoutesPage />} />
+                        <Route path="add-routes" element={<AddRoutesPage />} />
                         <Route path="settings" element={<SettingsMainPage />}>
                             <Route path="" element={<Navigate to="roles-permissions" />} />
                             <Route path="roles-permissions" element={<RolesPermissionsPage />} />
