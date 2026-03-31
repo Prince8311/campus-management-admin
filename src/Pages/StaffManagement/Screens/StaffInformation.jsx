@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { StaffInformationWrapper } from "../../../Styles/StaffStyle";
+import SelectStaffTypeModal from "../../../Components/Modals/Staff/SelectStaffType";
+import { useState } from "react";
 
 const StaffInformationPage = () => {
     const navigate = useNavigate();
+    const [isStaffTypeOpen, setIsStaffTypeOpen] = useState(false);
 
-    const redirectAddStaffScreen = () => {
-        navigate("/admin/staff-management/add-staff");
-    }
+    const handleOpenStaffTypeModal = () => {
+        setIsStaffTypeOpen(true);
+    };
+
     return (
         <>
             <StaffInformationWrapper>
@@ -19,9 +23,9 @@ const StaffInformationPage = () => {
                         <input type="text" placeholder="Search by Mobile Number" />
                     </div>
                     <div className="add_btn">
-                        <button onClick={redirectAddStaffScreen}>
+                        <button onClick={handleOpenStaffTypeModal}>
                             <i className="fa-solid fa-plus"></i>
-                            <p>Add New Staff</p>
+                            <p>Add New Staff Type</p>
                         </button>
                     </div>
                 </div>
@@ -101,6 +105,11 @@ const StaffInformationPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <SelectStaffTypeModal
+                    isStaffTypeOpen={isStaffTypeOpen}
+                    setIsStaffTypeOpen={setIsStaffTypeOpen}
+                />
             </StaffInformationWrapper>
         </>
     );
