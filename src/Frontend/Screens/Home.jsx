@@ -100,20 +100,20 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                <div class="stats_sec">
-                    <div class="sec_content">
-                        <div class="stat_box">
-                            <a class="blue">10k+</a>
+                <div className="stats_sec">
+                    <div className="sec_content">
+                        <div className="stat_box">
+                            <a className="blue">10k+</a>
                             <p>STUDENTS MANAGED</p>
                         </div>
 
-                        <div class="stat_box">
-                            <a class="green">500+</a>
+                        <div className="stat_box">
+                            <a className="green">500+</a>
                             <p>STAFFS INCLUDED</p>
                         </div>
 
-                        <div class="stat_box">
-                            <a class="light">99.9%</a>
+                        <div className="stat_box">
+                            <a className="light">99.9%</a>
                             <p>PLATFORM UPTIME</p>
                         </div>
                     </div>

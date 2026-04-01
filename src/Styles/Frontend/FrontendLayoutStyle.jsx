@@ -106,6 +106,15 @@ export const NavbarFrontendWrapper = styled('div')`
                             transform-origin: right;
                             transition: transform 0.35s ease;
                         }
+
+                        &.active {
+                            color: ${colors.customColors.blueColor2};
+
+                            &::after {
+                                transform: scaleX(1);
+                                transform-origin: left;
+                            }
+                        }
                     }
                     
                     &:hover {

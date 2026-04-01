@@ -14,6 +14,7 @@ export const HomePageWrapper = styled('div')`
         padding: 40px 0;
         display: flex;
         justify-content: center;
+        scroll-margin-top: 80px;
         background: linear-gradient(to bottom, #F6FAFE, #F6FAFE);
 
         .sec_content {
@@ -305,6 +306,7 @@ export const HomePageWrapper = styled('div')`
         margin-top: 25px;
         display: flex;
         justify-content: center;
+        scroll-margin-top: 80px;
 
         .sec_content {
             position: relative;
@@ -557,6 +559,7 @@ export const HomePageWrapper = styled('div')`
         padding: 40px 0;
         display: flex;
         justify-content: center;
+        scroll-margin-top: 80px;
 
         .sec_content {
             position: relative;
@@ -684,6 +687,7 @@ export const HomePageWrapper = styled('div')`
         display: flex;
         justify-content: center;
         background: ${colors.customColors.lightBackground3};
+        scroll-margin-top: 80px;
 
         .sec_content {
             position: relative;
