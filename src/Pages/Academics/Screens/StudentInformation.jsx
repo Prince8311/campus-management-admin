@@ -213,7 +213,7 @@ const StudentInformationPage = () => {
                                     )
                                 ) : (
                                     <tr>
-                                        <td className="empty_message">No states and cities available.</td>
+                                        <td className="empty_message">No students available.</td>
                                     </tr>
                                 )
                             }
