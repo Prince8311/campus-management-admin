@@ -20,31 +20,25 @@ const FooterFrontend = () => {
                                     <li>
                                         <a>
                                             <i className="fa-solid fa-angle-right"></i>
-                                            <span>Dashboard</span>
+                                            <span>Home</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a>
                                             <i className="fa-solid fa-angle-right"></i>
-                                            <span>Admissions</span>
+                                            <span>About Us</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a>
                                             <i className="fa-solid fa-angle-right"></i>
-                                            <span>Faculty</span>
+                                            <span>Register</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a>
                                             <i className="fa-solid fa-angle-right"></i>
-                                            <span>Finance</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <i className="fa-solid fa-angle-right"></i>
-                                            <span>Reports</span>
+                                            <span>Contact Us</span>
                                         </a>
                                     </li>
                                 </ul>

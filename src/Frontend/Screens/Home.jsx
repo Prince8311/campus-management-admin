@@ -12,7 +12,7 @@ const HomePage = () => {
     return (
         <>
             <HomePageWrapper>
-                <div className="banner_sec">
+                <div className="banner_sec" id="home">
                     <div className="sec_content">
                         <div className="left_content">
                             <div className="content_inner">
@@ -31,7 +31,7 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                <div className="about_sec">
+                <div className="about_sec" id="about">
                     <div className="sec_content">
                         <div className="about_content_left">
                             <div className="left_items">
@@ -119,7 +119,7 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                <div className="registration_sec">
+                <div className="registration_sec" id="register">
                     <div className="sec_content">
                         <div className="image_sec">
                             <img src="/images/connect.png" alt="" />
@@ -171,7 +171,7 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                <div className="contact_sec">
+                <div className="contact_sec" id="contact">
                     <div className="sec_content">
                         <div className="content_left">
                             <div className="left_inner">

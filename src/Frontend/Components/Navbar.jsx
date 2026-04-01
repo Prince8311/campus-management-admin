@@ -12,10 +12,10 @@ const NavbarFrontend = () => {
                             <img src="/images/logo.png" alt="" />
                         </div>
                         <div className="nav_items_part">
-                            <li><a>Home</a></li>
-                            <li><a>About Us</a></li>
-                            <li><a>Register</a></li>
-                            <li><a>Contact Us</a></li>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#register">Register</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
                         </div>
                         <div className="nav_btn">
                             <Link to="/auth">Get Started</Link>
