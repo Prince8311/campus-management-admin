@@ -34,7 +34,12 @@ const HomePage = () => {
                 <div className="about_sec" id="about">
                     <div className="sec_content">
                         <div className="about_content_left">
-                            <div className="left_items">
+                            <div className="left_item">
+                                <img src="/images/about-us.png" alt="" />
+                            </div>
+                        </div>
+                        <div className="about_content_right">
+                            <div className="right_items">
                                 <div className="item_head">
                                     <h4>About Us</h4>
                                     <p>At Edu Connekt by Shetty Ticket Counter Pvt Ltd, we are passionate about leveraging technology to drive growth and efficiency for businesses and educational institutions. Based in Chikkamagaluru, our mission is to deliver innovative solutions that transform the way organizations operate, communicate, and engage with their Customers/Users.</p>
@@ -51,11 +56,6 @@ const HomePage = () => {
                                         <span>We are building a globally recognized name — one that stands for creativity, results, and the kind of tailored web design and marketing that transforms businesses from the inside out.</span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="about_content_right">
-                            <div className="right_item">
-                                <img src="/images/about-us.png" alt="" />
                             </div>
                         </div>
                     </div>
