@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from "react";
 import { SidebarWrapper } from "../Styles/LayoutStyle";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -31,7 +32,7 @@ const Sidebar = () => {
         } else if (path.startsWith('/finance-management')) {
             setActiveDropdown(2);
         }
-    }, [location]);
+    }, [location, setPageName]);
 
     const toggleDropdown = (index) => {
         setActiveDropdown(prev => (prev === index ? null : index));
@@ -312,6 +313,10 @@ const Sidebar = () => {
                                                 <p>Subject Settings</p>
                                             </NavLink>
                                         }
+                                        <NavLink to="/admin/settings/time-tables">
+                                            <i className="fa-solid fa-calendar-days"></i>
+                                            <p>Time Table Settings</p>
+                                        </NavLink>
                                         <a>
                                             <i className="fa-solid fa-gear prefix"></i>
                                             <p>General Settings</p>
