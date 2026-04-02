@@ -63,7 +63,10 @@ const FooterFrontend = () => {
                             <div className="inner_box">
                                 <h5>Connect</h5>
                                 <div className="social_media">
-                                    <a><i className="fa-brands fa-instagram"></i></a>
+                                    <a><i className="fa-brands fa-facebook-f"></i></a>
+                                    <a href="https://www.instagram.com/educonnekt" target="_blank" rel="noopener noreferrer">
+                                        <i className="fa-brands fa-instagram"></i>
+                                    </a>
                                     <a><i className="fa-brands fa-x-twitter"></i></a>
                                 </div>
                             </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import ScrollToTop from "../Components/ScrollToTop";
+
 // Frontend Layout
 import FrontendLayout from "../Layouts/FrontendLayout";
 import HomePage from "../Frontend/Screens/Home";
@@ -91,6 +93,7 @@ const Routers = () => {
     return (
         <>
             <BrowserRouter>
+                <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<FrontendLayout />} >
                         <Route index element={<HomePage />} />

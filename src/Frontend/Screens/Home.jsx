@@ -1,13 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { HomePageWrapper } from "../../Styles/Frontend/HomeStyle";
 
 const HomePage = () => {
+    const location = useLocation();
     const navigate = useNavigate();
 
     const handleGetStarted = () => {
         navigate("/auth", { replace: true });
     };
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const section = params.get("section");
+        if (section) {
+            setTimeout(() => {
+                const el = document.getElementById(section);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                }
+                navigate("/", { replace: true });
+            }, 100);
+        }
+    }, [location]);
 
     return (
         <>
@@ -183,7 +199,7 @@ const HomePage = () => {
                                         <a className="email"><i className="fa-regular fa-envelope"></i></a>
                                         <div className="content">
                                             <span>EMAIL</span>
-                                            <p>hello@educonnect.com</p>
+                                            <p>educonnekt@gmail.com</p>
                                         </div>
                                     </div>
                                     <div className="item_box">
