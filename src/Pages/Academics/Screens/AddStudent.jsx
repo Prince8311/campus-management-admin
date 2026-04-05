@@ -106,20 +106,6 @@ const AddStudentPage = () => {
         });
     };
 
-    const handleFormSubmit = () => {
-        const formattedData = [];
-        Object.entries(formData).forEach(([sectionId, fields]) => {
-            Object.entries(fields).forEach(([fieldName, value]) => {
-                formattedData.push({
-                    section_id: sectionId,
-                    field_name: fieldName,
-                    value: value
-                });
-            });
-        });
-        console.log(formattedData);
-    };
-
     const handleDragOver = (e) => {
         e.preventDefault();
         setIsDragging(true);
@@ -218,11 +204,14 @@ const AddStudentPage = () => {
 
                     headers.forEach((header, index) => {
                         if (fieldMap[header]) {
-                            studentData.push({
-                                section_id: fieldMap[header].section_id,
-                                field_name: fieldMap[header].field_name,
-                                value: row[index]?.trim() || ""
-                            });
+                            const value = row[index]?.trim();
+                            if (value) {
+                                studentData.push({
+                                    section_id: fieldMap[header].section_id,
+                                    field_name: fieldMap[header].field_name,
+                                    value: value
+                                });
+                            }
                         }
                     });
 
@@ -235,13 +224,13 @@ const AddStudentPage = () => {
                     isBulkUpload: true
                 };
 
-                console.log("Payload", payload);
-                const response = await axiosInstance.post(api.addStudent, payload);
+                console.log("Bulk upload", payload);
+                // const response = await axiosInstance.post(api.addStudent, payload);
 
-                if (response?.data.status === 200) {
-                    toast.success(response.data?.message || "Students uploaded successfully");
-                    handleRemoveFile();
-                }
+                // if (response?.data.status === 200) {
+                //     toast.success(response.data?.message || "Students uploaded successfully");
+                //     handleRemoveFile();
+                // }
             } catch (error) {
                 toast.error(error.response?.data?.message || error.message);
             } finally {
@@ -263,6 +252,20 @@ const AddStudentPage = () => {
         if (fileInput) {
             fileInput.value = "";
         }
+    };
+
+    const handleFormSubmit = () => {
+        const formattedData = [];
+        Object.entries(formData).forEach(([sectionId, fields]) => {
+            Object.entries(fields).forEach(([fieldName, value]) => {
+                formattedData.push({
+                    section_id: sectionId,
+                    field_name: fieldName,
+                    value: value
+                });
+            });
+        });
+        console.log("Single upload", formattedData);
     };
 
     return (
