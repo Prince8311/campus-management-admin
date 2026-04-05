@@ -1245,6 +1245,7 @@ export const HomePageWrapper = styled('div')`
                                 width: calc(100% - 40px);
                                 display: flex;
                                 padding-left: 15px;
+                                padding-top: 4px;
                                 flex-direction: column;
 
                                 span {
@@ -1259,9 +1260,8 @@ export const HomePageWrapper = styled('div')`
                                     width: 350px;
                                     font-size: 12px;
                                     color: ${colors.customColors.blackColor};
-                                    font-weight: 500;
-                                    line-height: 1.5;
-                                    margin-top: auto;
+                                    line-height: 1.4;
+                                    margin-top: 3px;
                                 }
                             }
                         }

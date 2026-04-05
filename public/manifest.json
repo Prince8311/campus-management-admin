@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "EduConnekt",
+  "name": "Edu Connekt - Connect Students & Educators",
+  "description": "Edu Connekt helps students and teachers connect, explore courses, and enhance learning online.",
+  
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +20,18 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+
+  "start_url": "/",
+  "scope": "/",
+
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait",
+
+  "theme_color": "#0d6efd",
+  "background_color": "#ffffff",
+
+  "categories": ["education", "productivity"],
+
+  "lang": "en",
+  "dir": "ltr"
 }

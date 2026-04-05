@@ -379,6 +379,7 @@ export const FooterFrontendWrapper = styled('div')`
                             display: flex;
                             align-items: center;
                             justify-content: center;
+                            text-decoration: none;
                             margin-right: 15px;
                             border-radius: 8px;
                             font-size: 15px;
