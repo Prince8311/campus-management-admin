@@ -78,6 +78,9 @@ const NavbarFrontend = () => {
                                 </a>
                             </li>
                         </div>
+                        <div className="menubar_icon">
+                            <span><i class="fa-solid fa-bars"></i></span>
+                        </div>
                         <div className="nav_btn">
                             <Link to="/auth">Get Started</Link>
                         </div>
