@@ -25,7 +25,7 @@ const StaffInformationPage = () => {
                     <div className="add_btn">
                         <button onClick={handleOpenStaffTypeModal}>
                             <i className="fa-solid fa-plus"></i>
-                            <p>Add New Staff Type</p>
+                            <p>Add New Staff</p>
                         </button>
                     </div>
                 </div>

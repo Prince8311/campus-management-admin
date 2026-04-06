@@ -1704,6 +1704,12 @@ export const AddStudentWrapper = styled('div')`
                         i {
                             margin-right: 5px;
                         }
+
+                        &:disabled {
+                            opacity: 0.4;
+                            cursor: not-allowed;
+                            transition: all 0.5s ease;
+                        }
                     }
                 }
             }

@@ -1965,19 +1965,25 @@ export const AddFeesStructureWrapper = styled('div')`
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
 
             p {
                 position: relative;
                 font-size: 13px;
                 color: ${colors.customColors.blackColor2};
+                transition: all 0.2s ease;
             }
 
             &.active {
                 border: 1px solid ${colors.customColors.greenColor};
                 background: ${colors.customColors.greenColor};
+                transition: all 0.2s ease;
+                transition-delay: 0.3s;
 
                 p {
                     color: ${colors.customColors.whiteColor};
+                    transition: all 0.2s ease;
+                    transition-delay: 0.3s;
                 }
             }
         }
@@ -1990,8 +1996,22 @@ export const AddFeesStructureWrapper = styled('div')`
             background: ${colors.customColors.lightBackground3};
             margin: 0 10px;
 
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background: ${colors.customColors.greenColor}; 
+                transition: width 0.5s ease;
+            }
+
             &.active {
-                background: ${colors.customColors.greenColor};  
+                &::after {
+                    width: 100%;
+                    transition: width 0.5s ease;
+                } 
             }
         }
     }
@@ -2124,11 +2144,18 @@ export const AddFeesStructureWrapper = styled('div')`
                             align-items: center;
                             justify-content: center;
                             box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                            cursor: pointer;
 
                             i {
                                 position: relative;
                                 font-size: 14px;
                                 color: ${colors.customColors.blackColor2};
+                                transition: all 0.5s ease;
+
+                                &.active {
+                                    transform: rotate(90deg);
+                                    transition: all 0.5s ease;
+                                }
                             }
                         }
                     }
@@ -2136,6 +2163,12 @@ export const AddFeesStructureWrapper = styled('div')`
                     .bottom_part {
                         position: relative;
                         width: 100%;
+                        height: 0;
+                        overflow: hidden;
+
+                        &.active {
+                            height: max-content;
+                        }
 
                         .bottom_inner {
                             position: relative;
@@ -2348,6 +2381,12 @@ export const AddFeesStructureWrapper = styled('div')`
                         border-radius: 25px;
                         transition: all 0.5s ease;
                     }
+
+                    &:disabled {
+                        opacity: 0.4;
+                        cursor: not-allowed;
+                        transition: all 0.5s ease;
+                    }
                 }
             }
         }
@@ -2558,6 +2597,12 @@ export const AddFeesStructureWrapper = styled('div')`
                                                     color: ${colors.customColors.blackColor};
                                                 }
                                             }
+
+                                            &.empty_message {
+                                                color: ${colors.customColors.blackColor3};
+                                                padding: 5px 10px;
+                                                pointer-events: none;
+                                            }
                                         }
                                     }
                                 }
@@ -2714,6 +2759,12 @@ export const AddFeesStructureWrapper = styled('div')`
 
                     &:hover {
                         border-radius: 25px;
+                        transition: all 0.5s ease;
+                    }
+
+                    &:disabled {
+                        opacity: 0.4;
+                        cursor: not-allowed;
                         transition: all 0.5s ease;
                     }
                 }
@@ -2890,6 +2941,12 @@ export const AddFeesStructureWrapper = styled('div')`
 
                         &:hover {
                             border-radius: 25px;
+                            transition: all 0.5s ease;
+                        }
+
+                        &:disabled {
+                            opacity: 0.4;
+                            cursor: not-allowed;
                             transition: all 0.5s ease;
                         }
                     }

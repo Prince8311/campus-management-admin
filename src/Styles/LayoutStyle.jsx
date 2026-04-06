@@ -44,7 +44,6 @@ export const PageWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 height: 100%;
-                padding-bottom: 45px;
                 overflow-y: auto;
                 scrollbar-width: none;
                 -ms-overflow-style: none;

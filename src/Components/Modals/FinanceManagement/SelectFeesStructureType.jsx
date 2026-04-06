@@ -26,21 +26,21 @@ const SelectFeesStructureTypeModal = ({ isFeesStructureOpen, setIsFeesStructureO
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('recurring')}>
+                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('Recurring Fee')}>
                                 <div className="box_item">
                                     <img src="/images/recurring-fee.svg" alt="" />
                                     <p>Recurring Fee</p>
                                     <span>Create recurring fees like tution fees, maintance fees etc.</span>
                                 </div>
                             </div>
-                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('oneTime')}>
+                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('One Time Fee')}>
                                 <div className="box_item">
                                     <img src="/images/one-time-fee.svg" alt="" />
                                     <p>One Time Fee</p>
                                     <span>Create one time fees like admission fees, uniform fees etc.</span>
                                 </div>
                             </div>
-                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('transpost')}>
+                            <div className="inner_box" onClick={() => handleRedirectionAddFeesStructurePage('Transfort Fee')}>
                                 <div className="box_item">
                                     <img src="/images/transport-fee.svg" alt="" />
                                     <p>Transfort Fee</p>

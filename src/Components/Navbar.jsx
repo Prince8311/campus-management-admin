@@ -19,7 +19,6 @@ const Navbar = () => {
                                 <img src="/images/profile-image.png" alt="" />
                             </div>
                             <p>Sourish Mondal</p>
-                            <i className="fa-solid fa-angle-down"></i>
                         </div>
                     </div>
                 </div>

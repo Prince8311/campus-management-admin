@@ -227,7 +227,7 @@ const ClassroomPage = () => {
                                                                         <div className="top_part">
                                                                             <div className="part_content">
                                                                                 <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                                                <h6>1 - {section}</h6>
+                                                                                <h6>{academicClass.class} - {section}</h6>
                                                                                 <span>1000 Students</span>
                                                                             </div>
                                                                             <div className="teacher_name_sec">

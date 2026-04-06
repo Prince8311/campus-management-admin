@@ -22,6 +22,7 @@ const AddStudentPage = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isBulkUploading, setIsBulkUploading] = useState(false);
+    const [isStudentUploading, setIsStudentUploading] = useState(false);
 
     const fetchStudentForm = async () => {
         setIsFormLoading(true);
@@ -223,14 +224,12 @@ const AddStudentPage = () => {
                     session: userDetails?.session?.name,
                     isBulkUpload: true
                 };
+                const response = await axiosInstance.post(api.addStudent, payload);
 
-                console.log("Bulk upload", payload);
-                // const response = await axiosInstance.post(api.addStudent, payload);
-
-                // if (response?.data.status === 200) {
-                //     toast.success(response.data?.message || "Students uploaded successfully");
-                //     handleRemoveFile();
-                // }
+                if (response?.data.status === 200) {
+                    toast.success(response.data?.message || "Students uploaded successfully");
+                    handleRemoveFile();
+                }
             } catch (error) {
                 toast.error(error.response?.data?.message || error.message);
             } finally {
@@ -254,18 +253,50 @@ const AddStudentPage = () => {
         }
     };
 
+    const areRequiredFieldsFilled = () => {
+        for (const section of form) {
+            for (const field of section.fields) {
+                if (field.is_required) {
+                    const value = formData?.[section.id]?.[field.name];
+
+                    if (!value || value.toString().trim() === "") {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    };
+
     const handleFormSubmit = () => {
-        const formattedData = [];
+        const studentData = [];
         Object.entries(formData).forEach(([sectionId, fields]) => {
             Object.entries(fields).forEach(([fieldName, value]) => {
-                formattedData.push({
-                    section_id: sectionId,
-                    field_name: fieldName,
-                    value: value
-                });
+                const trimmedValue = value?.toString().trim();
+                if (trimmedValue) {
+                    studentData.push({
+                        section_id: sectionId,
+                        field_name: fieldName,
+                        value: trimmedValue
+                    });
+                }
             });
         });
-        console.log("Single upload", formattedData);
+        const payload = {
+            students: [
+                {
+                    student_fields: studentData
+                }
+            ],
+            session: userDetails?.session?.name,
+            isBulkUpload: false
+        };
+        try {
+            
+        } catch (error) {
+            
+        }
+        console.log("Single upload", payload);
     };
 
     return (
@@ -416,7 +447,7 @@ const AddStudentPage = () => {
                                             }
                                         </div>
                                         <div className="btn_sec">
-                                            <button onClick={handleFormSubmit}><i className="fa-solid fa-plus"></i>Add Student</button>
+                                            <button onClick={handleFormSubmit} disabled={!areRequiredFieldsFilled()}><i className="fa-solid fa-plus"></i>Add Student</button>
                                         </div>
                                     </div>
                                 </div>
