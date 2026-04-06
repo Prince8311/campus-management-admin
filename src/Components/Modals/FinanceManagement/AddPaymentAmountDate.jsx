@@ -11,7 +11,7 @@ const AddPaymentAmoutDateModal = ({ showAddPaymentAmountDate, setShowAddPaymentA
             <AddPaymentAmoutDateWrapper className={showAddPaymentAmountDate ? 'active' : ''}>
                 <div className={`modal_box ${showAddPaymentAmountDate ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Payments Amount & Schdule Dates</h4>
+                        <h4>Add Payment Amount & Schdule Date</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>

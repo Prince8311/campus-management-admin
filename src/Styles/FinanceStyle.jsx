@@ -2643,8 +2643,8 @@ export const AddFeesStructureWrapper = styled('div')`
 
                         .item_box {
                             position: relative;
-                            width: 25%;
-                            max-width: 302.75px;
+                            width: 20%;
+                            max-width: 240px;
                             padding: 10px;
 
                             .box_inner {
@@ -2670,7 +2670,7 @@ export const AddFeesStructureWrapper = styled('div')`
                                     h6 {
                                         position: relative;
                                         width: 100%;
-                                        font-size: 13.5px;
+                                        font-size: 12px;
                                         font-style: italic;
                                         font-weight: 500;
                                         color: ${colors.customColors.blackColor};
@@ -2723,7 +2723,7 @@ export const AddFeesStructureWrapper = styled('div')`
                                         &.edit {
                                             background: ${colors.customColors.blueColorLight};
                                             color: ${colors.customColors.blueColor2};
-                                            font-size: 10px;
+                                            font-size: 9px;
                                             cursor: pointer;
                                             font-weight: 500;
                                             border-bottom-left-radius: 4px;
@@ -2731,14 +2731,14 @@ export const AddFeesStructureWrapper = styled('div')`
 
                                             i {
                                                 margin-right: 6px;
-                                                font-size: 11px;
+                                                font-size: 10px;
                                             }
                                         }
 
                                         &.delete {
                                             background: ${colors.customColors.redColorLight};
                                             color:  ${colors.customColors.redColor};
-                                            font-size: 10px;
+                                            font-size: 9px;
                                             cursor: pointer;
                                             border-top-right-radius: 4px;
                                             border-bottom-right-radius: 4px;
