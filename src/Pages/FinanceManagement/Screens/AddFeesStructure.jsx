@@ -5,6 +5,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../../Context/PageContext";
+import AddPaymentAmoutDateModal from "../../../Components/Modals/FinanceManagement/AddPaymentAmountDate";
 
 const AddFeesStructure = () => {
     const api = getApiEndpoints();
@@ -17,6 +18,7 @@ const AddFeesStructure = () => {
     const getKey = (cls, section) => `${cls}-${section}`;
     const [feeTypes, setFeeTypes] = useState([]);
     const [showFeeTypesDropdown, setShowFeeTypesDropdown] = useState(false);
+    const [showAddPaymentAmountDate, setShowAddPaymentAmountDate] = useState(false);
     const [selectedFeeType, setSelectedFeeType] = useState('');
 
     const fetchAcademics = async () => {
@@ -62,6 +64,10 @@ const AddFeesStructure = () => {
         });
         setSelectedSections(updated);
     };
+
+    const handleOpenAddAmountDateModal = () => {
+        setShowAddPaymentAmountDate(true);
+    }
 
     const handleClassChange = (cls, checked) => {
         let updated = [...selectedSections];
@@ -322,22 +328,28 @@ const AddFeesStructure = () => {
                                 </div>
                                 <div className="fees_date_sec">
                                     <div className="fees_head">
-                                        <p>Payment schduled dates : </p>
+                                        <p>Payments & schduled dates : </p>
                                     </div>
                                     <div className="sec_items">
-                                        <div className="date_box">
-                                            <div className="date_btn">
-                                                <p>21 March, 2026</p>
-                                                <i className="fa-regular fa-calendar"></i>
-                                            </div>
-                                            <div className="dropdown">
-
+                                        <div className="item_box">
+                                            <div className="box_inner">
+                                                <div className="inner_top">
+                                                    <h6>#Installment - 1</h6>
+                                                    <li>
+                                                        <p>06 April, 2026 -</p>
+                                                        <span>₹30000</span>
+                                                    </li>
+                                                </div>
+                                                <div className="inner_btn">
+                                                    <button className="edit"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                </div>
                                             </div>
                                         </div>
                                         {
                                             feesStructureType === 'Recurring Fee' &&
                                             <div className="add_btn">
-                                                <button><i class="fa-solid fa-plus"></i>Add more</button>
+                                                <button onClick={handleOpenAddAmountDateModal}><i class="fa-solid fa-plus"></i>Add more</button>
                                             </div>
                                         }
                                     </div>
@@ -387,6 +399,11 @@ const AddFeesStructure = () => {
                         </div>
                     }
                 </div>
+
+                <AddPaymentAmoutDateModal
+                    showAddPaymentAmountDate={showAddPaymentAmountDate}
+                    setShowAddPaymentAmountDate={setShowAddPaymentAmountDate}
+                />
             </AddFeesStructureWrapper>
         </>
     );

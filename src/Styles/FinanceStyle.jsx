@@ -2638,58 +2638,112 @@ export const AddFeesStructureWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-wrap: wrap;
-                        padding: 0 7px;
+                        padding: 0 5px;
                         margin-top: 7px;
 
-                        .date_box {
+                        .item_box {
                             position: relative;
-                            width: 33.33%;
-                            height: 37px;
-                            flex-direction: column;
-                            margin-bottom: 16px;
-                            padding: 0 8px;
+                            width: 25%;
+                            max-width: 302.75px;
+                            padding: 10px;
 
-                            .date_btn {
+                            .box_inner {
                                 position: relative;
                                 width: 100%;
-                                height: 100%;
+                                padding: 12px;
+                                background: ${colors.customColors.whiteColor};
+                                border: 1px solid ${colors.customColors.borderColor};
+                                border-radius: 8px;
                                 display: flex;
-                                align-items: center;
-                                border-radius: 5px;
-                                padding: 5px 15px;
-                                background: ${colors.customColors.lightBackground3};
-                                cursor: pointer;
+                                flex-direction: column;
+                                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                                p {
+                                .inner_top {
                                     position: relative;
-                                    width: calc(100% - 25px);
+                                    width: 100%;
                                     display: flex;
-                                    font-size: 12px;
-                                    color: ${colors.customColors.blackColor1};
+                                    flex-direction: column;
+                                    padding-bottom: 8px;
+                                    border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                                    h6 {
+                                        position: relative;
+                                        width: 100%;
+                                        font-size: 13.5px;
+                                        font-style: italic;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                    }
+
+                                    li {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        list-style: none;
+                                        margin-top: 3px;
+
+                                        p {
+                                            position: relative;
+                                            font-size: 10px;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
+                                        
+                                        span {
+                                            position: relative;
+                                            font-size: 10px;
+                                            color: ${colors.customColors.blackColor1};
+                                            margin-left: 5px;
+                                        }
+                                    }
                                 }
 
-                                i {
+                                .inner_btn {
                                     position: relative;
-                                    width: 25px;
+                                    width: 100%;
                                     display: flex;
+                                    align-items: center;
+                                    margin-top: 8px;
                                     justify-content: flex-end;
-                                    cursor: pointer;
-                                    font-size: 12px;
-                                    color: ${colors.customColors.blackColor2};
-                                }
-                            }
 
-                            .dropdown {
-                                position: absolute;
-                                top: 100%;
-                                right: 0;
-                                z-index: 99;
-                                width: 100%;
-                                transition: all 0.5s ease;
+                                    button {
+                                        position: relative;
+                                        width: max-content;
+                                        height: 25px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border: none;
+                                        padding: 0 12px;
 
-                                &.drop_up {
-                                    top: inherit;
-                                    bottom: 100%;
+                                        &.edit {
+                                            background: ${colors.customColors.blueColorLight};
+                                            color: ${colors.customColors.blueColor2};
+                                            font-size: 10px;
+                                            cursor: pointer;
+                                            font-weight: 500;
+                                            border-bottom-left-radius: 4px;
+                                            border-top-left-radius: 4px;
+
+                                            i {
+                                                margin-right: 6px;
+                                                font-size: 11px;
+                                            }
+                                        }
+
+                                        &.delete {
+                                            background: ${colors.customColors.redColorLight};
+                                            color:  ${colors.customColors.redColor};
+                                            font-size: 10px;
+                                            cursor: pointer;
+                                            border-top-right-radius: 4px;
+                                            border-bottom-right-radius: 4px;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -2697,6 +2751,8 @@ export const AddFeesStructureWrapper = styled('div')`
                         .add_btn {
                             position: relative;
                             margin-left: 8px;
+                            display: flex;
+                            align-items: center;
 
                             button {
                                 position: relative;

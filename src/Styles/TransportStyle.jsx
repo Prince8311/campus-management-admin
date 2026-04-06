@@ -134,7 +134,7 @@ export const PassengersWrapper = styled('div')`
 
                 button {
                     position: relative;
-                    width: 150px;
+                    padding: 0 25px;
                     height: 35px;
                     display: flex;
                     align-items: center;
@@ -414,7 +414,7 @@ export const VehicleWrapper = styled('div')`
 
                 button {
                     position: relative;
-                    width: 150px;
+                    padding: 0 25px;
                     height: 35px;
                     display: flex;
                     align-items: center;
@@ -662,7 +662,7 @@ export const VehicleStaffWrapper = styled('div')`
 
                 button {
                     position: relative;
-                    width: 150px;
+                    padding: 0 25px;
                     height: 35px;
                     display: flex;
                     align-items: center;
@@ -916,7 +916,7 @@ export const VehicleRoutesWrapper = styled('div')`
 
                 button {
                     position: relative;
-                    width: 150px;
+                    padding: 0 25px;
                     height: 35px;
                     display: flex;
                     align-items: center;
@@ -1186,7 +1186,7 @@ export const StopagesWrapper = styled('div')`
 
                 button {
                     position: relative;
-                    width: 150px;
+                    padding: 0 25px;
                     height: 35px;
                     display: flex;
                     align-items: center;

@@ -15,7 +15,7 @@ const VehicleRoutesPage = () => {
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" placeholder="Search by VehiclesRoutes..." />
+                            <input type="text" placeholder="Search by Route names..." />
                         </div>
                         <div className="add_btn">
                             <button onClick={handleRedirectionAddRoutesPage}>

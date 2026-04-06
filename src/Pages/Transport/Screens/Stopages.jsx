@@ -16,7 +16,7 @@ const StopagesPage = () => {
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" placeholder="Search by Stopages..." />
+                            <input type="text" placeholder="Search by Stopage names..." />
                         </div>
                         <div className="add_btn">
                             <button onClick={handleOpenAddStopageModal}>

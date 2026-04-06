@@ -13,7 +13,7 @@ const AddRoutesPage = () => {
                             </div>
                             <div className="top_sec">
                                 <div className="input_box">
-                                    <span>Field Name <p>*</p></span>
+                                    <span>Route Name <p>*</p></span>
                                     <input type="text" />
                                 </div>
                                 <div className="select_box">
@@ -89,49 +89,14 @@ const AddRoutesPage = () => {
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School Start Time <p>*</p></span>
+                                                <span>Pick up Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School End Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="content_box">
-                                        <a>Stopage 1</a>
-                                        <div className="box_items">
-                                            <div className="select_box">
-                                                <span>Assigned Staff <p>*</p></span>
-                                                <div className="dropdown_sec">
-                                                    <div className="dropdown_btn">
-                                                        <p>Driver</p>
-                                                        <i className="fa-solid fa-angle-down"></i>
-                                                    </div>
-                                                    <div className="dropdown">
-                                                        <div className="dropdown_inner">
-                                                            <ul>
-                                                                <li></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>School Start Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
-                                                </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>School End Time <p>*</p></span>
+                                                <span>Drop Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>
@@ -159,49 +124,14 @@ const AddRoutesPage = () => {
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School Start Time <p>*</p></span>
+                                                <span>Pick up Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School End Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="content_box">
-                                        <a>Stopage 1</a>
-                                        <div className="box_items">
-                                            <div className="select_box">
-                                                <span>Assigned Staff <p>*</p></span>
-                                                <div className="dropdown_sec">
-                                                    <div className="dropdown_btn">
-                                                        <p>Driver</p>
-                                                        <i className="fa-solid fa-angle-down"></i>
-                                                    </div>
-                                                    <div className="dropdown">
-                                                        <div className="dropdown_inner">
-                                                            <ul>
-                                                                <li></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>School Start Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
-                                                </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>School End Time <p>*</p></span>
+                                                <span>Drop Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>
@@ -229,49 +159,14 @@ const AddRoutesPage = () => {
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School Start Time <p>*</p></span>
+                                                <span>Pick up Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School End Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="content_box">
-                                        <a>Stopage 1</a>
-                                        <div className="box_items">
-                                            <div className="select_box">
-                                                <span>Assigned Staff <p>*</p></span>
-                                                <div className="dropdown_sec">
-                                                    <div className="dropdown_btn">
-                                                        <p>Driver</p>
-                                                        <i className="fa-solid fa-angle-down"></i>
-                                                    </div>
-                                                    <div className="dropdown">
-                                                        <div className="dropdown_inner">
-                                                            <ul>
-                                                                <li></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>School Start Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
-                                                </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>School End Time <p>*</p></span>
+                                                <span>Drop Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>
@@ -299,14 +194,84 @@ const AddRoutesPage = () => {
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School Start Time <p>*</p></span>
+                                                <span>Pick up Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>
                                                 </div>
                                             </div>
                                             <div className="date_box">
-                                                <span>School End Time <p>*</p></span>
+                                                <span>Drop Time <p>*</p></span>
+                                                <div className="date_btn">
+                                                    <p>Set Time</p>
+                                                    <i className="fa-regular fa-clock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="content_box">
+                                        <a>Stopage 1</a>
+                                        <div className="box_items">
+                                            <div className="select_box">
+                                                <span>Assigned Staff <p>*</p></span>
+                                                <div className="dropdown_sec">
+                                                    <div className="dropdown_btn">
+                                                        <p>Driver</p>
+                                                        <i className="fa-solid fa-angle-down"></i>
+                                                    </div>
+                                                    <div className="dropdown">
+                                                        <div className="dropdown_inner">
+                                                            <ul>
+                                                                <li></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="date_box">
+                                                <span>Pick up Time <p>*</p></span>
+                                                <div className="date_btn">
+                                                    <p>Set Time</p>
+                                                    <i className="fa-regular fa-clock"></i>
+                                                </div>
+                                            </div>
+                                            <div className="date_box">
+                                                <span>Drop Time <p>*</p></span>
+                                                <div className="date_btn">
+                                                    <p>Set Time</p>
+                                                    <i className="fa-regular fa-clock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="content_box">
+                                        <a>Stopage 1</a>
+                                        <div className="box_items">
+                                            <div className="select_box">
+                                                <span>Assigned Staff <p>*</p></span>
+                                                <div className="dropdown_sec">
+                                                    <div className="dropdown_btn">
+                                                        <p>Driver</p>
+                                                        <i className="fa-solid fa-angle-down"></i>
+                                                    </div>
+                                                    <div className="dropdown">
+                                                        <div className="dropdown_inner">
+                                                            <ul>
+                                                                <li></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="date_box">
+                                                <span>Pick up Time <p>*</p></span>
+                                                <div className="date_btn">
+                                                    <p>Set Time</p>
+                                                    <i className="fa-regular fa-clock"></i>
+                                                </div>
+                                            </div>
+                                            <div className="date_box">
+                                                <span>Drop Time <p>*</p></span>
                                                 <div className="date_btn">
                                                     <p>Set Time</p>
                                                     <i className="fa-regular fa-clock"></i>

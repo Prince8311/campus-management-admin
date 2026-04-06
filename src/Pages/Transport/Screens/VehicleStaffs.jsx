@@ -16,7 +16,7 @@ const VehicleStaffsPage = () => {
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" placeholder="Search by VehiclesStaff..." />
+                            <input type="text" placeholder="Search by Staff names..." />
                         </div>
                         <div className="add_btn">
                             <button onClick={handleOpenAddStaffModal}>
