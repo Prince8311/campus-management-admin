@@ -419,6 +419,8 @@ export const HomePageWrapper = styled('div')`
             @media (max-width: 450px) {
                 .about_content_left {
 
+                    margin-top: 20px;
+
                     .left_item {
                         img {
                             height: 200px;
@@ -430,6 +432,18 @@ export const HomePageWrapper = styled('div')`
                         .item_head {
                             h4 {
                                 font-size: 15px;
+                            }
+                        }
+
+                        .bottom_items {
+                            flex-direction: column;
+
+                            .item_box {
+                                width: 100%;
+
+                                &:first-of-type {
+                                    margin-bottom: 20px;
+                                }
                             }
                         }
                     }
@@ -567,6 +581,7 @@ export const HomePageWrapper = styled('div')`
 
                 .content_items {
                     padding: 0 35px;
+                    align-items: flex-start;
                     .item_box {
                         width: 50%;
                     }
@@ -648,6 +663,9 @@ export const HomePageWrapper = styled('div')`
                             h5 {
                                 font-size: 11px;
                                 font-weight: 500;
+                                margin: 0;
+                                margin-top: 10px;
+                                margin-bottom: 6px;
                             }
 
                             p {

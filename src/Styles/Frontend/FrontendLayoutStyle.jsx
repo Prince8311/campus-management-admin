@@ -130,19 +130,6 @@ export const NavbarFrontendWrapper = styled('div')`
                 }
             }
 
-            .menubar_icon {
-                position: relative;
-                display: none;
-                margin-left: auto;
-
-                span {
-                    position: relative;
-                    font-size: 18px;
-                    color: ${colors.customColors.blackColor1};
-                    cursor: pointer;
-                }
-            }
-
             .nav_btn {
                 position: relative;
                 margin-left: auto;
@@ -169,6 +156,19 @@ export const NavbarFrontendWrapper = styled('div')`
                         border-radius: 25px;
                         transition: all 0.5s ease;
                     }
+                }
+            }
+
+            .menubar_icon {
+                position: relative;
+                display: none;
+                margin-left: 20px;
+
+                span {
+                    position: relative;
+                    font-size: 18px;
+                    color: ${colors.customColors.blackColor1};
+                    cursor: pointer;
                 }
             }
         }
@@ -210,10 +210,6 @@ export const NavbarFrontendWrapper = styled('div')`
                 .menubar_icon {
                     display: flex;
                 }
-
-                .nav_btn {
-                    margin-left: 20px;
-                }
             }
         }
 
@@ -234,7 +230,7 @@ export const NavbarFrontendWrapper = styled('div')`
                     }
                 }
                 .nav_btn {
-                    padding: 9px 0;
+                    padding: 10px 0;
                     a {
                         width: 90px;
                         font-size: 10px;
@@ -493,14 +489,30 @@ export const FooterFrontendWrapper = styled('div')`
                         width: 180px;
                     }
                 }
+
+                .right_inner {
+                    flex-wrap: wrap;
+
+                    .inner_box {
+                        width: 50%;
+
+                        &:last-of-type {
+                            margin-top: 20px;
+                        }
+                    }
+                }
             }
+        }
+
+        @media (max-width: 450px) {
+            padding: 20px 0;
         }
     }
 
     .footer_bottom {
         position: relative;
         width: 100%;
-        padding: 15px 0;
+        padding: 15px;
         display: flex;
         justify-content: center;
         text-align: center;
