@@ -2240,7 +2240,6 @@ export const AddFeesStructureWrapper = styled('div')`
                                         }
 
                                         input[type="checkbox"]:checked ~ label {
-                                            background: ${colors.customColors.lightBackground};
                                             color: ${colors.customColors.blackColor1};
                                             transition: all 0.5s ease;
 
@@ -2325,7 +2324,6 @@ export const AddFeesStructureWrapper = styled('div')`
                                                 }
 
                                                 input[type="checkbox"]:checked ~ label {
-                                                    background: ${colors.customColors.lightBackground};
                                                     color: ${colors.customColors.blackColor1};
                                                     transition: all 0.5s ease;
 
@@ -2650,6 +2648,7 @@ export const AddFeesStructureWrapper = styled('div')`
                             .box_inner {
                                 position: relative;
                                 width: 100%;
+                                max-height: 100px;
                                 padding: 12px;
                                 background: ${colors.customColors.whiteColor};
                                 border: 1px solid ${colors.customColors.borderColor};
@@ -2750,34 +2749,38 @@ export const AddFeesStructureWrapper = styled('div')`
 
                         .add_btn {
                             position: relative;
-                            margin-left: 8px;
+                            width: 20%;
+                            max-height: 240px;
                             display: flex;
                             align-items: center;
+                            padding: 10px;
 
-                            button {
+                            .btn_inner {
                                 position: relative;
-                                width: 120px;
-                                height: 37px;
+                                width: 100%;
+                                height: 100px;
+                                padding: 0 6px;
+                                background: ${colors.customColors.whiteColor};
+                                border: 1px solid ${colors.customColors.borderColor};
+                                border-radius: 8px;
                                 display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-size: 13px;
-                                color: ${colors.customColors.whiteColor};
-                                background: ${colors.customColors.greenColor};
-                                border-radius: 6px;
+                                align-items: flex-end;
+                                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
                                 cursor: pointer;
-                                outline: none;
-                                border: none;
-                                transition: all 0.5s ease;
 
-                                i {
-                                    margin-right: 6px;
-                                    font-size: 11px;
+                                img {
+                                    position: relative;
+                                    height: 80%;
                                 }
 
-                                &:hover {
-                                    border-radius: 25px;
-                                    transition: all 0.5s ease;
+                                p {
+                                    position: relative;
+                                    margin: auto 0;
+                                    font-size: 11px;
+                                    color: ${colors.customColors.blackColor1};
+                                    padding-left: 10px;
+                                    line-height: 1.3;
                                 }
                             }
                         }
@@ -2803,15 +2806,10 @@ export const AddFeesStructureWrapper = styled('div')`
                     justify-content: center;
                     font-size: 12px;
                     color: ${colors.customColors.whiteColor};
-                    background: ${colors.customColors.blueColor1};
                     border: none;
                     font-weight: 500;
                     cursor: pointer;
                     transition: all 0.5s ease;
-
-                    i {
-                        margin: 0 6px;
-                    }
 
                     &:hover {
                         border-radius: 25px;
@@ -2823,11 +2821,27 @@ export const AddFeesStructureWrapper = styled('div')`
                         cursor: not-allowed;
                         transition: all 0.5s ease;
                     }
+
+                    &:first-of-type {
+                        background: ${colors.customColors.blackColor3};
+
+                        i {
+                            margin-right: 6px;
+                        }
+                    }
+
+                    &:last-of-type {
+                        background: ${colors.customColors.blueColor1};
+
+                        i {
+                            margin-left: 6px;
+                        }
+                    }
                 }
             }
         }
 
-        .amount_sec {
+        .review_sec {
             position: relative;
             width: 100%;
             display: flex;
@@ -2852,117 +2866,409 @@ export const AddFeesStructureWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                padding:  0 15px;
-                margin-top: 20px;
+                margin-top: 5px;
 
-                .installments_sec {
+                .details_sec {
                     position: relative;
-                    width: max-content;
+                    width: 100%;
                     display: flex;
-                    flex-direction: column;
+                    flex-wrap: wrap;
 
-                    .installment_box {
+                    .brief_box {
                         position: relative;
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 15px;
+                        width: 30%;
+                        padding: 10px;
 
-                        p {
+                        .box_inner {
                             position: relative;
-                            font-size: 12px;
-                            color: ${colors.customColors.blackColor1};
-                        }
-
-                        .amount {
-                            position: relative;
-                            width: max-content;
-                            height: 37px;
-                            border-radius: 5px;
+                            width: 100%;
+                            height: 100%;
+                            padding: 15px;
+                            background: ${colors.customColors.whiteColor};
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 8px;
                             display: flex;
-                            align-items: center;
-                            margin-left: 30px;
-                            background: ${colors.customColors.lightBackground3};
-                            
-                            input {
-                                width: 200px;
-                                height: 100%;
-                                font-size: 12px;
-                                border-radius: 5px;
-                                outline: none;
-                                border: none;
-                                padding: 5px 15px;
-                                background: transparent;
-                                font-size: 13px;
-                                color: ${colors.customColors.blackColor2};
-                            }
+                            flex-direction: column;
+                            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                            span {
+                            .box_head {
                                 position: relative;
-                                width: 37px;
-                                height: 100%;
+                                width: 100%;
+                                height: 30px;
                                 display: flex;
                                 align-items: center;
-                                justify-content: center;
-                                font-size: 13px;
-                                color: ${colors.customColors.blackColor2};
+                                margin-left: 5px;
+                                padding-left: 15px;
+                                padding-right: 5px;
 
-                                &::after {
-                                    position: absolute;
+                                &::before {
                                     content: '';
+                                    position: absolute;
                                     top: 0;
-                                    right: 0;
+                                    left: 0;
+                                    width: 3px;
                                     height: 100%;
-                                    width: 1px;
-                                    background: ${colors.customColors.borderColor};
+                                    background: ${colors.customColors.blueColor2};
+                                    border-radius: 25px;
+                                }
+
+                                h3 {
+                                    position: relative;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    font-style: italic;
+                                }
+
+                                a {
+                                    position: relative;
+                                    padding: 4px 15px;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    background: ${colors.customColors.greenColorLight};
+                                    color: ${colors.customColors.greenColor};
+                                    border-radius: 25px;
+                                    cursor: pointer;
+                                    margin-left: auto;
+
+                                    i {
+                                        position: relative;
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
+
+                            .box_bottom {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 15px;
+                                display: flex;
+                                
+                                &.academics {
+                                    flex-wrap: wrap;
+
+                                    li {
+                                        position: relative;
+                                        list-style: none;
+                                        display: flex;
+                                        align-items: center;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        box-shadow: 0 0 4px ${colors.boxShadowColors.shadowColor1};
+                                        background: ${colors.customColors.whiteColor};
+                                        margin: 5px;
+                                        padding: 5px 10px;
+                                        border-radius: 5px;
+
+                                        span {
+                                            position: relative;
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
+
+                                        p {
+                                            position: relative;
+                                            margin-left: 5px;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor2};
+                                        }
+                                    }
+                                }
+
+                                &.fees {
+                                    flex-direction: column;
+
+                                    li {
+                                        position: relative;
+                                        list-style: none;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 0 10px;
+                                        margin-top: 5px;
+
+                                        &:first-of-type {
+                                            margin-top: 0;
+                                        }
+
+                                        span {
+                                            position: relative;
+                                            font-size: 13px;
+                                            color: ${colors.customColors.blackColor1};
+                                            font-weight: 500;
+                                        }
+
+                                        p {
+                                            position: relative;
+                                            margin-left: 6px;
+                                            font-size: 13px;
+                                            color: ${colors.customColors.blackColor2};
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
 
-                    .tax_sec {
+                    .installment_box {
                         position: relative;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: flex-end;
-                        padding: 10px 0;
-                        border-top: 1px solid ${colors.customColors.borderColor1};
-                        border-bottom: 1px solid ${colors.customColors.borderColor1};
+                        width: 40%;
+                        padding: 10px;
 
-                        a {
+                        .box_inner {
                             position: relative;
+                            width: 100%;
+                            height: 100%;
+                            padding: 15px;
+                            background: ${colors.customColors.whiteColor};
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 8px;
                             display: flex;
-                            align-items: center;
-                            text-decoration: none;
-                            font-size: 12px;
-                            color: ${colors.customColors.blackColor1};
-                            margin-bottom: 8px;
+                            flex-direction: column;
+                            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                            span {
-                                color: ${colors.customColors.blackColor2};
+                            .box_head {
+                                position: relative;
+                                width: 100%;
+                                height: 30px;
+                                display: flex;
+                                align-items: center;
                                 margin-left: 5px;
+                                padding-left: 15px;
+                                padding-right: 5px;
+
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 3px;
+                                    height: 100%;
+                                    background: ${colors.customColors.blueColor2};
+                                    border-radius: 25px;
+                                }
+
+                                h3 {
+                                    position: relative;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    font-style: italic;
+                                }
+
+                                a {
+                                    position: relative;
+                                    padding: 4px 15px;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    background: ${colors.customColors.greenColorLight};
+                                    color: ${colors.customColors.greenColor};
+                                    border-radius: 25px;
+                                    cursor: pointer;
+                                    margin-left: auto;
+
+                                    i {
+                                        position: relative;
+                                        margin-right: 5px;
+                                    }
+                                }
                             }
 
-                            &:last-of-type {
-                                margin-bottom: 0;
+                            .box_bottom {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 15px;
+                                padding: 0 5px;
+
+                                table {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    thead {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        padding: 0 10px;
+                                        padding-bottom: 3px;
+                                        border-bottom: 1px solid ${colors.customColors.blackColor2};
+
+                                        th {
+                                            position: relative;
+                                            font-size: 13px;
+                                            font-weight: 500;
+                                            font-style: italic;
+                                            display: flex;
+                                            color: ${colors.customColors.blackColor};
+
+                                            &:nth-of-type(1) {
+                                                width: 25%;
+                                                justify-content: flex-start;
+                                            }
+
+                                            &:nth-of-type(2) {
+                                                width: 50%;
+                                                justify-content: center;
+                                            }
+
+                                            &:nth-of-type(3) {
+                                                width: 25%;
+                                                justify-content: flex-end;
+                                            }
+                                        }
+                                    }
+
+                                    tbody {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+
+                                        tr {
+                                            position: relative;
+                                            width: 100%;
+                                            padding: 7px 10px;
+                                            display: flex;
+
+                                            &:nth-of-type(even) {
+                                                background: ${colors.customColors.lightBackground3};
+                                            }
+
+                                            td {
+                                                position: relative;
+                                                font-size: 13px;
+                                                display: flex;
+                                                color: ${colors.customColors.blackColor1};
+
+                                                &:nth-of-type(1) {
+                                                    width: 25%;
+                                                    font-style: italic;
+                                                    color: ${colors.customColors.blackColor};
+                                                }
+
+                                                &:nth-of-type(2) {
+                                                    width: 50%;
+                                                    justify-content: center;
+                                                }
+
+                                                &:nth-of-type(3) {
+                                                    width: 25%;
+                                                    justify-content: flex-end;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
+                }
 
-                    .grand_total_sec {
+                .payment_brief_sec {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 15px;
+                    padding: 0 15px;
+                    padding-top: 10px;
+                    display: flex;
+                    justify-content: flex-end;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 10px;
+                        width: calc(100% - 20px);
+                        height: 1px;
+                        background: linear-gradient(to left, ${colors.customColors.borderColor1}, ${colors.customColors.whiteColor});
+                    }
+
+                    .sec_inner {
                         position: relative;
-                        margin-top: 10px;
+                        width: 400px;
                         display: flex;
-                        justify-content: flex-end;
+                        flex-direction: column;
 
-                        p {
+                        .payment_row {
                             position: relative;
-                            font-size: 14px;
-                            color: ${colors.customColors.blackColor};
-                            font-weight: 500;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
 
-                            span {
-                                margin-left: 5px;
-                                color: ${colors.customColors.blackColor1};
+                            li {
+                                list-style: none;
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                margin-top: 8px;
+                                justify-content: space-between;
+
+                                span {
+                                    font-size: 16px;
+                                    color: ${colors.customColors.blackColor};
+                                }
+
+                                p {
+                                    font-size: 16px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+                            }
+                        }
+
+                        .payment_total {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 10px;
+                            border-top: 1px solid ${colors.customColors.borderColor};
+                            padding-top: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-end;
+
+                            li {
+                                position: relative;
+                                list-style: none;
+                                display: flex;
+                                flex-direction: column;
+
+                                span {
+                                    position: relative;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor2};
+                                }
+
+                                p {
+                                    position: relative;
+                                    font-size: 22px;
+                                    font-weight: 600;
+                                    line-height: 1;
+                                    margin-top: 3px;
+                                }
+                            }
+
+                            a {
+                                position: relative;
+                                display: flex;
+                                align-items: center;
+                                padding: 9px 25px 9px 18px;
+                                background: ${colors.customColors.greenColorLight};
+                                border-radius: 20px;
+
+                                img {
+                                    position: relative;
+                                    width: 18px;
+                                }
+
+                                p {
+                                    position: relative;
+                                    font-size: 13px;
+                                    font-weight: 500;
+                                    margin-left: 8px;
+                                    color: ${colors.customColors.greenColor1};
+                                }
                             }
                         }
                     }
@@ -2972,6 +3278,7 @@ export const AddFeesStructureWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     margin-top: 50px;
+                    padding:  0 15px;
                     display: flex;
                     justify-content: space-between;
 
@@ -2985,14 +3292,13 @@ export const AddFeesStructureWrapper = styled('div')`
                         justify-content: center;
                         font-size: 12px;
                         color: ${colors.customColors.whiteColor};
-                        background: ${colors.customColors.blueColor1};
                         border: none;
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.5s ease;
 
                         i {
-                            margin: 0 6px;
+                            margin-right: 6px;
                         }
 
                         &:hover {
@@ -3004,6 +3310,14 @@ export const AddFeesStructureWrapper = styled('div')`
                             opacity: 0.4;
                             cursor: not-allowed;
                             transition: all 0.5s ease;
+                        }
+
+                        &:first-of-type {
+                            background: ${colors.customColors.blackColor3};
+                        }
+
+                        &:last-of-type {
+                            background: ${colors.customColors.blueColor1};
                         }
                     }
                 }

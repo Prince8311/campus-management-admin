@@ -357,7 +357,7 @@ const AddFeesStructure = () => {
                                                     </li>
                                                 </div>
                                                 <div className="inner_btn">
-                                                    <button className="edit"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+                                                    <button className="edit"><i className="fa-regular fa-pen-to-square"></i>Edit</button>
                                                     <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                                 </div>
                                             </div>
@@ -365,50 +365,125 @@ const AddFeesStructure = () => {
                                         {
                                             feesStructureType === 'Recurring Fee' &&
                                             <div className="add_btn">
-                                                <button onClick={handleOpenAddAmountDateModal}><i class="fa-solid fa-plus"></i>Add more</button>
+                                                <div className="btn_inner" onClick={handleOpenAddAmountDateModal}>
+                                                    <img src="/images/add-installment.svg" alt="" />
+                                                    <p>Add Installment</p>
+                                                </div>
                                             </div>
                                         }
                                     </div>
                                 </div>
                             </div>
                             <div className="btn_sec">
-                                <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Previous</button>
+                                <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Back to Previous</button>
                                 <button onClick={() => setStep(3)}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
                             </div>
                         </div>
                     }
                     {
                         step === 3 &&
-                        <div className="amount_sec">
+                        <div className="review_sec">
                             <div className="sec_head">
-                                <span>Add amount to the installments</span>
+                                <span>Final Review</span>
                             </div>
                             <div className="sec_items">
-                                <div className="installments_sec">
-                                    <div className="installment_box">
-                                        <p>1. 31 May, 2026</p>
-                                        <div className="amount">
-                                            <span>₹</span>
-                                            <input type="text" />
+                                <div className="details_sec">
+                                    <div className="brief_box">
+                                        <div className="box_inner">
+                                            <div className="box_head">
+                                                <h3>Academics</h3>
+                                                <a><i className="fa-regular fa-pen-to-square"></i>Edit</a>
+                                            </div>
+                                            <div className="box_bottom academics">
+                                                <li>
+                                                    <span>Class 9:</span>
+                                                    <p>All Sections</p>
+                                                </li>
+                                                <li>
+                                                    <span>Class 8:</span>
+                                                    <p>A, B, C, D, E</p>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="brief_box">
+                                        <div className="box_inner">
+                                            <div className="box_head">
+                                                <h3>Fees Details</h3>
+                                                <a><i className="fa-regular fa-pen-to-square"></i>Edit</a>
+                                            </div>
+                                            <div className="box_bottom fees">
+                                                <li>
+                                                    <span>Fees type :</span>
+                                                    <p>Tution Fee</p>
+                                                </li>
+                                                <li>
+                                                    <span>Applied for :</span>
+                                                    <p>New Students</p>
+                                                </li>
+                                                <li>
+                                                    <span>Receipt prefix :</span>
+                                                    <p>SSA</p>
+                                                </li>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="installment_box">
-                                        <p>1. 31 May, 2026</p>
-                                        <div className="amount">
-                                            <span>₹</span>
-                                            <input type="text" />
+                                        <div className="box_inner">
+                                            <div className="box_head">
+                                                <h3>Installments</h3>
+                                                <a><i className="fa-regular fa-pen-to-square"></i>Edit</a>
+                                            </div>
+                                            <div className="box_bottom">
+                                                <table>
+                                                    <thead>
+                                                        <th>Serial No.</th>
+                                                        <th>Scheduled Date</th>
+                                                        <th>Amount</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>#1</td>
+                                                            <td>25 May</td>
+                                                            <td>₹30000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>#1</td>
+                                                            <td>25 May</td>
+                                                            <td>₹30000</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="tax_sec">
-                                        <a>Total fee : <span>₹50000</span></a>
-                                        <a>Tax applied : <span>₹1020</span></a>
-                                    </div>
-                                    <div className="grand_total_sec">
-                                        <p>Total fee including tax : <span>₹100000</span></p>
+                                </div>
+                                <div className="payment_brief_sec">
+                                    <div className="sec_inner">
+                                        <div className="payment_row">
+                                            <li>
+                                                <span>Subtotal Fee</span>
+                                                <p>₹50000.00</p>
+                                            </li>
+                                            <li>
+                                                <span>Applied Tax (%10)</span>
+                                                <p>₹5000.00</p>
+                                            </li>
+                                        </div>
+                                        <div className="payment_total">
+                                            <li>
+                                                <span>TOTAL PAYABLE</span>
+                                                <p>₹55000.00</p>
+                                            </li>
+                                            <a>
+                                                <img src="/images/check-badge.svg" alt="" />
+                                                <p>Calculation Verified</p>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="btn_sec">
-                                    <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Previous</button>
+                                    <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Back to Previous</button>
                                     <button><i className="fa-solid fa-cloud-arrow-up"></i> Publish</button>
                                 </div>
                             </div>

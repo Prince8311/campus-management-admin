@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { RolePermissionWrapper } from "../../../Styles/SettingStyle";
 
 const RolesPermissionsPage = () => {
@@ -7,10 +8,10 @@ const RolesPermissionsPage = () => {
                 <div className="page_head">
                     <h2>Role & Permission</h2>
                     <div className="add_btn">
-                        <button>
+                        <Link to="/admin/settings/add-roles-permissions">
                             <i className="fa-solid fa-plus"></i>
                             <p>Create Role</p>
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="role_levels">

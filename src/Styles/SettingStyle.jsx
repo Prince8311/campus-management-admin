@@ -27,13 +27,14 @@ export const RolePermissionWrapper = styled('div')`
             position: relative;
             margin-left: auto;
 
-            button {
+            a {
                 position: relative;
                 width: 200px;
                 height: 35px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                text-decoration: none;
                 cursor: pointer;
                 border: 1px solid ${colors.customColors.greenColor};
                 background: ${colors.customColors.greenColor};
@@ -184,6 +185,84 @@ export const RolePermissionWrapper = styled('div')`
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+`;
+
+export const AddRolePermissionWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 0 15px;
+
+        .left_sec {
+            position: relative;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+
+            h2 {
+                position: relative;
+                font-size: 21px;
+                font-weight: 600;
+                color: ${colors.customColors.blackColor};
+                font-family: "SUSE", sans-serif;
+            }
+
+            p {
+                position: relative;
+                margin-top: 5px;
+                font-size: 14px;
+                color: ${colors.customColors.blackColor2};
+                font-weight: 400;
+            }
+        }
+
+        .btn_sec {
+            position: relative;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+
+            button {
+                position: relative;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                padding: 0 30px;
+                border: none;
+                font-size: 13px;
+                font-weight: 500;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.5s ease;
+
+                &:first-of-type {
+                    background: ${colors.customColors.lightBackground2};
+                    color: ${colors.customColors.blackColor1};
+                    margin-right: 15px;
+                }
+                
+                &:last-of-type {
+                    background: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+
+                    i {
+                        margin-right: 5px;
+                    }
+                }
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
                 }
             }
         }

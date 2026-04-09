@@ -51,6 +51,7 @@ import AddStaffPage from "../Pages/StaffManagement/Screens/AddStaff";
 // Settings 
 import SettingsMainPage from "../Pages/Settings/Index";
 import RolesPermissionsPage from "../Pages/Settings/Screens/RolePermission";
+import AddRolePermissionPage from "../Pages/Settings/Screens/AddRolePermissions";
 import ProfileSettingPage from "../Pages/Settings/Screens/ProfileSettings";
 import TimeTableSettingsPage from "../Pages/Settings/Screens/TimeTableSettings";
 import StudentPage from "../Pages/Settings/Screens/Student";
@@ -178,6 +179,7 @@ const Routers = () => {
                         <Route path="settings" element={<SettingsMainPage />}>
                             <Route path="" element={<Navigate to="roles-permissions" />} />
                             <Route path="roles-permissions" element={<RolesPermissionsPage />} />
+                            <Route path="add-roles-permissions" element={<AddRolePermissionPage />} />
                             <Route path="time-tables" element={<TimeTableSettingsPage />} />
                             <Route path="state-cities" element={<StateCityPage />} />
                             <Route path="subject-settings" element={<SubjectSettingsPage />} />
