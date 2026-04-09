@@ -2117,184 +2117,161 @@ export const TimeTableSettingsWrapper = styled('div')`
             }
         }
 
-        .table_sec {
+        .time_levels {
             position: relative;
             width: 100%;
-            margin-top: 25px;
-            overflow-x: auto;
-            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            padding-top: 16px;
 
-            table {
+            .time_level_box {
                 position: relative;
-                min-width: 100%;
-                width: max-content;
+                width: 100%;
+                margin-bottom: 16px;
                 display: flex;
                 flex-direction: column;
+                border-radius: 8px;
+                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                thead {
+                .box_head {
                     position: relative;
                     width: 100%;
-                    height: 40px;
-                    background: ${colors.themeColor};
-                    border-radius: 10px 10px 0px 0px;
-                    border: 1px solid ${colors.themeColor};
+                    padding: 20px;
+                    padding-bottom: 10px;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
 
-                    tr {
-                        position: relative;
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 20px;
+                        bottom: 0;
+                        width: calc(100% - 40px);
+                        height: 1px;
+                        background: ${colors.customColors.borderColor};
                     }
 
-                    th {
+                    span {
                         position: relative;
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                        font-family: "Lemonada", cursive;
-                        font-size: 12px;
-                        word-break: break-all;
-                        color: ${colors.customColors.whiteColor};
-                        padding: 0 25px;
-                        font-weight: 600;
-
-                        &:nth-of-type(1) {
-                            width: 150px;
-                        }
-
-                        &:nth-of-type(2) {
-                            width: 300px;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(3) {
-                            width: 300px;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(4) {
-                            width: 300px;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(5) {
-                            width: 300px;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(6) {
-                            width: 300px;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(7) {
-                            width: 300px;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(8) {
-                            width: 300px;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(9) {
-                            width: 300px;
-                            justify-content: center;
-                        }
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor1};
+                        font-style: italic;
                     }
                 }
 
-                tbody {
+                .box_items {
                     position: relative;
                     width: 100%;
-                    border: 1px solid ${colors.customColors.whiteColor2};
-                    border-top: none;
-                    border-radius: 0px 0px 10px 10px;
                     display: flex;
-                    flex-direction: column;
-                    overflow: hidden;
+                    padding: 10px;
+                    flex-wrap: wrap;
 
-                    tr {
+                    .class_item {
                         position: relative;
-                        width: 100%;
-                        min-height: 40px;
-                        display: flex;
+                        width: 25%;
+                        max-width: 302.75px;
+                        padding: 10px;
 
-                        &:nth-of-type(even) {
-                            background: ${colors.customColors.blueColorLight};
-                        }
-
-                        td {
+                        .item_inner {
                             position: relative;
-                            padding: 12px 25px;
+                            width: 100%;
+                            padding: 12px;
+                            padding-left: 15px;
+                            background: ${colors.customColors.whiteColor};
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-left: 4px solid ${colors.customColors.greenColor};
+                            border-radius: 8px;
                             display: flex;
-                            color: ${colors.customColors.blackColor};
-                            font-size: 13px;
-                            word-break: break-all;
-                            line-height: 1.5;
+                            flex-direction: column;
+                            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                            &:nth-of-type(1) {
-                                width: 150px;
-                                display: flex;
-                            }
-
-                            &:nth-of-type(2) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &:nth-of-type(3) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &:nth-of-type(4) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &:nth-of-type(5) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &:nth-of-type(6) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &:nth-of-type(7) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &:nth-of-type(8) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &:nth-of-type(9) {
-                                width: 300px;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            &.empty_message {
+                            .top_part {
                                 position: relative;
                                 width: 100%;
-                                padding: 12px 25px;
                                 display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-size: 13px;
-                                color: ${colors.customColors.blackColor2};
+                                flex-direction: column;
+
+                                .content_part {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    
+                                    a {
+                                        position: relative;
+                                        width: 28px;
+                                        height: 28px;
+                                        border-radius: 50%;
+                                        background: ${colors.customColors.greenColorLight};
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.greenColor};
+                                        text-decoration: none;
+                                        cursor: pointer;
+                                    }
+                                    
+                                    h6 {
+                                        position: relative;
+                                        padding-left: 12px;
+                                        max-width: calc(100% - 28px);
+                                        font-size: 12px;
+                                        font-style: italic;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                    }
+                                }
+
+                                .subject_sec {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    margin-top: 5px;
+
+                                    p {
+                                        position: relative;
+                                        font-size: 11px;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        b {
+                                            font-weight: 500;
+                                            margin-right: 4px;
+                                            font-style: italic;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
+                                    }
+
+                                    li {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        margin-top: 5px;
+                                        list-style: none;
+
+                                        a {
+                                            font-size: 11px;
+                                            color: ${colors.customColors.blackColor1};
+                                            text-decoration: none;
+                                        }
+
+                                        h6 {
+                                            font-size: 11px;
+                                            color: ${colors.customColors.blackColor1};
+                                            margin-left: 8px;
+                                            font-weight: 400;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -2306,8 +2283,8 @@ export const TimeTableSettingsWrapper = styled('div')`
             position: relative;
             width: 100%;
             display: flex;
-            justify-content: space-between;
             margin-top: 25px;
+            justify-content: flex-end;
 
             button {
                 position: relative;
@@ -2332,6 +2309,11 @@ export const TimeTableSettingsWrapper = styled('div')`
                 &:hover {
                     border-radius: 25px;
                     transition: all 0.5s ease;
+                }
+
+                &:last-of-type {
+                    background: ${colors.customColors.greenColor};
+                    margin-left: 25px;
                 }
             }
         }

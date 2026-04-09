@@ -159,35 +159,123 @@ const TimeTableSettingsPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="table_sec">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Week Days</th>
-                                    <th>First Period(10:00Am - 10:50Am)</th>
-                                    <th>Second Period(10:00Am - 10:50Am)</th>
-                                    <th>Third Period(10:00Am - 10:50Am)</th>
-                                    <th>Fourth Period(10:00Am - 10:50Am)</th>
-                                    <th>Fifth Period(10:00Am - 10:50Am)</th>
-                                    <th>Sixth Period(10:00Am - 10:50Am)</th>
-                                    <th>Seventh Period(10:00Am - 10:50Am)</th>
-                                    <th>Eight Period(10:00Am - 10:50Am)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Monday</td>
-                                    <td>Bengali(Joydeep Barik)</td>
-                                    <td>English(Sourish Mondal)</td>
-                                    <td>Math</td>
-                                    <td>Life Science</td>
-                                    <td>Geography</td>
-                                    <td>Math2</td>
-                                    <td>History</td>
-                                    <td>Physical Science</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div className="time_levels">
+                        <div className="time_level_box">
+                            <div className="box_head">
+                                <span>Monday</span>
+                            </div>
+                            <div className="box_items">
+                                <div className="class_item">
+                                    <div className="item_inner">
+                                        <div className="top_part">
+                                            <div className="content_part">
+                                                <a><i className="fa-regular fa-clock"></i></a>
+                                                <h6>First Period</h6>
+                                            </div>
+                                            <div className="subject_sec">
+                                                <p>10.:00AM - 10:45AM</p>
+                                                <li>
+                                                    <a>Sourish Mondal</a>
+                                                    <h6>Math</h6>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="class_item">
+                                    <div className="item_inner">
+                                        <div className="top_part">
+                                            <div className="content_part">
+                                                <a><i className="fa-regular fa-clock"></i></a>
+                                                <h6>First Period</h6>
+                                            </div>
+                                            <div className="subject_sec">
+                                                <p>10.:00AM - 10:45AM</p>
+                                                <li>
+                                                    <a>Sourish Mondal</a>
+                                                    <h6>Math</h6>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="class_item">
+                                    <div className="item_inner">
+                                        <div className="top_part">
+                                            <div className="content_part">
+                                                <a><i className="fa-regular fa-clock"></i></a>
+                                                <h6>First Period</h6>
+                                            </div>
+                                            <div className="subject_sec">
+                                                <p>10.:00AM - 10:45AM</p>
+                                                <li>
+                                                    <a>Sourish Mondal</a>
+                                                    <h6>Math</h6>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="time_level_box">
+                            <div className="box_head">
+                                <span>Tuesday</span>
+                            </div>
+                            <div className="box_items">
+                                <div className="class_item">
+                                    <div className="item_inner">
+                                        <div className="top_part">
+                                            <div className="content_part">
+                                                <a><i className="fa-regular fa-clock"></i></a>
+                                                <h6>First Period</h6>
+                                            </div>
+                                            <div className="subject_sec">
+                                                <p>10.:00AM - 10:45AM</p>
+                                                <li>
+                                                    <a>Sourish Mondal</a>
+                                                    <h6>Math</h6>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="class_item">
+                                    <div className="item_inner">
+                                        <div className="top_part">
+                                            <div className="content_part">
+                                                <a><i className="fa-regular fa-clock"></i></a>
+                                                <h6>First Period</h6>
+                                            </div>
+                                            <div className="subject_sec">
+                                                <p>10.:00AM - 10:45AM</p>
+                                                <li>
+                                                    <a>Sourish Mondal</a>
+                                                    <h6>Math</h6>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="class_item">
+                                    <div className="item_inner">
+                                        <div className="top_part">
+                                            <div className="content_part">
+                                                <a><i className="fa-regular fa-clock"></i></a>
+                                                <h6>First Period</h6>
+                                            </div>
+                                            <div className="subject_sec">
+                                                <p>10.:00AM - 10:45AM</p>
+                                                <li>
+                                                    <a>Sourish Mondal</a>
+                                                    <h6>Math</h6>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="btns_sec">
                         <button><i class="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
