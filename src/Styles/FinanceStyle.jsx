@@ -2427,7 +2427,7 @@ export const AddFeesStructureWrapper = styled('div')`
 
                     .input_box {
                         position: relative;
-                        width: 20%;
+                        width: 15%;
                         margin-bottom: 15px;
 
                         span {
@@ -2473,7 +2473,7 @@ export const AddFeesStructureWrapper = styled('div')`
 
                     .select_box {
                         position: relative;
-                        width: 38%;
+                        width: 27%;
                         margin-bottom: 8px;
 
                         span {

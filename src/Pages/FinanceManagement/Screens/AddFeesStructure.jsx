@@ -318,6 +318,22 @@ const AddFeesStructure = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="select_box">
+                                        <span>Apply For <p>*</p></span>
+                                        <div className="dropdown_sec">
+                                            <div className="dropdown_btn">
+                                                <p>New Student</p>
+                                                <i className="fa-solid fa-angle-down"></i>
+                                            </div>
+                                            <div className="dropdown">
+                                                <div className="dropdown_inner">
+                                                    <ul>
+                                                        <li></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="input_box">
                                         <span>Tax % (if applicable) <p>*</p></span>
                                         <div className="input_wrapper">
