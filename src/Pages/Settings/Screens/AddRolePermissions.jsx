@@ -16,6 +16,234 @@ const AddRolePermissionPage = () => {
                     </button>
                 </div>
             </div>
+            <div className="page_content_sec">
+                <div className="sec_inner">
+                    <div className="left_sec">
+                        <div className="left_inner">
+                            <div className="left_box">
+                                <div className="box_head">
+                                    <div className="head_img">
+                                        <img src="/images/role.svg" alt="" />
+                                    </div>
+                                    <h5>Role Information</h5>
+                                </div>
+                                <div className="box_items">
+                                    <div className="input_box">
+                                        <span>Role Name <p>*</p></span>
+                                        <input type="text" />
+                                    </div>
+                                    <div className="info_box">
+                                        <a><i className="fa-solid fa-circle-info"></i></a>
+                                        <p>Roles that are inactive cannot be assigned to new users, but existing users will retain their access until manually updated.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="left_box">
+                                <div className="box_head">
+                                    <div className="head_img">
+                                        <img src="/images/toggle.svg" alt="" />
+                                    </div>
+                                    <h5>Role Status</h5>
+                                </div>
+                                <div className="box_items">
+                                    <div className="status_box">
+                                        <div className="status_left">
+                                            <p>Active Status</p>
+                                            <span>Enable this role for assignment</span>
+                                        </div>
+                                        <div className="status_right">
+                                            <div className="toggle_bar">
+                                                <input
+                                                    type="checkbox"
+                                                    id="toggle"
+                                                />
+                                                <label htmlFor="toggle">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="right_sec">
+                        <div className="right_inner">
+                            <div className="right_head">
+                                <div className="head_left_sec">
+                                    <div className="top_sec">
+                                        <div className="sec_img">
+                                            <img src="/images/permission.svg" alt="" />
+                                        </div>
+                                        <h5>Permissions Matrix</h5>
+                                    </div>
+                                    <p>Control access to modules and sub-features</p>
+                                </div>
+                                <div className="head_right_sec">
+                                    <a>Select All</a>
+                                    <a>Deselect All</a>
+                                </div>
+                            </div>
+                            <div className="right_body_sec">
+                                <div className="body_inner">
+                                    <div className="role_box">
+                                        <div className="top_part active">
+                                            <div className="top_left">
+                                                <div className="role_icon">
+                                                    <i className="fa-solid fa-graduation-cap"></i>
+                                                </div>
+                                                <p>Academics</p>
+                                            </div>
+                                            <div className="top_right">
+                                                <i className="fa-solid fa-angle-right"></i>
+                                            </div>
+                                        </div>
+                                        <div className="bottom_part">
+                                            <div className="bottom_inner">
+                                                <div className="table_sec">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Submodule</th>
+                                                                <th>View</th>
+                                                                <th>Create</th>
+                                                                <th>Edit</th>
+                                                                <th>Delete</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Student Directory</td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="view"
+                                                                        />
+                                                                        <label htmlFor="view">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="create"
+                                                                        />
+                                                                        <label htmlFor="create">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="edit"
+                                                                        />
+                                                                        <label htmlFor="edit">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="delete"
+                                                                        />
+                                                                        <label htmlFor="delete">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Classrooms</td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="Classroomsview"
+                                                                        />
+                                                                        <label htmlFor="Classroomsview">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="Classroomscreate"
+                                                                        />
+                                                                        <label htmlFor="Classroomscreate">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="Classroomsedit"
+                                                                        />
+                                                                        <label htmlFor="Classroomsedit">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="Classroomsdelete"
+                                                                        />
+                                                                        <label htmlFor="Classroomsdelete">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                        </label>
+                                                                    </li>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="role_box">
+                                        <div className="top_part">
+                                            <div className="top_left">
+                                                <div className="role_icon">
+                                                    <i className="fa-solid fa-graduation-cap"></i>
+                                                </div>
+                                                <p>Academics</p>
+                                            </div>
+                                            <div className="top_right">
+                                                <i className="fa-solid fa-angle-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="role_box">
+                                        <div className="top_part">
+                                            <div className="top_left">
+                                                <div className="role_icon">
+                                                    <i className="fa-solid fa-graduation-cap"></i>
+                                                </div>
+                                                <p>Academics</p>
+                                            </div>
+                                            <div className="top_right">
+                                                <i className="fa-solid fa-angle-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </AddRolePermissionWrapper>
     );
 }
