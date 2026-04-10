@@ -194,6 +194,7 @@ export const RolePermissionWrapper = styled('div')`
 export const AddRolePermissionWrapper = styled('div')`
     position: relative;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
@@ -263,6 +264,777 @@ export const AddRolePermissionWrapper = styled('div')`
                 &:hover {
                     border-radius: 25px;
                     transition: all 0.5s ease;
+                }
+            }
+        }
+    }
+
+    .page_content_sec {
+        position: relative;
+        width: 100%;
+        height: calc(100% - 74px);
+        display: flex;
+
+        .sec_inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            padding-bottom: 8px;
+
+            .left_sec {
+                position: relative;
+                width: 290px;
+                height: 100%;
+                padding: 0 15px;
+                display: flex;
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .left_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .left_box {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        padding: 15px;
+                        border-radius: 8px;
+                        margin-top: 20px;
+                        box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                                -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+                        &:last-of-type {
+                            margin-bottom: 0;
+                        }
+
+                        .box_head {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+
+                            .head_img {
+                                position: relative;
+                                width: 20px;
+                                height: auto;
+                                display: flex;
+
+                                img {
+                                    position: relative;
+                                    width: 100%;
+                                }
+                            }
+
+                            h5 {
+                                position: relative;
+                                width: calc(100% - 20px);
+                                padding-left: 10px;
+                                display: flex;
+                                font-size: 15px;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor};
+                            }
+                        }
+
+                        .box_items {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            margin-top: 15px;
+
+                            .input_box {
+                                position: relative;
+                                width: 100%;
+                                margin-bottom: 15px;
+
+                                input {
+                                    position: relative;
+                                    width: 100%;
+                                    height: 37px;
+                                    font-size: 12px;
+                                    border-radius: 5px;
+                                    padding: 5px 15px;
+                                    outline: none;
+                                    border: none;
+                                    margin-top: 3px;
+                                    background: ${colors.customColors.lightBackground3};
+                                }
+
+                                span {
+                                    position: relative;
+                                    display: flex;
+                                    align-items: center;
+                                    font-size: 12px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor2};
+
+                                    p {
+                                        color: ${colors.customColors.redColor};
+                                        margin-left: 2px;
+                                    }
+                                }
+                            }
+
+                            .info_box {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: flex-start;
+                                padding: 15px;
+                                background: ${colors.customColors.blueColorLight};
+                                border-radius: 8px;
+
+                                a {
+                                    position: relative;
+                                    font-size: 14px;
+                                    text-decoration: none;
+                                    color: ${colors.customColors.blueColor1};
+                                }
+
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 12px);
+                                    padding-left: 8px;
+                                    font-size: 11px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blueColor2};
+                                }
+                            }
+
+                            .status_box {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                padding: 10px;
+                                background: ${colors.customColors.lightBackground3};
+                                border-radius: 5px;
+
+                                .status_left {
+                                    position: relative;
+                                    width: calc(100% - 40px);
+                                    padding-right: 10px;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    p {
+                                        position: relative;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor};
+                                        font-weight: 500;
+                                        line-height: 1;
+                                    }
+
+                                    span {
+                                        position: relative;
+                                        font-size: 10px;
+                                        color: ${colors.customColors.blackColor2};
+                                        margin-top: 5px;
+                                        line-height: 1;
+                                    }
+                                }
+
+                                .status_right {
+                                    position: relative;
+                                    width: 40px;
+                                    display: flex;
+
+                                    .toggle_bar {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: flex-start;
+
+                                        input[type="checkbox"] {
+                                            display: none;
+                                        }
+
+                                        label {
+                                            position: relative;
+                                            width: 45px;
+                                            height: 21px;
+                                            background: ${colors.customColors.whiteColor2};
+                                            border-radius: 25px;
+                                            padding: 3px;
+                                            display: flex;
+                                            align-items: center;
+                                            cursor: pointer;
+                                            transition: all 0.5s ease;
+
+                                            span {
+                                                position: relative;
+                                                width: 15px;
+                                                height: 100%;
+                                                background: ${colors.customColors.whiteColor};
+                                                border-radius: 50%;
+                                                transition: all 0.5s ease;
+                                            }
+                                        }
+
+                                        input[type="checkbox"]:checked ~ label {
+                                            background: ${colors.customColors.greenColor1};
+                                            transition: all 0.5s ease;
+                                        }
+
+                                        input[type="checkbox"]:checked ~ label span {
+                                            transform: translateX(19px);
+                                            transition: all 0.5s ease;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .right_sec {
+                position: relative;
+                width: calc(100% - 290px);
+                height: 100%;
+                padding: 0 15px;
+                display: flex;
+                margin-top: 20px;
+
+                .right_inner {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 8px;
+                    box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+                    .right_head {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        padding: 15px 20px;
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                        .head_left_sec {
+                            position: relative;
+                            width: calc(100% - 160px);
+                            display: flex;
+                            flex-direction: column;
+
+                            .top_sec {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                .sec_img {
+                                    position: relative;
+                                    width: 20px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    img {
+                                        position: relative;
+                                        width: 100%;
+                                    }
+                                }
+
+                                h5 {
+                                    position: relative;
+                                    margin-left: 8px;
+                                    font-size: 14px;
+                                    color: ${colors.customColors.blackColor1};
+                                    font-weight: 500;
+                                }
+                            }
+
+                            p {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                font-size: 11px;
+                                color: ${colors.customColors.blackColor2};
+                                margin-top: 5px;
+                            }
+                        }
+
+                        .head_right_sec {
+                            position: relative;
+                            width: 160px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+
+                            a {
+                                position: relative;
+                                display: flex;
+                                color: ${colors.customColors.blackColor3};
+                                text-decoration: none;
+                                cursor: pointer;
+                                font-size: 12px;
+                                font-weight: 500;
+
+                                &:first-of-type {
+                                    color: ${colors.customColors.blueColor2};
+                                }
+                            }
+                        }
+                    }
+
+                    .right_body_sec {
+                        position: relative;
+                        width: 100%;
+                        height: calc(100vh - 66px);
+                        display: flex;
+
+                        .body_inner {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            padding: 10px 15px;
+                            overflow-y: auto;
+                            scrollbar-width: none;
+                            -ms-overflow-style: none;
+
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+
+                            .role_box {
+                                position: relative;
+                                margin: 10px 0;
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                border: 1px solid ${colors.customColors.borderColor};
+                                border-radius: 8px;
+                                overflow: hidden;
+                                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+
+                                .top_part {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 10px 16px;
+                                    cursor: pointer;
+                                    border-radius: 8px 8px 0 0;
+                                    transition: all 0.5s ease;
+
+                                    .top_left {
+                                        position: relative;
+                                        display: flex;
+                                        align-items: center;
+
+                                        .role_icon {
+                                            position: relative;
+                                            width: 35px;
+                                            height: 35px;
+                                            border-radius: 5px;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            background: ${colors.customColors.blueColorLight};
+
+                                            i {
+                                                font-size: 14px;
+                                                color: ${colors.customColors.blueColor1};
+                                            }
+                                        }
+
+                                        p {
+                                            position: relative;
+                                            font-size: 13px;
+                                            color: ${colors.customColors.blackColor};
+                                            font-weight: 500;
+                                            margin-left: 8px;
+                                        }
+                                    }
+
+                                    .top_right {
+                                        position: relative;
+                                        margin-left: auto;
+                                        display: flex;
+                                        align-items: center;
+
+                                        .icon {
+                                            position: relative;
+                                            width: 35px;
+                                            height: 35px;
+                                            border-radius: 50%;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                                            margin-left: 20px;
+
+                                            i {
+                                                position: relative;
+                                                font-size: 14px;
+                                                color: ${colors.customColors.blackColor2};
+                                                transition: all 0.3s ease;
+                                            }
+                                        }
+                                    }
+
+                                    &.active {
+                                        background: ${colors.customColors.lightBackground1};
+
+                                        .top_right {
+                                            .icon i {
+                                                transform: rotate(90deg);
+                                                transition: all 0.3s ease;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .bottom_part {
+                                    position: relative;
+                                    width: 100%;
+
+                                    .bottom_inner {
+                                        position: relative;
+                                        width: 100%;
+                                        padding: 15px;
+                                        display: flex;
+                                        flex-direction: column;
+
+                                        .table_sec {
+                                            position: relative;
+                                            width: 100%;
+
+                                            table {
+                                                position: relative;
+                                                width: 100%;
+                                                display: flex;
+                                                flex-direction: column;
+
+                                                thead {
+                                                    position: relative;
+                                                    width: 100%;
+                                                    height: 40px;
+                                                    background: ${colors.themeColor};
+                                                    border-radius: 10px 10px 0px 0px;
+                                                    border: 1px solid ${colors.themeColor};
+
+                                                    tr {
+                                                        position: relative;
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        display: flex;
+                                                    }
+
+                                                    th {
+                                                        position: relative;
+                                                        height: 100%;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        font-family: "Lemonada", cursive;
+                                                        font-size: 12px;
+                                                        word-break: break-all;
+                                                        color: ${colors.customColors.whiteColor};
+                                                        padding: 0 25px;
+                                                        font-weight: 600;
+
+                                                        &:nth-of-type(1) {
+                                                            width: 40%;
+                                                        }
+                                                        &:nth-of-type(2) {
+                                                            width: 15%;
+                                                            justify-content: center;
+                                                        }
+                                                        &:nth-of-type(3) {
+                                                            width: 15%;
+                                                            justify-content: center;
+                                                        }
+                                                        &:nth-of-type(4) {
+                                                            width: 15%;
+                                                            justify-content: center;
+                                                        }
+                                                        &:nth-of-type(5) {
+                                                            width: 15%;
+                                                            justify-content: center;
+                                                        }
+                                                    }
+                                                }
+
+                                                tbody {
+                                                    position: relative;
+                                                    width: 100%;
+                                                    border: 1px solid ${colors.customColors.whiteColor2};
+                                                    border-top: none;
+                                                    border-radius: 0px 0px 10px 10px;
+                                                    display: flex;
+                                                    flex-direction: column;
+                                                    overflow: hidden;
+
+                                                    tr {
+                                                        position: relative;
+                                                        width: 100%;
+                                                        min-height: 40px;
+                                                        display: flex;
+
+                                                        &:nth-of-type(even) {
+                                                            background: ${colors.customColors.lightBackground};
+                                                        }
+
+                                                        td {
+                                                            position: relative;
+                                                            padding: 12px 25px;
+                                                            display: flex;
+                                                            color: ${colors.customColors.blackColor};
+                                                            font-size: 13px;
+                                                            word-break: break-all;
+                                                            line-height: 1.5;
+
+                                                            &:nth-of-type(1) {
+                                                                width: 40%;
+                                                                display: flex;
+                                                                align-items: flex-start;
+                                                            }
+
+                                                            &:nth-of-type(2) {
+                                                                width: 15%;
+                                                                align-items: center;
+                                                                justify-content: center;
+
+                                                                li {
+                                                                    position: relative;
+                                                                    list-style: none;
+
+                                                                    input[type="checkbox"] {
+                                                                        display: none;
+                                                                    }
+
+                                                                    label {
+                                                                        position: relative;
+                                                                        cursor: pointer;
+                                                                        line-height: 1;
+                                                                        display: flex;
+                                                                        align-items: center;
+
+                                                                        .check_box {
+                                                                            position: relative;
+                                                                            width: 15px;
+                                                                            height: 15px;
+                                                                            border: 1px solid ${colors.customColors.borderColor};
+                                                                            border-radius: 4px;
+                                                                            cursor: pointer;
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                position: absolute;
+                                                                                left: 2px;
+                                                                                bottom: 2px;
+                                                                                width: 18px;
+                                                                                opacity: 0;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    input[type="checkbox"]:checked ~ label {
+
+                                                                        .check_box {
+                                                                            border: 1px solid ${colors.customColors.blackColor1};
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                opacity: 1;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            &:nth-of-type(3) {
+                                                                width: 15%;
+                                                                align-items: center;
+                                                                justify-content: center;
+
+                                                                li {
+                                                                    position: relative;
+                                                                    list-style: none;
+
+                                                                    input[type="checkbox"] {
+                                                                        display: none;
+                                                                    }
+
+                                                                    label {
+                                                                        position: relative;
+                                                                        cursor: pointer;
+                                                                        line-height: 1;
+                                                                        display: flex;
+                                                                        align-items: center;
+
+                                                                        .check_box {
+                                                                            position: relative;
+                                                                            width: 15px;
+                                                                            height: 15px;
+                                                                            border: 1px solid ${colors.customColors.borderColor};
+                                                                            border-radius: 4px;
+                                                                            cursor: pointer;
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                position: absolute;
+                                                                                left: 2px;
+                                                                                bottom: 2px;
+                                                                                width: 18px;
+                                                                                opacity: 0;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    input[type="checkbox"]:checked ~ label {
+
+                                                                        .check_box {
+                                                                            border: 1px solid ${colors.customColors.blackColor1};
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                opacity: 1;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            &:nth-of-type(4) {
+                                                                width: 15%;
+                                                                align-items: center;
+                                                                justify-content: center;
+
+                                                                li {
+                                                                    position: relative;
+                                                                    list-style: none;
+
+                                                                    input[type="checkbox"] {
+                                                                        display: none;
+                                                                    }
+
+                                                                    label {
+                                                                        position: relative;
+                                                                        cursor: pointer;
+                                                                        line-height: 1;
+                                                                        display: flex;
+                                                                        align-items: center;
+
+                                                                        .check_box {
+                                                                            position: relative;
+                                                                            width: 15px;
+                                                                            height: 15px;
+                                                                            border: 1px solid ${colors.customColors.borderColor};
+                                                                            border-radius: 4px;
+                                                                            cursor: pointer;
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                position: absolute;
+                                                                                left: 2px;
+                                                                                bottom: 2px;
+                                                                                width: 18px;
+                                                                                opacity: 0;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    input[type="checkbox"]:checked ~ label {
+
+                                                                        .check_box {
+                                                                            border: 1px solid ${colors.customColors.blackColor1};
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                opacity: 1;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            &:nth-of-type(5) {
+                                                                width: 15%;
+                                                                align-items: center;
+                                                                justify-content: center;
+
+                                                                li {
+                                                                    position: relative;
+                                                                    list-style: none;
+
+                                                                    input[type="checkbox"] {
+                                                                        display: none;
+                                                                    }
+
+                                                                    label {
+                                                                        position: relative;
+                                                                        cursor: pointer;
+                                                                        line-height: 1;
+                                                                        display: flex;
+                                                                        align-items: center;
+
+                                                                        .check_box {
+                                                                            position: relative;
+                                                                            width: 15px;
+                                                                            height: 15px;
+                                                                            border: 1px solid ${colors.customColors.borderColor};
+                                                                            border-radius: 4px;
+                                                                            cursor: pointer;
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                position: absolute;
+                                                                                left: 2px;
+                                                                                bottom: 2px;
+                                                                                width: 18px;
+                                                                                opacity: 0;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    input[type="checkbox"]:checked ~ label {
+
+                                                                        .check_box {
+                                                                            border: 1px solid ${colors.customColors.blackColor1};
+                                                                            transition: all 0.4s ease;
+
+                                                                            img {
+                                                                                opacity: 1;
+                                                                                transition: all 0.4s ease;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
