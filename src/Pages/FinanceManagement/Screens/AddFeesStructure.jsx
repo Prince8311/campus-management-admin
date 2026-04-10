@@ -10,16 +10,20 @@ import AddPaymentAmoutDateModal from "../../../Components/Modals/FinanceManageme
 const AddFeesStructure = () => {
     const api = getApiEndpoints();
     const feesStructureType = sessionStorage.getItem("feesStructureType");
+    const applicableTypes = ['New Students', 'Existing Students', 'Applicable for all'];
     const [isAcademicsLoading, setIsAcademicsLoading] = useState(false);
     const [step, setStep] = useState(1);
     const [academicData, setAcademicData] = useState([]);
     const [openLevels, setOpenLevels] = useState({});
-    const [selectedSections, setSelectedSections] = useState([]);
+    const [selectedClasses, setSelectedClasses] = useState([]);
     const getKey = (cls, section) => `${cls}-${section}`;
     const [feeTypes, setFeeTypes] = useState([]);
     const [showFeeTypesDropdown, setShowFeeTypesDropdown] = useState(false);
-    const [showAddPaymentAmountDate, setShowAddPaymentAmountDate] = useState(false);
     const [selectedFeeType, setSelectedFeeType] = useState('');
+    const [showApplicableTypesDropdown, setShowApplicableTypesDropdown] = useState(false);
+    const [selectedApplicableType, setSelectedApplicableType] = useState('');
+
+    const [showAddPaymentAmountDate, setShowAddPaymentAmountDate] = useState(false);
 
     const fetchAcademics = async () => {
         setIsAcademicsLoading(true);
@@ -48,21 +52,40 @@ const AddFeesStructure = () => {
         }));
     };
 
+    const updateClassSelection = (cls, updatedSections) => {
+        const allSections = cls.sections.map(section => `${cls.class}-${section}`);
+        const isAllSelected = allSections.every(sec => updatedSections.includes(sec));
+
+        let filtered = updatedSections.filter(
+            item => !item.startsWith(`${cls.class}-`) && item !== `${cls.class}`
+        );
+
+        if (isAllSelected) {
+            filtered.push(`${cls.class}`);
+        } else {
+            filtered.push(...updatedSections.filter(item => item.startsWith(`${cls.class}-`)));
+        }
+
+        return [...new Set(filtered)];
+    };
+
     const handleLevelChange = (level, checked) => {
-        let updated = [...selectedSections];
-        level.classes.forEach((cls) => {
-            cls.sections.forEach((section) => {
-                const key = getKey(cls.class, section);
-                if (checked) {
-                    if (!updated.includes(key)) {
-                        updated.push(key);
-                    }
-                } else {
-                    updated = updated.filter(item => item !== key);
-                }
-            });
+        let updated = [...selectedClasses];
+
+        level.classes.forEach(cls => {
+            const classKey = `${cls.class}`;
+
+            if (checked) {
+                updated = updated.filter(item => !item.startsWith(`${cls.class}-`));
+                updated.push(classKey);
+            } else {
+                updated = updated.filter(
+                    item => item !== classKey && !item.startsWith(`${cls.class}-`)
+                );
+            }
         });
-        setSelectedSections(updated);
+
+        setSelectedClasses([...new Set(updated)]);
     };
 
     const handleOpenAddAmountDateModal = () => {
@@ -70,45 +93,61 @@ const AddFeesStructure = () => {
     }
 
     const handleClassChange = (cls, checked) => {
-        let updated = [...selectedSections];
-        cls.sections.forEach((section) => {
-            const key = getKey(cls.class, section);
-            if (checked) {
-                if (!updated.includes(key)) {
-                    updated.push(key);
-                }
-            } else {
-                updated = updated.filter(item => item !== key);
-            }
-        });
-        setSelectedSections(updated);
+        let updated = [...selectedClasses];
+        const classKey = `${cls.class}`;
+        const sectionKeys = cls.sections.map(section => `${cls.class}-${section}`);
+
+        if (checked) {
+            updated = updated.filter(item => !item.startsWith(`${cls.class}-`));
+            updated.push(classKey);
+        } else {
+            updated = updated.filter(
+                item => item !== classKey && !item.startsWith(`${cls.class}-`)
+            );
+        }
+
+        setSelectedClasses(updated);
     };
 
     const handleSectionChange = (cls, section, checked) => {
-        const key = getKey(cls.class, section);
-        let updated = [...selectedSections];
-        if (checked) {
-            updated.push(key);
+        const key = `${cls.class}-${section}`;
+        let updated = [...selectedClasses];
+        const classKey = `${cls.class}`;
+        const allSections = cls.sections.map(sec => `${cls.class}-${sec}`);
+
+        if (updated.includes(classKey)) {
+            updated = updated.filter(item => item !== classKey);
+
+            updated.push(...allSections.filter(sec => sec !== key));
         } else {
-            updated = updated.filter(item => item !== key);
+            if (checked) {
+                updated.push(key);
+            } else {
+                updated = updated.filter(item => item !== key);
+            }
         }
-        setSelectedSections(updated);
+
+        updated = updateClassSelection(cls, updated);
+        setSelectedClasses([...new Set(updated)]);
     };
 
     const isLevelChecked = (level) =>
         level.classes.some(cls =>
+            selectedClasses.includes(`${cls.class}`) ||
             cls.sections.some(section =>
-                selectedSections.includes(getKey(cls.class, section))
+                selectedClasses.includes(`${cls.class}-${section}`)
             )
         );
 
     const isClassChecked = (cls) =>
+        selectedClasses.includes(`${cls.class}`) ||
         cls.sections.some(section =>
-            selectedSections.includes(getKey(cls.class, section))
+            selectedClasses.includes(`${cls.class}-${section}`)
         );
 
     const isSectionChecked = (cls, section) =>
-        selectedSections.includes(getKey(cls.class, section));
+        selectedClasses.includes(`${cls.class}`) ||
+        selectedClasses.includes(`${cls.class}-${section}`);
 
     const fetchFeeTypes = async () => {
         try {
@@ -125,6 +164,38 @@ const AddFeesStructure = () => {
     useEffect(() => {
         fetchFeeTypes();
     }, []);
+
+    const buildApiPayload = (selectedClasses) => {
+        const result = {};
+
+        selectedClasses.forEach(item => {
+            if (item.includes("-")) {
+                // Section-level (e.g. "1-A")
+                const [cls, section] = item.split("-");
+
+                if (!result[cls]) {
+                    result[cls] = {
+                        class: cls,
+                        sections: []
+                    };
+                }
+
+                // Avoid overriding ALL
+                if (result[cls].sections !== "ALL") {
+                    result[cls].sections.push(section);
+                }
+
+            } else {
+                // Full class (e.g. "1")
+                result[item] = {
+                    class: item,
+                    sections: "ALL"
+                };
+            }
+        });
+
+        return Object.values(result);
+    };
 
     return (
         <>
@@ -244,10 +315,10 @@ const AddFeesStructure = () => {
                                             </div>
                                             <div className="btn_sec">
                                                 <button
-                                                    disabled={selectedSections.length === 0}
+                                                    disabled={selectedClasses.length === 0}
                                                     onClick={() => {
                                                         setStep(2)
-                                                        console.log(selectedSections)
+                                                        console.log(selectedClasses)
                                                     }}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
                                             </div>
                                         </>
@@ -269,10 +340,17 @@ const AddFeesStructure = () => {
                             </div>
                             <div className="sec_item">
                                 <div className="fees_type_sec">
+                                    <div className="input_box receipt_prefix">
+                                        <span>Receipt prefix <p>*</p></span>
+                                        <input type="text" />
+                                    </div>
                                     <div className="select_box">
                                         <span>Fees type <p>*</p></span>
                                         <div className="dropdown_sec">
-                                            <div className="dropdown_btn" onClick={() => setShowFeeTypesDropdown(!showFeeTypesDropdown)}>
+                                            <div className="dropdown_btn" onClick={() => {
+                                                setShowFeeTypesDropdown(!showFeeTypesDropdown)
+                                                setShowApplicableTypesDropdown(false)
+                                            }}>
                                                 <p>{selectedFeeType}</p>
                                                 <i className={`fa-solid fa-angle-down ${showFeeTypesDropdown ? 'active' : ''}`}></i>
                                             </div>
@@ -303,32 +381,32 @@ const AddFeesStructure = () => {
                                         </div>
                                     </div>
                                     <div className="select_box">
-                                        <span>Receipt prefix <p>*</p></span>
-                                        <div className="dropdown_sec">
-                                            <div className="dropdown_btn">
-                                                <p>SSA</p>
-                                                <i className="fa-solid fa-angle-down"></i>
-                                            </div>
-                                            <div className="dropdown">
-                                                <div className="dropdown_inner">
-                                                    <ul>
-                                                        <li></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="select_box">
                                         <span>Apply For <p>*</p></span>
                                         <div className="dropdown_sec">
-                                            <div className="dropdown_btn">
-                                                <p>New Student</p>
-                                                <i className="fa-solid fa-angle-down"></i>
+                                            <div className="dropdown_btn" onClick={() => {
+                                                setShowApplicableTypesDropdown(!showApplicableTypesDropdown)
+                                                setShowFeeTypesDropdown(false)
+                                            }}>
+                                                <p>{selectedApplicableType}</p>
+                                                <i className={`fa-solid fa-angle-down ${showApplicableTypesDropdown ? 'active' : ''}`}></i>
                                             </div>
-                                            <div className="dropdown">
+                                            <div className={`dropdown ${showApplicableTypesDropdown ? 'active' : ''}`}>
                                                 <div className="dropdown_inner">
                                                     <ul>
-                                                        <li></li>
+                                                        {
+                                                            applicableTypes.map((type, i) =>
+                                                                <li
+                                                                    key={i}
+                                                                    className={selectedApplicableType === type ? 'active' : ''}
+                                                                    onClick={() => {
+                                                                        setSelectedApplicableType(type)
+                                                                        setShowApplicableTypesDropdown(false)
+                                                                    }}
+                                                                >
+                                                                    {type}
+                                                                </li>
+                                                            )
+                                                        }
                                                     </ul>
                                                 </div>
                                             </div>

@@ -2467,6 +2467,23 @@ export const AddFeesStructureWrapper = styled('div')`
                                 pointer-events: none;
                             }
                         }
+
+                        &.receipt_prefix {
+                            width: 27%;
+
+                            input {
+                                position: relative;
+                                margin-top: 3px;
+                                width: 100%;
+                                height: 37px;
+                                font-size: 12px;
+                                border-radius: 5px;
+                                padding: 5px 30px 5px 15px;
+                                outline: none;
+                                border: none;
+                                background: ${colors.customColors.lightBackground3};
+                            }
+                        }
                     }
 
                     .select_box {
