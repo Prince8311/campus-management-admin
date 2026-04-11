@@ -281,6 +281,10 @@ const Sidebar = () => {
                                                 <i className="fa-solid fa-bus"></i>
                                                 <p>Rooms</p>
                                             </NavLink>
+                                            <NavLink to="/admin/hostel-management/hostel-buildings">
+                                                <i className="fa-solid fa-bus"></i>
+                                                <p>Buildings</p>
+                                            </NavLink>
                                         </div>
                                     </div>
                                 }
