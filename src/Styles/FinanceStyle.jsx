@@ -2118,7 +2118,6 @@ export const AddFeesStructureWrapper = styled('div')`
                             }
 
                             input[type="checkbox"]:checked ~ label {
-                                background: ${colors.customColors.lightBackground};
                                 color: ${colors.customColors.blackColor1};
                                 transition: all 0.5s ease;
 
