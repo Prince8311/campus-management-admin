@@ -261,7 +261,7 @@ const Sidebar = () => {
                                     <div className={`dropdown_item ${activeDropdown === 5 ? 'active' : ''}`}>
                                         <div className="dropdown_btn" onClick={() => toggleDropdown(5)}>
                                             <li>
-                                                <i className="fa-solid fa-user-shield prefix"></i>
+                                                <i className="fa-solid fa-building-user prefix"></i>
                                                 <span>
                                                     <p>Hostel Management</p>
                                                     <i className="fa-solid fa-angle-right suffix"></i>
@@ -270,19 +270,19 @@ const Sidebar = () => {
                                         </div>
                                         <div className="dropdown">
                                             <NavLink to="/admin/hostel-management/hostel-overview">
-                                                <i className="fa-solid fa-certificate prefix"></i>
+                                                <i className="fa-solid fa-magnifying-glass-chart prefix"></i>
                                                 <p>Overview</p>
                                             </NavLink>
                                             <NavLink to="/admin/hostel-management/residents">
-                                                <i className="fa-solid fa-id-card-clip prefix"></i>
+                                                <i className="fa-solid fa-users prefix"></i>
                                                 <p>Residents</p>
                                             </NavLink>
                                             <NavLink to="/admin/hostel-management/hostel-rooms">
-                                                <i className="fa-solid fa-bus"></i>
+                                                <i className="fa-solid fa-door-open prefix"></i>
                                                 <p>Rooms</p>
                                             </NavLink>
                                             <NavLink to="/admin/hostel-management/hostel-buildings">
-                                                <i className="fa-solid fa-bus"></i>
+                                                <i className="fa-regular fa-building prefix"></i>
                                                 <p>Buildings</p>
                                             </NavLink>
                                         </div>
