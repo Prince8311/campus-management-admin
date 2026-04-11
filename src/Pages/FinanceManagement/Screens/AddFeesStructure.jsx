@@ -9,8 +9,11 @@ import AddPaymentAmoutDateModal from "../../../Components/Modals/FinanceManageme
 
 const AddFeesStructure = () => {
     const api = getApiEndpoints();
+    const { userDetails } = UserData();
     const feesStructureType = sessionStorage.getItem("feesStructureType");
+    const receiptPrefix = userDetails.institution?.receipt_prefix;
     const applicableTypes = ['New Students', 'Existing Students', 'Applicable for all'];
+    const defaultTaxValue = 0;
     const [isAcademicsLoading, setIsAcademicsLoading] = useState(false);
     const [step, setStep] = useState(1);
     const [academicData, setAcademicData] = useState([]);
@@ -22,8 +25,17 @@ const AddFeesStructure = () => {
     const [selectedFeeType, setSelectedFeeType] = useState('');
     const [showApplicableTypesDropdown, setShowApplicableTypesDropdown] = useState(false);
     const [selectedApplicableType, setSelectedApplicableType] = useState('');
+    const [taxValue, setTaxValue] = useState(defaultTaxValue);
 
-    const [showAddPaymentAmountDate, setShowAddPaymentAmountDate] = useState(false);
+    const [showAddPaymentAmountModal, setShowAddPaymentAmountModal] = useState(false);
+    const [scheduledPaymets, setScheduledPaymets] = useState([]);
+    const [editingPayment, setEditingPayment] = useState(null);
+    const isFeesStepValid =
+        Boolean(receiptPrefix) &&
+        Boolean(selectedFeeType) &&
+        Boolean(selectedApplicableType) &&
+        taxValue !== "" &&
+        scheduledPaymets.length > 0;
 
     const fetchAcademics = async () => {
         setIsAcademicsLoading(true);
@@ -89,7 +101,7 @@ const AddFeesStructure = () => {
     };
 
     const handleOpenAddAmountDateModal = () => {
-        setShowAddPaymentAmountDate(true);
+        setShowAddPaymentAmountModal(true);
     }
 
     const handleClassChange = (cls, checked) => {
@@ -165,6 +177,12 @@ const AddFeesStructure = () => {
         fetchFeeTypes();
     }, []);
 
+    useEffect(() => {
+        if (!showAddPaymentAmountModal) {
+            setEditingPayment(null);
+        }
+    }, [showAddPaymentAmountModal]);
+
     const buildApiPayload = (selectedClasses) => {
         const result = {};
 
@@ -196,6 +214,14 @@ const AddFeesStructure = () => {
 
         return Object.values(result);
     };
+
+    const selectedClassSummary = buildApiPayload(selectedClasses);
+    const subtotalFee = scheduledPaymets.reduce((total, item) => total + Number(item.amount || 0), 0);
+    const parsedTaxValue = Number(taxValue || 0);
+    const appliedTaxAmount = (subtotalFee * parsedTaxValue) / 100;
+    const totalPayableAmount = subtotalFee + appliedTaxAmount;
+
+    const formatCurrency = (amount) => `₹${Number(amount || 0).toFixed(2)}`;
 
     return (
         <>
@@ -342,7 +368,7 @@ const AddFeesStructure = () => {
                                 <div className="fees_type_sec">
                                     <div className="input_box receipt_prefix">
                                         <span>Receipt prefix <p>*</p></span>
-                                        <input type="text" />
+                                        <input type="text" value={receiptPrefix} required readOnly />
                                     </div>
                                     <div className="select_box">
                                         <span>Fees type <p>*</p></span>
@@ -415,7 +441,11 @@ const AddFeesStructure = () => {
                                     <div className="input_box">
                                         <span>Tax % (if applicable) <p>*</p></span>
                                         <div className="input_wrapper">
-                                            <input type="text" defaultValue="0" />
+                                            <input
+                                                type="text"
+                                                value={taxValue}
+                                                onChange={(e) => setTaxValue(e.target.value)}
+                                            />
                                             <span className="percent_symbol">%</span>
                                         </div>
                                     </div>
@@ -425,23 +455,48 @@ const AddFeesStructure = () => {
                                         <p>Payments & schduled dates : </p>
                                     </div>
                                     <div className="sec_items">
-                                        <div className="item_box">
-                                            <div className="box_inner">
-                                                <div className="inner_top">
-                                                    <h6>#Installment - 1</h6>
-                                                    <li>
-                                                        <p>06 April, 2026 -</p>
-                                                        <span>₹30000</span>
-                                                    </li>
-                                                </div>
-                                                <div className="inner_btn">
-                                                    <button className="edit"><i className="fa-regular fa-pen-to-square"></i>Edit</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
                                         {
-                                            feesStructureType === 'Recurring Fee' &&
+                                            scheduledPaymets.map((item, index) => (
+                                                <div className="item_box" key={item.id}>
+                                                    <div className="box_inner">
+                                                        <div className="inner_top">
+                                                            <h6>#Installment - {index + 1}</h6>
+                                                            <li>
+                                                                <p>{item.paymentDate} -</p>
+                                                                <span>₹{item.amount}</span>
+                                                            </li>
+                                                        </div>
+                                                        <div className="inner_btn">
+                                                            <button
+                                                                className="edit"
+                                                                onClick={() => {
+                                                                    setEditingPayment(item);
+                                                                    setShowAddPaymentAmountModal(true);
+                                                                }}
+                                                            >
+                                                                <i className="fa-regular fa-pen-to-square"></i>Edit
+                                                            </button>
+
+                                                            <button
+                                                                className="delete"
+                                                                onClick={() => {
+                                                                    setScheduledPaymets(prev =>
+                                                                        prev.filter(p => p.id !== item.id)
+                                                                    );
+                                                                }}
+                                                            >
+                                                                <i className="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                        {
+                                            (
+                                                feesStructureType === 'Recurring Fee' ||
+                                                (feesStructureType === 'One Time Fee' && scheduledPaymets.length < 1)
+                                            ) &&
                                             <div className="add_btn">
                                                 <div className="btn_inner" onClick={handleOpenAddAmountDateModal}>
                                                     <img src="/images/add-installment.svg" alt="" />
@@ -454,7 +509,7 @@ const AddFeesStructure = () => {
                             </div>
                             <div className="btn_sec">
                                 <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Back to Previous</button>
-                                <button onClick={() => setStep(3)}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
+                                <button disabled={!isFeesStepValid} onClick={() => setStep(3)}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
                             </div>
                         </div>
                     }
@@ -473,14 +528,21 @@ const AddFeesStructure = () => {
                                                 <a><i className="fa-regular fa-pen-to-square"></i>Edit</a>
                                             </div>
                                             <div className="box_bottom academics">
-                                                <li>
-                                                    <span>Class 9:</span>
-                                                    <p>All Sections</p>
-                                                </li>
-                                                <li>
-                                                    <span>Class 8:</span>
-                                                    <p>A, B, C, D, E</p>
-                                                </li>
+                                                {
+                                                    selectedClassSummary.length > 0 ? (
+                                                        selectedClassSummary.map((item) => (
+                                                            <li key={item.class}>
+                                                                <span>Class {item.class}:</span>
+                                                                <p>{item.sections === "ALL" ? "All Sections" : item.sections.join(", ")}</p>
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li>
+                                                            <span>Class:</span>
+                                                            <p>No classes selected</p>
+                                                        </li>
+                                                    )
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -493,15 +555,15 @@ const AddFeesStructure = () => {
                                             <div className="box_bottom fees">
                                                 <li>
                                                     <span>Fees type :</span>
-                                                    <p>Tution Fee</p>
+                                                    <p>{selectedFeeType || "--"}</p>
                                                 </li>
                                                 <li>
                                                     <span>Applied for :</span>
-                                                    <p>New Students</p>
+                                                    <p>{selectedApplicableType || "--"}</p>
                                                 </li>
                                                 <li>
                                                     <span>Receipt prefix :</span>
-                                                    <p>SSA</p>
+                                                    <p>{receiptPrefix || "--"}</p>
                                                 </li>
                                             </div>
                                         </div>
@@ -515,21 +577,28 @@ const AddFeesStructure = () => {
                                             <div className="box_bottom">
                                                 <table>
                                                     <thead>
-                                                        <th>Serial No.</th>
-                                                        <th>Scheduled Date</th>
-                                                        <th>Amount</th>
+                                                        <tr>
+                                                            <th>Serial No.</th>
+                                                            <th>Scheduled Date</th>
+                                                            <th>Amount</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>#1</td>
-                                                            <td>25 May</td>
-                                                            <td>₹30000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#1</td>
-                                                            <td>25 May</td>
-                                                            <td>₹30000</td>
-                                                        </tr>
+                                                        {
+                                                            scheduledPaymets.length > 0 ? (
+                                                                scheduledPaymets.map((item, index) => (
+                                                                    <tr key={item.id}>
+                                                                        <td>#{index + 1}</td>
+                                                                        <td>{item.paymentDate}</td>
+                                                                        <td>{formatCurrency(item.amount)}</td>
+                                                                    </tr>
+                                                                ))
+                                                            ) : (
+                                                                <tr>
+                                                                    <td colSpan="3">No installments added</td>
+                                                                </tr>
+                                                            )
+                                                        }
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -541,17 +610,17 @@ const AddFeesStructure = () => {
                                         <div className="payment_row">
                                             <li>
                                                 <span>Subtotal Fee</span>
-                                                <p>₹50000.00</p>
+                                                <p>{formatCurrency(subtotalFee)}</p>
                                             </li>
                                             <li>
-                                                <span>Applied Tax (%10)</span>
-                                                <p>₹5000.00</p>
+                                                <span>Applied Tax ({parsedTaxValue}%)</span>
+                                                <p>{formatCurrency(appliedTaxAmount)}</p>
                                             </li>
                                         </div>
                                         <div className="payment_total">
                                             <li>
                                                 <span>TOTAL PAYABLE</span>
-                                                <p>₹55000.00</p>
+                                                <p>{formatCurrency(totalPayableAmount)}</p>
                                             </li>
                                             <a>
                                                 <img src="/images/check-badge.svg" alt="" />
@@ -570,8 +639,24 @@ const AddFeesStructure = () => {
                 </div>
 
                 <AddPaymentAmoutDateModal
-                    showAddPaymentAmountDate={showAddPaymentAmountDate}
-                    setShowAddPaymentAmountDate={setShowAddPaymentAmountDate}
+                    showAddPaymentAmountModal={showAddPaymentAmountModal}
+                    setShowAddPaymentAmountModal={setShowAddPaymentAmountModal}
+                    onSave={(data) => {
+                        if (editingPayment) {
+                            setScheduledPaymets(prev =>
+                                prev.map(item =>
+                                    item.id === editingPayment.id ? { ...item, ...data } : item
+                                )
+                            );
+                            setEditingPayment(null);
+                        } else {
+                            setScheduledPaymets(prev => [
+                                ...prev,
+                                { id: Date.now(), ...data }
+                            ]);
+                        }
+                    }}
+                    editingPayment={editingPayment}
                 />
             </AddFeesStructureWrapper>
         </>

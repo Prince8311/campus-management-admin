@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CalenderBox } from "../Styles/LayoutStyle";
 
-const Calender = ({ setFinalSelectedDate }) => {
+const Calender = ({ hideYear = false, setFinalSelectedDate }) => {
     const today = new Date();
     const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -61,7 +61,9 @@ const Calender = ({ setFinalSelectedDate }) => {
             const monthName = fullDate.toLocaleString("en-US", { month: "long" });
             const yearNum = fullDate.getFullYear();
 
-            return `${dayNum} ${monthName}, ${yearNum}`;
+            return hideYear
+                ? `${dayNum} ${monthName}`
+                : `${dayNum} ${monthName}, ${yearNum}`;
         };
 
         // Step 1: Fill previous month dates
@@ -118,13 +120,13 @@ const Calender = ({ setFinalSelectedDate }) => {
                         <a onClick={handlePrevMonth}><i className="fa-solid fa-angle-left"></i></a>
                         <div className="month_year_sec" ref={pickerRef}>
                             <b onClick={(e) => setShowMonthYearPicker(prev => !prev)}>
-                                {currentDate.toLocaleString("default", { month: "long" })}, {year}
+                                {currentDate.toLocaleString("default", { month: "long" })} {!hideYear && <>, {year}</>}
                             </b>
                             {
                                 showMonthYearPicker &&
                                 <div className="month_year_picker">
                                     <div className="picker_inner">
-                                        <ul className="months_list">
+                                        <ul className={`months_list ${hideYear ? 'only_month' : ''}`}>
                                             {months.map((m, index) => (
                                                 <li
                                                     key={m}
@@ -135,17 +137,20 @@ const Calender = ({ setFinalSelectedDate }) => {
                                                 </li>
                                             ))}
                                         </ul>
-                                        <ul className="years_list">
-                                            {years.map((y) => (
-                                                <li
-                                                    key={y}
-                                                    className={`picker_item ${year === y ? "active" : ""}`}
-                                                    onClick={() => handleYearSelect(y)}
-                                                >
-                                                    {y}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                        {
+                                            !hideYear &&
+                                            <ul className="years_list">
+                                                {years.map((y) => (
+                                                    <li
+                                                        key={y}
+                                                        className={`picker_item ${year === y ? "active" : ""}`}
+                                                        onClick={() => handleYearSelect(y)}
+                                                    >
+                                                        {y}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        }
                                     </div>
                                 </div>
                             }

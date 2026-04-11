@@ -2,9 +2,9 @@ import { UserData } from "../Context/PageContext";
 import { NavbarWrapper } from "../Styles/LayoutStyle";
 
 const Navbar = () => {
-    const {pageName} = UserData();
+    const { pageName, userDetails } = UserData();
 
-    return(
+    return (
         <>
             <NavbarWrapper>
                 <div className="nav_inner">
@@ -18,7 +18,7 @@ const Navbar = () => {
                             <div className="profile_img">
                                 <img src="/images/profile-image.png" alt="" />
                             </div>
-                            <p>Sourish Mondal</p>
+                            <p>{userDetails.name}</p>
                         </div>
                     </div>
                 </div>

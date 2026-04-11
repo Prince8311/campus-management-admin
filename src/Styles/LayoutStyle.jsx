@@ -1058,6 +1058,11 @@ export const CalenderBox = styled('div')`
                             &.months_list {
                                 padding-right: 8px;
                                 border-right: 1px solid ${colors.customColors.borderColor};
+
+                                &.only_month {
+                                    padding-right: 0;
+                                    border-right: none;
+                                }
                             }
 
                             &.years_list {

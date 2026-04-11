@@ -90,6 +90,13 @@ import VehicleStaffsPage from "../Pages/Transport/Screens/VehicleStaffs";
 import VehicleRoutesPage from "../Pages/Transport/Screens/VehicleRoutes";
 import AddRoutesPage from "../Pages/Transport/Screens/AddRoutes";
 
+// Hostel Management 
+import HostelManagementMainPage from "../Pages/HostelManagement/Index";
+import HostelOverviewPage from "../Pages/HostelManagement/Screens/Overview";
+import HostelResidentsPage from "../Pages/HostelManagement/Screens/Residents";
+import HostelRoomsPage from "../Pages/HostelManagement/Screens/HostelRooms";
+import HostelBuildingsPage from "../Pages/HostelManagement/Screens/HostelBuildings";
+
 const Routers = () => {
     return (
         <>
@@ -166,6 +173,13 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="staff-information" />} />
                             <Route path="staff-information" element={<StaffInformationPage />} />
                             <Route path="add-staff" element={<AddStaffPage />} />
+                        </Route>
+                        <Route path="hostel-management" element={<HostelManagementMainPage />}>
+                            <Route path="" element={<Navigate to="hostel-overview" />} />
+                            <Route path="hostel-overview" element={<HostelOverviewPage />} />
+                            <Route path="residents" element={<HostelResidentsPage />} />
+                            <Route path="hostel-rooms" element={<HostelRoomsPage />} />
+                            <Route path="hostel-buildings" element={<HostelBuildingsPage />} />
                         </Route>
                         <Route path="transport-management" element={<TransportMainPage />}>
                             <Route path="" element={<Navigate to="passengers" />} />

@@ -1,15 +1,52 @@
+import { useEffect, useState } from "react";
 import { AddPaymentAmoutDateWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
+import Calender from "../../Calender";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddPaymentAmoutDateModal = ({ showAddPaymentAmountDate, setShowAddPaymentAmountDate }) => {
+const AddPaymentAmoutDateModal = ({ showAddPaymentAmountModal, setShowAddPaymentAmountModal, onSave, editingPayment }) => {
+    const [showPaymentDateDropdown, setShowPaymentDateDropdown] = useState(false);
+    const [paymentDate, setPaymentDate] = useState('');
+    const [paymentAmount, setPaymentAmount] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const isFormValid = paymentDate && paymentAmount && !isNaN(paymentAmount) && Number(paymentAmount) > 0;
 
     function closeModal() {
-        setShowAddPaymentAmountDate(false);
+        setPaymentDate('');
+        setPaymentAmount('');
+        setShowAddPaymentAmountModal(false);
     }
+
+    useEffect(() => {
+        if (editingPayment) {
+            setPaymentDate(editingPayment.paymentDate);
+            setPaymentAmount(editingPayment.amount);
+        } else {
+            setPaymentDate('');
+            setPaymentAmount('');
+        }
+    }, [editingPayment]);
+
+    const handleSave = async () => {
+        if (!isFormValid) return;
+
+        try {
+            setIsButtonLoading(true);
+            await onSave({
+                paymentDate,
+                amount: paymentAmount
+            });
+            closeModal();
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    };
 
     return (
         <>
-            <AddPaymentAmoutDateWrapper className={showAddPaymentAmountDate ? 'active' : ''}>
-                <div className={`modal_box ${showAddPaymentAmountDate ? 'active' : ''}`}>
+            <AddPaymentAmoutDateWrapper className={showAddPaymentAmountModal ? 'active' : ''}>
+                <div className={`modal_box ${showAddPaymentAmountModal ? 'active' : ''}`}>
                     <div className="modal_head">
                         <h4>Add Payment Amount & Schdule Date</h4>
                         <div className="close_sec">
@@ -21,13 +58,22 @@ const AddPaymentAmoutDateModal = ({ showAddPaymentAmountDate, setShowAddPaymentA
                             <div className="date_box_sec">
                                 <span>Date <p>*</p></span>
                                 <div className="date_box">
-                                    <div className="date_btn">
-                                        <p>21 March, 2026</p>
+                                    <div className="date_btn" onClick={() => setShowPaymentDateDropdown(!showPaymentDateDropdown)}>
+                                        <p>{paymentDate}</p>
                                         <i className="fa-regular fa-calendar"></i>
                                     </div>
-                                    <div className="dropdown">
-
-                                    </div>
+                                    {
+                                        showPaymentDateDropdown &&
+                                        <div className="dropdown">
+                                            <Calender
+                                                hideYear={true}
+                                                setFinalSelectedDate={(date) => {
+                                                    setPaymentDate(date)
+                                                    setShowPaymentDateDropdown(false)
+                                                }}
+                                            />
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div className="input_box">
@@ -35,13 +81,22 @@ const AddPaymentAmoutDateModal = ({ showAddPaymentAmountDate, setShowAddPaymentA
 
                                 <div className="input_sec">
                                     <span className="rupee">₹</span>
-                                    <input type="text" />
+                                    <input type="text" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} required />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button
+                            disabled={!isFormValid || isButtonLoading}
+                            onClick={handleSave}
+                        >
+                            {
+                                isButtonLoading
+                                    ? <ButtonLoader />
+                                    : (editingPayment ? "Update" : "Save")
+                            }
+                        </button>
                     </div>
                 </div>
             </AddPaymentAmoutDateWrapper>

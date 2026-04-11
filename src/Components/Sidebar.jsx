@@ -73,14 +73,14 @@ const Sidebar = () => {
                                 <i className="fa-solid fa-school"></i>
                             </div>
                             <li>
-                                <h4>{userDetails.name}</h4>
-                                <p><b>INT ID :</b>{userDetails.inst_id}</p>
+                                <h4>{userDetails.institution?.inst_name}</h4>
+                                <p><b>INT ID :</b>{userDetails.institution?.inst_id}</p>
                             </li>
                         </div>
                         <div className="bottom_part">
                             <li>
                                 <p>Ongoing Session :</p>
-                                <span>{userDetails.session?.name}</span>
+                                <span>{userDetails.institution?.ongoingSession?.name}</span>
                             </li>
                             <div className="btn_sec">
                                 <button className="view_btn">View Details</button>
@@ -263,6 +263,34 @@ const Sidebar = () => {
                                             <li>
                                                 <i className="fa-solid fa-user-shield prefix"></i>
                                                 <span>
+                                                    <p>Hostel Management</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/hostel-management/hostel-overview">
+                                                <i className="fa-solid fa-certificate prefix"></i>
+                                                <p>Overview</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/hostel-management/residents">
+                                                <i className="fa-solid fa-id-card-clip prefix"></i>
+                                                <p>Residents</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/hostel-management/hostel-rooms">
+                                                <i className="fa-solid fa-bus"></i>
+                                                <p>Rooms</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
+                                            <li>
+                                                <i className="fa-solid fa-user-shield prefix"></i>
+                                                <span>
                                                     <p>Administration</p>
                                                     <i className="fa-solid fa-angle-right suffix"></i>
                                                 </span>
@@ -284,8 +312,8 @@ const Sidebar = () => {
                                         </div>
                                     </div>
                                 }
-                                <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
-                                    <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
+                                <div className={`dropdown_item ${activeDropdown === 7 ? 'active' : ''}`}>
+                                    <div className="dropdown_btn" onClick={() => toggleDropdown(7)}>
                                         <li>
                                             <i className="fa-solid fa-gears prefix"></i>
                                             <span>

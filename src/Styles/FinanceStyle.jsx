@@ -3112,6 +3112,12 @@ export const AddFeesStructureWrapper = styled('div')`
                                         padding-bottom: 3px;
                                         border-bottom: 1px solid ${colors.customColors.blackColor2};
 
+                                        tr {
+                                            position: relative;
+                                            width: 100%;
+                                            display: flex;
+                                        }
+
                                         th {
                                             position: relative;
                                             font-size: 13px;
@@ -3223,7 +3229,7 @@ export const AddFeesStructureWrapper = styled('div')`
                                 justify-content: space-between;
 
                                 span {
-                                    font-size: 16px;
+                                    font-size: 14px;
                                     color: ${colors.customColors.blackColor};
                                 }
 
