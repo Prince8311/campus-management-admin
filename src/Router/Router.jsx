@@ -153,10 +153,10 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="fee-collection" />} />
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
                             <Route path="fee-transactions" element={<FeeTransactionsPage />} />
-                            <Route path="add-fees-structure" element={<AddFeesStructure />} />
+                            <Route path="add-fee-structure" element={<AddFeesStructure />} />
                             <Route path="fee-configuration" element={<FeeConfigurationPage />}>
-                                <Route path="" element={<Navigate to="fees-structure" />} />
-                                <Route path="fees-structure" element={<FeesStructurePage />} />
+                                <Route path="" element={<Navigate to="fee-structure" />} />
+                                <Route path="fee-structure" element={<FeesStructurePage />} />
                                 <Route path="discount" element={<DiscountPage />} />
                             </Route>
                             <Route path="bank-accounts" element={<BankAccountPage />}>

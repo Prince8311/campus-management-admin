@@ -7,7 +7,7 @@ const FeeConfigurationPage = () => {
             <FeeConfigurationWrapper>
                 <div className="heading_part">
                     <div className="inner_part">
-                        <NavLink to="fees-structure" className="part_box">
+                        <NavLink to="fee-structure" className="part_box">
                             <h6>Fee Structure</h6>
                         </NavLink>
                         <NavLink to="discount" className="part_box">

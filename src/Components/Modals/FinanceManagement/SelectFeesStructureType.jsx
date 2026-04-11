@@ -7,7 +7,7 @@ const SelectFeesStructureTypeModal = ({ isFeesStructureOpen, setIsFeesStructureO
     // 'recurring', 'oneTime', 'transpost'
     const handleRedirectionAddFeesStructurePage = (type) => {
         sessionStorage.setItem("feesStructureType", type);
-        navigate("/admin/finance-management/add-fees-structure");
+        navigate("/admin/finance-management/add-fee-structure");
         setIsFeesStructureOpen(false);
     }
 
