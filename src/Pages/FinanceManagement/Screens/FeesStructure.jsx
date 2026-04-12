@@ -23,9 +23,11 @@ const FeesStructurePage = () => {
                 params: { feeType: selectedTab }
             });
             if (response?.data.status === 200) {
+                setFeeConfigurations(response?.data.configurations);
                 console.log("Fesssssssssssssssssss", response?.data);
             }
         } catch (error) {
+            setFeeConfigurations([]);
             toast.error(error.response?.data.message || error.message);
         } finally {
             setIsFeeConfigurationsLoading(false);
