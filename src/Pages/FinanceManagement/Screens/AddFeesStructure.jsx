@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { AddFeesStructureWrapper } from "../../../Styles/FinanceStyle";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../../Context/PageContext";
 import AddPaymentAmoutDateModal from "../../../Components/Modals/FinanceManagement/AddPaymentAmountDate";
+import ButtonLoader from "../../../Components/Loader/ButtonLoader";
 
 const AddFeesStructure = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const { userDetails } = UserData();
     const feesStructureType = sessionStorage.getItem("feesStructureType");
     const receiptPrefix = userDetails.institution?.receipt_prefix;
@@ -30,6 +33,7 @@ const AddFeesStructure = () => {
     const [showAddPaymentAmountModal, setShowAddPaymentAmountModal] = useState(false);
     const [scheduledPaymets, setScheduledPaymets] = useState([]);
     const [editingPayment, setEditingPayment] = useState(null);
+    const [isPublishButtonLoading, setIsPublishButtonLoading] = useState(false);
     const isFeesStepValid =
         Boolean(receiptPrefix) &&
         Boolean(selectedFeeType) &&
@@ -163,7 +167,7 @@ const AddFeesStructure = () => {
 
     const fetchFeeTypes = async () => {
         try {
-            const response = await axiosInstance.get(api.fetchFeesTypes);
+            const response = await axiosInstance.get(api.fetchFeeTypes);
             if (response?.data.status === 200) {
                 setFeeTypes(response?.data.types);
             }
@@ -222,6 +226,36 @@ const AddFeesStructure = () => {
     const totalPayableAmount = subtotalFee + appliedTaxAmount;
 
     const formatCurrency = (amount) => `₹${Number(amount || 0).toFixed(2)}`;
+
+    const handleAddFeeStructure = async () => {
+        setIsPublishButtonLoading(true);
+        const payload = {
+            receipt_prefix: receiptPrefix,
+            fee_name: selectedFeeType,
+            type: feesStructureType,
+            applicable_type: selectedApplicableType,
+            tax_percentage: Number(taxValue || 0),
+            classes: JSON.stringify(selectedClasses),
+            scheduled_payments: JSON.stringify(
+                scheduledPaymets.map(({ paymentDate, amount }) => ({
+                    paymentDate,
+                    amount: Number(amount)
+                }))
+            )
+        };
+        try {
+            const response = await axiosInstance.post(api.createFeeConfiguration, payload);
+            if (response?.data.status === 200) { 
+                toast.success(response?.data.message);
+                navigate("/admin/finance-management/fee-configuration/fee-structure", { replace: true });
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsPublishButtonLoading(false);
+        }
+        console.log(payload);
+    }
 
     return (
         <>
@@ -631,7 +665,15 @@ const AddFeesStructure = () => {
                                 </div>
                                 <div className="btn_sec">
                                     <button onClick={() => setStep(step - 1)}><i className="fa-solid fa-angle-left"></i> Back to Previous</button>
-                                    <button><i className="fa-solid fa-cloud-arrow-up"></i> Publish</button>
+                                    <button onClick={handleAddFeeStructure}>
+                                        {
+                                            isPublishButtonLoading ? (
+                                                <ButtonLoader />
+                                            ) : (
+                                                <><i className="fa-solid fa-cloud-arrow-up"></i> Publish</>
+                                            )
+                                        }
+                                    </button>
                                 </div>
                             </div>
                         </div>

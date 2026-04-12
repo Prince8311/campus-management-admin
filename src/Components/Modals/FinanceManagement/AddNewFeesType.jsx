@@ -16,9 +16,9 @@ const AddNewFeesTypeModal = ({ isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen }) 
         setIsAddNewFeesTypeOpen(false);
     }
 
-    const fetchFeesTypes = async () => {
+    const fetchFeeTypes = async () => {
         try {
-            const response = await axiosInstance.get(api.fetchFeesTypes);
+            const response = await axiosInstance.get(api.fetchFeeTypes);
             if (response?.data.status === 200) {
                 setItems(response?.data.types || []);
                 setOriginalItems(response?.data.types || []);
@@ -30,7 +30,7 @@ const AddNewFeesTypeModal = ({ isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen }) 
 
     useEffect(() => {
         if (isAddNewFeesTypeOpen) {
-            fetchFeesTypes();
+            fetchFeeTypes();
         }
     }, [isAddNewFeesTypeOpen]);
 
@@ -61,7 +61,7 @@ const AddNewFeesTypeModal = ({ isAddNewFeesTypeOpen, setIsAddNewFeesTypeOpen }) 
         setIsButtonLoading(true);
         const payload = { types: JSON.stringify(items) };
         try {
-            const response = await axiosInstance.post(api.createFeesType, payload);
+            const response = await axiosInstance.post(api.createFeeType, payload);
             if (response?.data.status === 200) { 
                 toast.success(response?.data.message);
                 closeModal();
