@@ -48,6 +48,51 @@ const FeesStructurePage = () => {
         setIsAddNewFeesTypeOpen(true);
     };
 
+    const formatClasses = (classes = []) => {
+        const result = {};
+
+        classes.forEach(item => {
+            if (item.includes("-")) {
+                const [cls, section] = item.split("-");
+
+                if (!result[cls]) {
+                    result[cls] = {
+                        class: cls,
+                        sections: []
+                    };
+                }
+
+                if (result[cls].sections !== "ALL") {
+                    result[cls].sections.push(section);
+                }
+
+            } else {
+                result[item] = {
+                    class: item,
+                    sections: "ALL"
+                };
+            }
+        });
+
+        return Object.values(result);
+    };
+
+    const formatScheduledDate = (dateStr = "") => {
+        const [day, month] = dateStr.split(" ");
+        if (!month) return dateStr;
+        const shortMonth = month.slice(0, 3);
+        return `${day} ${shortMonth}`;
+    };
+
+    const calculateTotalWithTax = (installments = [], tax = 0) => {
+        const subtotal = installments.reduce((sum, item) => {
+            return sum + Number(item.amount || 0);
+        }, 0);
+        const taxAmount = (subtotal * Number(tax || 0)) / 100;
+        const total = subtotal + taxAmount;
+        return total;
+    };
+
     return (
         <>
             <FeesStructureWrapper>
@@ -94,22 +139,41 @@ const FeesStructurePage = () => {
                                         <div className="top_part">
                                             <div className="part_content">
                                                 <a><i className="fa-solid fa-comment-dollar"></i></a>
-                                                <h6>Tution Fees</h6>
-                                                <span>New Students</span>
+                                                <h6>{feeConfiguration.fee_name}</h6>
+                                                <span>{feeConfiguration.applied_for}</span>
                                             </div>
-                                            <a>Class - 1</a>
+                                            <div className="class_sec">
+                                                Classes:
+                                                <span>
+                                                    {formatClasses(feeConfiguration.classes)
+                                                        .map(cls =>
+                                                            cls.sections === "ALL"
+                                                                ? `${cls.class}[All sections]`
+                                                                : `${cls.class}[${cls.sections.join(", ")}]`
+                                                        )
+                                                        .join(", ")}
+                                                </span>
+                                            </div>
                                             <div className="fees_sec">
                                                 <h6>Installments : </h6>
                                                 <div className="installments_sec">
-                                                    <li>1. May<span>₹30000.00</span></li>
-                                                    <li>2. May<span>₹30000.00</span></li>
+                                                    {feeConfiguration.installments.map((inst, idx) => (
+                                                        <li key={inst.id}>
+                                                            {idx + 1}. {formatScheduledDate(inst["scheduled date"])}
+                                                            <span>₹{Number(inst.amount).toFixed(2)}</span>
+                                                        </li>
+                                                    ))}
                                                 </div>
                                             </div>
-                                            <p>Receipt Serial No. : <span>SSA - 00</span></p>
+                                            <p>Applied tax : <span>{feeConfiguration.tax}%</span></p>
+                                            <p className="receipt_prefix">Receipt Serial No. : <span>{feeConfiguration.receipt_prefix}</span></p>
                                         </div>
                                         <div className="bottom_btn">
                                             <div className="total_sec">
-                                                <h5>Total : <span>₹100000.00</span></h5>
+                                                <h5>Total: <span>₹{(calculateTotalWithTax(
+                                                    feeConfiguration.installments,
+                                                    feeConfiguration.tax
+                                                )).toFixed(2)}</span></h5>
                                             </div>
                                             <div className="btns_sec">
                                                 <button className="edit">Edit Name</button>

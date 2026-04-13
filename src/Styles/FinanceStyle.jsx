@@ -1113,7 +1113,7 @@ export const FeesStructureWrapper = styled('div')`
                         
                         h6 {
                             position: relative;
-                            padding-left: 12px;
+                            padding-left: 5px;
                             max-width: calc(100% - 85px);
                             font-size: 13.5px;
                             font-style: italic;
@@ -1139,15 +1139,22 @@ export const FeesStructureWrapper = styled('div')`
                         }
                     }
 
-                    a {
+                    .class_sec {
                         position: relative;
                         width: 100%;
                         display: flex;
+                        align-items: flex-end;
                         font-size: 12px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor};
                         text-decoration: none;
-                        margin-top: 3px;
+                        margin-top: 6px;
+
+                        span {
+                            margin-left: 4px;
+                            color: ${colors.customColors.blackColor2};
+                            font-size: 11px;
+                        }
                     }
 
                     .fees_sec {
@@ -1155,7 +1162,7 @@ export const FeesStructureWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        margin-top: 8px;
+                        margin-top: 5px;
 
                         h6 {
                             position: relative;
@@ -1200,6 +1207,10 @@ export const FeesStructureWrapper = styled('div')`
                         color: ${colors.customColors.blackColor1};
                         margin-top: 8px;
 
+                        &.receipt_prefix {
+                            margin-top: 3px;
+                        }
+
                         span {
                             color: ${colors.customColors.blackColor2};
                             margin-left: 5px;
@@ -1228,7 +1239,7 @@ export const FeesStructureWrapper = styled('div')`
                             
                             span {
                                 color: ${colors.customColors.blackColor};
-                                margin-left: 3px;
+                                margin-left: 2px;
                             }
                         }
                     }
@@ -1280,7 +1291,7 @@ export const FeesStructureWrapper = styled('div')`
             justify-content: center;
             align-items: center;
             padding: 0 10px;
-            margin-top: 80px;
+            margin-top: 50px;
 
             img {
                 position: relative;
