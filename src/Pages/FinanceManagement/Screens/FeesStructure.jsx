@@ -54,11 +54,11 @@ const FeesStructurePage = () => {
                 <div className="page_head">
                     <h2>Fees Structure</h2>
                     <div className="add_btn">
-                        <button onClick={handleOpenAddNewFeesType}>
+                        <button className="feeType" onClick={handleOpenAddNewFeesType}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add Fees Type</p>
                         </button>
-                        <button onClick={handleOpenFeesStructure}>
+                        <button className="addStructure" onClick={handleOpenFeesStructure}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Create Structure</p>
                         </button>
@@ -120,7 +120,10 @@ const FeesStructurePage = () => {
                                 </div>
                             )
                         ) : (
-                            <div className="empty_box"></div>
+                            <div className="empty_box">
+                                <img src="/images/no-fields.svg" alt="" />
+                                <p>No Data available.</p>
+                            </div>
                         )
                     }
                 </div>

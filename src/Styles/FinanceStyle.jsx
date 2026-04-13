@@ -971,37 +971,42 @@ export const FeesStructureWrapper = styled('div')`
 
         .add_btn {
             position: relative;
-            display: flex;
             margin-left: auto;
+            display: flex;
+            align-items: center;
 
             button {
                 position: relative;
-                width: 200px;
+                width: max-content;
                 height: 35px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
-                background: ${colors.customColors.greenColor};
-                color: ${colors.customColors.whiteColor};
-                border-radius: 6px;
-                font-size: 13px;
-                font-weight: 500;
-                transition: all 0.5s ease;
+                border: none;
+                padding: 0 25px;
+                font-size: 12.5px;
+
+                &.feeType {
+                    background: ${colors.customColors.greenColor};
+                    border: 1px solid ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+                    cursor: pointer;
+                    border-bottom-left-radius: 6px;
+                    border-top-left-radius: 6px;
+                }
+                
+                &.addStructure {
+                    background: ${colors.customColors.whiteColor};
+                    border: 1px solid ${colors.customColors.greenColor};
+                    color:  ${colors.customColors.greenColor};
+                    cursor: pointer;
+                    border-top-right-radius: 6px;
+                    border-bottom-right-radius: 6px;
+                }
 
                 i {
-                    margin-right: 8px;
-                    font-size: 12px;
-                }
-
-                &:hover {
-                    border-radius: 25px;
-                    transition: all 0.5s ease;
-                }
-
-                &:first-of-type {
-                    margin-right: 15px;
+                    font-size: 10px;
+                    margin-right: 4px;
                 }
             }
         }
@@ -1264,6 +1269,30 @@ export const FeesStructureWrapper = styled('div')`
                         }
                     }
                 }
+            }
+        }
+
+        .empty_box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+            margin-top: 80px;
+
+            img {
+                position: relative;
+                width: 300px;
+                opacity: 0.5;
+            }
+
+            p {
+                position: relative;
+                font-size: 15px;
+                margin-top: 10px;
+                color: ${colors.customColors.blackColor3};
             }
         }
     }
