@@ -19,11 +19,11 @@ const TransportMainPage = () => {
                         <NavLink to="staffs" className="part_box">
                             <h6>Staffs</h6>
                         </NavLink>
-                        <NavLink to="routes" className="part_box">
-                            <h6>Routes</h6>
-                        </NavLink>
                         <NavLink to="stopages" className="part_box">
                             <h6>Stopages</h6>
+                        </NavLink>
+                        <NavLink to="routes" className="part_box">
+                            <h6>Routes</h6>
                         </NavLink>
                     </div>
                 </div>

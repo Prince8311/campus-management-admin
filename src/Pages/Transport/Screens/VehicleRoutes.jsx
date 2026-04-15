@@ -11,7 +11,7 @@ const VehicleRoutesPage = () => {
         <>
             <VehicleRoutesWrapper>
                 <div className="head_sec">
-                    <h6>VehiclesRoutes Directory</h6>
+                    <h6>Vehicles Routes Directory</h6>
                     <div className="filter_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
