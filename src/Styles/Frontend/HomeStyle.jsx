@@ -197,7 +197,7 @@ export const HomePageWrapper = styled('div')`
                 .left_content {
                     .content_inner {
                         h1 {
-                            font-size: 15px;
+                            font-size: 18.5px;
                         }
                         .banner_btns {
                             button {

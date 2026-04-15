@@ -164,11 +164,53 @@ export const NavbarFrontendWrapper = styled('div')`
                 display: none;
                 margin-left: 20px;
 
-                span {
+                a {
                     position: relative;
-                    font-size: 18px;
-                    color: ${colors.customColors.blackColor1};
-                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 7px;
+                    border: 1px solid ${colors.customColors.borderColor};
+                    border-radius: 5px;
+
+                    span {
+                        position: relative;
+                        width: 20px;
+                        height: 2.5px;
+                        background: ${colors.customColors.blackColor1};
+                        border-radius: 25px;
+                        
+                        &:nth-of-type(1),
+                        &:nth-of-type(3) {
+                            transition: transform 0.5s ease;
+                        }
+
+                        &:nth-of-type(2) {
+                            margin: 4px 0;
+                            transition: all 0.5s ease;
+                        }
+                    }
+
+                    &.active {
+                        span {
+                            &:nth-of-type(2) {
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: all 0.5s ease;
+                            }
+
+                            &:nth-of-type(1) {
+                                transform: rotate(40deg);
+                                transform-origin: left;
+                                transition: transform 0.5s ease;
+                            }
+
+                            &:nth-of-type(3) {
+                                transform: rotate(-40deg);
+                                transform-origin: left;
+                                transition: transform 0.5s ease;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -546,6 +588,123 @@ export const FooterFrontendWrapper = styled('div')`
                 span {
                     font-size: 10px;
                 }
+            }
+        }
+    }
+`;
+
+export const SidebarFrontendWrapper = styled('div')`
+    position: fixed;
+    top: 51px;
+    right: -100%;
+    width: 300px;
+    height: calc(100vh - 51px);
+    border-top-left-radius: 10px;
+    background: ${colors.customColors.whiteColor};
+    box-shadow: -10px 5px 15px ${colors.boxShadowColors.shadowColor1};
+    z-index: 1000;
+    transition: all 0.6s ease;
+
+    &.active {
+        right: 0;
+        transition: all 0.6s ease;
+    }
+
+    .sidebar_inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .inner_head {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid ${colors.customColors.borderColor};
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h4 {
+                position: relative;
+                font-size: 14px;
+                font-weight: 600;
+                font-style: italic;
+                color: ${colors.customColors.blackColor1};
+            }
+
+            a {
+                position: relative;
+                cursor: pointer;
+                font-size: 16px;
+                color: ${colors.customColors.blackColor1};
+            }
+        }
+
+        .inner_items {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 116px);
+
+            .items_inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                li {
+                    position: relative;
+                    width: 100%;
+                    list-style: none;
+                    padding: 10px 15px;
+                    border-bottom: 1px solid ${colors.customColors.borderColor};
+                    display: flex;
+                    align-items: center;
+
+                    a {
+                        position: relative;
+                        text-decoration: none;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor1};
+                    }
+                }
+            }
+        }
+
+        .inner_btn {
+            position: relative;
+            width: 100%;
+            height: 66px;
+            border-top: 1px solid ${colors.customColors.borderColor};
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+
+            button {
+                position: relative;
+                width: 100%;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                letter-spacing: 1px;
+                background: linear-gradient(135deg, #2ea6d6, #0d7fa6);
+                border-radius: 6px;
+                font-size: 12px;
+                font-weight: 500;
+                color: ${colors.customColors.whiteColor};
+                border: none;
             }
         }
     }
