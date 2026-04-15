@@ -2,11 +2,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { NavbarFrontendWrapper } from "../../Styles/Frontend/FrontendLayoutStyle";
+import Sidebar from "./sidebar";
 
 const NavbarFrontend = () => {
     const [active, setActive] = useState("home");
     const navigate = useNavigate();
     const location = useLocation();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const handleNavClick = (id) => {
         if (location.pathname !== "/") {
@@ -20,43 +22,47 @@ const NavbarFrontend = () => {
         setActive(id);
     };
 
-     useEffect(() => {
+    const handleOpenSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    }
+
+    useEffect(() => {
         if (location.pathname !== "/") {
             setActive("");
         }
     }, [location.pathname]);
 
     useEffect(() => {
-    if (location.pathname !== "/") return; 
+        if (location.pathname !== "/") return;
 
-    const sections = ["home", "about", "register", "contact"];
-    let observer;
-    const timeout = setTimeout(() => {
-        observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActive(entry.target.id);
-                    }
-                });
-            },
-            {
-                root: null,
-                rootMargin: "-40% 0px -40% 0px",
-                threshold: 0,
-            }
-        );
-        sections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        });
-    }, 200);
+        const sections = ["home", "about", "register", "contact"];
+        let observer;
+        const timeout = setTimeout(() => {
+            observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            setActive(entry.target.id);
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: "-40% 0px -40% 0px",
+                    threshold: 0,
+                }
+            );
+            sections.forEach((id) => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
+        }, 200);
 
-    return () => {
-        clearTimeout(timeout);
-        if (observer) observer.disconnect();
-    };
-}, [location.pathname]);
+        return () => {
+            clearTimeout(timeout);
+            if (observer) observer.disconnect();
+        };
+    }, [location.pathname]);
 
     return (
         <NavbarFrontendWrapper>
@@ -108,10 +114,19 @@ const NavbarFrontend = () => {
                         <Link to="/auth">Get Started</Link>
                     </div>
                     <div className="menubar_icon">
-                        <span><i className="fa-solid fa-bars"></i></span>
+                        <a className={isSidebarOpen ? 'active' : ''} onClick={handleOpenSidebar}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <Sidebar
+                isSidebarOpen={isSidebarOpen}
+                setIsSidebarOpen={setIsSidebarOpen}
+            />
         </NavbarFrontendWrapper>
     );
 };

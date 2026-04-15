@@ -6,6 +6,7 @@ import { HomePageWrapper } from "../../Styles/Frontend/HomeStyle";
 const HomePage = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    
 
     const handleGetStarted = () => {
         navigate("/auth", { replace: true });
@@ -24,6 +25,10 @@ const HomePage = () => {
             }, 100);
         }
     }, [location]);
+
+    const handleRedirectPricingPage = () => {
+        navigate("/pricing", { replace: true });
+    };
 
     return (
         <>
@@ -181,7 +186,7 @@ const HomePage = () => {
                             </div>
                             <div className="demo_btn">
                                 <button>Request a Demo</button>
-                                <button>View Pricing</button>
+                                <button onClick={handleRedirectPricingPage}>View Pricing</button>
                             </div>
                         </div>
                     </div>

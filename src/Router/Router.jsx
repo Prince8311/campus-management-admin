@@ -8,6 +8,7 @@ import FrontendLayout from "../Layouts/FrontendLayout";
 import HomePage from "../Frontend/Screens/Home";
 import TermsConditionsPage from "../Frontend/Screens/TermsCondition";
 import PrivacyPolicyPage from "../Frontend/Screens/PrivacyPolicy";
+import PricingPage from "../Frontend/Screens/Pricing";
 
 // Authentication 
 import AuthenticationPage from "../Auth/Authentication";
@@ -107,6 +108,7 @@ const Routers = () => {
                         <Route index element={<HomePage />} />
                         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                         <Route path="terms-conditions" element={<TermsConditionsPage />} />
+                        <Route path="pricing" element={<PricingPage />} />
                     </Route>
                     <Route path="auth" element={<AuthenticationPage />} />
                     <Route path="admin" element={<PageLayout />}>
