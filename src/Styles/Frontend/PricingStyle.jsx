@@ -254,6 +254,14 @@ export const PricingPageWrapper = styled('div')`
                                 }
                             }
 
+                            &:last-of-type {
+                                .box_head {
+                                    .head_img {
+                                        background: ${colors.customColors.yellowColorLight};
+                                    }
+                                }
+                            }
+
                             .box_item {
                                 position: relative;
                                 width: 100%;
@@ -295,7 +303,7 @@ export const PricingPageWrapper = styled('div')`
                         width: 100%;
                         margin-top: 20px;
                         display: flex;
-                        padding-bottom: 20px;
+                        padding: 5px 5px 20px 5px;
                         border-radius: 6px;
                         background: linear-gradient(135deg, #2ea6d6, #0d7fa6);
 
@@ -356,22 +364,23 @@ export const PricingPageWrapper = styled('div')`
                                     position: relative;
                                     width: 100%;
                                     display: flex;
-                                    align-items: center;
                                     text-decoration: none;
                                     font-size: 12px;
                                     font-weight: 400;
                                     color: ${colors.customColors.whiteColor1};
 
                                     del {
-                                        font-size: 11px;
-                                        margin-left: 2px;
+                                        position: relative;
+                                        display: flex;
+                                        align-items: flex-end;
+                                        font-size: 12px;
                                     }
 
                                     span {
-                                        font-size: 21px;
+                                        font-size: 23px;
                                         font-weight: 600;
                                         color: ${colors.customColors.greenColor};
-                                        margin-left: 6px;
+                                        margin-left: 10px;
                                     }
                                 }
 

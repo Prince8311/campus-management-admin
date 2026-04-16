@@ -80,7 +80,7 @@ const PricingPage = () => {
                                             <p>Get both Hostel & Travel facilities at a discounted rate.</p>
                                         </div>
                                         <div className="box_price">
-                                            <a>₹ <del>60</del><span>50</span></a>
+                                            <a><del>₹60</del><span>₹50</span></a>
                                             <p>SAVE 10/- PER STUDENT</p>
                                         </div>
                                     </div>
