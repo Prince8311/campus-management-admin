@@ -390,11 +390,19 @@ export const AddStaffWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
 
                 .input_box {
                     position: relative;
-                    width: 100%;
                     margin-bottom: 10px;
+
+                    &.fullwidth {
+                        width: 100%;
+                    }
+
+                    &.halfwidth {
+                        width: 48.5%;
+                    }
 
                     input {
                         position: relative;
@@ -436,7 +444,7 @@ export const AddStaffWrapper = styled('div')`
 
                 .select_box {
                     position: relative;
-                    width: 100%;
+                    width: 48.5%;
                     margin-bottom: 10px;
 
                     span {

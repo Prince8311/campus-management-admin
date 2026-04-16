@@ -17,7 +17,6 @@ export const PricingPageWrapper = styled('div')`
         display: flex;
         justify-content: center;
         scroll-margin-top: 80px;
-        /* background: linear-gradient(to bottom, #F6FAFE, #F6FAFE); */
 
         .sec_content {
             position: relative;
@@ -63,6 +62,60 @@ export const PricingPageWrapper = styled('div')`
                 color: ${colors.customColors.blackColor1};
                 font-size: 13px;
             }
+
+            @media (max-width: 1440px) {
+                width: 1024px;
+            }
+
+            @media (max-width: 1099px) {
+                width: 100%;
+                padding: 0 50px;
+
+                h2 {
+                    font-size: 33px;
+                }
+
+                p {
+                    font-size: 12px;
+                    text-align: center;
+                }
+            }
+            @media (max-width: 876px) {
+                padding: 0 30px;
+
+                h2 {
+                    font-size: 31px;
+                    text-align: center;
+                }
+            }
+            @media (max-width: 678px) {
+                padding: 0 15px;
+
+                a {
+                    font-size: 10px;
+                }
+
+                h2 {
+                    font-size: 21px;
+                }
+
+                p {
+                    font-size: 11px;
+                    margin-top: 10px;
+                }
+            }
+
+            @media (max-width: 450px) {
+
+                h2 {
+                    font-size: 18.5px;
+                }
+            }
+        }
+
+        @media (max-width: 678px) {
+            padding-top: 0;
+            padding-bottom: 25px;
         }
     }
 
@@ -254,6 +307,14 @@ export const PricingPageWrapper = styled('div')`
                                 }
                             }
 
+                            &:last-of-type {
+                                .box_head {
+                                    .head_img {
+                                        background: ${colors.customColors.yellowColorLight};
+                                    }
+                                }
+                            }
+
                             .box_item {
                                 position: relative;
                                 width: 100%;
@@ -295,7 +356,7 @@ export const PricingPageWrapper = styled('div')`
                         width: 100%;
                         margin-top: 20px;
                         display: flex;
-                        padding-bottom: 20px;
+                        padding: 5px 5px 20px 5px;
                         border-radius: 6px;
                         background: linear-gradient(135deg, #2ea6d6, #0d7fa6);
 
@@ -356,22 +417,23 @@ export const PricingPageWrapper = styled('div')`
                                     position: relative;
                                     width: 100%;
                                     display: flex;
-                                    align-items: center;
                                     text-decoration: none;
                                     font-size: 12px;
                                     font-weight: 400;
                                     color: ${colors.customColors.whiteColor1};
 
                                     del {
-                                        font-size: 11px;
-                                        margin-left: 2px;
+                                        position: relative;
+                                        display: flex;
+                                        align-items: flex-end;
+                                        font-size: 12px;
                                     }
 
                                     span {
-                                        font-size: 21px;
+                                        font-size: 23px;
                                         font-weight: 600;
                                         color: ${colors.customColors.greenColor};
-                                        margin-left: 6px;
+                                        margin-left: 10px;
                                     }
                                 }
 
@@ -386,6 +448,25 @@ export const PricingPageWrapper = styled('div')`
                     }
                 }
             }
+
+            @media (max-width: 1440px) {
+                width: 1024px;
+            }
+
+            @media (max-width: 1099px) {
+                width: 100%;
+                padding: 0 50px;
+            }
+            @media (max-width: 876px) {
+                padding: 0 30px;
+            }
+            @media (max-width: 678px) {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 678px) {
+            padding: 25px 0;
         }
     }
 
@@ -502,6 +583,128 @@ export const PricingPageWrapper = styled('div')`
 
 
             }
+
+            @media (max-width: 1440px) {
+                width: 1024px;
+            }
+
+            @media (max-width: 1099px) {
+                width: 100%;
+                padding: 0 50px;
+
+                .left_sec {
+                    width: 400px;
+                    height: 270px; 
+                }
+
+                .right_sec {
+                    width: calc(100% - 400px);
+                    padding-left: 20px;
+
+                    .sec_inner {
+                        h4 {
+                            font-size: 21px;
+                        }
+
+                        p {
+                            font-size: 11px;
+                        }
+                    }
+                }
+            }
+            @media (max-width: 876px) {
+                padding: 0 30px;
+                flex-direction: column;
+
+                .left_sec {
+                    width: 100%;
+                    height: 300px;
+                }
+
+                .right_sec {
+                    width: 100%;
+                    padding-left: 0;
+                    margin-top: 20px;
+                }
+
+
+            }
+            @media (max-width: 678px) {
+                padding: 0 15px;
+
+                .right_sec {
+                    
+                    .sec_inner {
+                        h4 {
+                            font-size: 18px;
+                            font-weight: 500;
+                        }
+
+                        p {
+                            font-size: 10px;
+                        }
+
+                        .inner_items {
+                            margin-top: 15px;
+
+                            .item {
+                                margin-bottom: 15px;
+
+                                .item_img {
+                                    width: 30px;
+                                    height: 30px;
+
+                                    img {
+                                        width: 12px;
+                                    }
+                                }
+
+                                .item_content {
+                                    width: calc(100% - 30px);
+                                    padding-left: 15px;
+
+                                    a {
+                                        font-size: 12px;
+                                    }
+
+                                    span {
+                                        font-size: 11px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            @media (max-width: 450px) {
+
+                .left_sec {
+                    height: 235px;
+                }
+
+                .right_sec {
+                    
+                    .sec_inner {
+
+                        .inner_items {
+
+                            .item {
+
+                                .item_img {
+
+                                    img {
+                                        width: 10px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 678px) {
+            padding: 25px 0;
         }
     }
 
@@ -598,6 +801,67 @@ export const PricingPageWrapper = styled('div')`
                     }
                 }
             }
+
+            @media (max-width: 1440px) {
+                width: 1024px;
+            }
+
+            @media (max-width: 1099px) {
+                width: 100%;
+                padding: 0 50px;
+            }
+            @media (max-width: 876px) {
+                padding: 0 30px;
+
+                .sec_head {
+                    h3 {
+                        font-size: 18px;
+                    }
+                }
+
+                .faq_content_sec {
+                    margin-top: 15px;
+
+                    .faq_box {
+                        width: 100%;
+                    }
+                }
+            }
+            @media (max-width: 678px) {
+                padding: 0 15px;
+            }
+            @media (max-width: 575px) {
+                .sec_head {
+                    h3 {
+                        font-size: 15px;
+                    }
+                }
+
+                .faq_content_sec {
+
+                    .faq_box {
+                        .box_top {
+                            h6 {
+                                font-size: 12px;
+                            }
+
+                            a {
+                                font-size: 13px;
+                            }
+                        }
+
+                        .box_bottom {
+                            p {
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 678px) {
+            padding: 25px 0;
         }
     }
 `;
