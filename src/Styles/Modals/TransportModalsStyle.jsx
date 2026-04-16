@@ -394,7 +394,6 @@ export const AddStaffWrapper = styled('div')`
 
                 .input_box {
                     position: relative;
-                    /* width: 100%; */
                     margin-bottom: 10px;
 
                     &.fullwidth {
