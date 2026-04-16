@@ -17,7 +17,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="input_box">
+                            <div className="input_box halfwidth">
                                 <span>Staff Name <p>*</p></span>
                                 <input type="text" />
                             </div>
@@ -37,7 +37,11 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="input_box">
+                            <div className="input_box fullwidth">
+                                <span>Email <p>*</p></span>
+                                <input type="email" />
+                            </div>
+                            <div className="input_box fullwidth">
                                 <span>Contact No. <p>*</p></span>
                                 <input type="number" />
                             </div>
