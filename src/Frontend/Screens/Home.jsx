@@ -27,7 +27,7 @@ const HomePage = () => {
     }, [location]);
 
     const handleRedirectPricingPage = () => {
-        navigate("/pricing", { replace: true });
+        navigate("/pricing");
     };
 
     return (
