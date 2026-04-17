@@ -104,7 +104,7 @@ const AddRolePermissionPage = () => {
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th>Submodule</th>
+                                                                <th>Module</th>
                                                                 <th>View</th>
                                                                 <th>Create</th>
                                                                 <th>Edit</th>
