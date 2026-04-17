@@ -1,0 +1,21 @@
+[
+    {
+        "key": "inst_admin",
+        "modules": [
+            {
+                "id": 1,
+                "name": "Reports",
+                "sub_modules": [
+                    {
+                        "key": "SCHOOL_STRENGTH",
+                        "value": "School Strength"
+                    },
+                    {
+                        "key": "CLASSROOM_ACTIVITY",
+                        "value": "Classroom Activity"
+                    }
+                ]
+            }
+        ]
+    }
+]
