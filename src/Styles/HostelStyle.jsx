@@ -97,6 +97,47 @@ export const ResidentsWrapper = styled('div')`
         }
     }
 
+    .student_search_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        padding: 0 15px;
+
+        .search_sec {
+            position: relative;
+            height: 35px;
+            padding: 5px 0;
+            display: flex;
+            border: 1px solid ${colors.customColors.borderColor};
+            border-radius: 6px;
+
+            i {
+                position: relative;
+                width: 40px;
+                height: 100%;
+                font-size: 13px;
+                color: ${colors.customColors.blackColor3};
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-right: 1px solid ${colors.customColors.borderColor};
+            }
+
+            input {
+                position: relative;
+                width: 300px;
+                height: 100%;
+                border: none;
+                outline: none;
+                padding: 0 15px;
+                font-size: 12px;
+                color: ${colors.customColors.blackColor1};
+            }
+        }
+    }
+
     .table_sec {
         position: relative;
         width: 100%;
@@ -864,8 +905,8 @@ export const HostelBuildingsWrapper = styled('div')`
                                 cursor: pointer;
                                 font-size: 13px;
 
-                               &.view_btn {
-                                    color: ${colors.customColors.blueColor1};
+                               &.edit_btn {
+                                    color: ${colors.customColors.greenColor};
                                     margin-right: 10px;
                                }
 

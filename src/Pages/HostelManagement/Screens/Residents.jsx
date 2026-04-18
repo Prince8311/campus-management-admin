@@ -1,13 +1,21 @@
+import { useState } from "react";
 import { ResidentsWrapper } from "../../../Styles/HostelStyle";
+import AddResidentModal from "../../../Components/Modals/HostelManagement/AddResident";
 
 const HostelResidentsPage = () => {
+    const [isAddResidentOpen, setIsAddResidentOpen] = useState(false);
+
+    const handleOpenAddResidentModal = () => {
+        setIsAddResidentOpen(true);
+    };
+
     return (
         <>
             <ResidentsWrapper>
                 <div className="page_head">
                     <h2>Hostel Residents Directory</h2>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={handleOpenAddResidentModal}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add New Resident</p>
                         </button>
@@ -17,6 +25,12 @@ const HostelResidentsPage = () => {
                     <div className="tab_inner">
                         <li className="active">Student</li>
                         <li>Staff</li>
+                    </div>
+                </div>
+                <div className="student_search_sec">
+                    <div className="search_sec">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search by student " />
                     </div>
                 </div>
                 <div className="table_sec">
@@ -83,6 +97,11 @@ const HostelResidentsPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <AddResidentModal
+                    isAddResidentOpen={isAddResidentOpen}
+                    setIsAddResidentOpen={setIsAddResidentOpen}
+                />
             </ResidentsWrapper>
         </>
     );

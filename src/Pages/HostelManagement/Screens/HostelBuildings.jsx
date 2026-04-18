@@ -43,7 +43,7 @@ const HostelBuildingsPage = () => {
                                     <p className="active">Active</p>
                                 </td>
                                 <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
                                     <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                 </td>
                             </tr>

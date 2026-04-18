@@ -1,4 +1,4 @@
-import { AddBuildingWrapper } from "../../../Styles/Modals/HostelManagementStyle";
+import { AddBuildingWrapper } from "../../../Styles/Modals/HostelManagementModalStyle";
 
 const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen }) => {
 

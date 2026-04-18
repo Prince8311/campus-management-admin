@@ -280,13 +280,14 @@ export const AddRolePermissionWrapper = styled('div')`
             width: 100%;
             height: 100%;
             display: flex;
+            padding: 0 5px;
             padding-bottom: 8px;
 
             .left_sec {
                 position: relative;
                 width: 290px;
                 height: 100%;
-                padding: 0 15px;
+                padding: 0 10px;
                 display: flex;
                 overflow-y: auto;
                 scrollbar-width: none;
@@ -503,7 +504,7 @@ export const AddRolePermissionWrapper = styled('div')`
                 position: relative;
                 width: calc(100% - 290px);
                 height: 100%;
-                padding: 0 15px;
+                padding: 0 10px;
                 display: flex;
                 margin-top: 20px;
 

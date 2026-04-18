@@ -1,18 +1,17 @@
-import { AddRoomsWrapper } from "../../../Styles/Modals/HostelManagementModalStyle";
+import { AddResidentWrapper } from "../../../Styles/Modals/HostelManagementModalStyle";
 
-
-const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
+const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
 
     const closeModal = () => {
-        setIsAddRoomOpen(false);
+        setIsAddResidentOpen(false);
     };
 
     return (
         <>
-            <AddRoomsWrapper className={isAddRoomOpen ? "active" : ''}>
-                <div className={`modal_box ${isAddRoomOpen ? "active" : ''}`}>
+            <AddResidentWrapper className={isAddResidentOpen ? "active" : ''}>
+                <div className={`modal_box ${isAddResidentOpen ? "active" : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Hostel Living Room</h4>
+                        <h4>Add Resident</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -20,6 +19,22 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="select_box fullwidth">
+                                <span>Select Resident <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn">
+                                        <p>Sick Room</p>
+                                        <i className="fa-solid fa-angle-down"></i>
+                                    </div>
+                                    <div className="dropdown">
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                <li>Sick Room</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="select_box halfwidth">
                                 <span>Select Building <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn">
@@ -35,34 +50,33 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="input_box">
-                                <span>Room Number <p>*</p></span>
-                                <input type="text" />
-                            </div>
-                            <div className="input_box">
-                                <span>Total Beds <p>*</p></span>
-                                <input type="text" />
-                            </div>
-                            <div className="input_box">
-                                <span>Occupied <p>*</p></span>
-                                <input type="text" />
-                            </div>
                             <div className="select_box halfwidth">
-                                <span>Type <p>*</p></span>
+                                <span>Select Room <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn">
-                                        <p>AC</p>
+                                        <p>Sick Room</p>
                                         <i className="fa-solid fa-angle-down"></i>
                                     </div>
                                     <div className="dropdown">
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li>AC</li>
-                                                <li>Non-AC</li>
+                                                <li>Sick Room</li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="input_box halfwidth">
+                                <span>Class <p>*</p></span>
+                                <input type="text" />
+                            </div>
+                            <div className="input_box halfwidth">
+                                <span>Contact No. <p>*</p></span>
+                                <input type="text" />
+                            </div>
+                            <div className="input_box fullwidth">
+                                <span>Mail ID <p>*</p></span>
+                                <input type="text" readOnly />
                             </div>
                         </div>
                     </div>
@@ -80,9 +94,9 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
                         <button>Save</button>
                     </div>
                 </div>
-            </AddRoomsWrapper>
+            </AddResidentWrapper>
         </>
     );
 }
 
-export default AddRoomsModal;
+export default AddResidentModal;
