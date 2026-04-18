@@ -1,13 +1,21 @@
+import { useState } from "react";
 import { HostelRoomWrapper } from "../../../Styles/HostelStyle";
+import AddRoomsModal from "../../../Components/Modals/HostelManagement/AddRooms";
 
 const HostelRoomsPage = () => {
+    const [isAddRoomOpen, setIsAddRoomOpen] = useState(false);
+
+    const handleOpenAddRoomModal = () => {
+        setIsAddRoomOpen(true);
+    };
+
     return (
         <>
             <HostelRoomWrapper>
                 <div className="page_head">
                     <h2>Hostel Rooms Directory</h2>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={handleOpenAddRoomModal}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add New Room</p>
                         </button>
@@ -48,6 +56,11 @@ const HostelRoomsPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                <AddRoomsModal
+                    isAddRoomOpen={isAddRoomOpen}
+                    setIsAddRoomOpen={setIsAddRoomOpen}
+                />
             </HostelRoomWrapper>
         </>
     );
