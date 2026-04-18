@@ -115,7 +115,7 @@ export const PricingPageWrapper = styled('div')`
 
         @media (max-width: 678px) {
             padding-top: 0;
-            padding-bottom: 25px;
+            padding-bottom: 0;
         }
     }
 
@@ -418,7 +418,6 @@ export const PricingPageWrapper = styled('div')`
                                     width: 100%;
                                     display: flex;
                                     text-decoration: none;
-                                    font-size: 12px;
                                     font-weight: 400;
                                     color: ${colors.customColors.whiteColor1};
 
@@ -456,17 +455,283 @@ export const PricingPageWrapper = styled('div')`
             @media (max-width: 1099px) {
                 width: 100%;
                 padding: 0 50px;
+
+                .left_content {
+                    width: 300px;
+
+                    .left_inner {
+                        padding: 15px;
+                    }
+                }
+
+                .right_content {
+                    width: calc(100% - 300px);
+                    padding-left: 15px;
+                    .right_inner {
+                        .right_bottom_sec {
+                            .bottom_box {
+                                .box_content{
+                                    width: calc(100% - 170px);
+                                    padding: 0 15px;
+                                }
+                                .box_price {
+                                    width: 130px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             @media (max-width: 876px) {
                 padding: 0 30px;
+                flex-direction: column;
+
+                .left_content {
+                    width: 100%;
+                }
+
+                .right_content {
+                    width: 100%;
+                    padding-left: 0;
+                    margin-top: 15px;
+                }
             }
             @media (max-width: 678px) {
                 padding: 0 15px;
+
+                .left_content {
+                    .left_inner {
+                        .left_item_top {
+                            a {
+                                width: 35px;
+                                height: 35px;
+                                font-size: 15px;
+                            }
+
+                            span {
+                                font-size: 13px;
+                            }
+                        }
+
+                        .left_items {
+                            margin-top: 15px;
+
+                            a {
+                                margin: 10px 0;
+
+                                span {
+                                    font-size: 17px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .right_content {
+                    .right_inner {
+                        .right_top_sec {
+                            .top_box {
+                                padding: 15px;
+
+                                .box_head {
+                                    .head_img {
+                                        width: 32px;
+                                        height: 32px;
+
+                                        img {
+                                            width: 12px;
+                                        }
+                                    }
+
+                                    h6 {
+                                        font-size: 13px;
+                                    }
+                                }
+
+                                .box_item {
+                                    margin-top: 10px;
+                                    p {
+                                        font-size: 11px;
+                                    }
+
+                                    a {
+                                        span {
+                                            font-size: 15px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .right_bottom_sec {
+                            margin-top: 15px;
+
+                            .bottom_box {
+                                padding: 15px;
+
+                                .box_img {
+                                    width: 35px;
+                                    height: 35px;
+
+                                    img {
+                                        width: 14px;
+                                    }
+                                }
+
+                                .box_content {
+                                    width: calc(100% - 165px);
+
+                                    h6 {
+                                        font-size: 13px;
+                                    }
+
+                                    p {
+                                        font-size: 11px;
+                                    }
+                                }
+
+                                .box_price {
+                                    a {
+                                        del {
+                                            font-size: 11px;
+                                        }
+
+                                        span {
+                                            font-size: 20px;
+                                        }
+                                    }
+
+                                    p {
+                                        font-size: 10px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @media (max-width: 450px) {
+                .left_content {
+                    .left_inner {
+                        .left_item_top {
+
+                            span {
+                                font-size: 12px;
+                            }
+                        }
+
+                        .left_items {
+                            margin-top: 10px;
+
+                            h5 {
+                                font-size: 13px;
+                            }
+
+                            p {
+                                font-size: 11px;
+                            }
+
+                            a {
+                                margin: 8px 0;
+
+                                span {
+                                    font-size: 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .right_content {
+                    .right_inner {
+                        .right_top_sec {
+                            .top_box {
+                                padding: 10px;
+
+                                .box_head {
+                                    .head_img {
+                                        width: 30px;
+                                        height: 30px;
+
+                                        img {
+                                            width: 11px;
+                                        }
+                                    }
+
+                                    h6 {
+                                        font-size: 12px;
+                                    }
+                                }
+
+                                .box_item {
+                                    margin-top: 10px;
+                                    p {
+                                        font-size: 10px;
+                                    }
+
+                                    a {
+                                        span {
+                                            font-size: 14px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .right_bottom_sec {
+                            margin-top: 15px;
+
+                            .bottom_box {
+                                padding: 10px;
+
+                                .box_img {
+                                    width: 30px;
+                                    height: 30px;
+
+                                    img {
+                                        width: 10px;
+                                    }
+                                }
+
+                                .box_content {
+                                    width: calc(100% - 125px);
+
+                                    h6 {
+                                        font-size: 12px;
+                                    }
+
+                                    p {
+                                        font-size: 10px;
+                                    }
+                                }
+
+                                .box_price {
+                                    width: 95px;
+                                    a {
+                                        del {
+                                            font-size: 10px;
+                                        }
+
+                                        span {
+                                            font-size: 18px;
+                                            font-weight: 500;
+                                        }
+                                    }
+
+                                    p {
+                                        font-size: 8px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
         @media (max-width: 678px) {
-            padding: 25px 0;
+            padding-top: 25px;
+            padding-bottom: 0;
         }
     }
 
@@ -704,7 +969,8 @@ export const PricingPageWrapper = styled('div')`
         }
 
         @media (max-width: 678px) {
-            padding: 25px 0;
+            padding-top: 25px;
+            padding-bottom: 0;
         }
     }
 
