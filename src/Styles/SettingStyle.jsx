@@ -265,6 +265,12 @@ export const AddRolePermissionWrapper = styled('div')`
                     border-radius: 25px;
                     transition: all 0.5s ease;
                 }
+
+                &:disabled {
+                    opacity: 0.4;
+                    transition: all 0.5s ease;
+                    cursor: not-allowed;
+                }
             }
         }
     }
@@ -616,7 +622,7 @@ export const AddRolePermissionWrapper = styled('div')`
 
                             .role_box {
                                 position: relative;
-                                margin: 10px 0;
+                                margin: 7.5px 0;
                                 width: 100%;
                                 display: flex;
                                 flex-direction: column;
@@ -624,12 +630,16 @@ export const AddRolePermissionWrapper = styled('div')`
                                 border-radius: 8px;
                                 box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
 
+                                &:first-of-type {
+                                    margin-top: 0;
+                                }
+
                                 .top_part {
                                     position: relative;
                                     width: 100%;
                                     display: flex;
                                     align-items: center;
-                                    padding: 10px 16px;
+                                    padding: 10px 15px;
                                     cursor: pointer;
                                     border-radius: 8px 8px 0 0;
                                     transition: all 0.5s ease;
@@ -684,10 +694,10 @@ export const AddRolePermissionWrapper = styled('div')`
                                     }
 
                                     &.active {
-                                        background: ${colors.customColors.lightBackground1};
+                                        border-bottom: 1px solid ${colors.customColors.borderColor};
 
                                         .top_right {
-                                            .icon i {
+                                            i {
                                                 transform: rotate(90deg);
                                                 transition: all 0.3s ease;
                                             }

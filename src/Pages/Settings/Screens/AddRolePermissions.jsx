@@ -9,6 +9,31 @@ const AddRolePermissionPage = () => {
     const userPermissions = Permissions.find(perm => perm.key === userType);
     const modules = userPermissions?.modules || [];
     const [activeModuleIndex, setActiveModuleIndex] = useState(0);
+    const [roleName, setRoleName] = useState("");
+    const [isActive, setIsActive] = useState(true);
+    const [checkedPermissions, setCheckedPermissions] = useState([]);
+
+    const handlePermissionToggle = (permissionId) => {
+        setCheckedPermissions((prev) =>
+            prev.includes(permissionId)
+                ? prev.filter((key) => key !== permissionId)
+                : [...prev, permissionId]
+        );
+    };
+
+    const checkedKeys = checkedPermissions.join(",");
+    const canSave = roleName.trim() !== "" && checkedPermissions.length > 0;
+
+    const handleSaveRole = () => {
+        const payload = {
+            role_name: roleName,
+            permissions: checkedKeys,
+            status: isActive,
+        };
+
+        console.log("Role payload", payload);
+        // TODO: submit this payload to your API
+    };
 
     return (
         <AddRolePermissionWrapper>
@@ -18,8 +43,8 @@ const AddRolePermissionPage = () => {
                     <p>Define institutional responsibilities by grouping specific module permissions into custom administrative roles.</p>
                 </div>
                 <div className="btn_sec">
-                    <button>Cancel</button>
-                    <button>
+                    <button type="button">Cancel</button>
+                    <button type="button" onClick={handleSaveRole} disabled={!canSave}>
                         <i className="fa-solid fa-floppy-disk"></i>
                         <p>Save Role</p>
                     </button>
@@ -39,7 +64,11 @@ const AddRolePermissionPage = () => {
                                 <div className="box_items">
                                     <div className="input_box">
                                         <span>Role Name <p>*</p></span>
-                                        <input type="text" />
+                                        <input
+                                            type="text"
+                                            value={roleName}
+                                            onChange={(e) => setRoleName(e.target.value)}
+                                        />
                                     </div>
                                     <div className="info_box">
                                         <a><i className="fa-solid fa-circle-info"></i></a>
@@ -65,6 +94,8 @@ const AddRolePermissionPage = () => {
                                                 <input
                                                     type="checkbox"
                                                     id="toggle"
+                                                    checked={isActive}
+                                                    onChange={(e) => setIsActive(e.target.checked)}
                                                 />
                                                 <label htmlFor="toggle">
                                                     <span></span>
@@ -125,55 +156,32 @@ const AddRolePermissionPage = () => {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {module.sub_modules.map((sub) => (
-                                                                    <tr key={sub.key}>
-                                                                        <td>{sub.value}</td>
-                                                                        <td>
-                                                                            <li>
-                                                                                <input
-                                                                                    type="checkbox"
-                                                                                    id={`${sub.key}_VIEW`}
-                                                                                />
-                                                                                <label htmlFor={`${sub.key}_VIEW`}>
-                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                                </label>
-                                                                            </li>
-                                                                        </td>
-                                                                        <td>
-                                                                            <li>
-                                                                                <input
-                                                                                    type="checkbox"
-                                                                                    id={`${sub.key}_CREATE`}
-                                                                                />
-                                                                                <label htmlFor={`${sub.key}_CREATE`}>
-                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                                </label>
-                                                                            </li>
-                                                                        </td>
-                                                                        <td>
-                                                                            <li>
-                                                                                <input
-                                                                                    type="checkbox"
-                                                                                    id={`${sub.key}_EDIT`}
-                                                                                />
-                                                                                <label htmlFor={`${sub.key}_EDIT`}>
-                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                                </label>
-                                                                            </li>
-                                                                        </td>
-                                                                        <td>
-                                                                            <li>
-                                                                                <input
-                                                                                    type="checkbox"
-                                                                                    id={`${sub.key}_DELETE`}
-                                                                                />
-                                                                                <label htmlFor={`${sub.key}_DELETE`}>
-                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                                </label>
-                                                                            </li>
-                                                                        </td>
-                                                                    </tr>
-                                                                ))}
+                                                                {module.sub_modules.map((sub) => {
+                                                                    const permissionTypes = ["VIEW", "CREATE", "EDIT", "DELETE"];
+                                                                    return (
+                                                                        <tr key={sub.key}>
+                                                                            <td>{sub.value}</td>
+                                                                            {permissionTypes.map((type) => {
+                                                                                const permissionId = `${sub.key}_${type}`;
+                                                                                return (
+                                                                                    <td key={permissionId}>
+                                                                                        <li>
+                                                                                            <input
+                                                                                                type="checkbox"
+                                                                                                id={permissionId}
+                                                                                                checked={checkedPermissions.includes(permissionId)}
+                                                                                                onChange={() => handlePermissionToggle(permissionId)}
+                                                                                            />
+                                                                                            <label htmlFor={permissionId}>
+                                                                                                <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                                            </label>
+                                                                                        </li>
+                                                                                    </td>
+                                                                                );
+                                                                            })}
+                                                                        </tr>
+                                                                    );
+                                                                })}
                                                             </tbody>
                                                         </table>
                                                     </div>
