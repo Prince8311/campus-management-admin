@@ -1,5 +1,46 @@
 [
     {
+        "key": "super_admin",
+        "modules": [
+            {
+                "id": 1,
+                "name": "Institutions",
+                "sub_modules": [
+                    {
+                        "key": "INSTITUTIONS",
+                        "value": "Institutions"
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "name": "Settings",
+                "sub_modules": [
+                    {
+                        "key": "DEVICE_SETTINGS",
+                        "value": "Device Settings"
+                    },
+                    {
+                        "key": "PROFILE_SETTINGS",
+                        "value": "Profile Settings"
+                    },
+                    {
+                        "key": "GENERAL_SETTINGS",
+                        "value": "General Settings"
+                    },
+                    {
+                        "key": "STATE_CITIES",
+                        "value": "State & Cities"
+                    },
+                    {
+                        "key": "ROLES_PERMISSIONS",
+                        "value": "Roles & Permissions"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "key": "inst_admin",
         "modules": [
             {
@@ -13,6 +54,174 @@
                     {
                         "key": "CLASSROOM_ACTIVITY",
                         "value": "Classroom Activity"
+                    },
+                    {
+                        "key": "STUDENT_ATTENDANCE_REPORT",
+                        "value": "Student Attendance"
+                    },
+                    {
+                        "key": "ACADEMICS_REPORT",
+                        "value": "Academics"
+                    },
+                    {
+                        "key": "FEE_REPORT",
+                        "value": "Fee"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "Academics",
+                "sub_modules": [
+                    {
+                        "key": "STUDENT_INFORMATION",
+                        "value": "Student Information"
+                    },
+                    {
+                        "key": "CLASSROOMS",
+                        "value": "Classrooms"
+                    },
+                    {
+                        "key": "STUDENT_ATTENDANCE",
+                        "value": "Student Attendance"
+                    },
+                    {
+                        "key": "REPORT_CARD",
+                        "value": "Report Card"
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "name": "Finance Management",
+                "sub_modules": [
+                    {
+                        "key": "FEE_COLLECTION",
+                        "value": "Fee Collection"
+                    },
+                    {
+                        "key": "FEE_TRANSACTIONS",
+                        "value": "Fee Transactions"
+                    },
+                    {
+                        "key": "FEE_CONFIGURATION",
+                        "value": "Fee Configuration"
+                    },
+                    {
+                        "key": "BANK_ACCOUNTS",
+                        "value": "Bank Accounts"
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "name": "Communication",
+                "sub_modules": [
+                    {
+                        "key": "MESSAGING",
+                        "value": "Messaging"
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "name": "Staff Management",
+                "sub_modules": [
+                    {
+                        "key": "STAFF_INFORMATION",
+                        "value": "Staff Information"
+                    },
+                    {
+                        "key": "STAFF_ATTENDANCE",
+                        "value": "Staff Attendance"
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "name": "Hostel Management",
+                "sub_modules": [
+                    {
+                        "key": "HOSTEL_OVERVIEW",
+                        "value": "Overview"
+                    },
+                    {
+                        "key": "HOSTEL_RESIDENTS",
+                        "value": "Residents"
+                    },
+                    {
+                        "key": "HOSTEL_ROOMS",
+                        "value": "Rooms"
+                    },
+                    {
+                        "key": "HOSTEL_BUILDINGS",
+                        "value": "Buildings"
+                    }
+                ]
+            },
+            {
+                "id": 7,
+                "name": "Administration",
+                "sub_modules": [
+                    {
+                        "key": "CERTIFICATES",
+                        "value": "Certificates"
+                    },
+                    {
+                        "key": "ID_CARDS",
+                        "value": "Id Cards"
+                    },
+                    {
+                        "key": "TRANSPORT",
+                        "value": "Transport"
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "name": "Settings",
+                "sub_modules": [
+                    {
+                        "key": "DEVICE_SETTINGS",
+                        "value": "Device Settings"
+                    },
+                    {
+                        "key": "PROFILE_SETTINGS",
+                        "value": "Profile Settings"
+                    },
+                    {
+                        "key": "SUBJECT_SETTINGS",
+                        "value": "Subject Settings"
+                    },
+                    {
+                        "key": "TIME_TABLE_SETTINGS",
+                        "value": "Time Table Settings"
+                    },
+                    {
+                        "key": "GENERAL_SETTINGS",
+                        "value": "General Settings"
+                    },
+                    {
+                        "key": "ROLES_PERMISSIONS",
+                        "value": "Roles & Permissions"
+                    },
+                    {
+                        "key": "PREFERENCES",
+                        "value": "Preferences"
+                    }
+                ]
+            },
+            {
+                "id": 9,
+                "name": "Extras",
+                "sub_modules": [
+                    {
+                        "key": "BILLING",
+                        "value": "Billing"
+                    },
+                    {
+                        "key": "ALUMNI",
+                        "value": "Alumni"
                     }
                 ]
             }

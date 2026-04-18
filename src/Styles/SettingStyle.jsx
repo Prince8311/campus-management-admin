@@ -594,8 +594,9 @@ export const AddRolePermissionWrapper = styled('div')`
                     .right_body_sec {
                         position: relative;
                         width: 100%;
-                        height: calc(100vh - 66px);
+                        height: calc(100% - 66px);
                         display: flex;
+                        padding: 15px 0;
 
                         .body_inner {
                             position: relative;
@@ -603,7 +604,7 @@ export const AddRolePermissionWrapper = styled('div')`
                             height: 100%;
                             display: flex;
                             flex-direction: column;
-                            padding: 10px 15px;
+                            padding: 0 15px;
                             overflow-y: auto;
                             scrollbar-width: none;
                             -ms-overflow-style: none;
@@ -620,7 +621,6 @@ export const AddRolePermissionWrapper = styled('div')`
                                 flex-direction: column;
                                 border: 1px solid ${colors.customColors.borderColor};
                                 border-radius: 8px;
-                                overflow: hidden;
                                 box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
 
                                 .top_part {
@@ -704,6 +704,14 @@ export const AddRolePermissionWrapper = styled('div')`
                                 .bottom_part {
                                     position: relative;
                                     width: 100%;
+                                    max-height: 0;
+                                    overflow: hidden;
+                                    transition: all 0.5s ease;
+
+                                    &.active {
+                                        max-height: 1000px;
+                                        transition: all 0.5s ease;
+                                    }
 
                                     .bottom_inner {
                                         position: relative;

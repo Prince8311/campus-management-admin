@@ -1,6 +1,15 @@
+import { useState } from "react";
+import { UserData } from "../../../Context/PageContext";
 import { AddRolePermissionWrapper } from "../../../Styles/SettingStyle";
+import Permissions from "../../../Data/Permissions.json";
 
 const AddRolePermissionPage = () => {
+    const { userDetails } = UserData();
+    const userType = userDetails?.user_type;
+    const userPermissions = Permissions.find(perm => perm.key === userType);
+    const modules = userPermissions?.modules || [];
+    const [activeModuleIndex, setActiveModuleIndex] = useState(0);
+
     return (
         <AddRolePermissionWrapper>
             <div className="page_head">
@@ -86,158 +95,92 @@ const AddRolePermissionPage = () => {
                             </div>
                             <div className="right_body_sec">
                                 <div className="body_inner">
-                                    <div className="role_box">
-                                        <div className="top_part active">
-                                            <div className="top_left">
-                                                <div className="role_icon">
-                                                    <i className="fa-solid fa-graduation-cap"></i>
+                                    {modules.map((module, index) => (
+                                        <div className="role_box" key={module.id}>
+                                            <div
+                                                className={`top_part ${index === activeModuleIndex ? 'active' : ''}`}
+                                                onClick={() => setActiveModuleIndex(index)}
+                                            >
+                                                <div className="top_left">
+                                                    <div className="role_icon">
+                                                        <i className="fa-solid fa-graduation-cap"></i>
+                                                    </div>
+                                                    <p>{module.name}</p>
                                                 </div>
-                                                <p>Academics</p>
+                                                <div className="top_right">
+                                                    <i className="fa-solid fa-angle-right"></i>
+                                                </div>
                                             </div>
-                                            <div className="top_right">
-                                                <i className="fa-solid fa-angle-right"></i>
-                                            </div>
-                                        </div>
-                                        <div className="bottom_part">
-                                            <div className="bottom_inner">
-                                                <div className="table_sec">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Submodule</th>
-                                                                <th>View</th>
-                                                                <th>Create</th>
-                                                                <th>Edit</th>
-                                                                <th>Delete</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Student Directory</td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="view"
-                                                                        />
-                                                                        <label htmlFor="view">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="create"
-                                                                        />
-                                                                        <label htmlFor="create">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="edit"
-                                                                        />
-                                                                        <label htmlFor="edit">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="delete"
-                                                                        />
-                                                                        <label htmlFor="delete">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Classrooms</td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="Classroomsview"
-                                                                        />
-                                                                        <label htmlFor="Classroomsview">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="Classroomscreate"
-                                                                        />
-                                                                        <label htmlFor="Classroomscreate">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="Classroomsedit"
-                                                                        />
-                                                                        <label htmlFor="Classroomsedit">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                                <td>
-                                                                    <li>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            id="Classroomsdelete"
-                                                                        />
-                                                                        <label htmlFor="Classroomsdelete">
-                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                                        </label>
-                                                                    </li>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                            <div className={`bottom_part ${index === activeModuleIndex ? 'active' : ''}`}>
+                                                <div className="bottom_inner">
+                                                    <div className="table_sec">
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Module</th>
+                                                                    <th>View</th>
+                                                                    <th>Create</th>
+                                                                    <th>Edit</th>
+                                                                    <th>Delete</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {module.sub_modules.map((sub) => (
+                                                                    <tr key={sub.key}>
+                                                                        <td>{sub.value}</td>
+                                                                        <td>
+                                                                            <li>
+                                                                                <input
+                                                                                    type="checkbox"
+                                                                                    id={`${sub.key}_VIEW`}
+                                                                                />
+                                                                                <label htmlFor={`${sub.key}_VIEW`}>
+                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                                </label>
+                                                                            </li>
+                                                                        </td>
+                                                                        <td>
+                                                                            <li>
+                                                                                <input
+                                                                                    type="checkbox"
+                                                                                    id={`${sub.key}_CREATE`}
+                                                                                />
+                                                                                <label htmlFor={`${sub.key}_CREATE`}>
+                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                                </label>
+                                                                            </li>
+                                                                        </td>
+                                                                        <td>
+                                                                            <li>
+                                                                                <input
+                                                                                    type="checkbox"
+                                                                                    id={`${sub.key}_EDIT`}
+                                                                                />
+                                                                                <label htmlFor={`${sub.key}_EDIT`}>
+                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                                </label>
+                                                                            </li>
+                                                                        </td>
+                                                                        <td>
+                                                                            <li>
+                                                                                <input
+                                                                                    type="checkbox"
+                                                                                    id={`${sub.key}_DELETE`}
+                                                                                />
+                                                                                <label htmlFor={`${sub.key}_DELETE`}>
+                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                                </label>
+                                                                            </li>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="role_box">
-                                        <div className="top_part">
-                                            <div className="top_left">
-                                                <div className="role_icon">
-                                                    <i className="fa-solid fa-graduation-cap"></i>
-                                                </div>
-                                                <p>Academics</p>
-                                            </div>
-                                            <div className="top_right">
-                                                <i className="fa-solid fa-angle-right"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="role_box">
-                                        <div className="top_part">
-                                            <div className="top_left">
-                                                <div className="role_icon">
-                                                    <i className="fa-solid fa-graduation-cap"></i>
-                                                </div>
-                                                <p>Academics</p>
-                                            </div>
-                                            <div className="top_right">
-                                                <i className="fa-solid fa-angle-right"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
