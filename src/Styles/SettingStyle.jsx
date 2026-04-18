@@ -666,27 +666,20 @@ export const AddRolePermissionWrapper = styled('div')`
 
                                     .top_right {
                                         position: relative;
-                                        margin-left: auto;
+                                        width: 35px;
+                                        height: 35px;
+                                        border-radius: 50%;
                                         display: flex;
                                         align-items: center;
+                                        justify-content: center;
+                                        box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                                        margin-left: auto;
 
-                                        .icon {
+                                        i {
                                             position: relative;
-                                            width: 35px;
-                                            height: 35px;
-                                            border-radius: 50%;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
-                                            margin-left: 20px;
-
-                                            i {
-                                                position: relative;
-                                                font-size: 14px;
-                                                color: ${colors.customColors.blackColor2};
-                                                transition: all 0.3s ease;
-                                            }
+                                            font-size: 14px;
+                                            color: ${colors.customColors.blackColor2};
+                                            transition: all 0.3s ease;
                                         }
                                     }
 
