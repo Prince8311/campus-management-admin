@@ -116,7 +116,7 @@ export const RolePermissionWrapper = styled('div')`
 
                         h6 {
                             position: relative;
-                            padding-left: 12px;
+                            padding-left: 6px;
                             max-width: calc(100% - 85px);
                             font-size: 13.5px;
                             font-style: italic;
@@ -185,6 +185,30 @@ export const RolePermissionWrapper = styled('div')`
                             }
                         }
                     }
+                }
+            }
+
+            .empty_box {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0 10px;
+                margin-top: 70px;
+
+                img {
+                    position: relative;
+                    width: 300px;
+                    opacity: 0.5;
+                }
+
+                p {
+                    position: relative;
+                    font-size: 15px;
+                    margin-top: 10px;
+                    color: ${colors.customColors.blackColor3};
                 }
             }
         }
@@ -800,7 +824,7 @@ export const AddRolePermissionWrapper = styled('div')`
                                                         display: flex;
 
                                                         &:nth-of-type(even) {
-                                                            background: ${colors.customColors.lightBackground};
+                                                            background: ${colors.customColors.lightBackground3};
                                                         }
 
                                                         td {

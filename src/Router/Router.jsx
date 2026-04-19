@@ -195,6 +195,7 @@ const Routers = () => {
                         <Route path="settings" element={<SettingsMainPage />}>
                             <Route path="" element={<Navigate to="roles-permissions" />} />
                             <Route path="roles-permissions" element={<RolesPermissionsPage />} />
+                            <Route path="role/:roleName" element={<AddRolePermissionPage />} />
                             <Route path="add-roles-permissions" element={<AddRolePermissionPage />} />
                             <Route path="time-tables" element={<TimeTableSettingsPage />} />
                             <Route path="state-cities" element={<StateCityPage />} />

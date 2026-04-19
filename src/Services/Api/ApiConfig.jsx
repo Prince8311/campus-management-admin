@@ -76,5 +76,11 @@ export const getApiEndpoints = () => {
         fetchAcademics: `${apiURL}/api/fee/academics.php`,
         createFeeConfiguration: `${apiURL}/api/fee/configuration/create.php`,
         fetchFeeConfigurations: `${apiURL}/api/fee/configuration/list.php`,
+
+        // Roles & Permissions
+        createUpdateRole: `${apiURL}/api/role-permission/create-edit.php`,
+        fetchRoles: `${apiURL}/api/role-permission/list.php`,
+        fetchRoleDetails: `${apiURL}/api/role-permission/details.php`,
+        deleteRole: `${apiURL}/api/role-permission/delete.php`,
     };
 }

@@ -1,17 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UserData } from "../../../Context/PageContext";
 import { AddRolePermissionWrapper } from "../../../Styles/SettingStyle";
 import Permissions from "../../../Data/Permissions.json";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../../Components/Loader/ButtonLoader";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddRolePermissionPage = () => {
+    const api = getApiEndpoints();
+    const navigate = useNavigate();
+    const { roleName: paramRoleName } = useParams();
     const { userDetails } = UserData();
     const userType = userDetails?.user_type;
     const userPermissions = Permissions.find(perm => perm.key === userType);
     const modules = userPermissions?.modules || [];
     const [activeModuleIndex, setActiveModuleIndex] = useState(0);
+    const [roleId, setRoleId] = useState(null);
     const [roleName, setRoleName] = useState("");
-    const [isActive, setIsActive] = useState(true);
+    const [isActive, setIsActive] = useState(false);
     const [checkedPermissions, setCheckedPermissions] = useState([]);
+    const [initialRoleName, setInitialRoleName] = useState("");
+    const [initialIsActive, setInitialIsActive] = useState(false);
+    const [initialCheckedPermissions, setInitialCheckedPermissions] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handlePermissionToggle = (permissionId) => {
         setCheckedPermissions((prev) =>
@@ -21,32 +36,130 @@ const AddRolePermissionPage = () => {
         );
     };
 
-    const checkedKeys = checkedPermissions.join(",");
-    const canSave = roleName.trim() !== "" && checkedPermissions.length > 0;
+    const getAllPermissionIds = () => {
+        const permissionTypes = ["VIEW", "CREATE", "EDIT", "DELETE"];
+        return modules.flatMap((module) =>
+            module.sub_modules.flatMap((sub) =>
+                permissionTypes.map((type) => `${sub.key}_${type}`)
+            )
+        );
+    };
 
-    const handleSaveRole = () => {
+    useEffect(() => {
+        if (paramRoleName) {
+            const storedRoleId = sessionStorage.getItem("selectedRoleId");
+            fetchRoleDetails(paramRoleName);
+            setIsEditMode(true);
+        }
+    }, [paramRoleName]);
+
+    const fetchRoleDetails = async (name) => {
+        setIsLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchRoleDetails, {
+                params: { roleName: name }
+            });
+            if (response?.data.status === 200 && response?.data.details) {
+                const details = response.data.details;
+                setRoleName(details.role_name || "");
+                setIsActive(Boolean(details.status));
+
+                const permissions = details.permissions;
+                console.log("Fetched Role Permissions:", response);
+                if (Array.isArray(permissions)) {
+                    setCheckedPermissions(permissions);
+                    setInitialCheckedPermissions(permissions);
+                } else if (typeof permissions === "string") {
+                    const parsedPermissions = permissions.split(",").map((item) => item.trim()).filter(Boolean);
+                    setCheckedPermissions(parsedPermissions);
+                    setInitialCheckedPermissions(parsedPermissions);
+                } else if (permissions && typeof permissions === "object") {
+                    const flattenPermissions = Object.values(permissions).flat();
+                    const parsedPermissions = Array.isArray(flattenPermissions) ? flattenPermissions : [];
+                    setCheckedPermissions(parsedPermissions);
+                    setInitialCheckedPermissions(parsedPermissions);
+                } else {
+                    setCheckedPermissions([]);
+                    setInitialCheckedPermissions([]);
+                }
+                setInitialRoleName(details.role_name || "");
+                setInitialIsActive(Boolean(details.status));
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+            navigate("/admin/settings/roles-permissions", { replace: true });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleSelectAll = () => {
+        setCheckedPermissions(getAllPermissionIds());
+    };
+
+    const handleDeselectAll = () => {
+        setCheckedPermissions([]);
+    };
+
+    const arraysAreEqual = (arr1, arr2) => {
+        if (arr1.length !== arr2.length) return false;
+        const sorted1 = [...arr1].slice().sort();
+        const sorted2 = [...arr2].slice().sort();
+        return sorted1.every((value, index) => value === sorted2[index]);
+    };
+
+    const checkedKeys = checkedPermissions.join(",");
+    const isFormValid = roleName.trim() !== "" && checkedPermissions.length > 0;
+    const hasChanges = isEditMode && (
+        roleName !== initialRoleName ||
+        isActive !== initialIsActive ||
+        !arraysAreEqual(checkedPermissions, initialCheckedPermissions)
+    );
+    const canSave = isFormValid && (!isEditMode || hasChanges);
+
+    const handleSaveRole = async () => {
+        setIsSubmitting(true);
         const payload = {
             role_name: roleName,
             permissions: checkedKeys,
             status: isActive,
         };
+        if (isEditMode && roleId) {
+            payload.id = roleId;
+        }
 
-        console.log("Role payload", payload);
-        // TODO: submit this payload to your API
+        try {
+            const response = await axiosInstance.post(api.createUpdateRole, payload);
+            console.log("Create Role Response:", response);
+            if (response?.data.status === 200) {
+                toast.success(response.data.message);
+                navigate("/admin/settings/roles-permissions", { replace: true });
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
         <AddRolePermissionWrapper>
             <div className="page_head">
                 <div className="left_sec">
-                    <h2>Create New Role</h2>
+                    <h2>{isEditMode ? "Edit Role" : "Create New Role"}</h2>
                     <p>Define institutional responsibilities by grouping specific module permissions into custom administrative roles.</p>
                 </div>
                 <div className="btn_sec">
-                    <button type="button">Cancel</button>
-                    <button type="button" onClick={handleSaveRole} disabled={!canSave}>
-                        <i className="fa-solid fa-floppy-disk"></i>
-                        <p>Save Role</p>
+                    <button type="button" onClick={() => navigate("/admin/settings/roles-permissions")}>Cancel</button>
+                    <button type="button" onClick={handleSaveRole} disabled={!canSave || isSubmitting || isLoading}>
+                        {
+                            isSubmitting || isLoading ? <ButtonLoader /> : (
+                                <>
+                                    <i className="fa-solid fa-floppy-disk"></i>
+                                    <p>{isEditMode ? "Update Role" : "Save Role"}</p>
+                                </>
+                            )
+                        }
                     </button>
                 </div>
             </div>
@@ -68,6 +181,8 @@ const AddRolePermissionPage = () => {
                                             type="text"
                                             value={roleName}
                                             onChange={(e) => setRoleName(e.target.value)}
+                                            readOnly={isEditMode}
+                                            disabled={isEditMode}
                                         />
                                     </div>
                                     <div className="info_box">
@@ -120,8 +235,8 @@ const AddRolePermissionPage = () => {
                                     <p>Control access to modules and sub-features</p>
                                 </div>
                                 <div className="head_right_sec">
-                                    <a>Select All</a>
-                                    <a>Deselect All</a>
+                                    <a onClick={handleSelectAll} role="button">Select All</a>
+                                    <a onClick={handleDeselectAll} role="button">Deselect All</a>
                                 </div>
                             </div>
                             <div className="right_body_sec">
