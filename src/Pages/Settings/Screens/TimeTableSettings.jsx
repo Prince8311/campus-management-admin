@@ -21,97 +21,12 @@ const TimeTableSettingsPage = () => {
                                     <a><i className="fa-regular fa-clock"></i></a>
                                     <h6>First Period</h6>
                                 </div>
-                                <div className="subject_assigning_sec">
-                                    <p>10.:00AM - 10:45AM</p>
-                                </div>
                             </div>
                             <div className="bottom_btn">
-                                <button className="details"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slot_box">
-                        <div className="box_inner">
-                            <div className="top_part">
-                                <div className="part_content">
-                                    <a><i className="fa-regular fa-clock"></i></a>
-                                    <h6>First Period</h6>
+                                <div className="time_sec">
+                                    <p>10:00AM - 10:45AM</p>
                                 </div>
-                                <div className="subject_assigning_sec">
-                                    <p>10.:00AM - 10:45AM</p>
-                                </div>
-                            </div>
-                            <div className="bottom_btn">
-                                <button className="details"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slot_box">
-                        <div className="box_inner">
-                            <div className="top_part">
-                                <div className="part_content">
-                                    <a><i className="fa-regular fa-clock"></i></a>
-                                    <h6>First Period</h6>
-                                </div>
-                                <div className="subject_assigning_sec">
-                                    <p>10.:00AM - 10:45AM</p>
-                                </div>
-                            </div>
-                            <div className="bottom_btn">
-                                <button className="details"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slot_box">
-                        <div className="box_inner">
-                            <div className="top_part">
-                                <div className="part_content">
-                                    <a><i className="fa-regular fa-clock"></i></a>
-                                    <h6>First Period</h6>
-                                </div>
-                                <div className="subject_assigning_sec">
-                                    <p>10.:00AM - 10:45AM</p>
-                                </div>
-                            </div>
-                            <div className="bottom_btn">
-                                <button className="details"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slot_box">
-                        <div className="box_inner">
-                            <div className="top_part">
-                                <div className="part_content">
-                                    <a><i className="fa-regular fa-clock"></i></a>
-                                    <h6>First Period</h6>
-                                </div>
-                                <div className="subject_assigning_sec">
-                                    <p>10.:00AM - 10:45AM</p>
-                                </div>
-                            </div>
-                            <div className="bottom_btn">
-                                <button className="details"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slot_box">
-                        <div className="box_inner">
-                            <div className="top_part">
-                                <div className="part_content">
-                                    <a><i className="fa-regular fa-clock"></i></a>
-                                    <h6>First Period</h6>
-                                </div>
-                                <div className="subject_assigning_sec">
-                                    <p>10.:00AM - 10:45AM</p>
-                                </div>
-                            </div>
-                            <div className="bottom_btn">
-                                <button className="details"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+                                <button className="details"><i className="fa-regular fa-pen-to-square"></i>Edit</button>
                                 <button className="delete"><i className="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
@@ -173,7 +88,7 @@ const TimeTableSettingsPage = () => {
                                                 <h6>First Period</h6>
                                             </div>
                                             <div className="subject_sec">
-                                                <p>10.:00AM - 10:45AM</p>
+                                                <p>10:00AM - 10:45AM</p>
                                                 <li>
                                                     <a>Sourish Mondal</a>
                                                     <h6>Math</h6>
@@ -190,7 +105,7 @@ const TimeTableSettingsPage = () => {
                                                 <h6>First Period</h6>
                                             </div>
                                             <div className="subject_sec">
-                                                <p>10.:00AM - 10:45AM</p>
+                                                <p>10:00AM - 10:45AM</p>
                                                 <li>
                                                     <a>Sourish Mondal</a>
                                                     <h6>Math</h6>
@@ -278,8 +193,8 @@ const TimeTableSettingsPage = () => {
                         </div>
                     </div>
                     <div className="btns_sec">
-                        <button><i class="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
-                        <button><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                        <button><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
+                        <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
                     </div>
                 </div>
             </TimeTableSettingsWrapper>

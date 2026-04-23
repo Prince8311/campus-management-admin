@@ -2715,35 +2715,15 @@ export const TimeTableSettingsWrapper = styled('div')`
                         
                         h6 {
                             position: relative;
-                            padding-left: 12px;
+                            padding-left: 8px;
                             max-width: calc(100% - 28px);
-                            font-size: 13.5px;
+                            font-size: 13px;
                             font-style: italic;
                             font-weight: 500;
                             color: ${colors.customColors.blackColor};
                             overflow: hidden;
                             white-space: nowrap;
                             text-overflow: ellipsis;
-                        }
-                    }
-
-                    .subject_assigning_sec {
-                        position: relative;
-                        width: 100%;
-                        display: flex;
-                        margin-top: 5px;
-
-                        p {
-                            position: relative;
-                            font-size: 11px;
-                            color: ${colors.customColors.blackColor2};
-
-                            b {
-                                font-weight: 500;
-                                margin-right: 4px;
-                                font-style: italic;
-                                color: ${colors.customColors.blackColor1};
-                            }
                         }
                     }
                 }
@@ -2754,7 +2734,19 @@ export const TimeTableSettingsWrapper = styled('div')`
                     display: flex;
                     align-items: center;
                     margin-top: 8px;
-                    justify-content: flex-end;
+
+                    .time_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        margin-right: auto;
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor2};
+                        }
+                    }
 
                     button {
                         position: relative;
@@ -2801,7 +2793,7 @@ export const TimeTableSettingsWrapper = styled('div')`
         display: flex;
         flex-direction: column;
         padding: 0 15px;
-        padding-top: 20px;
+        padding-top: 15px;
         margin-top: 15px;
 
         &::before {
@@ -2840,7 +2832,8 @@ export const TimeTableSettingsWrapper = styled('div')`
             width: 100%;
             display: flex;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 20px;
+            margin-bottom: 5px;
 
             .item_inner {
                 position: relative;
@@ -3019,13 +3012,12 @@ export const TimeTableSettingsWrapper = styled('div')`
                 flex-direction: column;
                 border-radius: 8px;
                 box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
-                                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
                 .box_head {
                     position: relative;
                     width: 100%;
-                    padding: 20px;
-                    padding-bottom: 10px;
+                    padding: 13px 20px;
                     display: flex;
                     align-items: flex-end;
                     justify-content: space-between;
@@ -3046,6 +3038,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
                         font-style: italic;
+                        margin-top: 0;
                     }
                 }
 
