@@ -1,13 +1,22 @@
+import { useState } from "react";
 import { TimeTableSettingsWrapper } from "../../../Styles/SettingStyle";
+import AddTimeSlotModal from "../../../Components/Modals/Setting/AddTimeSlot";
 
 const TimeTableSettingsPage = () => {
+
+    const [isAddTimeSlotOpen, setIsAddTimeSlotOpen] = useState(false);
+
+    const handleOpenAddTimeSlot = () => {
+        setIsAddTimeSlotOpen(true);
+    };
+
     return (
         <>
             <TimeTableSettingsWrapper>
                 <div className="page_head">
                     <h2>Institution Time Slots</h2>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={handleOpenAddTimeSlot}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add New Slot</p>
                         </button>
@@ -197,6 +206,11 @@ const TimeTableSettingsPage = () => {
                         <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
                     </div>
                 </div>
+
+                <AddTimeSlotModal 
+                    isAddTimeSlotOpen={isAddTimeSlotOpen}
+                    setIsAddTimeSlotOpen={setIsAddTimeSlotOpen}
+                />
             </TimeTableSettingsWrapper>
         </>
     );
