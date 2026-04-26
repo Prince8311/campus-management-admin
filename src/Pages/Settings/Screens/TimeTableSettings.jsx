@@ -180,7 +180,7 @@ const TimeTableSettingsPage = () => {
                                                 <h6>First Period</h6>
                                             </div>
                                             <div className="subject_sec">
-                                                <p>10.:00AM - 10:45AM</p>
+                                                <p>10:00AM - 10:45AM</p>
                                                 <li>
                                                     <a>Sourish Mondal</a>
                                                     <h6>Math</h6>
