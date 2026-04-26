@@ -1949,35 +1949,46 @@ export const AddTimeSlotWrapper = styled('div')`
                         justify-content: space-between;
                         margin-top: 3px;
 
-                        .time_btn {
+                        .sec_box {
                             position: relative;
-                            width: 45%;
-                            height: 37px;
-                            display: flex;
-                            align-items: center;
-                            border-radius: 5px;
-                            padding: 5px 15px;
-                            background: ${colors.customColors.lightBackground3};
+                            width: 45%; 
 
-                    
-                            input {
+                            .time_btn {
                                 position: relative;
-                                width: calc(100% - 25px);
-                                height: 100%;
-                                font-size: 12px;
-                                outline: none;
-                                background: transparent;
-                                padding: 0;
+                                width: 100%;
+                                height: 37px;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                background: ${colors.customColors.lightBackground3};
+
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 25px);
+                                    font-size: 12px;
+                                    outline: none;
+                                    background: transparent;
+                                    padding: 0;
+                                }
+
+                                i {
+                                    position: relative;
+                                    width: 25px;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor2};
+                                }
                             }
 
-                            i {
-                                position: relative;
-                                width: 25px;
-                                display: flex;
-                                justify-content: flex-end;
-                                cursor: pointer;
-                                font-size: 12px;
-                                color: ${colors.customColors.blackColor2};
+                            .dropdown {
+                                position: absolute;
+                                bottom: 100%;
+                                left: 0px;
+                                width: 100%;
+                                z-index: 5;
                             }
                         }
 

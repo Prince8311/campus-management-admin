@@ -28,6 +28,10 @@ export const getApiEndpoints = () => {
         createAcademicLevel: `${apiURL}/api/institutions/academic/academic-level/create.php`,
         fetchAcademicLevels: `${apiURL}/api/institutions/academic/academic-level/list.php`,
 
+        // Time Slots 
+        createTimeSlot: `${apiURL}/api/institutions/time-slot/create.php`,
+        fetchTimeSlots: `${apiURL}/api/institutions/time-slot/list.php`,
+
         // ====================== Students ======================
         studentUploadForm: `${apiURL}/api/student/form.php`,
         addStudent: `${apiURL}/api/student/create.php`,

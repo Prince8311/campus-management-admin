@@ -1174,3 +1174,88 @@ export const CalenderBox = styled('div')`
         }
     }
 `;
+
+export const TimeBoxWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    background: #FFF;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    .time_box_inner {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 15px 0;
+
+        .scroll_list {
+            position: relative;
+            width: 33.33%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 1px;
+                height: 100%;
+                background: linear-gradient(to bottom, transparent, ${colors.customColors.borderColor}, transparent);
+            }
+
+            &:last-of-type {
+                &::before {
+                    display: none;
+                }
+            }
+
+            .scroll_part {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: scroll;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                li {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    list-style: none;
+                    line-height: 35px;
+                    opacity: 0.4;
+                    filter: blur(1.75px);
+                    transition: all 0.2s ease;
+
+                    &.active {
+                        opacity: 1;
+                        filter: blur(0);
+                        border-top: 2px solid ${colors.themeColor};
+                        border-bottom: 2px solid ${colors.themeColor};
+                        transition: all 0.2s ease;
+                    }
+
+                    &:nth-of-type(1),
+                    &:nth-of-type(2),
+                    &:nth-last-of-type(1),
+                    &:nth-last-of-type(2) {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
+`;

@@ -1,10 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TimeTableSettingsWrapper } from "../../../Styles/SettingStyle";
 import AddTimeSlotModal from "../../../Components/Modals/Setting/AddTimeSlot";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const TimeTableSettingsPage = () => {
-
+    const api = getApiEndpoints();
+    const [timeSlots, setTimeSlots] = useState([]);
+    const [isInitialTimeSlotsLoading, setIsInitialTimeSlotsLoading] = useState(true);
     const [isAddTimeSlotOpen, setIsAddTimeSlotOpen] = useState(false);
+
+    const fetchTimeSlots = async (showSkeleton = false) => {
+        if (showSkeleton) {
+            setIsInitialTimeSlotsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchTimeSlots);
+            if (response?.data.status === 200) {
+                setTimeSlots(response.data.time_slots);
+                console.log("Time Slots:", response.data);
+            }
+        } catch (error) {
+            setTimeSlots([]);
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialTimeSlotsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchTimeSlots(true);
+    }, []);
 
     const handleOpenAddTimeSlot = () => {
         setIsAddTimeSlotOpen(true);
@@ -23,23 +51,41 @@ const TimeTableSettingsPage = () => {
                     </div>
                 </div>
                 <div className="slot_levels">
-                    <div className="slot_box">
-                        <div className="box_inner">
-                            <div className="top_part">
-                                <div className="part_content">
-                                    <a><i className="fa-regular fa-clock"></i></a>
-                                    <h6>First Period</h6>
+                    {
+                        isInitialTimeSlotsLoading ? (
+                            Array.from({ length: 4 }).map((_, i) => (
+                                <div key={i} className="slot_box">
+                                    <SkeletonLoader width="100%" height="110px" />
                                 </div>
-                            </div>
-                            <div className="bottom_btn">
-                                <div className="time_sec">
-                                    <p>10:00AM - 10:45AM</p>
+                            ))
+                        ) : timeSlots.length > 0 ? (
+                            timeSlots.map((slot, i) => (
+                                <div className="slot_box" key={i}>
+                                    <div className="box_inner">
+                                        <div className="top_part">
+                                            <div className="part_content">
+                                                <a><i className="fa-regular fa-clock"></i></a>
+                                                <h6>First Period</h6>
+                                            </div>
+                                        </div>
+                                        <div className="bottom_btn">
+                                            <div className="time_sec">
+                                                <p>10:00AM - 10:45AM</p>
+                                            </div>
+                                            <button className="details"><i className="fa-regular fa-pen-to-square"></i>Edit</button>
+                                            <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button className="details"><i className="fa-regular fa-pen-to-square"></i>Edit</button>
-                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                            ))
+                        ) : (
+                            <div className="empty_box">
+                                <img src="/images/no-fields.svg" alt="" />
+                                <p>No Data available.</p>
                             </div>
-                        </div>
-                    </div>
+                        )
+                    }
+
                 </div>
                 <div className="page_bottom_sec">
                     <div className="schedule_head">
@@ -207,9 +253,10 @@ const TimeTableSettingsPage = () => {
                     </div>
                 </div>
 
-                <AddTimeSlotModal 
+                <AddTimeSlotModal
                     isAddTimeSlotOpen={isAddTimeSlotOpen}
                     setIsAddTimeSlotOpen={setIsAddTimeSlotOpen}
+                    refreshSlots={() => fetchTimeSlots(false)}
                 />
             </TimeTableSettingsWrapper>
         </>
