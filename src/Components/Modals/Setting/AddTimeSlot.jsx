@@ -60,6 +60,7 @@ const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlot
             setIsButtonLoading(false);
             setSlotName('');
             setSlotTiming({ start: '', end: '' });
+            refreshSlots();
         }
 
     }

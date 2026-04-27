@@ -2792,7 +2792,7 @@ export const TimeTableSettingsWrapper = styled('div')`
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 35px;
+            padding-top: 50px;
             overflow-y: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -2809,7 +2809,7 @@ export const TimeTableSettingsWrapper = styled('div')`
 
             p {
                 position: relative;
-                margin-top: 25px;
+                margin-top: 15px;
                 font-size: 13px;
                 color: ${colors.customColors.blackColor2};
             }
@@ -2853,15 +2853,14 @@ export const TimeTableSettingsWrapper = styled('div')`
             position: relative;
             font-size: 12px;
             color: ${colors.customColors.blackColor2};
-            margin-top: 10px;
+            margin-top: 6px;
         }
 
         .page_items_sec {
             position: relative;
             width: 100%;
             display: flex;
-            margin-top: 20px;
-            margin-bottom: 5px;
+            margin-top: 30px;
 
             .left_item_sec {
                 position: relative;
@@ -3340,7 +3339,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         display: flex;
-                        margin-top: 25px;
+                        margin-top: 10px;
                         justify-content: flex-end;
 
                         button {
