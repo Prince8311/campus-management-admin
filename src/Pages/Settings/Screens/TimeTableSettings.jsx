@@ -5,12 +5,14 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import CustomizeSubjectRepetitionModal from "../../../Components/Modals/Setting/CustomizeSubjectRepetition";
 
 const TimeTableSettingsPage = () => {
     const api = getApiEndpoints();
     const [timeSlots, setTimeSlots] = useState([]);
     const [isInitialTimeSlotsLoading, setIsInitialTimeSlotsLoading] = useState(true);
     const [isAddTimeSlotOpen, setIsAddTimeSlotOpen] = useState(false);
+    const [isCustomizeSubjectOpen, setIsCustomizeSubjectOpen] = useState(false);
 
     const fetchTimeSlots = async (showSkeleton = false) => {
         if (showSkeleton) {
@@ -36,6 +38,10 @@ const TimeTableSettingsPage = () => {
 
     const handleOpenAddTimeSlot = () => {
         setIsAddTimeSlotOpen(true);
+    };
+
+    const handleOpenCustomizeSubject = () => {
+        setIsCustomizeSubjectOpen(true);
     };
 
     return (
@@ -147,7 +153,7 @@ const TimeTableSettingsPage = () => {
                                         <p>Mathematics - maximum 5</p>
                                     </div>
                                     <div className="text_bottom_sec">
-                                        <button>Customize Repetition</button>
+                                        <button onClick={handleOpenCustomizeSubject}>Customize Repetition</button>
                                     </div>
                                 </div>
                                 <div className="btn_box">
@@ -290,6 +296,10 @@ const TimeTableSettingsPage = () => {
                     isAddTimeSlotOpen={isAddTimeSlotOpen}
                     setIsAddTimeSlotOpen={setIsAddTimeSlotOpen}
                     refreshSlots={() => fetchTimeSlots(false)}
+                />
+                <CustomizeSubjectRepetitionModal
+                    isCustomizeSubjectOpen={isCustomizeSubjectOpen}
+                    setIsCustomizeSubjectOpen={setIsCustomizeSubjectOpen}
                 />
             </TimeTableSettingsWrapper>
         </>
