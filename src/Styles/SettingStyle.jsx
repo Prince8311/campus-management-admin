@@ -3170,7 +3170,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                 }
             }
 
-            .rght_item_sec {
+            .right_item_sec {
                 position: relative;
                 width: calc(100% - 300px);
                 padding-left: 20px;

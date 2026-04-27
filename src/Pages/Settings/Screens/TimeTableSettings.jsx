@@ -155,7 +155,7 @@ const TimeTableSettingsPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="rght_item_sec">
+                        <div className="right_item_sec">
                             <div className="time_levels">
                                 <div className="time_level_box">
                                     <div className="box_head">
