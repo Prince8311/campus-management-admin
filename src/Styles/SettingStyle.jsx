@@ -3083,28 +3083,28 @@ export const TimeTableSettingsWrapper = styled('div')`
                         margin-bottom: 20px;
                         position: relative;
                         width: 100%;
-                        min-height: 80px;
                         display: flex;
                         flex-direction: column;
                         padding: 7px;
                         background: ${colors.customColors.lightBackground3};
                         border-radius: 5px;
-
+                        
                         .text_top_sec {
                             position: relative;
                             width: 100%;
+                            min-height: 80px;
                             display: flex;
+                            flex-wrap: wrap;
 
-                            input {
+                            p {
                                 position: relative;
-                                height: 23px;
-                                margin: 5px;
-                                width: max-content;
-                                border: none;
-                                outline: none;
-                                background: transparent;
-                                padding: 0 5px;
-                                font-size: 11px;
+                                font-size: 10px;
+                                color: ${colors.customColors.blackColor1};
+                                margin-right: 5px;
+
+                                &:last-of-type {
+                                    margin-right: 0;
+                                }
                             }
                         }
 
@@ -3112,7 +3112,9 @@ export const TimeTableSettingsWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             display: flex;
-                            margin-top: 5px;
+                            margin-top: 7px;
+                            padding-top: 7px;
+                            border-top: 1px solid ${colors.customColors.borderColor};
                             justify-content: flex-end;
 
                             button {
@@ -3333,45 +3335,67 @@ export const TimeTableSettingsWrapper = styled('div')`
                             }
                         }
                     }
+
+                    .btns_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        margin-top: 25px;
+                        justify-content: flex-end;
+
+                        button {
+                            position: relative;
+                            width: 150px;
+                            height: 37px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: ${colors.customColors.whiteColor};
+                            background: ${colors.customColors.blueColor1};
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            transition: all 0.5s ease;
+
+                            i {
+                                margin-right: 8px;
+                            }
+
+                            &:hover {
+                                border-radius: 25px;
+                                transition: all 0.5s ease;
+                            }
+
+                            &:last-of-type {
+                                background: ${colors.customColors.greenColor};
+                                margin-left: 25px;
+                            }
+                        }
+                    }
                 }
-            }
-        }
 
-        .btns_sec {
-            position: relative;
-            width: 100%;
-            display: flex;
-            margin-top: 25px;
-            justify-content: flex-end;
+                .empty_box {
+                    position: relative;
+                    width: 100%;
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                    padding-top: 35px;
 
-            button {
-                position: relative;
-                width: 150px;
-                height: 37px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                font-weight: 500;
-                color: ${colors.customColors.whiteColor};
-                background: ${colors.customColors.blueColor1};
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: all 0.5s ease;
+                    img {
+                        position: relative;
+                        width: 250px;
+                        opacity: 0.5;
+                    }
 
-                i {
-                    margin-right: 8px;
-                }
-
-                &:hover {
-                    border-radius: 25px;
-                    transition: all 0.5s ease;
-                }
-
-                &:last-of-type {
-                    background: ${colors.customColors.greenColor};
-                    margin-left: 25px;
+                    p {
+                        position: relative;
+                        margin-top: 25px;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor2};
+                    }
                 }
             }
         }

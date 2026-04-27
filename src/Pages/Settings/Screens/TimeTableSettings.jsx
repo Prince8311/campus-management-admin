@@ -140,17 +140,14 @@ const TimeTableSettingsPage = () => {
                                             <span></span>
                                         </label>
                                     </div>
-                                    
+
                                 </div>
                                 <div className="text_sec">
                                     <div className="text_top_sec">
-                                        <input
-                                            type="text"
-                                            placeholder="Type here"
-                                        />
+                                        <p>Mathematics - maximum 5</p>
                                     </div>
                                     <div className="text_bottom_sec">
-                                        <button>Customize Repeat</button>
+                                        <button>Customize Repetition</button>
                                     </div>
                                 </div>
                                 <div className="btn_box">
@@ -276,12 +273,16 @@ const TimeTableSettingsPage = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="btns_sec">
+                                    <button><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
+                                    <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
+                                </div>
+                            </div>
+                            <div className="empty_box">
+                                <img src="/images/no-fields.svg" alt="" />
+                                <p>No Data available.</p>
                             </div>
                         </div>
-                    </div>
-                    <div className="btns_sec">
-                        <button><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
-                        <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
                     </div>
                 </div>
 
