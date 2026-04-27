@@ -2081,7 +2081,7 @@ export const CustomizeSubjectRepetitionWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 450px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
