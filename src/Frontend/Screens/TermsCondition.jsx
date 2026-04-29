@@ -266,7 +266,16 @@ const TermsConditionsPage = () => {
                             </div>
                         </div>
                         <div className="content_box">
-                            <h3>20. Contact Information</h3>
+                            <h3>20. Refund and Cancellation</h3>
+                            <div className="box_item">
+                                <ul>
+                                    <li><i className="fa-solid fa-circle"></i><span>For staffs or Students: For refund or cancellation contact your respective institutions</span></li>
+                                    <li><i className="fa-solid fa-circle"></i><span>For Institutions: There is no Refund for the subscription you have taken. You can cancel the subscription  within your subscription time ends.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="content_box">
+                            <h3>21. Contact Information</h3>
                             <div className="box_item">
                                 <p>Email: support@educonnekt.in</p>
                                 <p>Phone: +91 9449618559</p>
