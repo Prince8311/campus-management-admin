@@ -1,4 +1,4 @@
-export const baseURL = 'https://api.edu-connect.ticketbay.in';
+export const baseURL = 'https://api.educonnekt.in';
 export const apiURL = `${baseURL}/admin`;
 
 export const getApiEndpoints = () => {

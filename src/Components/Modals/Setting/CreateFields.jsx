@@ -13,6 +13,7 @@ const CreateFieldsModal = ({ isCreateFieldsOpen, setIsCreateFieldsOpen, refreshF
         { key: 'textbox', value: 'Textbox' },
         { key: 'number', value: 'Number' },
         { key: 'date', value: 'Date' },
+        { key: 'address', value: 'Address' },
         { key: 'dropdown', value: 'Dropdown' },
         { key: 'multi-select-dropdown', value: 'Multi-select Dropdown' },
     ];

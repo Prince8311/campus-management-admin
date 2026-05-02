@@ -7,7 +7,7 @@ const focusIndex = 2; // 4th visible item
 const TimeBox = ({ onTimeChange }) => {
     const [hasInteracted, setHasInteracted] = useState(false);
     const hours = Array.from({ length: 17 }, (_, i) => i - 1);
-    const minutes = Array.from({ length: 65 }, (_, i) => i - 1);
+    const minutes = Array.from({ length: 15 }, (_, i) => (i - 2) * 5);
     const periods = ["PM", "AM", "PM", "AM", "PM", "AM", "PM"];
 
     const hourRef = useRef(null);

@@ -13,6 +13,7 @@ const AddStaffPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
     const { userDetails } = UserData();
+    const staffType = sessionStorage.getItem("staffType");
     const [displayBulkUpload, setDisplayBulkUpload] = useState(true);
     const [displayManualUpload, setDisplayManualUpload] = useState(false);
     const [isFormLoading, setIsFormLoading] = useState(false);
@@ -26,7 +27,9 @@ const AddStaffPage = () => {
     const fetchStaffForm = async () => {
         setIsFormLoading(true);
         try {
-            const response = await axiosInstance.get(api.staffUploadForm);
+            const response = await axiosInstance.get(api.staffUploadForm, {
+                params: { staffType: staffType }
+            });
             if (response?.data.status === 200) {
                 setForm(response?.data.form);
             }
@@ -251,7 +254,7 @@ const AddStaffPage = () => {
                                     <div className={`upload_form_sec ${displayManualUpload ? 'active' : ''}`}>
                                         <div className="profile_image_sec">
                                             <div className="sec_inner">
-                                                <h6>Manually Staff Student</h6>
+                                                <h6>Manually Add Staff</h6>
                                                 <div className="sec_content">
                                                     <div className="content_left">
                                                         <img src="/images/profile-image.png" alt="" />
@@ -298,6 +301,9 @@ const AddStaffPage = () => {
                                                     </div>
                                                 )
                                             }
+                                        </div>
+                                        <div className="btn_sec">
+                                            <button><i className="fa-solid fa-plus"></i>Add Staff</button>
                                         </div>
                                     </div>
                                 </div>
