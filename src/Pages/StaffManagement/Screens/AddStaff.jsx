@@ -61,25 +61,18 @@ const AddStaffPage = () => {
 
     const downloadSampleExcel = () => {
         if (!form.length) return;
-
-        // Collect all field names
         const headers = [];
-
         form.forEach(section => {
             section.fields.forEach(field => {
                 headers.push(field.is_required ? `${field.name}*` : field.name);
             });
         });
 
-        // Convert headers to CSV format
         const csvContent = headers.join(",") + "\n";
-
-        // Create blob
         const blob = new Blob([csvContent], {
             type: "text/csv;charset=utf-8;"
         });
 
-        // Create download link
         const link = document.createElement("a");
         const url = URL.createObjectURL(blob);
 
