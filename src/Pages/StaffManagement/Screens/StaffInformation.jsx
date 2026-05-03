@@ -105,6 +105,42 @@ const StaffInformationPage = () => {
                         </tbody>
                     </table>
                 </div>
+                <div className="second_table_sec">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Staff Name</th>
+                                <th>Contact</th>
+                                <th>Roll</th>
+                                <th>Employment Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div className="left_table_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_table_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>360 / 2025-26</p>
+                                    </div>
+                                </td>
+                                <td>9749708386</td>
+                                <td>Driver</td>
+                                <td>
+                                    <p className="active">Active</p>
+                                </td>
+                                <td>
+                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <SelectStaffTypeModal
                     isStaffTypeOpen={isStaffTypeOpen}

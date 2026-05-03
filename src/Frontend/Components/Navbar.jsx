@@ -111,7 +111,7 @@ const NavbarFrontend = () => {
                     </div>
 
                     <div className="nav_btn">
-                        <Link to="/auth">Get Started</Link>
+                        <Link to="/auth">Sign In</Link>
                     </div>
                     <div className="menubar_icon">
                         <a className={isSidebarOpen ? 'active' : ''} onClick={handleOpenSidebar}>
