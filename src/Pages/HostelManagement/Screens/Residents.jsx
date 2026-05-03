@@ -47,6 +47,7 @@ const HostelResidentsPage = () => {
                                 </th>
                                 <th>Class</th>
                                 <th>Contact No.</th>
+                                <th>Food Preference</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -65,29 +66,9 @@ const HostelResidentsPage = () => {
                                 <td>H1-056</td>
                                 <td>1 - A</td>
                                 <td>9749708386</td>
+                                <td>Veg</td>
                                 <td>
                                     <p className="oncampus">On Campus</p>
-                                </td>
-                                <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div className="left_table_sec">
-                                        <h5>SM</h5>
-                                    </div>
-                                    <div className="right_table_sec">
-                                        <h6>Sourish Mondal</h6>
-                                        <p>545454H2</p>
-                                    </div>
-                                </td>
-                                <td>H2-056</td>
-                                <td>1 - B</td>
-                                <td>9134000456</td>
-                                <td>
-                                    <p className="onsick">On Sick</p>
                                 </td>
                                 <td>
                                     <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
