@@ -74,9 +74,25 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                                 <span>Contact No. <p>*</p></span>
                                 <input type="text" />
                             </div>
-                            <div className="input_box fullwidth">
+                            <div className="input_box halfwidth">
                                 <span>Mail ID <p>*</p></span>
                                 <input type="text" readOnly />
+                            </div>
+                            <div className="select_box halfwidth">
+                                <span>Food Preference <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn">
+                                        <p>Veg</p>
+                                        <i className="fa-solid fa-angle-down"></i>
+                                    </div>
+                                    <div className="dropdown">
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                <li>Non Veg</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
