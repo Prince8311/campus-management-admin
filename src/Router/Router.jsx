@@ -16,6 +16,9 @@ import PageLayout from "../Layouts/PageLayout";
 import DashboardPage from "../Pages/Dashboard";
 import SessionPage from "../Pages/Session";
 
+// Subcription 
+import SubscriptionPage from "../Pages/Subscription";
+
 // Institutions 
 import InstitutionMainPage from "../Pages/Institutions/Index";
 import InstitutionListPage from "../Pages/Institutions/Screens/InstitutionList";
@@ -111,6 +114,7 @@ const Routers = () => {
                         <Route path="pricing" element={<PricingPage />} />
                     </Route>
                     <Route path="auth" element={<AuthenticationPage />} />
+                    <Route path="subcription" element={<SubscriptionPage />} />
                     <Route path="admin" element={<PageLayout />}>
                         <Route path="" element={<Navigate to="dashboard" />} />
                         <Route path="dashboard" element={<DashboardPage />} />

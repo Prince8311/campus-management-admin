@@ -30,6 +30,10 @@ const HomePage = () => {
         navigate("/pricing");
     };
 
+    const handleRedirectSubcriptionPage = () => {
+        navigate("/subcription");
+    };
+
     return (
         <>
             <HomePageWrapper>
@@ -42,7 +46,7 @@ const HomePage = () => {
                                 <p>Empower your institution with an editorial-grade interface thats transform complex date into actiable intelligence. Academic planing finance and student traking in one cognitive sanctuary.</p>
                                 <div className="banner_btns">
                                     <button onClick={handleGetStarted}>Get Started Now</button>
-                                    <button><i className="fa-regular fa-circle-play"></i>Watch Demo</button>
+                                    <button onClick={handleRedirectSubcriptionPage}><i className="fa-regular fa-circle-play"></i>Watch Demo</button>
                                 </div>
                             </div>
                         </div>
