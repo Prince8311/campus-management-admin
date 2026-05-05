@@ -235,8 +235,28 @@ const AddRolePermissionPage = () => {
                                     <p>Control access to modules and sub-features</p>
                                 </div>
                                 <div className="head_right_sec">
-                                    <a onClick={handleSelectAll} role="button">Select All</a>
-                                    <a onClick={handleDeselectAll} role="button">Deselect All</a>
+                                    <a onClick={handleSelectAll} role="button">
+                                        <li>
+                                            <input
+                                                type="checkbox"
+                                                id="allSellect"
+                                            />
+                                            <label htmlFor="allSellect">
+                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
+                                            </label>
+                                        </li>
+                                        Select All</a>
+                                    <a onClick={handleDeselectAll} role="button">
+                                        <li>
+                                            <input
+                                                type="checkbox"
+                                                id="Deselectall"
+                                            />
+                                            <label htmlFor="Deselectall">
+                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
+                                            </label>
+                                        </li>
+                                        Deselect All</a>
                                 </div>
                             </div>
                             <div className="right_body_sec">
@@ -252,6 +272,32 @@ const AddRolePermissionPage = () => {
                                                         <i className="fa-solid fa-graduation-cap"></i>
                                                     </div>
                                                     <p>{module.name}</p>
+                                                </div>
+                                                <div className="top_btns">
+                                                    <button>
+                                                        <li>
+                                                            <input
+                                                                type="checkbox"
+                                                                id="allreportsSellect"
+                                                            />
+                                                            <label htmlFor="allreportsSellect">
+                                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
+                                                            </label>
+                                                        </li>
+                                                        Select All
+                                                    </button>
+                                                    <button>
+                                                        <li>
+                                                            <input
+                                                                type="checkbox"
+                                                                id="Deselectallreports"
+                                                            />
+                                                            <label htmlFor="Deselectallreports">
+                                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
+                                                            </label>
+                                                        </li>
+                                                        Deselect All
+                                                    </button>
                                                 </div>
                                                 <div className="top_right">
                                                     <i className="fa-solid fa-angle-right"></i>
