@@ -110,6 +110,19 @@ const AddStaffPage = () => {
         console.log("Dropped file:", file);
     };
 
+    const handleFieldChange = (sectionId, fieldName, value) => {
+        setFormData(prev => {
+            const updated = {
+                ...prev,
+                [sectionId]: {
+                    ...(prev[sectionId] || {}),
+                    [fieldName]: value
+                }
+            };
+            return updated;
+        });
+    };
+
     const handleFileSelect = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -123,21 +136,103 @@ const AddStaffPage = () => {
         console.log("Selected file:", file);
     };
 
-    const handleFieldChange = (sectionId, fieldName, value) => {
-        setFormData(prev => {
-            const updated = {
-                ...prev,
-                [sectionId]: {
-                    ...(prev[sectionId] || {}),
-                    [fieldName]: value
-                }
-            };
-            if (fieldName === "Class / Standard") {
-                updated[sectionId]["Section"] = "";
-            }
+    const createFieldMap = () => {
+        const map = {};
 
-            return updated;
+        form.forEach(section => {
+            section.fields.forEach(field => {
+                const cleanName = field.name.trim();
+                map[cleanName] = {
+                    section_id: section.id,
+                    field_name: field.name
+                };
+            });
         });
+
+        return map;
+    };
+
+     const handleCSVUpload = async () => {
+        if (!selectedFile) {
+            toast.warn("Please select a file first");
+            return;
+        }
+
+        setIsBulkUploading(true);
+        const reader = new FileReader();
+
+        reader.onload = async (event) => {
+            try {
+
+                const text = event.target.result?.trim();
+                if (!text) {
+                    toast.warn("No data in the file");
+                    setIsBulkUploading(false);
+                    return;
+                }
+
+                const rows = text.split("\n").map(row => row.split(","));
+                if (rows.length <= 1) {
+                    toast.warn("No data in the file");
+                    setIsBulkUploading(false);
+                    return;
+                }
+
+                const dataRows = rows.slice(1).filter(row =>
+                    row.some(cell => cell.trim() !== "")
+                );
+
+                if (dataRows.length === 0) {
+                    toast.warn("No data in the file");
+                    setIsBulkUploading(false);
+                    return;
+                }
+
+                const headers = rows[0].map(h => h.replace("*", "").trim());
+                const fieldMap = createFieldMap();
+
+                const formattedData = dataRows.map(row => {
+                    const staffData = [];
+
+                    headers.forEach((header, index) => {
+                        if (fieldMap[header]) {
+                            const value = row[index]?.trim();
+                            if (value) {
+                                staffData.push({
+                                    section_id: fieldMap[header].section_id,
+                                    field_name: fieldMap[header].field_name,
+                                    value: value
+                                });
+                            }
+                        }
+                    });
+
+                    return { staff_fields: staffData };
+                });
+
+                const payload = {
+                    staffs: formattedData,
+                    staffType: staffType,
+                    isBulkUpload: true
+                };
+                const response = await axiosInstance.post(api.addStaff, payload);
+                if (response?.data.status === 200) {
+                    toast.success(response.data?.message || "Staff uploaded successfully");
+                    handleRemoveFile();
+                }
+            } catch (error) {
+                toast.error(error.response?.data?.message || error.message);
+            } finally {
+                setIsBulkUploading(false);
+            }
+        };
+
+        reader.onerror = () => {
+            toast.error("Failed to read file");
+            setIsBulkUploading(false);
+        };
+
+        reader.readAsText(selectedFile);
     };
 
     const handleRemoveFile = () => {
@@ -146,6 +241,52 @@ const AddStaffPage = () => {
         if (fileInput) {
             fileInput.value = "";
         }
+    };
+
+     const areRequiredFieldsFilled = () => {
+        for (const section of form) {
+            for (const field of section.fields) {
+                if (field.is_required) {
+                    const value = formData?.[section.id]?.[field.name];
+
+                    if (!value || value.toString().trim() === "") {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    };
+
+     const handleFormSubmit = () => {
+        const staffData = [];
+        Object.entries(formData).forEach(([sectionId, fields]) => {
+            Object.entries(fields).forEach(([fieldName, value]) => {
+                const trimmedValue = value?.toString().trim();
+                if (trimmedValue) {
+                    staffData.push({
+                        section_id: sectionId,
+                        field_name: fieldName,
+                        value: trimmedValue
+                    });
+                }
+            });
+        });
+        const payload = {
+            staffs: [
+                {
+                    staff_fields: staffData
+                }
+            ],
+            staffType: staffType,
+            isBulkUpload: false
+        };
+        try {
+            
+        } catch (error) {
+            
+        }
+        console.log("Single upload", payload);
     };
 
     return (
@@ -190,7 +331,7 @@ const AddStaffPage = () => {
                                                             <div className="file_items">
                                                                 <p>{selectedFile.name}</p>
                                                                 <div className="btns">
-                                                                    <button disabled={isBulkUploading}>
+                                                                    <button disabled={isBulkUploading} onClick={handleCSVUpload}>
                                                                         {
                                                                             isBulkUploading ? (
                                                                                 <>Uploading<CircleLoader margin="0 0 0 7px" color="blueColor1" /></>

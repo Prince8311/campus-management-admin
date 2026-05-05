@@ -6,7 +6,7 @@ const SubscriptionPage = () => {
             <SubcriptionWrapper>
                 <div className="heading_sec">
                     <div className="sec_content">
-                        <h2>Configure Campus <span>Subscription</span></h2>
+                        <h2>Configure Your <span>Subscription</span></h2>
                         <p>Tailor your educational ecosystem. Manage student capacities and integratedfacility add-ons for a unified management experience.</p>
                     </div>
                 </div>
@@ -31,7 +31,6 @@ const SubscriptionPage = () => {
                                         </div>
                                     </div>
                                     <div className="bottom_sec">
-
                                         <div className="bottom_box">
                                             <div className="box_inner">
                                                 <i class="fa-solid fa-circle-check"></i>

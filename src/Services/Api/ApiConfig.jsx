@@ -1,3 +1,5 @@
+import { add } from "@dnd-kit/utilities";
+
 export const baseURL = 'https://api.educonnekt.in';
 export const apiURL = `${baseURL}/admin`;
 
@@ -49,6 +51,7 @@ export const getApiEndpoints = () => {
         
         // ====================== Staffs ======================
         staffUploadForm: `${apiURL}/api/staff/form.php`,
+        addStaff: `${apiURL}/api/staff/create.php`,
 
         // Form Sections 
         createStaffFormSection: `${apiURL}/api/staff/sections/create.php`,
