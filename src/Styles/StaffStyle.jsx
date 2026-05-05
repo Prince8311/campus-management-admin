@@ -175,7 +175,7 @@ export const StaffInformationWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 17%;
+                        width: 20%;
                     }
 
                     &:nth-of-type(2) {
@@ -186,28 +186,24 @@ export const StaffInformationWrapper = styled('div')`
                         width: 10%;
                         justify-content: center;
                     }
-                    &:nth-of-type(4) {
-                        width: 10%;
-                        justify-content: center;
-                    }
 
-                    &:nth-of-type(5) {
+                    &:nth-of-type(4) {
                         width: 12%;
                         justify-content: center;
                     }
 
+                    &:nth-of-type(5) {
+                        width: 20%;
+                        justify-content: center;
+                    }
+
                     &:nth-of-type(6) {
-                        width: 15%;
+                        width: 12%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(7) {
                         width: 12%;
-                        justify-content: center;
-                    }
-
-                    &:nth-of-type(8) {
-                        width: 10%;
                         justify-content: center;
                     }
                 }
@@ -243,7 +239,7 @@ export const StaffInformationWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 17%;
+                            width: 20%;
                             display: flex;
 
                             .left_table_sec {
@@ -292,7 +288,6 @@ export const StaffInformationWrapper = styled('div')`
                             align-items: center;
                             justify-content: center;
                         }
-
                         &:nth-of-type(3) {
                             align-items: center;
                             width: 10%;
@@ -300,17 +295,12 @@ export const StaffInformationWrapper = styled('div')`
                         }
                         &:nth-of-type(4) {
                             align-items: center;
-                            width: 10%;
-                            justify-content: center;
-                        }
-                        &:nth-of-type(5) {
-                            align-items: center;
                             width: 12%;
                             justify-content: center;
                         }
 
-                        &:nth-of-type(6) {
-                            width: 15%;
+                        &:nth-of-type(5) {
+                            width: 20%;
                             align-items: center;
                             justify-content: center;
 
@@ -333,7 +323,7 @@ export const StaffInformationWrapper = styled('div')`
                             }
                         }
 
-                        &:nth-of-type(7) {
+                        &:nth-of-type(6) {
                             width: 12%;
                             align-items: center;
                             justify-content: center;
@@ -357,8 +347,8 @@ export const StaffInformationWrapper = styled('div')`
                             }
                         }
 
-                        &:nth-of-type(8) {
-                            width: 10%;
+                        &:nth-of-type(7) {
+                            width: 12%;
                             align-items: center;
                             justify-content: center;
 

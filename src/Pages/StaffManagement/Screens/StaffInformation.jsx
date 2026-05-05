@@ -40,8 +40,7 @@ const StaffInformationPage = () => {
                         <thead>
                             <tr>
                                 <th>Teacher Name</th>
-                                <th>Contact</th>
-                                <th>Class</th>
+                                <th>Contact no.</th>
                                 <th>Subject</th>
                                 <th>Class Teacher</th>
                                 <th>Employment Status</th>
@@ -61,7 +60,6 @@ const StaffInformationPage = () => {
                                     </div>
                                 </td>
                                 <td>9749708386</td>
-                                <td>10 - A</td>
                                 <td>Science</td>
                                 <td><i className="fa-solid fa-minus"></i></td>
                                 <td>
@@ -69,32 +67,6 @@ const StaffInformationPage = () => {
                                 </td>
                                 <td>
                                     <p className="active">Joined</p>
-                                </td>
-                                <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div className="left_table_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_table_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>360 / 2025-26</p>
-                                    </div>
-                                </td>
-                                <td>9749708386</td>
-                                <td>10 - A</td>
-                                <td>Science</td>
-                                <td><i className="fa-solid fa-minus"></i></td>
-                                <td>
-                                    <p className="">Active</p>
-                                </td>
-                                <td>
-                                    <p className="">Joined</p>
                                 </td>
                                 <td>
                                     <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
@@ -110,8 +82,8 @@ const StaffInformationPage = () => {
                         <thead>
                             <tr>
                                 <th>Staff Name</th>
-                                <th>Contact</th>
-                                <th>Roll</th>
+                                <th>Contact no.</th>
+                                <th>Role</th>
                                 <th>Employment Status</th>
                                 <th>Actions</th>
                             </tr>
