@@ -12,7 +12,6 @@ import CircleLoader from "../../../Components/Loader/CircleLoader";
 const AddStaffPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
-    const { userDetails } = UserData();
     const staffType = sessionStorage.getItem("staffType");
     const [displayBulkUpload, setDisplayBulkUpload] = useState(true);
     const [displayManualUpload, setDisplayManualUpload] = useState(false);

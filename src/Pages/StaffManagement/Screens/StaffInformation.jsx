@@ -1,9 +1,14 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StaffInformationWrapper } from "../../../Styles/StaffStyle";
 import SelectStaffTypeModal from "../../../Components/Modals/Staff/SelectStaffType";
-import { useState } from "react";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const StaffInformationPage = () => {
+    const api = getApiEndpoints();
     const navigate = useNavigate();
     const [isStaffTypeOpen, setIsStaffTypeOpen] = useState(false);
 
@@ -40,7 +45,7 @@ const StaffInformationPage = () => {
                         <thead>
                             <tr>
                                 <th>Teacher Name</th>
-                                <th>Contact no.</th>
+                                <th>Contact No.</th>
                                 <th>Subject</th>
                                 <th>Class Teacher</th>
                                 <th>Employment Status</th>
@@ -107,7 +112,7 @@ const StaffInformationPage = () => {
                         <thead>
                             <tr>
                                 <th>Staff Name</th>
-                                <th>Contact no.</th>
+                                <th>Contact No.</th>
                                 <th>Role</th>
                                 <th>Employment Status</th>
                                 <th>Actions</th>
