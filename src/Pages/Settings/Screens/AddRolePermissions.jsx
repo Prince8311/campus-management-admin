@@ -101,6 +101,45 @@ const AddRolePermissionPage = () => {
         setCheckedPermissions([]);
     };
 
+    const handleSelectModulePermissions = (moduleIndex) => {
+        const module = modules[moduleIndex];
+        const modulePermissionIds = module.sub_modules.flatMap((sub) => {
+            const permissionTypes = ["VIEW", "CREATE", "EDIT", "DELETE"];
+            return permissionTypes.map((type) => `${sub.key}_${type}`);
+        });
+
+        setCheckedPermissions((prev) => {
+            const updated = new Set([...prev, ...modulePermissionIds]);
+            return Array.from(updated);
+        });
+    };
+
+    const handleDeselectModulePermissions = (moduleIndex) => {
+        const module = modules[moduleIndex];
+        const modulePermissionIds = module.sub_modules.flatMap((sub) => {
+            const permissionTypes = ["VIEW", "CREATE", "EDIT", "DELETE"];
+            return permissionTypes.map((type) => `${sub.key}_${type}`);
+        });
+
+        setCheckedPermissions((prev) =>
+            prev.filter((perm) => !modulePermissionIds.includes(perm))
+        );
+    };
+
+    const isAllPermissionsSelected = () => {
+        const allPermissionIds = getAllPermissionIds();
+        return allPermissionIds.length > 0 && allPermissionIds.every((id) => checkedPermissions.includes(id));
+    };
+
+    const isModuleAllPermissionsSelected = (moduleIndex) => {
+        const module = modules[moduleIndex];
+        const modulePermissionIds = module.sub_modules.flatMap((sub) => {
+            const permissionTypes = ["VIEW", "CREATE", "EDIT", "DELETE"];
+            return permissionTypes.map((type) => `${sub.key}_${type}`);
+        });
+        return modulePermissionIds.length > 0 && modulePermissionIds.every((id) => checkedPermissions.includes(id));
+    };
+
     const arraysAreEqual = (arr1, arr2) => {
         if (arr1.length !== arr2.length) return false;
         const sorted1 = [...arr1].slice().sort();
@@ -235,28 +274,23 @@ const AddRolePermissionPage = () => {
                                     <p>Control access to modules and sub-features</p>
                                 </div>
                                 <div className="head_right_sec">
-                                    <a onClick={handleSelectAll} role="button">
-                                        <li>
-                                            <input
-                                                type="checkbox"
-                                                id="allSellect"
-                                            />
-                                            <label htmlFor="allSellect">
-                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
-                                            </label>
-                                        </li>
-                                        Select All</a>
-                                    <a onClick={handleDeselectAll} role="button">
-                                        <li>
-                                            <input
-                                                type="checkbox"
-                                                id="Deselectall"
-                                            />
-                                            <label htmlFor="Deselectall">
-                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
-                                            </label>
-                                        </li>
-                                        Deselect All</a>
+                                    <li onClick={handleSelectAll}>
+                                        <input
+                                            type="checkbox"
+                                            id="allSellect"
+                                            checked={isAllPermissionsSelected()}
+                                            onChange={handleSelectAll}
+                                        />
+                                        <label htmlFor="allSellect">
+                                            <span className="check_box"><i className="fa-solid fa-check"></i></span>
+                                            <p>Select All</p>
+                                        </label>
+                                    </li>
+                                    <li onClick={handleDeselectAll}>
+                                        <label>
+                                            <p>Deselect All</p>
+                                        </label>
+                                    </li>
                                 </div>
                             </div>
                             <div className="right_body_sec">
@@ -269,35 +303,28 @@ const AddRolePermissionPage = () => {
                                             >
                                                 <div className="top_left">
                                                     <div className="role_icon">
-                                                        <i className="fa-solid fa-graduation-cap"></i>
+                                                        <i className={`fa-solid ${module.icon}`}></i>
                                                     </div>
                                                     <p>{module.name}</p>
                                                 </div>
                                                 <div className="top_btns">
-                                                    <button>
-                                                        <li>
-                                                            <input
-                                                                type="checkbox"
-                                                                id="allreportsSellect"
-                                                            />
-                                                            <label htmlFor="allreportsSellect">
-                                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
-                                                            </label>
-                                                        </li>
-                                                        Select All
-                                                    </button>
-                                                    <button>
-                                                        <li>
-                                                            <input
-                                                                type="checkbox"
-                                                                id="Deselectallreports"
-                                                            />
-                                                            <label htmlFor="Deselectallreports">
-                                                                <span className="check_box"><i className="fa-solid fa-check"></i></span>
-                                                            </label>
-                                                        </li>
-                                                        Deselect All
-                                                    </button>
+                                                    <li onClick={() => handleSelectModulePermissions(index)}>
+                                                        <input
+                                                            type="checkbox"
+                                                            id="allreportsSellect"
+                                                            checked={isModuleAllPermissionsSelected(index)}
+                                                            onChange={() => handleSelectModulePermissions(index)}
+                                                        />
+                                                        <label htmlFor="allreportsSellect">
+                                                            <span className="check_box"><i className="fa-solid fa-check"></i></span>
+                                                            <p>Select All</p>
+                                                        </label>
+                                                    </li>
+                                                    <li onClick={() => handleDeselectModulePermissions(index)}>
+                                                        <label>
+                                                            <p>Deselect All</p>
+                                                        </label>
+                                                    </li>
                                                 </div>
                                                 <div className="top_right">
                                                     <i className="fa-solid fa-angle-right"></i>

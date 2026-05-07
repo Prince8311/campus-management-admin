@@ -9,6 +9,7 @@ import HomePage from "../Frontend/Screens/Home";
 import TermsConditionsPage from "../Frontend/Screens/TermsCondition";
 import PrivacyPolicyPage from "../Frontend/Screens/PrivacyPolicy";
 import PricingPage from "../Frontend/Screens/Pricing";
+import CancellationRefundPolicyPage from "../Frontend/Screens/CancellationRefundPolicy";
 
 // Authentication 
 import AuthenticationPage from "../Auth/Authentication";
@@ -112,6 +113,7 @@ const Routers = () => {
                         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                         <Route path="terms-conditions" element={<TermsConditionsPage />} />
                         <Route path="pricing" element={<PricingPage />} />
+                        <Route path="cancellation-refund-policy" element={<CancellationRefundPolicyPage />} />
                     </Route>
                     <Route path="auth" element={<AuthenticationPage />} />
                     <Route path="subcription" element={<SubscriptionPage />} />

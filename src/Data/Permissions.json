@@ -46,6 +46,7 @@
             {
                 "id": 1,
                 "name": "Reports",
+                "icon": "fa-chart-bar",
                 "sub_modules": [
                     {
                         "key": "SCHOOL_STRENGTH",
@@ -72,6 +73,7 @@
             {
                 "id": 2,
                 "name": "Academics",
+                "icon": "fa-book",
                 "sub_modules": [
                     {
                         "key": "STUDENT_INFORMATION",
@@ -94,6 +96,7 @@
             {
                 "id": 3,
                 "name": "Finance Management",
+                "icon": "fa-sack-dollar",
                 "sub_modules": [
                     {
                         "key": "FEE_COLLECTION",
@@ -116,6 +119,7 @@
             {
                 "id": 4,
                 "name": "Communication",
+                "icon": "fa-headphones",
                 "sub_modules": [
                     {
                         "key": "MESSAGING",
@@ -126,6 +130,7 @@
             {
                 "id": 5,
                 "name": "Staff Management",
+                "icon": "fa-users-gear",
                 "sub_modules": [
                     {
                         "key": "STAFF_INFORMATION",
@@ -140,6 +145,7 @@
             {
                 "id": 6,
                 "name": "Hostel Management",
+                "icon": "fa-building-user",
                 "sub_modules": [
                     {
                         "key": "HOSTEL_OVERVIEW",
@@ -162,6 +168,7 @@
             {
                 "id": 7,
                 "name": "Administration",
+                "icon": "fa-user-shield",
                 "sub_modules": [
                     {
                         "key": "CERTIFICATES",
@@ -180,6 +187,7 @@
             {
                 "id": 8,
                 "name": "Settings",
+                "icon": "fa-gears",
                 "sub_modules": [
                     {
                         "key": "DEVICE_SETTINGS",
@@ -214,6 +222,7 @@
             {
                 "id": 9,
                 "name": "Extras",
+                "icon": "fa-star",
                 "sub_modules": [
                     {
                         "key": "BILLING",

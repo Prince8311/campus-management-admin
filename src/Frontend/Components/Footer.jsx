@@ -58,6 +58,12 @@ const FooterFrontend = () => {
                                             <span>Terms & Conditions</span>
                                         </NavLink>
                                     </li>
+                                    <li>
+                                        <NavLink to="/cancellation-refund-policy">
+                                            <i className="fa-solid fa-angle-right"></i>
+                                            <span>Cancellation & Refund Policy</span>
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                             <div className="inner_box">

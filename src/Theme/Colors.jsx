@@ -23,6 +23,7 @@ export const colorNames = () => {
         borderColor1: "rgb(201, 201, 201)",
         redColor: "rgb(231, 57, 57)",
         redColorLight: "rgba(255, 0, 0, 0.15)",
+        redColorLight1: "rgba(255, 0, 0, 0.062)",
         orangeColor: "rgb(252, 103, 54)",
         greenColor: "rgb(63, 228, 79)",
         greenColor1: "rgb(0, 110, 32)",
@@ -32,6 +33,7 @@ export const colorNames = () => {
         yellowColorLight: "rgba(255, 199, 108, 0.2)",
         blueColor1: "rgb(2, 192, 255)",
         blueColor2: "rgb(0, 114, 195)",
+        blueColor3: "rgb(0, 101, 141)",
         blueColorLight: "rgba(2, 192, 255, 0.08)",
       }
     };

@@ -606,6 +606,89 @@ export const AddRolePermissionWrapper = styled('div')`
                             align-items: center;
                             justify-content: space-between;
 
+                            li {
+                                position: relative;
+                                list-style: none;
+                                display: flex;
+                                align-items: center;
+                                color: ${colors.customColors.blackColor3};
+                                text-decoration: none;
+                                cursor: pointer;
+                                font-size: 12px;
+                                font-weight: 500;
+
+                                input[type="checkbox"] {
+                                    display: none;
+                                }
+
+                                label {
+                                    position: relative;
+                                    cursor: pointer;
+                                    line-height: 1;
+                                    display: flex;
+                                    align-items: center;
+
+                                    .check_box {
+                                        position: relative;
+                                        width: 15px;
+                                        height: 15px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        border-radius: 4px;
+                                        margin-right: 5px;
+                                        cursor: pointer;
+                                        transition: all 0.4s ease;
+
+                                        i {
+                                            font-size: 10px;
+                                            opacity: 0;
+                                            transition: all 0.4s ease;
+                                        }
+                                    }
+                                }
+
+                                input[type="checkbox"]:checked ~ label {
+
+                                    .check_box {
+                                        background: ${colors.customColors.blackColor3};
+                                        transition: all 0.4s ease;
+
+                                        i {
+                                            opacity: 1;
+                                            color: ${colors.customColors.whiteColor};
+                                            transition: all 0.4s ease;
+                                        }
+                                    }
+                                }
+
+                                &:first-of-type {
+                                    color: ${colors.customColors.blueColor2};
+                                    margin-right: 20px;
+
+                                    label {
+                                        .check_box {
+                                            border: 1px solid ${colors.customColors.blueColor2};
+                                        }
+                                    }
+
+                                    input[type="checkbox"]:checked ~ label {
+
+                                        .check_box {
+                                            background: ${colors.customColors.blueColor2};
+                                            transition: all 0.4s ease;
+
+                                            i {
+                                                opacity: 1;
+                                                color: ${colors.customColors.whiteColor};
+                                                transition: all 0.4s ease;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             a {
                                 position: relative;
                                 display: flex;
@@ -620,6 +703,13 @@ export const AddRolePermissionWrapper = styled('div')`
                                     position: relative;
                                     list-style: none;
                                     margin-right: 5px;
+                                    display: flex;
+                                    align-items: center;
+                                    color: ${colors.customColors.blackColor3};
+                                    text-decoration: none;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    font-weight: 500;
 
                                     input[type="checkbox"] {
                                         display: none;
@@ -778,65 +868,57 @@ export const AddRolePermissionWrapper = styled('div')`
                                         display: flex;
                                         margin-left: auto;
 
-                                        button {
+                                        li {
                                             position: relative;
-                                            display: flex;
-                                            align-items: center;
-                                            color: ${colors.customColors.blackColor3};
-                                            text-decoration: none;
+                                            list-style: none;
+                                            margin-right: 5px;
                                             cursor: pointer;
                                             font-size: 12px;
                                             font-weight: 500;
-                                            border: none;
-                                            background: transparent;
+                                            color: ${colors.customColors.blackColor3};
 
-                                            li {
+                                            input[type="checkbox"] {
+                                                display: none;
+                                            }
+
+                                            label {
                                                 position: relative;
-                                                list-style: none;
-                                                margin-right: 5px;
+                                                cursor: pointer;
+                                                line-height: 1;
+                                                display: flex;
+                                                align-items: center;
 
-                                                input[type="checkbox"] {
-                                                    display: none;
-                                                }
-
-                                                label {
+                                                .check_box {
                                                     position: relative;
-                                                    cursor: pointer;
-                                                    line-height: 1;
+                                                    width: 15px;
+                                                    height: 15px;
                                                     display: flex;
                                                     align-items: center;
+                                                    justify-content: center;
+                                                    border: 1px solid ${colors.customColors.borderColor};
+                                                    border-radius: 4px;
+                                                    margin-right: 5px;
+                                                    cursor: pointer;
+                                                    transition: all 0.4s ease;
 
-                                                    .check_box {
-                                                        position: relative;
-                                                        width: 15px;
-                                                        height: 15px;
-                                                        display: flex;
-                                                        align-items: center;
-                                                        justify-content: center;
-                                                        border: 1px solid ${colors.customColors.borderColor};
-                                                        border-radius: 4px;
-                                                        cursor: pointer;
+                                                    i {
+                                                        font-size: 10px;
+                                                        opacity: 0;
                                                         transition: all 0.4s ease;
-
-                                                        i {
-                                                            font-size: 14px;
-                                                            opacity: 0;
-                                                            transition: all 0.4s ease;
-                                                        }
                                                     }
                                                 }
+                                            }
 
-                                                input[type="checkbox"]:checked ~ label {
+                                            input[type="checkbox"]:checked ~ label {
 
-                                                    .check_box {
-                                                        background: ${colors.customColors.blackColor3};
+                                                .check_box {
+                                                    background: ${colors.customColors.blackColor3};
+                                                    transition: all 0.4s ease;
+
+                                                    i {
+                                                        opacity: 1;
+                                                        color: ${colors.customColors.whiteColor};
                                                         transition: all 0.4s ease;
-
-                                                        i {
-                                                            opacity: 1;
-                                                            color: ${colors.customColors.whiteColor};
-                                                            transition: all 0.4s ease;
-                                                        }
                                                     }
                                                 }
                                             }
@@ -845,24 +927,22 @@ export const AddRolePermissionWrapper = styled('div')`
                                                 color: ${colors.customColors.blueColor2};
                                                 margin-right: 20px;
 
-                                                li {
-                                                    label {
-                                                        .check_box {
-                                                            border: 1px solid ${colors.customColors.blueColor2};
-                                                        }
+                                                label {
+                                                    .check_box {
+                                                        border: 1px solid ${colors.customColors.blueColor2};
                                                     }
+                                                }
 
-                                                    input[type="checkbox"]:checked ~ label {
+                                                input[type="checkbox"]:checked ~ label {
 
-                                                        .check_box {
-                                                            background: ${colors.customColors.blueColor2};
+                                                    .check_box {
+                                                        background: ${colors.customColors.blueColor2};
+                                                        transition: all 0.4s ease;
+
+                                                        i {
+                                                            opacity: 1;
+                                                            color: ${colors.customColors.whiteColor};
                                                             transition: all 0.4s ease;
-
-                                                            i {
-                                                                opacity: 1;
-                                                                color: ${colors.customColors.whiteColor};
-                                                                transition: all 0.4s ease;
-                                                            }
                                                         }
                                                     }
                                                 }
