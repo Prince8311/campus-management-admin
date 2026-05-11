@@ -65,7 +65,6 @@ export const getApiEndpoints = () => {
         fetchStaffFormFields: `${apiURL}/api/staff/fields/list.php`,
         updateStaffFormFieldOrder: `${apiURL}/api/staff/fields/update-order.php`,
 
-
         // Subjects 
         createSubject: `${apiURL}/api/institutions/subjects/create.php`,
         fetchSubjects: `${apiURL}/api/institutions/subjects/list.php`,

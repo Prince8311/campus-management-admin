@@ -11,9 +11,53 @@ const StaffInformationPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
     const [isStaffTypeOpen, setIsStaffTypeOpen] = useState(false);
+    const tabs = [
+        { label: "Teaching Staff", value: "teaching" },
+        { label: "Non Teaching Staff", value: "non-teaching" }
+    ];
+    const [selectedTab, setSelectedTab] = useState(tabs[0].value);
+    const [page, setPage] = useState(1);
+    const [staffs, setStaffs] = useState([]);
+    const [isInitialStaffsLoading, setIsInitialStaffsLoading] = useState(true);
+    const [totalCount, setTotalCount] = useState('');
 
     const handleOpenStaffTypeModal = () => {
         setIsStaffTypeOpen(true);
+    };
+
+    const fetchStaffs = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialStaffsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchStaffs, {
+                params: {
+                    staffType: selectedTab,
+                    page: pageNumber,
+                }
+            });
+            if (response.data.status === 200) {
+                console.log("Staffs", response.data);
+                setStaffs(response?.data.staffs);
+                setTotalCount(response?.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialStaffsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchStaffs(true);
+    }, [selectedTab, page]);
+
+    const getInitials = (name) => {
+        if (!name) return "";
+        const parts = name.trim().split(" ").filter(Boolean);
+        const first = parts[0]?.[0] || "";
+        const last = parts.length > 1 ? parts[parts.length - 1]?.[0] : "";
+        return (first + last).toUpperCase();
     };
 
     return (
@@ -36,113 +80,169 @@ const StaffInformationPage = () => {
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
-                        <li className="active">Teaching Staff</li>
-                        <li>Non Teaching Staff</li>
+                        {tabs.map((tab) => (
+                            <li
+                                key={tab.value}
+                                className={selectedTab === tab.value ? "active" : ""}
+                                onClick={() => setSelectedTab(tab.value)}
+                            >
+                                {tab.label}
+                            </li>
+                        ))}
                     </div>
                 </div>
-                <div className="table_sec">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Teacher Name</th>
-                                <th>Contact No.</th>
-                                <th>Subject</th>
-                                <th>Class Teacher</th>
-                                <th>Employment Status</th>
-                                <th>App Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div className="left_table_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_table_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>360 / 2025-26</p>
-                                    </div>
-                                </td>
-                                <td>9749708386</td>
-                                <td>Science</td>
-                                <td><i className="fa-solid fa-minus"></i></td>
-                                <td>
-                                    <p>Active</p>
-                                </td>
-                                <td>
-                                    <p>Joined</p>
-                                </td>
-                                <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div className="left_table_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_table_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>360 / 2025-26</p>
-                                    </div>
-                                </td>
-                                <td>9749708386</td>
-                                <td>Science</td>
-                                <td><i className="fa-solid fa-minus"></i></td>
-                                <td>
-                                    <p className="active">Active</p>
-                                </td>
-                                <td>
-                                    <p className="active">Joined</p>
-                                </td>
-                                <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className="second_table_sec">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Staff Name</th>
-                                <th>Contact No.</th>
-                                <th>Role</th>
-                                <th>Employment Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div className="left_table_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_table_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>360 / 2025-26</p>
-                                    </div>
-                                </td>
-                                <td>9749708386</td>
-                                <td>Driver</td>
-                                <td>
-                                    <p className="active">Active</p>
-                                </td>
-                                <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {
+                    selectedTab === "teaching" && (
+                        <div className="table_sec">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Teacher Name</th>
+                                        <th>Contact No.</th>
+                                        <th>Subject</th>
+                                        <th>Class Teacher</th>
+                                        <th>Employment Status</th>
+                                        <th>App Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        isInitialStaffsLoading ? (
+                                            Array.from({ length: 2 }).map((_, i) => (
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <SkeletonLoader width="30px" height="30px" />
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <SkeletonLoader width="100%" height="15px" />
+                                                            <SkeletonLoader width="150px" height="12px" margin="5px 0 0 0" />
+                                                        </div>
+                                                    </td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td>
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                        <SkeletonLoader width="15px" height="15px" margin="0 6px 0 6px" />
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : staffs.length > 0 ? (
+                                            staffs.map((staff, i) =>
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <h5>{getInitials(staff.name)}</h5>
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <h6>{staff.name}</h6>
+                                                            <p>{staff.staff_id}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>{staff.phone}</td>
+                                                    <td>{staff.subject}</td>
+                                                    <td><i className="fa-solid fa-minus"></i></td>
+                                                    <td>
+                                                        <p className={staff.status ? 'active' : ''}>{staff.status ? 'Active' : 'Inactive'}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>Joined</p>
+                                                    </td>
+                                                    <td>
+                                                        <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        ) : (
+                                            <tr>
+                                                <td className="empty_message">No staffs available.</td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
+                {
+                    selectedTab === "non-teaching" && (
+                        <div className="second_table_sec">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Staff Name</th>
+                                        <th>Contact No.</th>
+                                        <th>Role</th>
+                                        <th>Employment Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        isInitialStaffsLoading ? (
+                                            Array.from({ length: 2 }).map((_, i) => (
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <SkeletonLoader width="30px" height="30px" />
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <SkeletonLoader width="100%" height="15px" />
+                                                            <SkeletonLoader width="150px" height="12px" margin="5px 0 0 0" />
+                                                        </div>
+                                                    </td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td>
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                        <SkeletonLoader width="15px" height="15px" margin="0 6px 0 6px" />
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : staffs.length > 0 ? (
+                                            staffs.map((staff, i) =>
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <h5>{getInitials(staff.name)}</h5>
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <h6>{staff.name}</h6>
+                                                            <p>{staff.staff_id}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>{staff.phone}</td>
+                                                    <td>{staff.user_role}</td>
+                                                    <td>
+                                                        <p className={staff.status ? 'active' : ''}>{staff.status ? 'Active' : 'Inactive'}</p>
+                                                    </td>
+                                                    <td>
+                                                        <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        ) : (
+                                            <tr>
+                                                <td className="empty_message">No staffs available.</td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
 
                 <SelectStaffTypeModal
                     isStaffTypeOpen={isStaffTypeOpen}

@@ -275,7 +275,7 @@ export const StaffInformationWrapper = styled('div')`
                                 }
 
                                 p {
-                                    font-size: 12px;
+                                    font-size: 11px;
                                     font-weight: 400;
                                     color: ${colors.customColors.blackColor2};
                                     /* margin-top: 3px; */
@@ -517,7 +517,7 @@ export const StaffInformationWrapper = styled('div')`
                                 }
 
                                 p {
-                                    font-size: 12px;
+                                    font-size: 11px;
                                     font-weight: 400;
                                     color: ${colors.customColors.blackColor2};
                                     /* margin-top: 3px; */
