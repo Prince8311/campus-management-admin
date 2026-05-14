@@ -1006,3 +1006,74 @@ export const AddSubjectClassWiseWrapper = styled('div')`
         }
     }
 `;
+
+export const AttendenceWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 650px;
+    height: 100vh;
+    border-top-left-radius: 10px;
+    background: ${colors.customColors.whiteColor};
+    box-shadow: -10px 5px 15px ${colors.boxShadowColors.shadowColor1};
+    z-index: 1000;
+    transition: all 0.6s ease;
+
+    &.active {
+        right: 0;
+        transition: all 0.6s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .modal_head {
+            position: relative;
+            width: 100%;
+            padding: 20px 30px;
+            border-bottom: 1px solid ${colors.customColors.borderColor};
+            display: flex;
+            align-items: center;
+
+            h4 {
+                position: relative;
+                max-width: calc(100% - 40px);
+                font-size: 14px;
+                line-height: 1;
+                font-weight: 600;
+                font-style: italic;
+                color: ${colors.customColors.blackColor1};
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .close_sec {
+                position: absolute;
+                top: 10px;
+                left: -20px;
+                display: flex;
+
+                a {
+                    position: relative;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 15px;
+                    color: ${colors.customColors.blackColor2};
+                    cursor: pointer;
+                    text-decoration: none;
+                    background: ${colors.customColors.whiteColor};
+                    box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                }
+            }
+        }
+    }
+`;

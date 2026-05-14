@@ -400,8 +400,8 @@ export const ResidentsWrapper = styled('div')`
                                 cursor: pointer;
                                 font-size: 13px;
 
-                               &.view_btn {
-                                    color: ${colors.customColors.blueColor1};
+                               &.edit_btn {
+                                    color: ${colors.customColors.greenColor};
                                     margin-right: 10px;
                                }
 
@@ -673,8 +673,8 @@ export const HostelRoomWrapper = styled('div')`
                                 cursor: pointer;
                                 font-size: 13px;
 
-                               &.view_btn {
-                                    color: ${colors.customColors.blueColor1};
+                               &.edit_btn {
+                                    color: ${colors.customColors.greenColor};
                                     margin-right: 10px;
                                }
 

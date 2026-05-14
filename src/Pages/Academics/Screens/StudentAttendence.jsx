@@ -1,17 +1,39 @@
+import { useState } from "react";
 import { StudentAttendenceWrapper } from "../../../Styles/AcademicStyle";
+import AttendenceModal from "../../../Components/Modals/Academics/Attendence";
 
 const StudentAttendencePage = () => {
+    const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
+
+    const handleOpenAttendenceModal = () => {
+        setIsAttendenceModalOpen(true);
+    };
+
     return (
         <>
             <StudentAttendenceWrapper>
                 <div className="page_head">
                     <h2>Student Attendance</h2>
+                    <div className="filter_sec">
+                        <div className="filter_btn">
+                            <i className="fa-solid fa-filter"></i>
+                            <p>Filter by date</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="overview_section">
                     <div className="sec_head">
                         <h6>Overview Report</h6>
                     </div>
-                    <div></div>
+                    <div className="graph_sec">
+                        <div className="graph_first_box"></div>
+                        <div className="graph_second_box"></div>
+                        <div className="another_sec">
+                            <div className="sec_box"></div>
+                            <div className="sec_box"></div>
+                            <div className="sec_box"></div>
+                        </div>
+                    </div>
                 </div>
                 <div className="report_details_sec">
                     <div className="report_head">
@@ -34,16 +56,18 @@ const StudentAttendencePage = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Class & Section</th>
                                     <th>Class Teacher</th>
                                     <th>Total Students</th>
                                     <th>Present</th>
                                     <th>Absent</th>
                                     <th>Percentage</th>
-                                    <th>Action</th>
+                                    <th>Mark</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>10 - D</td>
                                     <td>
                                         <div className="left_table_sec">
                                             <h5>JB</h5>
@@ -60,13 +84,19 @@ const StudentAttendencePage = () => {
                                         <p className="">Not Marked</p>
                                     </td>
                                     <td>
-                                        <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                        <a className="edit_btn" onClick={handleOpenAttendenceModal}>
+                                            <i className="fa-solid fa-pen-to-square"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <AttendenceModal
+                    isAttendenceModalOpen={isAttendenceModalOpen}
+                    setIsAttendenceModalOpen={setIsAttendenceModalOpen}
+                />
             </StudentAttendenceWrapper>
         </>
     );
