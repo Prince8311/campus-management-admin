@@ -104,14 +104,14 @@ export const AddBuildingWrapper = styled('div')`
 
                 .input_box {
                     position: relative;
-                    margin-bottom: 15px;
+                    margin-bottom: 10px;
 
                     &.fullwidth {
                         width: 100%;
                     }
 
                     &.halfwidth {
-                        width: 48.5%;
+                        width: 47.5%;
                     }
 
                     input {
@@ -335,7 +335,7 @@ export const AddRoomsWrapper = styled('div')`
                 .input_box {
                     position: relative;
                     width: 48.5%;
-                    margin-bottom: 15px;
+                    margin-bottom: 10px;
 
                     input {
                         position: relative;
@@ -367,7 +367,7 @@ export const AddRoomsWrapper = styled('div')`
 
                 .select_box {
                     position: relative;
-                    margin-bottom: 15px;
+                    margin-bottom: 10px;
 
                     &.fullwidth {
                         width: 100%;
@@ -696,7 +696,7 @@ export const AddResidentWrapper = styled('div')`
 
                 .input_box {
                     position: relative;
-                    margin-bottom: 15px;
+                    margin-bottom: 10px;
 
                     &.fullwidth {
                         width: 100%;
@@ -736,7 +736,7 @@ export const AddResidentWrapper = styled('div')`
 
                 .select_box {
                     position: relative;
-                    margin-bottom: 15px;
+                    margin-bottom: 10px;
 
                     &.fullwidth {
                         width: 100%;
