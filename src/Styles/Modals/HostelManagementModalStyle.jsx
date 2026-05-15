@@ -142,6 +142,7 @@ export const AddBuildingWrapper = styled('div')`
                 width: 50px;
                 display: flex;
                 justify-content: flex-start;
+                margin-left: 8px;
 
                 input[type="checkbox"] {
                     display: none;
@@ -344,7 +345,7 @@ export const AddRoomsWrapper = styled('div')`
 
                 .select_box {
                     position: relative;
-                    margin-bottom: 8px;
+                    margin-bottom: 15px;
 
                     &.fullwidth {
                         width: 100%;
