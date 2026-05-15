@@ -863,6 +863,38 @@ export const StudentAttendenceWrapper = styled('div')`
             color: ${colors.customColors.blackColor};
             font-family: "SUSE", sans-serif;
         }
+
+        .filter_sec {
+            position: relative;
+            margin-left: auto;
+
+            .filter_btn {
+                position: relative;
+                width: 150px;
+                height: 35px;
+                border: 1px solid ${colors.customColors.blueColor1};
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 5px 15px;
+                cursor: pointer;
+
+                p {
+                    position: relative;
+                    margin-left: 6px;
+                    font-size: 12px;
+                    color: ${colors.customColors.blueColor1};
+                    font-weight: 500;
+                }
+
+                i {
+                    position: relative;
+                    color: ${colors.customColors.blueColor1};
+                    font-size: 13px;
+                }
+            }
+        }
     }
 
     .overview_section {
@@ -884,6 +916,78 @@ export const StudentAttendenceWrapper = styled('div')`
                 font-size: 14px;
                 font-weight: 500;
                 color: ${colors.customColors.blackColor1};
+            }
+        }
+
+        .graph_sec {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+
+            .graph_first_box {
+                position: relative;
+                width: 48%;
+                height: 280px;
+                border: 1px solid ${colors.customColors.borderColor};
+                border-radius: 6px;
+                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+            }
+
+            .graph_second_box {
+                position: relative;
+                width: 24%;
+                height: 280px;
+                border: 1px solid ${colors.customColors.borderColor};
+                border-radius: 6px;
+                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+            }
+
+            .another_sec {
+                position: relative;
+                width: 24%;
+                display: flex;
+                flex-direction: column;
+
+                .sec_box {
+                    position: relative;
+                    width: 100%;
+                    height: 80px;
+                    border: 1px solid ${colors.customColors.borderColor};
+                    border-radius: 6px;
+                    box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+                    margin-bottom: 20px;
+                    padding: 15px;
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 10px;
+                        left: 9px;
+                        width: 3px;
+                        height: calc(100% - 20px);
+                        background: ${colors.customColors.blueColor1};
+                        border-radius: 25px;
+                    }
+
+                    &:nth-of-type(2) {
+                        &::before {
+                            background: ${colors.customColors.greenColor};
+                        }
+                    }
+
+                    &:nth-of-type(3) {
+                        &::before {
+                            background: ${colors.customColors.redColor};
+                        }
+                    }
+                }
             }
         }
     }
@@ -1028,16 +1132,15 @@ export const StudentAttendenceWrapper = styled('div')`
                         font-weight: 600;
 
                         &:nth-of-type(1) {
-                            width: 25%;
+                            width: 15%;
                         }
 
                         &:nth-of-type(2) {
                             width: 18%;
-                            justify-content: center;
                         }
 
                         &:nth-of-type(3) {
-                            width: 14%;
+                            width: 15%;
                             justify-content: center;
                         }
 
@@ -1047,12 +1150,17 @@ export const StudentAttendenceWrapper = styled('div')`
                         }
 
                         &:nth-of-type(5) {
-                            width: 18%;
+                            width: 14%;
                             justify-content: center;
                         }
 
                         &:nth-of-type(6) {
-                            width: 11%;
+                            width: 16%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(7) {
+                            width: 8%;
                             justify-content: center;
                         }
                     }
@@ -1088,7 +1196,13 @@ export const StudentAttendenceWrapper = styled('div')`
                             line-height: 1.5;
 
                             &:nth-of-type(1) {
-                                width: 25%;
+                                width: 15%;
+                                align-items: center;
+                                justify-content: center;
+                            }
+
+                            &:nth-of-type(2) {
+                                width: 18%;
                                 display: flex;
 
                                 .left_table_sec {
@@ -1132,13 +1246,13 @@ export const StudentAttendenceWrapper = styled('div')`
                                 }
                             }
 
-                            &:nth-of-type(2) {
-                                width: 18%;
+                            &:nth-of-type(3) {
+                                width: 15%;
                                 align-items: center;
                                 justify-content: center;
                             }
 
-                            &:nth-of-type(3) {
+                            &:nth-of-type(4) {
                                 align-items: center;
                                 width: 14%;
                                 justify-content: center;
@@ -1148,7 +1262,7 @@ export const StudentAttendenceWrapper = styled('div')`
                                 }
                             }
 
-                            &:nth-of-type(4) {
+                            &:nth-of-type(5) {
                                 width: 14%;
                                 align-items: center;
                                 justify-content: center;
@@ -1158,8 +1272,8 @@ export const StudentAttendenceWrapper = styled('div')`
                                 }
                             }
 
-                            &:nth-of-type(5) {
-                                width: 18%;
+                            &:nth-of-type(6) {
+                                width: 16%;
                                 align-items: center;
                                 justify-content: center;
 
@@ -1182,8 +1296,8 @@ export const StudentAttendenceWrapper = styled('div')`
                                 }
                             }
 
-                            &:nth-of-type(6) {
-                                width: 11%;
+                            &:nth-of-type(7) {
+                                width: 8%;
                                 align-items: center;
                                 justify-content: center;
 
@@ -1193,8 +1307,9 @@ export const StudentAttendenceWrapper = styled('div')`
                                     cursor: pointer;
                                     font-size: 13px;
 
-                                    &.view_btn {
-                                            color: ${colors.customColors.blueColor1};
+                                    &.edit_btn {
+                                        color: ${colors.customColors.greenColor};
+                                        margin: 0 10px;
                                     }
                                 }
                             }

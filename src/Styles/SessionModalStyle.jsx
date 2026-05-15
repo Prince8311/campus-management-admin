@@ -37,6 +37,13 @@ export const CreateSessionsWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);

@@ -240,7 +240,7 @@ export const ResidentsWrapper = styled('div')`
                     }
 
                     &:nth-of-type(4) {
-                        width: 18%;
+                        width: 16%;
                         justify-content: center;
                     }
 
@@ -254,7 +254,7 @@ export const ResidentsWrapper = styled('div')`
                     }
 
                     &:nth-of-type(7) {
-                        width: 10%;
+                        width: 12%;
                         justify-content: center;
                     }
                 }
@@ -346,7 +346,7 @@ export const ResidentsWrapper = styled('div')`
                         }
 
                         &:nth-of-type(4) {
-                            width: 18%;
+                            width: 16%;
                             align-items: center;
                             justify-content: center;
                         }
@@ -390,7 +390,7 @@ export const ResidentsWrapper = styled('div')`
                         }
 
                         &:nth-of-type(7) {
-                            width: 10%;
+                            width: 12%;
                             align-items: center;
                             justify-content: center;
 
@@ -402,7 +402,11 @@ export const ResidentsWrapper = styled('div')`
 
                                &.view_btn {
                                     color: ${colors.customColors.blueColor1};
-                                    margin-right: 10px;
+                               }
+
+                               &.edit_btn {
+                                    color: ${colors.customColors.greenColor};
+                                    margin: 0 10px;
                                }
 
                                &.delete_btn {
@@ -563,16 +567,16 @@ export const HostelRoomWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 10%;
+                        width: 9%;
                     }
 
                     &:nth-of-type(2) {
-                        width: 16%;
+                        width: 15%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(3) {
-                        width: 20%;
+                        width: 15%;
                         justify-content: center;
                     }
 
@@ -580,19 +584,23 @@ export const HostelRoomWrapper = styled('div')`
                         width: 12%;
                         justify-content: center;
                     }
-
                     &:nth-of-type(5) {
                         width: 12%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(6) {
-                        width: 18%;
+                        width: 12%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(7) {
-                        width: 12%;
+                        width: 15%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(8) {
+                        width: 10%;
                         justify-content: center;
                     }
                 }
@@ -628,19 +636,19 @@ export const HostelRoomWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 10%;
+                            width: 9%;
                             align-items: flex-start;
                         }
 
                         &:nth-of-type(2) {
-                            width: 16%;
+                            width: 15%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(3) {
                             align-items: center;
-                            width: 20%;
+                            width: 15%;
                             justify-content: center;
                         }
 
@@ -657,13 +665,19 @@ export const HostelRoomWrapper = styled('div')`
                         }
 
                         &:nth-of-type(6) {
-                            width: 18%;
+                            width: 12%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(7) {
-                            width: 12%;
+                            width: 15%;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(8) {
+                            width: 10%;
                             align-items: center;
                             justify-content: center;
 
@@ -673,8 +687,8 @@ export const HostelRoomWrapper = styled('div')`
                                 cursor: pointer;
                                 font-size: 13px;
 
-                               &.view_btn {
-                                    color: ${colors.customColors.blueColor1};
+                               &.edit_btn {
+                                    color: ${colors.customColors.greenColor};
                                     margin-right: 10px;
                                }
 
@@ -794,16 +808,16 @@ export const HostelBuildingsWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 12%;
+                        width: 11%;
                     }
 
                     &:nth-of-type(2) {
-                        width: 25%;
+                        width: 20%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(3) {
-                        width: 16%;
+                        width: 10%;
                         justify-content: center;
                     }
 
@@ -819,6 +833,11 @@ export const HostelBuildingsWrapper = styled('div')`
 
                     &:nth-of-type(6) {
                         width: 15%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(7) {
+                        width: 12%;
                         justify-content: center;
                     }
                 }
@@ -854,30 +873,36 @@ export const HostelBuildingsWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 12%;
+                            width: 11%;
                             align-items: flex-start;
                         }
 
                         &:nth-of-type(2) {
-                            width: 25%;
+                            width: 20%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(3) {
+                            width: 10%;
                             align-items: center;
-                            width: 16%;
                             justify-content: center;
                         }
 
                         &:nth-of-type(4) {
-                            width: 16%;
                             align-items: center;
+                            width: 16%;
                             justify-content: center;
                         }
 
                         &:nth-of-type(5) {
                             width: 16%;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(6) {
+                            width: 15%;
                             align-items: center;
                             justify-content: center;
 
@@ -904,8 +929,8 @@ export const HostelBuildingsWrapper = styled('div')`
                             }
                         }
 
-                        &:nth-of-type(6) {
-                            width: 15%;
+                        &:nth-of-type(7) {
+                            width: 12%;
                             align-items: center;
                             justify-content: center;
 

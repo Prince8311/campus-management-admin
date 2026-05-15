@@ -18,15 +18,19 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen }) => {
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="input_box">
+                            <div className="input_box fullwidth">
                                 <span>Building Name <p>*</p></span>
                                 <input type="text" />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box fullwidth">
                                 <span>Total Living Rooms <p>*</p></span>
                                 <input type="text" />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box halfwidth">
+                                <span>Total Floors <p>*</p></span>
+                                <input type="text" />
+                            </div>
+                            <div className="input_box halfwidth">
                                 <span>Total Sick Rooms <p>*</p></span>
                                 <input type="text" />
                             </div>

@@ -37,6 +37,13 @@ export const AddBuildingWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -93,11 +100,19 @@ export const AddBuildingWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
 
                 .input_box {
                     position: relative;
-                    width: 100%;
                     margin-bottom: 15px;
+
+                    &.fullwidth {
+                        width: 100%;
+                    }
+
+                    &.halfwidth {
+                        width: 48.5%;
+                    }
 
                     input {
                         position: relative;
@@ -252,6 +267,13 @@ export const AddRoomsWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -607,6 +629,13 @@ export const AddResidentWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -707,7 +736,7 @@ export const AddResidentWrapper = styled('div')`
 
                 .select_box {
                     position: relative;
-                    margin-bottom: 8px;
+                    margin-bottom: 15px;
 
                     &.fullwidth {
                         width: 100%;
