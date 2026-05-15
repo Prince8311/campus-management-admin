@@ -37,6 +37,13 @@ export const CreateSectionWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -212,6 +219,13 @@ export const CreateSubjectsWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -376,6 +390,13 @@ export const DeleteConfirmationWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -509,6 +530,13 @@ export const CreateFieldsWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -938,6 +966,13 @@ export const AddStateCitiesWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -1237,6 +1272,13 @@ export const EditStateCitiesWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -1866,6 +1908,13 @@ export const AddTimeSlotWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -2090,6 +2139,13 @@ export const CustomizeSubjectRepetitionWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);

@@ -34,6 +34,7 @@ const HostelRoomsPage = () => {
                                 <th>Sl.No.</th>
                                 <th>Room No.</th>
                                 <th>Building</th>
+                                <th>Floor No.</th>
                                 <th>Bed Count</th>
                                 <th>Occupied</th>
                                 <th>Type</th>
@@ -45,6 +46,7 @@ const HostelRoomsPage = () => {
                                 <td>1</td>
                                 <td>11A</td>
                                 <td>H1-056</td>
+                                <td>02</td>
                                 <td>25</td>
                                 <td>2</td>
                                 <td>Ac</td>

@@ -19,7 +19,7 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="select_box fullwidth">
+                            <div className="select_box halfwidth">
                                 <span>Select Building <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn">
@@ -34,6 +34,10 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="input_box">
+                                <span>Floor No. <p>*</p></span>
+                                <input type="text" />
                             </div>
                             <div className="input_box">
                                 <span>Room Number <p>*</p></span>

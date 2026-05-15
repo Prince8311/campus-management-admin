@@ -27,6 +27,7 @@ const HostelBuildingsPage = () => {
                             <tr>
                                 <th>Sl.No.</th>
                                 <th>Building Name</th>
+                                <th>Floors</th>
                                 <th>Living Rooms</th>
                                 <th>Sick Rooms</th>
                                 <th>Status</th>
@@ -37,6 +38,7 @@ const HostelBuildingsPage = () => {
                             <tr>
                                 <td>1</td>
                                 <td>H1-056</td>
+                                <td>05</td>
                                 <td>25</td>
                                 <td>2</td>
                                 <td>

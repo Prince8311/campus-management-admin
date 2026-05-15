@@ -972,19 +972,19 @@ export const StudentAttendenceWrapper = styled('div')`
                         left: 9px;
                         width: 3px;
                         height: calc(100% - 20px);
-                        background: ${colors.customColors.greenColor};
+                        background: ${colors.customColors.blueColor1};
                         border-radius: 25px;
                     }
 
                     &:nth-of-type(2) {
                         &::before {
-                            background: ${colors.customColors.redColor};
+                            background: ${colors.customColors.greenColor};
                         }
                     }
 
                     &:nth-of-type(3) {
                         &::before {
-                            background: ${colors.customColors.yellowColor1};
+                            background: ${colors.customColors.redColor};
                         }
                     }
                 }
