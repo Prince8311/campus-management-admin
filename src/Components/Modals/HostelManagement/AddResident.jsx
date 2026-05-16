@@ -70,17 +70,22 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="input_box halfwidth">
-                                <span>Class <p>*</p></span>
-                                <input type="text" />
-                            </div>
-                            <div className="input_box halfwidth">
-                                <span>Contact No. <p>*</p></span>
-                                <input type="text" />
-                            </div>
-                            <div className="input_box halfwidth">
-                                <span>Mail ID <p>*</p></span>
-                                <input type="text" readOnly />
+                            <div className="select_box halfwidth">
+                                <span>Status <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn">
+                                        <p>On Campus</p>
+                                        <i className="fa-solid fa-angle-down"></i>
+                                    </div>
+                                    <div className="dropdown">
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                <li>On Campus</li>
+                                                <li>Off Campus</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="select_box halfwidth">
                                 <span>Food Preference <p>*</p></span>
@@ -101,16 +106,6 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <div className="toggle_bar">
-                            <input
-                                type="checkbox"
-                                id="toggle"
-                            />
-                            <label htmlFor="toggle">
-                                <span></span>
-                            </label>
-                        </div>
-                        <p>Make this field mandatory</p>
                         <button>Save</button>
                     </div>
                 </div>

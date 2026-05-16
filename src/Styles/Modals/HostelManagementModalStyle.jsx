@@ -883,55 +883,6 @@ export const AddResidentWrapper = styled('div')`
             align-items: center;
             border-top: 1px solid ${colors.customColors.borderColor};
 
-            .toggle_bar {
-                position: relative;
-                width: 50px;
-                display: flex;
-                justify-content: flex-start;
-
-                input[type="checkbox"] {
-                    display: none;
-                }
-
-                label {
-                    position: relative;
-                    width: 40px;
-                    height: 21px;
-                    background: ${colors.customColors.whiteColor2};
-                    border-radius: 25px;
-                    padding: 3px;
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                    transition: all 0.5s ease;
-
-                    span {
-                        position: relative;
-                        width: 15px;
-                        height: 100%;
-                        background: ${colors.customColors.whiteColor};
-                        border-radius: 50%;
-                        transition: all 0.5s ease;
-                    }
-                }
-
-                input[type="checkbox"]:checked ~ label {
-                    background: ${colors.customColors.blueColor1};
-                    transition: all 0.5s ease;
-                }
-
-                input[type="checkbox"]:checked ~ label span {
-                    transform: translateX(19px);
-                    transition: all 0.5s ease;
-                }
-            }
-
-            p {
-                position: relative;
-                font-size: 12px;
-                color: ${colors.customColors.blackColor1};
-            }
-
             button {
                 position: relative;
                 width: 160px;
