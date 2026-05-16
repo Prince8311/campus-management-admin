@@ -89,5 +89,9 @@ export const getApiEndpoints = () => {
         fetchRoles: `${apiURL}/api/role-permission/list.php`,
         fetchRoleDetails: `${apiURL}/api/role-permission/details.php`,
         deleteRole: `${apiURL}/api/role-permission/delete.php`,
+
+        // Hostel Management
+        createHostelBuilding: `${apiURL}/api/hostel/building/create.php`,
+        FetchHostelBuilding: `${apiURL}/api/hostel/building/list.php`,
     };
 }
