@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { StudentAttendenceWrapper } from "../../../Styles/AcademicStyle";
 import AttendenceModal from "../../../Components/Modals/Academics/Attendence";
+import StudentWeeklyAttendanceGraph from "../Charts/WeeklyAttendence";
+import StudentDailyAttendance from "../Charts/DailyAttendence";
 
 const StudentAttendencePage = () => {
     const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
@@ -26,12 +28,31 @@ const StudentAttendencePage = () => {
                         <h6>Overview Report</h6>
                     </div>
                     <div className="graph_sec">
-                        <div className="graph_first_box"></div>
-                        <div className="graph_second_box"></div>
+                        <div className="graph_first_box">
+                            <h4>Weekly Report <span>(10 May - 17 May)</span></h4>
+                            <div className="graph_box">
+                                <StudentWeeklyAttendanceGraph />
+                            </div>
+                        </div>
+                        <div className="graph_second_box">
+                            <h4>Daily Report <span>(10 May)</span></h4>
+                            <div className="graph_box">
+                                <StudentDailyAttendance />
+                            </div>
+                        </div>
                         <div className="another_sec">
-                            <div className="sec_box"></div>
-                            <div className="sec_box"></div>
-                            <div className="sec_box"></div>
+                            <div className="sec_box">
+                                <p>Total Students</p>
+                                <span>1500</span>
+                            </div>
+                            <div className="sec_box">
+                                <p>Present Students</p>
+                                <span>1000</span>
+                            </div>
+                            <div className="sec_box">
+                                <p>Absent Students</p>
+                                <span>500</span>
+                            </div>
                         </div>
                     </div>
                 </div>

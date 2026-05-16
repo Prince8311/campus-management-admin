@@ -932,17 +932,68 @@ export const StudentAttendenceWrapper = styled('div')`
                 width: 48%;
                 height: 280px;
                 border: 1px solid ${colors.customColors.borderColor};
+                padding: 15px 15px 5px 10px;
                 border-radius: 6px;
                 box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+
+                h4 {
+                    position: relative;
+                    padding-left: 10px;
+                    width: max-content;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor};
+                    font-style: italic;
+
+                    span {
+                        font-size: 11px;
+                        opacity: 0.5;
+                    }
+                }
+
+                .graph_box {
+                    position: relative;
+                    margin-top: 20px;
+                    width: 100%;
+                    height: calc(100% - 40px);
+                }
             }
 
             .graph_second_box {
                 position: relative;
                 width: 24%;
                 height: 280px;
+                padding: 15px;
                 border: 1px solid ${colors.customColors.borderColor};
                 border-radius: 6px;
+                display: flex;
+                flex-direction: column;
                 box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+
+                h4 {
+                    position: relative;
+                    padding-left: 5px;
+                    width: max-content;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor};
+                    font-style: italic;
+
+                    span {
+                        font-size: 11px;
+                        opacity: 0.5;
+                    }
+                }
+
+                .graph_box {
+                    position: relative;
+                    margin-top: 20px;
+                    width: 100%;
+                    height: calc(100% - 40px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
 
             .another_sec {
@@ -960,6 +1011,9 @@ export const StudentAttendenceWrapper = styled('div')`
                     box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
                     margin-bottom: 20px;
                     padding: 15px;
+                    padding-left: 25px;
+                    display: flex;
+                    flex-direction: column;
 
                     &:last-of-type {
                         margin-bottom: 0;
@@ -972,7 +1026,7 @@ export const StudentAttendenceWrapper = styled('div')`
                         left: 9px;
                         width: 3px;
                         height: calc(100% - 20px);
-                        background: ${colors.customColors.blueColor1};
+                        background: ${colors.customColors.blueColor4};
                         border-radius: 25px;
                     }
 
@@ -986,6 +1040,21 @@ export const StudentAttendenceWrapper = styled('div')`
                         &::before {
                             background: ${colors.customColors.redColor};
                         }
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        font-weight: 500;
+                        font-style: italic;
+                        color: ${colors.customColors.blackColor1};
+                    }
+
+                    span {
+                        position: relative;
+                        margin-top: 2px;
+                        font-size: 24px;
+                        font-weight: 600;
                     }
                 }
             }

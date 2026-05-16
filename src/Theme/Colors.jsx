@@ -34,6 +34,7 @@ export const colorNames = () => {
         blueColor1: "rgb(2, 192, 255)",
         blueColor2: "rgb(0, 114, 195)",
         blueColor3: "rgb(0, 101, 141)",
+        blueColor4: "rgb(28, 65, 255)",
         blueColorLight: "rgba(2, 192, 255, 0.08)",
       }
     };
