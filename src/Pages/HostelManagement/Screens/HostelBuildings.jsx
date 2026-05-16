@@ -25,7 +25,7 @@ const HostelBuildingsPage = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Sl.No.</th>
+                                <th>Sl. No.</th>
                                 <th>Building Name</th>
                                 <th>Floors</th>
                                 <th>Living Rooms</th>

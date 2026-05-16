@@ -37,6 +37,7 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
+                        <p>Status</p>
                         <div className="toggle_bar">
                             <input
                                 type="checkbox"
@@ -46,7 +47,6 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen }) => {
                                 <span></span>
                             </label>
                         </div>
-                        <p>Make this field mandatory</p>
                         <button>Save</button>
                     </div>
                 </div>
