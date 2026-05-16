@@ -1,13 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HostelBuildingsWrapper } from "../../../Styles/HostelStyle";
 import AddBuildingModal from "../../../Components/Modals/HostelManagement/AddBuilding";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const HostelBuildingsPage = () => {
+    const api = getApiEndpoints();
     const [isAddBuildingOpen, setIsAddBuildingOpen] = useState(false);
+    const [page, setPage] = useState(1);
+    const [buildings, setBuildings] = useState([]);
+    const [isInitialBuildingsLoading, setIsInitialBuildingsLoading] = useState(true);
+    const [totalCount, setTotalCount] = useState('');
 
     const handleOpenAddBuildingModal = () => {
         setIsAddBuildingOpen(true);
     };
+
+    const fetchBuildings = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialBuildingsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.FetchHostelBuilding, {
+                params: {
+                    page: pageNumber,
+                }
+            });
+            if (response?.data.status === 200) {
+                console.log("Hostel Buildings", response);
+                setBuildings(response?.data.buildings);
+                setTotalCount(response?.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialBuildingsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchBuildings(true, page);
+    }, []);
 
     return (
         <>
@@ -35,20 +70,47 @@ const HostelBuildingsPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>H1-056</td>
-                                <td>05</td>
-                                <td>25</td>
-                                <td>2</td>
-                                <td>
-                                    <p className="active">Active</p>
-                                </td>
-                                <td>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                isInitialBuildingsLoading ? (
+                                    Array.from({ length: 2 }).map((_, i) => (
+                                        <tr key={i}>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td>
+                                                <SkeletonLoader width="15px" height="15px" />
+                                                <SkeletonLoader width="15px" height="15px" margin="0 6px 0 0" />
+                                                <SkeletonLoader width="15px" height="15px" />
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : buildings.length > 0 ? (
+                                    buildings.map((building, i) =>
+                                        <tr key={i}>
+                                            <td>{building.id}</td>
+                                            <td>{building.name}</td>
+                                            <td>{building.total_floors}</td>
+                                            <td>{building.living_rooms}</td>
+                                            <td>{building.sick_rooms}</td>
+                                            <td>
+                                                <p className={building.status ? 'active' : ''}>{building.status ? 'Active' : 'Inactive'}</p>
+                                            </td>
+                                            <td>
+                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    )
+                                ) : (
+                                    <tr>
+                                        <td className="empty_message">No Hostel Building available.</td>
+                                    </tr>
+                                )
+                            }
+
                         </tbody>
                     </table>
                 </div>
