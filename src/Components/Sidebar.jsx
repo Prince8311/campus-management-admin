@@ -282,7 +282,7 @@ const Sidebar = () => {
                                                 <p>Rooms</p>
                                             </NavLink>
                                             <NavLink to="/admin/hostel-management/hostel-buildings">
-                                                <i className="fa-regular fa-building prefix"></i>
+                                                <i className="fa-solid fa-building prefix"></i>
                                                 <p>Buildings</p>
                                             </NavLink>
                                         </div>

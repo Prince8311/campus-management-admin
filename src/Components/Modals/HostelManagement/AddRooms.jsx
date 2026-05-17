@@ -47,9 +47,22 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
                                 <span>Total Beds <p>*</p></span>
                                 <input type="text" />
                             </div>
-                            <div className="input_box">
-                                <span>Occupied <p>*</p></span>
-                                <input type="text" />
+                            <div className="select_box halfwidth">
+                                <span>Room Category <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn">
+                                        <p>AC</p>
+                                        <i className="fa-solid fa-angle-down"></i>
+                                    </div>
+                                    <div className="dropdown">
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                <li>AC</li>
+                                                <li>Non-AC</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="select_box halfwidth">
                                 <span>Type <p>*</p></span>
