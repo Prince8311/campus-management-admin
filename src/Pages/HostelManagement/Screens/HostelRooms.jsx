@@ -1,13 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HostelRoomWrapper } from "../../../Styles/HostelStyle";
 import AddRoomsModal from "../../../Components/Modals/HostelManagement/AddRooms";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const HostelRoomsPage = () => {
+    const api = getApiEndpoints();
     const [isAddRoomOpen, setIsAddRoomOpen] = useState(false);
+    const tabs = [
+        { label: "Living Rooms", value: "Living Room" },
+        { label: "Sick Rooms", value: "Sick Room" }
+    ];
+    const [selectedTab, setSelectedTab] = useState(tabs[0].value);
+    const [page, setPage] = useState(1);
+    const [rooms, setRooms] = useState([]);
+    const [isInitialBuildingsLoading, setIsInitialBuildingsLoading] = useState(true);
+    const [totalCount, setTotalCount] = useState('');
 
     const handleOpenAddRoomModal = () => {
         setIsAddRoomOpen(true);
     };
+
+    const fetchRooms = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialBuildingsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchHostelRoom, {
+                params: {
+                    page: pageNumber,
+                    category: selectedTab
+                }
+            });
+            if (response?.data.status === 200) {
+                console.log("Hostel Rooms", response);
+                setRooms(response?.data.rooms);
+                setTotalCount(response?.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialBuildingsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchRooms(true, page);
+    }, [selectedTab, page]);
 
     return (
         <>
@@ -23,8 +64,17 @@ const HostelRoomsPage = () => {
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
-                        <li className="active">Living Rooms</li>
-                        <li>Sick Rooms</li>
+                        {
+                            tabs.map((tab) => (
+                                <li
+                                    key={tab.value}
+                                    className={selectedTab === tab.value ? "active" : ""}
+                                    onClick={() => setSelectedTab(tab.value)}
+                                >
+                                    {tab.label}
+                                </li>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className="table_sec">

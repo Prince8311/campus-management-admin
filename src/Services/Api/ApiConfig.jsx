@@ -92,6 +92,8 @@ export const getApiEndpoints = () => {
 
         // Hostel Management
         createHostelBuilding: `${apiURL}/api/hostel/building/create.php`,
-        FetchHostelBuilding: `${apiURL}/api/hostel/building/list.php`,
+        fetchHostelBuilding: `${apiURL}/api/hostel/building/list.php`,
+        createHostelRoom: `${apiURL}/api/hostel/room/create.php`,
+        fetchHostelRoom: `${apiURL}/api/hostel/room/list.php`,
     };
 }
