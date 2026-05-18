@@ -452,6 +452,11 @@ export const AddRoomsWrapper = styled('div')`
                                 transition: all 0.5s ease;
                             }
 
+                            &.dropup {
+                                top: inherit;
+                                bottom: 100%;
+                            }
+
                             .dropdown_inner {
                                 position: relative;
                                 width: 100%;

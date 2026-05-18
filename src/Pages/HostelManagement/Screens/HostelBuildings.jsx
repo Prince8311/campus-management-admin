@@ -23,7 +23,7 @@ const HostelBuildingsPage = () => {
             setIsInitialBuildingsLoading(true);
         }
         try {
-            const response = await axiosInstance.get(api.FetchHostelBuilding, {
+            const response = await axiosInstance.get(api.fetchHostelBuilding, {
                 params: {
                     page: pageNumber,
                 }
