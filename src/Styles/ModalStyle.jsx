@@ -1109,29 +1109,42 @@ export const AttendenceWrapper = styled('div')`
                 display: flex;
                 padding: 20px;
 
-                .filter_btn {
+                .filter_date_sec {
                     position: relative;
                     width: 250px;
                     height: 35px;
-                    border: 1px solid ${colors.customColors.borderColor};
-                    border-radius: 6px;
-                    display: flex;
-                    align-items: center;
-                    padding: 5px 15px;
-                    cursor: pointer;
 
-                    p {
+                    .filter_btn {
                         position: relative;
-                        margin-left: 10px;
-                        font-size: 12px;
-                        color: ${colors.customColors.blackColor1};
-                        font-weight: 500;
+                        width: 100%;
+                        height: 100%;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 6px;
+                        display: flex;
+                        align-items: center;
+                        padding: 5px 12px;
+                        cursor: pointer;
+
+                        p {
+                            position: relative;
+                            margin-left: 15px;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        i {
+                            position: relative;
+                            color: ${colors.customColors.blueColor1};
+                            font-size: 13px;
+                        }
                     }
 
-                    i {
-                        position: relative;
-                        color: ${colors.customColors.blueColor1};
-                        font-size: 13px;
+                    .dropdown {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 300px;
+                        z-index: 5;
                     }
                 }
 
@@ -1158,7 +1171,7 @@ export const AttendenceWrapper = styled('div')`
                 .item_box {
                     position: relative;
                     width: 33.33%;
-                    height: 80px;
+                    height: 72px;
                     padding: 0 10px;
                     display: flex;
 
@@ -1204,9 +1217,11 @@ export const AttendenceWrapper = styled('div')`
 
                         span {
                             position: relative;
-                            margin-top: 5px;
+                            margin-top: 3px;
                             font-size: 27px;
-                            font-weight: 500;
+                            line-height: 1.2;
+                            font-weight: 600;
+                            font-style: italic;
                             color: ${colors.customColors.blackColor1};
                         }
                     }

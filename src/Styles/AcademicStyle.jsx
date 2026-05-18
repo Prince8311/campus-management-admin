@@ -870,29 +870,41 @@ export const StudentAttendenceWrapper = styled('div')`
 
             .filter_btn {
                 position: relative;
-                width: 150px;
+                width: 200px;
                 height: 35px;
-                border: 1px solid ${colors.customColors.blueColor1};
+                border: 1px solid ${colors.customColors.borderColor};
                 border-radius: 6px;
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                padding: 5px 15px;
+                padding: 5px 0;
                 cursor: pointer;
-
-                p {
-                    position: relative;
-                    margin-left: 6px;
-                    font-size: 12px;
-                    color: ${colors.customColors.blueColor1};
-                    font-weight: 500;
-                }
 
                 i {
                     position: relative;
-                    color: ${colors.customColors.blueColor1};
+                    width: 40px;
+                    height: 100%;
+                    color: ${colors.customColors.blackColor3};
                     font-size: 13px;
+                    border-right: 1px solid ${colors.customColors.borderColor};
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
+
+                p {
+                    position: relative;
+                    padding-left: 15px;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor2};
+                }
+            }
+
+            .dropdown {
+                position: absolute;
+                top: 35px;
+                right: 0;
+                width: 300px;
+                z-index: 5;
             }
         }
     }

@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { AttendenceWrapper } from "../../../Styles/ModalStyle";
+import Calender from "../../Calender";
 
-const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen }) => {
+const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, selectedDate }) => {
+    const [isCalendarDropdownOpen, setIsCalendarDropdownOpen] = useState(false);
+
     const closeModal = () => {
         setIsAttendenceModalOpen(false);
     };
@@ -17,9 +21,18 @@ const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen }) =>
                     </div>
                     <div className="modal_item_sec">
                         <div className="item_btns">
-                            <div className="filter_btn">
-                                <i className="fa-regular fa-calendar"></i>
-                                <p>15 May 2026</p>
+                            <div className="filter_date_sec">
+                                <div className="filter_btn" onClick={() => setIsCalendarDropdownOpen(!isCalendarDropdownOpen)}>
+                                    <i className="fa-regular fa-calendar"></i>
+                                    <p>{selectedDate}</p>
+                                </div>
+                                {
+                                    isCalendarDropdownOpen && (
+                                        <div className="dropdown">
+                                            <Calender />
+                                        </div>
+                                    )
+                                }
                             </div>
                             <button>Mark all Students</button>
                         </div>

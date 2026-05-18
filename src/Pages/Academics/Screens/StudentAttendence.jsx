@@ -3,9 +3,21 @@ import { StudentAttendenceWrapper } from "../../../Styles/AcademicStyle";
 import AttendenceModal from "../../../Components/Modals/Academics/Attendence";
 import StudentWeeklyAttendanceGraph from "../Charts/WeeklyAttendence";
 import StudentDailyAttendance from "../Charts/DailyAttendence";
+import Calender from "../../../Components/Calender";
 
 const StudentAttendencePage = () => {
     const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+    const getFormattedCurrentDate = () => {
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = today.toLocaleString('en-US', { month: 'long' });
+        const year = today.getFullYear();
+        return `${day} ${month}, ${year}`;
+    };
+
+    const [filterDate, setFilterDate] = useState(getFormattedCurrentDate());
 
     const handleOpenAttendenceModal = () => {
         setIsAttendenceModalOpen(true);
@@ -17,10 +29,17 @@ const StudentAttendencePage = () => {
                 <div className="page_head">
                     <h2>Student Attendance</h2>
                     <div className="filter_sec">
-                        <div className="filter_btn">
+                        <div className="filter_btn" onClick={() => setIsCalendarOpen(prev => !prev)}>
                             <i className="fa-solid fa-filter"></i>
-                            <p>Filter by date</p>
+                            <p>{filterDate || "Filter by date"}</p>
                         </div>
+                        {
+                            isCalendarOpen && (
+                                <div className="dropdown">
+                                    <Calender setFinalSelectedDate={setFilterDate} />
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 <div className="overview_section">
@@ -117,6 +136,7 @@ const StudentAttendencePage = () => {
                 <AttendenceModal
                     isAttendenceModalOpen={isAttendenceModalOpen}
                     setIsAttendenceModalOpen={setIsAttendenceModalOpen}
+                    selectedDate={filterDate}
                 />
             </StudentAttendenceWrapper>
         </>

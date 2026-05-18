@@ -1,8 +1,6 @@
 import { AddRoomsWrapper } from "../../../Styles/Modals/HostelManagementModalStyle";
 
-
 const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
-
     const closeModal = () => {
         setIsAddRoomOpen(false);
     };
