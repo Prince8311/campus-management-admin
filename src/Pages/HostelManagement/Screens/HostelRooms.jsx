@@ -92,19 +92,46 @@ const HostelRoomsPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>11A</td>
-                                <td>H1-056</td>
-                                <td>02</td>
-                                <td>25</td>
-                                <td>2</td>
-                                <td>Ac</td>
-                                <td>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                isInitialBuildingsLoading ? (
+                                    Array.from({ length: 2 }).map((_, i) => (
+                                        <tr key={i}>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td>
+                                                <SkeletonLoader width="15px" height="15px" margin="0 6px 0 0" />
+                                                <SkeletonLoader width="15px" height="15px" />
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : rooms.length > 0 ? (
+                                    rooms.map((room, i) =>
+                                        <tr key={i}>
+                                            <td>{room.id}</td>
+                                            <td>{room.room_no}</td>
+                                            <td>{room.building_name}</td>
+                                            <td>{room.floor_no}</td>
+                                            <td>{room.bed_count}</td>
+                                            <td>{room.occupied}</td>
+                                            <td>{room.type}</td>
+                                            <td>
+                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    )
+                                ) : (
+                                    <tr>
+                                        <td className="empty_message">No Hostel Room available.</td>
+                                    </tr>
+
+                                )
+                            }
                         </tbody>
                     </table>
                 </div>
