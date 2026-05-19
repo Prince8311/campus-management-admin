@@ -24,6 +24,9 @@ import SubscriptionPage from "../Pages/Subscription";
 import InstitutionMainPage from "../Pages/Institutions/Index";
 import InstitutionListPage from "../Pages/Institutions/Screens/InstitutionList";
 
+// Coupons 
+import CouponsPage from "../Pages/Coupons";
+
 // Academics
 import AcademicMainPage from "../Pages/Academics/Index";
 import StudentInformationPage from "../Pages/Academics/Screens/StudentInformation";
@@ -125,6 +128,7 @@ const Routers = () => {
                             <Route path="" element={<Navigate to="institution-list" />} />
                             <Route path="institution-list" element={<InstitutionListPage />} />
                         </Route>
+                        <Route path="coupons" element={<CouponsPage />} />
                         <Route path="reports" element={<ReportMainPage />}>
                             <Route path="" element={<Navigate to="school-strength" />} />
                             <Route path="school-strength" element={<SchoolSthrengthPage />}>
