@@ -1,10 +1,66 @@
+import { useEffect, useState } from "react";
 import { AddResidentWrapper } from "../../../Styles/Modals/HostelManagementModalStyle";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { toast } from "react-toastify";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
+const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }) => {
+    const api = getApiEndpoints();
+    const [userList, setUserList] = useState([]);
+    const [buildingList, setBuildingList] = useState([]);
+    const [roomList, setRoomList] = useState([]);
+    const statusOptions = ['On Campus', 'On Outing', 'On Sick Leave'];
+    const foodPreferenceOptions = ['Veg', 'Non Veg'];
+    const [showUserDropdown, setShowUserDropdown] = useState(false);
+    const [showBuildingDropdown, setShowBuildingDropdown] = useState(false);
+    const [showRoomDropdown, setShowRoomDropdown] = useState(false);
+    const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+    const [showFoodPreferenceDropdown, setShowFoodPreferenceDropdown] = useState(false);
 
     const closeModal = () => {
         setIsAddResidentOpen(false);
     };
+
+    const toggleUserDropdown = () => {
+        setShowUserDropdown(!showUserDropdown);
+        setShowBuildingDropdown(false);
+        setShowRoomDropdown(false);
+        setShowStatusDropdown(false);
+        setShowFoodPreferenceDropdown(false);
+    };
+
+    const toggleBuildingDropdown = () => {
+        setShowBuildingDropdown(!showBuildingDropdown);
+        setShowUserDropdown(false);
+        setShowRoomDropdown(false);
+        setShowStatusDropdown(false);
+        setShowFoodPreferenceDropdown(false);
+    }   
+
+    const toggleRoomDropdown = () => {
+        setShowRoomDropdown(!showRoomDropdown);
+        setShowUserDropdown(false);
+        setShowBuildingDropdown(false);
+        setShowStatusDropdown(false);
+        setShowFoodPreferenceDropdown(false);
+    }
+
+    const toggleStatusDropdown = () => {
+        setShowStatusDropdown(!showStatusDropdown);
+        setShowUserDropdown(false);
+        setShowBuildingDropdown(false);
+        setShowRoomDropdown(false);
+        setShowFoodPreferenceDropdown(false);
+    }
+
+    const toggleFoodPreferenceDropdown = () => {
+        setShowFoodPreferenceDropdown(!showFoodPreferenceDropdown);
+        setShowUserDropdown(false);
+        setShowBuildingDropdown(false);
+        setShowRoomDropdown(false);
+        setShowStatusDropdown(false);
+    }
 
     return (
         <>
@@ -21,11 +77,11 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                             <div className="select_box halfwidth">
                                 <span>Select Resident <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
+                                    <div className="dropdown_btn" onClick={toggleUserDropdown}>
                                         <p>Sick Room</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                        <i className={`fa-solid fa-angle-down ${showUserDropdown ? "active" : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showUserDropdown ? "active" : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
                                                 <li>Sick Room</li>
@@ -37,11 +93,11 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                             <div className="select_box halfwidth">
                                 <span>Select Building <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
+                                    <div className="dropdown_btn" onClick={toggleBuildingDropdown}>
                                         <p>Sick Room</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                        <i className={`fa-solid fa-angle-down ${showBuildingDropdown ? "active" : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showBuildingDropdown ? "active" : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
                                                 <li>Sick Room</li>
@@ -57,11 +113,11 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                             <div className="select_box halfwidth">
                                 <span>Select Room <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
+                                    <div className="dropdown_btn" onClick={toggleRoomDropdown}>
                                         <p>Sick Room</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                        <i className={`fa-solid fa-angle-down ${showRoomDropdown ? "active" : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showRoomDropdown ? "active" : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
                                                 <li>Sick Room</li>
@@ -73,15 +129,18 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                             <div className="select_box halfwidth">
                                 <span>Status <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
+                                    <div className="dropdown_btn" onClick={toggleStatusDropdown}>
                                         <p>On Campus</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                        <i className={`fa-solid fa-angle-down ${showStatusDropdown ? "active" : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showStatusDropdown ? "active" : ''} dropUp`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li>On Campus</li>
-                                                <li>Off Campus</li>
+                                                {
+                                                    statusOptions.map((option) => (
+                                                        <li key={option}>{option}</li>
+                                                    ))
+                                                }
                                             </ul>
                                         </div>
                                     </div>
@@ -90,14 +149,18 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen }) => {
                             <div className="select_box halfwidth">
                                 <span>Food Preference <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
+                                    <div className="dropdown_btn" onClick={toggleFoodPreferenceDropdown}>
                                         <p>Veg</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                        <i className={`fa-solid fa-angle-down ${showFoodPreferenceDropdown ? "active" : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showFoodPreferenceDropdown ? "active" : ''} dropUp`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li>Non Veg</li>
+                                                {
+                                                    foodPreferenceOptions.map((option) => (
+                                                        <li key={option}>{option}</li>
+                                                    ))
+                                                }
                                             </ul>
                                         </div>
                                     </div>

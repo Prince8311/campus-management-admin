@@ -3,6 +3,9 @@ import { ResidentsWrapper } from "../../../Styles/HostelStyle";
 import AddResidentModal from "../../../Components/Modals/HostelManagement/AddResident";
 
 const HostelResidentsPage = () => {
+    const tabs = ["Student", "Staff"];
+    const [activeTab, setActiveTab] = useState("Student");
+
     const [isAddResidentOpen, setIsAddResidentOpen] = useState(false);
 
     const handleOpenAddResidentModal = () => {
@@ -23,8 +26,15 @@ const HostelResidentsPage = () => {
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
-                        <li className="active">Student</li>
-                        <li>Staff</li>
+                        {tabs.map((tab) => (
+                            <li
+                                key={tab}
+                                className={activeTab === tab ? "active" : ""}
+                                onClick={() => setActiveTab(tab)}
+                            >
+                                {tab}
+                            </li>
+                        ))}
                     </div>
                 </div>
                 <div className="student_search_sec">
@@ -83,6 +93,7 @@ const HostelResidentsPage = () => {
                 <AddResidentModal
                     isAddResidentOpen={isAddResidentOpen}
                     setIsAddResidentOpen={setIsAddResidentOpen}
+                    activeTab={activeTab}
                 />
             </ResidentsWrapper>
         </>
