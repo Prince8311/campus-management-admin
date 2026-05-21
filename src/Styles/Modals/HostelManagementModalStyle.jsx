@@ -843,7 +843,7 @@ export const AddResidentWrapper = styled('div')`
                                     width: 100%;
                                     display: flex;
                                     flex-direction: column;
-                                    max-height: 150px;
+                                    max-height: 115px;
                                     overflow-y: auto;
                                     scrollbar-width: none;
                                     -ms-overflow-style: none;
@@ -861,22 +861,52 @@ export const AddResidentWrapper = styled('div')`
                                         font-size: 12px;
                                         color: ${colors.customColors.blackColor1};
                                         border-radius: 4px;
+                                        display: flex;
+                                        align-items: center;
                                         transition: all 0.5s ease;
+
+                                        span {
+                                            position: relative;
+                                            font-size: 11px;
+                                            margin-left: 2px;
+                                            color: ${colors.customColors.blackColor2};
+                                        }
 
                                         &:hover {
                                             background: ${colors.themeColor};
                                             color: ${colors.customColors.whiteColor};
                                             transition: all 0.5s ease;
+
+                                            span {
+                                                color: ${colors.customColors.whiteColor};
+                                            }
                                         }
 
                                         &.active {
                                             background: ${colors.customColors.lightBackground};
                                             color: ${colors.customColors.blackColor};
 
+                                            span {
+                                                color: ${colors.customColors.blackColor1};
+                                            }
+
                                             &:hover {
                                                 color: ${colors.customColors.blackColor};
+
+                                                span {
+                                                    color: ${colors.customColors.blackColor1};
+                                                }
                                             }
                                         }
+
+                                    }
+
+                                    .no_data {
+                                        position: relative;
+                                        width: 100%;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor3};
+                                        padding: 3px 10px;
                                     }
 
                                     .user_box {
@@ -884,10 +914,9 @@ export const AddResidentWrapper = styled('div')`
                                         width: 100%;
                                         display: flex;
                                         align-items: center;
-                                        padding: 5px;
+                                        padding: 7px;
                                         cursor: pointer;
                                         border-bottom: 1px solid ${colors.customColors.borderColor};
-                                        border-radius: 5px;
                                         transition: all 0.5s ease;
 
                                         &:last-of-type {
@@ -928,7 +957,7 @@ export const AddResidentWrapper = styled('div')`
                                             span {
                                                 font-size: 9px;
                                                 color: ${colors.customColors.blackColor2};
-                                                margin-top: 2px;
+                                                margin-top: 1px;
                                             }
                                         }
 
