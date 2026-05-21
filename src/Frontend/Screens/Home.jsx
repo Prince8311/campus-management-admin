@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomePageWrapper } from "../../Styles/Frontend/HomeStyle";
+import SelectAddressModal from "../../Components/Modals/Setting/SelectAddress";
 
 const HomePage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    
+    const [showAddressModal, setShowAddressModal] = useState(false);
+    const [selectedAddress, setSelectedAddress] = useState('');
+
 
     const handleGetStarted = () => {
         navigate("/auth", { replace: true });
@@ -33,6 +36,10 @@ const HomePage = () => {
     const handleRedirectSubcriptionPage = () => {
         navigate("/subcription");
     };
+
+    const handleAddressModalOpen = () => {
+        setShowAddressModal(true);
+    }
 
     return (
         <>
@@ -168,9 +175,9 @@ const HomePage = () => {
                                         <span>Phone Number <p>*</p></span>
                                         <input type="text" placeholder="+91 (555) 000-0000" />
                                     </div>
-                                    <div className="text_box">
+                                    <div className="text_box" onClick={handleAddressModalOpen}>
                                         <span>Location <p>*</p></span>
-                                        <textarea placeholder="Enter your institution's location" />
+                                        <textarea placeholder="Enter your institution's location" readOnly value={selectedAddress} />
                                     </div>
                                     <div className="btn_box">
                                         <button>Register</button>
@@ -246,6 +253,13 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
+
+                <SelectAddressModal
+                    isShowAddressModal={showAddressModal}
+                    setIsShowAddressModal={setShowAddressModal}
+                    selectedAddress={selectedAddress}
+                    setSelectedAddress={setSelectedAddress}
+                />
             </HomePageWrapper>
         </>
     );

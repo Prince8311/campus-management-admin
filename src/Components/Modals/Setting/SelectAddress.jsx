@@ -6,7 +6,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import { GoogleMap, LoadScript, Marker, Autocomplete, Circle } from "@react-google-maps/api";
 
-const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
+const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selectedAddress, setSelectedAddress }) => {
     const api = getApiEndpoints();
     const [stateDropdownShow, setStateDropdownShow] = useState(false);
     const [selectedState, setSelectedState] = useState('');
@@ -96,6 +96,33 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
             return "";
         }
     };
+
+    // When modal opens, prefill address and map if parent provided a selectedAddress
+    useEffect(() => {
+        if (!isShowAddressModal) return;
+
+        if (selectedAddress) {
+            setAddress(selectedAddress);
+
+            (async () => {
+                try {
+                    const coords = await geocodeLocation(selectedAddress);
+                    if (coords) {
+                        setMapCenter(coords);
+                        setMarkerPosition(coords);
+                        setHighlightCenter(coords);
+                        setZoomLevel(15);
+                        setSearchBounds(coords.bounds || null);
+                    }
+                } catch (e) {
+                    // ignore geocode failures
+                    console.error(e);
+                }
+            })();
+        } else {
+            setAddress("");
+        }
+    }, [isShowAddressModal, selectedAddress]);
 
     const handleSelectState = async (state) => {
         if (state === selectedState) return;
@@ -366,7 +393,12 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button onClick={() => {
+                            if (address) {
+                                setSelectedAddress(address);
+                            }
+                            closeModal();
+                        }}>Save</button>
                     </div>
                 </div>
             </SelectAddressWrapper>
