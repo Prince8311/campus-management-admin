@@ -5,17 +5,24 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) => {
+const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen, selectedAddress, setShowAddressModal, setSelectedAddress }) => {
     const api = getApiEndpoints();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [location, setLocation] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
-    const isFormValid = name.trim() !== '' && email.trim() !== '' && phone.trim() !== '' && location.trim() !== '';
+    const isFormValid = name.trim() !== '' && email.trim() !== '' && phone.trim() !== '' && selectedAddress.trim() !== '';
 
     function closeModal() {
         setIsAddInstitutionOpen(false);
+        resetForm();
+    }
+
+    const resetForm = () => {
+        setName('');
+        setEmail('');
+        setPhone('');
+        setSelectedAddress('');
     }
 
     const handleAddInstitution = async (e) => {
@@ -25,7 +32,7 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) 
             institutionName: name,
             phone: phone,
             email: email,
-            location: location
+            location: selectedAddress
         };
         try {
             const response = await axiosInstance.post(api.addInstitution, payload);
@@ -36,6 +43,7 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) 
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
         } finally {
+            resetForm();
             setIsButtonLoading(false);
         }
     }
@@ -70,9 +78,9 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen }) 
                                     onChange={(e) => setPhone(e.target.value)}
                                 />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box" onClick={() => setShowAddressModal(true)}>
                                 <span>Location <a>(Google map location)</a><p>*</p></span>
-                                <textarea value={location} onChange={(e) => setLocation(e.target.value)}></textarea>
+                                <textarea readOnly value={selectedAddress}></textarea>
                             </div>
                         </div>
                     </div>

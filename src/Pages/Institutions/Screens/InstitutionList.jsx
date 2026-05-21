@@ -1,9 +1,12 @@
 import { useState } from "react";
 import AddInstitutionModal from "../../../Components/Modals/Institutions/AddInstitution";
 import { InstitutionListWrapper } from "../../../Styles/InstitutionStyle";
+import SelectAddressModal from "../../../Components/Modals/Setting/SelectAddress";
 
 const InstitutionListPage = () => {
     const [isAddInstitutionOpen, setIsAddInstitutionOpen] = useState(false);
+    const [selectedAddress, setSelectedAddress] = useState('');
+    const [showAddressModal, setShowAddressModal] = useState(false);
 
     const handleOpenAddInstitutionModal = () => {
         setIsAddInstitutionOpen(true);
@@ -74,9 +77,19 @@ const InstitutionListPage = () => {
                     </table>
                 </div>
 
-                <AddInstitutionModal 
+                <AddInstitutionModal
                     isAddInstitutionOpen={isAddInstitutionOpen}
                     setIsAddInstitutionOpen={setIsAddInstitutionOpen}
+                    selectedAddress={selectedAddress}
+                    setSelectedAddress={setSelectedAddress}
+                    setShowAddressModal={setShowAddressModal}
+                />
+
+                <SelectAddressModal
+                    isShowAddressModal={showAddressModal}
+                    setIsShowAddressModal={setShowAddressModal}
+                    selectedAddress={selectedAddress}
+                    setSelectedAddress={setSelectedAddress}
                 />
             </InstitutionListWrapper>
         </>

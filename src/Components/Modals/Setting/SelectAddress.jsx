@@ -6,7 +6,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import { GoogleMap, LoadScript, Marker, Autocomplete, Circle } from "@react-google-maps/api";
 
-const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selectedAddress, setSelectedAddress }) => {
+const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selectedAddress, setSelectedAddress, isAdmin = true }) => {
     const api = getApiEndpoints();
     const [stateDropdownShow, setStateDropdownShow] = useState(false);
     const [selectedState, setSelectedState] = useState('');
@@ -204,7 +204,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
 
     return (
         <>
-            <SelectAddressWrapper className={isShowAddressModal ? 'active' : ''}>
+            <SelectAddressWrapper className={`${isShowAddressModal ? 'active' : ''} ${isAdmin ? 'admin_popup' : ''}`}>
                 <div className={`modal_box ${isShowAddressModal ? 'active' : ''}`}>
                     <div className="modal_head">
                         <h4>Select Address form Google Map</h4>

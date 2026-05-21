@@ -3,12 +3,24 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomePageWrapper } from "../../Styles/Frontend/HomeStyle";
 import SelectAddressModal from "../../Components/Modals/Setting/SelectAddress";
+import SuccessModal from "../../Components/Modals/Success";
+import { getApiEndpoints } from "../../Services/Api/ApiConfig";
+import axiosInstance from "../../Services/Middleware/AxiosInstance";
+import { toast } from "react-toastify";
+import ButtonLoader from "../../Components/Loader/ButtonLoader";
 
 const HomePage = () => {
+    const api = getApiEndpoints();
     const location = useLocation();
     const navigate = useNavigate();
     const [showAddressModal, setShowAddressModal] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState('');
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+    const [institutionName, setInstitutionName] = useState('');
+    const [isEmail, setIsEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const isFormValid = institutionName.trim() !== '' && isEmail.trim() !== '' && phoneNumber.trim() !== '' && selectedAddress.trim() !== '';
 
 
     const handleGetStarted = () => {
@@ -39,6 +51,31 @@ const HomePage = () => {
 
     const handleAddressModalOpen = () => {
         setShowAddressModal(true);
+    }
+
+    const handleRegisterInstitution = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            institutionName: institutionName,
+            phone: phoneNumber,
+            email: isEmail,
+            location: selectedAddress
+        };
+        try {
+            const response = await axiosInstance.post(api.register, payload);
+            if (response?.data.status === 200) {
+                setIsSuccessModalOpen(true);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setInstitutionName('');
+            setIsEmail('');
+            setPhoneNumber('');
+            setSelectedAddress('');
+            setIsButtonLoading(false);
+        }
     }
 
     return (
@@ -165,22 +202,33 @@ const HomePage = () => {
                                 <div className="form_sec">
                                     <div className="input_box">
                                         <span>Institution Name <p>*</p></span>
-                                        <input type="text" placeholder="Enter your institution's name" />
+                                        <input type="text" placeholder="Enter your institution's name" value={institutionName} onChange={(e) => setInstitutionName(e.target.value)} />
                                     </div>
                                     <div className="input_box">
                                         <span>Admin Email <p>*</p></span>
-                                        <input type="text" placeholder="admin@institution.edu" />
+                                        <input type="text" placeholder="admin@institution.edu" value={isEmail} onChange={(e) => setIsEmail(e.target.value)} />
                                     </div>
                                     <div className="input_box">
                                         <span>Phone Number <p>*</p></span>
-                                        <input type="text" placeholder="+91 (555) 000-0000" />
+                                        <input type="text" placeholder="+91 (555) 000-0000" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                                     </div>
                                     <div className="text_box" onClick={handleAddressModalOpen}>
                                         <span>Location <p>*</p></span>
                                         <textarea placeholder="Enter your institution's location" readOnly value={selectedAddress} />
                                     </div>
                                     <div className="btn_box">
-                                        <button>Register</button>
+                                        <button
+                                            disabled={!isFormValid || isButtonLoading}
+                                            onClick={handleRegisterInstitution}
+                                        >
+                                            {
+                                                isButtonLoading ? (
+                                                    <ButtonLoader />
+                                                ) : (
+                                                    <>Register</>
+                                                )
+                                            }
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -259,6 +307,12 @@ const HomePage = () => {
                     setIsShowAddressModal={setShowAddressModal}
                     selectedAddress={selectedAddress}
                     setSelectedAddress={setSelectedAddress}
+                    isAdmin={false}
+                />
+
+                <SuccessModal
+                    isSuccessModalOpen={isSuccessModalOpen}
+                    setIsSuccessModalOpen={setIsSuccessModalOpen}
                 />
             </HomePageWrapper>
         </>
