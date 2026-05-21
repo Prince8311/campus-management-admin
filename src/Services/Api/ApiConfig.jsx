@@ -5,6 +5,9 @@ export const apiURL = `${baseURL}/admin`;
 
 export const getApiEndpoints = () => {
     return {
+        // Public
+        register: `${apiURL}/api/institutions/register.php`,
+
         // Auth 
         login: `${apiURL}/auth/login.php`,
         sendOtp: `${apiURL}/auth/send-mail-otp.php`,
