@@ -84,7 +84,42 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                                     <div className={`dropdown ${showUserDropdown ? "active" : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li>Sick Room</li>
+                                                <div className="user_box">
+                                                    <div className="box_left">
+                                                        <h6>JB</h6>
+                                                    </div>
+                                                    <div className="box_right">
+                                                        <p>Resident</p>
+                                                        <span>54149-H1-164</span>
+                                                    </div>
+                                                </div>
+                                                <div className="user_box">
+                                                    <div className="box_left">
+                                                        <h6>JB</h6>
+                                                    </div>
+                                                    <div className="box_right">
+                                                        <p>Resident</p>
+                                                        <span>54149-H1-164</span>
+                                                    </div>
+                                                </div>
+                                                <div className="user_box">
+                                                    <div className="box_left">
+                                                        <h6>JB</h6>
+                                                    </div>
+                                                    <div className="box_right">
+                                                        <p>Resident</p>
+                                                        <span>54149-H1-164</span>
+                                                    </div>
+                                                </div>
+                                                <div className="user_box">
+                                                    <div className="box_left">
+                                                        <h6>JB</h6>
+                                                    </div>
+                                                    <div className="box_right">
+                                                        <p>Resident</p>
+                                                        <span>54149-H1-164</span>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </div>
                                     </div>

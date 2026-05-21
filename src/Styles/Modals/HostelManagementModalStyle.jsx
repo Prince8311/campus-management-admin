@@ -878,6 +878,69 @@ export const AddResidentWrapper = styled('div')`
                                             }
                                         }
                                     }
+
+                                    .user_box {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 5px;
+                                        cursor: pointer;
+                                        border-bottom: 1px solid ${colors.customColors.borderColor};
+                                        border-radius: 5px;
+                                        transition: all 0.5s ease;
+
+                                        &:last-of-type {
+                                            border-bottom: none;
+                                        }
+
+                                        .box_left {
+                                            position: relative;
+                                            width: 25px;
+                                            height: 25px;
+                                            border-radius: 5px;
+                                            background: ${colors.customColors.blueColor1};
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            
+                                            h6 {
+                                                font-size: 11px;
+                                                color: ${colors.customColors.whiteColor};
+                                                font-weight: 500;
+                                            }
+                                        }
+
+                                        .box_right {
+                                            position: relative;
+                                            width: calc(100% - 25px);
+                                            padding-left: 6px;
+                                            display: flex;
+                                            flex-direction: column;
+
+                                            p {
+                                                font-size: 11px;
+                                                color: ${colors.customColors.blackColor1};
+                                                line-height: 1;
+                                                font-weight: 500;
+                                            }
+
+                                            span {
+                                                font-size: 9px;
+                                                color: ${colors.customColors.blackColor2};
+                                                margin-top: 2px;
+                                            }
+                                        }
+
+                                        &:hover {
+                                            background: ${colors.customColors.lightBackground};
+                                            transition: all 0.5s ease;
+                                        }
+
+                                        &.active {
+                                            background: ${colors.customColors.lightBackground};
+                                        }
+                                    }
                                 }
                             }
                         }
