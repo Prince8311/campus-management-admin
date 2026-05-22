@@ -838,6 +838,114 @@ export const AddResidentWrapper = styled('div')`
                                 display: flex;
                                 flex-direction: column;
 
+                                .room_type_sec {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: space-between;
+
+                                    .type_box {
+                                        position: relative;
+                                        width: max-content;
+                                        display: flex;
+                                        align-items: center;
+                                        color: ${colors.customColors.blackColor3};
+                                        text-decoration: none;
+                                        cursor: pointer;
+                                        font-size: 12px;
+                                        font-weight: 500;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        padding: 3px 12px 3px 3px;
+                                        border-radius: 25px;
+
+                                        input[type="checkbox"] {
+                                            display: none;
+                                        }
+
+                                        label {
+                                            position: relative;
+                                            cursor: pointer;
+                                            line-height: 1;
+                                            display: flex;
+                                            align-items: center;
+
+                                            .check_box {
+                                                position: relative;
+                                                width: 15px;
+                                                height: 15px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                border: 1px solid ${colors.customColors.borderColor};
+                                                border-radius: 50%;
+                                                margin-right: 5px;
+                                                cursor: pointer;
+                                                transition: all 0.4s ease;
+
+                                                i {
+                                                    font-size: 10px;
+                                                    opacity: 0;
+                                                    transition: all 0.4s ease;
+                                                }
+                                            }
+
+                                            p {
+                                                position: relative;
+                                                font-size: 9px;
+                                                color: ${colors.customColors.blackColor1};
+                                            }
+                                        }
+
+                                        input[type="checkbox"]:checked ~ label {
+
+                                            .check_box {
+                                                background: ${colors.customColors.blueColor1};
+                                                transition: all 0.4s ease;
+
+                                                i {
+                                                    opacity: 1;
+                                                    color: ${colors.customColors.whiteColor};
+                                                    transition: all 0.4s ease;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .search_sec {
+                                    position: relative;
+                                    height: 35px;
+                                    padding: 5px 0;
+                                    display: flex;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    border-radius: 6px;
+                                    margin-bottom: 10px;
+
+                                    i {
+                                        position: relative;
+                                        width: 40px;
+                                        height: 100%;
+                                        font-size: 13px;
+                                        color: ${colors.customColors.blackColor3};
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border-right: 1px solid ${colors.customColors.borderColor};
+                                    }
+
+                                    input {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 100%;
+                                        border: none;
+                                        outline: none;
+                                        padding: 0 15px;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
+                                }
+
                                 ul {
                                     position: relative;
                                     width: 100%;

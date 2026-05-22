@@ -243,6 +243,10 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                                     </div>
                                     <div className={`dropdown ${showUserDropdown ? "active" : ''}`}>
                                         <div className="dropdown_inner">
+                                            <div className="search_sec">
+                                                <i className="fa-solid fa-magnifying-glass"></i>
+                                                <input type="text" placeholder="Search by Resident Name..." />
+                                            </div>
                                             <ul>
                                                 {
                                                     userList && userList.length > 0 ? (
@@ -327,6 +331,48 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                                     </div>
                                     <div className={`dropdown ${showRoomDropdown ? "active" : ''}`}>
                                         <div className="dropdown_inner">
+                                            <div className="room_type_sec">
+                                                <div className="type_box">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="ac"
+                                                    />
+                                                    <label htmlFor="ac">
+                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
+                                                        <p>AC</p>
+                                                    </label>
+                                                </div>
+                                                <div className="type_box">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="nonac"
+                                                    />
+                                                    <label htmlFor="nonac">
+                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
+                                                        <p>Non-AC</p>
+                                                    </label>
+                                                </div>
+                                                <div className="type_box">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="living"
+                                                    />
+                                                    <label htmlFor="living">
+                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
+                                                        <p>Living</p>
+                                                    </label>
+                                                </div>
+                                                <div className="type_box">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="sick"
+                                                    />
+                                                    <label htmlFor="sick">
+                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
+                                                        <p>Sick</p>
+                                                    </label>
+                                                </div>
+                                            </div>
                                             <ul>
                                                 {
                                                     roomList && roomList.length > 0 ? (
