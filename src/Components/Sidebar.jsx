@@ -233,6 +233,10 @@ const Sidebar = () => {
                                                 <i className="fa-solid fa-message prefix"></i>
                                                 <p>Messaging</p>
                                             </NavLink>
+                                            <NavLink to="/admin/communication/institution-wallets">
+                                                <i className="fa-solid fa-wallet prefix"></i>
+                                                <p>Institution Wallets</p>
+                                            </NavLink>
                                         </div>
                                     </div>
                                 }

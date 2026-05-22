@@ -50,6 +50,7 @@ import AddFeesStructure from "../Pages/FinanceManagement/Screens/AddFeesStructur
 // Communication 
 import CommunicationMainPage from "../Pages/Communication/Index";
 import MessagingPage from "../Pages/Communication/Screens/Messaging";
+import InstitutionWalletsPage from "../Pages/Communication/Screens/InstitutionWallets";
 
 // Staff Management 
 import StaffManagementMainPage from "../Pages/StaffManagement/Index";
@@ -180,6 +181,7 @@ const Routers = () => {
                         <Route path="communication" element={<CommunicationMainPage />}>
                             <Route path="" element={<Navigate to="messaging" />} />
                             <Route path="messaging" element={<MessagingPage />} />
+                            <Route path="institution-wallets" element={<InstitutionWalletsPage />} />
                         </Route>
                         <Route path="staff-management" element={<StaffManagementMainPage />}>
                             <Route path="" element={<Navigate to="staff-information" />} />
