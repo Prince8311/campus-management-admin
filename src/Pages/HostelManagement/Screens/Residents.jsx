@@ -33,6 +33,8 @@ const HostelResidentsPage = () => {
             });
             if (response?.data.status === 200) {
                 console.log("Hostel Residents", response);
+                setResidents(response?.data.residents);
+                setTotalCount(response?.data.totalCount);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -44,6 +46,14 @@ const HostelResidentsPage = () => {
     useEffect(() => {
         fetchResidents(true, page);
     }, [activeTab, page]);
+
+    const getInitials = (name) => {
+        if (!name) return "";
+        const parts = name.trim().split(" ").filter(Boolean);
+        const first = parts[0]?.[0] || "";
+        const last = parts.length > 1 ? parts[parts.length - 1]?.[0] : "";
+        return (first + last).toUpperCase();
+    };
 
     return (
         <>
@@ -87,7 +97,7 @@ const HostelResidentsPage = () => {
                                             Room
                                             <label>
                                                 <i className="fa-solid fa-circle-info"></i>
-                                                <a>Bed No. - Room No. - Building No.</a>
+                                                <a>Building No. - Room No. - Bed No.</a>
                                             </label>
                                         </th>
                                         <th>Class</th>
@@ -98,29 +108,64 @@ const HostelResidentsPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div className="left_table_sec">
-                                                <h5>JB</h5>
-                                            </div>
-                                            <div className="right_table_sec">
-                                                <h6>Joydeep Barik</h6>
-                                                <p>545454H1</p>
-                                            </div>
-                                        </td>
-                                        <td>H1-056</td>
-                                        <td>1 - A</td>
-                                        <td>9749708386</td>
-                                        <td>Veg</td>
-                                        <td>
-                                            <p className="oncampus">On Campus</p>
-                                        </td>
-                                        <td>
-                                            <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                            <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                            <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
+                                    {
+                                        isInitialResidentsLoading ? (
+                                            Array.from({ length: 2 }).map((_, i) => (
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <SkeletonLoader width="30px" height="30px" />
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <SkeletonLoader width="100%" height="15px" />
+                                                            <SkeletonLoader width="150px" height="12px" margin="5px 0 0 0" />
+                                                        </div>
+                                                    </td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td>
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                        <SkeletonLoader width="15px" height="15px" margin="0 6px 0 6px" />
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : residents.length > 0 ? (
+                                            residents.map((resident, i) =>
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <h5>{getInitials(resident.resident_name)}</h5>
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <h6>{resident.resident_name}</h6>
+                                                            <p>#{resident.user_id}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}</td>
+                                                    <td>{resident.class_section}</td>
+                                                    <td>{resident.resident_details.phone}</td>
+                                                    <td>{resident.food_preference}</td>
+                                                    <td>
+                                                        <p className="oncampus">{resident.status}</p>
+                                                    </td>
+                                                    <td>
+                                                        <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        ) : (
+                                            <tr>
+                                                <td className="empty_message">No student available.</td>
+                                            </tr>
+                                        )
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
@@ -137,7 +182,7 @@ const HostelResidentsPage = () => {
                                             Room
                                             <label>
                                                 <i className="fa-solid fa-circle-info"></i>
-                                                <a>Bed No. - Room No. - Building No.</a>
+                                                <a>Building No. - Room No. - Bed No.</a>
                                             </label>
                                         </th>
                                         <th>Role</th>
@@ -148,29 +193,63 @@ const HostelResidentsPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div className="left_table_sec">
-                                                <h5>JB</h5>
-                                            </div>
-                                            <div className="right_table_sec">
-                                                <h6>Joydeep Barik</h6>
-                                                <p>545454H1</p>
-                                            </div>
-                                        </td>
-                                        <td>H1-056</td>
-                                        <td>Student</td>
-                                        <td>9749708386</td>
-                                        <td>Veg</td>
-                                        <td>
-                                            <p className="oncampus">On Campus</p>
-                                        </td>
-                                        <td>
-                                            <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                            <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                            <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
+                                    {
+                                        isInitialResidentsLoading ? (
+                                            Array.from({ length: 2 }).map((_, i) => (
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <SkeletonLoader width="30px" height="30px" />
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <SkeletonLoader width="100%" height="15px" />
+                                                            <SkeletonLoader width="150px" height="12px" margin="5px 0 0 0" />
+                                                        </div>
+                                                    </td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td>
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                        <SkeletonLoader width="15px" height="15px" margin="0 6px 0 6px" />
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : residents.length > 0 ? (
+                                            residents.map((resident, i) =>
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="left_table_sec">
+                                                            <h5>{getInitials(resident.resident_name)}</h5>
+                                                        </div>
+                                                        <div className="right_table_sec">
+                                                            <h6>{resident.resident_name}</h6>
+                                                            <p>#{resident.user_id}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}</td>
+                                                    <td>{resident.role}</td>
+                                                    <td>{resident.resident_details.phone}</td>
+                                                    <td>{resident.food_preference}</td>
+                                                    <td>
+                                                        <p className="oncampus">{resident.status}</p>
+                                                    </td>
+                                                    <td>
+                                                        <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        ) : (
+                                            <tr>
+                                                <td className="empty_message">No staff available.</td>
+                                            </tr>
+                                        )
+                                    }
                                 </tbody>
                             </table>
                         </div>

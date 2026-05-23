@@ -382,7 +382,7 @@ export const ResidentsWrapper = styled('div')`
                                     color: ${colors.customColors.orangeColor};
                                     background: ${colors.customColors.yellowColorLight};
                                 }
-                                &.onsick {
+                                &.onsickLeave {
                                     color: ${colors.customColors.redColor};
                                     background: ${colors.customColors.redColorLight};
                                 }
@@ -430,7 +430,7 @@ export const ResidentsWrapper = styled('div')`
             }
         }
     }
-    
+
     .second_table_sec {
         position: relative;
         width: 100%;
