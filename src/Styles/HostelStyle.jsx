@@ -430,6 +430,299 @@ export const ResidentsWrapper = styled('div')`
             }
         }
     }
+    
+    .second_table_sec {
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+        padding: 0 15px;
+
+        table {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            thead {
+                position: relative;
+                width: 100%;
+                height: 40px;
+                background: ${colors.themeColor};
+                border-radius: 10px 10px 0px 0px;
+                border: 1px solid ${colors.themeColor};
+
+                tr {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                }
+
+                th {
+                    position: relative;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    font-family: "Lemonada", cursive;
+                    font-size: 12px;
+                    word-break: break-all;
+                    color: ${colors.customColors.whiteColor};
+                    padding: 0 25px;
+                    font-weight: 600;
+
+                    &:nth-of-type(1) {
+                        width: 18%;
+                    }
+
+                    &:nth-of-type(2) {
+                        width: 15%;
+                        justify-content: center;
+
+                        label {
+                            position: relative;
+                            margin-left: 3px;
+                            z-index: 5;
+
+                            i {
+                                font-size: 9px;
+                                cursor: pointer;
+                            }
+
+                            a {
+                                position: absolute;
+                                right: -10px;
+                                top: -42px;
+                                width: 135px;
+                                padding: 7px 10px;
+                                background: ${colors.customColors.whiteColor};
+                                box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                                color: ${colors.customColors.blackColor2};
+                                border-radius: 5px;
+                                font-size: 9px;
+                                pointer-events: none;
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: all 0.5s ease;
+
+                                &::after {
+                                    content: '';
+                                    position: absolute;
+                                    bottom: -4px;
+                                    right: 10.5px;
+                                    width: 8px;
+                                    height: 8px;
+                                    background: ${colors.customColors.whiteColor};
+                                    transform: rotate(45deg);
+                                    box-shadow: 4px 4px 5px ${colors.boxShadowColors.shadowColor1};
+                                }
+                            }
+
+                            &:hover {
+                                a {
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+                    }
+
+                    &:nth-of-type(3) {
+                        width: 12%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(4) {
+                        width: 16%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(5) {
+                        width: 15%;
+                        justify-content: center;
+                    }
+                    &:nth-of-type(6) {
+                        width: 12%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(7) {
+                        width: 12%;
+                        justify-content: center;
+                    }
+                }
+            }
+
+            tbody {
+                position: relative;
+                width: 100%;
+                border: 1px solid ${colors.customColors.whiteColor2};
+                border-top: none;
+                border-radius: 0px 0px 10px 10px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+
+                tr {
+                    position: relative;
+                    width: 100%;
+                    min-height: 40px;
+                    display: flex;
+
+                    &:nth-of-type(even) {
+                        background: ${colors.customColors.blueColorLight};
+                    }
+
+                    td {
+                        position: relative;
+                        padding: 12px 25px;
+                        display: flex;
+                        color: ${colors.customColors.blackColor};
+                        font-size: 13px;
+                        word-break: break-all;
+                        line-height: 1.5;
+
+                        &:nth-of-type(1) {
+                            width: 18%;
+                            display: flex;
+
+                            .left_table_sec {
+                                position: relative;
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 6px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: ${colors.customColors.blueColor2};
+
+                                h5 {
+                                    position: relative;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.whiteColor};
+                                    text-transform: uppercase;
+                                }
+                            }
+
+                            .right_table_sec {
+                                position: relative;
+                                width: calc(100% - 30px);
+                                padding-left: 7px;
+                                display: flex;
+                                flex-direction: column;
+
+                                h6 {
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                p {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor2};
+                                }
+                            }
+                        }
+
+                        &:nth-of-type(2) {
+                            width: 15%;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(3) {
+                            align-items: center;
+                            width: 12%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(4) {
+                            width: 16%;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(5) {
+                            width: 15%;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(6) {
+                            width: 12%;
+                            align-items: center;
+                            justify-content: center;
+
+                            p {
+                                position: relative;
+                                font-size: 10px;
+                                font-weight: 500;
+                                line-height: 1;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 20px;
+                                padding: 4px 15px;
+                                color: ${colors.customColors.yellowColor1};
+                                background: ${colors.customColors.yellowColorLight};
+
+                                &.oncampus {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
+                                }
+                                &.onouting {
+                                    color: ${colors.customColors.orangeColor};
+                                    background: ${colors.customColors.yellowColorLight};
+                                }
+                                &.onsick {
+                                    color: ${colors.customColors.redColor};
+                                    background: ${colors.customColors.redColorLight};
+                                }
+                            }
+                        }
+
+                        &:nth-of-type(7) {
+                            width: 12%;
+                            align-items: center;
+                            justify-content: center;
+
+                            a {
+                                position: relative;
+                                text-decoration: none;
+                                cursor: pointer;
+                                font-size: 13px;
+
+                               &.view_btn {
+                                    color: ${colors.customColors.blueColor1};
+                               }
+
+                               &.edit_btn {
+                                    color: ${colors.customColors.greenColor};
+                                    margin: 0 10px;
+                               }
+
+                               &.delete_btn {
+                                    color: ${colors.customColors.redColor};
+                               }
+                            }
+                        }
+
+                        &.empty_message {
+                            position: relative;
+                            width: 100%;
+                            padding: 12px 25px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor2};
+                        }
+                    }
+                }
+            }
+        }
+    }
 `;
 
 export const HostelRoomWrapper = styled('div')`

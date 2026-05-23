@@ -31,7 +31,7 @@ const HostelResidentsPage = () => {
                     userType: activeTab
                 }
             });
-            if(response?.data.status === 200) {
+            if (response?.data.status === 200) {
                 console.log("Hostel Residents", response);
             }
         } catch (error) {
@@ -76,52 +76,106 @@ const HostelResidentsPage = () => {
                         <input type="text" placeholder="Search by student " />
                     </div>
                 </div>
-                <div className="table_sec">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Student Name</th>
-                                <th>
-                                    Room
-                                    <label>
-                                        <i className="fa-solid fa-circle-info"></i>
-                                        <a>Bed No. - Room No. - Building No.</a>
-                                    </label>
-                                </th>
-                                <th>Class</th>
-                                <th>Contact No.</th>
-                                <th>Food Preference</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div className="left_table_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_table_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>545454H1</p>
-                                    </div>
-                                </td>
-                                <td>H1-056</td>
-                                <td>1 - A</td>
-                                <td>9749708386</td>
-                                <td>Veg</td>
-                                <td>
-                                    <p className="oncampus">On Campus</p>
-                                </td>
-                                <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {
+                    activeTab === "Student" && (
+                        <div className="table_sec">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>
+                                            Room
+                                            <label>
+                                                <i className="fa-solid fa-circle-info"></i>
+                                                <a>Bed No. - Room No. - Building No.</a>
+                                            </label>
+                                        </th>
+                                        <th>Class</th>
+                                        <th>Contact No.</th>
+                                        <th>Food Preference</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div className="left_table_sec">
+                                                <h5>JB</h5>
+                                            </div>
+                                            <div className="right_table_sec">
+                                                <h6>Joydeep Barik</h6>
+                                                <p>545454H1</p>
+                                            </div>
+                                        </td>
+                                        <td>H1-056</td>
+                                        <td>1 - A</td>
+                                        <td>9749708386</td>
+                                        <td>Veg</td>
+                                        <td>
+                                            <p className="oncampus">On Campus</p>
+                                        </td>
+                                        <td>
+                                            <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                            <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                            <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
+                {
+                    activeTab === "Staff" && (
+                        <div className="second_table_sec">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>
+                                            Room
+                                            <label>
+                                                <i className="fa-solid fa-circle-info"></i>
+                                                <a>Bed No. - Room No. - Building No.</a>
+                                            </label>
+                                        </th>
+                                        <th>Role</th>
+                                        <th>Contact No.</th>
+                                        <th>Food Preference</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div className="left_table_sec">
+                                                <h5>JB</h5>
+                                            </div>
+                                            <div className="right_table_sec">
+                                                <h6>Joydeep Barik</h6>
+                                                <p>545454H1</p>
+                                            </div>
+                                        </td>
+                                        <td>H1-056</td>
+                                        <td>Student</td>
+                                        <td>9749708386</td>
+                                        <td>Veg</td>
+                                        <td>
+                                            <p className="oncampus">On Campus</p>
+                                        </td>
+                                        <td>
+                                            <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                            <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                            <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
 
                 <AddResidentModal
                     isAddResidentOpen={isAddResidentOpen}
