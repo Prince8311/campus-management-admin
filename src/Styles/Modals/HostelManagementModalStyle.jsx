@@ -854,11 +854,7 @@ export const AddResidentWrapper = styled('div')`
                                         color: ${colors.customColors.blackColor3};
                                         text-decoration: none;
                                         cursor: pointer;
-                                        font-size: 12px;
-                                        font-weight: 500;
-                                        border: 1px solid ${colors.customColors.borderColor};
-                                        padding: 3px 12px 3px 3px;
-                                        border-radius: 25px;
+                                        
 
                                         input[type="checkbox"] {
                                             display: none;
@@ -870,6 +866,11 @@ export const AddResidentWrapper = styled('div')`
                                             line-height: 1;
                                             display: flex;
                                             align-items: center;
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            border: 1px solid ${colors.customColors.borderColor};
+                                            padding: 3px 12px 3px 3px;
+                                            border-radius: 25px;
 
                                             .check_box {
                                                 position: relative;
@@ -883,32 +884,29 @@ export const AddResidentWrapper = styled('div')`
                                                 margin-right: 5px;
                                                 cursor: pointer;
                                                 transition: all 0.4s ease;
-
-                                                i {
-                                                    font-size: 10px;
-                                                    opacity: 0;
-                                                    transition: all 0.4s ease;
-                                                }
                                             }
 
                                             p {
                                                 position: relative;
-                                                font-size: 9px;
-                                                color: ${colors.customColors.blackColor1};
+                                                font-size: 10.5px;
+                                                color: ${colors.customColors.blackColor2};
                                             }
                                         }
 
                                         input[type="checkbox"]:checked ~ label {
+                                            background: ${colors.customColors.blueColor1};
+                                            border: 1px solid ${colors.customColors.blueColor1};
+                                            transition: all 0.4s ease;
 
                                             .check_box {
-                                                background: ${colors.customColors.blueColor1};
+                                                border: 1px solid ${colors.customColors.whiteColor};
+                                                background: ${colors.customColors.whiteColor};
                                                 transition: all 0.4s ease;
-
-                                                i {
-                                                    opacity: 1;
-                                                    color: ${colors.customColors.whiteColor};
-                                                    transition: all 0.4s ease;
-                                                }
+                                            }
+                                            
+                                            p {
+                                                color: ${colors.customColors.whiteColor};
+                                                transition: all 0.4s ease;
                                             }
                                         }
                                     }

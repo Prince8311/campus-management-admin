@@ -8,10 +8,16 @@ import ButtonLoader from "../../Loader/ButtonLoader";
 const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }) => {
     const api = getApiEndpoints();
     const [userList, setUserList] = useState([]);
+    const [userSearch, setUserSearch] = useState("");
     const [buildingList, setBuildingList] = useState([]);
     const [roomList, setRoomList] = useState([]);
+    // Room filter states
+    const typeOptions = ['Ac', 'Non-Ac'];
+    const categoryOptions = ['Living', 'Sick'];
+    const [selectedTypes, setSelectedTypes] = useState([...typeOptions]);
+    const [selectedCategories, setSelectedCategories] = useState([...categoryOptions]);
     const statusOptions = ['On Campus', 'On Outing', 'On Sick Leave'];
-    const foodPreferenceOptions = ['Veg', 'Non Veg'];
+    const foodPreferenceOptions = ['Veg', 'Non-Veg'];
     const [selectedUser, setSelectedUser] = useState({});
     const [selectedBuilding, setSelectedBuilding] = useState({});
     const [selectedFloor, setSelectedFloor] = useState('');
@@ -24,6 +30,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
     const [showRoomDropdown, setShowRoomDropdown] = useState(false);
     const [showStatusDropdown, setShowStatusDropdown] = useState(false);
     const [showFoodPreferenceDropdown, setShowFoodPreferenceDropdown] = useState(false);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     const closeModal = () => {
         setIsAddResidentOpen(false);
@@ -95,15 +102,15 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowFloorDropdown(false);
     }
 
-    const fetchUsers = async () => {
+    const fetchUsers = async (search = "") => {
         try {
             const respose = await axiosInstance.get(api.fetchUserlist, {
                 params: {
-                    userType: activeTab
+                    userType: activeTab,
+                    search: search
                 }
             });
             if (respose?.data.status === 200) {
-                console.log(respose.data);
                 setUserList(respose?.data.users);
             }
         } catch (error) {
@@ -129,7 +136,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
 
     useEffect(() => {
         if (isAddResidentOpen) {
-            fetchUsers();
+            fetchUsers("");
             fetchHostelBuildings();
         }
     }, [isAddResidentOpen]);
@@ -174,10 +181,13 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
 
     const fetchRooms = async () => {
         try {
+            const apiCategories = selectedCategories.map(cat => cat === 'Living' ? 'Living Room' : 'Sick Room');
             const response = await axiosInstance.get(api.fetchHostelRoom, {
                 params: {
                     building_id: selectedBuilding.id,
-                    floor_no: selectedFloor
+                    floor_no: selectedFloor,
+                    type: selectedTypes,
+                    category: apiCategories
                 }
             });
             if (response?.data.status === 200) {
@@ -193,7 +203,8 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         if (selectedBuilding && selectedFloor) {
             fetchRooms();
         }
-    }, [selectedBuilding, selectedFloor]);
+        // eslint-disable-next-line
+    }, [selectedBuilding, selectedFloor, selectedTypes, selectedCategories]);
 
     const handleRoomSelect = (room) => {
         if (selectedRoom.id === room.id) return;
@@ -222,6 +233,34 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         selectedFoodPreference
     );
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            name: selectedUser.name,
+            userId: selectedUser.user_id,
+            userType: activeTab,
+            roomId: selectedRoom.id,
+            status: selectedStatus,
+            foodPreference: selectedFoodPreference,
+            ...(activeTab === 'Student'
+                ? { classSection: selectedUser.class && selectedUser.section ? `${selectedUser.class} - ${selectedUser.section}` : "" }
+                : { role: selectedUser.role || "" })
+        };
+        console.log("Payload for creating resident:", payload);
+        try {
+            const response = await axiosInstance.post(api.createHostelResident, payload);
+            if (response?.data.status === 200) {
+                toast.success(response.data.message);
+                closeModal();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+
     return (
         <>
             <AddResidentWrapper className={isAddResidentOpen ? "active" : ''}>
@@ -245,7 +284,15 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                                         <div className="dropdown_inner">
                                             <div className="search_sec">
                                                 <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input type="text" placeholder="Search by Resident Name..." />
+                                                <input
+                                                    type="text"
+                                                    placeholder="Search by Resident Name..."
+                                                    value={userSearch}
+                                                    onChange={e => {
+                                                        setUserSearch(e.target.value);
+                                                        fetchUsers(e.target.value);
+                                                    }}
+                                                />
                                             </div>
                                             <ul>
                                                 {
@@ -331,48 +378,54 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                                     </div>
                                     <div className={`dropdown ${showRoomDropdown ? "active" : ''}`}>
                                         <div className="dropdown_inner">
-                                            <div className="room_type_sec">
-                                                <div className="type_box">
-                                                    <input
-                                                        type="checkbox"
-                                                        id="ac"
-                                                    />
-                                                    <label htmlFor="ac">
-                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
-                                                        <p>AC</p>
-                                                    </label>
-                                                </div>
-                                                <div className="type_box">
-                                                    <input
-                                                        type="checkbox"
-                                                        id="nonac"
-                                                    />
-                                                    <label htmlFor="nonac">
-                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
-                                                        <p>Non-AC</p>
-                                                    </label>
-                                                </div>
-                                                <div className="type_box">
-                                                    <input
-                                                        type="checkbox"
-                                                        id="living"
-                                                    />
-                                                    <label htmlFor="living">
-                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
-                                                        <p>Living</p>
-                                                    </label>
-                                                </div>
-                                                <div className="type_box">
-                                                    <input
-                                                        type="checkbox"
-                                                        id="sick"
-                                                    />
-                                                    <label htmlFor="sick">
-                                                        <span className="check_box"><i className="fa-regular fa-circle"></i></span>
-                                                        <p>Sick</p>
-                                                    </label>
-                                                </div>
-                                            </div>
+                                            {
+                                                selectedFloor && (
+                                                    <div className="room_type_sec">
+                                                        {/* Type Filters */}
+                                                        {typeOptions.map((type) => (
+                                                            <div className="type_box" key={type}>
+                                                                <input
+                                                                    type="checkbox"
+                                                                    id={type.toLowerCase()}
+                                                                    checked={selectedTypes.includes(type)}
+                                                                    onChange={() => {
+                                                                        setSelectedTypes(prev =>
+                                                                            prev.includes(type)
+                                                                                ? prev.filter(t => t !== type)
+                                                                                : [...prev, type]
+                                                                        );
+                                                                    }}
+                                                                />
+                                                                <label htmlFor={type.toLowerCase()}>
+                                                                    <span className="check_box"></span>
+                                                                    <p>{type}</p>
+                                                                </label>
+                                                            </div>
+                                                        ))}
+                                                        {/* Category Filters */}
+                                                        {categoryOptions.map((cat) => (
+                                                            <div className="type_box" key={cat}>
+                                                                <input
+                                                                    type="checkbox"
+                                                                    id={cat.toLowerCase()}
+                                                                    checked={selectedCategories.includes(cat)}
+                                                                    onChange={() => {
+                                                                        setSelectedCategories(prev =>
+                                                                            prev.includes(cat)
+                                                                                ? prev.filter(c => c !== cat)
+                                                                                : [...prev, cat]
+                                                                        );
+                                                                    }}
+                                                                />
+                                                                <label htmlFor={cat.toLowerCase()}>
+                                                                    <span className="check_box"></span>
+                                                                    <p>{cat}</p>
+                                                                </label>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )
+                                            }
                                             <ul>
                                                 {
                                                     roomList && roomList.length > 0 ? (
@@ -442,7 +495,15 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button disabled={isSaveDisabled}>Save</button>
+                        <button disabled={isSaveDisabled} onClick={handleSubmit}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </AddResidentWrapper>

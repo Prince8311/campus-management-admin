@@ -1,16 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ResidentsWrapper } from "../../../Styles/HostelStyle";
 import AddResidentModal from "../../../Components/Modals/HostelManagement/AddResident";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const HostelResidentsPage = () => {
+    const api = getApiEndpoints();
     const tabs = ["Student", "Staff"];
-    const [activeTab, setActiveTab] = useState("Student");
-
+    const [activeTab, setActiveTab] = useState(tabs[0]);
     const [isAddResidentOpen, setIsAddResidentOpen] = useState(false);
+    const [page, setPage] = useState(1);
+    const [residents, setResidents] = useState([]);
+    const [isInitialResidentsLoading, setIsInitialResidentsLoading] = useState(true);
+    const [totalCount, setTotalCount] = useState('');
 
     const handleOpenAddResidentModal = () => {
         setIsAddResidentOpen(true);
     };
+
+    const fetchResidents = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialResidentsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchHostelResidents, {
+                params: {
+                    page: pageNumber,
+                    userType: activeTab
+                }
+            });
+            if(response?.data.status === 200) {
+                console.log("Hostel Residents", response);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialResidentsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchResidents(true, page);
+    }, [activeTab, page]);
 
     return (
         <>
