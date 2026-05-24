@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
 
-const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
+const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
     const api = getApiEndpoints();
     const [showBuildingDropdown, setShowBuildingDropdown] = useState(false);
     const [buildings, setBuildings] = useState([]);
@@ -74,6 +74,7 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen }) => {
             const response = await axiosInstance.post(api.createHostelRoom, payload);
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
+                refreshRooms();
                 closeModal();
             }
         } catch (error) {

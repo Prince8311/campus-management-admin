@@ -5,29 +5,32 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }) => {
+const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, refreshResidents }) => {
     const api = getApiEndpoints();
     const [userList, setUserList] = useState([]);
     const [userSearch, setUserSearch] = useState("");
     const [buildingList, setBuildingList] = useState([]);
     const [roomList, setRoomList] = useState([]);
+    const [roomBedList, setRoomBedList] = useState([]);
     // Room filter states
     const typeOptions = ['Ac', 'Non-Ac'];
     const categoryOptions = ['Living', 'Sick'];
     const [selectedTypes, setSelectedTypes] = useState([...typeOptions]);
     const [selectedCategories, setSelectedCategories] = useState([...categoryOptions]);
-    const statusOptions = ['On Campus', 'On Outing', 'On Sick Leave'];
+    const statusOptions = ['On Campus', 'On Outing', 'Sick Leave'];
     const foodPreferenceOptions = ['Veg', 'Non-Veg'];
     const [selectedUser, setSelectedUser] = useState({});
     const [selectedBuilding, setSelectedBuilding] = useState({});
     const [selectedFloor, setSelectedFloor] = useState('');
     const [selectedRoom, setSelectedRoom] = useState({});
+    const [selectedRoomBed, setSelectedRoomBed] = useState('');
     const [selectedStatus, setSelectedStatus] = useState('');
     const [selectedFoodPreference, setSelectedFoodPreference] = useState('');
     const [showUserDropdown, setShowUserDropdown] = useState(false);
     const [showBuildingDropdown, setShowBuildingDropdown] = useState(false);
     const [showFloorDropdown, setShowFloorDropdown] = useState(false);
     const [showRoomDropdown, setShowRoomDropdown] = useState(false);
+    const [showRoomBedDropdown, setShowRoomBedDropdown] = useState(false);
     const [showStatusDropdown, setShowStatusDropdown] = useState(false);
     const [showFoodPreferenceDropdown, setShowFoodPreferenceDropdown] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -38,12 +41,14 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setSelectedBuilding({});
         setSelectedFloor('');
         setSelectedRoom({});
+        setSelectedRoomBed('');
         setSelectedStatus('');
         setSelectedFoodPreference('');
         setShowUserDropdown(false);
         setShowBuildingDropdown(false);
         setShowFloorDropdown(false);
         setShowRoomDropdown(false);
+        setShowRoomBedDropdown(false);
         setShowStatusDropdown(false);
         setShowFoodPreferenceDropdown(false);
     };
@@ -53,6 +58,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowBuildingDropdown(false);
         setShowFloorDropdown(false);
         setShowRoomDropdown(false);
+        setShowRoomBedDropdown(false);
         setShowStatusDropdown(false);
         setShowFoodPreferenceDropdown(false);
     };
@@ -62,6 +68,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowUserDropdown(false);
         setShowFloorDropdown(false);
         setShowRoomDropdown(false);
+        setShowRoomBedDropdown(false);
         setShowStatusDropdown(false);
         setShowFoodPreferenceDropdown(false);
     }
@@ -71,6 +78,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowUserDropdown(false);
         setShowBuildingDropdown(false);
         setShowRoomDropdown(false);
+        setShowRoomBedDropdown(false);
         setShowStatusDropdown(false);
         setShowFoodPreferenceDropdown(false);
     }
@@ -80,6 +88,17 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowUserDropdown(false);
         setShowBuildingDropdown(false);
         setShowFloorDropdown(false);
+        setShowRoomBedDropdown(false);
+        setShowStatusDropdown(false);
+        setShowFoodPreferenceDropdown(false);
+    }
+
+    const toggleRoomBedDropdown = () => {
+        setShowRoomBedDropdown(!showRoomBedDropdown);
+        setShowUserDropdown(false);
+        setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
         setShowStatusDropdown(false);
         setShowFoodPreferenceDropdown(false);
     }
@@ -89,6 +108,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowUserDropdown(false);
         setShowBuildingDropdown(false);
         setShowRoomDropdown(false);
+        setShowRoomBedDropdown(false);
         setShowFloorDropdown(false);
         setShowFoodPreferenceDropdown(false);
     }
@@ -100,6 +120,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowRoomDropdown(false);
         setShowStatusDropdown(false);
         setShowFloorDropdown(false);
+        setShowRoomBedDropdown(false);
     }
 
     const fetchUsers = async (search = "") => {
@@ -162,6 +183,8 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setShowBuildingDropdown(false);
         setSelectedFloor('');
         setSelectedRoom({});
+        setRoomBedList([]);
+        setSelectedRoomBed('');
     }
 
     const handleFloorSelect = (floor) => {
@@ -169,6 +192,8 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         setSelectedFloor(floor);
         setShowFloorDropdown(false);
         setSelectedRoom({});
+        setRoomBedList([]);
+        setSelectedRoomBed('');
     }
 
     const floorOptions = [];
@@ -203,13 +228,43 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         if (selectedBuilding && selectedFloor) {
             fetchRooms();
         }
-        // eslint-disable-next-line
     }, [selectedBuilding, selectedFloor, selectedTypes, selectedCategories]);
+
+    const fetchRoomBeds = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchRoomBeds, {
+                params: {
+                    buildingId: selectedBuilding.id,
+                    floorNo: selectedFloor,
+                    roomId: selectedRoom.id
+                }
+            });
+            if (response?.data.status === 200) {
+                console.log(response.data);
+                setRoomBedList(response?.data.availableBeds);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedRoom && selectedRoom.id) {
+            fetchRoomBeds();
+        }
+    }, [selectedRoom]);
 
     const handleRoomSelect = (room) => {
         if (selectedRoom.id === room.id) return;
         setSelectedRoom(room);
         setShowRoomDropdown(false);
+        setSelectedRoomBed('');
+    }
+
+    const handleRoomBedSelect = (bed) => {
+        if (selectedRoomBed === bed) return;
+        setSelectedRoomBed(bed);
+        setShowRoomBedDropdown(false);
     }
 
     const handleStatusSelect = (status) => {
@@ -229,6 +284,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
         selectedBuilding && selectedBuilding.id &&
         selectedFloor &&
         selectedRoom && selectedRoom.id &&
+        selectedRoomBed &&
         selectedStatus &&
         selectedFoodPreference
     );
@@ -241,6 +297,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
             userId: selectedUser.user_id,
             userType: activeTab,
             roomId: selectedRoom.id,
+            bedNo: selectedRoomBed,
             status: selectedStatus,
             foodPreference: selectedFoodPreference,
             ...(activeTab === 'Student'
@@ -252,6 +309,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
             const response = await axiosInstance.post(api.createHostelResident, payload);
             if (response?.data.status === 200) {
                 toast.success(response.data.message);
+                refreshResidents();
                 closeModal();
             }
         } catch (error) {
@@ -448,7 +506,33 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                                     </div>
                                 </div>
                             </div>
-                            <div className="select_box halfwidth">
+                            <div className="select_box oneThirdWidth">
+                                <span>Select Bed No. <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn" onClick={toggleRoomBedDropdown}>
+                                        <p>{selectedRoomBed}</p>
+                                        <i className={`fa-solid fa-angle-down ${showRoomBedDropdown ? "active" : ''}`}></i>
+                                    </div>
+                                    <div className={`dropdown ${showRoomBedDropdown ? "active" : ''} dropUp`}>
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                {
+                                                    roomBedList && roomBedList.length > 0 ? (
+                                                        roomBedList.map((bed, i) =>
+                                                            <li key={i} className={selectedRoomBed === bed ? "active" : ""} onClick={() => handleRoomBedSelect(bed)}>
+                                                                {bed}
+                                                            </li>
+                                                        )
+                                                    ) : (
+                                                        <p className="no_data">No beds available</p>
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="select_box oneThirdWidth">
                                 <span>Status <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={toggleStatusDropdown}>
@@ -470,7 +554,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab }
                                     </div>
                                 </div>
                             </div>
-                            <div className="select_box halfwidth">
+                            <div className="select_box oneThirdWidth">
                                 <span>Food Preference <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={toggleFoodPreferenceDropdown}>
