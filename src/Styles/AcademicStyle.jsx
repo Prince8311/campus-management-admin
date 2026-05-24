@@ -2312,7 +2312,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                 .item {
                     position: relative;
                     width: 33.33%;
-                    max-width: 380px;
+                    max-width: 386px;
                     padding: 10px;
 
                     .item_inner {
@@ -2375,6 +2375,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                                     position: relative;
                                     width: max-content;
                                     display: flex;
+                                    align-items: center;
                                     font-size: 10px;
                                     color: ${colors.customColors.orangeColor};
                                     margin-top: 2px;
@@ -2383,6 +2384,12 @@ export const ClassroomDetailsWrapper = styled('div')`
                                     padding: 3px 15px;
                                     margin-left: auto;
                                     font-weight: 500;
+                                    cursor: pointer;
+
+                                    i {
+                                        margin-left: 5px;
+                                        font-size: 10px;
+                                    }
                                 }
                             }
 
@@ -2450,7 +2457,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                                             button {
                                                 position: relative;
                                                 width: max-content;
-                                                padding: 5px 10px;
+                                                padding: 4px 10px;
                                                 font-size: 9px;
                                                 cursor: pointer;
                                                 border: none;
