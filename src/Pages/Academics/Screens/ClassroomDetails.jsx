@@ -1,8 +1,22 @@
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { ClassroomDetailsWrapper } from "../../../Styles/AcademicStyle";
+import AddSubjectModal from '../../../Components/Modals/Academics/AddSubject';
+import ManageSubjectModal from '../../../Components/Modals/Academics/ManageSubject';
 
 const ClassroomDetailsPage = () => {
+    const [isAddSubjectModalOpen, setIsAddSubjectModalOpen] = useState(false);
+    const [isManageSubjectModalOpen, setIsManageSubjectModalOpen] = useState(false);
+
+    const handleOpenSubjectAddModal = () => {
+        setIsAddSubjectModalOpen(true);
+    }
+
+    const handleOpenSubjectManageModal = () => {
+        setIsManageSubjectModalOpen(true);
+    }
+
     return (
         <>
             <ClassroomDetailsWrapper>
@@ -65,7 +79,7 @@ const ClassroomDetailsPage = () => {
                                 </div>
                             </div>
                             <div className="add_btn">
-                                <button>
+                                <button onClick={handleOpenSubjectAddModal}>
                                     <i className="fa-solid fa-plus"></i>
                                     <p>Add Subject</p>
                                 </button>
@@ -78,7 +92,7 @@ const ClassroomDetailsPage = () => {
                                         <div className="part_content">
                                             <a><i className="fa-solid fa-book-open"></i></a>
                                             <h6>Subject Name</h6>
-                                            <span>1000 Students</span>
+                                            <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
                                         </div>
                                         <div className="teacher_sec">
                                             <div className="teacher_box">
@@ -126,7 +140,7 @@ const ClassroomDetailsPage = () => {
                                         <div className="part_content">
                                             <a><i className="fa-solid fa-book-open"></i></a>
                                             <h6>Subject Name</h6>
-                                            <span>1000 Students</span>
+                                            <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
                                         </div>
                                         <div className="teacher_sec">
                                             <div className="teacher_box">
@@ -174,7 +188,7 @@ const ClassroomDetailsPage = () => {
                                         <div className="part_content">
                                             <a><i className="fa-solid fa-book-open"></i></a>
                                             <h6>Subject Name</h6>
-                                            <span>1000 Students</span>
+                                            <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
                                         </div>
                                         <div className="teacher_sec">
                                             <div className="teacher_box">
@@ -219,6 +233,16 @@ const ClassroomDetailsPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <AddSubjectModal
+                    isAddSubjectModalOpen={isAddSubjectModalOpen}
+                    setIsAddSubjectModalOpen={setIsAddSubjectModalOpen}
+                />
+
+                <ManageSubjectModal
+                    isManageSubjectModalOpen={isManageSubjectModalOpen}
+                    setIsManageSubjectModalOpen={setIsManageSubjectModalOpen}
+                />
             </ClassroomDetailsWrapper>
         </>
     );
