@@ -751,6 +751,10 @@ export const AddResidentWrapper = styled('div')`
                         width: 48.5%;
                     }
 
+                    &.oneThirdWidth {
+                        width: 31.5%;
+                    }
+
                     span {
                         position: relative;
                         display: flex;

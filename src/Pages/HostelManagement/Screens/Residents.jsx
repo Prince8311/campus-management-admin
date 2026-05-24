@@ -55,6 +55,12 @@ const HostelResidentsPage = () => {
         return (first + last).toUpperCase();
     };
 
+    // Converts status to className (e.g., 'On Campus' -> 'on_campus')
+    const getStatusClass = (status) => {
+        if (!status) return "";
+        return status.toLowerCase().replace(/\s+/g, "_");
+    };
+
     return (
         <>
             <ResidentsWrapper>
@@ -145,12 +151,12 @@ const HostelResidentsPage = () => {
                                                             <p>#{resident.user_id}</p>
                                                         </div>
                                                     </td>
-                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}</td>
+                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}-{resident.room_details.bed_no}</td>
                                                     <td>{resident.class_section}</td>
                                                     <td>{resident.resident_details.phone}</td>
                                                     <td>{resident.food_preference}</td>
                                                     <td>
-                                                        <p className="oncampus">{resident.status}</p>
+                                                        <p className={getStatusClass(resident.status)}>{resident.status}</p>
                                                     </td>
                                                     <td>
                                                         <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
@@ -161,7 +167,7 @@ const HostelResidentsPage = () => {
                                             )
                                         ) : (
                                             <tr>
-                                                <td className="empty_message">No student available.</td>
+                                                <td className="empty_message">No residents available.</td>
                                             </tr>
                                         )
                                     }
@@ -173,7 +179,7 @@ const HostelResidentsPage = () => {
                 }
                 {
                     activeTab === "Staff" && (
-                        <div className="second_table_sec">
+                        <div className="table_sec">
                             <table>
                                 <thead>
                                     <tr>
@@ -230,12 +236,12 @@ const HostelResidentsPage = () => {
                                                             <p>#{resident.user_id}</p>
                                                         </div>
                                                     </td>
-                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}</td>
+                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}-{resident.room_details.bed_no}</td>
                                                     <td>{resident.role}</td>
                                                     <td>{resident.resident_details.phone}</td>
                                                     <td>{resident.food_preference}</td>
                                                     <td>
-                                                        <p className="oncampus">{resident.status}</p>
+                                                        <p className={getStatusClass(resident.status)}>{resident.status}</p>
                                                     </td>
                                                     <td>
                                                         <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
@@ -246,7 +252,7 @@ const HostelResidentsPage = () => {
                                             )
                                         ) : (
                                             <tr>
-                                                <td className="empty_message">No staff available.</td>
+                                                <td className="empty_message">No residents available.</td>
                                             </tr>
                                         )
                                     }
@@ -260,6 +266,7 @@ const HostelResidentsPage = () => {
                     isAddResidentOpen={isAddResidentOpen}
                     setIsAddResidentOpen={setIsAddResidentOpen}
                     activeTab={activeTab}
+                    refreshResidents={() => fetchResidents(false)}
                 />
             </ResidentsWrapper>
         </>

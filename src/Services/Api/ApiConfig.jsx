@@ -99,6 +99,7 @@ export const getApiEndpoints = () => {
         createHostelRoom: `${apiURL}/api/hostel/room/create.php`,
         fetchHostelRoom: `${apiURL}/api/hostel/room/list.php`,
         fetchUserlist: `${apiURL}/api/hostel/resident/user-list.php`,
+        fetchRoomBeds: `${apiURL}/api/hostel/room/bed-list.php`,
         createHostelResident: `${apiURL}/api/hostel/resident/create.php`,
         fetchHostelResidents: `${apiURL}/api/hostel/resident/list.php`,
     };

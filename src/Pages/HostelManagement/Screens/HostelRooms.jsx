@@ -112,7 +112,7 @@ const HostelRoomsPage = () => {
                                 ) : rooms.length > 0 ? (
                                     rooms.map((room, i) =>
                                         <tr key={i}>
-                                            <td>{room.id}</td>
+                                            <td>{i + 1}</td>
                                             <td>{room.room_no}</td>
                                             <td>{room.building_name}</td>
                                             <td>{room.floor_no}</td>
@@ -139,6 +139,7 @@ const HostelRoomsPage = () => {
                 <AddRoomsModal
                     isAddRoomOpen={isAddRoomOpen}
                     setIsAddRoomOpen={setIsAddRoomOpen}
+                    refreshRooms={() => fetchRooms(false)}
                 />
             </HostelRoomWrapper>
         </>

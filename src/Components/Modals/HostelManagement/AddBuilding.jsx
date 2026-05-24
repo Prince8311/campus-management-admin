@@ -5,7 +5,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen }) => {
+const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuildings }) => {
     const api = getApiEndpoints();
     const [buildName, setBuildName] = useState('');
     const [totalFloor, setTotalFloor] = useState('');
@@ -38,6 +38,7 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen }) => {
             const response = await axiosInstance.post(api.createHostelBuilding, payload);
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
+                refreshBuildings();
                 closeModal();
             }
         } catch (error) {
