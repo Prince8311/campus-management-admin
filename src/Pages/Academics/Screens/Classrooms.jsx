@@ -93,7 +93,8 @@ const ClassroomPage = () => {
         }
     }, [selectedAcademicLevel]);
 
-    const handleRedirectionClassroomDetailsPage = () => {
+    const handleRedirectionClassroomDetailsPage = (selectedClass, sections, selectedSection) => {
+        localStorage.setItem("classroomDetails", JSON.stringify({ selectedClass, sections, selectedSection }));
         navigate("/admin/academics/classroom-details");
     }
 
@@ -235,7 +236,7 @@ const ClassroomPage = () => {
                                                                             </div>
                                                                         </div>
                                                                         <div className="bottom_btn">
-                                                                            <button className="details" onClick={handleRedirectionClassroomDetailsPage}>View Details</button>
+                                                                            <button className="details" onClick={() => handleRedirectionClassroomDetailsPage(academicClass.class, academicClass.sections, section)}>View Details</button>
                                                                             <button className="delete" onClick={() => handleSectionDelete(academicClass.class, section)}><i className="fa-solid fa-trash"></i></button>
                                                                         </div>
                                                                     </div>

@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { ClassroomDetailsWrapper } from "../../../Styles/AcademicStyle";
 
 const ClassroomDetailsPage = () => {
+    const [selectedClass] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedClass : '');
+    const [sections] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).sections : []);
+    const [selectedSection, setSelectedSection] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedSection : '');
+
     return (
         <>
             <ClassroomDetailsWrapper>
                 <div className="page_head">
-                    <h2>10 - A</h2>
+                    <h2>Class {selectedClass} - {selectedSection}</h2>
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
@@ -16,18 +21,17 @@ const ClassroomDetailsPage = () => {
                             spaceBetween={8}
                             className="mySwiper"
                         >
-                            <SwiperSlide>
-                                <li>10 - A</li>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <li className='active'>10 -B</li>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <li>10 - C</li>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <li>10 - D</li>
-                            </SwiperSlide>
+                            {sections && sections.map((section, idx) => (
+                                <SwiperSlide key={section}>
+                                    <li
+                                        className={selectedSection === section ? 'active' : ''}
+                                        onClick={() => setSelectedSection(section)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        {selectedClass} - {section}
+                                    </li>
+                                </SwiperSlide>
+                            ))}
                         </Swiper>
                     </div>
                 </div>

@@ -95,7 +95,7 @@ const Sidebar = () => {
                             <div className="items_inner">
                                 {
                                     Array.from({ length: 4 }).map((_, i) => (
-                                        <SkeletonLoader width="100%" height="40px" margin="0 0 10px 0" />
+                                        <SkeletonLoader key={i} width="100%" height="40px" margin="0 0 10px 0" />
                                     ))
                                 }
                             </div>
