@@ -2193,9 +2193,143 @@ export const ClassroomDetailsWrapper = styled('div')`
         position: relative;
         width: 100%;
         display: flex;
-        flex-direction: column;
         padding: 0 15px;
         margin-bottom: 15px;
+
+        .student_box {
+            position: relative;
+            width: 405px;
+            display: flex;
+            padding-right: 25px;
+            margin-top: 25px;
+
+            .student_box_inner {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+                
+                .student_heading {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    h6 {
+                        position: relative;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor1};
+                        font-style: italic;
+                    }
+
+                    .search_sec {
+                        position: relative;
+                        height: 35px;
+                        padding: 5px 0;
+                        display: flex;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 6px;
+                        margin-top: 8px;
+
+                        i {
+                            position: relative;
+                            width: 40px;
+                            height: 100%;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor3};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-right: 1px solid ${colors.customColors.borderColor};
+                        }
+
+                        input {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            border: none;
+                            outline: none;
+                            padding: 0 15px;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+                }
+
+                .student_list_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 20px;
+
+                    .list_box {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        padding-bottom: 10px;
+                        margin-bottom: 10px;
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                        &:last-of-type {
+                            border-bottom: none;
+                        }
+
+                        .left_sec {
+                            position: relative;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 6px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: ${colors.customColors.blueColor2};
+
+                            h5 {
+                                position: relative;
+                                font-size: 14px;
+                                font-weight: 500;
+                                color: ${colors.customColors.whiteColor};
+                                text-transform: uppercase;
+                            }
+                        }
+
+                        .right_sec {
+                            position: relative;
+                            width: calc(100% - 30px);
+                            padding-left: 10px;
+                            display: flex;
+                            flex-direction: column;
+
+                            h6 {
+                                font-size: 13px;
+                                font-weight: 400;
+                                color: ${colors.customColors.blackColor1};
+                            }
+
+                            p {
+                                font-size: 10px;
+                                font-weight: 400;
+                                color: ${colors.customColors.blackColor2};
+                            }
+                        }
+
+                        a {
+                            position: relative;
+                            width: 10px;
+                            height: 10px;
+                            text-decoration: none;
+                            color: ${colors.customColors.blackColor3};
+                        }
+                    }
+                }
+            }
+        }
 
         .details_box {
             position: relative;
@@ -2311,7 +2445,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                 .item {
                     position: relative;
-                    width: 33.33%;
+                    width: 50%;
                     max-width: 386px;
                     padding: 10px;
 

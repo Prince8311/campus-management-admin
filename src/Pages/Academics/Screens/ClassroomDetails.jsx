@@ -71,6 +71,59 @@ const ClassroomDetailsPage = () => {
                     </div>
                 </div>
                 <div className="class_details_sec">
+                    <div className="student_box">
+                        <div className="student_box_inner">
+                            <div className="student_heading">
+                                <h6>Student List</h6>
+                                <div className="search_sec">
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="Search by student name..." />
+                                </div>
+                            </div>
+                            <div className="student_list_sec">
+                                <div className="list_box">
+                                    <div className="left_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>#2A521hg</p>
+                                    </div>
+                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
+                                </div>
+                                <div className="list_box">
+                                    <div className="left_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>#2A521hg</p>
+                                    </div>
+                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
+                                </div>
+                                <div className="list_box">
+                                    <div className="left_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>#2A521hg</p>
+                                    </div>
+                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
+                                </div>
+                                <div className="list_box">
+                                    <div className="left_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>#2A521hg</p>
+                                    </div>
+                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="details_box">
                         <div className="box_head_sec">
                             <div className="head_content">
