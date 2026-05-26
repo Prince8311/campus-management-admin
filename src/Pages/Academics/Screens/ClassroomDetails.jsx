@@ -36,7 +36,7 @@ const ClassroomDetailsPage = () => {
                     section: selectedSection
                 }
             });
-            if(response?.data.status === 200) {
+            if (response?.data.status === 200) {
                 console.log("Class Details: ", response.data.data);
                 setClassroomDetails(response?.data.data);
             }
@@ -46,7 +46,7 @@ const ClassroomDetailsPage = () => {
     }
 
     useEffect(() => {
-        if(selectedClass && selectedSection) {
+        if (selectedClass && selectedSection) {
             fetchClassDetails();
         }
     }, []);
@@ -81,23 +81,32 @@ const ClassroomDetailsPage = () => {
                 <div className="class_teacher_sec">
                     <div className="sec_inner">
                         <div className="inner_top_sec">
-                            <h5>Manage class teacher for 10 - A</h5>
-                            <p>Class teacher is responsible for day to day activities of the class</p>
+                            <li>
+                                <h5>Manage class teacher for 10 - A</h5>
+                                <p>Class teacher is responsible for day to day activities of the class</p>
+                            </li>
+                            {
+                                (!classroomDetails.class_teacher) &&
+                                <a><i className="fa-solid fa-plus"></i>Add Class Teacher</a>
+                            }
                         </div>
-                        <div className="inner_bottom_sec">
-                            <div className="teacher_name_sec">
-                                <div className="left_sec">
-                                    <h6>PK</h6>
+                        {
+                            classroomDetails.class_teacher &&
+                            <div className="inner_bottom_sec">
+                                <div className="teacher_name_sec">
+                                    <div className="left_sec">
+                                        <h6>PK</h6>
+                                    </div>
+                                    <div className="right_sec">
+                                        <p>POONAM C K</p>
+                                        <span>91-7760390715</span>
+                                    </div>
                                 </div>
-                                <div className="right_sec">
-                                    <p>POONAM C K</p>
-                                    <span>91-7760390715</span>
+                                <div className="btn_sec">
+                                    <button>Remove</button>
                                 </div>
                             </div>
-                            <div className="btn_sec">
-                                <button>Remove</button>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
                 <div className="class_details_sec">

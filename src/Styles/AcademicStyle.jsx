@@ -2091,22 +2091,48 @@ export const ClassroomDetailsWrapper = styled('div')`
                 width: 100%;
                 padding: 15px;
                 display: flex;
-                flex-direction: column;
+                align-items: flex-start;
 
-                h5 {
+                li {
                     position: relative;
-                    font-size: 14px;
-                    font-weight: 500;
-                    color: ${colors.customColors.blackColor1};
-                    font-style: italic;
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+
+                    h5 {
+                        position: relative;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor1};
+                        font-style: italic;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+                        margin-top: 5px;
+                    }
                 }
 
-                p {
+                a {
                     position: relative;
+                    margin-left: auto;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
                     font-size: 12px;
-                    font-weight: 400;
-                    color: ${colors.customColors.blackColor2};
-                    margin-top: 5px;
+                    font-weight: 500;
+                    padding: 10px 20px;
+                    background: ${colors.customColors.blueColorLight};
+                    color: ${colors.customColors.blueColor1};
+                    border-radius: 6px;
+                    cursor: pointer;
+
+                    i {
+                        margin-right: 6px;
+                    }
                 }
             }
 
@@ -2198,7 +2224,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
         .student_box {
             position: relative;
-            width: 405px;
+            width: 350px;
             display: flex;
             padding-right: 25px;
             margin-top: 25px;
@@ -2208,7 +2234,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                padding: 15px;
+                padding: 15px 18px;
                 border-radius: 8px;
                 box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
                                     -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
@@ -2321,8 +2347,8 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                         a {
                             position: relative;
-                            width: 10px;
-                            height: 10px;
+                            width: 8px;
+                            height: 8px;
                             text-decoration: none;
                             border-radius: 50%;
 
@@ -2343,7 +2369,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
         .details_box {
             position: relative;
-            width: 100%;
+            width: calc(100% - 350px);
             margin-top: 25px;
             display: flex;
             flex-direction: column;
@@ -2456,7 +2482,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                 .item {
                     position: relative;
                     width: 50%;
-                    max-width: 386px;
+                    max-width: 405px;
                     padding: 10px;
 
                     .item_inner {
