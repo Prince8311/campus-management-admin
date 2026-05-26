@@ -2324,7 +2324,17 @@ export const ClassroomDetailsWrapper = styled('div')`
                             width: 10px;
                             height: 10px;
                             text-decoration: none;
-                            color: ${colors.customColors.blackColor3};
+                            border-radius: 50%;
+
+                            &.not_marked {
+                                background: ${colors.customColors.blackColor3};
+                            }
+                            &.present {
+                                background: ${colors.customColors.greenColor};
+                            }
+                            &.absent {
+                                background: ${colors.customColors.redColor};
+                            }
                         }
                     }
                 }
