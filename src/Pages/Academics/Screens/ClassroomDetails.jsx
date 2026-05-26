@@ -15,6 +15,8 @@ const ClassroomDetailsPage = () => {
     const [sections] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).sections : []);
     const [selectedSection, setSelectedSection] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedSection : '');
 
+    const [classroomDetails, setClassroomDetails] = useState({});
+
     const [isAddSubjectModalOpen, setIsAddSubjectModalOpen] = useState(false);
     const [isManageSubjectModalOpen, setIsManageSubjectModalOpen] = useState(false);
 
@@ -36,6 +38,7 @@ const ClassroomDetailsPage = () => {
             });
             if(response?.data.status === 200) {
                 console.log("Class Details: ", response.data.data);
+                setClassroomDetails(response?.data.data);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);

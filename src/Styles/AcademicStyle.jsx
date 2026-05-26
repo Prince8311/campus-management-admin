@@ -2092,7 +2092,6 @@ export const ClassroomDetailsWrapper = styled('div')`
                 padding: 15px;
                 display: flex;
                 flex-direction: column;
-                border-bottom: 1px solid ${colors.customColors.borderColor};
 
                 h5 {
                     position: relative;
@@ -2116,6 +2115,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                 width: 100%;
                 padding: 15px;
                 display: flex;
+                border-top: 1px solid ${colors.customColors.borderColor};
 
                 .teacher_name_sec {
                     position: relative;
