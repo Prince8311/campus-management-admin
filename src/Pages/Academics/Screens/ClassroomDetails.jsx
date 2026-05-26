@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { ClassroomDetailsWrapper } from "../../../Styles/AcademicStyle";
 import AddSubjectModal from '../../../Components/Modals/Academics/AddSubject';
 import ManageSubjectModal from '../../../Components/Modals/Academics/ManageSubject';
+import { toast } from 'react-toastify';
+import axiosInstance from '../../../Services/Middleware/AxiosInstance';
+import { getApiEndpoints } from '../../../Services/Api/ApiConfig';
+import SkeletonLoader from '../../../Components/Loader/SkeletonLoader';
 
 const ClassroomDetailsPage = () => {
+    const api = getApiEndpoints();
     const [selectedClass] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedClass : '');
     const [sections] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).sections : []);
     const [selectedSection, setSelectedSection] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedSection : '');
@@ -20,6 +25,28 @@ const ClassroomDetailsPage = () => {
     const handleOpenSubjectManageModal = () => {
         setIsManageSubjectModalOpen(true);
     }
+
+    const fetchClassDetails = async () => {
+        try {
+            const response = await axiosInstance.get(api.classSectionDetails, {
+                params: {
+                    class: selectedClass,
+                    section: selectedSection
+                }
+            });
+            if(response?.data.status === 200) {
+                console.log("Class Details: ", response.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if(selectedClass && selectedSection) {
+            fetchClassDetails();
+        }
+    }, []);
 
     return (
         <>
