@@ -89,7 +89,7 @@ const ClassroomDetailsPage = () => {
                                         <h6>Joydeep Barik</h6>
                                         <p>#2A521hg</p>
                                     </div>
-                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
+                                    <a className='absent'></a>
                                 </div>
                                 <div className="list_box">
                                     <div className="left_sec">
@@ -99,7 +99,7 @@ const ClassroomDetailsPage = () => {
                                         <h6>Joydeep Barik</h6>
                                         <p>#2A521hg</p>
                                     </div>
-                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
+                                    <a className='present'></a>
                                 </div>
                                 <div className="list_box">
                                     <div className="left_sec">
@@ -109,17 +109,7 @@ const ClassroomDetailsPage = () => {
                                         <h6>Joydeep Barik</h6>
                                         <p>#2A521hg</p>
                                     </div>
-                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
-                                </div>
-                                <div className="list_box">
-                                    <div className="left_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>#2A521hg</p>
-                                    </div>
-                                    <a><i className="fa-solid fa-circle-half-stroke"></i></a>
+                                    <a className='not_marked'></a>
                                 </div>
                             </div>
                         </div>
