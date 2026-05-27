@@ -2640,6 +2640,11 @@ export const ClassroomDetailsWrapper = styled('div')`
                                                 i {
                                                     margin-left: 5px;
                                                     font-size: 8px;
+
+                                                    &.prefix {
+                                                        margin-right: 5px;
+                                                        margin-left: 0;
+                                                    }
                                                 }
                                             }
                                         }

@@ -59,6 +59,14 @@ const ClassroomDetailsPage = () => {
         }
     }, []);
 
+    const getInitials = (name) => {
+        if (!name) return "";
+        const parts = name.trim().split(" ").filter(Boolean);
+        const first = parts[0]?.[0] || "";
+        const last = parts.length > 1 ? parts[parts.length - 1]?.[0] : "";
+        return (first + last).toUpperCase();
+    };
+
     return (
         <>
             <ClassroomDetailsWrapper>
@@ -130,36 +138,27 @@ const ClassroomDetailsPage = () => {
                                 </div>
                             </div>
                             <div className="student_list_sec">
-                                <div className="list_box">
-                                    <div className="left_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>#2A521hg</p>
-                                    </div>
-                                    <a className='absent'></a>
-                                </div>
-                                <div className="list_box">
-                                    <div className="left_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>#2A521hg</p>
-                                    </div>
-                                    <a className='present'></a>
-                                </div>
-                                <div className="list_box">
-                                    <div className="left_sec">
-                                        <h5>JB</h5>
-                                    </div>
-                                    <div className="right_sec">
-                                        <h6>Joydeep Barik</h6>
-                                        <p>#2A521hg</p>
-                                    </div>
-                                    <a className='not_marked'></a>
-                                </div>
+                                {
+                                    (classroomDetails.students) && (classroomDetails.students).length > 0 ? (
+                                        (classroomDetails.students).map((student, i) =>
+                                            <div className="list_box" key={i}>
+                                                <div className="left_sec">
+                                                    <h5>{getInitials(student.name)}</h5>
+                                                </div>
+                                                <div className="right_sec">
+                                                    <h6>{student.name}</h6>
+                                                    <p>#{student.enrollment_id}</p>
+                                                </div>
+                                                <a className='absent'></a>
+                                            </div>
+                                        )
+                                    ) : (
+                                        <div className="empty_box">
+                                            <img src="/images/no-fields.svg" alt="" />
+                                            <p>No Student available.</p>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
@@ -181,162 +180,67 @@ const ClassroomDetailsPage = () => {
                             </div>
                         </div>
                         <div className="box_item_sec">
-                            <div className="item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <div className="part_content">
-                                            <a><i className="fa-solid fa-book-open"></i></a>
-                                            <h6>Subject Name</h6>
-                                            <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
-                                        </div>
-                                        <div className="teacher_sec">
-                                            <div className="teacher_box">
-                                                <div className="teacher_heading">
-                                                    <h5>Subject Teacher</h5>
-                                                    <li>
-                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher")}>
-                                                            <i className="fa-solid fa-pen-to-square"></i>Edit
-                                                        </a>
-                                                        {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
-                                                    </li>
+                            {
+                                (classroomDetails.subjects) && (classroomDetails.subjects).length > 0 ? (
+                                    <div className="item">
+                                        <div className="item_inner">
+                                            <div className="top_part">
+                                                <div className="part_content">
+                                                    <a><i className="fa-solid fa-book-open"></i></a>
+                                                    <h6>Subject Name</h6>
+                                                    <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
                                                 </div>
-                                                <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                <span>91-9916068002</span>
+                                                <div className="teacher_sec">
+                                                    <div className="teacher_box">
+                                                        <div className="teacher_heading">
+                                                            <h5>Subject Teacher</h5>
+                                                            <li>
+                                                                <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher")}>
+                                                                    <i className="fa-solid fa-pen-to-square"></i>Edit
+                                                                </a>
+                                                                {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
+                                                            </li>
+                                                        </div>
+                                                        <p>SOMASHEKAR M BHAIRANATTI</p>
+                                                        <span>91-9916068002</span>
+                                                    </div>
+                                                    <div className="teacher_box">
+                                                        <div className="teacher_heading">
+                                                            <h5>Co Teacher</h5>
+                                                            <li>
+                                                                <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher")}>
+                                                                    <i className="fa-solid fa-plus prefix"></i>Add / Remove<i className="fa-solid fa-angle-right"></i>
+                                                                </button>
+                                                            </li>
+                                                        </div>
+                                                        <p>SOMASHEKAR M BHAIRANATTI</p>
+                                                        <span>91-9916068002</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="teacher_box">
-                                                <div className="teacher_heading">
-                                                    <h5>Co Teacher</h5>
-                                                    <li>
-                                                        <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher")}>
-                                                            <i className="fa-solid fa-plus"></i>Add / Remove<i className="fa-solid fa-angle-right"></i>
-                                                        </button>
-                                                    </li>
+                                            <div className="bottom_btn">
+                                                <div className="left_btns">
+                                                    <a className="left_box">
+                                                        <h6>Compulsory</h6>
+                                                    </a>
+                                                    <a className="left_box active">
+                                                        <h6>Optional</h6>
+                                                    </a>
                                                 </div>
-                                                <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                <span>91-9916068002</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="bottom_btn">
-                                        <div className="left_btns">
-                                            <a className="left_box">
-                                                <h6>Compulsory</h6>
-                                            </a>
-                                            <a className="left_box active">
-                                                <h6>Optional</h6>
-                                            </a>
-                                        </div>
-                                        <div className="right_btns">
-                                            <button className="edit">Edit Name</button>
-                                            <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <div className="part_content">
-                                            <a><i className="fa-solid fa-book-open"></i></a>
-                                            <h6>Subject Name</h6>
-                                            <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
-                                        </div>
-                                        <div className="teacher_sec">
-                                            <div className="teacher_box">
-                                                <div className="teacher_heading">
-                                                    <h5>Subject Teacher</h5>
-                                                    <li>
-                                                        <a className='edit' onClick={handleOpenTeacherManageModal}>
-                                                            <i className="fa-solid fa-pen-to-square"></i>Edit
-                                                        </a>
-                                                        {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
-                                                    </li>
+                                                <div className="right_btns">
+                                                    <button className="edit">Edit Name</button>
+                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                                 </div>
-                                                <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                <span>91-9916068002</span>
-                                            </div>
-                                            <div className="teacher_box">
-                                                <div className="teacher_heading">
-                                                    <h5>Co Teacher</h5>
-                                                    <li>
-                                                        <button className='add' onClick={handleOpenTeacherManageModal}>
-                                                            <i className="fa-solid fa-plus"></i>Add/Remove<i className="fa-solid fa-angle-right"></i>
-                                                        </button>
-                                                    </li>
-                                                </div>
-                                                <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                <span>91-9916068002</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="bottom_btn">
-                                        <div className="left_btns">
-                                            <a className="left_box">
-                                                <h6>Compulsory</h6>
-                                            </a>
-                                            <a className="left_box active">
-                                                <h6>Optional</h6>
-                                            </a>
-                                        </div>
-                                        <div className="right_btns">
-                                            <button className="edit">Edit Name</button>
-                                            <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                        </div>
+                                ) : (
+                                    <div className="empty_box">
+                                        <img src="/images/no-fields.svg" alt="" />
+                                        <p>No Subjects available.</p>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="item">
-                                <div className="item_inner">
-                                    <div className="top_part">
-                                        <div className="part_content">
-                                            <a><i className="fa-solid fa-book-open"></i></a>
-                                            <h6>Subject Name</h6>
-                                            <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
-                                        </div>
-                                        <div className="teacher_sec">
-                                            <div className="teacher_box">
-                                                <div className="teacher_heading">
-                                                    <h5>Subject Teacher</h5>
-                                                    <li>
-                                                        <a className='edit' onClick={handleOpenTeacherManageModal}>
-                                                            <i className="fa-solid fa-pen-to-square"></i>Edit
-                                                        </a>
-                                                        {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
-                                                    </li>
-                                                </div>
-                                                <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                <span>91-9916068002</span>
-                                            </div>
-                                            <div className="teacher_box">
-                                                <div className="teacher_heading">
-                                                    <h5>Co Teacher</h5>
-                                                    <li>
-                                                        <button className='add' onClick={handleOpenTeacherManageModal}>
-                                                            <i className="fa-solid fa-plus"></i>Add/Remove<i className="fa-solid fa-angle-right"></i>
-                                                        </button>
-                                                    </li>
-                                                </div>
-                                                <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                <span>91-9916068002</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="bottom_btn">
-                                        <div className="left_btns">
-                                            <a className="left_box">
-                                                <h6>Compulsory</h6>
-                                            </a>
-                                            <a className="left_box active">
-                                                <h6>Optional</h6>
-                                            </a>
-                                        </div>
-                                        <div className="right_btns">
-                                            <button className="edit">Edit Name</button>
-                                            <button className="delete"><i className="fa-solid fa-trash"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
@@ -351,7 +255,7 @@ const ClassroomDetailsPage = () => {
                     setIsManageSubjectModalOpen={setIsManageSubjectModalOpen}
                 />
 
-                <ManageTeacher 
+                <ManageTeacher
                     isManageTeacherModalOpen={isManageTeacherModalOpen}
                     setIsManageTeacherModalOpen={setIsManageTeacherModalOpen}
                     manageTeacherType={manageTeacherType}
