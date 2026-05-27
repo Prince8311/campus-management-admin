@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import axiosInstance from '../../../Services/Middleware/AxiosInstance';
 import { getApiEndpoints } from '../../../Services/Api/ApiConfig';
 import SkeletonLoader from '../../../Components/Loader/SkeletonLoader';
+import ManageTeacher from '../../../Components/Modals/Academics/ManageTeacher';
 
 const ClassroomDetailsPage = () => {
     const api = getApiEndpoints();
@@ -19,6 +20,8 @@ const ClassroomDetailsPage = () => {
 
     const [isAddSubjectModalOpen, setIsAddSubjectModalOpen] = useState(false);
     const [isManageSubjectModalOpen, setIsManageSubjectModalOpen] = useState(false);
+    const [isManageTeacherModalOpen, setIsManageTeacherModalOpen] = useState(false);
+    const [manageTeacherType, setManageTeacherType] = useState("");
 
     const handleOpenSubjectAddModal = () => {
         setIsAddSubjectModalOpen(true);
@@ -26,6 +29,11 @@ const ClassroomDetailsPage = () => {
 
     const handleOpenSubjectManageModal = () => {
         setIsManageSubjectModalOpen(true);
+    }
+
+    const handleOpenTeacherManageModal = (type) => {
+        setManageTeacherType(type);
+        setIsManageTeacherModalOpen(true);
     }
 
     const fetchClassDetails = async () => {
@@ -87,7 +95,9 @@ const ClassroomDetailsPage = () => {
                             </li>
                             {
                                 (!classroomDetails.class_teacher) &&
-                                <a><i className="fa-solid fa-plus"></i>Add Class Teacher</a>
+                                <a onClick={() => handleOpenTeacherManageModal("add_class_teacher")}>
+                                    <i className="fa-solid fa-plus"></i>Add Class Teacher
+                                </a>
                             }
                         </div>
                         {
@@ -184,7 +194,9 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Subject Teacher</h5>
                                                     <li>
-                                                        <a className='edit'><i className="fa-solid fa-pen-to-square"></i>Edit</a>
+                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher")}>
+                                                            <i className="fa-solid fa-pen-to-square"></i>Edit
+                                                        </a>
                                                         {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
                                                     </li>
                                                 </div>
@@ -195,7 +207,9 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Co Teacher</h5>
                                                     <li>
-                                                        <button className='add'>Add / Remove<i className="fa-solid fa-angle-right"></i></button>
+                                                        <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher")}>
+                                                            <i className="fa-solid fa-plus"></i>Add / Remove<i className="fa-solid fa-angle-right"></i>
+                                                        </button>
                                                     </li>
                                                 </div>
                                                 <p>SOMASHEKAR M BHAIRANATTI</p>
@@ -232,7 +246,9 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Subject Teacher</h5>
                                                     <li>
-                                                        <a className='edit'><i className="fa-solid fa-pen-to-square"></i>Edit</a>
+                                                        <a className='edit' onClick={handleOpenTeacherManageModal}>
+                                                            <i className="fa-solid fa-pen-to-square"></i>Edit
+                                                        </a>
                                                         {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
                                                     </li>
                                                 </div>
@@ -243,7 +259,9 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Co Teacher</h5>
                                                     <li>
-                                                        <button className='add'>Add/Remove<i className="fa-solid fa-angle-right"></i></button>
+                                                        <button className='add' onClick={handleOpenTeacherManageModal}>
+                                                            <i className="fa-solid fa-plus"></i>Add/Remove<i className="fa-solid fa-angle-right"></i>
+                                                        </button>
                                                     </li>
                                                 </div>
                                                 <p>SOMASHEKAR M BHAIRANATTI</p>
@@ -280,7 +298,9 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Subject Teacher</h5>
                                                     <li>
-                                                        <a className='edit'><i className="fa-solid fa-pen-to-square"></i>Edit</a>
+                                                        <a className='edit' onClick={handleOpenTeacherManageModal}>
+                                                            <i className="fa-solid fa-pen-to-square"></i>Edit
+                                                        </a>
                                                         {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
                                                     </li>
                                                 </div>
@@ -291,7 +311,9 @@ const ClassroomDetailsPage = () => {
                                                 <div className="teacher_heading">
                                                     <h5>Co Teacher</h5>
                                                     <li>
-                                                        <button className='add'>Add/Remove<i className="fa-solid fa-angle-right"></i></button>
+                                                        <button className='add' onClick={handleOpenTeacherManageModal}>
+                                                            <i className="fa-solid fa-plus"></i>Add/Remove<i className="fa-solid fa-angle-right"></i>
+                                                        </button>
                                                     </li>
                                                 </div>
                                                 <p>SOMASHEKAR M BHAIRANATTI</p>
@@ -327,6 +349,12 @@ const ClassroomDetailsPage = () => {
                 <ManageSubjectModal
                     isManageSubjectModalOpen={isManageSubjectModalOpen}
                     setIsManageSubjectModalOpen={setIsManageSubjectModalOpen}
+                />
+
+                <ManageTeacher 
+                    isManageTeacherModalOpen={isManageTeacherModalOpen}
+                    setIsManageTeacherModalOpen={setIsManageTeacherModalOpen}
+                    manageTeacherType={manageTeacherType}
                 />
             </ClassroomDetailsWrapper>
         </>
