@@ -2530,7 +2530,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                                 
                                 h6 {
                                     position: relative;
-                                    padding-left: 12px;
+                                    padding-left: 8px;
                                     max-width: calc(100% - 85px);
                                     font-size: 13.5px;
                                     font-style: italic;
@@ -2580,11 +2580,12 @@ export const ClassroomDetailsWrapper = styled('div')`
                                         position: relative;
                                         width: 100%;
                                         display: flex;
-                                        align-items: center;
+                                        align-items: flex-end;
 
                                         h5 {
                                             position: relative;
                                             font-size: 10px;
+                                            line-height: 1.2;
                                             font-weight: 500;
                                             font-style: italic;
                                             color: ${colors.customColors.blackColor};
@@ -2595,12 +2596,11 @@ export const ClassroomDetailsWrapper = styled('div')`
                                             display: flex;
                                             align-items: center;
                                             list-style: none;
-                                            margin-left: 5px;
+                                            margin-left: 6px;
 
                                             a {
                                                 position: relative;
                                                 width: max-content;
-                                                padding: 4px 10px;
                                                 font-size: 9px;
                                                 cursor: pointer;
                                                 text-decoration: none;
@@ -2627,7 +2627,6 @@ export const ClassroomDetailsWrapper = styled('div')`
                                             button {
                                                 position: relative;
                                                 width: max-content;
-                                                padding: 4px 10px;
                                                 font-size: 9px;
                                                 cursor: pointer;
                                                 border: none;
