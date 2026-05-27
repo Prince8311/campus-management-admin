@@ -2683,6 +2683,14 @@ export const ClassroomDetailsWrapper = styled('div')`
                                         overflow: hidden;
                                         white-space: nowrap;
                                         text-overflow: ellipsis;
+
+                                        &.empty {
+                                            padding-left: 5px;
+                                            margin-top: 6px;
+                                            font-size: 12px;
+                                            opacity: 0.5;
+                                            font-style: italic;
+                                        }
                                     }
 
                                     span {

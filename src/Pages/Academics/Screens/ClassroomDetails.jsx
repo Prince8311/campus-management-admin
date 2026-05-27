@@ -182,58 +182,81 @@ const ClassroomDetailsPage = () => {
                         <div className="box_item_sec">
                             {
                                 (classroomDetails.subjects) && (classroomDetails.subjects).length > 0 ? (
-                                    <div className="item">
-                                        <div className="item_inner">
-                                            <div className="top_part">
-                                                <div className="part_content">
-                                                    <a><i className="fa-solid fa-book-open"></i></a>
-                                                    <h6>Subject Name</h6>
-                                                    <span onClick={handleOpenSubjectManageModal}>1000 Students <i className="fa-solid fa-angle-right"></i></span>
-                                                </div>
-                                                <div className="teacher_sec">
-                                                    <div className="teacher_box">
-                                                        <div className="teacher_heading">
-                                                            <h5>Subject Teacher</h5>
-                                                            <li>
-                                                                <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher")}>
-                                                                    <i className="fa-solid fa-pen-to-square"></i>Edit
-                                                                </a>
-                                                                {/* <a className='add'><i className="fa-solid fa-plus"></i>Add</a> */}
-                                                            </li>
-                                                        </div>
-                                                        <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                        <span>91-9916068002</span>
+                                    (classroomDetails.subjects).map((subject, i) =>
+                                        <div className="item" key={i}>
+                                            <div className="item_inner">
+                                                <div className="top_part">
+                                                    <div className="part_content">
+                                                        <a><i className="fa-solid fa-book-open"></i></a>
+                                                        <h6>{subject.subject}</h6>
+                                                        <span onClick={handleOpenSubjectManageModal}>{subject.students_count} Student{subject.students_count > 1 && 's'} <i className="fa-solid fa-angle-right"></i></span>
                                                     </div>
-                                                    <div className="teacher_box">
-                                                        <div className="teacher_heading">
-                                                            <h5>Co Teacher</h5>
-                                                            <li>
-                                                                <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher")}>
-                                                                    <i className="fa-solid fa-plus prefix"></i>Add / Remove<i className="fa-solid fa-angle-right"></i>
-                                                                </button>
-                                                            </li>
+                                                    <div className="teacher_sec">
+                                                        <div className="teacher_box">
+                                                            <div className="teacher_heading">
+                                                                <h5>Subject Teacher</h5>
+                                                                <li>
+                                                                    {
+                                                                        subject.subject_teacher ? (
+                                                                            <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher")}>
+                                                                                <i className="fa-solid fa-pen-to-square"></i>Edit
+                                                                            </a>
+                                                                        ) : (
+                                                                            <a className='add'><i className="fa-solid fa-plus"></i>Add</a>
+                                                                        )
+                                                                    }
+                                                                </li>
+                                                            </div>
+                                                            {
+                                                                subject.subject_teacher ? (
+                                                                    <>
+                                                                        <p>SOMASHEKAR M BHAIRANATTI</p>
+                                                                        <span>91-9916068002</span>
+                                                                    </>
+                                                                ) : (
+                                                                    <p className='empty'>N/A</p>
+                                                                )
+                                                            }
                                                         </div>
-                                                        <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                        <span>91-9916068002</span>
+                                                        <div className="teacher_box">
+                                                            <div className="teacher_heading">
+                                                                <h5>Co Teacher</h5>
+                                                                <li>
+                                                                    <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher")}>
+                                                                        <i className="fa-solid fa-plus prefix"></i>Add / Remove<i className="fa-solid fa-angle-right"></i>
+                                                                    </button>
+                                                                </li>
+                                                            </div>
+                                                            {
+                                                                (subject.co_teachers).length > 0 ? (
+                                                                    <>
+                                                                        <p>SOMASHEKAR M BHAIRANATTI</p>
+                                                                        <span>91-9916068002</span>
+                                                                    </>
+                                                                ) : (
+                                                                    <p className='empty'>N/A</p>
+                                                                )
+                                                            }
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="bottom_btn">
-                                                <div className="left_btns">
-                                                    <a className="left_box">
-                                                        <h6>Compulsory</h6>
-                                                    </a>
-                                                    <a className="left_box active">
-                                                        <h6>Optional</h6>
-                                                    </a>
-                                                </div>
-                                                <div className="right_btns">
-                                                    <button className="edit">Edit Name</button>
-                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                <div className="bottom_btn">
+                                                    <div className="left_btns">
+                                                        <a className={`left_box ${subject.is_mandatory ? 'active' : ''}`}>
+                                                            <h6>Compulsory</h6>
+                                                        </a>
+                                                        <a className={`left_box ${!subject.is_mandatory ? 'active' : ''}`}>
+                                                            <h6>Optional</h6>
+                                                        </a>
+                                                    </div>
+                                                    <div className="right_btns">
+                                                        <button className="edit">Edit Name</button>
+                                                        <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    )
                                 ) : (
                                     <div className="empty_box">
                                         <img src="/images/no-fields.svg" alt="" />
