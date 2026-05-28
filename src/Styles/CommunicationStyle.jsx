@@ -366,6 +366,24 @@ export const MessagingWrapper = styled('div')`
                     font-weight: 400;
                     margin-left: 10px;
                 }
+
+                a {
+                    position: relative;
+                    padding: 4px 10px;
+                    font-size: 11px;
+                    color: ${colors.customColors.whiteColor};
+                    font-weight: 400;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    margin-left: 10px;
+                    cursor: pointer;
+                    background: ${colors.customColors.blueColor1};
+
+                    i {
+                        font-size: 12px;
+                        margin-left: 6px;
+                    }
+                }
             }
 
             .box_body {

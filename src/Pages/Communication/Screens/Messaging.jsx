@@ -1,6 +1,14 @@
+import { useState } from "react";
 import { MessagingWrapper } from "../../../Styles/CommunicationStyle";
+import CreateMessageModal from "../../../Components/Modals/Communication/CreateMessage";
 
 const MessagingPage = () => {
+    const [isMessageCreateModalOpen, setIsMessageCreateModalOpen] = useState(false);
+
+    const openMessageCreateModal = () => {
+        setIsMessageCreateModalOpen(true);
+    };
+
     return (
         <>
             <MessagingWrapper>
@@ -55,7 +63,7 @@ const MessagingPage = () => {
                             <div className="filter_dropdown"></div>
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={openMessageCreateModal}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Add New</p>
                             </button>
@@ -73,6 +81,7 @@ const MessagingPage = () => {
                         <div className="box_head">
                             <h5>Fee Due Reminder</h5>
                             <span>Pending</span>
+                            <a>Edit<i className="fa-regular fa-pen-to-square"></i></a>
                         </div>
                         <div className="box_body">
                             <p>{"Dear Parent, {{ Name }} 's pending fee is {{ Amount }}. Pay online on Teachmint bit.ly/3K8zWwV Ignore if paid. Regards SRI SAI ANGELS SCHOOL via Edu Connekt"}</p>
@@ -118,6 +127,11 @@ const MessagingPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <CreateMessageModal
+                    isMessageCreateModalOpen={isMessageCreateModalOpen}
+                    setIsMessageCreateModalOpen={setIsMessageCreateModalOpen}
+                />
             </MessagingWrapper>
         </>
     );
