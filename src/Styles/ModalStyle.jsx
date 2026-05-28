@@ -2703,21 +2703,17 @@ export const SubjectPreferenceWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
-                justify-content: center;
 
                 a {
                     position: relative;
-                    font-size: 14px;
+                    font-size: 13px;
                     color: ${colors.customColors.blackColor2};
-                    text-align: center;
                     text-decoration: none;
 
                     span {
                         position: relative;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor1};
-                        font-size: 15px;
                     }
                 }
 
@@ -2727,7 +2723,7 @@ export const SubjectPreferenceWrapper = styled('div')`
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    margin-top: 20px;
+                    margin-top: 15px;
 
                     li {
                         position: relative;
@@ -2767,8 +2763,8 @@ export const SubjectPreferenceWrapper = styled('div')`
 
                                 img {
                                     position: absolute;
-                                    left: 2px;
-                                    bottom: 2px;
+                                    left: 1px;
+                                    bottom: 1px;
                                     width: 20px;
                                     opacity: 0;
                                     transition: all 0.4s ease;
@@ -2798,7 +2794,9 @@ export const SubjectPreferenceWrapper = styled('div')`
             width: 100%;
             padding: 13px 20px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: 1px solid ${colors.customColors.borderColor};
 
             button {
                 position: relative;
