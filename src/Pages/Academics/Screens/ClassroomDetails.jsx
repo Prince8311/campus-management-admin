@@ -9,6 +9,7 @@ import axiosInstance from '../../../Services/Middleware/AxiosInstance';
 import { getApiEndpoints } from '../../../Services/Api/ApiConfig';
 import SkeletonLoader from '../../../Components/Loader/SkeletonLoader';
 import ManageTeacher from '../../../Components/Modals/Academics/ManageTeacher';
+import SubjectPreferenceModal from '../../../Components/Modals/Academics/SubjectPreference';
 
 const ClassroomDetailsPage = () => {
     const api = getApiEndpoints();
@@ -22,6 +23,7 @@ const ClassroomDetailsPage = () => {
     const [isManageSubjectModalOpen, setIsManageSubjectModalOpen] = useState(false);
     const [isManageTeacherModalOpen, setIsManageTeacherModalOpen] = useState(false);
     const [manageTeacherType, setManageTeacherType] = useState("");
+    const [isSubjectPreferenceModalOpen, setIsSubjectPreferenceModalOpen] = useState(false);
 
     const handleOpenSubjectAddModal = () => {
         setIsAddSubjectModalOpen(true);
@@ -34,6 +36,10 @@ const ClassroomDetailsPage = () => {
     const handleOpenTeacherManageModal = (type) => {
         setManageTeacherType(type);
         setIsManageTeacherModalOpen(true);
+    }
+
+    const handleOpenSubjectPreferenceModal = () => {
+        setIsSubjectPreferenceModalOpen(true);
     }
 
     const fetchClassDetails = async () => {
@@ -242,7 +248,7 @@ const ClassroomDetailsPage = () => {
                                                 </div>
                                                 <div className="bottom_btn">
                                                     <div className="left_btns">
-                                                        <a className={`left_box ${subject.is_mandatory ? 'active' : ''}`}>
+                                                        <a className={`left_box ${subject.is_mandatory ? 'active' : ''}`} onClick={handleOpenSubjectPreferenceModal}>
                                                             <h6>Compulsory</h6>
                                                         </a>
                                                         <a className={`left_box ${!subject.is_mandatory ? 'active' : ''}`}>
@@ -282,6 +288,11 @@ const ClassroomDetailsPage = () => {
                     isManageTeacherModalOpen={isManageTeacherModalOpen}
                     setIsManageTeacherModalOpen={setIsManageTeacherModalOpen}
                     manageTeacherType={manageTeacherType}
+                />
+
+                <SubjectPreferenceModal
+                    isSubjectPreferenceModalOpen={isSubjectPreferenceModalOpen}
+                    setIsSubjectPreferenceModalOpen={setIsSubjectPreferenceModalOpen}
                 />
             </ClassroomDetailsWrapper>
         </>
