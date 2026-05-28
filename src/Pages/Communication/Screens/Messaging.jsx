@@ -80,7 +80,7 @@ const MessagingPage = () => {
                         <div className="box_bottom">
                             <p><b>Created by :</b>Meghashree K M</p>
                             <span><i className="fa-solid fa-circle"></i></span>
-                            <p><b>Posted by :</b>Sourish Mondal</p>
+                            <p><b>Approved by :</b>Sourish Mondal</p>
                             <span><i className="fa-solid fa-circle"></i></span>
                             <p><i className="fa-solid fa-calendar"></i>11 Oct, 2025</p>
                         </div>
@@ -96,7 +96,7 @@ const MessagingPage = () => {
                         <div className="box_bottom">
                             <p><b>Created by :</b>Meghashree K M</p>
                             <span><i className="fa-solid fa-circle"></i></span>
-                            <p><b>Posted by :</b>Sourish Mondal</p>
+                            <p><b>Approved by :</b>Sourish Mondal</p>
                             <span><i className="fa-solid fa-circle"></i></span>
                             <p><i className="fa-solid fa-calendar"></i>11 Oct, 2025</p>
                         </div>
@@ -112,7 +112,7 @@ const MessagingPage = () => {
                         <div className="box_bottom">
                             <p><b>Created by :</b>Meghashree K M</p>
                             <span><i className="fa-solid fa-circle"></i></span>
-                            <p><b>Posted by :</b>Sourish Mondal</p>
+                            <p><b>Approved by :</b>Sourish Mondal</p>
                             <span><i className="fa-solid fa-circle"></i></span>
                             <p><i className="fa-solid fa-calendar"></i>11 Oct, 2025</p>
                         </div>
