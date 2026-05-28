@@ -221,7 +221,6 @@ const AddStudentPage = () => {
 
                 const payload = {
                     students: formattedData,
-                    session: userDetails?.session?.name,
                     isBulkUpload: true
                 };
                 const response = await axiosInstance.post(api.addStudent, payload);
@@ -288,7 +287,6 @@ const AddStudentPage = () => {
                     student_fields: studentData
                 }
             ],
-            session: userDetails?.session?.name,
             isBulkUpload: false
         };
         try {

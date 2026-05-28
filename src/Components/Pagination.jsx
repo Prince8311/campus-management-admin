@@ -19,7 +19,11 @@ const Pagination = ({ currentPage, totalItems, itemsPerPage, onPageChange }) => 
 
     return (
         <PaginationWrapper>
-            <button className={`prev_btn ${currentPage === 1 ? 'disable' : ''}`} onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}><i className="fa-solid fa-angles-left"></i>Prev</button>
+            {currentPage !== 1 && (
+                <button className={"prev_btn"} onClick={() => goToPage(currentPage - 1)}>
+                    <i className="fa-solid fa-angles-left"></i>Prev
+                </button>
+            )}
 
             <ul>
                 {startPage > 1 && (
@@ -47,7 +51,11 @@ const Pagination = ({ currentPage, totalItems, itemsPerPage, onPageChange }) => 
                 )}
             </ul>
 
-            <button className={`next_btn ${currentPage === lastPage ? 'disable' : ''}`} onClick={() => goToPage(currentPage + 1)} disabled={currentPage === lastPage}>Next<i className="fa-solid fa-angles-right"></i></button>
+            {currentPage !== lastPage && (
+                <button className={"next_btn"} onClick={() => goToPage(currentPage + 1)}>
+                    Next<i className="fa-solid fa-angles-right"></i>
+                </button>
+            )}
         </PaginationWrapper>
     );
 };

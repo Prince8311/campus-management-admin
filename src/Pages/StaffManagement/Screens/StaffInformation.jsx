@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import Pagination from "../../../Components/Pagination";
 
 const StaffInformationPage = () => {
     const api = getApiEndpoints();
@@ -49,7 +50,7 @@ const StaffInformationPage = () => {
     }
 
     useEffect(() => {
-        fetchStaffs(true);
+        fetchStaffs(true, page);
     }, [selectedTab, page]);
 
     const getInitials = (name) => {
@@ -141,7 +142,7 @@ const StaffInformationPage = () => {
                                                         </div>
                                                         <div className="right_table_sec">
                                                             <h6>{staff.name}</h6>
-                                                            <p>{staff.staff_id}</p>
+                                                            <p>#{staff.staff_id}</p>
                                                         </div>
                                                     </td>
                                                     <td>{staff.phone}</td>
@@ -242,6 +243,11 @@ const StaffInformationPage = () => {
                             </table>
                         </div>
                     )
+                }
+
+                {
+                    totalCount > 10 &&
+                    <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
                 }
 
                 <SelectStaffTypeModal

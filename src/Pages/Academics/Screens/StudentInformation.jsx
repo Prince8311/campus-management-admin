@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import Pagination from "../../../Components/Pagination";
 
 const StudentInformationPage = () => {
     const api = getApiEndpoints();
@@ -220,6 +221,11 @@ const StudentInformationPage = () => {
                         </tbody>
                     </table>
                 </div>
+
+                {
+                    totalCount > 10 &&
+                    <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
+                }
             </StudentInformationWrapper>
         </>
     );

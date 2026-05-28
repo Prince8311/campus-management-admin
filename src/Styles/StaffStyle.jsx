@@ -292,6 +292,8 @@ export const StaffInformationWrapper = styled('div')`
                             align-items: center;
                             width: 10%;
                             justify-content: center;
+                            word-break: break-word;
+                            text-align: center;
                         }
                         &:nth-of-type(4) {
                             align-items: center;

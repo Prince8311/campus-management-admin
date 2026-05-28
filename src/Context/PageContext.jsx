@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
             if (response?.data?.status === 200) {
                 setUserDetails(response.data.user);
                 setAuthStatus("authenticated");
-                console.log(response);
+                console.log(response.data.user);
             } else {
                 throw new Error("Invalid auth");
             }
