@@ -1923,8 +1923,8 @@ export const AddSubjectWrapper = styled('div')`
 
                                 img {
                                     position: absolute;
-                                    left: 2px;
-                                    bottom: 2px;
+                                    left: 1px;
+                                    bottom: 1px;
                                     width: 20px;
                                     opacity: 0;
                                     transition: all 0.4s ease;
