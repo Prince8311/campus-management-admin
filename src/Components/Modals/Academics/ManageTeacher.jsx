@@ -1,6 +1,11 @@
+import { useEffect, useState } from "react";
 import { ManageTeacherWrapper } from "../../../Styles/ModalStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../Loader/SkeletonLoader";
 
-const ManageTeacher = ({ isManageTeacherModalOpen, setIsManageTeacherModalOpen, manageTeacherType }) => {
+const ManageTeacher = ({ isManageTeacherModalOpen, setIsManageTeacherModalOpen, manageTeacherType, selectedClass, section, currentSubject }) => {
     
     function closeModal() {
         setIsManageTeacherModalOpen(false);
@@ -8,14 +13,14 @@ const ManageTeacher = ({ isManageTeacherModalOpen, setIsManageTeacherModalOpen, 
 
     const getHeading = () => {
         switch (manageTeacherType) {
-            case "add_class_teacher":
-                return "Add Class Teacher for 10 - D";
+            case "manage_class_teacher":
+                return `Manage Class Teacher for Class ${selectedClass} - ${section}`;
 
             case "manage_teacher":
-                return "Manage Subject Teacher";
+                return `Manage Subject Teacher for ${currentSubject} of Class ${selectedClass} - ${section}`;
 
             case "manage_co_teacher":
-                return "Manage Co Teacher for 10 - D";
+                return `Manage Co-Teachers for ${currentSubject} of Class ${selectedClass} - ${section}`;
 
             default:
                 return "Manage Teacher";

@@ -2293,6 +2293,14 @@ export const ClassroomDetailsWrapper = styled('div')`
                     display: flex;
                     flex-direction: column;
                     margin-top: 20px;
+                    max-height: 300px;
+                    overflow-y: auto;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
 
                     .list_box {
                         position: relative;
@@ -2327,8 +2335,9 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                         .right_sec {
                             position: relative;
-                            width: calc(100% - 30px);
+                            width: calc(100% - 40px);
                             padding-left: 10px;
+                            padding-right: 15px;
                             display: flex;
                             flex-direction: column;
 

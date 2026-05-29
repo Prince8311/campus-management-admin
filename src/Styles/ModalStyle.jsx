@@ -52,6 +52,7 @@ export const PaginationWrapper = styled('div')`
     position: relative;
     width: 100%;
     margin-top: 20px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-end;

@@ -24,6 +24,7 @@ const ClassroomDetailsPage = () => {
     const [isManageSubjectModalOpen, setIsManageSubjectModalOpen] = useState(false);
     const [isManageTeacherModalOpen, setIsManageTeacherModalOpen] = useState(false);
     const [manageTeacherType, setManageTeacherType] = useState("");
+    const [currentSubject, setCurrentSubject] = useState("");
     const [isSubjectPreferenceModalOpen, setIsSubjectPreferenceModalOpen] = useState(false);
 
     const handleOpenSubjectAddModal = () => {
@@ -34,8 +35,9 @@ const ClassroomDetailsPage = () => {
         setIsManageSubjectModalOpen(true);
     }
 
-    const handleOpenTeacherManageModal = (type) => {
+    const handleOpenTeacherManageModal = (type, subject = "") => {
         setManageTeacherType(type);
+        if (subject) setCurrentSubject(subject);
         setIsManageTeacherModalOpen(true);
     }
 
@@ -119,7 +121,7 @@ const ClassroomDetailsPage = () => {
                                     </li>
                                     {
                                         (!classroomDetails.class_teacher) &&
-                                        <a onClick={() => handleOpenTeacherManageModal("add_class_teacher")}>
+                                        <a onClick={() => handleOpenTeacherManageModal("manage_class_teacher")}>
                                             <i className="fa-solid fa-plus"></i>Add Class Teacher
                                         </a>
                                     }
@@ -227,11 +229,11 @@ const ClassroomDetailsPage = () => {
                                                                             <li>
                                                                                 {
                                                                                     subject.subject_teacher ? (
-                                                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher")}>
+                                                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher", subject.subject)}>
                                                                                             <i className="fa-solid fa-pen-to-square"></i>Edit
                                                                                         </a>
                                                                                     ) : (
-                                                                                        <a className='add'><i className="fa-solid fa-plus"></i>Add</a>
+                                                                                        <a className='add' onClick={() => handleOpenTeacherManageModal("manage_teacher", subject.subject)}><i className="fa-solid fa-plus"></i>Add</a>
                                                                                     )
                                                                                 }
                                                                             </li>
@@ -251,7 +253,7 @@ const ClassroomDetailsPage = () => {
                                                                         <div className="teacher_heading">
                                                                             <h5>Co Teacher</h5>
                                                                             <li>
-                                                                                <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher")}>
+                                                                                <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher", subject.subject)}>
                                                                                     <i className="fa-solid fa-plus prefix"></i>Add / Remove<i className="fa-solid fa-angle-right"></i>
                                                                                 </button>
                                                                             </li>
@@ -314,6 +316,9 @@ const ClassroomDetailsPage = () => {
                     isManageTeacherModalOpen={isManageTeacherModalOpen}
                     setIsManageTeacherModalOpen={setIsManageTeacherModalOpen}
                     manageTeacherType={manageTeacherType}
+                    selectedClass={selectedClass}
+                    section={selectedSection}
+                    currentSubject={currentSubject}
                 />
 
                 <SubjectPreferenceModal
