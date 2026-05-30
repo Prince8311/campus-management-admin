@@ -867,6 +867,7 @@ export const StudentAttendenceWrapper = styled('div')`
         .filter_sec {
             position: relative;
             margin-left: auto;
+            display: flex;
 
             .filter_btn {
                 position: relative;
@@ -905,6 +906,38 @@ export const StudentAttendenceWrapper = styled('div')`
                 right: 0;
                 width: 300px;
                 z-index: 5;
+            }
+
+            .add_btn {
+                position: relative;
+                margin-left: 20px;
+
+                button {
+                    position: relative;
+                    padding: 0 15px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 1px solid ${colors.customColors.greenColor};
+                    background: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    transition: all 0.5s ease;
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.5s ease;
+                    }
+
+                    i {
+                        margin-right: 8px;
+                        font-size: 12px;
+                    }
+                }
             }
         }
     }
