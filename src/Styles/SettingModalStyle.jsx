@@ -495,6 +495,125 @@ export const DeleteConfirmationWrapper = styled('div')`
     }    
 `;
 
+export const ConfirmationWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    padding-left: 265px;
+    transition: all 0.3s ease;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: initial;
+        transition: all 0.3s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 400px;
+        max-height: 100%;
+        background: rgb(249, 249, 249);
+        box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(-150px);
+        transition: transform 0.8s ease;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &.active {
+            transform: translateY(0);
+            transition: transform 0.8s ease;
+        }
+
+        .modal_body {
+            position: relative;
+            width: 100%;
+            padding: 11px 20px;
+            display: flex;
+            flex-direction: column;
+
+            .body_inner {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                p {
+                    position: relative;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor};
+                }
+            }
+        }
+
+        .modal_btn {
+            position: relative;
+            width: 100%;
+            padding: 13px 20px;
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid ${colors.customColors.borderColor};
+
+            button {
+                position: relative;
+                width: 130px;
+                height: 35px;
+                font-size: 13px;
+                font-weight: 500;
+                cursor: pointer;
+                border-radius: 6px;
+                overflow: hidden;
+                border: none;
+                background: ${colors.customColors.blueColor1};
+                color: ${colors.customColors.whiteColor};
+                transition: all 0.5s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
+
+                &:disabled {
+                    cursor: not-allowed;
+                    opacity: 0.4;
+                    transition: all 0.5s ease;
+                }
+
+                &.cancel {
+                    background: ${colors.customColors.redColor};
+                    color: ${colors.customColors.whiteColor};
+                    margin-right: 15px;
+                }
+
+                &.confirm {
+                    background: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+                }
+            }
+        }
+    }
+`;
+
 export const CreateFieldsWrapper = styled('div')`
     position: fixed;
     top: 0;
