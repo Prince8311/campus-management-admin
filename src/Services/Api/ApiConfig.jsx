@@ -56,6 +56,7 @@ export const getApiEndpoints = () => {
         staffUploadForm: `${apiURL}/api/staff/form.php`,
         addStaff: `${apiURL}/api/staff/create.php`,
         fetchStaffs: `${apiURL}/api/staff/list.php`,
+        fetchTeachers: `${apiURL}/api/staff/teacher-list.php`,
 
         // Form Sections 
         createStaffFormSection: `${apiURL}/api/staff/sections/create.php`,

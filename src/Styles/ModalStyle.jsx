@@ -2301,7 +2301,7 @@ export const ManageTeacherWrapper = styled('div')`
     position: fixed;
     top: 0;
     right: -100%;
-    width: 750px;
+    width: 650px;
     height: 100vh;
     border-top-left-radius: 10px;
     background: ${colors.customColors.whiteColor};
@@ -2369,8 +2369,8 @@ export const ManageTeacherWrapper = styled('div')`
         .table_sec {
             position: relative;
             width: 100%;
-            height: calc(100% - 144px);
-            margin-top: 20px;
+            height: calc(100% - 164px);
+            margin: 20px 0;
             padding: 0 20px;
             overflow-y: auto;
             scrollbar-width: none;
@@ -2380,8 +2380,42 @@ export const ManageTeacherWrapper = styled('div')`
                 display: none;
             }
 
+            .search_sec {
+                position: relative;
+                width: max-content;
+                height: 35px;
+                padding: 5px 0;
+                display: flex;
+                border: 1px solid ${colors.customColors.borderColor};
+                border-radius: 6px;
+
+                i {
+                    position: relative;
+                    width: 40px;
+                    height: 100%;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor3};
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-right: 1px solid ${colors.customColors.borderColor};
+                }
+
+                input {
+                    position: relative;
+                    width: 300px;
+                    height: 100%;
+                    border: none;
+                    outline: none;
+                    padding: 0 15px;
+                    font-size: 12px;
+                    color: ${colors.customColors.blackColor1};
+                }
+            }
+
             .sec_inner {
                 position: relative;
+                margin-top: 15px;
                 width: 100%;
                 display: flex;
 
@@ -2442,7 +2476,7 @@ export const ManageTeacherWrapper = styled('div')`
                         border-radius: 0px 0px 10px 10px;
                         display: flex;
                         flex-direction: column;
-                        overflow: hidden;
+                        overflow-y: auto;
 
                         tr {
                             position: relative;
@@ -2496,6 +2530,7 @@ export const ManageTeacherWrapper = styled('div')`
 
                                         h6 {
                                             font-size: 13px;
+                                            line-height: 1.25;
                                             font-weight: 400;
                                             color: ${colors.customColors.blackColor1};
                                         }

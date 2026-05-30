@@ -229,7 +229,7 @@ const ClassroomDetailsPage = () => {
                                                                             <li>
                                                                                 {
                                                                                     subject.subject_teacher ? (
-                                                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_teacher", subject.subject)}>
+                                                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_subject_teacher", subject.subject)}>
                                                                                             <i className="fa-solid fa-pen-to-square"></i>Edit
                                                                                         </a>
                                                                                     ) : (

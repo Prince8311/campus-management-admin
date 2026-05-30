@@ -2293,7 +2293,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                     display: flex;
                     flex-direction: column;
                     margin-top: 20px;
-                    max-height: 300px;
+                    max-height: 270px;
                     overflow-y: auto;
                     scrollbar-width: none;
                     -ms-overflow-style: none;
@@ -2326,7 +2326,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                             h5 {
                                 position: relative;
-                                font-size: 14px;
+                                font-size: 13px;
                                 font-weight: 500;
                                 color: ${colors.customColors.whiteColor};
                                 text-transform: uppercase;
@@ -2342,13 +2342,15 @@ export const ClassroomDetailsWrapper = styled('div')`
                             flex-direction: column;
 
                             h6 {
-                                font-size: 13px;
+                                font-size: 12px;
+                                line-height: 1.2;
                                 font-weight: 400;
                                 color: ${colors.customColors.blackColor1};
                             }
 
                             p {
                                 font-size: 10px;
+                                margin-top: 1px;
                                 font-weight: 400;
                                 color: ${colors.customColors.blackColor2};
                             }
@@ -2356,8 +2358,9 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                         a {
                             position: relative;
-                            width: 8px;
-                            height: 8px;
+                            margin-left: auto;
+                            width: 7px;
+                            height: 7px;
                             text-decoration: none;
                             border-radius: 50%;
 

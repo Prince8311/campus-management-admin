@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { StaffInformationWrapper } from "../../../Styles/StaffStyle";
 import SelectStaffTypeModal from "../../../Components/Modals/Staff/SelectStaffType";
 import { toast } from "react-toastify";
@@ -10,7 +9,6 @@ import Pagination from "../../../Components/Pagination";
 
 const StaffInformationPage = () => {
     const api = getApiEndpoints();
-    const navigate = useNavigate();
     const [isStaffTypeOpen, setIsStaffTypeOpen] = useState(false);
     const tabs = [
         { label: "Teaching Staff", value: "teaching" },
