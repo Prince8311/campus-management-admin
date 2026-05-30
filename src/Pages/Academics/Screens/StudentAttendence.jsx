@@ -4,10 +4,12 @@ import AttendenceModal from "../../../Components/Modals/Academics/Attendence";
 import StudentWeeklyAttendanceGraph from "../Charts/WeeklyAttendence";
 import StudentDailyAttendance from "../Charts/DailyAttendence";
 import Calender from "../../../Components/Calender";
+import AttendenceConfigarationModal from "../../../Components/Modals/Academics/AttendenceConfigaration";
 
 const StudentAttendencePage = () => {
     const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    const [isConfigarationModalOpen, setIsConfigarationModalOpen] = useState(false);
 
     const getFormattedCurrentDate = () => {
         const today = new Date();
@@ -21,6 +23,10 @@ const StudentAttendencePage = () => {
 
     const handleOpenAttendenceModal = () => {
         setIsAttendenceModalOpen(true);
+    };
+
+    const handleOpenConfigarationModal = () => {
+        setIsConfigarationModalOpen(true);
     };
 
     return (
@@ -40,6 +46,13 @@ const StudentAttendencePage = () => {
                                 </div>
                             )
                         }
+
+                        <div className="add_btn">
+                            <button onClick={handleOpenConfigarationModal}>
+                                <i className="fa-solid fa-gears"></i>
+                                <p>Attendence Configaration</p>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="overview_section">
@@ -137,6 +150,11 @@ const StudentAttendencePage = () => {
                     isAttendenceModalOpen={isAttendenceModalOpen}
                     setIsAttendenceModalOpen={setIsAttendenceModalOpen}
                     selectedDate={filterDate}
+                />
+
+                <AttendenceConfigarationModal
+                    isConfigarationModalOpen={isConfigarationModalOpen}
+                    setIsConfigarationModalOpen={setIsConfigarationModalOpen}
                 />
             </StudentAttendenceWrapper>
         </>

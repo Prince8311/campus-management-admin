@@ -1484,6 +1484,462 @@ export const AttendenceWrapper = styled('div')`
     }
 `;
 
+export const AttendenceConfigarationWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 750px;
+    height: 100vh;
+    border-top-left-radius: 10px;
+    background: ${colors.customColors.whiteColor};
+    box-shadow: -10px 5px 15px ${colors.boxShadowColors.shadowColor1};
+    z-index: 1000;
+    transition: all 0.6s ease;
+
+    &.active {
+        right: 0;
+        transition: all 0.6s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .modal_head {
+            position: relative;
+            width: 100%;
+            padding: 20px 30px;
+            border-bottom: 1px solid ${colors.customColors.borderColor};
+            display: flex;
+            align-items: center;
+
+            h4 {
+                position: relative;
+                max-width: calc(100% - 40px);
+                font-size: 14px;
+                font-weight: 600;
+                font-style: italic;
+                color: ${colors.customColors.blackColor1};
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                padding-left: 20px;
+            }
+
+            .close_sec {
+                position: absolute;
+                top: 10px;
+                left: -20px;
+                display: flex;
+
+                a {
+                    position: relative;
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 17px;
+                    color: ${colors.customColors.blackColor2};
+                    cursor: pointer;
+                    text-decoration: none;
+                    background: ${colors.customColors.whiteColor};
+                    box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                }
+            }
+        }
+
+        .modal_body {
+            position: relative;
+            width: 100%;
+            display: flex;
+
+            .body_inner {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .inner_top {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    padding: 0 20px;
+                    margin-top: 20px;
+
+                    p {
+                        position: relative;
+                        font-size: 14px;
+                        color: ${colors.customColors.blackColor1};
+                    }
+                }
+
+                .class_attendence_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 20px;
+                    margin: 20px 0;
+
+                    h6 {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor2};
+                        line-height: 1;
+                    }
+
+                    .attendence_box_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 6px;
+                        padding: 20px 15px;
+                        margin-top: 20px;
+
+                        p {
+                            position: relative;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor2};
+                        }
+
+                        .select_class_sec {
+                            position: relative;
+                            margin-left: 15px;
+                            display: flex;
+
+                            span {
+                                position: relative;
+                                padding: 4px 10px;
+                                display: flex;
+                                align-items: center;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor};
+                                background: ${colors.customColors.blueColorLight};
+                                border-radius: 25px;
+                                font-weight: 500;
+
+                                i {
+                                    margin-left: 10px;
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+
+                        .box_left_sec {
+                            position: relative;
+                            display: flex;
+                            margin-left: 15px;
+
+                            a {
+                                position: relative;
+                                padding: 5px 12px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-size: 12px;
+                                font-weight: 400;
+                                color: ${colors.customColors.blueColor1};
+                                background:  ${colors.customColors.blueColorLight};
+                                border: 1px solid  ${colors.customColors.blueColor1};
+                                cursor: pointer;
+
+                                i {
+                                    margin-right: 6px;
+                                }
+                            }
+
+                            .multiple_class_sec {
+                                position: absolute;
+                                top: 29px;
+                                left: 0;
+                                display: flex;
+                                z-index: 1;
+                                
+                                .class_sec_inner {
+                                    position: relative;
+                                    width: 250px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    padding: 15px;
+                                    background: ${colors.customColors.whiteColor};
+                                    border-radius: 12px;
+                                    box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+
+                                    li {
+                                        position: relative;
+                                        width: 50%;
+                                        list-style: none;
+                                        display: flex;
+                                        align-items: center;
+                                        color: ${colors.customColors.blackColor1};
+                                        text-decoration: none;
+                                        cursor: pointer;
+                                        font-size: 12px;
+                                        font-weight: 400;
+                                        margin-bottom: 10px;
+
+                                        &:last-of-type {
+                                            margin-bottom: 0;
+                                        }
+
+                                        input[type="radio"] {
+                                            display: none;
+                                        }
+
+                                        label {
+                                            position: relative;
+                                            cursor: pointer;
+                                            line-height: 1;
+                                            display: flex;
+                                            align-items: center;
+
+                                            .check_box {
+                                                position: relative;
+                                                width: 15px;
+                                                height: 15px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                border: 1px solid ${colors.customColors.borderColor};
+                                                border-radius: 4px;
+                                                margin-right: 5px;
+                                                cursor: pointer;
+                                                transition: all 0.4s ease;
+
+                                                img {
+                                                    position: absolute;
+                                                    left: 1px;
+                                                    bottom: 1px;
+                                                    width: 20px;
+                                                    opacity: 0;
+                                                    transition: all 0.4s ease;
+                                                }
+                                            }
+                                        }
+
+                                        input[type="radio"]:checked ~ label {
+
+                                            .check_box {
+                                                border: 1px solid ${colors.customColors.blackColor1};
+                                                transition: all 0.4s ease;
+
+                                                img {
+                                                    opacity: 1;
+                                                    transition: all 0.4s ease;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .Methodology_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 20px;
+
+                    .top_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 20px;
+
+                        h5 {
+                            position: relative;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor1};
+                            font-weight: 500;
+                        }
+
+                        a {
+                            position: relative;
+                            padding: 4px 10px;
+                            background: ${colors.customColors.blueColorLight};
+                            color: ${colors.customColors.blueColor1};
+                            font-size: 11px;
+                            font-weight: 500;
+                            text-transform: uppercase;
+                            text-decoration: none;
+                            cursor: pointer;
+                            border-radius: 5px;
+                            margin-left: auto;
+                        }
+                    }
+
+                    .bottom_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        padding: 0 10px;
+                        margin-top: 15px;
+
+                        .bottom_box {
+                            position: relative;
+                            width: 50%;
+                            display: flex;
+                            padding: 0 10px;
+
+                            .box_inner {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                padding: 20px 15px;
+                                background: ${colors.customColors.lightBackground3};
+                                border-radius: 6px;
+
+                                span {
+                                    position: relative;
+                                    width: 35px;
+                                    height: 35px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 6px;
+                                    font-size: 14px;
+                                    background: ${colors.customColors.blueColorLight};
+                                    color: ${colors.customColors.blueColor2};
+                                }
+
+                                .box_item {
+                                    position: relative;
+                                    width: calc(100% - 35px);
+                                    padding-left: 15px;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    h6 {
+                                        position: relative;
+                                        font-size: 15px;
+                                        color: ${colors.customColors.blackColor1};
+                                        font-weight: 500;
+                                        line-height: 1;
+
+                                        i {
+                                            font-size: 11px;
+                                            color: ${colors.customColors.blackColor3};
+                                            margin-left: 7px;
+                                        }
+                                    }
+
+                                    p {
+                                        position: relative;
+                                        font-size: 13px;
+                                        color: ${colors.customColors.blackColor1};
+                                        font-weight: 400;
+                                        margin-top: 5px;
+                                    }
+                                }
+
+                                a {
+                                    position: absolute;
+                                    top: 10px;
+                                    right: 10px;
+                                    display: none;
+                                    font-size: 16px;
+                                    color: ${colors.customColors.blueColor2};
+                                    text-decoration: none;
+                                }
+                            }
+
+                            &:last-of-type {
+                                .box_inner {
+                                    span {
+                                        background: ${colors.customColors.greenColorLight};
+                                        color: ${colors.customColors.greenColor1};
+                                    }
+                                }
+                            }
+
+                            &.active {
+                                .box_inner {
+                                    background: ${colors.customColors.whiteColor};
+                                    border: 2px solid ${colors.customColors.blueColor2};
+
+                                    a {
+                                        display: flex;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .security_sec {
+                    position: relative;
+                    width: 100%;
+                    margin-bottom: 20px;
+                    display: flex;
+                    padding: 0 20px;
+
+                    .sec_content {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        border-radius: 6px;
+                        padding: 15px;
+                        background: ${colors.customColors.lightBackground3};
+
+                        i {
+                            font-size: 13px;
+                            color: ${colors.customColors.greenColor};
+                        }
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor2};
+                            margin-left: 6px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .modal_btn {
+            position: relative;
+            width: 100%;
+            padding: 13px 20px;
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid ${colors.customColors.borderColor};
+            margin-top: auto;
+
+            button {
+                position: relative;
+                padding: 10px 30px;
+                font-size: 12px;
+                font-weight: 500;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+
+                &:first-of-type {
+                    background: ${colors.customColors.lightBackground3};
+                    color: ${colors.customColors.blackColor1};
+                }
+
+                &:last-of-type {
+                    background: ${colors.customColors.blueColor1};
+                    color: ${colors.customColors.whiteColor};
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+`;
+
 export const SuccessWrapper = styled('div')`
     position: fixed;
     top: 0;
