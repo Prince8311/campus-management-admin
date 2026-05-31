@@ -46,13 +46,12 @@ const StudentAttendencePage = () => {
                                 </div>
                             )
                         }
-
-                        <div className="add_btn">
-                            <button onClick={handleOpenConfigarationModal}>
-                                <i className="fa-solid fa-gears"></i>
-                                <p>Attendence Configaration</p>
-                            </button>
-                        </div>
+                    </div>
+                    <div className="configuration_btn">
+                        <button onClick={handleOpenConfigarationModal}>
+                            <i className="fa-solid fa-gears"></i>
+                            <p>Attendence Configaration</p>
+                        </button>
                     </div>
                 </div>
                 <div className="overview_section">

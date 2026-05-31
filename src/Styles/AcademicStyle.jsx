@@ -553,7 +553,7 @@ export const ClassroomsWrapper = styled('div')`
             flex-direction: column;
             border-radius: 8px;
             box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
-                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
             .box_head {
                 position: relative;
@@ -714,14 +714,26 @@ export const ClassroomsWrapper = styled('div')`
 
                                 p {
                                     position: relative;
+                                    display: flex;
+                                    width: 100%;
                                     font-size: 11px;
                                     color: ${colors.customColors.blackColor2};
 
                                     b {
+                                        position: relative;
+                                        width: 86px;
                                         font-weight: 500;
                                         margin-right: 4px;
                                         font-style: italic;
                                         color: ${colors.customColors.blackColor1};
+                                    }
+
+                                    span {
+                                        position: relative;
+                                        width: calc(100% - 90px);
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
                                     }
                                 }
                             }
@@ -907,36 +919,36 @@ export const StudentAttendenceWrapper = styled('div')`
                 width: 300px;
                 z-index: 5;
             }
+        }
 
-            .add_btn {
+        .configuration_btn {
+            position: relative;
+            margin-left: 20px;
+
+            button {
                 position: relative;
-                margin-left: 20px;
+                padding: 0 25px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border: 1px solid ${colors.customColors.greenColor};
+                background: ${colors.customColors.greenColor};
+                color: ${colors.customColors.whiteColor};
+                border-radius: 6px;
+                font-size: 13px;
+                font-weight: 500;
+                transition: all 0.5s ease;
 
-                button {
-                    position: relative;
-                    padding: 0 15px;
-                    height: 35px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    border: 1px solid ${colors.customColors.greenColor};
-                    background: ${colors.customColors.greenColor};
-                    color: ${colors.customColors.whiteColor};
-                    border-radius: 6px;
-                    font-size: 13px;
-                    font-weight: 500;
+                &:hover {
+                    border-radius: 25px;
                     transition: all 0.5s ease;
+                }
 
-                    &:hover {
-                        border-radius: 25px;
-                        transition: all 0.5s ease;
-                    }
-
-                    i {
-                        margin-right: 8px;
-                        font-size: 12px;
-                    }
+                i {
+                    margin-right: 8px;
+                    font-size: 14px;
                 }
             }
         }
@@ -2719,12 +2731,49 @@ export const ClassroomDetailsWrapper = styled('div')`
                                         }
                                     }
 
+                                    ul {
+                                        position: relative;
+                                        margin-top: 3px;
+                                        width: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+
+                                        li {
+                                            position: relative;
+                                            width: 100%;
+                                            list-style: none;
+                                            display: flex;
+                                            align-items: center;
+
+                                            p {
+                                                max-width: calc(100% - 20px);
+                                            }
+                                        }
+
+                                        p {
+                                            line-height: 1.5;
+                                            padding-right: 6px;
+                                        }
+
+                                        label {
+                                            position: relative;
+                                            width: 20px;
+                                            height: 15px;
+                                            background: ${colors.customColors.blackColor};
+                                            font-size: 9px;
+                                            color: ${colors.customColors.whiteColor};
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            border-radius: 4px;
+                                        }
+                                    }
+
                                     p {
                                         position: relative;
                                         max-width: 100%;
                                         font-size: 10px;
                                         color: ${colors.customColors.blackColor1};
-                                        margin: 3px 0;
                                         overflow: hidden;
                                         white-space: nowrap;
                                         text-overflow: ellipsis;
@@ -2799,25 +2848,16 @@ export const ClassroomDetailsWrapper = styled('div')`
                                     align-items: center;
                                     justify-content: center;
                                     border: none;
-                                    padding: 0 10px;
+                                    border-radius: 4px;
+                                    padding: 0 13px;
+                                    background: ${colors.customColors.redColorLight};
+                                    color:  ${colors.customColors.redColor};
+                                    font-size: 10px;
+                                    font-weight: 500;
+                                    cursor: pointer;
 
-                                    &.edit {
-                                        background: ${colors.customColors.blueColorLight};
-                                        color: ${colors.customColors.blueColor2};
-                                        font-size: 10px;
-                                        cursor: pointer;
-                                        font-weight: 500;
-                                        border-bottom-left-radius: 4px;
-                                        border-top-left-radius: 4px;
-                                    }
-
-                                    &.delete {
-                                        background: ${colors.customColors.redColorLight};
-                                        color:  ${colors.customColors.redColor};
-                                        font-size: 10px;
-                                        cursor: pointer;
-                                        border-top-right-radius: 4px;
-                                        border-bottom-right-radius: 4px;
+                                    i {
+                                        margin-right: 5px;
                                     }
                                 }
                             }

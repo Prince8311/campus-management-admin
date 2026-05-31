@@ -228,16 +228,16 @@ const ClassroomPage = () => {
                                                                         <div className="top_part">
                                                                             <div className="part_content">
                                                                                 <a><i className="fa-solid fa-chalkboard-user"></i></a>
-                                                                                <h6>{academicClass.class} - {section}</h6>
-                                                                                <span>1000 Students</span>
+                                                                                <h6>{section.class} - {section.section}</h6>
+                                                                                <span>{section.student_count} Student{section.student_count > 1 ? 's' : ''}</span>
                                                                             </div>
                                                                             <div className="teacher_name_sec">
-                                                                                <p><b>Class Teacher :</b>Poonam C K</p>
+                                                                                <p><b>Class Teacher :</b><span>{section.class_teacher ? section.class_teacher : 'N/A'}</span></p>
                                                                             </div>
                                                                         </div>
                                                                         <div className="bottom_btn">
-                                                                            <button className="details" onClick={() => handleRedirectionClassroomDetailsPage(academicClass.class, academicClass.sections, section)}>View Details</button>
-                                                                            <button className="delete" onClick={() => handleSectionDelete(academicClass.class, section)}><i className="fa-solid fa-trash"></i></button>
+                                                                            <button className="details" onClick={() => handleRedirectionClassroomDetailsPage(academicClass.class, academicClass.all_sections, section.section)}>View Details</button>
+                                                                            <button className="delete" onClick={() => handleSectionDelete(academicClass.class, section.section)}><i className="fa-solid fa-trash"></i></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>

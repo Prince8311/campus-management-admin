@@ -26,6 +26,23 @@ const ClassroomDetailsPage = () => {
     const [manageTeacherType, setManageTeacherType] = useState("");
     const [currentSubject, setCurrentSubject] = useState("");
     const [isSubjectPreferenceModalOpen, setIsSubjectPreferenceModalOpen] = useState(false);
+    const [currentSubjectTeacherId, setCurrentSubjectTeacherId] = useState(null);
+    const [currentSubjectCoTeacherIds, setCurrentSubjectCoTeacherIds] = useState([]);
+
+    const handleSectionChange = (section) => {
+        setSelectedSection(section);
+
+        const classroomDetails = JSON.parse(
+            localStorage.getItem("classroomDetails") || "{}"
+        );
+
+        classroomDetails.selectedSection = section;
+
+        localStorage.setItem(
+            "classroomDetails",
+            JSON.stringify(classroomDetails)
+        );
+    };
 
     const handleOpenSubjectAddModal = () => {
         setIsAddSubjectModalOpen(true);
@@ -35,9 +52,26 @@ const ClassroomDetailsPage = () => {
         setIsManageSubjectModalOpen(true);
     }
 
-    const handleOpenTeacherManageModal = (type, subject = "") => {
+    const handleOpenTeacherManageModal = (type, subject = "", teacherData = null) => {
         setManageTeacherType(type);
-        if (subject) setCurrentSubject(subject);
+        if (subject) {
+            setCurrentSubject(subject);
+        }
+
+        if (type === "manage_class_teacher") {
+            setCurrentSubjectTeacherId(null);
+            setCurrentSubjectCoTeacherIds([]);
+        } else if (type === "manage_subject_teacher") {
+            setCurrentSubjectTeacherId(teacherData?.id || null);
+            setCurrentSubjectCoTeacherIds([]);
+        } else if (type === "manage_co_teacher") {
+            setCurrentSubjectCoTeacherIds(
+                Array.isArray(teacherData)
+                    ? teacherData.map((teacher) => teacher.id)
+                    : []
+            );
+            setCurrentSubjectTeacherId(null);
+        }
         setIsManageTeacherModalOpen(true);
     }
 
@@ -98,7 +132,7 @@ const ClassroomDetailsPage = () => {
                                 <SwiperSlide key={section}>
                                     <li
                                         className={selectedSection === section ? 'active' : ''}
-                                        onClick={() => setSelectedSection(section)}
+                                        onClick={() => handleSectionChange(section)}
                                         style={{ cursor: 'pointer' }}
                                     >
                                         {selectedClass} - {section}
@@ -131,11 +165,11 @@ const ClassroomDetailsPage = () => {
                                     <div className="inner_bottom_sec">
                                         <div className="teacher_name_sec">
                                             <div className="left_sec">
-                                                <h6>PK</h6>
+                                                <h6>{getInitials(classroomDetails.class_teacher.name)}</h6>
                                             </div>
                                             <div className="right_sec">
-                                                <p>POONAM C K</p>
-                                                <span>91-7760390715</span>
+                                                <p>{classroomDetails.class_teacher.name}</p>
+                                                <span>{classroomDetails.class_teacher.phone}</span>
                                             </div>
                                         </div>
                                         <div className="btn_sec">
@@ -229,21 +263,21 @@ const ClassroomDetailsPage = () => {
                                                                             <li>
                                                                                 {
                                                                                     subject.subject_teacher ? (
-                                                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_subject_teacher", subject.subject)}>
+                                                                                        <a className='edit' onClick={() => handleOpenTeacherManageModal("manage_subject_teacher", subject.subject, subject.subject_teacher)}>
                                                                                             <i className="fa-solid fa-pen-to-square"></i>Edit
                                                                                         </a>
                                                                                     ) : (
-                                                                                        <a className='add' onClick={() => handleOpenTeacherManageModal("manage_teacher", subject.subject)}><i className="fa-solid fa-plus"></i>Add</a>
+                                                                                        <a className='add' onClick={() => handleOpenTeacherManageModal("manage_subject_teacher", subject.subject, subject.subject_teacher)}><i className="fa-solid fa-plus"></i>Add</a>
                                                                                     )
                                                                                 }
                                                                             </li>
                                                                         </div>
                                                                         {
                                                                             subject.subject_teacher ? (
-                                                                                <>
-                                                                                    <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                                                    <span>91-9916068002</span>
-                                                                                </>
+                                                                                <ul>
+                                                                                    <p>{subject.subject_teacher.name}</p>
+                                                                                    <span>{subject.subject_teacher.phone}</span>
+                                                                                </ul>
                                                                             ) : (
                                                                                 <p className='empty'>N/A</p>
                                                                             )
@@ -251,19 +285,26 @@ const ClassroomDetailsPage = () => {
                                                                     </div>
                                                                     <div className="teacher_box">
                                                                         <div className="teacher_heading">
-                                                                            <h5>Co Teacher</h5>
+                                                                            <h5>Co-Teachers</h5>
                                                                             <li>
-                                                                                <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher", subject.subject)}>
+                                                                                <button className='add' onClick={() => handleOpenTeacherManageModal("manage_co_teacher", subject.subject, subject.co_teachers)}>
                                                                                     <i className="fa-solid fa-plus prefix"></i>Add / Remove<i className="fa-solid fa-angle-right"></i>
                                                                                 </button>
                                                                             </li>
                                                                         </div>
                                                                         {
                                                                             (subject.co_teachers).length > 0 ? (
-                                                                                <>
-                                                                                    <p>SOMASHEKAR M BHAIRANATTI</p>
-                                                                                    <span>91-9916068002</span>
-                                                                                </>
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        <p>{subject.co_teachers[subject.co_teachers.length - 1].name}</p>
+                                                                                        {subject.co_teachers.length > 1 && (
+                                                                                            <label className="more_count">
+                                                                                                +{subject.co_teachers.length - 1}
+                                                                                            </label>
+                                                                                        )}
+                                                                                    </li>
+                                                                                    <span>{subject.co_teachers[subject.co_teachers.length - 1].phone}</span>
+                                                                                </ul>
                                                                             ) : (
                                                                                 <p className='empty'>N/A</p>
                                                                             )
@@ -281,8 +322,7 @@ const ClassroomDetailsPage = () => {
                                                                     </a>
                                                                 </div>
                                                                 <div className="right_btns">
-                                                                    <button className="edit">Edit Name</button>
-                                                                    <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                                    <button className="delete"><i className="fa-solid fa-trash"></i>Remove</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -319,6 +359,9 @@ const ClassroomDetailsPage = () => {
                     selectedClass={selectedClass}
                     section={selectedSection}
                     currentSubject={currentSubject}
+                    currentSubjectTeacherId={currentSubjectTeacherId}
+                    currentSubjectCoTeacherIds={currentSubjectCoTeacherIds}
+                    refreshData={() => fetchClassDetails(false)}
                 />
 
                 <SubjectPreferenceModal

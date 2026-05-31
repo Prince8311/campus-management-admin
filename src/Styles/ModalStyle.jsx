@@ -171,7 +171,7 @@ export const CreateAcademicLabelWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 450px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -353,7 +353,7 @@ export const CreateClassWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 450px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -362,13 +362,6 @@ export const CreateClassWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
 
         &.active {
             transform: translateY(0);
@@ -3010,6 +3003,10 @@ export const ManageTeacherWrapper = styled('div')`
                                         display: flex;
                                         justify-content: flex-start;
 
+                                        &.disabled {
+                                            opacity: 0.3;
+                                        }
+
                                         input[type="checkbox"] {
                                             display: none;
                                         }
@@ -3093,6 +3090,17 @@ export const ManageTeacherWrapper = styled('div')`
                     color: ${colors.customColors.whiteColor};
                     margin-left: 20px;
                 }
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
+
+                &:disabled {
+                    cursor: not-allowed;
+                    opacity: 0.4;
+                    transition: all 0.5s ease;
+                }
             }
         }
     }
@@ -3108,6 +3116,7 @@ export const SubjectPreferenceWrapper = styled('div')`
     align-items: center;
     justify-content: center;
     padding: 40px 0;
+    padding-left: 265px;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
