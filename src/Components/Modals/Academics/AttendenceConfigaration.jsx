@@ -41,7 +41,7 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
                                                     />
                                                     <label htmlFor="class9">
                                                         <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                        <p>Class 9 - A</p>
+                                                        <p>Class 9</p>
                                                     </label>
                                                 </li>
                                                 <li>
@@ -52,7 +52,7 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
                                                     />
                                                     <label htmlFor="class10">
                                                         <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                        <p>Class 9 - B</p>
+                                                        <p>Class 10</p>
                                                     </label>
                                                 </li>
                                                 <li>
@@ -63,7 +63,7 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
                                                     />
                                                     <label htmlFor="class11">
                                                         <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                        <p>Class 9 - C</p>
+                                                        <p>Class 11</p>
                                                     </label>
                                                 </li>
                                                 <li>
@@ -74,9 +74,12 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
                                                     />
                                                     <label htmlFor="class12">
                                                         <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
-                                                        <p>Class 9 - D</p>
+                                                        <p>Class 12</p>
                                                     </label>
                                                 </li>
+                                                <div className="btn_sec">
+                                                    <button>Apply</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

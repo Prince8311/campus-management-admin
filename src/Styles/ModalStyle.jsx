@@ -1584,6 +1584,7 @@ export const AttendenceConfigarationWrapper = styled('div')`
                         font-size: 13px;
                         color: ${colors.customColors.blackColor2};
                         line-height: 1;
+                        font-weight: 500;
                     }
 
                     .attendence_box_sec {
@@ -1656,17 +1657,15 @@ export const AttendenceConfigarationWrapper = styled('div')`
                                 
                                 .class_sec_inner {
                                     position: relative;
-                                    width: 250px;
+                                    width: 120px;
                                     display: flex;
                                     flex-direction: column;
-                                    padding: 15px;
                                     background: ${colors.customColors.whiteColor};
-                                    border-radius: 12px;
+                                    border-radius: 6px;
                                     box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
 
                                     li {
                                         position: relative;
-                                        width: 50%;
                                         list-style: none;
                                         display: flex;
                                         align-items: center;
@@ -1676,9 +1675,14 @@ export const AttendenceConfigarationWrapper = styled('div')`
                                         font-size: 12px;
                                         font-weight: 400;
                                         margin-bottom: 10px;
+                                        padding: 0 15px;
 
                                         &:last-of-type {
                                             margin-bottom: 0;
+                                        }
+
+                                        &:first-of-type {
+                                            margin-top: 10px;
                                         }
 
                                         input[type="radio"] {
@@ -1714,6 +1718,11 @@ export const AttendenceConfigarationWrapper = styled('div')`
                                                     transition: all 0.4s ease;
                                                 }
                                             }
+
+                                            p {
+                                                font-size: 12px;
+                                                color: ${colors.customColors.blackColor1};
+                                            }
                                         }
 
                                         input[type="radio"]:checked ~ label {
@@ -1727,6 +1736,30 @@ export const AttendenceConfigarationWrapper = styled('div')`
                                                     transition: all 0.4s ease;
                                                 }
                                             }
+                                        }
+                                    }
+
+                                    .btn_sec {
+                                        position: relative;
+                                        width: 100%;
+                                        margin-top: 10px;
+                                        padding: 10px;
+                                        border-top: 1px solid ${colors.customColors.borderColor};
+                                        display: flex;
+
+                                        button {
+                                            position: relative;
+                                            width: 100%;
+                                            padding: 5px 0;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.whiteColor};
+                                            background: ${colors.customColors.blueColor1};
+                                            border-radius: 6px;
+                                            border: none;
+                                            cursor: pointer;
                                         }
                                     }
                                 }
@@ -1814,7 +1847,7 @@ export const AttendenceConfigarationWrapper = styled('div')`
 
                                     h6 {
                                         position: relative;
-                                        font-size: 15px;
+                                        font-size: 13px;
                                         color: ${colors.customColors.blackColor1};
                                         font-weight: 500;
                                         line-height: 1;
@@ -1828,7 +1861,7 @@ export const AttendenceConfigarationWrapper = styled('div')`
 
                                     p {
                                         position: relative;
-                                        font-size: 13px;
+                                        font-size: 12px;
                                         color: ${colors.customColors.blackColor1};
                                         font-weight: 400;
                                         margin-top: 5px;
