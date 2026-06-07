@@ -209,6 +209,45 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
                                     <p>Applying this configuration will affect how teachers view the attendance portal for the selected classes starting from the next calendar day. Existing records will remain archived under previous rules.</p>
                                 </div>
                             </div>
+                            <div className="table_sec">
+                                <h5>Configuration List</h5>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Class</th>
+                                            <th>Datewise</th>
+                                            <th>Periodwise</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Class 1</td>
+                                            <td>
+                                                <div className="toggle_bar">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="toggle"
+                                                    />
+                                                    <label htmlFor="toggle">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="toggle_bar">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="toggle"
+                                                    />
+                                                    <label htmlFor="toggle">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div className="modal_btn">

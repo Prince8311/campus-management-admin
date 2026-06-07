@@ -1549,7 +1549,15 @@ export const AttendenceConfigarationWrapper = styled('div')`
         .modal_body {
             position: relative;
             width: 100%;
+            height: calc(100% - 124px);
             display: flex;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
 
             .body_inner {
                 position: relative;
@@ -1947,6 +1955,157 @@ export const AttendenceConfigarationWrapper = styled('div')`
                             font-size: 12px;
                             color: ${colors.customColors.blackColor2};
                             margin-left: 6px;
+                        }
+                    }
+                }
+
+                .table_sec {
+                    position: relative;
+                    width: 100%;
+                    margin-bottom: 20px;
+                    padding: 0 20px;
+                    padding-bottom: 20px;
+                    display: flex;
+                    flex-direction: column;
+
+                    h5 {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor1};
+                        font-weight: 500;
+                    }
+
+                    table {
+                        position: relative;
+                        margin-top: 10px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+
+                        thead {
+                            position: relative;
+                            width: 100%;
+                            height: 40px;
+                            background: ${colors.themeColor};
+                            border-radius: 10px 10px 0px 0px;
+                            border: 1px solid ${colors.themeColor};
+
+                            tr {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+
+                                th {
+                                    position: relative;
+                                    height: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    font-family: "Lemonada", cursive;
+                                    font-size: 12px;
+                                    word-break: break-all;
+                                    color: ${colors.customColors.whiteColor};
+                                    padding: 0 25px;
+                                    font-weight: 600;
+
+                                    &:nth-of-type(1) {
+                                        width: 40%;
+                                    }
+
+                                    &:nth-of-type(2),
+                                    &:nth-of-type(3) {
+                                        width: 30%;
+                                        justify-content: center;
+                                    }
+                                }
+                            }
+                        }
+
+                        tbody {
+                            position: relative;
+                            width: 100%;
+                            border: 1px solid ${colors.customColors.whiteColor2};
+                            border-top: none;
+                            border-radius: 0px 0px 10px 10px;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+
+                            .toggle_bar {
+                                position: relative;
+                                width: 40px;
+                                display: flex;
+                                justify-content: flex-start;
+                                margin: 0 15px;
+
+                                input[type="checkbox"] {
+                                    display: none;
+                                }
+
+                                label {
+                                    position: relative;
+                                    width: 40px;
+                                    height: 21px;
+                                    background: ${colors.customColors.whiteColor2};
+                                    border-radius: 25px;
+                                    padding: 3px;
+                                    display: flex;
+                                    align-items: center;
+                                    cursor: pointer;
+                                    transition: all 0.5s ease;
+
+                                    span {
+                                        position: relative;
+                                        width: 15px;
+                                        height: 100%;
+                                        background: ${colors.customColors.whiteColor};
+                                        border-radius: 50%;
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+
+                                input[type="checkbox"]:checked ~ label {
+                                    background: ${colors.customColors.blueColor1};
+                                    transition: all 0.5s ease;
+                                }
+
+                                input[type="checkbox"]:checked ~ label span {
+                                    transform: translateX(19px);
+                                    transition: all 0.5s ease;
+                                }
+                            }
+
+                            tr {
+                                position: relative;
+                                width: 100%;
+                                min-height: 40px;
+                                display: flex;
+
+                                &:nth-of-type(even) {
+                                    background: ${colors.customColors.blueColorLight};
+                                }
+
+                                td {
+                                    position: relative;
+                                    padding: 12px 25px;
+                                    display: flex;
+                                    color: ${colors.customColors.blackColor};
+                                    font-size: 13px;
+                                    word-break: break-all;
+                                    line-height: 1.5;
+
+                                    &:nth-of-type(1) {
+                                        width: 40%;
+                                    }
+
+                                    &:nth-of-type(2),
+                                    &:nth-of-type(3) {
+                                        width: 30%;
+                                        align-items: center;
+                                        justify-content: center;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
