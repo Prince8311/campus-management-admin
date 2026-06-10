@@ -189,7 +189,17 @@ const ClassroomDetailsPage = () => {
                             ) : (
                                 <div className="student_box_inner">
                                     <div className="student_heading">
-                                        <h6>Student List</h6>
+                                        <div className="heading_sec">
+                                            <h6>Student List</h6>
+                                            <a>Attendance Type: <span>{classroomDetails.attendance_type ? classroomDetails.attendance_type : 'N/A'}</span></a>
+                                        </div>
+                                        {
+                                            classroomDetails.attendance_type &&
+                                            <div className="btn_sec">
+                                                <button><i className="fa-regular fa-circle-check"></i>Mark Attendance</button>
+                                                <button><i className="fa-solid fa-clock-rotate-left"></i>Attendance History</button>
+                                            </div>
+                                        }
                                         <div className="search_sec">
                                             <i className="fa-solid fa-magnifying-glass"></i>
                                             <input type="text" placeholder="Search by student name..." />

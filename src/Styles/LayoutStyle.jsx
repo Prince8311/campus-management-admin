@@ -1111,7 +1111,7 @@ export const CalenderBox = styled('div')`
                 list-style: none;
                 display: flex;
                 justify-content: center;
-                font-size: 12px;
+                font-size: 11px;
                 font-weight: 500;
                 color: ${colors.themeColor};
             }
