@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StudentAttendenceWrapper } from "../../../Styles/AcademicStyle";
 import AttendenceModal from "../../../Components/Modals/Academics/Attendence";
 import StudentWeeklyAttendanceGraph from "../Charts/WeeklyAttendence";
 import StudentDailyAttendance from "../Charts/DailyAttendence";
 import Calender from "../../../Components/Calender";
 import AttendenceConfigarationModal from "../../../Components/Modals/Academics/AttendenceConfigaration";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const StudentAttendencePage = () => {
+    const api = getApiEndpoints();
     const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [isConfigarationModalOpen, setIsConfigarationModalOpen] = useState(false);
+    const [intialConfigarationsLoading, setIntialConfigarationsLoading] = useState(false);
 
     const getFormattedCurrentDate = () => {
         const today = new Date();
@@ -20,6 +26,26 @@ const StudentAttendencePage = () => {
     };
 
     const [filterDate, setFilterDate] = useState(getFormattedCurrentDate());
+
+    const fetchAttendanceConfigurationList = async (showSkeleton = false) => {
+        if(showSkeleton) {
+            setIntialConfigarationsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.attendanceConfigurationList);
+            if(response?.data.status === 200) {
+                console.log("listttttttttttttt", response?.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIntialConfigarationsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchAttendanceConfigurationList(true);
+    }, []);
 
     const handleOpenAttendenceModal = () => {
         setIsAttendenceModalOpen(true);

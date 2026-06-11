@@ -133,8 +133,8 @@ const ClassroomPage = () => {
                 <div className="page_head">
                     <h2>Classroom Setup</h2>
                     <div className="btns_sec">
-                        <button className="academic" onClick={handleOpenCreateAcademicLabel}><i className="fa-solid fa-plus"></i>Add Academic level</button>
-                        <button className="add_class" onClick={handleOpenCreateClass}><i className="fa-solid fa-plus"></i>Add Class</button>
+                        <button className="academic" onClick={handleOpenCreateAcademicLabel}><i className="fa-solid fa-graduation-cap"></i>Add Academic level</button>
+                        <button className="add_class" onClick={handleOpenCreateClass}><i className="fa-solid fa-circle-plus"></i>Add Class</button>
                     </div>
                 </div>
                 {
@@ -201,27 +201,25 @@ const ClassroomPage = () => {
                                         academicClasses.map((academicClass, index) =>
                                             <div className="class_level_box" key={index}>
                                                 <div className="box_head">
-                                                    <span>Class - {academicClass.class}</span>
-                                                    <button className="new_Subject" onClick={() => handleOpenSubjectAddModal(academicClass)}>
-                                                        <i className="fa-solid fa-plus"></i>
+                                                    <div className="head_brief">
+                                                        <span><img src="/images/book-open.svg" alt="" /></span>
+                                                        <ul>
+                                                            <h5>Class - {academicClass.class}</h5>
+                                                            <li>
+                                                                <p>{academicClass.sections.length} Section{academicClass.sections.length > 1 ? 's' : ''}</p>
+                                                                <i className="fa-solid fa-circle"></i>
+                                                                <p>{academicClass.total_students} Student{academicClass.total_students > 1 ? 's' : ''}</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <button onClick={() => handleOpenSubjectAddModal(academicClass)}>
+                                                        <i className="fa-solid fa-file-circle-plus"></i>
                                                         <p>Add New Subject</p>
-                                                    </button>
-                                                    <button disabled={isSectionButtonLoading} onClick={() => handleAddSection(academicClass.class)}>
-                                                        {
-                                                            isSectionButtonLoading ? (
-                                                                <ButtonLoader />
-                                                            ) : (
-                                                                <>
-                                                                    <i className="fa-solid fa-plus"></i>
-                                                                    <p>Add New Section</p>
-                                                                </>
-                                                            )
-                                                        }
                                                     </button>
                                                 </div>
                                                 <div className="box_items">
                                                     {
-                                                        academicClass.sections.length > 0 ? (
+                                                        academicClass.sections.length > 0 && (
                                                             academicClass.sections.map((section, i) =>
                                                                 <div className="class_item" key={i}>
                                                                     <div className="item_inner">
@@ -242,13 +240,19 @@ const ClassroomPage = () => {
                                                                     </div>
                                                                 </div>
                                                             )
-                                                        ) : (
-                                                            <div className="empty_box">
-                                                                <img src="/images/no-fields.svg" alt="" />
-                                                                <p>No Section available.</p>
-                                                            </div>
                                                         )
                                                     }
+                                                    <div className="add_section" onClick={() => handleAddSection(academicClass.class)}>
+                                                        <div className="add_inner">
+                                                            <div className="text">
+                                                                <p><i className="fa-solid fa-plus"></i>Add</p>
+                                                                <p>New <span>Section</span></p>
+                                                            </div>
+                                                            <div className="icon">
+                                                                <img src="/images/section-add.svg" alt="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         )
@@ -286,10 +290,10 @@ const ClassroomPage = () => {
                     currentClass={currentClass}
                     setCurrentClass={setCurrentClass}
                 />
-                <DeleteConfirmationModal 
+                <DeleteConfirmationModal
                     isModalOpen={openDeleteModal}
                     setIsModalOpen={setOpenDeleteModal}
-                    deleteObject="Section" 
+                    deleteObject="Section"
                     payload={deletePayload}
                     endPoint={api.deleteSection}
                     refreshData={() => fetchClasses(false)}

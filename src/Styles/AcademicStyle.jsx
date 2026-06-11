@@ -457,28 +457,26 @@ export const ClassroomsWrapper = styled('div')`
                 border: none;
                 padding: 0 25px;
                 font-size: 12.5px;
+                cursor: pointer;
 
                 &.academic {
-                    background: ${colors.customColors.blueColor1};
-                    border: 1px solid ${colors.customColors.blueColor1};
-                    color: ${colors.customColors.whiteColor};
-                    cursor: pointer;
-                    border-bottom-left-radius: 6px;
-                    border-top-left-radius: 6px;
+                    background: ${colors.customColors.whiteColor};
+                    border: 2px solid ${colors.customColors.blueColor2};
+                    color: ${colors.customColors.blueColor2};
+                    border-radius: 6px;
                 }
                 
                 &.add_class {
-                    background: ${colors.customColors.whiteColor};
-                    border: 1px solid ${colors.customColors.blueColor1};
-                    color:  ${colors.customColors.blueColor1};
-                    cursor: pointer;
-                    border-top-right-radius: 6px;
-                    border-bottom-right-radius: 6px;
+                    margin-left: 20px;
+                    background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                    color: ${colors.customColors.whiteColor};
+                    border-radius: 6px;
+                    font-weight: 500;
                 }
 
                 i {
-                    font-size: 10px;
-                    margin-right: 4px;
+                    font-size: 12px;
+                    margin-right: 5px;
                 }
             }
         }
@@ -574,12 +572,61 @@ export const ClassroomsWrapper = styled('div')`
                     background: ${colors.customColors.borderColor};
                 }
 
-                span {
+                .head_brief {
                     position: relative;
-                    font-size: 14px;
-                    font-weight: 500;
-                    color: ${colors.customColors.blackColor1};
-                    font-style: italic;
+                    display: flex;
+
+                    span {
+                        position: relative;
+                        width: 40px;
+                        height: 40px;
+                        background: ${colors.customColors.blueColorLight};
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 15px;
+
+                        img {
+                            position: relative;
+                            width: 20px;
+                        }
+                    }
+
+                    ul {
+                        position: relative;
+                        margin-left: 12px;
+                        display: flex;
+                        flex-direction: column;
+
+                        h5 {
+                            position: relative;
+                            font-size: 15px;
+                            font-weight: 600;
+                            color: ${colors.customColors.blackColor};
+                            font-style: italic;
+                        }
+
+                        li {
+                            position: relative;
+                            margin-top: 2px;
+                            list-style: none;
+                            display: flex;
+                            align-items: center;
+                            
+                            p {
+                                position: relative;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
+                            }
+
+                            i {
+                                position: relative;
+                                font-size: 4px;
+                                color: ${colors.customColors.blackColor2};
+                                margin: 0 10px;
+                            }
+                        }
+                    }
                 }
 
                 button {
@@ -590,12 +637,14 @@ export const ClassroomsWrapper = styled('div')`
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
-                    border: 1px solid ${colors.customColors.greenColor};
-                    background: ${colors.customColors.greenColor};
+                    border: none;
+                    background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                     color: ${colors.customColors.whiteColor};
                     border-radius: 6px;
                     font-size: 12.5px;
                     font-weight: 500;
+                    opacity: 0;
+                    visibility: hidden;
                     transition: all 0.5s ease;
 
                     i {
@@ -606,13 +655,6 @@ export const ClassroomsWrapper = styled('div')`
                     &:hover {
                         border-radius: 25px;
                         transition: all 0.5s ease;
-                    }
-
-                    &.new_Subject {
-                        border: 1px solid ${colors.customColors.blueColor1};
-                        background: ${colors.customColors.blueColor1};
-                        margin-left: auto;
-                        margin-right: 10px;
                     }
 
                     &:disabled {
@@ -633,6 +675,7 @@ export const ClassroomsWrapper = styled('div')`
                     position: relative;
                     width: 25%;
                     max-width: 302.75px;
+                    max-height: 135px;
                     padding: 10px;
 
                     .item_inner {
@@ -780,28 +823,91 @@ export const ClassroomsWrapper = styled('div')`
                     }
                 }
 
-                .empty_box {
+                .add_section {
                     position: relative;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 0 10px;
-                    margin-top: 10px;
+                    width: 25%;
+                    max-width: 302.75px;
+                    height: 135px;
+                    padding: 10px;
+                    cursor: pointer;
 
-                    img {
+                    .add_inner {
                         position: relative;
-                        width: 150px;
-                        opacity: 0.5;
-                    }
+                        width: 100%;
+                        height: 100%;
+                        padding: 12px;
+                        padding-left: 15px;
+                        background: ${colors.customColors.whiteColor};
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-left: 4px solid ${colors.customColors.greenColor};
+                        border-radius: 8px;
+                        display: flex;
+                        flex-direction: column;
+                        box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                    p {
-                        position: relative;
-                        font-size: 13px;
-                        margin-top: 10px;
-                        color: ${colors.customColors.blackColor3};
+                        .text {
+                            position: relative;
+                            width: calc(100% - 122px);
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            padding-bottom: 25px;
+
+                            p {
+                                position: relative;
+                                font-size: 13px;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor};
+                                display: flex;
+                                align-items: center;
+
+                                &:first-of-type {
+                                    font-size: 16px;
+                                    margin-bottom: 2px;
+                                }
+
+                                i {
+                                    position: relative;
+                                    width: 14px;
+                                    height: 14px;
+                                    border: 2px solid ${colors.customColors.blackColor};
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 9.5px;
+                                    border-radius: 50%;
+                                    margin-right: 4px;
+                                }
+
+                                span {
+                                    margin-left: 4px;
+                                    color: ${colors.customColors.blueColor2};
+                                }
+                            }
+                        }
+
+                        .icon {
+                            position: absolute;
+                            right: 6px;
+                            bottom: 6px;
+                            display: flex;
+
+                            img {
+                                width: 122px;
+                                height: auto;
+                            }
+                        }
                     }
+                }
+            }
+
+            &:hover {
+                .box_head button {
+                    opacity: 1;
+                    visibility: visible;
+                    transition: all 0.5s ease;
                 }
             }
         }
@@ -933,7 +1039,7 @@ export const StudentAttendenceWrapper = styled('div')`
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
+                border: none;
                 background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 color: ${colors.customColors.whiteColor};
                 border-radius: 6px;

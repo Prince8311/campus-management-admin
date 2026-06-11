@@ -83,6 +83,10 @@ export const getApiEndpoints = () => {
         classSectionDetails: `${apiURL}/api/institutions/academic/section/details.php`,
         editClassSectionTeacher: `${apiURL}/api/institutions/academic/section/edit-teacher.php`,
 
+        // Attendance Configuration 
+        addAttendanceConfiguration: `${apiURL}/api/attendance/configuration/create.php`,
+        attendanceConfigurationList: `${apiURL}/api/attendance/configuration/list.php`,
+
         // Fee Configuration 
         createFeeType: `${apiURL}/api/fee/types/create.php`,
         fetchFeeTypes: `${apiURL}/api/fee/types/list.php`,
