@@ -28,12 +28,12 @@ const StudentAttendencePage = () => {
     const [filterDate, setFilterDate] = useState(getFormattedCurrentDate());
 
     const fetchAttendanceConfigurationList = async (showSkeleton = false) => {
-        if(showSkeleton) {
+        if (showSkeleton) {
             setIntialConfigarationsLoading(true);
         }
         try {
             const response = await axiosInstance.get(api.attendanceConfigurationList);
-            if(response?.data.status === 200) {
+            if (response?.data.status === 200) {
                 console.log("listttttttttttttt", response?.data);
             }
         } catch (error) {
@@ -60,19 +60,6 @@ const StudentAttendencePage = () => {
             <StudentAttendenceWrapper>
                 <div className="page_head">
                     <h2>Student Attendance</h2>
-                    <div className="filter_sec">
-                        <div className="filter_btn" onClick={() => setIsCalendarOpen(prev => !prev)}>
-                            <i className="fa-solid fa-filter"></i>
-                            <p>{filterDate || "Filter by date"}</p>
-                        </div>
-                        {
-                            isCalendarOpen && (
-                                <div className="dropdown">
-                                    <Calender setFinalSelectedDate={setFilterDate} />
-                                </div>
-                            )
-                        }
-                    </div>
                     <div className="configuration_btn">
                         <button onClick={handleOpenConfigarationModal}>
                             <i className="fa-solid fa-sliders"></i>
@@ -116,11 +103,36 @@ const StudentAttendencePage = () => {
                 <div className="report_details_sec">
                     <div className="report_head">
                         <h6>Report Details</h6>
+                        <div className="heading_option_part">
+                            <div className="inner_part">
+                                <a className="part_box">
+                                    <span><i className="fa-solid fa-users"></i></span>
+                                    <h6>Class Wise</h6>
+                                </a>
+                                <a className="part_box active">
+                                    <span><i className="fa-regular fa-clock"></i></span>
+                                    <h6>Period Wise</h6>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div className="student_search_sec">
                         <div className="search_sec">
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input type="text" placeholder="Search for class/section or class teacher" />
+                        </div>
+                        <div className="filter_sec">
+                            <div className="filter_btn" onClick={() => setIsCalendarOpen(prev => !prev)}>
+                                <i className="fa-solid fa-filter"></i>
+                                <p>{filterDate || "Filter by date"}</p>
+                            </div>
+                            {
+                                isCalendarOpen && (
+                                    <div className="dropdown">
+                                        <Calender setFinalSelectedDate={setFilterDate} />
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="tab_sec">
@@ -135,17 +147,22 @@ const StudentAttendencePage = () => {
                             <thead>
                                 <tr>
                                     <th>Class & Section</th>
-                                    <th>Class Teacher</th>
                                     <th>Total Students</th>
                                     <th>Present</th>
                                     <th>Absent</th>
                                     <th>Percentage</th>
-                                    <th>Mark</th>
+                                    <th>Mark by</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>10 - D</td>
+                                    <td>100</td>
+                                    <td><i className="fa-solid fa-minus"></i></td>
+                                    <td><i className="fa-solid fa-minus"></i></td>
+                                    <td>
+                                        <p className="">Not Marked</p>
+                                    </td>
                                     <td>
                                         <div className="left_table_sec">
                                             <h5>JB</h5>
@@ -155,6 +172,27 @@ const StudentAttendencePage = () => {
                                             <p>9749708386</p>
                                         </div>
                                     </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="secondtable_sec">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Class & Section</th>
+                                    <th>Period</th>
+                                    <th>Total Students</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                    <th>Percentage</th>
+                                    <th>Mark by</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10 - D</td>
+                                    <td>First <span>(10:00 am - 11:45 am)</span></td>
                                     <td>100</td>
                                     <td><i className="fa-solid fa-minus"></i></td>
                                     <td><i className="fa-solid fa-minus"></i></td>
@@ -162,9 +200,13 @@ const StudentAttendencePage = () => {
                                         <p className="">Not Marked</p>
                                     </td>
                                     <td>
-                                        <a className="edit_btn" onClick={handleOpenAttendenceModal}>
-                                            <i className="fa-solid fa-pen-to-square"></i>
-                                        </a>
+                                        <div className="left_table_sec">
+                                            <h5>JB</h5>
+                                        </div>
+                                        <div className="right_table_sec">
+                                            <h6>Joydeep Barik</h6>
+                                            <p>9749708386</p>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>

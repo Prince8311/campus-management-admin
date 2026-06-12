@@ -982,54 +982,9 @@ export const StudentAttendenceWrapper = styled('div')`
             font-family: "SUSE", sans-serif;
         }
 
-        .filter_sec {
-            position: relative;
-            margin-left: auto;
-            display: flex;
-
-            .filter_btn {
-                position: relative;
-                width: 200px;
-                height: 35px;
-                border: 1px solid ${colors.customColors.borderColor};
-                border-radius: 6px;
-                display: flex;
-                align-items: center;
-                padding: 5px 0;
-                cursor: pointer;
-
-                i {
-                    position: relative;
-                    width: 40px;
-                    height: 100%;
-                    color: ${colors.customColors.blackColor3};
-                    font-size: 13px;
-                    border-right: 1px solid ${colors.customColors.borderColor};
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                p {
-                    position: relative;
-                    padding-left: 15px;
-                    font-size: 12px;
-                    color: ${colors.customColors.blackColor2};
-                }
-            }
-
-            .dropdown {
-                position: absolute;
-                top: 35px;
-                right: 0;
-                width: 300px;
-                z-index: 5;
-            }
-        }
-
         .configuration_btn {
             position: relative;
-            margin-left: 20px;
+            margin-left: auto;
 
             button {
                 position: relative;
@@ -1242,6 +1197,56 @@ export const StudentAttendenceWrapper = styled('div')`
                 font-weight: 500;
                 color: ${colors.customColors.blackColor1};
             }
+
+            .heading_option_part {
+                position: relative;
+                display: flex;
+                margin-left: auto;
+
+                .inner_part {
+                    position: relative;
+                    width: max-content;
+                    padding: 6px;
+                    background: ${colors.customColors.lightBackground};
+                    border-radius: 6px;
+                    display: flex;
+
+                    .part_box {
+                        position: relative;
+                        padding: 8px 20px;
+                        cursor: pointer;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        display: flex;
+                        
+                        &.active {
+                            background: ${colors.customColors.blueColor1};
+                        }
+
+                        span {
+                            position: relative;
+                            font-size: 11px;
+                            color: ${colors.customColors.blackColor3};
+                            margin-right: 6px;
+                        }
+
+                        &.active span {
+                            color: ${colors.customColors.whiteColor};
+                        }
+
+                        h6 {
+                            position: relative;
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                        
+                        &.active h6 {
+                            color: ${colors.customColors.whiteColor};
+                        }
+                    }
+                }
+            }
         }
 
         .student_search_sec {
@@ -1280,6 +1285,51 @@ export const StudentAttendenceWrapper = styled('div')`
                     padding: 0 15px;
                     font-size: 12px;
                     color: ${colors.customColors.blackColor1};
+                }
+            }
+
+            .filter_sec {
+                position: relative;
+                margin-left: auto;
+                display: flex;
+
+                .filter_btn {
+                    position: relative;
+                    width: 200px;
+                    height: 35px;
+                    border: 1px solid ${colors.customColors.borderColor};
+                    border-radius: 6px;
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 0;
+                    cursor: pointer;
+
+                    i {
+                        position: relative;
+                        width: 40px;
+                        height: 100%;
+                        color: ${colors.customColors.blackColor3};
+                        font-size: 13px;
+                        border-right: 1px solid ${colors.customColors.borderColor};
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    p {
+                        position: relative;
+                        padding-left: 15px;
+                        font-size: 12px;
+                        color: ${colors.customColors.blackColor2};
+                    }
+                }
+
+                .dropdown {
+                    position: absolute;
+                    top: 35px;
+                    right: 0;
+                    width: 300px;
+                    z-index: 5;
                 }
             }
         }
@@ -1368,7 +1418,8 @@ export const StudentAttendenceWrapper = styled('div')`
                         }
 
                         &:nth-of-type(2) {
-                            width: 18%;
+                            width: 15%;
+                            justify-content: center;
                         }
 
                         &:nth-of-type(3) {
@@ -1377,22 +1428,17 @@ export const StudentAttendenceWrapper = styled('div')`
                         }
 
                         &:nth-of-type(4) {
-                            width: 14%;
+                            width: 15%;
                             justify-content: center;
                         }
 
                         &:nth-of-type(5) {
-                            width: 14%;
+                            width: 20%;
                             justify-content: center;
                         }
 
                         &:nth-of-type(6) {
-                            width: 16%;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(7) {
-                            width: 8%;
+                            width: 20%;
                             justify-content: center;
                         }
                     }
@@ -1430,12 +1476,62 @@ export const StudentAttendenceWrapper = styled('div')`
                             &:nth-of-type(1) {
                                 width: 15%;
                                 align-items: center;
-                                justify-content: center;
                             }
 
                             &:nth-of-type(2) {
-                                width: 18%;
+                                width: 15%;
+                                align-items: center;
+                                justify-content: center;
+                            }
+
+                            &:nth-of-type(3) {
+                                align-items: center;
+                                width: 15%;
+                                justify-content: center;
+
+                                i {
+                                    color: ${colors.customColors.greenColor};
+                                }
+                            }
+
+                            &:nth-of-type(4) {
+                                width: 15%;
+                                align-items: center;
+                                justify-content: center;
+
+                                i {
+                                    color: ${colors.customColors.redColor};
+                                }
+                            }
+
+                            &:nth-of-type(5) {
+                                width: 20%;
+                                align-items: center;
+                                justify-content: center;
+
+                                p {
+                                    position: relative;
+                                    font-size: 10px;
+                                    font-weight: 500;
+                                    line-height: 1;
+                                    display: flex;
+                                    align-items: center;
+                                    border-radius: 20px;
+                                    padding: 4px 15px;
+                                    color: ${colors.customColors.redColor};
+                                    background: ${colors.customColors.redColorLight};
+
+                                    &.active {
+                                        color: ${colors.customColors.greenColor};
+                                        background: ${colors.customColors.greenColorLight};
+                                    }
+                                }
+                            }
+
+                            &:nth-of-type(6) {
+                                width: 20%;
                                 display: flex;
+                                align-items: center;
 
                                 .left_table_sec {
                                     position: relative;
@@ -1445,13 +1541,13 @@ export const StudentAttendenceWrapper = styled('div')`
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
-                                    border: 1px solid ${colors.customColors.borderColor1};
+                                    background: ${colors.customColors.blueColor2};
 
                                     h5 {
                                         position: relative;
                                         font-size: 14px;
                                         font-weight: 500;
-                                        color: ${colors.customColors.blackColor2};
+                                        color: ${colors.customColors.whiteColor};
                                         text-transform: uppercase;
                                     }
                                 }
@@ -1478,6 +1574,141 @@ export const StudentAttendenceWrapper = styled('div')`
                                 }
                             }
 
+                            &.empty_message {
+                                position: relative;
+                                width: 100%;
+                                padding: 12px 25px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor2};
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .secondtable_sec {
+            position: relative;
+            width: 100%;
+            margin-top: 25px;
+
+            table {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                thead {
+                    position: relative;
+                    width: 100%;
+                    height: 40px;
+                    background: ${colors.themeColor};
+                    border-radius: 10px 10px 0px 0px;
+                    border: 1px solid ${colors.themeColor};
+
+                    tr {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                    }
+
+                    th {
+                        position: relative;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        font-family: "Lemonada", cursive;
+                        font-size: 12px;
+                        word-break: break-all;
+                        color: ${colors.customColors.whiteColor};
+                        padding: 0 25px;
+                        font-weight: 600;
+
+                        &:nth-of-type(1) {
+                            width: 14%;
+                        }
+
+                        &:nth-of-type(2) {
+                            width: 16%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(3) {
+                            width: 15%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(4) {
+                            width: 12%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(5) {
+                            width: 12%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(6) {
+                            width: 15%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(7) {
+                            width: 16%;
+                            justify-content: center;
+                        }
+                    }
+                }
+
+                tbody {
+                    position: relative;
+                    width: 100%;
+                    border: 1px solid ${colors.customColors.whiteColor2};
+                    border-top: none;
+                    border-radius: 0px 0px 10px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+
+                    tr {
+                        position: relative;
+                        width: 100%;
+                        min-height: 40px;
+                        display: flex;
+
+                        &:nth-of-type(even) {
+                            background: ${colors.customColors.blueColorLight};
+                        }
+
+                        td {
+                            position: relative;
+                            padding: 12px 25px;
+                            display: flex;
+                            color: ${colors.customColors.blackColor};
+                            font-size: 13px;
+                            word-break: break-all;
+                            line-height: 1.5;
+
+                            &:nth-of-type(1) {
+                                width: 14%;
+                                align-items: center;
+                            }
+
+                            &:nth-of-type(2) {
+                                width: 16%;
+                                align-items: center;
+
+                                span {
+                                    font-size: 10px;
+                                    color: ${colors.customColors.blackColor2};
+                                    margin-left: 5px;
+                                }
+                            }
+
                             &:nth-of-type(3) {
                                 width: 15%;
                                 align-items: center;
@@ -1486,7 +1717,7 @@ export const StudentAttendenceWrapper = styled('div')`
 
                             &:nth-of-type(4) {
                                 align-items: center;
-                                width: 14%;
+                                width: 12%;
                                 justify-content: center;
 
                                 i {
@@ -1495,7 +1726,7 @@ export const StudentAttendenceWrapper = styled('div')`
                             }
 
                             &:nth-of-type(5) {
-                                width: 14%;
+                                width: 12%;
                                 align-items: center;
                                 justify-content: center;
 
@@ -1505,7 +1736,7 @@ export const StudentAttendenceWrapper = styled('div')`
                             }
 
                             &:nth-of-type(6) {
-                                width: 16%;
+                                width: 15%;
                                 align-items: center;
                                 justify-content: center;
 
@@ -1529,19 +1760,47 @@ export const StudentAttendenceWrapper = styled('div')`
                             }
 
                             &:nth-of-type(7) {
-                                width: 8%;
+                                width: 16%;
+                                display: flex;
                                 align-items: center;
-                                justify-content: center;
 
-                                a {
+                                .left_table_sec {
                                     position: relative;
-                                    text-decoration: none;
-                                    cursor: pointer;
-                                    font-size: 13px;
+                                    width: 30px;
+                                    height: 30px;
+                                    border-radius: 6px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    background: ${colors.customColors.blueColor2};
 
-                                    &.edit_btn {
-                                        color: ${colors.customColors.greenColor};
-                                        margin: 0 10px;
+                                    h5 {
+                                        position: relative;
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.whiteColor};
+                                        text-transform: uppercase;
+                                    }
+                                }
+
+                                .right_table_sec {
+                                    position: relative;
+                                    width: calc(100% - 30px);
+                                    padding-left: 10px;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    h6 {
+                                        font-size: 13px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
+
+                                    p {
+                                        font-size: 12px;
+                                        font-weight: 400;
+                                        color: ${colors.customColors.blackColor2};
+                                        /* margin-top: 3px; */
                                     }
                                 }
                             }
