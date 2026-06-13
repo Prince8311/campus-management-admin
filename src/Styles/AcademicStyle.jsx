@@ -1218,9 +1218,11 @@ export const StudentAttendenceWrapper = styled('div')`
                         border-radius: 4px;
                         text-decoration: none;
                         display: flex;
+                        align-items: center;
                         
                         &.active {
-                            background: ${colors.customColors.blueColor1};
+                            background: ${colors.customColors.whiteColor};
+                            box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
                         }
 
                         span {
@@ -1231,7 +1233,7 @@ export const StudentAttendenceWrapper = styled('div')`
                         }
 
                         &.active span {
-                            color: ${colors.customColors.whiteColor};
+                            color: ${colors.customColors.blueColor2};
                         }
 
                         h6 {
@@ -1242,7 +1244,7 @@ export const StudentAttendenceWrapper = styled('div')`
                         }
                         
                         &.active h6 {
-                            color: ${colors.customColors.whiteColor};
+                            color: ${colors.customColors.blueColor2};
                         }
                     }
                 }
@@ -1439,7 +1441,6 @@ export const StudentAttendenceWrapper = styled('div')`
 
                         &:nth-of-type(6) {
                             width: 20%;
-                            justify-content: center;
                         }
                     }
                 }
@@ -1531,7 +1532,6 @@ export const StudentAttendenceWrapper = styled('div')`
                             &:nth-of-type(6) {
                                 width: 20%;
                                 display: flex;
-                                align-items: center;
 
                                 .left_table_sec {
                                     position: relative;
@@ -1659,7 +1659,6 @@ export const StudentAttendenceWrapper = styled('div')`
 
                         &:nth-of-type(7) {
                             width: 16%;
-                            justify-content: center;
                         }
                     }
                 }
@@ -1762,7 +1761,6 @@ export const StudentAttendenceWrapper = styled('div')`
                             &:nth-of-type(7) {
                                 width: 16%;
                                 display: flex;
-                                align-items: center;
 
                                 .left_table_sec {
                                     position: relative;
