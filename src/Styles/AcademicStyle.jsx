@@ -1831,7 +1831,7 @@ export const StudentAttendenceWrapper = styled('div')`
 
         .empty_img {
             position: relative;
-            width: 250px;
+            width: 275px;
             display: flex;
 
             img {
@@ -1848,7 +1848,7 @@ export const StudentAttendenceWrapper = styled('div')`
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 10px;
+            margin-top: 30px;
 
             h4 {
                 position: relative;

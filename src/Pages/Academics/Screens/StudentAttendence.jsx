@@ -74,7 +74,7 @@ const StudentAttendencePage = () => {
                     <div className="configuration_btn">
                         <button onClick={handleOpenConfigarationModal}>
                             <i className="fa-solid fa-sliders"></i>
-                            <p>Attendence Configaration</p>
+                            <p>Attendence Configuration</p>
                         </button>
                     </div>
                 </div>
@@ -234,11 +234,11 @@ const StudentAttendencePage = () => {
                                 <img src="/images/empty-configuration.png" alt="" />
                             </div>
                             <div className="empty_screen_content">
-                                <h4>No Attendance Configaration Found</h4>
+                                <h4>No Attendance Configuration Found</h4>
                                 <a>Set up your tracking preferences—Class-wise or Period-wise—to begin recording attendance.</a>
                                 <button>
                                     <i className="fa-solid fa-sliders"></i>
-                                    <p>Attendence Configaration</p>
+                                    <p>Attendence Configuration</p>
                                 </button>
                             </div>
                             <div className="empty_screen_bottom_sec">
