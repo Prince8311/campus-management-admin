@@ -151,7 +151,7 @@ const StudentAttendencePage = () => {
                                     <th>Present</th>
                                     <th>Absent</th>
                                     <th>Percentage</th>
-                                    <th>Mark by</th>
+                                    <th>Marked by</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -186,7 +186,7 @@ const StudentAttendencePage = () => {
                                     <th>Present</th>
                                     <th>Absent</th>
                                     <th>Percentage</th>
-                                    <th>Mark by</th>
+                                    <th>Marked by</th>
                                 </tr>
                             </thead>
                             <tbody>
