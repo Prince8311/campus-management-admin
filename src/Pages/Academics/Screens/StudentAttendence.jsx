@@ -230,7 +230,24 @@ const StudentAttendencePage = () => {
                         </>
                     ) : (
                         <div className="empty_screen">
-                            
+                            <div className="empty_img">
+                                <img src="/images/empty-configuration.png" alt="" />
+                            </div>
+                            <div className="empty_screen_content">
+                                <h4>No Attendance Configaration Found</h4>
+                                <a>Set up your tracking preferences—Class-wise or Period-wise—to begin recording attendance.</a>
+                                <button>
+                                    <i className="fa-solid fa-sliders"></i>
+                                    <p>Attendence Configaration</p>
+                                </button>
+                            </div>
+                            <div className="empty_screen_bottom_sec">
+                                <span><i className="fa-solid fa-circle-info"></i></span>
+                                <div className="bottom_item">
+                                    <h6>Why do I see this?</h6>
+                                    <p>Attendance tracking requires a one-time global configuration for your institution. You can choose to track attendance for each period or once per class session.</p>
+                                </div>
+                            </div>
                         </div>
                     )
                 }

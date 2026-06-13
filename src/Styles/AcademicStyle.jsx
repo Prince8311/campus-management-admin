@@ -1819,6 +1819,128 @@ export const StudentAttendenceWrapper = styled('div')`
             }
         }
     }
+
+    .empty_screen {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 50px;
+
+        .empty_img {
+            position: relative;
+            width: 250px;
+            display: flex;
+
+            img {
+                position: relative;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .empty_screen_content {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+
+            h4 {
+                position: relative;
+                font-size: 19px;
+                font-weight: 500;
+                color: ${colors.customColors.blackColor1};
+            }
+
+            a {
+                position: relative;
+                font-size: 11px;
+                font-weight: 400;
+                color: ${colors.customColors.blackColor2};
+                margin-top: 5px;
+                text-decoration: none;
+            }
+
+            button {
+                position: relative;
+                padding: 0 25px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border: none;
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                color: ${colors.customColors.whiteColor};
+                border-radius: 6px;
+                font-size: 13px;
+                font-weight: 500;
+                margin-top: 20px;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
+
+                i {
+                    margin-right: 8px;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .empty_screen_bottom_sec {
+            position: relative;
+            width: 100%;
+            display: flex;
+            margin-top: 30px;
+            background: ${colors.customColors.lightBackground};
+            border-radius: 6px;
+            padding: 15px;
+
+            span {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 15px;
+                color: ${colors.customColors.blueColor2};
+                background: ${colors.customColors.whiteColor};
+                border-radius: 5px;
+                box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+            }
+
+            .bottom_item {
+                position: relative;
+                width: calc(100% - 40px);
+                display: flex;
+                flex-direction: column;
+                padding-left: 15px;
+
+                h6 {
+                    position: relative;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor1};
+                    font-weight: 500;
+                }
+
+                p {
+                    position: relative;
+                    font-size: 11px;
+                    color: ${colors.customColors.blackColor2};
+                    margin-top: 3px;
+                }
+            }
+        }
+    }
 `;
 
 export const AddStudentWrapper = styled('div')`
