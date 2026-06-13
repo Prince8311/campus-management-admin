@@ -1897,7 +1897,7 @@ export const StudentAttendenceWrapper = styled('div')`
 
         .empty_screen_bottom_sec {
             position: relative;
-            width: 100%;
+            width: 70%;
             display: flex;
             margin-top: 30px;
             background: ${colors.customColors.lightBackground};
