@@ -223,7 +223,9 @@ const StudentAttendencePage = () => {
                             </div>
                         </>
                     ) : (
-                        <div className="empty_screen"></div>
+                        <div className="empty_screen">
+                            
+                        </div>
                     )
                 }
                 <AttendenceModal
