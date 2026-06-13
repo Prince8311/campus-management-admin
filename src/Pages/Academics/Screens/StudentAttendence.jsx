@@ -62,7 +62,7 @@ const StudentAttendencePage = () => {
             <StudentAttendenceWrapper>
                 <div className="page_head">
                     <h2>Student Attendance</h2>
-                    {
+                    {/* {
                         configurationList.length > 0 &&
                         <div className="configuration_btn">
                             <button onClick={handleOpenConfigarationModal}>
@@ -70,7 +70,13 @@ const StudentAttendencePage = () => {
                                 <p>Attendence Configaration</p>
                             </button>
                         </div>
-                    }
+                    } */}
+                    <div className="configuration_btn">
+                        <button onClick={handleOpenConfigarationModal}>
+                            <i className="fa-solid fa-sliders"></i>
+                            <p>Attendence Configaration</p>
+                        </button>
+                    </div>
                 </div>
                 {
                     configurationList.length > 0 ? (
