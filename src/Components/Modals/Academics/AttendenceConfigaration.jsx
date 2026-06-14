@@ -5,7 +5,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigarationModalOpen }) => {
+const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigurationModalOpen, configurationList }) => {
     const api = getApiEndpoints();
     const [isMultipleClassSelectOpen, setIsMultipleClassSelectOpen] = useState(false);
     const [selectedAttendaceType, setSelectedAttendaceType] = useState('date_wise');
@@ -52,7 +52,7 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
     };
 
     function closeModal() {
-        setIsConfigarationModalOpen(false);
+        setIsConfigurationModalOpen(false);
     }
 
     const fetchClasses = async () => {
@@ -72,10 +72,10 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
     }
 
     useEffect(() => {
-        if (isConfigarationModalOpen) {
+        if (isConfigurationModalOpen) {
             fetchClasses();
         }
-    }, [isConfigarationModalOpen]);
+    }, [isConfigurationModalOpen]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -96,8 +96,8 @@ const AttendenceConfigarationModal = ({ isConfigarationModalOpen, setIsConfigara
 
     return (
         <>
-            <AttendenceConfigarationWrapper className={isConfigarationModalOpen ? "active" : ""}>
-                <div className={`modal_box ${isConfigarationModalOpen ? "active" : ""}`}>
+            <AttendenceConfigarationWrapper className={isConfigurationModalOpen ? "active" : ""}>
+                <div className={`modal_box ${isConfigurationModalOpen ? "active" : ""}`}>
                     <div className="modal_head">
                         <h4>Attendence Configaration</h4>
                         <div className="close_sec">

@@ -14,7 +14,7 @@ const StudentAttendencePage = () => {
     const api = getApiEndpoints();
     const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-    const [isConfigarationModalOpen, setIsConfigarationModalOpen] = useState(false);
+    const [isConfigurationModalOpen, setIsConfigurationModalOpen] = useState(false);
     const [intialConfigarationsLoading, setIntialConfigarationsLoading] = useState(false);
     const [configurationList, setConfigurationList] = useState([]);
 
@@ -54,7 +54,7 @@ const StudentAttendencePage = () => {
     };
 
     const handleOpenConfigarationModal = () => {
-        setIsConfigarationModalOpen(true);
+        setIsConfigurationModalOpen(true);
     };
 
     return (
@@ -62,7 +62,7 @@ const StudentAttendencePage = () => {
             <StudentAttendenceWrapper>
                 <div className="page_head">
                     <h2>Student Attendance</h2>
-                    {/* {
+                    {
                         configurationList.length > 0 &&
                         <div className="configuration_btn">
                             <button onClick={handleOpenConfigarationModal}>
@@ -70,13 +70,7 @@ const StudentAttendencePage = () => {
                                 <p>Attendence Configaration</p>
                             </button>
                         </div>
-                    } */}
-                    <div className="configuration_btn">
-                        <button onClick={handleOpenConfigarationModal}>
-                            <i className="fa-solid fa-sliders"></i>
-                            <p>Attendence Configuration</p>
-                        </button>
-                    </div>
+                    }
                 </div>
                 {
                     configurationList.length > 0 ? (
@@ -236,7 +230,7 @@ const StudentAttendencePage = () => {
                             <div className="empty_screen_content">
                                 <h4>No Attendance Configuration Found</h4>
                                 <a>Set up your tracking preferences—Class-wise or Period-wise—to begin recording attendance.</a>
-                                <button>
+                                <button onClick={handleOpenConfigarationModal}>
                                     <i className="fa-solid fa-sliders"></i>
                                     <p>Attendence Configuration</p>
                                 </button>
@@ -258,8 +252,9 @@ const StudentAttendencePage = () => {
                 />
 
                 <AttendenceConfigarationModal
-                    isConfigarationModalOpen={isConfigarationModalOpen}
-                    setIsConfigarationModalOpen={setIsConfigarationModalOpen}
+                    isConfigurationModalOpen={isConfigurationModalOpen}
+                    setIsConfigurationModalOpen={setIsConfigurationModalOpen}
+                    configurationList={configurationList}
                 />
             </StudentAttendenceWrapper>
         </>
