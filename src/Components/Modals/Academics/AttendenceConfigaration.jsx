@@ -5,13 +5,14 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigurationModalOpen, configurationList }) => {
+const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigurationModalOpen, configurationList, reloadData }) => {
     const api = getApiEndpoints();
     const [isMultipleClassSelectOpen, setIsMultipleClassSelectOpen] = useState(false);
     const [selectedAttendaceType, setSelectedAttendaceType] = useState('date_wise');
     const [classes, setClasses] = useState([]);
     const [selectedClasses, setSelectedClasses] = useState([]);
     const [pendingSelectedClasses, setPendingSelectedClasses] = useState([]);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
     const multipleClassRef = useRef(null);
 
     const getClassKey = (classItem) => {
@@ -51,8 +52,45 @@ const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigura
         return getClassLabel(classItem || classKey);
     };
 
+    const getConfigurationClassLabel = (configuration) => {
+        return configuration.class_name || configuration.name || configuration.class || configuration.class_id || 'N/A';
+    };
+
+    const getConfigurationClassKeys = (configuration) => {
+        return [
+            configuration.id,
+            configuration.class,
+            configuration.class_id,
+            configuration.name,
+            configuration.class_name,
+            configuration.label
+        ]
+            .filter((item) => item !== undefined && item !== null)
+            .map((item) => item.toString());
+    };
+
+    const configuredClassKeys = new Set(
+        configurationList.flatMap((configuration) => getConfigurationClassKeys(configuration))
+    );
+
+    const availableClasses = classes.filter((classItem) => {
+        const classKeys = [
+            getClassKey(classItem),
+            getClassLabel(classItem)
+        ]
+            .filter((item) => item !== undefined && item !== null)
+            .map((item) => item.toString());
+
+        return !classKeys.some((classKey) => configuredClassKeys.has(classKey));
+    });
+
+    const isDateWiseConfiguration = (configuration) => configuration.attendance_type === 'date_wise';
+
+    const isPeriodWiseConfiguration = (configuration) => configuration.attendance_type === 'period_wise';
+
     function closeModal() {
         setIsConfigurationModalOpen(false);
+        setSelectedClasses([]);
     }
 
     const fetchClasses = async () => {
@@ -92,6 +130,27 @@ const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigura
         event.preventDefault();
         setPendingSelectedClasses(selectedClasses);
         setIsMultipleClassSelectOpen((prev) => !prev);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            classes: selectedClasses,
+            type: selectedAttendaceType
+        };
+        try {
+            const response = await axiosInstance.post(api.addAttendanceConfiguration, payload);
+            if (response?.data.status === 200) { 
+                console.log(response?.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+            setSelectedClasses([]);
+            reloadData();
+        }
     }
 
     return (
@@ -136,10 +195,10 @@ const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigura
                                                 <div className="multiple_class_sec">
                                                     <div className="class_sec_inner">
                                                         {
-                                                            classes.length > 0 ? (
+                                                            availableClasses.length > 0 ? (
                                                                 <>
                                                                     {
-                                                                        classes.map((classItem, i) => {
+                                                                        availableClasses.map((classItem, i) => {
                                                                             const classKey = getClassKey(classItem);
                                                                             return (
                                                                                 <li key={classKey || i}>
@@ -191,7 +250,7 @@ const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigura
                                             <a><i className="fa-regular fa-circle-check"></i></a>
                                         </div>
                                     </div>
-                                    <div className={`bottom_box ${selectedAttendaceType === 'class_wise' ? 'active' : ''}`} onClick={() => setSelectedAttendaceType('class_wise')}>
+                                    <div className={`bottom_box ${selectedAttendaceType === 'period_wise' ? 'active' : ''}`} onClick={() => setSelectedAttendaceType('period_wise')}>
                                         <div className="box_inner">
                                             <span><i className="fa-solid fa-clock"></i></span>
                                             <div className="box_item">
@@ -220,39 +279,67 @@ const AttendenceConfigarationModal = ({ isConfigurationModalOpen, setIsConfigura
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Class 1</td>
-                                            <td>
-                                                <div className="toggle_bar">
-                                                    <input
-                                                        type="checkbox"
-                                                        id="toggle"
-                                                    />
-                                                    <label htmlFor="toggle">
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="toggle_bar">
-                                                    <input
-                                                        type="checkbox"
-                                                        id="toggle"
-                                                    />
-                                                    <label htmlFor="toggle">
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        {
+                                            configurationList.length > 0 ? (
+                                                configurationList.map((configuration, index) => {
+                                                    const classLabel = getConfigurationClassLabel(configuration);
+                                                    const dateWiseToggleId = `datewise-toggle-${classLabel}-${index}`;
+                                                    const periodWiseToggleId = `periodwise-toggle-${classLabel}-${index}`;
+
+                                                    return (
+                                                        <tr key={`${classLabel}-${configuration.attendance_type}-${index}`}>
+                                                            <td>Class {classLabel}</td>
+                                                            <td>
+                                                                <div className="toggle_bar">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id={dateWiseToggleId}
+                                                                        checked={isDateWiseConfiguration(configuration)}
+                                                                        readOnly
+                                                                    />
+                                                                    <label htmlFor={dateWiseToggleId}>
+                                                                        <span></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="toggle_bar">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id={periodWiseToggleId}
+                                                                        checked={isPeriodWiseConfiguration(configuration)}
+                                                                        readOnly
+                                                                    />
+                                                                    <label htmlFor={periodWiseToggleId}>
+                                                                        <span></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })
+                                            ) : (
+                                                <tr>
+                                                    <td className="empty_message">No configuration available.</td>
+                                                </tr>
+                                            )
+                                        }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Cancel</button>
-                        <button>Save Changes</button>
+                        <button type="button" onClick={closeModal}>Cancel</button>
+                        <button disabled={selectedClasses.length === 0 || isButtonLoading} onClick={handleSubmit}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save Changes</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </AttendenceConfigarationWrapper>

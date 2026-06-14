@@ -10,6 +10,7 @@ import { getApiEndpoints } from '../../../Services/Api/ApiConfig';
 import SkeletonLoader from '../../../Components/Loader/SkeletonLoader';
 import ManageTeacher from '../../../Components/Modals/Academics/ManageTeacher';
 import SubjectPreferenceModal from '../../../Components/Modals/Academics/SubjectPreference';
+import AttendenceModal from '../../../Components/Modals/Academics/Attendence';
 
 const ClassroomDetailsPage = () => {
     const api = getApiEndpoints();
@@ -28,6 +29,17 @@ const ClassroomDetailsPage = () => {
     const [isSubjectPreferenceModalOpen, setIsSubjectPreferenceModalOpen] = useState(false);
     const [currentSubjectTeacherId, setCurrentSubjectTeacherId] = useState(null);
     const [currentSubjectCoTeacherIds, setCurrentSubjectCoTeacherIds] = useState([]);
+    const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
+
+    const getFormattedCurrentDate = () => {
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = today.toLocaleString('en-US', { month: 'long' });
+        const year = today.getFullYear();
+        return `${day} ${month}, ${year}`;
+    };
+
+    const [filterDate, setFilterDate] = useState(getFormattedCurrentDate());
 
     const handleSectionChange = (section) => {
         setSelectedSection(section);
@@ -115,6 +127,10 @@ const ClassroomDetailsPage = () => {
         return (first + last).toUpperCase();
     };
 
+    const handleOpenAttendenceModal = () => {
+        setIsAttendenceModalOpen(true);
+    };
+
     return (
         <>
             <ClassroomDetailsWrapper>
@@ -196,7 +212,7 @@ const ClassroomDetailsPage = () => {
                                         {
                                             classroomDetails.attendance_type &&
                                             <div className="btn_sec">
-                                                <button><i className="fa-regular fa-circle-check"></i>Mark Attendance</button>
+                                                <button onClick={handleOpenAttendenceModal}><i className="fa-regular fa-circle-check"></i>Mark Attendance</button>
                                                 <button><i className="fa-solid fa-clock-rotate-left"></i>Attendance History</button>
                                             </div>
                                         }
@@ -377,6 +393,12 @@ const ClassroomDetailsPage = () => {
                 <SubjectPreferenceModal
                     isSubjectPreferenceModalOpen={isSubjectPreferenceModalOpen}
                     setIsSubjectPreferenceModalOpen={setIsSubjectPreferenceModalOpen}
+                />
+
+                <AttendenceModal
+                    isAttendenceModalOpen={isAttendenceModalOpen}
+                    setIsAttendenceModalOpen={setIsAttendenceModalOpen}
+                    selectedDate={filterDate}
                 />
             </ClassroomDetailsWrapper>
         </>

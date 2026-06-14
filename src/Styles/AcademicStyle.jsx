@@ -584,7 +584,7 @@ export const ClassroomsWrapper = styled('div')`
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        border-radius: 15px;
+                        border-radius: 12px;
 
                         img {
                             position: relative;
@@ -608,7 +608,7 @@ export const ClassroomsWrapper = styled('div')`
 
                         li {
                             position: relative;
-                            margin-top: 2px;
+                            margin-top: 1px;
                             list-style: none;
                             display: flex;
                             align-items: center;
@@ -848,50 +848,56 @@ export const ClassroomsWrapper = styled('div')`
 
                         .text {
                             position: relative;
-                            width: calc(100% - 122px);
+                            width: 100%;
                             height: 100%;
                             display: flex;
                             flex-direction: column;
                             justify-content: center;
-                            padding-bottom: 25px;
+                            z-index: 5;
 
-                            p {
+                            a {
                                 position: relative;
-                                font-size: 13px;
-                                font-weight: 500;
-                                color: ${colors.customColors.blackColor};
+                                text-decoration: none;
                                 display: flex;
                                 align-items: center;
-
-                                &:first-of-type {
-                                    font-size: 16px;
-                                    margin-bottom: 2px;
-                                }
-
-                                i {
-                                    position: relative;
-                                    width: 14px;
-                                    height: 14px;
-                                    border: 2px solid ${colors.customColors.blackColor};
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    font-size: 9.5px;
-                                    border-radius: 50%;
-                                    margin-right: 4px;
-                                }
+                                font-size: 14px;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor};
 
                                 span {
                                     margin-left: 4px;
                                     color: ${colors.customColors.blueColor2};
                                 }
+
+                                i {
+                                    position: relative;
+                                    width: 22px;
+                                    height: 22px;
+                                    background: ${colors.customColors.blueColorLight};
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blueColor2};
+                                    border-radius: 50%;
+                                    margin-right: 6px;
+                                }
+
+                            }
+
+                            p {
+                                position: relative;
+                                margin-top: 6px;
+                                width: calc(100% - 115px);
+                                font-size: 10px;
+                                color: ${colors.customColors.blackColor2};
                             }
                         }
 
                         .icon {
                             position: absolute;
-                            right: 6px;
-                            bottom: 6px;
+                            right: 4px;
+                            bottom: 4px;
                             display: flex;
 
                             img {
@@ -968,6 +974,19 @@ export const StudentAttendenceWrapper = styled('div')`
     padding: 0 15px;
     display: flex;
     flex-direction: column;
+
+    .loading_screen {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+
+        img {
+            position: relative;
+            width: 500px;
+        }
+    }
 
     .page_head {
         position: relative;
@@ -1207,7 +1226,7 @@ export const StudentAttendenceWrapper = styled('div')`
                     position: relative;
                     width: max-content;
                     padding: 6px;
-                    background: ${colors.customColors.lightBackground};
+                    background: ${colors.customColors.blueColorLight};
                     border-radius: 6px;
                     display: flex;
 
@@ -1217,34 +1236,26 @@ export const StudentAttendenceWrapper = styled('div')`
                         cursor: pointer;
                         border-radius: 4px;
                         text-decoration: none;
+                        color: ${colors.customColors.blackColor1};
                         display: flex;
                         align-items: center;
-                        
-                        &.active {
-                            background: ${colors.customColors.whiteColor};
-                            box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+
+                        i {
+                            position: relative;
+                            font-size: 11px;
+                            margin-right: 6px;
                         }
 
                         span {
                             position: relative;
-                            font-size: 11px;
-                            color: ${colors.customColors.blackColor3};
-                            margin-right: 6px;
-                        }
-
-                        &.active span {
-                            color: ${colors.customColors.blueColor2};
-                        }
-
-                        h6 {
-                            position: relative;
                             font-size: 12px;
                             font-weight: 500;
-                            color: ${colors.customColors.blackColor1};
                         }
-                        
-                        &.active h6 {
+
+                        &.active {
                             color: ${colors.customColors.blueColor2};
+                            background: ${colors.customColors.whiteColor};
+                            box-shadow: 3px 4px 8px ${colors.boxShadowColors.shadowColor1}, -3px -3px 6px ${colors.boxShadowColors.shadowColor2};
                         }
                     }
                 }
@@ -1827,7 +1838,7 @@ export const StudentAttendenceWrapper = styled('div')`
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        margin-top: 50px;
+        margin-top: 20px;
 
         .empty_img {
             position: relative;

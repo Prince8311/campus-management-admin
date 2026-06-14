@@ -245,11 +245,11 @@ const ClassroomPage = () => {
                                                     <div className="add_section" onClick={() => handleAddSection(academicClass.class)}>
                                                         <div className="add_inner">
                                                             <div className="text">
-                                                                <p><i className="fa-solid fa-plus"></i>Add</p>
-                                                                <p>New <span>Section</span></p>
+                                                                <a><i className="fa-solid fa-plus"></i>Add <span>New Section</span></a>
+                                                                <p>Create a new section to organize classes, subjects or records with ease.</p>
                                                             </div>
                                                             <div className="icon">
-                                                                <img src="/images/section-add.svg" alt="" />
+                                                                <img src="/images/section-add.png" alt="" />
                                                             </div>
                                                         </div>
                                                     </div>
