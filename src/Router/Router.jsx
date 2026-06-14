@@ -68,6 +68,7 @@ import StaffPage from "../Pages/Settings/Screens/Staff";
 import SectionFieldsPage from "../Pages/Settings/Screens/SectionFields";
 import SubjectSettingsPage from "../Pages/Settings/Screens/SubjectSettings";
 import StateCityPage from "../Pages/Settings/Screens/StateCities";
+import SubscriptionSettingPage from "../Pages/Settings/SubscriptionSetting";
 
 import AlumniPage from "../Pages/Alumni";
 import BillingPage from "../Pages/Billing";
@@ -210,6 +211,7 @@ const Routers = () => {
                             <Route path="role/:roleName" element={<AddRolePermissionPage />} />
                             <Route path="add-roles-permissions" element={<AddRolePermissionPage />} />
                             <Route path="time-tables" element={<TimeTableSettingsPage />} />
+                            <Route path="subscription-setting" element={<SubscriptionSettingPage />} />
                             <Route path="state-cities" element={<StateCityPage />} />
                             <Route path="subject-settings" element={<SubjectSettingsPage />} />
                             <Route path="profile-settings" element={<ProfileSettingPage />}>
