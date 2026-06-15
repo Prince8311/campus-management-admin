@@ -4018,5 +4018,280 @@ export const SubscriptionSettingWrapper = styled('div')`
                 }
             }
         }
+
+        .pricing_box_sec {
+            position: relative;
+            width: 100%;
+            display: flex;
+            padding: 0 5px;
+            margin-top: 20px;
+
+            .price_box {
+                position: relative;
+                width: 25%;
+                display: flex;
+                padding: 10px;
+
+                &:nth-of-type(2) {
+                    .box_inner {
+                        .box_top {
+                            a {
+                                background: ${colors.customColors.greenColorLight};
+                                color: ${colors.customColors.greenColor1};
+                            }
+                        }
+                    }
+                }
+                &:nth-of-type(3) {
+                    .box_inner {
+                        .box_top {
+                            a {
+                                background: ${colors.customColors.yellowColorLight};
+                                color: ${colors.customColors.orangeColor};
+                            }
+                        }
+                    }
+                }
+                &:nth-of-type(4) {
+                    .box_inner {
+                        .box_top {
+                            a {
+                                background: ${colors.customColors.blueColor2};
+                                color: ${colors.customColors.whiteColor};
+                            }
+                        }
+                    }
+                }
+
+                .box_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 15px;
+                    border: 1px solid ${colors.customColors.borderColor};
+                    border-radius: 6px;
+
+                    .box_top {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+
+                        a {
+                            position: relative;
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 5px;
+                            background: ${colors.customColors.blueColorLight};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 14px;
+                            color: ${colors.customColors.blueColor3};
+                            text-decoration: none;
+                        }
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            height: max-content;
+                            margin-left: auto;
+                            padding: 4px 20px;
+                            font-size: 12px;
+                            background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                            color: ${colors.customColors.whiteColor};
+                            border-radius: 5px;
+                            cursor: pointer;
+
+                            i {
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+
+                    .box_content {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 10px;
+
+                        h5 {
+                            position: relative;
+                            font-size: 16px;
+                            color: ${colors.customColors.blackColor};
+                            font-weight: 500;
+                        }
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                            margin-top: 5px;
+                            line-height: 1.5;
+                        }
+
+                        .price_sec {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 10px;
+
+                            h6 {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: flex-end;
+                                line-height: 1;
+                                font-size: 23px;
+                                font-weight: 600;
+                                color: ${colors.customColors.blueColor3};
+
+                                span {
+                                    position: relative;
+                                    letter-spacing: 1px;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.blackColor2};
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+
+                        .addon_sec {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 10px;
+                            flex-direction: column;
+
+                            li {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                list-style: none;
+                                margin-bottom: 8px;
+                                padding-bottom: 5px;
+                                border-bottom: 1px solid ${colors.customColors.borderColor1};
+
+                                &:last-of-type {
+                                    margin-bottom: 0;
+                                }
+
+                                p {
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                a {
+                                    position: relative;
+                                    margin-left: auto;
+                                    text-decoration: none;
+                                    color: ${colors.customColors.blackColor};
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+
+                        .toggle_sec {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            margin-top: 10px;
+
+                            .sec_box {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 8px;
+                                padding-bottom: 5px;
+                                border-bottom: 1px solid ${colors.customColors.borderColor1};
+
+                                &:last-of-type {
+                                    margin-bottom: 0;
+                                    border-bottom: none;
+                                }
+
+                                h4 {
+                                    font-size: 13px;
+                                    color: ${colors.customColors.blackColor};
+                                    font-weight: 500;
+                                }
+
+                                .toggle_bar {
+                                    position: relative;
+                                    width: 50px;
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    margin-left: auto;
+
+                                    input[type="checkbox"] {
+                                        display: none;
+                                    }
+
+                                    label {
+                                        position: relative;
+                                        width: 40px;
+                                        height: 21px;
+                                        background: ${colors.customColors.whiteColor2};
+                                        border-radius: 25px;
+                                        padding: 3px;
+                                        display: flex;
+                                        align-items: center;
+                                        cursor: pointer;
+                                        transition: all 0.5s ease;
+
+                                        span {
+                                            position: relative;
+                                            width: 15px;
+                                            height: 100%;
+                                            background: ${colors.customColors.whiteColor};
+                                            border-radius: 50%;
+                                            transition: all 0.5s ease;
+                                        }
+                                    }
+
+                                    input[type="checkbox"]:checked ~ label {
+                                        background: ${colors.customColors.blueColor1};
+                                        transition: all 0.5s ease;
+                                    }
+
+                                    input[type="checkbox"]:checked ~ label span {
+                                        transform: translateX(19px);
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+                            }
+                        }
+
+                        ul {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            flex-wrap: wrap;
+                            margin-top: 8px;
+
+                            a {
+                                position: relative;
+                                padding: 3px 15px;
+                                margin-right: 10px;
+                                text-decoration: none;
+                                font-size: 11px;
+                                color: ${colors.customColors.blackColor};
+                                border-radius: 25px;
+                                background: ${colors.customColors.blueColorLight};
+
+                                &:last-of-type {
+                                    margin-right: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 `;

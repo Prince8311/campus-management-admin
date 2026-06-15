@@ -199,6 +199,56 @@ const ClassroomDetailsPage = () => {
                         )
                     }
                 </div>
+                <div className="class_routine_sec">
+                    <div className="routine_table_container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className="sticky_col">PERIOD</th>
+                                    <th>1<sup>ST</sup></th>
+                                    <th>2<sup>ND</sup></th>
+                                    <th>3<sup>RD</sup></th>
+                                    <th className="break_col">--------</th>
+                                    <th>4<sup>TH</sup></th>
+                                    <th>5<sup>TH</sup></th>
+                                    <th>6<sup>TH</sup></th>
+                                    <th>7<sup>TH</sup></th>
+                                    <th>8<sup>TH</sup></th>
+                                    <th>9<sup>TH</sup></th>
+                                    <th>10<sup>TH</sup></th>
+                                    <th>11<sup>TH</sup></th>
+                                    <th>12<sup>TH</sup></th>
+                                    <th>13<sup>TH</sup></th>
+                                    <th>14<sup>TH</sup></th>
+                                    <th>15<sup>TH</sup></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {["MON", "TUES", "WED", "THURS", "FRI"].map((day, index) => (
+                                    <tr key={day}>
+                                        <td className="sticky_col day_col">{day}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td className="break_col">{"BREAK"[index]}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <div className="class_details_sec">
                     <div className="student_box">
                         {

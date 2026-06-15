@@ -1,4 +1,4 @@
-import { SubscriptionSettingWrapper } from "../../Styles/SettingStyle";
+import { SubscriptionSettingWrapper } from "../../../Styles/SettingStyle";
 
 const SubscriptionSettingPage = () => {
     return (
@@ -129,6 +129,113 @@ const SubscriptionSettingPage = () => {
                             <a className="part_box active">
                                 <span>Institution Specific</span>
                             </a>
+                        </div>
+                    </div>
+                    <div className="pricing_box_sec">
+                        <div className="price_box">
+                            <div className="box_inner">
+                                <div className="box_top">
+                                    <a><i className="fa-solid fa-user-plus"></i></a>
+                                    <span><i className="fa-regular fa-pen-to-square"></i>Edit</span>
+                                </div>
+                                <div className="box_content">
+                                    <h5>Per-Student Base Price</h5>
+                                    <p>Core license cost calculated per active seat. Tiered discounts apply for volume.</p>
+                                    <div className="price_sec">
+                                        <h6>₹20.00<span>/ student / month</span></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="price_box">
+                            <div className="box_inner">
+                                <div className="box_top">
+                                    <a><i className="fa-solid fa-truck"></i></a>
+                                    <span><i className="fa-regular fa-pen-to-square"></i>Edit</span>
+                                </div>
+                                <div className="box_content">
+                                    <h5>Service Add-ons</h5>
+                                    <div className="addon_sec">
+                                        <li>
+                                            <p>Hostel Management</p>
+                                            <a>₹3.00</a>
+                                        </li>
+                                        <li>
+                                            <p>Hostel + Travel Management</p>
+                                            <a>₹2.00</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="price_box">
+                            <div className="box_inner">
+                                <div className="box_top">
+                                    <a href=""><i className="fa-solid fa-money-bill"></i></a>
+                                    <span><i className="fa-regular fa-pen-to-square"></i>Edit</span>
+                                </div>
+                                <div className="box_content">
+                                    <h5>Billing Cycle</h5>
+                                    <div className="toggle_sec">
+                                        <div className="sec_box">
+                                            <h4>Monthly</h4>
+                                            <div className="toggle_bar">
+                                                <input
+                                                    type="checkbox"
+                                                    id="toggle"
+                                                />
+                                                <label htmlFor="toggle">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div className="sec_box">
+                                            <h4>Quarterly</h4>
+                                            <div className="toggle_bar">
+                                                <input
+                                                    type="checkbox"
+                                                    id="toggleqa"
+                                                />
+                                                <label htmlFor="toggleqa">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div className="sec_box">
+                                            <h4>Annually</h4>
+                                            <div className="toggle_bar">
+                                                <input
+                                                    type="checkbox"
+                                                    id="toggleann"
+                                                />
+                                                <label htmlFor="toggleann">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="price_box">
+                            <div className="box_inner">
+                                <div className="box_top">
+                                    <a><i className="fa-solid fa-star"></i></a>
+                                    <span><i className="fa-regular fa-pen-to-square"></i>Edit</span>
+                                </div>
+                                <div className="box_content">
+                                    <h5>All-in Bundle (LMS + ERP)</h5>
+                                    <p>Bundled pricing for schools utilizing full suite (LMS, ERP, Hostel, & Transport).</p>
+                                    <ul>
+                                        <a>LMS</a>
+                                        <a>ERP</a>
+                                        <a>Support+</a>
+                                    </ul>
+                                    <div className="price_sec">
+                                        <h6>₹15.99<span>flat / seat</span></h6>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
