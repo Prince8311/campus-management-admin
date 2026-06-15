@@ -2756,6 +2756,94 @@ export const ClassroomDetailsWrapper = styled('div')`
         }
     }
 
+    .class_routine_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 0 15px;
+        margin-top: 25px;
+
+        .routine_table_container {
+            position: relative;
+            width: 100%;
+            background: ${colors.customColors.whiteColor};
+            border-radius: 8px;
+            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+            padding: 20px;
+            overflow-x: auto;
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: center;
+                border: 2px solid ${colors.customColors.blackColor2};
+                
+                thead {
+                    tr {
+                        th {
+                            border: 1px solid ${colors.customColors.blackColor2};
+                            padding: 15px 10px;
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: ${colors.customColors.blackColor};
+                            min-width: 90px;
+                            
+                            sup {
+                                font-size: 10px;
+                            }
+                            
+                            &.break_col {
+                                width: 60px;
+                                min-width: 60px;
+                            }
+
+                            &.sticky_col {
+                                position: sticky;
+                                left: 0;
+                                background: ${colors.customColors.whiteColor} !important;
+                                z-index: 2;
+                                border-right: 2px solid ${colors.customColors.blackColor2};
+                                min-width: 100px;
+                            }
+                        }
+                    }
+                }
+
+                tbody {
+                    tr {
+                        td {
+                            border: 1px solid ${colors.customColors.blackColor2};
+                            padding: 20px 10px;
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: ${colors.customColors.blackColor};
+                            min-width: 90px;
+                            
+                            &.day_col {
+                                font-weight: 600;
+                            }
+
+                            &.break_col {
+                                font-weight: 700;
+                                min-width: 60px;
+                            }
+
+                            &.sticky_col {
+                                position: sticky;
+                                left: 0;
+                                background: ${colors.customColors.whiteColor} !important;
+                                z-index: 2;
+                                border-right: 2px solid ${colors.customColors.blackColor2};
+                                min-width: 100px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .class_details_sec {
         position: relative;
         width: 100%;
