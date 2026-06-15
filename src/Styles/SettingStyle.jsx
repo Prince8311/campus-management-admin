@@ -2887,8 +2887,8 @@ export const TimeTableSettingsWrapper = styled('div')`
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
-                background: ${colors.customColors.greenColor};
+                border: none;
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 color: ${colors.customColors.whiteColor};
                 border-radius: 6px;
                 font-size: 13px;
@@ -2929,7 +2929,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                 padding-left: 15px;
                 background: ${colors.customColors.whiteColor};
                 border: 1px solid ${colors.customColors.borderColor};
-                border-left: 4px solid ${colors.customColors.greenColor};
+                border-left: 4px solid ${colors.customColors.blueColor2};
                 border-radius: 8px;
                 display: flex;
                 flex-direction: column;
@@ -2948,34 +2948,48 @@ export const TimeTableSettingsWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         display: flex;
-                        align-items: center;
                         
                         a {
                             position: relative;
-                            width: 28px;
-                            height: 28px;
-                            border-radius: 50%;
-                            background: ${colors.customColors.greenColorLight};
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 10px;
+                            background: ${colors.customColors.blueColorLight};
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            font-size: 12px;
-                            color: ${colors.customColors.greenColor};
+                            font-size: 13px;
+                            color: ${colors.customColors.blueColor2};
                             text-decoration: none;
                             cursor: pointer;
                         }
-                        
-                        h6 {
+
+                        li {
                             position: relative;
+                            list-style: none;
                             padding-left: 8px;
                             max-width: calc(100% - 28px);
-                            font-size: 13px;
-                            font-style: italic;
-                            font-weight: 500;
-                            color: ${colors.customColors.blackColor};
-                            overflow: hidden;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
+                            display: flex;
+                            flex-direction: column;
+
+                            h6 {
+                                position: relative;
+                                width: 100%;
+                                font-size: 13px;
+                                font-style: italic;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor};
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                            }
+
+                            p {
+                                position: relative;
+                                margin-top: 2px;
+                                font-size: 11px;
+                                color: ${colors.customColors.blackColor2};
+                            }
                         }
                     }
                 }
@@ -2984,8 +2998,8 @@ export const TimeTableSettingsWrapper = styled('div')`
                     position: relative;
                     width: 100%;
                     display: flex;
-                    align-items: center;
-                    margin-top: 8px;
+                    align-items: flex-end;
+                    margin-top: 7px;
 
                     .time_sec {
                         position: relative;
@@ -2995,8 +3009,15 @@ export const TimeTableSettingsWrapper = styled('div')`
 
                         p {
                             position: relative;
-                            font-size: 12px;
+                            font-size: 11.5px;
                             color: ${colors.customColors.blackColor2};
+                            font-style: italic;
+
+                            span {
+                                position: relative;
+                                color: ${colors.customColors.blackColor};
+                                font-style: normal;
+                            }
                         }
                     }
 
@@ -3336,7 +3357,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        padding: 7px;
+                        padding: 10px 13px;
                         background: ${colors.customColors.lightBackground3};
                         border-radius: 5px;
                         
@@ -3374,7 +3395,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 font-size: 10px;
                                 font-weight: 400;
                                 color: ${colors.customColors.whiteColor};
-                                background: ${colors.customColors.greenColor};
+                                background: ${colors.customColors.blueColor2};
                                 border: none;
                                 border-radius: 5px;
                                 cursor: pointer;
@@ -3401,7 +3422,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                             font-size: 12px;
                             font-weight: 500;
                             color: ${colors.customColors.whiteColor};
-                            background: ${colors.customColors.greenColor};
+                            background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                             border: none;
                             border-radius: 5px;
                             cursor: pointer;
@@ -3446,7 +3467,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                         .box_head {
                             position: relative;
                             width: 100%;
-                            padding: 13px 20px;
+                            padding: 20px 20px 10px 20px;
                             display: flex;
                             align-items: flex-end;
                             justify-content: space-between;
@@ -3461,13 +3482,57 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 background: ${colors.customColors.borderColor};
                             }
 
-                            span {
+                            li {
                                 position: relative;
-                                font-size: 14px;
-                                font-weight: 500;
-                                color: ${colors.customColors.blackColor1};
-                                font-style: italic;
-                                margin-top: 0;
+                                display: flex;
+                                align-items: center;
+                                list-style: none;
+
+                                i {
+                                    position: relative;
+                                    width: 32px;
+                                    height: 32px;
+                                    background: ${colors.customColors.blueColorLight};
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 10px;
+                                    font-size: 14px;
+                                    color: ${colors.customColors.blueColor3};
+                                }
+
+                                span {
+                                    position: relative;
+                                    margin-left: 8px;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    margin-top: 0;
+                                }
+                            }
+
+                            button {
+                                position: relative;
+                                height: 30px;
+                                padding: 0 20px;
+                                border: none;
+                                font-size: 12px;
+                                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                                color: ${colors.customColors.whiteColor};
+                                border-radius: 6px;
+                                cursor: pointer;
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: all 0.5s ease;
+
+                                i {
+                                    margin-right: 6px;
+                                }
+
+                                &:hover {
+                                    border-radius: 25px;
+                                    transition: all 0.5s ease;
+                                }
                             }
                         }
 
@@ -3489,100 +3554,110 @@ export const TimeTableSettingsWrapper = styled('div')`
                                     width: 100%;
                                     padding: 12px;
                                     padding-left: 15px;
-                                    background: ${colors.customColors.whiteColor};
+                                    background: ${colors.customColors.blueColorLight1};
                                     border: 1px solid ${colors.customColors.borderColor};
-                                    border-left: 4px solid ${colors.customColors.greenColor};
+                                    border-left: 4px solid ${colors.customColors.blueColor2};
                                     border-radius: 8px;
                                     display: flex;
                                     flex-direction: column;
                                     box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
                                                 -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
 
-                                    .top_part {
+                                    .timing {
                                         position: relative;
+                                        width: max-content;
+                                        display: flex;
+                                        align-items: center;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        padding: 4px 10px;
+                                        background: ${colors.customColors.whiteColor1};
+                                        box-shadow: 3px 3px 5px ${colors.boxShadowColors.shadowColor2};
+                                        border-radius: 6px;
+
+                                        i {
+                                            font-size: 10px;
+                                            color: ${colors.customColors.blueColor2};
+                                        }
+                                        
+                                        p {
+                                            position: relative;
+                                            margin-left: 5px;
+                                            font-size: 11px;
+                                            letter-spacing: 0.44px;
+                                            color: ${colors.customColors.blueColor2};
+                                        }
+                                    }
+
+                                    .content_part {
+                                        position: relative;
+                                        margin-top: 12px;
                                         width: 100%;
                                         display: flex;
-                                        flex-direction: column;
+                                        align-items: center;
 
-                                        .content_part {
+                                        img {
                                             position: relative;
-                                            width: 100%;
-                                            display: flex;
-                                            align-items: center;
-                                            
-                                            a {
-                                                position: relative;
-                                                width: 28px;
-                                                height: 28px;
-                                                border-radius: 50%;
-                                                background: ${colors.customColors.greenColorLight};
-                                                display: flex;
-                                                align-items: center;
-                                                justify-content: center;
-                                                font-size: 12px;
-                                                color: ${colors.customColors.greenColor};
-                                                text-decoration: none;
-                                                cursor: pointer;
-                                            }
-                                            
-                                            h6 {
-                                                position: relative;
-                                                padding-left: 12px;
-                                                max-width: calc(100% - 28px);
-                                                font-size: 12px;
-                                                font-style: italic;
-                                                font-weight: 500;
-                                                color: ${colors.customColors.blackColor};
-                                                overflow: hidden;
-                                                white-space: nowrap;
-                                                text-overflow: ellipsis;
-                                            }
+                                            width: 32px;
+                                            height: auto;
                                         }
 
-                                        .subject_sec {
+                                        li {
                                             position: relative;
-                                            width: 100%;
+                                            width: calc(100% - 32px);
+                                            list-style: none;
                                             display: flex;
                                             flex-direction: column;
-                                            margin-top: 5px;
+                                            padding-left: 10px;
 
-                                            p {
-                                                position: relative;
-                                                font-size: 11px;
-                                                color: ${colors.customColors.blackColor2};
-
-                                                b {
-                                                    font-weight: 500;
-                                                    margin-right: 4px;
-                                                    font-style: italic;
-                                                    color: ${colors.customColors.blackColor1};
-                                                }
-                                            }
-
-                                            li {
+                                            h6 {
                                                 position: relative;
                                                 width: 100%;
-                                                display: flex;
-                                                align-items: center;
-                                                margin-top: 5px;
-                                                list-style: none;
+                                                font-size: 14px;
+                                                font-weight: 600;
+                                                color: ${colors.customColors.blackColor};
+                                            }
 
-                                                a {
-                                                    font-size: 11px;
-                                                    color: ${colors.customColors.blackColor1};
-                                                    text-decoration: none;
-                                                }
-
-                                                h6 {
-                                                    font-size: 11px;
-                                                    color: ${colors.customColors.blackColor1};
-                                                    margin-left: 8px;
-                                                    font-weight: 400;
-                                                }
+                                            span {
+                                                position: relative;
+                                                font-size: 12px;
+                                                font-weight: 500;
+                                                line-height: 1.2;
+                                                color: ${colors.customColors.blackColor2};
                                             }
                                         }
                                     }
+
+                                    .teacher_info {
+                                        position: relative;
+                                        width: 100%;
+                                        margin-top: 8px;
+                                        padding-top: 6px;
+                                        border-top: 1px solid ${colors.customColors.borderColor};
+                                        display: flex;
+                                        align-items: center;
+
+                                        i {
+                                            position: relative;
+                                            font-size: 11px;
+                                            color: ${colors.customColors.blueColor2};
+                                        }
+
+                                        a {
+                                            position: relative;
+                                            font-size: 12px;
+                                            margin-left: 6px;
+                                            color: ${colors.customColors.blueColor2};
+                                        }
+                                    }
                                 }
+                            }
+                        }
+
+                        &:hover {
+                            .box_head button {
+                                opacity: 1;
+                                visibility: visible;
+                                transition: all 0.5s ease;
                             }
                         }
                     }
@@ -3597,14 +3672,12 @@ export const TimeTableSettingsWrapper = styled('div')`
                         button {
                             position: relative;
                             width: 150px;
-                            height: 37px;
+                            height: 35px;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             font-size: 12px;
                             font-weight: 500;
-                            color: ${colors.customColors.whiteColor};
-                            background: ${colors.customColors.blueColor1};
                             border: none;
                             border-radius: 5px;
                             cursor: pointer;
@@ -3619,9 +3692,16 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 transition: all 0.5s ease;
                             }
 
+                            &:first-of-type {
+                                border: 2px solid ${colors.customColors.blueColor2};
+                                background: ${colors.customColors.whiteColor};
+                                color: ${colors.customColors.blueColor2};
+                            }
+
                             &:last-of-type {
-                                background: ${colors.customColors.greenColor};
-                                margin-left: 25px;
+                                margin-left: 20px;
+                                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                                color: ${colors.customColors.whiteColor};
                             }
                         }
                     }

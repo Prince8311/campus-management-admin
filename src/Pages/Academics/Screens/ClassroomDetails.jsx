@@ -30,6 +30,7 @@ const ClassroomDetailsPage = () => {
     const [currentSubjectTeacherId, setCurrentSubjectTeacherId] = useState(null);
     const [currentSubjectCoTeacherIds, setCurrentSubjectCoTeacherIds] = useState([]);
     const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
+    const [isHistory, setIsHistory] = useState(false);
 
     const getFormattedCurrentDate = () => {
         const today = new Date();
@@ -127,7 +128,8 @@ const ClassroomDetailsPage = () => {
         return (first + last).toUpperCase();
     };
 
-    const handleOpenAttendenceModal = () => {
+    const handleOpenAttendenceModal = (history) => {
+        setIsHistory(history);
         setIsAttendenceModalOpen(true);
     };
 
@@ -212,8 +214,8 @@ const ClassroomDetailsPage = () => {
                                         {
                                             classroomDetails.attendance_type &&
                                             <div className="btn_sec">
-                                                <button onClick={handleOpenAttendenceModal}><i className="fa-regular fa-circle-check"></i>Mark Attendance</button>
-                                                <button><i className="fa-solid fa-clock-rotate-left"></i>Attendance History</button>
+                                                <button onClick={() => handleOpenAttendenceModal(false)}><i className="fa-regular fa-circle-check"></i>Mark Attendance</button>
+                                                <button onClick={() => handleOpenAttendenceModal(true)}><i className="fa-solid fa-clock-rotate-left"></i>Attendance History</button>
                                             </div>
                                         }
                                         <div className="search_sec">
@@ -399,6 +401,7 @@ const ClassroomDetailsPage = () => {
                     isAttendenceModalOpen={isAttendenceModalOpen}
                     setIsAttendenceModalOpen={setIsAttendenceModalOpen}
                     selectedDate={filterDate}
+                    isHistory={isHistory}
                 />
             </ClassroomDetailsWrapper>
         </>

@@ -1,13 +1,36 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AttendenceWrapper } from "../../../Styles/ModalStyle";
 import Calender from "../../Calender";
 
-const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, selectedDate }) => {
+const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, selectedDate, isHistory }) => {
     const [isCalendarDropdownOpen, setIsCalendarDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const filterBtnRef = useRef(null);
 
     const closeModal = () => {
         setIsAttendenceModalOpen(false);
     };
+
+    const openCalender = () => {
+        if(!isHistory) return;
+        setIsCalendarDropdownOpen(!isCalendarDropdownOpen)
+    }
+
+    useEffect(() => {
+        if (!isCalendarDropdownOpen) return;
+
+        const handleClickOutside = (e) => {
+            if (
+                dropdownRef.current && !dropdownRef.current.contains(e.target) &&
+                filterBtnRef.current && !filterBtnRef.current.contains(e.target)
+            ) {
+                setIsCalendarDropdownOpen(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isCalendarDropdownOpen]);
 
     return (
         <>
@@ -22,13 +45,13 @@ const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, sele
                     <div className="modal_item_sec">
                         <div className="item_btns">
                             <div className="filter_date_sec">
-                                <div className="filter_btn" onClick={() => setIsCalendarDropdownOpen(!isCalendarDropdownOpen)}>
+                                <div className="filter_btn" onClick={openCalender} ref={filterBtnRef}>
                                     <i className="fa-regular fa-calendar"></i>
                                     <p>{selectedDate}</p>
                                 </div>
                                 {
                                     isCalendarDropdownOpen && (
-                                        <div className="dropdown">
+                                        <div className="dropdown" ref={dropdownRef}>
                                             <Calender />
                                         </div>
                                     )
