@@ -68,7 +68,7 @@ import StaffPage from "../Pages/Settings/Screens/Staff";
 import SectionFieldsPage from "../Pages/Settings/Screens/SectionFields";
 import SubjectSettingsPage from "../Pages/Settings/Screens/SubjectSettings";
 import StateCityPage from "../Pages/Settings/Screens/StateCities";
-import SubscriptionSettingPage from "../Pages/Settings/SubscriptionSetting";
+import SubscriptionSettingPage from "../Pages/Settings/Screens/SubscriptionSetting";
 
 import AlumniPage from "../Pages/Alumni";
 import BillingPage from "../Pages/Billing";
