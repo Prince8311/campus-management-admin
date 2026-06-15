@@ -1026,7 +1026,7 @@ export const AttendenceWrapper = styled('div')`
     position: fixed;
     top: 0;
     right: -100%;
-    width: 750px;
+    width: 675px;
     height: 100vh;
     border-top-left-radius: 10px;
     background: ${colors.customColors.whiteColor};
@@ -1277,11 +1277,11 @@ export const AttendenceWrapper = styled('div')`
                             font-weight: 600;
 
                             &:nth-of-type(1) {
-                                width: 50%;
+                                width: 45%;
                             }
 
                             &:nth-of-type(2) {
-                                width: 20%;
+                                width: 25%;
                                 justify-content: center;
                             }
 
@@ -1322,7 +1322,7 @@ export const AttendenceWrapper = styled('div')`
                                 line-height: 1.5;
 
                                 &:nth-of-type(1) {
-                                    width: 50%;
+                                    width: 45%;
                                     display: flex;
 
                                     .left_table_sec {
@@ -1366,7 +1366,7 @@ export const AttendenceWrapper = styled('div')`
                                 }
 
                                 &:nth-of-type(2) {
-                                    width: 20%;
+                                    width: 25%;
                                     align-items: center;
                                     justify-content: center;
                                 }
@@ -1381,7 +1381,7 @@ export const AttendenceWrapper = styled('div')`
                                         width: 40px;
                                         display: flex;
                                         justify-content: flex-start;
-                                        margin: 0 15px;
+                                        margin: 0 8px;
 
                                         input[type="checkbox"] {
                                             display: none;
@@ -2104,6 +2104,17 @@ export const AttendenceConfigarationWrapper = styled('div')`
                                         align-items: center;
                                         justify-content: center;
                                     }
+
+                                    &.empty_message {
+                                        position: relative;
+                                        width: 100%;
+                                        padding: 12px 25px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 13px;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
                                 }
                             }
                         }
@@ -2129,6 +2140,7 @@ export const AttendenceConfigarationWrapper = styled('div')`
                 border: none;
                 border-radius: 6px;
                 cursor: pointer;
+                transition: all 0.5s ease;
 
                 &:first-of-type {
                     background: ${colors.customColors.lightBackground3};
@@ -2139,6 +2151,17 @@ export const AttendenceConfigarationWrapper = styled('div')`
                     background: ${colors.customColors.blueColor1};
                     color: ${colors.customColors.whiteColor};
                     margin-left: 20px;
+                }
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
+
+                &:disabled {
+                    opacity: 0.4;
+                    transition: all 0.5s ease;
+                    cursor: not-allowed;
                 }
             }
         }
