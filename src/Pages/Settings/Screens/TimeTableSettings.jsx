@@ -12,6 +12,7 @@ const TimeTableSettingsPage = () => {
     const [timeSlots, setTimeSlots] = useState([]);
     const [isInitialTimeSlotsLoading, setIsInitialTimeSlotsLoading] = useState(true);
     const [isAddTimeSlotOpen, setIsAddTimeSlotOpen] = useState(false);
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [isCustomizeSubjectOpen, setIsCustomizeSubjectOpen] = useState(false);
 
     const fetchTimeSlots = async (showSkeleton = false) => {
@@ -37,11 +38,53 @@ const TimeTableSettingsPage = () => {
     }, []);
 
     const handleOpenAddTimeSlot = () => {
+        setSelectedTimeSlot(null);
+        setIsAddTimeSlotOpen(true);
+    };
+
+    const handleOpenEditTimeSlot = (slot) => {
+        setSelectedTimeSlot(slot);
         setIsAddTimeSlotOpen(true);
     };
 
     const handleOpenCustomizeSubject = () => {
         setIsCustomizeSubjectOpen(true);
+    };
+
+    const calculateDuration = (startTime, endTime) => {
+        if (!startTime || !endTime) return "0h 0m";
+
+        const parseTime = (time) => {
+            const match = time.trim().match(/^(\d{1,2}):(\d{2})\s?(AM|PM)$/i);
+            if (!match) return null;
+
+            let hours = Number(match[1]);
+            const minutes = Number(match[2]);
+            const period = match[3].toUpperCase();
+
+            if (period === "PM" && hours !== 12) hours += 12;
+            if (period === "AM" && hours === 12) hours = 0;
+
+            return hours * 60 + minutes;
+        };
+
+        const startMinutes = parseTime(startTime);
+        const endMinutes = parseTime(endTime);
+
+        if (startMinutes === null || endMinutes === null) return "0h 0m";
+
+        const durationMinutes = endMinutes >= startMinutes
+            ? endMinutes - startMinutes
+            : (24 * 60 - startMinutes) + endMinutes;
+
+        const hours = Math.floor(durationMinutes / 60);
+        const minutes = durationMinutes % 60;
+
+        if (hours && minutes) return `${hours}h ${minutes}m`;
+        if (hours) return `${hours}h`;
+        if (minutes) return `${minutes}m`;
+
+        return "0m";
     };
 
     return (
@@ -79,9 +122,9 @@ const TimeTableSettingsPage = () => {
                                         </div>
                                         <div className="bottom_btn">
                                             <div className="time_sec">
-                                                <p><span>Duration:</span> 1h 5m</p>
+                                                <p><span>Duration:</span> {calculateDuration(slot.start, slot.end)}</p>
                                             </div>
-                                            <button className="details"><i className="fa-regular fa-pen-to-square"></i>Edit</button>
+                                            <button className="details" onClick={() => handleOpenEditTimeSlot(slot)}><i className="fa-regular fa-pen-to-square"></i>Edit</button>
                                             <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                         </div>
                                     </div>
@@ -254,6 +297,8 @@ const TimeTableSettingsPage = () => {
                 <AddTimeSlotModal
                     isAddTimeSlotOpen={isAddTimeSlotOpen}
                     setIsAddTimeSlotOpen={setIsAddTimeSlotOpen}
+                    selectedTimeSlot={selectedTimeSlot}
+                    setSelectedTimeSlot={setSelectedTimeSlot}
                     refreshSlots={() => fetchTimeSlots(false)}
                 />
                 <CustomizeSubjectRepetitionModal

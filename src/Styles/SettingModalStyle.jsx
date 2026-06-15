@@ -2085,6 +2085,7 @@ export const AddTimeSlotWrapper = styled('div')`
             position: relative;
             width: 100%;
             padding: 11px 20px;
+            padding-bottom: 5px;
             display: flex;
             flex-direction: column;
 
@@ -2093,11 +2094,151 @@ export const AddTimeSlotWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
+
+                .select_box {
+                    position: relative;
+                    width: 48%;
+                    margin-bottom: 15px;
+                    display: flex;
+                    flex-direction: column;
+
+                    span {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
+                    }
+
+                    .dropdown_sec {
+                        position: relative;
+                        width: 100%;
+                        height: 37px;
+                        flex-direction: column;
+                        margin-top: 3px;
+
+                        .dropdown_btn {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            border-radius: 5px;
+                            padding: 5px 15px;
+                            cursor: pointer;
+                            background: ${colors.customColors.lightBackground3};
+
+                            p {
+                                position: relative;
+                                width: calc(100% - 25px);
+                                display: flex;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor1};
+                            }
+
+                            i {
+                                position: relative;
+                                margin-left: auto;
+                                display: flex;
+                                justify-content: flex-end;
+                                cursor: pointer;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
+                                transition: all 0.5s ease;
+                                
+                                &.active {
+                                    transform: rotate(-180deg);
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+
+                        .dropdown {
+                            position: absolute;
+                            top: 100%;
+                            left: 0px;
+                            width: 100%;
+                            z-index: 15;
+                            background: ${colors.customColors.whiteColor};
+                            border-radius: 5px;
+                            box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                            max-height: 0px;
+                            overflow: hidden;
+                            transition: all 0.5s ease;
+
+                            &.active {
+                                max-height: 200px;
+                                transition: all 0.5s ease;
+                            }
+
+                            .dropdown_inner {
+                                position: relative;
+                                width: 100%;
+                                padding: 10px;
+                                display: flex;
+                                flex-direction: column;
+
+                                ul {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    max-height: 160px;
+                                    overflow-y: auto;
+                                    scrollbar-width: none;
+                                    -ms-overflow-style: none;
+
+                                    &::-webkit-scrollbar {
+                                        display: none;
+                                    }
+
+                                    li {
+                                        position: relative;
+                                        width: 100%;
+                                        list-style: none;
+                                        padding: 7px 15px;
+                                        cursor: pointer;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor1};
+                                        border-radius: 4px;
+                                        transition: all 0.5s ease;
+
+                                        &:hover {
+                                            background: ${colors.themeColor};
+                                            color: ${colors.customColors.whiteColor};
+                                            transition: all 0.5s ease;
+                                        }
+
+                                        &.active {
+                                            background: ${colors.customColors.lightBackground};
+                                            color: ${colors.customColors.blackColor};
+
+                                            &:hover {
+                                                color: ${colors.customColors.blackColor};
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
                 .input_box {
                     position: relative;
                     width: 100%;
                     margin-bottom: 15px;
+
+                    &.halfWdith {
+                        width: 48%;
+                    }
 
                     input {
                         position: relative;

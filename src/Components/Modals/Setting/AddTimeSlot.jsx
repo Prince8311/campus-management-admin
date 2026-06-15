@@ -6,13 +6,18 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlots }) => {
+const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, selectedTimeSlot, setSelectedTimeSlot, refreshSlots }) => {
     const api = getApiEndpoints();
+    const slotTypes = ['Period', 'Break'];
+    const [selectedType, setSelectedType] = useState('');
+    const [showTypesDropdown, setShowTypesDropdown] = useState(false);
     const [slotName, setSlotName] = useState('');
     const [showStartTimeBox, setShowStartTimeBox] = useState(false);
     const [showEndTimeBox, setShowEndTimeBox] = useState(false);
     const [slotTiming, setSlotTiming] = useState({ start: '', end: '' });
     const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const isEditMode = !!selectedTimeSlot;
+    const isSlotNameDisabled = selectedType !== 'Period';
 
     const startTimeRef = useRef(null);
     const endTimeRef = useRef(null);
@@ -31,10 +36,44 @@ const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlot
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    function closeModal() {
+    useEffect(() => {
+        if (!isAddTimeSlotOpen) return;
+
+        if (selectedTimeSlot) {
+            const slotName = selectedTimeSlot.name || '';
+
+            setSelectedType(slotName === 'Break' ? 'Break' : 'Period');
+            setSlotName(slotName);
+            setSlotTiming({
+                start: selectedTimeSlot.start || '',
+                end: selectedTimeSlot.end || ''
+            });
+            setShowTypesDropdown(false);
+            setShowStartTimeBox(false);
+            setShowEndTimeBox(false);
+        } else {
+            resetForm();
+        }
+    }, [isAddTimeSlotOpen, selectedTimeSlot]);
+
+    function resetForm() {
+        setSelectedType('');
         setSlotName('');
         setSlotTiming({ start: '', end: '' });
+    }
+
+    function closeModal() {
+        resetForm();
+        setSelectedTimeSlot(null);
         setIsAddTimeSlotOpen(false);
+    }
+
+    const handleSelectType = (type) => {
+        if (type !== selectedType) {
+            setSelectedType(type);
+            setSlotName(type === 'Break' ? 'Break' : '');
+            setShowTypesDropdown(false);
+        }
     }
 
     const isFormValid = slotName.trim() && slotTiming.start && slotTiming.end;
@@ -43,10 +82,15 @@ const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlot
         if (!isFormValid) return;
 
         const payload = {
+            intend: isEditMode ? 'update' : 'add',
             name: slotName,
             start: slotTiming.start,
             end: slotTiming.end
         };
+
+        if (isEditMode) {
+            payload.slotId = selectedTimeSlot.id;
+        }
 
         setIsButtonLoading(true);
         try {
@@ -58,8 +102,8 @@ const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlot
             toast.error(error.response?.data.message || error.message);
         } finally {
             setIsButtonLoading(false);
-            setSlotName('');
-            setSlotTiming({ start: '', end: '' });
+            resetForm();
+            setSelectedTimeSlot(null);
             refreshSlots();
         }
 
@@ -70,16 +114,41 @@ const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlot
             <AddTimeSlotWrapper className={isAddTimeSlotOpen ? 'active' : ''}>
                 <div className={`modal_box ${isAddTimeSlotOpen ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Time Slot</h4>
+                        <h4>{isEditMode ? 'Edit Time Slot' : 'Add Time Slot'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="input_box">
+                            <div className="select_box">
+                                <span>Slot Type <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn" onClick={() => setShowTypesDropdown(!showTypesDropdown)}>
+                                        <p>{selectedType}</p>
+                                        <i className={`fa-solid fa-angle-down ${showTypesDropdown ? 'active' : ''}`}></i>
+                                    </div>
+                                    <div className={`dropdown ${showTypesDropdown ? 'active' : ''}`}>
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                {
+                                                    slotTypes.map((type, i) =>
+                                                        <li key={i} className={selectedType === type ? 'active' : ''} onClick={() => handleSelectType(type)}>{type}</li>
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="input_box halfWdith">
                                 <span>Slot Name <p>*</p></span>
-                                <input type="text" value={slotName} onChange={(e) => setSlotName(e.target.value)} />
+                                <input
+                                    type="text"
+                                    value={slotName}
+                                    onChange={(e) => setSlotName(e.target.value)}
+                                    disabled={isSlotNameDisabled}
+                                />
                             </div>
                             <div className="input_box">
                                 <span>Slot Timing <p>*</p></span>
@@ -95,7 +164,10 @@ const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlot
                                         {
                                             showStartTimeBox && (
                                                 <div className="dropdown">
-                                                    <TimeBox onTimeChange={(time) => setSlotTiming(prev => ({ ...prev, start: time }))} />
+                                                    <TimeBox
+                                                        selectedTime={slotTiming.start}
+                                                        onTimeChange={(time) => setSlotTiming(prev => ({ ...prev, start: time }))}
+                                                    />
                                                 </div>
                                             )
                                         }
@@ -112,7 +184,10 @@ const AddTimeSlotModal = ({ isAddTimeSlotOpen, setIsAddTimeSlotOpen, refreshSlot
                                         {
                                             showEndTimeBox && (
                                                 <div className="dropdown">
-                                                    <TimeBox onTimeChange={(time) => setSlotTiming(prev => ({ ...prev, end: time }))} />
+                                                    <TimeBox
+                                                        selectedTime={slotTiming.end}
+                                                        onTimeChange={(time) => setSlotTiming(prev => ({ ...prev, end: time }))}
+                                                    />
                                                 </div>
                                             )
                                         }

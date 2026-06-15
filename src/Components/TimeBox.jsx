@@ -3,12 +3,12 @@ import { TimeBoxWrapper } from "../Styles/LayoutStyle";
 
 const itemHeight = 35;
 const focusIndex = 2; // 4th visible item
+const hours = Array.from({ length: 17 }, (_, i) => i - 1);
+const minutes = Array.from({ length: 15 }, (_, i) => (i - 2) * 5);
+const periods = ["PM", "AM", "PM", "AM", "PM", "AM", "PM"];
 
-const TimeBox = ({ onTimeChange }) => {
+const TimeBox = ({ onTimeChange, selectedTime = "" }) => {
     const [hasInteracted, setHasInteracted] = useState(false);
-    const hours = Array.from({ length: 17 }, (_, i) => i - 1);
-    const minutes = Array.from({ length: 15 }, (_, i) => (i - 2) * 5);
-    const periods = ["PM", "AM", "PM", "AM", "PM", "AM", "PM"];
 
     const hourRef = useRef(null);
     const minuteRef = useRef(null);
@@ -17,6 +17,45 @@ const TimeBox = ({ onTimeChange }) => {
     const [activeHour, setActiveHour] = useState(0);
     const [activeMinute, setActiveMinute] = useState(0);
     const [activePeriod, setActivePeriod] = useState(0);
+
+    const getScrollTopByIndex = (index) => Math.max(index - focusIndex, 0) * itemHeight;
+    const getFocusableIndex = (items, isMatch) => {
+        const maxFocusableIndex = items.length - 3;
+        const focusableIndex = items.findIndex((item, index) => (
+            index >= focusIndex
+            && index <= maxFocusableIndex
+            && isMatch(item)
+        ));
+
+        if (focusableIndex !== -1) return focusableIndex;
+
+        return items.findIndex(isMatch);
+    };
+
+    const focusTime = (time) => {
+        const match = String(time || '').trim().match(/^(\d{1,2}):(\d{2})\s?(AM|PM)$/i);
+        if (!match) return false;
+
+        const selectedHour = Number(match[1]);
+        const selectedMinute = Number(match[2]);
+        const selectedPeriod = match[3].toUpperCase();
+
+        const hourIndex = getFocusableIndex(hours, (hour) => ((hour + 12) % 12 || 12) === selectedHour);
+        const minuteIndex = getFocusableIndex(minutes, (minute) => (minute + 60) % 60 === selectedMinute);
+        const periodIndex = getFocusableIndex(periods, (period) => period === selectedPeriod);
+
+        if (hourIndex === -1 || minuteIndex === -1 || periodIndex === -1) return false;
+
+        hourRef.current?.scrollTo({ top: getScrollTopByIndex(hourIndex) });
+        minuteRef.current?.scrollTo({ top: getScrollTopByIndex(minuteIndex) });
+        periodRef.current?.scrollTo({ top: getScrollTopByIndex(periodIndex) });
+
+        setActiveHour(hourIndex);
+        setActiveMinute(minuteIndex);
+        setActivePeriod(periodIndex);
+
+        return true;
+    };
 
     const updateActive = (scrollTop, items, setActive) => {
         const firstVisible = Math.round(scrollTop / itemHeight);
@@ -32,9 +71,6 @@ const TimeBox = ({ onTimeChange }) => {
     const setupScroll = (containerRef, items, setActive) => {
         const container = containerRef.current;
         if (!container) return;
-
-        container.scrollTop = 0;
-        updateActive(container.scrollTop, items, setActive);
 
         const minScrollTop = 0;
         const maxScrollTop = (items.length - 3 - focusIndex) * itemHeight;
@@ -61,6 +97,17 @@ const TimeBox = ({ onTimeChange }) => {
     };
 
     useEffect(() => {
+        const hasFocusedTime = focusTime(selectedTime || "12:00 AM");
+
+        if (!hasFocusedTime) {
+            if (hourRef.current) hourRef.current.scrollTop = 0;
+            if (minuteRef.current) minuteRef.current.scrollTop = 0;
+            if (periodRef.current) periodRef.current.scrollTop = 0;
+            setActiveHour(0);
+            setActiveMinute(0);
+            setActivePeriod(0);
+        }
+
         const cleanHour = setupScroll(hourRef, hours, setActiveHour);
         const cleanMinute = setupScroll(minuteRef, minutes, setActiveMinute);
         const cleanPeriod = setupScroll(periodRef, periods, setActivePeriod);
@@ -70,7 +117,7 @@ const TimeBox = ({ onTimeChange }) => {
             cleanMinute?.();
             cleanPeriod?.();
         };
-    }, [hours.length, minutes.length, periods.length]);
+    }, [selectedTime]);
 
     useEffect(() => {
         if (!hasInteracted) return;
