@@ -3291,6 +3291,115 @@ export const TimeTableSettingsWrapper = styled('div')`
                         }
                     }
 
+                    .subject_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 15px;
+
+                        a {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                            font-size: 500;
+                            text-decoration: none;
+                        }
+
+                        .subject_items {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            flex-wrap: wrap;
+                            margin-top: 5px;
+
+                            .item {
+                                position: relative;
+                                padding: 3px;
+                                display: flex;
+
+                                span {
+                                    position: relative;
+                                    width: max-content;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.blueColor2};
+                                    padding: 3px 10px;
+                                    background: ${colors.customColors.blueColorLight};
+                                    border: 1px solid ${colors.customColors.blueColor2};
+                                    border-radius: 25px;
+                                }
+                            }
+                        }
+                    }
+
+                    .weekday_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 15px;
+
+                        h5 {
+                            position: relative;
+                            font-size: 14px;
+                            color: ${colors.customColors.blackColor};
+                            font-weight: 500;
+                        }
+
+                        .day_type_sec {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+
+                            .day_box {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+
+                                p {
+                                    position: relative;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                    margin-top: 10px;
+                                    font-weight: 500;
+                                }
+
+                                ul {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    align-items: center;
+                                    margin-top: 7px;
+
+                                    li {
+                                        position: relative;
+                                        padding: 3px;
+                                        display: flex;
+                                        list-style: none;
+
+                                        span {
+                                            position: relative;
+                                            padding: 3px 10px;
+                                            font-size: 10px;
+                                            color: ${colors.customColors.blackColor1};
+                                            background: ${colors.customColors.borderColor};
+                                            border-radius: 25px;
+
+                                            &.active {
+                                                color: ${colors.customColors.whiteColor};
+                                                background: ${colors.customColors.greenColor};
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     .toggle_sec {
                         position: relative;
                         width: 100%;

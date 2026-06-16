@@ -183,6 +183,58 @@ const TimeTableSettingsPage = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className="subject_sec">
+                                            <a>Class Subject</a>
+                                            <div className="subject_items">
+                                                <div className="item">
+                                                    <span>Math</span>
+                                                </div>
+                                                <div className="item">
+                                                    <span>Math</span>
+                                                </div>
+                                                <div className="item">
+                                                    <span>Math</span>
+                                                </div>
+                                                <div className="item">
+                                                    <span>Math</span>
+                                                </div>
+                                                <div className="item">
+                                                    <span>Math</span>
+                                                </div>
+                                                <div className="item">
+                                                    <span>Math</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="weekday_sec">
+                                            <h5>Instritution Weekdays</h5>
+                                            <div className="day_type_sec">
+                                                <div className="day_box">
+                                                    <p>Full Day</p>
+                                                    <ul>
+                                                        <li><span className="active">Mon</span></li>
+                                                        <li><span>Tue</span></li>
+                                                        <li><span>Wed</span></li>
+                                                        <li><span>Thus</span></li>
+                                                        <li><span>Fri</span></li>
+                                                        <li><span>Sat</span></li>
+                                                        <li><span>Sun</span></li>
+                                                    </ul>
+                                                </div>
+                                                <div className="day_box">
+                                                    <p>Half Day</p>
+                                                    <ul>
+                                                        <li><span>Mon</span></li>
+                                                        <li><span>Tue</span></li>
+                                                        <li><span className="active">Wed</span></li>
+                                                        <li><span>Thus</span></li>
+                                                        <li><span>Fri</span></li>
+                                                        <li><span>Sat</span></li>
+                                                        <li><span>Sun</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="toggle_sec">
                                             <p>Customize subject repetition</p>
                                             <div className="toggle_bar">
