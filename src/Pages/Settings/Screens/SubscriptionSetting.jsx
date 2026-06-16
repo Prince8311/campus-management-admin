@@ -117,18 +117,20 @@ const SubscriptionSettingPage = () => {
                     </div>
                 </div>
                 <div className="pricing_section">
-                    <div className="sec_head">
-                        <h3>Pricing Configuration</h3>
-                        <p>Global rate definitions and institution-level overrides.</p>
-                    </div>
-                    <div className="pricing_option_part">
-                        <div className="inner_part">
-                            <a className="part_box">
-                                <span>Genaral Rates</span>
-                            </a>
-                            <a className="part_box active">
-                                <span>Institution Specific</span>
-                            </a>
+                    <div className="price_top_sec">
+                        <div className="sec_head">
+                            <h3>Pricing Configuration</h3>
+                            <p>Global rate definitions and institution-level overrides.</p>
+                        </div>
+                        <div className="pricing_option_part">
+                            <div className="inner_part">
+                                <a className="part_box">
+                                    <span>Genaral Rates</span>
+                                </a>
+                                <a className="part_box active">
+                                    <span>Institution Specific</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div className="pricing_box_sec">

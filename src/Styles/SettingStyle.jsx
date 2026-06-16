@@ -3627,7 +3627,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                             a {
                                 position: relative;
                                 height: 30px;
-                                padding: 0 20px;
+                                width: 30px;
                                 text-decoration: none;
                                 border: 1px solid ${colors.customColors.blueColor2};
                                 background: ${colors.customColors.whiteColor};
@@ -3647,7 +3647,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 padding: 0 20px;
                                 border: none;
                                 font-size: 12px;
-                                margin-left: 20px;
+                                margin-left: 10px;
                                 background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                                 color: ${colors.customColors.whiteColor};
                                 border-radius: 6px;
@@ -4087,64 +4087,71 @@ export const SubscriptionSettingWrapper = styled('div')`
         flex-direction: column;
         margin-top: 30px;
 
-        .sec_head {
+        .price_top_sec {
             position: relative;
             width: 100%;
             display: flex;
-            flex-direction: column;
-            padding: 0 15px;
-
-            h3 {
-                position: relative;
-                font-size: 19px;
-                font-weight: 500;
-                color: ${colors.customColors.blackColor};
-                line-height: 1;
-            }
-
-            p {
-                position: relative;
-                font-size: 13px;
-                color: ${colors.customColors.blackColor2};
-                margin-top: 5px;
-            }
-        }
-
-        .pricing_option_part {
-            position: relative;
-            display: flex;
-            margin-top: 20px;
             align-items: center;
-            justify-content: center;
+            padding: 0 15px;
+            justify-content: space-between;
 
-            .inner_part {
+            .sec_head {
                 position: relative;
-                width: max-content;
-                padding: 6px;
-                background: ${colors.customColors.lightBackground};
-                border-radius: 6px;
                 display: flex;
+                flex-direction: column;
 
-                .part_box {
+                h3 {
                     position: relative;
-                    padding: 8px 20px;
-                    cursor: pointer;
-                    border-radius: 4px;
-                    text-decoration: none;
-                    display: flex;
-                    align-items: center;
-                    color: ${colors.customColors.blackColor1};
-                    
-                    &.active {
-                        background: ${colors.customColors.whiteColor};
-                        box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
-                        color: ${colors.customColors.blueColor2};
-                    }
+                    font-size: 21px;
+                    font-weight: 600;
+                    color: ${colors.customColors.blackColor};
+                    font-family: "SUSE", sans-serif;
+                    line-height: 1;
+                }
 
-                    span {
+                p {
+                    position: relative;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor2};
+                    margin-top: 5px;
+                }
+            }
+
+            .pricing_option_part {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .inner_part {
+                    position: relative;
+                    width: max-content;
+                    padding: 6px;
+                    background: ${colors.customColors.lightBackground};
+                    border-radius: 6px;
+                    display: flex;
+
+                    .part_box {
                         position: relative;
-                        font-size: 12px;
-                        font-weight: 500;
+                        padding: 8px 20px;
+                        cursor: pointer;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        color: ${colors.customColors.blackColor1};
+                        
+                        &.active {
+                            background: ${colors.customColors.whiteColor};
+                            box-shadow: 3px 4px 8px ${colors.boxShadowColors.shadowColor1}, -3px -3px 6px ${colors.boxShadowColors.shadowColor2};
+                            color: ${colors.customColors.blueColor2};
+                        }
+
+                        span {
+                            position: relative;
+                            font-size: 12px;
+                            font-weight: 500;
+                        }
                     }
                 }
             }
