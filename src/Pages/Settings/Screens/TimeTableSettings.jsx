@@ -207,7 +207,7 @@ const TimeTableSettingsPage = () => {
                                             </div>
                                         </div>
                                         <div className="weekday_sec">
-                                            <h5>Instritution Weekdays</h5>
+                                            <h5>Institution Weekdays</h5>
                                             <div className="day_type_sec">
                                                 <div className="day_box">
                                                     <p>Full Day</p>

@@ -3339,10 +3339,14 @@ export const TimeTableSettingsWrapper = styled('div')`
                         display: flex;
                         flex-direction: column;
                         margin-bottom: 15px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        border-top: 1px solid ${colors.customColors.borderColor};
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
 
                         h5 {
                             position: relative;
-                            font-size: 14px;
+                            font-size: 13px;
                             color: ${colors.customColors.blackColor};
                             font-weight: 500;
                         }
@@ -3363,7 +3367,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                                     position: relative;
                                     font-size: 12px;
                                     color: ${colors.customColors.blackColor1};
-                                    margin-top: 10px;
+                                    margin-top: 5px;
                                     font-weight: 500;
                                 }
 
@@ -3385,9 +3389,10 @@ export const TimeTableSettingsWrapper = styled('div')`
                                             position: relative;
                                             padding: 3px 10px;
                                             font-size: 10px;
-                                            color: ${colors.customColors.blackColor1};
+                                            color: ${colors.customColors.blackColor};
                                             background: ${colors.customColors.borderColor};
                                             border-radius: 25px;
+                                            cursor: pointer;
 
                                             &.active {
                                                 color: ${colors.customColors.whiteColor};
