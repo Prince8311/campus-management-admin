@@ -146,7 +146,7 @@ const SubscriptionPage = () => {
                                     </div>
 
                                     <div className="subcription_term_box">
-                                        <div className="dropdown_sec">
+                                        {/* <div className="dropdown_sec">
                                             <div className="dropdown_btn">
                                                 <p>12 Months (Best Value)</p>
                                                 <i className="fa-solid fa-angle-down"></i>
@@ -157,6 +157,37 @@ const SubscriptionPage = () => {
                                                         <li>Sick Room</li>
                                                     </ul>
                                                 </div>
+                                            </div>
+                                        </div> */}
+                                        <div className="term_box">
+                                            <div className="box_inner">
+                                                <a>3</a>
+                                                <p>Months</p>
+                                            </div>
+                                        </div>
+                                        <div className="term_box">
+                                            <div className="box_inner">
+                                                <a>6</a>
+                                                <p>Months</p>
+                                            </div>
+                                        </div>
+                                        <div className="term_box active">
+                                            <div className="box_inner">
+                                                <a>12</a>
+                                                <p>Months</p>
+                                                <span>Best Value</span>
+                                            </div>
+                                        </div>
+                                        <div className="term_box">
+                                            <div className="box_inner">
+                                                <a>24</a>
+                                                <p>Months</p>
+                                            </div>
+                                        </div>
+                                        <div className="term_box">
+                                            <div className="box_inner">
+                                                <a>48</a>
+                                                <p>Months</p>
                                             </div>
                                         </div>
                                     </div>

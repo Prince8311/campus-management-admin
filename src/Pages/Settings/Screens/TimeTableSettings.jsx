@@ -269,6 +269,7 @@ const TimeTableSettingsPage = () => {
                                                     <i className="fa-solid fa-calendar-day"></i>
                                                     <span>Monday</span>
                                                 </li>
+                                                <a><i className="fa-solid fa-arrow-rotate-left"></i></a>
                                                 <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
                                             </div>
                                             <div className="box_items">

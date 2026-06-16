@@ -3584,7 +3584,6 @@ export const TimeTableSettingsWrapper = styled('div')`
                             padding: 20px 20px 10px 20px;
                             display: flex;
                             align-items: flex-end;
-                            justify-content: space-between;
 
                             &::before {
                                 content: '';
@@ -3625,12 +3624,30 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 }
                             }
 
+                            a {
+                                position: relative;
+                                height: 30px;
+                                padding: 0 20px;
+                                text-decoration: none;
+                                border: 1px solid ${colors.customColors.blueColor2};
+                                background: ${colors.customColors.whiteColor};
+                                color: ${colors.customColors.blueColor2};
+                                font-size: 12px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 6px;
+                                margin-left: auto;
+                                cursor: pointer;
+                            }
+
                             button {
                                 position: relative;
                                 height: 30px;
                                 padding: 0 20px;
                                 border: none;
                                 font-size: 12px;
+                                margin-left: 20px;
                                 background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                                 color: ${colors.customColors.whiteColor};
                                 border-radius: 6px;

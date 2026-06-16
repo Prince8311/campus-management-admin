@@ -1621,7 +1621,7 @@ export const SubcriptionWrapper = styled('div')`
                         border-radius: 6px;
                         display: flex;
                         flex-direction: column;
-                        padding: 15px;
+                        padding-top: 15px;
 
                         .term_heading {
                             position: relative;
@@ -1629,6 +1629,7 @@ export const SubcriptionWrapper = styled('div')`
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
+                            padding: 0 15px;
 
                             h5 {
                                 position: relative;
@@ -1647,7 +1648,9 @@ export const SubcriptionWrapper = styled('div')`
                         .subcription_term_box {
                             position: relative;
                             width: 100%;
-                            margin-top: 7px;
+                            display: flex;
+                            align-items: center;
+                            padding: 7.5px;
 
                             .dropdown_sec {
                                 position: relative;
@@ -1758,6 +1761,59 @@ export const SubcriptionWrapper = styled('div')`
                                                 }
                                             }
                                         }
+                                    }
+                                }
+                            }
+
+                            .term_box {
+                                position: relative;
+                                width: 20%;
+                                display: flex;
+                                padding: 7.5px;
+
+                                .box_inner {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    flex-direction: column;
+                                    border-radius: 6px;
+                                    cursor: pointer;
+                                    padding: 20px;
+                                    border: 1px solid ${colors.customColors.borderColor};
+
+                                    a {
+                                        position: relative;
+                                        color: ${colors.customColors.blackColor};
+                                        text-decoration: none;
+                                        font-weight: 500;
+                                        font-size: 16px;
+                                    }
+
+                                    p {
+                                        position: relative;
+                                        color: ${colors.customColors.blackColor1};
+                                        font-size: 12px;
+                                        margin-top: 3px;
+                                        line-height: 1;
+                                    }
+
+                                    span {
+                                        position: absolute;
+                                        top: -9px;
+                                        right: 20px;
+                                        padding: 3px 15px;
+                                        background: ${colors.customColors.greenColor1};
+                                        color: ${colors.customColors.whiteColor};
+                                        font-size: 9px;
+                                        border-radius: 4px;
+                                    }
+                                }
+
+                                &.active {
+                                    .box_inner {
+                                        border: 1px solid ${colors.customColors.blueColor3};
+                                        background: ${colors.customColors.blueColorLight};;
                                     }
                                 }
                             }
