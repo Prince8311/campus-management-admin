@@ -13,6 +13,8 @@ const TimeTableSettingsPage = () => {
     const [isInitialTimeSlotsLoading, setIsInitialTimeSlotsLoading] = useState(true);
     const [isAddTimeSlotOpen, setIsAddTimeSlotOpen] = useState(false);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+    const [showClassDropdown, setShowClassDropdown] = useState(false);
+    const [showSectionDropdown, setS0howSectionDropdown] = useState(false);
     const [isCustomizeSubjectOpen, setIsCustomizeSubjectOpen] = useState(false);
 
     const fetchTimeSlots = async (showSkeleton = false) => {
