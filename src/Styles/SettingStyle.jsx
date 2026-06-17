@@ -3638,7 +3638,10 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 align-items: center;
                                 border-radius: 6px;
                                 margin-left: auto;
+                                opacity: 0;
+                                visibility: hidden;
                                 cursor: pointer;
+                                 transition: all 0.5s eases;
                             }
 
                             button {
@@ -3785,10 +3788,18 @@ export const TimeTableSettingsWrapper = styled('div')`
                         }
 
                         &:hover {
-                            .box_head button {
-                                opacity: 1;
-                                visibility: visible;
-                                transition: all 0.5s ease;
+                            .box_head {
+                                a {
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transition: all 0.5s ease;
+                                }
+
+                                button {
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transition: all 0.5s ease;
+                                }
                             }
                         }
                     }

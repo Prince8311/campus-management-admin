@@ -12,7 +12,7 @@ const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, sele
     };
 
     const openCalender = () => {
-        if(!isHistory) return;
+        if (!isHistory) return;
         setIsCalendarDropdownOpen(!isCalendarDropdownOpen)
     }
 
@@ -57,7 +57,10 @@ const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, sele
                                     )
                                 }
                             </div>
-                            <button>Mark all Students</button>
+                            {
+                                !isHistory &&
+                                <button>Mark all Students</button>
+                            }
                         </div>
                         <div className="item_box_sec">
                             <div className="item_box">
