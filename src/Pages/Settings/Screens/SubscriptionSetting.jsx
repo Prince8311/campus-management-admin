@@ -132,6 +132,12 @@ const SubscriptionSettingPage = () => {
                                 </a>
                             </div>
                         </div>
+                        <div className="add_btn">
+                            <button>
+                                <i className="fa-solid fa-plus"></i>
+                                <p>Add New Price</p>
+                            </button>
+                        </div>
                     </div>
                     <div className="pricing_box_sec">
                         <div className="price_box">
@@ -239,6 +245,33 @@ const SubscriptionSettingPage = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="table_sec">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Institution Name</th>
+                                    <th>Student Price</th>
+                                    <th>Add-on Price</th>
+                                    <th>Billing Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC Institution</td>
+                                    <td>15</td>
+                                    <td>
+                                        <p>₹5.20 <span>(Hostel)</span></p>
+                                        <p>₹3.20 <span>(Hostel & Travel)</span></p>
+                                    </td>
+                                    <td>₹1,03,250</td>
+                                    <td>
+                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </SubscriptionSettingWrapper>

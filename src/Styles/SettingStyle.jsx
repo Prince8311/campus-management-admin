@@ -4104,7 +4104,6 @@ export const SubscriptionSettingWrapper = styled('div')`
             display: flex;
             align-items: center;
             padding: 0 15px;
-            justify-content: space-between;
 
             .sec_head {
                 position: relative;
@@ -4133,6 +4132,7 @@ export const SubscriptionSettingWrapper = styled('div')`
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                margin-left: auto;
 
                 .inner_part {
                     position: relative;
@@ -4163,6 +4163,38 @@ export const SubscriptionSettingWrapper = styled('div')`
                             font-size: 12px;
                             font-weight: 500;
                         }
+                    }
+                }
+            }
+
+            .add_btn {
+                position: relative;
+                margin-left: 15px;
+
+                button {
+                    position: relative;
+                    width: 150px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                    border: none;
+                    color: ${colors.customColors.whiteColor};
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    transition: all 0.5s ease;
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.5s ease;
+                    }
+
+                    i {
+                        margin-right: 8px;
+                        font-size: 12px;
                     }
                 }
             }
@@ -4436,6 +4468,170 @@ export const SubscriptionSettingWrapper = styled('div')`
                                 &:last-of-type {
                                     margin-right: 0;
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .table_sec {
+            position: relative;
+            width: 100%;
+            margin-top: 25px;
+            padding: 0 15px;
+
+            table {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                thead {
+                    position: relative;
+                    width: 100%;
+                    height: 40px;
+                    background: ${colors.themeColor};
+                    border-radius: 10px 10px 0px 0px;
+                    border: 1px solid ${colors.themeColor};
+
+                    tr {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                    }
+
+                    th {
+                        position: relative;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        font-family: "Lemonada", cursive;
+                        font-size: 12px;
+                        word-break: break-all;
+                        color: ${colors.customColors.whiteColor};
+                        padding: 0 25px;
+                        font-weight: 600;
+
+                        &:nth-of-type(1) {
+                            width: 30%;
+                        }
+
+                        &:nth-of-type(2) {
+                            width: 15%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(3) {
+                            width: 25%;
+                        }
+
+                        &:nth-of-type(4) {
+                            width: 20%;
+                            justify-content: center;
+                        }
+
+                        &:nth-of-type(5) {
+                            width: 10%;
+                            justify-content: center;
+                        }
+                    }
+                }
+
+                tbody {
+                    position: relative;
+                    width: 100%;
+                    border: 1px solid ${colors.customColors.whiteColor2};
+                    border-top: none;
+                    border-radius: 0px 0px 10px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+
+                    tr {
+                        position: relative;
+                        width: 100%;
+                        min-height: 40px;
+                        display: flex;
+
+                        &:nth-of-type(even) {
+                            background: ${colors.customColors.blueColorLight};
+                        }
+
+                        td {
+                            position: relative;
+                            padding: 12px 25px;
+                            display: flex;
+                            color: ${colors.customColors.blackColor};
+                            font-size: 12px;
+                            word-break: break-all;
+                            line-height: 1.5;
+
+                            &:nth-of-type(1) {
+                                width: 30%;
+                                display: flex;
+                            }
+
+                            &:nth-of-type(2) {
+                                width: 15%;
+                                align-items: center;
+                                justify-content: center;
+                            }
+
+                            &:nth-of-type(3) {
+                                width: 25%;
+                                display: flex;
+                                flex-direction: column;
+
+                                p {
+                                    position: relative;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    line-height: 1;
+                                    display: flex;
+                                    align-items: center;
+                                    color: ${colors.customColors.blackColor};
+                                    
+                                    span {
+                                        color: ${colors.customColors.blackColor1};
+                                        margin-left: 3px;
+                                    }
+                                }
+                            }
+
+                            &:nth-of-type(4) {
+                                width: 20%;
+                                align-items: center;
+                                justify-content: center;
+                            }
+
+                            &:nth-of-type(5) {
+                                width: 10%;
+                                align-items: center;
+                                justify-content: center;
+
+                                a {
+                                    position: relative;
+                                    text-decoration: none;
+                                    cursor: pointer;
+                                    font-size: 13px;
+
+                                    &.edit_btn {
+                                        color: ${colors.customColors.greenColor};
+                                    }
+                                }
+                            }
+
+                            &.empty_message {
+                                position: relative;
+                                width: 100%;
+                                padding: 12px 25px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor2};
                             }
                         }
                     }
