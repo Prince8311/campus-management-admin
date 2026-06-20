@@ -14,7 +14,12 @@ const TimeTableSettingsPage = () => {
     const [isAddTimeSlotOpen, setIsAddTimeSlotOpen] = useState(false);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [showClassDropdown, setShowClassDropdown] = useState(false);
-    const [showSectionDropdown, setS0howSectionDropdown] = useState(false);
+    const [showSectionDropdown, setShowSectionDropdown] = useState(false);
+    const [classes, setClasses] = useState([]);
+    const [sections, setSections] = useState([]);
+    const [selectedClass, setSelectedClass] = useState('');
+    const [selectedSection, setSelectedSection] = useState('');
+    const [subjects, setSubjects] = useState([]);
     const [isCustomizeSubjectOpen, setIsCustomizeSubjectOpen] = useState(false);
 
     const fetchTimeSlots = async (showSkeleton = false) => {
@@ -89,6 +94,92 @@ const TimeTableSettingsPage = () => {
         return "0m";
     };
 
+    const fetchClasses = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchClasses, {
+                params: {
+                    isForm: true
+                }
+            });
+            if (response?.data.status === 200) {
+                setClasses(response?.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        fetchClasses();
+    }, []);
+
+    function toggleClassDropdown() {
+        setShowClassDropdown(!showClassDropdown);
+        setShowSectionDropdown(false);
+    }
+
+    function toggleSectionDropdown() {
+        setShowSectionDropdown(!showSectionDropdown);
+        setShowClassDropdown(false);
+    }
+
+    const handleSelectClass = (classItem) => {
+        setSelectedClass(classItem);
+        setSelectedSection('');
+        setSections([]);
+        setSubjects([]);
+        setShowClassDropdown(false);
+    }
+
+    const fetchSections = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchClassSections, {
+                params: {
+                    class: selectedClass
+                }
+            });
+            if (response?.data.status === 200) {
+                setSections(response?.data.sections);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedClass) {
+            fetchSections();
+        }
+    }, [selectedClass]);
+
+    const handleSelectSection = (section) => {
+        setSelectedSection(section);
+        setShowSectionDropdown(false);
+    }
+
+    const fetchSectionSubjects = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchSubjects, {
+                params: {
+                    classSectionWise: true,
+                    class: selectedClass,
+                    section: selectedSection
+                }
+            });
+            if (response?.data.status === 200) {
+                setSubjects(response?.data.subjects);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedSection) {
+            fetchSectionSubjects();
+        }
+    }, [selectedSection]);
+
     return (
         <>
             <TimeTableSettingsWrapper>
@@ -148,7 +239,7 @@ const TimeTableSettingsPage = () => {
                                 <h2>Set Time Table Section Wise</h2>
                             </div>
                             <span className="bottom_desc">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente sit sequi vero, in saepe iure ducimus amet hic quis magnam perferendis quaerat unde dolore ratione nostrum id quo laudantium temporibus! Deserunt similique saepe facilis suscipit accusamus ea delectus hic perspiciatis pariatur? Laboriosam natus quod, optio consequatur minima cumque corrupti. Eaque!
+                                Configure and manage class schedules by selecting a class and assigning subjects, teachers, and time slots for each section.
                             </span>
                             <div className="page_items_sec">
                                 <div className="left_item_sec">
@@ -156,14 +247,22 @@ const TimeTableSettingsPage = () => {
                                         <div className="select_box">
                                             <span>Select Class <p>*</p></span>
                                             <div className="dropdown_sec">
-                                                <div className="dropdown_btn">
-                                                    <p>Class 1</p>
-                                                    <i className="fa-solid fa-angle-down"></i>
+                                                <div className="dropdown_btn" onClick={toggleClassDropdown}>
+                                                    <p>{selectedClass ? `Class ${selectedClass}` : ''}</p>
+                                                    <i className={`fa-solid fa-angle-down ${showClassDropdown ? 'active' : ''}`}></i>
                                                 </div>
-                                                <div className="dropdown">
+                                                <div className={`dropdown ${showClassDropdown ? 'active' : ''}`}>
                                                     <div className="dropdown_inner">
                                                         <ul>
-                                                            <li>Class 1</li>
+                                                            {
+                                                                classes && classes.length > 0 ? (
+                                                                    classes.map((item, i) =>
+                                                                        <li key={i} className={item === selectedClass ? 'active' : ''} onClick={() => handleSelectClass(item)}>{item}</li>
+                                                                    )
+                                                                ) : (
+                                                                    <li className="empty_message">No class available</li>
+                                                                )
+                                                            }
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -172,42 +271,46 @@ const TimeTableSettingsPage = () => {
                                         <div className="select_box">
                                             <span>Select Section <p>*</p></span>
                                             <div className="dropdown_sec">
-                                                <div className="dropdown_btn">
-                                                    <p>Section A</p>
-                                                    <i className="fa-solid fa-angle-down"></i>
+                                                <div className="dropdown_btn" onClick={toggleSectionDropdown}>
+                                                    <p>{selectedSection ? `Section ${selectedSection}` : ''}</p>
+                                                    <i className={`fa-solid fa-angle-down ${showSectionDropdown ? 'active' : ''}`}></i>
                                                 </div>
-                                                <div className="dropdown">
+                                                <div className={`dropdown ${showSectionDropdown ? 'active' : ''}`}>
                                                     <div className="dropdown_inner">
                                                         <ul>
-                                                            <li>Section A</li>
+                                                            {
+                                                                sections && sections.length > 0 ? (
+                                                                    sections.map((item, i) =>
+                                                                        <li key={i} className={item === selectedSection ? 'active' : ''} onClick={() => handleSelectSection(item)}>{item}</li>
+                                                                    )
+                                                                ) : (
+                                                                    <li className="empty_message">No sections available</li>
+                                                                )
+                                                            }
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="subject_sec">
-                                            <a>Class Subject</a>
-                                            <div className="subject_items">
-                                                <div className="item">
-                                                    <span>Math</span>
-                                                </div>
-                                                <div className="item">
-                                                    <span>Math</span>
-                                                </div>
-                                                <div className="item">
-                                                    <span>Math</span>
-                                                </div>
-                                                <div className="item">
-                                                    <span>Math</span>
-                                                </div>
-                                                <div className="item">
-                                                    <span>Math</span>
-                                                </div>
-                                                <div className="item">
-                                                    <span>Math</span>
+                                        {
+                                            selectedSection &&
+                                            <div className="subject_sec">
+                                                <a>Class Subject</a>
+                                                <div className="subject_items">
+                                                    {
+                                                        subjects.length > 0 ? (
+                                                            subjects.map((subject, i) =>
+                                                                <div className="item" key={i}>
+                                                                    <span>{subject}</span>
+                                                                </div>
+                                                            )
+                                                        ) : (
+                                                            <p className="empty_message">No subjects assigned.</p>
+                                                        )
+                                                    }
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                         <div className="weekday_sec">
                                             <h5>Institution Weekdays</h5>
                                             <div className="day_type_sec">

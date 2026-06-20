@@ -3161,7 +3161,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                     .select_box {
                         position: relative;
                         width: 100%;
-                        margin-bottom: 20px;
+                        margin-bottom: 15px;
 
                         span {
                             position: relative;
@@ -3284,6 +3284,12 @@ export const TimeTableSettingsWrapper = styled('div')`
                                                     color: ${colors.customColors.blackColor};
                                                 }
                                             }
+
+                                            &.empty_message {
+                                                padding: 5px 10px;
+                                                color: ${colors.customColors.blackColor3};
+                                                pointer-events: none;
+                                            }
                                         }
                                     }
                                 }
@@ -3296,7 +3302,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        margin-bottom: 15px;
+                        margin-bottom: 12px;
 
                         a {
                             position: relative;
@@ -3312,11 +3318,12 @@ export const TimeTableSettingsWrapper = styled('div')`
                             display: flex;
                             align-items: center;
                             flex-wrap: wrap;
-                            margin-top: 5px;
+                            margin-top: 8px;
 
                             .item {
                                 position: relative;
-                                padding: 3px;
+                                padding-right: 6px;
+                                padding-bottom: 6px;
                                 display: flex;
 
                                 span {
@@ -3329,6 +3336,12 @@ export const TimeTableSettingsWrapper = styled('div')`
                                     border: 1px solid ${colors.customColors.blueColor2};
                                     border-radius: 25px;
                                 }
+                            }
+
+                            p {
+                                position: relative;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor3};
                             }
                         }
                     }

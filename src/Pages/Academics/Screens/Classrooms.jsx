@@ -38,6 +38,7 @@ const ClassroomPage = () => {
     };
 
     const handleOpenSubjectAddModal = (className) => {
+        console.log(className);
         setIsSubjectAddModalOpen(true);
         setCurrentClass(className)
     }

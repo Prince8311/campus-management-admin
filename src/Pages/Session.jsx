@@ -91,7 +91,7 @@ const SessionPage = () => {
                                             <div className="inner_top">
                                                 <div className="inner_content">
                                                     <a><i className="fa-solid fa-graduation-cap"></i></a>
-                                                    <h6>{section.sesssion_name}</h6>
+                                                    <h6>{section.session_name}</h6>
                                                     <span className={section.status.toLowerCase()}>{section.status}</span>
                                                 </div>
                                                 <div className="session_name">
