@@ -2549,8 +2549,13 @@ export const CustomizeSubjectRepetitionWrapper = styled('div')`
                             overflow: hidden;
                             transition: all 0.5s ease;
 
+                            &.up_drop {
+                                top: inherit;
+                                bottom: 100%;
+                            }
+
                             &.active {
-                                max-height: 200px;
+                                max-height: 125px;
                                 transition: all 0.5s ease;
                             }
 
@@ -2599,6 +2604,12 @@ export const CustomizeSubjectRepetitionWrapper = styled('div')`
                                             &:hover {
                                                 color: ${colors.customColors.blackColor};
                                             }
+                                        }
+
+                                        &.empty_message {
+                                            padding: 5px 10px;
+                                            color: ${colors.customColors.blackColor3};
+                                            pointer-events: none;
                                         }
                                     }
                                 }

@@ -7,6 +7,8 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import CustomizeSubjectRepetitionModal from "../../../Components/Modals/Setting/CustomizeSubjectRepetition";
 
+const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
 const TimeTableSettingsPage = () => {
     const api = getApiEndpoints();
     const [timeSlots, setTimeSlots] = useState([]);
@@ -21,6 +23,10 @@ const TimeTableSettingsPage = () => {
     const [selectedSection, setSelectedSection] = useState('');
     const [subjects, setSubjects] = useState([]);
     const [isCustomizeSubjectOpen, setIsCustomizeSubjectOpen] = useState(false);
+    const [fullDays, setFullDays] = useState([]);
+    const [halfDays, setHalfDays] = useState([]);
+    const [showSubjectRepetition, setShowSubjectRepetition] = useState(false);
+    const [subjectRepeatData, setSubjectRepeatData] = useState([]);
 
     const fetchTimeSlots = async (showSkeleton = false) => {
         if (showSkeleton) {
@@ -56,6 +62,25 @@ const TimeTableSettingsPage = () => {
 
     const handleOpenCustomizeSubject = () => {
         setIsCustomizeSubjectOpen(true);
+    };
+
+    const handleSelectWeekDay = (day, dayType) => {
+        if (dayType === "full") {
+            setFullDays((prevDays) =>
+                prevDays.includes(day)
+                    ? prevDays.filter((selectedDay) => selectedDay !== day)
+                    : [...prevDays, day]
+            );
+            setHalfDays((prevDays) => prevDays.filter((selectedDay) => selectedDay !== day));
+            return;
+        }
+
+        setHalfDays((prevDays) =>
+            prevDays.includes(day)
+                ? prevDays.filter((selectedDay) => selectedDay !== day)
+                : [...prevDays, day]
+        );
+        setFullDays((prevDays) => prevDays.filter((selectedDay) => selectedDay !== day));
     };
 
     const calculateDuration = (startTime, endTime) => {
@@ -128,6 +153,8 @@ const TimeTableSettingsPage = () => {
         setSelectedSection('');
         setSections([]);
         setSubjects([]);
+        setSubjectRepeatData([]);
+        setShowSubjectRepetition(false);
         setShowClassDropdown(false);
     }
 
@@ -154,6 +181,8 @@ const TimeTableSettingsPage = () => {
 
     const handleSelectSection = (section) => {
         setSelectedSection(section);
+        setSubjectRepeatData([]);
+        setShowSubjectRepetition(false);
         setShowSectionDropdown(false);
     }
 
@@ -317,53 +346,84 @@ const TimeTableSettingsPage = () => {
                                                 <div className="day_box">
                                                     <p>Full Day</p>
                                                     <ul>
-                                                        <li><span className="active">Mon</span></li>
-                                                        <li><span>Tue</span></li>
-                                                        <li><span>Wed</span></li>
-                                                        <li><span>Thus</span></li>
-                                                        <li><span>Fri</span></li>
-                                                        <li><span>Sat</span></li>
-                                                        <li><span>Sun</span></li>
+                                                        {
+                                                            weekDays.map((day) => (
+                                                                <li key={day}>
+                                                                    <span
+                                                                        className={fullDays.includes(day) ? "active" : ""}
+                                                                        onClick={() => handleSelectWeekDay(day, "full")}
+                                                                    >
+                                                                        {day}
+                                                                    </span>
+                                                                </li>
+                                                            ))
+                                                        }
                                                     </ul>
                                                 </div>
                                                 <div className="day_box">
                                                     <p>Half Day</p>
                                                     <ul>
-                                                        <li><span>Mon</span></li>
-                                                        <li><span>Tue</span></li>
-                                                        <li><span className="active">Wed</span></li>
-                                                        <li><span>Thus</span></li>
-                                                        <li><span>Fri</span></li>
-                                                        <li><span>Sat</span></li>
-                                                        <li><span>Sun</span></li>
+                                                        {
+                                                            weekDays.map((day) => (
+                                                                <li key={day}>
+                                                                    <span
+                                                                        className={halfDays.includes(day) ? "active" : ""}
+                                                                        onClick={() => handleSelectWeekDay(day, "half")}
+                                                                    >
+                                                                        {day}
+                                                                    </span>
+                                                                </li>
+                                                            ))
+                                                        }
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="toggle_sec">
-                                            <p>Customize subject repetition</p>
-                                            <div className="toggle_bar">
-                                                <input
-                                                    type="checkbox"
-                                                    id="toggle"
-                                                />
-                                                <label htmlFor="toggle">
-                                                    <span></span>
-                                                </label>
+                                        {
+                                            selectedSection &&
+                                            <div className="toggle_sec">
+                                                <p>Customize subject repetition</p>
+                                                <div className="toggle_bar">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="toggle"
+                                                        checked={showSubjectRepetition}
+                                                        onChange={(event) => setShowSubjectRepetition(event.target.checked)}
+                                                    />
+                                                    <label htmlFor="toggle">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
                                             </div>
-
-                                        </div>
-                                        <div className="text_sec">
-                                            <div className="text_top_sec">
-                                                <p>Mathematics - maximum 5</p>
+                                        }
+                                        {
+                                            showSubjectRepetition && (
+                                                <div className="text_sec">
+                                                    <div className="text_top_sec">
+                                                        {
+                                                            subjectRepeatData.length > 0 ? (
+                                                                subjectRepeatData.map((repeatItem, i) => (
+                                                                    <p key={`${repeatItem.subject}-${repeatItem.type}-${i}`}>
+                                                                        {repeatItem.subject} - {repeatItem.type.toLowerCase()} {repeatItem.value}
+                                                                    </p>
+                                                                ))
+                                                            ) : (
+                                                                <p>No repetition rules added.</p>
+                                                            )
+                                                        }
+                                                    </div>
+                                                    <div className="text_bottom_sec">
+                                                        <button onClick={handleOpenCustomizeSubject}>Customize Repetition</button>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        {
+                                            selectedSection &&
+                                            <div className="btn_box">
+                                                <button><i className="fa-solid fa-file-pen"></i>Generate</button>
                                             </div>
-                                            <div className="text_bottom_sec">
-                                                <button onClick={handleOpenCustomizeSubject}>Customize Repetition</button>
-                                            </div>
-                                        </div>
-                                        <div className="btn_box">
-                                            <button><i className="fa-solid fa-file-pen"></i>Generate</button>
-                                        </div>
+                                        }
                                     </div>
                                 </div>
                                 <div className="right_item_sec">
@@ -462,6 +522,9 @@ const TimeTableSettingsPage = () => {
                 <CustomizeSubjectRepetitionModal
                     isCustomizeSubjectOpen={isCustomizeSubjectOpen}
                     setIsCustomizeSubjectOpen={setIsCustomizeSubjectOpen}
+                    subjects={subjects}
+                    subjectRepeatData={subjectRepeatData}
+                    setSubjectRepeatData={setSubjectRepeatData}
                 />
             </TimeTableSettingsWrapper>
         </>

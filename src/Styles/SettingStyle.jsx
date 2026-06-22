@@ -3351,11 +3351,9 @@ export const TimeTableSettingsWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        margin-bottom: 15px;
                         padding-top: 10px;
                         padding-bottom: 10px;
                         border-top: 1px solid ${colors.customColors.borderColor};
-                        border-bottom: 1px solid ${colors.customColors.borderColor};
 
                         h5 {
                             position: relative;
@@ -3372,15 +3370,15 @@ export const TimeTableSettingsWrapper = styled('div')`
 
                             .day_box {
                                 position: relative;
+                                margin-top: 10px;
                                 width: 100%;
                                 display: flex;
                                 flex-direction: column;
 
                                 p {
                                     position: relative;
-                                    font-size: 12px;
+                                    font-size: 11px;
                                     color: ${colors.customColors.blackColor1};
-                                    margin-top: 5px;
                                     font-weight: 500;
                                 }
 
@@ -3390,11 +3388,12 @@ export const TimeTableSettingsWrapper = styled('div')`
                                     display: flex;
                                     flex-wrap: wrap;
                                     align-items: center;
-                                    margin-top: 7px;
+                                    margin-top: 6px;
 
                                     li {
                                         position: relative;
-                                        padding: 3px;
+                                        padding-right: 6px;
+                                        padding-bottom: 6px;
                                         display: flex;
                                         list-style: none;
 
@@ -3422,11 +3421,13 @@ export const TimeTableSettingsWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         display: flex;
-                        margin-bottom: 20px;
+                        margin-bottom: 15px;
+                        border-top: 1px solid ${colors.customColors.borderColor};
+                        padding-top: 15px;
 
                         .toggle_bar {
                             position: relative;
-                            width: 50px;
+                            width: max-content;
                             display: flex;
                             justify-content: flex-start;
                             margin-left: auto;
