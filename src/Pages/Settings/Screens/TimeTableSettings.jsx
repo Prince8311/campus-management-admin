@@ -424,6 +424,11 @@ const TimeTableSettingsPage = () => {
                                                                 subjectRepeatData.map((repeatItem, i) => (
                                                                     <p key={`${repeatItem.subject}-${repeatItem.type}-${i}`}>
                                                                         {repeatItem.subject} - {repeatItem.type.toLowerCase()} {repeatItem.value}
+                                                                        
+                                                                        <div className="btns">
+                                                                            <a><i className="fa-regular fa-pen-to-square"></i></a>
+                                                                            <a><i className="fa-regular fa-trash-can"></i></a>
+                                                                        </div>
                                                                     </p>
                                                                 ))
                                                             ) : (

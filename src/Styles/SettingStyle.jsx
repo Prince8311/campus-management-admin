@@ -2453,12 +2453,12 @@ export const SubjectSettingsWrapper = styled('div')`
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
-                background: ${colors.customColors.greenColor};
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 color: ${colors.customColors.whiteColor};
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
+                border: none;
                 transition: all 0.5s ease;
                 
                 i {
@@ -2495,7 +2495,7 @@ export const SubjectSettingsWrapper = styled('div')`
                 padding-left: 15px;
                 background: ${colors.customColors.whiteColor};
                 border: 1px solid ${colors.customColors.borderColor};
-                border-left: 4px solid ${colors.customColors.greenColor};
+                border-left: 4px solid ${colors.customColors.blueColor2};
                 border-radius: 8px;
                 display: flex;
                 flex-direction: column;
@@ -2507,7 +2507,7 @@ export const SubjectSettingsWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    padding-bottom: 8px;
+                    padding-bottom: 4px;
                     border-bottom: 1px solid ${colors.customColors.borderColor};
 
                     .part_content {
@@ -2521,12 +2521,12 @@ export const SubjectSettingsWrapper = styled('div')`
                             width: 28px;
                             height: 28px;
                             border-radius: 50%;
-                            background: ${colors.customColors.greenColorLight};
+                            background: ${colors.customColors.blueColorLight};
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             font-size: 12px;
-                            color: ${colors.customColors.greenColor};
+                            color: ${colors.customColors.blueColor2};
                             text-decoration: none;
                             cursor: pointer;
                         }
@@ -2549,18 +2549,46 @@ export const SubjectSettingsWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         display: flex;
-                        margin-top: 5px;
+                        flex-wrap: wrap;
+                        align-items: flex-start;
+                        margin-top: 3px;
 
-                        p {
+                        .title {
                             position: relative;
-                            font-size: 11px;
+                            display: flex;
+                            align-items: center;
+                            white-space: nowrap;
+                            font-size: 10px;
                             color: ${colors.customColors.blackColor2};
+                            padding-top: 2px;
+
+                            i {
+                                font-size: 9px;
+                                color: ${colors.customColors.blackColor2};
+                                margin-right: 5px;
+                            }
 
                             b {
                                 font-weight: 500;
                                 margin-right: 4px;
                                 font-style: italic;
                                 color: ${colors.customColors.blackColor1};
+                            }
+                        }
+
+                        .sections {
+                            display: contents;
+
+                            span {
+                                position: relative;
+                                padding: 2px 7px;
+                                background: ${colors.customColors.blueColorLight};
+                                border-radius: 25px;
+                                border: 1px solid ${colors.customColors.blueColor1};
+                                color: ${colors.customColors.blueColor1};
+                                margin-right: 4px;
+                                margin-bottom: 4px;
+                                font-size: 8px;
                             }
                         }
                     }
@@ -3485,7 +3513,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        padding: 10px 13px;
+                        padding: 13px;
                         background: ${colors.customColors.lightBackground3};
                         border-radius: 5px;
                         
@@ -3498,12 +3526,52 @@ export const TimeTableSettingsWrapper = styled('div')`
 
                             p {
                                 position: relative;
+                                height: max-content;
+                                display: flex;
+                                align-items: center;
                                 font-size: 10px;
                                 color: ${colors.customColors.blackColor1};
                                 margin-right: 5px;
+                                padding: 4px 10px;
+                                border-radius: 25px;
+                                border: 1px solid ${colors.customColors.borderColor};
+                                background: ${colors.customColors.whiteColor};
 
                                 &:last-of-type {
                                     margin-right: 0;
+                                }
+
+                                .btns {
+                                    position: relative;
+                                    display: flex;
+                                    align-items: center;
+                                    margin-left: 15px;
+
+
+                                    a {
+                                        position: relative;
+                                        width: 20px;
+                                        height: 20px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 10px;
+                                        color: ${colors.customColors.whiteColor};
+                                        cursor: pointer;
+                                        text-decoration: none;
+
+                                        &:first-of-type {
+                                            background: ${colors.customColors.greenColor};
+                                            border-top-left-radius: 4px;
+                                            border-bottom-left-radius: 4px;
+                                        }
+
+                                        &:last-of-type {
+                                            background: ${colors.customColors.redColor};
+                                            border-top-right-radius: 4px;
+                                            border-bottom-right-radius: 4px;
+                                        }
+                                    }
                                 }
                             }
                         }

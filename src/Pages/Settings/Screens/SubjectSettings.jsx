@@ -84,7 +84,17 @@ const SubjectSettingsPage = () => {
                                                 <h6>{subject.subject_name}</h6>
                                             </div>
                                             <div className="subject_assigning_sec">
-                                                <p><b>Class Assigned :</b>1 - A</p>
+                                                <div className="title">
+                                                    <i className="fa-solid fa-users"></i>
+                                                    <b>Assigned Classes :</b>
+                                                </div>
+                                                <div className="sections">
+                                                    <span>1 - A</span>
+                                                    <span>1 - A</span>
+                                                    <span>1 - A</span>
+                                                    <span>1 - A</span>
+                                                    <span>1 - A</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="bottom_btn">

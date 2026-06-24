@@ -343,19 +343,19 @@ const Sidebar = () => {
                                             userDetails.user_type === 'inst_admin' &&
                                             <NavLink to="/admin/settings/profile-settings">
                                                 <i className="fa-solid fa-user-gear prefix"></i>
-                                                <p>Profile Settings</p>
+                                                <p>Manage Profile</p>
                                             </NavLink>
                                         }
                                         {
                                             userDetails.user_type === 'inst_admin' &&
                                             <NavLink to="/admin/settings/subject-settings">
                                                 <i className="fa-solid fa-book-open"></i>
-                                                <p>Subject Settings</p>
+                                                <p>Subjects</p>
                                             </NavLink>
                                         }
                                         <NavLink to="/admin/settings/time-tables">
                                             <i className="fa-solid fa-calendar-days"></i>
-                                            <p>Time Table Settings</p>
+                                            <p>Time Table</p>
                                         </NavLink>
                                         <a>
                                             <i className="fa-solid fa-gear prefix"></i>
