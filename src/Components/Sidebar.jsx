@@ -112,10 +112,13 @@ const Sidebar = () => {
                                         <p>Institutions</p>
                                     </NavLink>
                                 }
-                                <NavLink to="/admin/coupons">
-                                    <i className="fa-solid fa-tags"></i>
-                                    <p>Coupons</p>
-                                </NavLink>
+                                {
+                                    userDetails.user_type === 'super_admin' &&
+                                    <NavLink to="/admin/coupons">
+                                        <i className="fa-solid fa-tags"></i>
+                                        <p>Coupons</p>
+                                    </NavLink>
+                                }
                                 {
                                     userDetails.user_type === 'inst_admin' &&
                                     <div className={`dropdown_item ${activeDropdown === 0 ? 'active' : ''}`}>

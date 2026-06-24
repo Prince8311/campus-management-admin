@@ -28,18 +28,18 @@ export const CouponWrapper = styled('div')`
 
             button {
                 position: relative;
-                width: 150px;
+                width: 180px;
                 height: 35px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
-                background: ${colors.customColors.greenColor};
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 color: ${colors.customColors.whiteColor};
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
+                border: none;
                 transition: all 0.5s ease;
 
                 i {

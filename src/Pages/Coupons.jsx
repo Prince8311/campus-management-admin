@@ -13,7 +13,7 @@ const CouponsPage = () => {
         <>
             <CouponWrapper>
                 <div className="page_head">
-                    <h2>Offer List</h2>
+                    <h2>Coupons Directory</h2>
                     <div className="add_btn">
                         <button onClick={handleOpenCouponModal}>
                             <i className="fa-solid fa-plus"></i>

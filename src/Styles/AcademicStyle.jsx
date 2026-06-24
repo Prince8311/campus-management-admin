@@ -104,8 +104,8 @@ export const StudentInformationWrapper = styled('div')`
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
-                background: ${colors.customColors.greenColor};
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                border: none;
                 color: ${colors.customColors.whiteColor};
                 border-radius: 6px;
                 font-size: 13px;
@@ -3170,9 +3170,9 @@ export const ClassroomDetailsWrapper = styled('div')`
                         align-items: center;
                         justify-content: center;
                         cursor: pointer;
-                        border: 1px solid ${colors.customColors.greenColor};
-                        background: ${colors.customColors.greenColor};
+                        background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                         color: ${colors.customColors.whiteColor};
+                        border: none;
                         border-radius: 6px;
                         font-size: 13px;
                         font-weight: 500;
@@ -3211,7 +3211,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                         padding-left: 15px;
                         background: ${colors.customColors.whiteColor};
                         border: 1px solid ${colors.customColors.borderColor};
-                        border-left: 4px solid ${colors.customColors.blueColor1};
+                        border-left: 4px solid ${colors.customColors.blueColor2};
                         border-radius: 8px;
                         display: flex;
                         flex-direction: column;
@@ -3242,7 +3242,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                                     align-items: center;
                                     justify-content: center;
                                     font-size: 12px;
-                                    color: ${colors.customColors.blueColor1};
+                                    color: ${colors.customColors.blueColor2};
                                     text-decoration: none;
                                     cursor: pointer;
                                 }
@@ -3451,24 +3451,24 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                                 .left_box {
                                     position: relative;
-                                    padding: 4px 12px;
+                                    padding: 5px 15px;
                                     cursor: pointer;
                                     border-radius: 4px;
                                     text-decoration: none;
-                                    
-                                    &.active {
-                                        background: ${colors.customColors.blueColor1};
-                                    }
+                                    color: ${colors.customColors.blackColor1};
+                                    display: flex;
+                                    align-items: center;
 
                                     h6 {
                                         position: relative;
-                                        font-size: 10px;
-                                        font-weight: 400;
-                                        color: ${colors.customColors.blackColor1};
+                                        font-size: 12px;
+                                        font-weight: 500;
                                     }
-                                    
-                                    &.active h6 {
-                                        color: ${colors.customColors.whiteColor};
+
+                                    &.active {
+                                        color: ${colors.customColors.blueColor2};
+                                        background: ${colors.customColors.whiteColor};
+                                        box-shadow: 3px 4px 8px ${colors.boxShadowColors.shadowColor1}, -3px -3px 6px ${colors.boxShadowColors.shadowColor2};
                                     }
                                 }
                             }

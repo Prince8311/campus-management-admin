@@ -1535,8 +1535,8 @@ export const BankAccountsWrapper = styled('div')`
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
-                background: ${colors.customColors.greenColor};
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                border: none;
                 color: ${colors.customColors.whiteColor};
                 border-radius: 6px;
                 font-size: 13px;
