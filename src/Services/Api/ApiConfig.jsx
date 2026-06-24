@@ -83,6 +83,9 @@ export const getApiEndpoints = () => {
         classSectionDetails: `${apiURL}/api/institutions/academic/section/details.php`,
         editClassSectionTeacher: `${apiURL}/api/institutions/academic/section/edit-teacher.php`,
 
+        // Time Table 
+        generateTimeTable: `${apiURL}/api/time-table/generate.php`,
+
         // Attendance Configuration 
         addAttendanceConfiguration: `${apiURL}/api/attendance/configuration/create.php`,
         attendanceConfigurationList: `${apiURL}/api/attendance/configuration/list.php`,

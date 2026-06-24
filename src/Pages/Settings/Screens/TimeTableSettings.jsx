@@ -209,6 +209,25 @@ const TimeTableSettingsPage = () => {
         }
     }, [selectedSection]);
 
+    const handleGenerateTimeTable = async () => {
+        const payload = {
+            class: selectedClass,
+            section: selectedSection,
+            subjectRepeatData: subjectRepeatData,
+            fullDays: fullDays,
+            halfDays: halfDays
+        };
+
+        try {
+            const response = await axiosInstance.post(api.generateTimeTable, payload);
+            if (response?.data.status === 200) { 
+                console.log('Time table', response?.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
     return (
         <>
             <TimeTableSettingsWrapper>
@@ -421,7 +440,7 @@ const TimeTableSettingsPage = () => {
                                         {
                                             selectedSection &&
                                             <div className="btn_box">
-                                                <button><i className="fa-solid fa-file-pen"></i>Generate</button>
+                                                <button onClick={handleGenerateTimeTable}><i className="fa-solid fa-file-pen"></i>Generate</button>
                                             </div>
                                         }
                                     </div>
