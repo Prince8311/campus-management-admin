@@ -3461,7 +3461,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                                     h6 {
                                         position: relative;
-                                        font-size: 12px;
+                                        font-size: 11px;
                                         font-weight: 500;
                                     }
 

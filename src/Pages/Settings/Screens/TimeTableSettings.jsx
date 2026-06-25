@@ -27,6 +27,9 @@ const TimeTableSettingsPage = () => {
     const [halfDays, setHalfDays] = useState([]);
     const [showSubjectRepetition, setShowSubjectRepetition] = useState(false);
     const [subjectRepeatData, setSubjectRepeatData] = useState([]);
+    const [reloadTimeTable, setReloadTimeTable] = useState(false);
+    const [timeTableData, setTimeTableData] = useState([]);
+    const isGenerateDisabled = fullDays.length === 0 && halfDays.length === 0;
 
     const fetchTimeSlots = async (showSkeleton = false) => {
         if (showSkeleton) {
@@ -209,6 +212,31 @@ const TimeTableSettingsPage = () => {
         }
     }, [selectedSection]);
 
+    const fecthTimeTable = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchTimeTable, {
+                params: {
+                    class: selectedClass,
+                    section: selectedSection
+                }
+            });
+            if (response?.data.status === 200) {
+                console.log('Time table', response?.data);
+                setTimeTableData(response?.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setReloadTimeTable(false);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedSection) {
+            fecthTimeTable();
+        }
+    }, [selectedSection, reloadTimeTable]);
+
     const handleGenerateTimeTable = async () => {
         const payload = {
             class: selectedClass,
@@ -220,8 +248,9 @@ const TimeTableSettingsPage = () => {
 
         try {
             const response = await axiosInstance.post(api.generateTimeTable, payload);
-            if (response?.data.status === 200) { 
-                console.log('Time table', response?.data);
+            if (response?.data.status === 200) {
+                setReloadTimeTable(true);
+                toast.success(response?.data.message);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -424,7 +453,7 @@ const TimeTableSettingsPage = () => {
                                                                 subjectRepeatData.map((repeatItem, i) => (
                                                                     <p key={`${repeatItem.subject}-${repeatItem.type}-${i}`}>
                                                                         {repeatItem.subject} - {repeatItem.type.toLowerCase()} {repeatItem.value}
-                                                                        
+
                                                                         <div className="btns">
                                                                             <a><i className="fa-regular fa-pen-to-square"></i></a>
                                                                             <a><i className="fa-regular fa-trash-can"></i></a>
@@ -445,91 +474,74 @@ const TimeTableSettingsPage = () => {
                                         {
                                             selectedSection &&
                                             <div className="btn_box">
-                                                <button onClick={handleGenerateTimeTable}><i className="fa-solid fa-file-pen"></i>Generate</button>
+                                                <button onClick={handleGenerateTimeTable} disabled={isGenerateDisabled}><i className="fa-solid fa-file-pen"></i>Generate</button>
                                             </div>
                                         }
                                     </div>
                                 </div>
                                 <div className="right_item_sec">
-                                    <div className="time_levels">
-                                        <div className="time_level_box">
-                                            <div className="box_head">
-                                                <li>
-                                                    <i className="fa-solid fa-calendar-day"></i>
-                                                    <span>Monday</span>
-                                                </li>
-                                                <a><i className="fa-solid fa-arrow-rotate-left"></i></a>
-                                                <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
-                                            </div>
-                                            <div className="box_items">
-                                                <div className="class_item">
-                                                    <div className="item_inner">
-                                                        <div className="timing">
-                                                            <i className="fa-regular fa-clock"></i>
-                                                            <p>10:00AM - 10:45AM</p>
+                                    {
+                                        timeTableData.length > 0 ? (
+                                            <div className="time_levels">
+                                                {
+                                                    timeTableData.map((data, index) =>
+                                                        <div className="time_level_box" key={index}>
+                                                            <div className="box_head">
+                                                                <li>
+                                                                    <i className="fa-solid fa-calendar-day"></i>
+                                                                    <span>{data.day}</span>
+                                                                </li>
+                                                                <a><i className="fa-solid fa-arrow-rotate-left"></i></a>
+                                                                <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
+                                                            </div>
+                                                            <div className="box_items">
+                                                                {
+                                                                    data.schedule.length > 0 ? (
+                                                                        data.schedule.map((schedule, i) =>
+                                                                            <div className="class_item" key={i}>
+                                                                                <div className="item_inner">
+                                                                                    <div className="timing">
+                                                                                        <i className="fa-regular fa-clock"></i>
+                                                                                        <p>{schedule.time}</p>
+                                                                                    </div>
+                                                                                    <div className="content_part">
+                                                                                        <img src="/images/period.png" alt="" />
+                                                                                        <li>
+                                                                                            <h6>{schedule.subject}</h6>
+                                                                                            <span>{schedule.period}</span>
+                                                                                        </li>
+                                                                                    </div>
+                                                                                    <div className="teacher_info">
+                                                                                        <i className="fa-solid fa-user"></i>
+                                                                                        <a>{schedule.teacher}</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    ) : (
+                                                                        <div className="empty_box">
+                                                                            <img src="/images/no-fields.svg" alt="" />
+                                                                            <p>No Period available.</p>
+                                                                        </div>
+                                                                    )
+                                                                }
+
+                                                            </div>
                                                         </div>
-                                                        <div className="content_part">
-                                                            <img src="/images/period.png" alt="" />
-                                                            <li>
-                                                                <h6>Math</h6>
-                                                                <span>First Period</span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="teacher_info">
-                                                            <i className="fa-solid fa-user"></i>
-                                                            <a>Sourish Mondal</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="class_item">
-                                                    <div className="item_inner">
-                                                        <div className="timing">
-                                                            <i className="fa-regular fa-clock"></i>
-                                                            <p>10:00AM - 10:45AM</p>
-                                                        </div>
-                                                        <div className="content_part">
-                                                            <img src="/images/period.png" alt="" />
-                                                            <li>
-                                                                <h6>Math</h6>
-                                                                <span>First Period</span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="teacher_info">
-                                                            <i className="fa-solid fa-user"></i>
-                                                            <a>Sourish Mondal</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="class_item">
-                                                    <div className="item_inner">
-                                                        <div className="timing">
-                                                            <i className="fa-regular fa-clock"></i>
-                                                            <p>10:00AM - 10:45AM</p>
-                                                        </div>
-                                                        <div className="content_part">
-                                                            <img src="/images/period.png" alt="" />
-                                                            <li>
-                                                                <h6>Math</h6>
-                                                                <span>First Period</span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="teacher_info">
-                                                            <i className="fa-solid fa-user"></i>
-                                                            <a>Sourish Mondal</a>
-                                                        </div>
-                                                    </div>
+                                                    )
+                                                }
+                                                <div className="btns_sec">
+                                                    <button><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
+                                                    <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="btns_sec">
-                                            <button><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
-                                            <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
-                                        </div>
-                                    </div>
-                                    <div className="empty_box">
-                                        <img src="/images/no-fields.svg" alt="" />
-                                        <p>No Data available.</p>
-                                    </div>
+                                        ) : (
+                                            <div className="empty_box">
+                                                <img src="/images/no-fields.svg" alt="" />
+                                                <p>No Data available.</p>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>
