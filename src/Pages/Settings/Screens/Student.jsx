@@ -207,7 +207,7 @@ const StudentPage = () => {
                     setIsModalOpen={setOpenDeleteModal}
                     deleteObject="Form section"
                     payload={deletePayload}
-                    endPoint={api.deleteStaffFormSection}
+                    endPoint={api.deleteStudentFormSection}
                     refreshData={() => {
                         if (sectionType === 'profile_info') {
                             fetchProfileFormSections(false);

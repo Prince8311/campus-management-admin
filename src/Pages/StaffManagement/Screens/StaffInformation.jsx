@@ -6,6 +6,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import Pagination from "../../../Components/Pagination";
+import StaffDetailsModal from "../../../Components/Modals/Staff/StaffDetails";
 
 const StaffInformationPage = () => {
     const api = getApiEndpoints();
@@ -19,10 +20,15 @@ const StaffInformationPage = () => {
     const [staffs, setStaffs] = useState([]);
     const [isInitialStaffsLoading, setIsInitialStaffsLoading] = useState(true);
     const [totalCount, setTotalCount] = useState('');
+    const [isStaffDetailsModal, setIsStaffDetailsModal] = useState(false);
 
     const handleOpenStaffTypeModal = () => {
         setIsStaffTypeOpen(true);
     };
+
+    const handleOpenStaffDetailsModal = () => {
+        setIsStaffDetailsModal(true);
+    }
 
     const fetchStaffs = async (showSkeleton = false, pageNumber = 1) => {
         if (showSkeleton) {
@@ -125,8 +131,7 @@ const StaffInformationPage = () => {
                                                     <td><SkeletonLoader width="100%" height="13px" /></td>
                                                     <td><SkeletonLoader width="100%" height="13px" /></td>
                                                     <td>
-                                                        <SkeletonLoader width="15px" height="15px" />
-                                                        <SkeletonLoader width="15px" height="15px" margin="0 6px 0 6px" />
+                                                        <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
                                                         <SkeletonLoader width="15px" height="15px" />
                                                     </td>
                                                 </tr>
@@ -153,8 +158,7 @@ const StaffInformationPage = () => {
                                                         <p>Joined</p>
                                                     </td>
                                                     <td>
-                                                        <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="edit_btn" onClick={handleOpenStaffDetailsModal}><i className="fa-solid fa-pen-to-square"></i></a>
                                                         <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                                     </td>
                                                 </tr>
@@ -251,6 +255,12 @@ const StaffInformationPage = () => {
                 <SelectStaffTypeModal
                     isStaffTypeOpen={isStaffTypeOpen}
                     setIsStaffTypeOpen={setIsStaffTypeOpen}
+                />
+
+                <StaffDetailsModal 
+                    isStaffDetailsModal={isStaffDetailsModal}
+                    setIsStaffDetailsModal={setIsStaffDetailsModal}
+                    staffType={selectedTab}
                 />
             </StaffInformationWrapper>
         </>

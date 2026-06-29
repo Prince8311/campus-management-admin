@@ -360,13 +360,9 @@ export const StaffInformationWrapper = styled('div')`
                                 cursor: pointer;
                                 font-size: 13px;
 
-                               &.view_btn {
-                                    color: ${colors.customColors.blueColor1};
-                               }
-
                                &.edit_btn {
                                     color: ${colors.customColors.greenColor};
-                                    margin: 0 10px;
+                                    margin-right: 10px;
                                }
 
                                &.delete_btn {

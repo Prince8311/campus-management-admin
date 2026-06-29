@@ -44,6 +44,7 @@ export const getApiEndpoints = () => {
 
         // Form Sections 
         createStudentFormSection: `${apiURL}/api/student/sections/create.php`,
+        deleteStudentFormSection: `${apiURL}/api/student/sections/delete.php`,
         fetchStudentFormSection: `${apiURL}/api/student/sections/list.php`,
 
         // Form Fields
