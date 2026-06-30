@@ -2763,44 +2763,102 @@ export const ClassroomDetailsWrapper = styled('div')`
             position: relative;
             width: 100%;
             background: ${colors.customColors.whiteColor};
-            border-radius: 8px;
-            box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
-                        -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
-            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid ${colors.customColors.borderColor};
+            box-shadow: 0 4px 20px ${colors.boxShadowColors.shadowColor2};
             overflow-x: auto;
+            padding-bottom: 14px;
+
+            &::-webkit-scrollbar {
+                height: 8px;
+            }
+            &::-webkit-scrollbar-track {
+                background: #F8FAFC;
+                border-radius: 0 0 12px 12px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #CBD5E1;
+                border-radius: 4px;
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: #94A3B8;
+            }
 
             table {
                 width: 100%;
                 border-collapse: collapse;
                 text-align: center;
-                border: 2px solid ${colors.customColors.blackColor2};
+                border: none;
                 
                 thead {
                     tr {
+                        background: ${colors.customColors.blueColor2};
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
+
                         th {
-                            border: 1px solid ${colors.customColors.blackColor2};
-                            padding: 15px 10px;
+                            border-right: 1px solid ${colors.customColors.borderColor};
+                            padding: 12px 14px;
                             font-size: 13px;
                             font-weight: 600;
-                            color: ${colors.customColors.blackColor};
-                            min-width: 90px;
-                            
-                            sup {
-                                font-size: 10px;
+                            color: ${colors.customColors.whiteColor};
+                            min-width: 120px;
+                            width: auto;
+                            vertical-align: middle;
+
+                            &:last-of-type {
+                                border-right: none;
                             }
                             
-                            &.break_col {
-                                width: 60px;
-                                min-width: 60px;
+                            &.day_header {
+                                font-size: 14px;
+                                font-weight: 500;
+                                width: 80px;
+                                min-width: 80px;
+                                text-align: center;
+                            }
+
+                            &.break_header {
+                                width: 65px;
+                                min-width: 65px;
+                                text-align: center;
+                                
+                                .break_title {
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    color: ${colors.customColors.whiteColor};
+                                }
+                            }
+
+                            .period_header {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 3px;
+                                white-space: nowrap;
+
+                                .period_num {
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    color: ${colors.customColors.whiteColor};
+                                }
+
+                                .period_time {
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.whiteColor};
+                                    text-align: center;
+                                    line-height: 1.25;
+                                    white-space: nowrap;
+                                }
                             }
 
                             &.sticky_col {
                                 position: sticky;
                                 left: 0;
-                                background: ${colors.customColors.whiteColor} !important;
-                                z-index: 2;
-                                border-right: 2px solid ${colors.customColors.blackColor2};
-                                min-width: 100px;
+                                background: ${colors.customColors.blueColor2} !important;
+                                z-index: 5;
+                                border-right: 1px solid ${colors.customColors.borderColor};
                             }
                         }
                     }
@@ -2808,30 +2866,170 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                 tbody {
                     tr {
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                        &:last-of-type {
+                            border-bottom: none;
+                        }
+
                         td {
-                            border: 1px solid ${colors.customColors.blackColor2};
-                            padding: 20px 10px;
-                            font-size: 13px;
-                            font-weight: 600;
-                            color: ${colors.customColors.blackColor};
-                            min-width: 90px;
+                            border-right: 1px solid ${colors.customColors.borderColor};
+                            padding: 8px;
+                            vertical-align: middle;
+                            min-width: 120px;
+                            width: auto;
+
+                            &:last-of-type {
+                                border-right: none;
+                            }
                             
                             &.day_col {
-                                font-weight: 600;
+                                font-weight: 500;
+                                font-size: 14px;
+                                color: ${colors.customColors.blackColor};
+                                vertical-align: middle;
+                                text-align: center;
                             }
 
                             &.break_col {
-                                font-weight: 700;
-                                min-width: 60px;
+                                width: 65px;
+                                min-width: 65px;
+                                vertical-align: middle;
+                                background: ${colors.customColors.blueColorLight1};
+                                padding: 6px 4px;
+
+                                .recess_box {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 2px;
+                                    font-size: 9.5px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    letter-spacing: 1.5px;
+                                }
                             }
 
                             &.sticky_col {
                                 position: sticky;
                                 left: 0;
                                 background: ${colors.customColors.whiteColor} !important;
-                                z-index: 2;
-                                border-right: 2px solid ${colors.customColors.blackColor2};
-                                min-width: 100px;
+                                z-index: 4;
+                                border-right: 1px solid ${colors.customColors.borderColor};
+                            }
+
+                            .subject_card {
+                                position: relative;
+                                width: 100%;
+                                min-height: 56px;
+                                border-radius: 6px;
+                                padding: 9px 12px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: flex-start;
+                                text-align: left;
+                                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                                cursor: pointer;
+                                overflow: hidden;
+
+                                &:hover {
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+                                }
+
+                                .sub_name {
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    line-height: 1.25;
+                                    margin-bottom: 2px;
+                                }
+
+                                .teacher_name {
+                                    font-size: 10.5px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blueColor5};
+                                    line-height: 1.25;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    width: 100%;
+                                }
+
+                                &.blue {
+                                    background: #EFF6FF;
+                                    border-left: 3.5px solid #2563EB;
+                                    .sub_name { color: #1D4ED8; }
+                                }
+
+                                &.green {
+                                    background: #ECFDF5;
+                                    border-left: 3.5px solid #059669;
+                                    .sub_name { color: #047857; }
+                                }
+
+                                &.orange {
+                                    background: #FFF7ED;
+                                    border-left: 3.5px solid #D97706;
+                                    .sub_name { color: #C2410C; }
+                                }
+
+                                &.purple {
+                                    background: #F5F3FF;
+                                    border-left: 3.5px solid #7C3AED;
+                                    .sub_name { color: #6D28D9; }
+                                }
+
+                                &.grey {
+                                    background: #F1F5F9;
+                                    border-left: 3.5px solid #475569;
+                                    .sub_name { color: #334155; }
+                                }
+                            }
+
+                            .add_sub_card {
+                                width: 100%;
+                                min-height: 56px;
+                                height: 100%;
+                                padding: 6px 8px;
+                                border: 1.5px dashed ${colors.customColors.borderColor};
+                                border-radius: 6px;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 6px;
+                                cursor: pointer;
+                                transition: all 0.2s ease;
+                                background: transparent;
+
+                                &:hover {
+                                    border-color: ${colors.customColors.borderColor1};
+                                    background: ${colors.customColors.blueColorLight1};
+                                    transform: translateY(-1px);
+                                }
+
+                                .add_icon {
+                                    width: 20px;
+                                    height: 20px;
+                                    border-radius: 50%;
+                                    border: 1.5px solid ${colors.customColors.borderColor};
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: ${colors.customColors.blackColor1};
+
+                                    i {
+                                        font-size: 10px;
+                                    }
+                                }
+
+                                p {
+                                    font-size: 11.5px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor1};
+                                }
                             }
                         }
                     }

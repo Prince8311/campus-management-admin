@@ -12,6 +12,101 @@ import ManageTeacher from '../../../Components/Modals/Academics/ManageTeacher';
 import SubjectPreferenceModal from '../../../Components/Modals/Academics/SubjectPreference';
 import AttendenceModal from '../../../Components/Modals/Academics/Attendence';
 
+const routinePeriods = [
+    { name: "First Period", time: "08:00 - 08:45" },
+    { name: "Second Period", time: "08:45 - 09:30" },
+    { name: "3rd", time: "09:30 - 10:15" },
+    { name: "4th", time: "10:15 - 11:00" },
+    { type: "break", name: "Break" },
+    { name: "5th", time: "11:30 - 12:15" },
+    { name: "6th", time: "12:15 - 01:00" },
+    { name: "7th", time: "01:00 - 01:45" },
+    { name: "8th", time: "01:45 - 02:30" },
+    { name: "9th", time: "02:30 - 03:15" },
+    { name: "10th", time: "03:15 - 04:00" }
+];
+
+const routineData = {
+    MON: [
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
+        { subject: "MUSIC", teacher: "Samar Shukla", color: "orange" },
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { type: "break" },
+        { subject: "EVS", teacher: "Priya Mehta", color: "purple" },
+        { subject: "ENGLISH II", teacher: "Dr. Rajat K.", color: "green" },
+        { subject: "HISTORY", teacher: "Anil Kumar", color: "orange" },
+        null,
+        null,
+        null
+    ],
+    TUE: [
+        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        null,
+        { subject: "COMP. PRAC", teacher: "Vikram Dev", color: "grey" },
+        { type: "break" },
+        { subject: "ENGLISH II", teacher: "Dr. Rajat K.", color: "green" },
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { subject: "GEOGRAPHY", teacher: "Sonal Sen", color: "purple" },
+        { subject: "PT / YOGA", teacher: "R. K. Singh", color: "orange" },
+        null,
+        null
+    ],
+    WED: [
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
+        { subject: "SCIENCE", teacher: "Dr. S. Verma", color: "purple" },
+        { subject: "LIBRARY", teacher: "Manoj Das", color: "grey" },
+        { type: "break" },
+        { subject: "EVS", teacher: "Priya Mehta", color: "purple" },
+        null,
+        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
+        { subject: "ART / CRAFT", teacher: "Neelam Roy", color: "orange" },
+        null,
+        null
+    ],
+    THU: [
+        { subject: "SCIENCE", teacher: "Dr. S. Verma", color: "purple" },
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { subject: "ENGLISH II", teacher: "Dr. Rajat K.", color: "green" },
+        null,
+        { type: "break" },
+        { subject: "PT / YOGA", teacher: "R. K. Singh", color: "orange" },
+        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { subject: "COMP. THEORY", teacher: "Vikram Dev", color: "grey" },
+        null,
+        null
+    ],
+    FRI: [
+        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
+        null,
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
+        { type: "break" },
+        { subject: "ART / CRAFT", teacher: "Neelam Roy", color: "orange" },
+        { subject: "G.K.", teacher: "Sonal Sen", color: "purple" },
+        { subject: "VALUE ED.", teacher: "Priya Mehta", color: "grey" },
+        null,
+        null,
+        null
+    ],
+    SAT: [
+        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
+        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
+        { subject: "SCIENCE", teacher: "Dr. S. Verma", color: "purple" },
+        { subject: "G.K.", teacher: "Sonal Sen", color: "orange" },
+        { type: "break" },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    ]
+};
+
 const ClassroomDetailsPage = () => {
     const api = getApiEndpoints();
     const [selectedClass] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedClass : '');
@@ -204,45 +299,54 @@ const ClassroomDetailsPage = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th className="sticky_col">PERIOD</th>
-                                    <th>1<sup>ST</sup></th>
-                                    <th>2<sup>ND</sup></th>
-                                    <th>3<sup>RD</sup></th>
-                                    <th className="break_col">--------</th>
-                                    <th>4<sup>TH</sup></th>
-                                    <th>5<sup>TH</sup></th>
-                                    <th>6<sup>TH</sup></th>
-                                    <th>7<sup>TH</sup></th>
-                                    <th>8<sup>TH</sup></th>
-                                    <th>9<sup>TH</sup></th>
-                                    <th>10<sup>TH</sup></th>
-                                    <th>11<sup>TH</sup></th>
-                                    <th>12<sup>TH</sup></th>
-                                    <th>13<sup>TH</sup></th>
-                                    <th>14<sup>TH</sup></th>
-                                    <th>15<sup>TH</sup></th>
+                                    <th className="sticky_col day_header">Day</th>
+                                    {routinePeriods.map((period, index) => (
+                                        <th key={index} className={period.type === "break" ? "break_header" : ""}>
+                                            {period.type === "break" ? (
+                                                <span className="break_title">Break</span>
+                                            ) : (
+                                                <div className="period_header">
+                                                    <span className="period_num">{period.name}</span>
+                                                    <span className="period_time">({period.time})</span>
+                                                </div>
+                                            )}
+                                        </th>
+                                    ))}
                                 </tr>
                             </thead>
                             <tbody>
-                                {["MON", "TUES", "WED", "THURS", "FRI"].map((day, index) => (
+                                {["MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day) => (
                                     <tr key={day}>
                                         <td className="sticky_col day_col">{day}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td className="break_col">{"BREAK"[index]}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        {routineData[day].map((cell, idx) => {
+                                            if (cell?.type === "break") {
+                                                return (
+                                                    <td key={idx} className="break_col">
+                                                        <div className="recess_box">
+                                                            {"BREAK".split("").map((char, i) => (
+                                                                <span key={i}>{char}</span>
+                                                            ))}
+                                                        </div>
+                                                    </td>
+                                                );
+                                            }
+
+                                            return (
+                                                <td key={idx} className="period_cell">
+                                                    {cell ? (
+                                                        <div className={`subject_card ${cell.color}`}>
+                                                            <h6 className="sub_name">{cell.subject}</h6>
+                                                            <p className="teacher_name">{cell.teacher}</p>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="add_sub_card">
+                                                            <span className="add_icon"><i className="fa-solid fa-plus"></i></span>
+                                                            <p>Add Sub</p>
+                                                        </div>
+                                                    )}
+                                                </td>
+                                            );
+                                        })}
                                     </tr>
                                 ))}
                             </tbody>
