@@ -8,6 +8,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import Pagination from "../../../Components/Pagination";
+import StudentDetailsModal from "../../../Components/Modals/Academics/StudentDetails";
 
 const StudentInformationPage = () => {
     const api = getApiEndpoints();
@@ -19,9 +20,14 @@ const StudentInformationPage = () => {
     const [students, setStudents] = useState([]);
     const [isInitialStudentsLoading, setIsInitialStudentsLoading] = useState(true);
     const [totalCount, setTotalCount] = useState('');
+    const [isStudentDetails, setIsStudentDetails] = useState(false);
 
     const redirectAddStudentScreen = () => {
         navigate("/admin/academics/add-student");
+    }
+
+    const handleOpenStudentDetailsModal = () => {
+        setIsStudentDetails(true);
     }
 
     const fetchAcademicLevels = async () => {
@@ -179,8 +185,7 @@ const StudentInformationPage = () => {
                                             <td><SkeletonLoader width="100%" height="13px" /></td>
                                             <td><SkeletonLoader width="100%" height="13px" /></td>
                                             <td>
-                                                <SkeletonLoader width="15px" height="15px" />
-                                                <SkeletonLoader width="15px" height="15px" margin="0 6px 0 6px" />
+                                                <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
                                                 <SkeletonLoader width="15px" height="15px" />
                                             </td>
                                         </tr>
@@ -206,8 +211,7 @@ const StudentInformationPage = () => {
                                                 <p className="active">Joined</p>
                                             </td>
                                             <td>
-                                                <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="edit_btn" onClick={handleOpenStudentDetailsModal}><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
@@ -226,6 +230,11 @@ const StudentInformationPage = () => {
                     totalCount > 10 &&
                     <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
                 }
+
+                <StudentDetailsModal
+                    isStudentDetails={isStudentDetails}
+                    setIsStudentDetails={setIsStudentDetails}
+                />
             </StudentInformationWrapper>
         </>
     );
