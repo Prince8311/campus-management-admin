@@ -36,9 +36,9 @@ export const RolePermissionWrapper = styled('div')`
                 justify-content: center;
                 text-decoration: none;
                 cursor: pointer;
-                border: 1px solid ${colors.customColors.greenColor};
-                background: ${colors.customColors.greenColor};
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 color: ${colors.customColors.whiteColor};
+                border: none;
                 border-radius: 6px;
                 font-size: 13px;
                 font-weight: 500;
@@ -1469,9 +1469,9 @@ export const StudentWrapper = styled('div')`
                         align-items: center;
                         justify-content: center;
                         cursor: pointer;
-                        border: 1px solid ${colors.customColors.greenColor};
-                        background: ${colors.customColors.greenColor};
+                        background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                         color: ${colors.customColors.whiteColor};
+                        border: none;
                         border-radius: 6px;
                         font-size: 13px;
                         font-weight: 500;
@@ -1721,9 +1721,9 @@ export const StaffWrapper = styled('div')`
                         align-items: center;
                         justify-content: center;
                         cursor: pointer;
-                        border: 1px solid ${colors.customColors.greenColor};
-                        background: ${colors.customColors.greenColor};
+                        background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                         color: ${colors.customColors.whiteColor};
+                        border: none;
                         border-radius: 6px;
                         font-size: 13px;
                         font-weight: 500;
