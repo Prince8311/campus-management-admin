@@ -2797,7 +2797,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                         th {
                             border-right: 1px solid ${colors.customColors.borderColor};
-                            padding: 12px 14px;
+                            padding: 12px 20px;
                             font-size: 13px;
                             font-weight: 600;
                             color: ${colors.customColors.whiteColor};
@@ -2838,8 +2838,8 @@ export const ClassroomDetailsWrapper = styled('div')`
                                 white-space: nowrap;
 
                                 .period_num {
-                                    font-size: 14px;
-                                    font-weight: 600;
+                                    font-size: 13px;
+                                    font-weight: 500;
                                     color: ${colors.customColors.whiteColor};
                                 }
 
@@ -2874,7 +2874,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                         td {
                             border-right: 1px solid ${colors.customColors.borderColor};
-                            padding: 8px;
+                            padding: 8px 12px;
                             vertical-align: middle;
                             min-width: 120px;
                             width: auto;
@@ -2904,8 +2904,8 @@ export const ClassroomDetailsWrapper = styled('div')`
                                     align-items: center;
                                     justify-content: center;
                                     gap: 2px;
-                                    font-size: 9.5px;
-                                    font-weight: 500;
+                                    font-size: 8px;
+                                    font-weight: 400;
                                     color: ${colors.customColors.blackColor};
                                     letter-spacing: 1.5px;
                                 }

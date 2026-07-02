@@ -1,15 +1,22 @@
+import { useState } from "react";
+import AddConfigarationModal from "../../../Components/Modals/Setting/AddConfigaration";
 import { SubscriptionSettingWrapper } from "../../../Styles/SettingStyle";
 
 const SubscriptionSettingPage = () => {
+    const [isAddConfigaration, setIsAddConfigaration] = useState(false);
+
+    const handleAddConfigationModalOpen = () => {
+        setIsAddConfigaration(true);
+    }
     return (
         <>
             <SubscriptionSettingWrapper>
                 <div className="page_head">
                     <h2>Subscription Duration & Offers</h2>
                     <div className="edit_btn">
-                        <button>
-                            <i className="fa-regular fa-pen-to-square"></i>
-                            <p>Edit Configaration</p>
+                        <button onClick={handleAddConfigationModalOpen}>
+                            <i className="fa-solid fa-gears"></i>
+                            <p>Add Configaration</p>
                         </button>
                     </div>
                 </div>
@@ -274,6 +281,11 @@ const SubscriptionSettingPage = () => {
                         </table>
                     </div>
                 </div>
+
+                <AddConfigarationModal
+                    isAddConfigaration={isAddConfigaration}
+                    setIsAddConfigaration={setIsAddConfigaration}
+                />
             </SubscriptionSettingWrapper>
         </>
     );
