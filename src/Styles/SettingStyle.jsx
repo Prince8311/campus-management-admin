@@ -4204,7 +4204,18 @@ export const SubscriptionSettingWrapper = styled('div')`
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin-top: 30px;
+        margin-top: 25px;
+        padding-top: 25px;
+
+        &::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 15px;
+            width: calc(100% - 30px);
+            height: 1px;
+            background: ${colors.customColors.borderColor};
+        }
 
         .price_top_sec {
             position: relative;
