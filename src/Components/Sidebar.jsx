@@ -364,10 +364,13 @@ const Sidebar = () => {
                                             <i className="fa-solid fa-gear prefix"></i>
                                             <p>General Settings</p>
                                         </a>
-                                        <NavLink to="/admin/settings/subscription-setting">
-                                            <i className="fa-solid fa-box-archive prefix"></i>
-                                            <p>Subscriptions</p>
-                                        </NavLink>
+                                        {
+                                            userDetails.user_type === 'super_admin' &&
+                                            <NavLink to="/admin/settings/subscription-setting">
+                                                <i className="fa-solid fa-box-archive prefix"></i>
+                                                <p>Subscriptions</p>
+                                            </NavLink>
+                                        }
                                         {
                                             userDetails.user_type === 'super_admin' &&
                                             <NavLink to="/admin/settings/state-cities">
