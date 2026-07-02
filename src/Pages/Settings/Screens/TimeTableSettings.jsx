@@ -257,6 +257,36 @@ const TimeTableSettingsPage = () => {
         }
     }
 
+    const handleRegenerateTimeTable = async (generateType = 'week', day = null) => {
+        const payload = {
+            class: selectedClass,
+            section: selectedSection,
+            subjectRepeatData: subjectRepeatData,
+            fullDays: fullDays,
+            halfDays: halfDays,
+        };
+
+        if (generateType === 'day' && day) {
+            payload.day = day;
+        }
+
+        try {
+            const response = await axiosInstance.post(api.generateTimeTable, payload, {
+                params: {
+                    intent: 're-generate',
+                    'generate-type': generateType,
+                },
+            });
+            if (response?.data.status === 200) {
+                setReloadTimeTable(true);
+                toast.success(response?.data.message);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+
+    }
+
     return (
         <>
             <TimeTableSettingsWrapper>
@@ -491,7 +521,9 @@ const TimeTableSettingsPage = () => {
                                                                     <i className="fa-solid fa-calendar-day"></i>
                                                                     <span>{data.day}</span>
                                                                 </li>
-                                                                <a><i className="fa-solid fa-arrow-rotate-left"></i></a>
+                                                                <button className="small_btn" onClick={() => handleRegenerateTimeTable('day', data.day)}>
+                                                                    <i className="fa-solid fa-arrow-rotate-left"></i>
+                                                                </button>
                                                                 <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
                                                             </div>
                                                             <div className="box_items">
@@ -531,7 +563,7 @@ const TimeTableSettingsPage = () => {
                                                     )
                                                 }
                                                 <div className="btns_sec">
-                                                    <button><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
+                                                    <button onClick={() => handleRegenerateTimeTable('week')}><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
                                                     <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
                                                 </div>
                                             </div>

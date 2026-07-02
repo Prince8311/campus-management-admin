@@ -3771,6 +3771,15 @@ export const TimeTableSettingsWrapper = styled('div')`
                                     border-radius: 25px;
                                     transition: all 0.5s ease;
                                 }
+
+                                &.small_btn {
+                                    padding: 0 15px;
+                                    margin-left: auto;
+
+                                    i {
+                                        margin-right: 0;
+                                    }
+                                }
                             }
                         }
 
