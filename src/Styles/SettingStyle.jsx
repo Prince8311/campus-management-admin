@@ -3539,7 +3539,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 font-size: 10px;
                                 color: ${colors.customColors.blackColor1};
                                 margin-right: 5px;
-                                padding: 4px 10px;
+                                padding: 4px 4px 4px 14px;;
                                 border-radius: 25px;
                                 border: 1px solid ${colors.customColors.borderColor};
                                 background: ${colors.customColors.whiteColor};
@@ -3562,7 +3562,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                                         display: flex;
                                         align-items: center;
                                         justify-content: center;
-                                        font-size: 10px;
+                                        font-size: 9.5px;
                                         color: ${colors.customColors.whiteColor};
                                         cursor: pointer;
                                         text-decoration: none;
@@ -3574,9 +3574,11 @@ export const TimeTableSettingsWrapper = styled('div')`
                                         }
 
                                         &:last-of-type {
+                                            width: 24px;
                                             background: ${colors.customColors.redColor};
-                                            border-top-right-radius: 4px;
-                                            border-bottom-right-radius: 4px;
+                                            border-top-right-radius: 25px;
+                                            border-bottom-right-radius: 25px;
+                                            padding-right: 2px;
                                         }
                                     }
                                 }
