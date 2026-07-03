@@ -18,7 +18,7 @@ const routinePeriods = [
     { name: "Second Period", time: "08:45 - 09:30" },
     { name: "3rd", time: "09:30 - 10:15" },
     { name: "4th", time: "10:15 - 11:00" },
-    { type: "break", name: "Break" },
+    { type: "break", name: "Tiffin" },
     { name: "5th", time: "11:30 - 12:15" },
     { name: "6th", time: "12:15 - 01:00" },
     { name: "7th", time: "01:00 - 01:45" },
@@ -302,7 +302,7 @@ const ClassroomDetailsPage = () => {
                 </div>
                 <div className="class_routine_sec">
                     <div className="routine_table_container">
-                        <table style={{ display: "none" }}>
+                        <table>
                             <thead>
                                 <tr>
                                     <th className="sticky_col day_header">Day</th>
@@ -321,20 +321,23 @@ const ClassroomDetailsPage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {["MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day) => (
+                                {["MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day, rowIdx) => (
                                     <tr key={day}>
                                         <td className="sticky_col day_col">{day}</td>
                                         {routineData[day].map((cell, idx) => {
                                             if (cell?.type === "break") {
-                                                return (
-                                                    <td key={idx} className="break_col">
-                                                        <div className="recess_box">
-                                                            {"BREAK".split("").map((char, i) => (
-                                                                <span key={i}>{char}</span>
-                                                            ))}
-                                                        </div>
-                                                    </td>
-                                                );
+                                                if (rowIdx === 0) {
+                                                    return (
+                                                        <td key={idx} className="break_col" rowSpan={6}>
+                                                            <div className="recess_box">
+                                                                {"TIFFIN".split("").map((char, i) => (
+                                                                    <span key={i}>{char}</span>
+                                                                ))}
+                                                            </div>
+                                                        </td>
+                                                    );
+                                                }
+                                                return null;
                                             }
 
                                             return (
@@ -357,7 +360,7 @@ const ClassroomDetailsPage = () => {
                                 ))}
                             </tbody>
                         </table>
-                        <div className="empty_box">
+                        <div className="empty_box" style={{ display: "none" }}>
                             <img src="/images/no-fields.svg" alt="" />
                             <p>No time table available for this class section.</p>
                             <a onClick={handleRedirectTimeTablePage}><i className="fa-solid fa-sliders"></i>Create Tittle</a>

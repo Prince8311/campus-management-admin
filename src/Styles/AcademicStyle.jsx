@@ -2759,6 +2759,17 @@ export const ClassroomDetailsWrapper = styled('div')`
         flex-direction: column;
         padding: 0 15px;
         margin-top: 25px;
+        padding-top: 25px;
+
+        &::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 15px;
+            width: calc(100% - 30px);
+            height: 1px;
+            background: ${colors.customColors.borderColor};
+        }
 
         .routine_table_container {
             position: relative;
@@ -2897,18 +2908,20 @@ export const ClassroomDetailsWrapper = styled('div')`
                                 min-width: 65px;
                                 vertical-align: middle;
                                 background: ${colors.customColors.blueColorLight1};
-                                padding: 6px 4px;
+                                padding: 15px 4px;
+                                border-bottom: none !important;
 
                                 .recess_box {
                                     display: flex;
                                     flex-direction: column;
                                     align-items: center;
-                                    justify-content: center;
-                                    gap: 2px;
-                                    font-size: 8px;
-                                    font-weight: 400;
+                                    justify-content: space-evenly;
+                                    height: 100%;
+                                    min-height: 380px;
+                                    gap: 15px;
+                                    font-size: 15px;
+                                    font-weight: 500;
                                     color: ${colors.customColors.blackColor};
-                                    letter-spacing: 1.5px;
                                 }
                             }
 
