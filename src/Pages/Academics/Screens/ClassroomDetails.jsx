@@ -11,6 +11,7 @@ import SkeletonLoader from '../../../Components/Loader/SkeletonLoader';
 import ManageTeacher from '../../../Components/Modals/Academics/ManageTeacher';
 import SubjectPreferenceModal from '../../../Components/Modals/Academics/SubjectPreference';
 import AttendenceModal from '../../../Components/Modals/Academics/Attendence';
+import { useNavigate } from 'react-router-dom';
 
 const routinePeriods = [
     { name: "First Period", time: "08:00 - 08:45" },
@@ -109,6 +110,7 @@ const routineData = {
 
 const ClassroomDetailsPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const [selectedClass] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedClass : '');
     const [sections] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).sections : []);
     const [selectedSection, setSelectedSection] = useState(localStorage.getItem("classroomDetails") ? JSON.parse(localStorage.getItem("classroomDetails")).selectedSection : '');
@@ -228,6 +230,10 @@ const ClassroomDetailsPage = () => {
         setIsAttendenceModalOpen(true);
     };
 
+    const handleRedirectTimeTablePage = () => {
+        navigate("/admin/settings/time-tables");
+    };
+
     return (
         <>
             <ClassroomDetailsWrapper>
@@ -296,7 +302,7 @@ const ClassroomDetailsPage = () => {
                 </div>
                 <div className="class_routine_sec">
                     <div className="routine_table_container">
-                        <table>
+                        <table style={{ display: "none" }}>
                             <thead>
                                 <tr>
                                     <th className="sticky_col day_header">Day</th>
@@ -351,6 +357,11 @@ const ClassroomDetailsPage = () => {
                                 ))}
                             </tbody>
                         </table>
+                        <div className="empty_box">
+                            <img src="/images/no-fields.svg" alt="" />
+                            <p>No time table available for this class section.</p>
+                            <a onClick={handleRedirectTimeTablePage}><i className="fa-solid fa-sliders"></i>Create Tittle</a>
+                        </div>
                     </div>
                 </div>
                 <div className="class_details_sec">

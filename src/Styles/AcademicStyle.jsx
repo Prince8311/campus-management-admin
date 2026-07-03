@@ -2756,18 +2756,20 @@ export const ClassroomDetailsWrapper = styled('div')`
         position: relative;
         width: 100%;
         display: flex;
+        flex-direction: column;
         padding: 0 15px;
         margin-top: 25px;
 
         .routine_table_container {
             position: relative;
             width: 100%;
+            min-height: 120px;
             background: ${colors.customColors.whiteColor};
             border-radius: 12px;
             border: 1px solid ${colors.customColors.borderColor};
             box-shadow: 0 4px 20px ${colors.boxShadowColors.shadowColor2};
             overflow-x: auto;
-            padding-bottom: 14px;
+            padding-bottom: 20px;
 
             &::-webkit-scrollbar {
                 height: 8px;
@@ -2786,20 +2788,21 @@ export const ClassroomDetailsWrapper = styled('div')`
 
             table {
                 width: 100%;
-                border-collapse: collapse;
+                border-collapse: separate;
+                border-spacing: 0;
                 text-align: center;
                 border: none;
                 
                 thead {
                     tr {
                         background: ${colors.customColors.blueColor2};
-                        border-bottom: 1px solid ${colors.customColors.borderColor};
 
                         th {
                             border-right: 1px solid ${colors.customColors.borderColor};
+                            border-bottom: 1px solid ${colors.customColors.borderColor};
                             padding: 12px 20px;
                             font-size: 13px;
-                            font-weight: 600;
+                            font-weight: 500;
                             color: ${colors.customColors.whiteColor};
                             min-width: 120px;
                             width: auto;
@@ -2810,15 +2813,13 @@ export const ClassroomDetailsWrapper = styled('div')`
                             }
                             
                             &.day_header {
-                                font-size: 14px;
+                                font-size: 13px;
                                 font-weight: 500;
-                                width: 80px;
                                 min-width: 80px;
                                 text-align: center;
                             }
 
                             &.break_header {
-                                width: 65px;
                                 min-width: 65px;
                                 text-align: center;
                                 
@@ -2866,17 +2867,18 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                 tbody {
                     tr {
-                        border-bottom: 1px solid ${colors.customColors.borderColor};
-
                         &:last-of-type {
-                            border-bottom: none;
+                            td {
+                                border-bottom: none;
+                            }
                         }
 
                         td {
                             border-right: 1px solid ${colors.customColors.borderColor};
+                            border-bottom: 1px solid ${colors.customColors.borderColor};
                             padding: 8px 12px;
                             vertical-align: middle;
-                            min-width: 120px;
+                            min-width: 100px;
                             width: auto;
 
                             &:last-of-type {
@@ -2885,14 +2887,13 @@ export const ClassroomDetailsWrapper = styled('div')`
                             
                             &.day_col {
                                 font-weight: 500;
-                                font-size: 14px;
+                                font-size: 13px;
                                 color: ${colors.customColors.blackColor};
                                 vertical-align: middle;
                                 text-align: center;
                             }
 
                             &.break_col {
-                                width: 65px;
                                 min-width: 65px;
                                 vertical-align: middle;
                                 background: ${colors.customColors.blueColorLight1};
@@ -3033,6 +3034,61 @@ export const ClassroomDetailsWrapper = styled('div')`
                             }
                         }
                     }
+                }
+            }
+
+            .empty_box {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0 10px;
+                margin-top: 35px;
+                margin-bottom: 20px;
+
+                img {
+                    position: relative;
+                    width: 150px;
+                    opacity: 0.5;
+                }
+
+                p {
+                    position: relative;
+                    font-size: 15px;
+                    margin-top: 10px;
+                    color: ${colors.customColors.blackColor3};
+                }
+
+                a {
+                    position: relative;
+                    width: 200px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                    color: ${colors.customColors.whiteColor};
+                    border: none;
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    text-decoration: none;
+                    margin-top: 15px;
+                    transition: all 0.5s ease;
+
+                    i {
+                        margin-right: 8px;
+                        font-size: 12px;
+                    }
+
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.5s ease;
+                    }
+
                 }
             }
         }
