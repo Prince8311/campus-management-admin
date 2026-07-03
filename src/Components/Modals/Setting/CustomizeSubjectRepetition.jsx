@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomizeSubjectRepetitionWrapper } from "../../../Styles/SettingModalStyle";
 
-const CustomizeSubjectRepetitionModal = ({ isCustomizeSubjectOpen, setIsCustomizeSubjectOpen, subjects = [], subjectRepeatData = [], setSubjectRepeatData }) => {
+const CustomizeSubjectRepetitionModal = ({
+    isCustomizeSubjectOpen,
+    setIsCustomizeSubjectOpen,
+    subjects = [],
+    subjectRepeatData = [],
+    setSubjectRepeatData,
+    selectedRepeatItem = null,
+    selectedRepeatIndex = -1,
+    onClose
+}) => {
     const types = ['Maximum', 'Minimum', 'Exactly'];
-    const selectedRepeatSubjects = subjectRepeatData.map((repeatItem) => repeatItem.subject);
-    const availableSubjects = subjects.filter((subject) => !selectedRepeatSubjects.includes(subject));
+    const selectedRepeatSubjects = subjectRepeatData
+        .filter((_, index) => index !== selectedRepeatIndex)
+        .map((repeatItem) => repeatItem.subject);
+    const availableSubjects = subjects.filter(
+        (subject) => !selectedRepeatSubjects.includes(subject) || subject === selectedRepeatItem?.subject
+    );
     const [showSubjectDropdown, setShowSubjectDropdown] = useState(false);
     const [showTypeDropdown, setShowTypeDropdown] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState('');
@@ -17,7 +30,27 @@ const CustomizeSubjectRepetitionModal = ({ isCustomizeSubjectOpen, setIsCustomiz
         setSelectedSubject('');
         setSelectedType('');
         setRepeatValue('');
+        if (onClose) onClose();
     }
+
+    useEffect(() => {
+        if (!isCustomizeSubjectOpen) {
+            setSelectedSubject('');
+            setSelectedType('');
+            setRepeatValue('');
+            return;
+        }
+
+        if (selectedRepeatItem) {
+            setSelectedSubject(selectedRepeatItem.subject);
+            setSelectedType(selectedRepeatItem.type);
+            setRepeatValue(selectedRepeatItem.value);
+        } else {
+            setSelectedSubject('');
+            setSelectedType('');
+            setRepeatValue('');
+        }
+    }, [isCustomizeSubjectOpen, selectedRepeatItem]);
 
     function toggleSubjectDropdown() {
         setShowSubjectDropdown(!showSubjectDropdown);
@@ -47,14 +80,28 @@ const CustomizeSubjectRepetitionModal = ({ isCustomizeSubjectOpen, setIsCustomiz
     const handleSave = () => {
         if (isSaveDisabled) return;
 
-        setSubjectRepeatData((prevData) => [
-            ...prevData,
-            {
-                subject: selectedSubject,
-                type: selectedType,
-                value: repeatValue.trim()
+        setSubjectRepeatData((prevData) => {
+            if (selectedRepeatIndex >= 0) {
+                return prevData.map((item, index) =>
+                    index === selectedRepeatIndex
+                        ? {
+                            subject: selectedSubject,
+                            type: selectedType,
+                            value: repeatValue.trim()
+                        }
+                        : item
+                );
             }
-        ]);
+
+            return [
+                ...prevData,
+                {
+                    subject: selectedSubject,
+                    type: selectedType,
+                    value: repeatValue.trim()
+                }
+            ];
+        });
         closeModal();
     }
 
@@ -121,7 +168,9 @@ const CustomizeSubjectRepetitionModal = ({ isCustomizeSubjectOpen, setIsCustomiz
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button disabled={isSaveDisabled} onClick={handleSave}>Save</button>
+                        <button disabled={isSaveDisabled} onClick={handleSave}>
+                            {selectedRepeatIndex >= 0 ? 'Update' : 'Save'}
+                        </button>
                     </div>
                 </div>
             </CustomizeSubjectRepetitionWrapper>

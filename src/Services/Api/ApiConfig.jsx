@@ -87,6 +87,7 @@ export const getApiEndpoints = () => {
         // Time Table 
         generateTimeTable: `${apiURL}/api/time-table/generate.php`,
         fetchTimeTable: `${apiURL}/api/time-table/list.php`,
+        saveTimeTable: `${apiURL}/api/time-table/save.php`,
 
         // Attendance Configuration 
         addAttendanceConfiguration: `${apiURL}/api/attendance/configuration/create.php`,

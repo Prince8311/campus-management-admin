@@ -27,8 +27,23 @@ const TimeTableSettingsPage = () => {
     const [halfDays, setHalfDays] = useState([]);
     const [showSubjectRepetition, setShowSubjectRepetition] = useState(false);
     const [subjectRepeatData, setSubjectRepeatData] = useState([]);
+    const [editingRepeatItem, setEditingRepeatItem] = useState(null);
+    const [editingRepeatIndex, setEditingRepeatIndex] = useState(-1);
     const [reloadTimeTable, setReloadTimeTable] = useState(false);
     const [timeTableData, setTimeTableData] = useState([]);
+    const [isTimeTableSaved, setIsTimeTableSaved] = useState(false);
+    const [isTimeTableSaving, setIsTimeTableSaving] = useState(false);
+    const [originalFullDays, setOriginalFullDays] = useState([]);
+    const [originalHalfDays, setOriginalHalfDays] = useState([]);
+    const [originalSubjectRepeatData, setOriginalSubjectRepeatData] = useState([]);
+
+    const hasPayloadChanged = () => {
+        const fullDaysChanged = JSON.stringify(fullDays) !== JSON.stringify(originalFullDays);
+        const halfDaysChanged = JSON.stringify(halfDays) !== JSON.stringify(originalHalfDays);
+        const repeatDataChanged = JSON.stringify(subjectRepeatData) !== JSON.stringify(originalSubjectRepeatData);
+        return fullDaysChanged || halfDaysChanged || repeatDataChanged;
+    };
+
     const isGenerateDisabled = fullDays.length === 0 && halfDays.length === 0;
 
     const fetchTimeSlots = async (showSkeleton = false) => {
@@ -64,7 +79,19 @@ const TimeTableSettingsPage = () => {
     };
 
     const handleOpenCustomizeSubject = () => {
+        setEditingRepeatItem(null);
+        setEditingRepeatIndex(-1);
         setIsCustomizeSubjectOpen(true);
+    };
+
+    const handleEditSubjectRepeat = (repeatItem, index) => {
+        setEditingRepeatItem(repeatItem);
+        setEditingRepeatIndex(index);
+        setIsCustomizeSubjectOpen(true);
+    };
+
+    const handleDeleteSubjectRepeat = (index) => {
+        setSubjectRepeatData((prevData) => prevData.filter((_, idx) => idx !== index));
     };
 
     const handleSelectWeekDay = (day, dayType) => {
@@ -221,8 +248,23 @@ const TimeTableSettingsPage = () => {
                 }
             });
             if (response?.data.status === 200) {
+                const repeats = response?.data.payload?.repeats || [];
+                const fetchedFullDays = response?.data.payload?.fullDays || [];
+                const fetchedHalfDays = response?.data.payload?.halfDays || [];
+
                 console.log('Time table', response?.data);
                 setTimeTableData(response?.data.data);
+                setIsTimeTableSaved(response?.data.all_saved || false);
+                setFullDays(fetchedFullDays);
+                setHalfDays(fetchedHalfDays);
+                setSubjectRepeatData(repeats);
+
+                // Store original values for change detection
+                setOriginalFullDays(fetchedFullDays);
+                setOriginalHalfDays(fetchedHalfDays);
+                setOriginalSubjectRepeatData(repeats);
+
+                setShowSubjectRepetition(repeats.length > 0);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -246,8 +288,12 @@ const TimeTableSettingsPage = () => {
             halfDays: halfDays
         };
 
+        const params = {
+            intent: hasPayloadChanged() ? 'new-regenerate' : 'generate'
+        };
+
         try {
-            const response = await axiosInstance.post(api.generateTimeTable, payload);
+            const response = await axiosInstance.post(api.generateTimeTable, payload, { params });
             if (response?.data.status === 200) {
                 setReloadTimeTable(true);
                 toast.success(response?.data.message);
@@ -274,7 +320,7 @@ const TimeTableSettingsPage = () => {
             const response = await axiosInstance.post(api.generateTimeTable, payload, {
                 params: {
                     intent: 're-generate',
-                    'generate-type': generateType,
+                    generateType: generateType,
                 },
             });
             if (response?.data.status === 200) {
@@ -485,13 +531,13 @@ const TimeTableSettingsPage = () => {
                                                                         {repeatItem.subject} - {repeatItem.type.toLowerCase()} {repeatItem.value}
 
                                                                         <div className="btns">
-                                                                            <a><i className="fa-regular fa-pen-to-square"></i></a>
-                                                                            <a><i className="fa-regular fa-trash-can"></i></a>
+                                                                            <a onClick={() => handleEditSubjectRepeat(repeatItem, i)}><i className="fa-regular fa-pen-to-square"></i></a>
+                                                                            <a onClick={() => handleDeleteSubjectRepeat(i)}><i className="fa-regular fa-trash-can"></i></a>
                                                                         </div>
                                                                     </p>
                                                                 ))
                                                             ) : (
-                                                                <p>No repetition rules added.</p>
+                                                                <p className="empty_message">No repetition rules added.</p>
                                                             )
                                                         }
                                                     </div>
@@ -504,7 +550,15 @@ const TimeTableSettingsPage = () => {
                                         {
                                             selectedSection &&
                                             <div className="btn_box">
-                                                <button onClick={handleGenerateTimeTable} disabled={isGenerateDisabled}><i className="fa-solid fa-file-pen"></i>Generate</button>
+                                                {(timeTableData.length === 0 || hasPayloadChanged()) && (
+                                                    <button
+                                                        onClick={handleGenerateTimeTable}
+                                                        disabled={isGenerateDisabled}
+                                                    >
+                                                        <i className="fa-solid fa-file-pen"></i>
+                                                        {timeTableData.length > 0 ? 'Re-Generate' : 'Generate'}
+                                                    </button>
+                                                )}
                                             </div>
                                         }
                                     </div>
@@ -521,10 +575,14 @@ const TimeTableSettingsPage = () => {
                                                                     <i className="fa-solid fa-calendar-day"></i>
                                                                     <span>{data.day}</span>
                                                                 </li>
-                                                                <button className="small_btn" onClick={() => handleRegenerateTimeTable('day', data.day)}>
-                                                                    <i className="fa-solid fa-arrow-rotate-left"></i>
-                                                                </button>
-                                                                <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
+                                                                <div className="header_btn_sec">
+                                                                    {!hasPayloadChanged() && (
+                                                                        <button className="small_btn" onClick={() => handleRegenerateTimeTable('day', data.day)}>
+                                                                            <i className="fa-solid fa-arrow-rotate-left"></i>
+                                                                        </button>
+                                                                    )}
+                                                                    <button disabled={data.saved}><i className="fa-solid fa-floppy-disk"></i>Save</button>
+                                                                </div>
                                                             </div>
                                                             <div className="box_items">
                                                                 {
@@ -563,8 +621,11 @@ const TimeTableSettingsPage = () => {
                                                     )
                                                 }
                                                 <div className="btns_sec">
-                                                    <button onClick={() => handleRegenerateTimeTable('week')}><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
-                                                    <button><i className="fa-solid fa-floppy-disk"></i>Save</button>
+                                                    {
+                                                        !hasPayloadChanged() &&
+                                                        <button className="regenerate_btn" onClick={() => handleRegenerateTimeTable('week')}><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
+                                                    }
+                                                    <button className="save_btn" disabled={isTimeTableSaved || isTimeTableSaving}><i className="fa-solid fa-floppy-disk"></i>Save</button>
                                                 </div>
                                             </div>
                                         ) : (
@@ -593,6 +654,13 @@ const TimeTableSettingsPage = () => {
                     subjects={subjects}
                     subjectRepeatData={subjectRepeatData}
                     setSubjectRepeatData={setSubjectRepeatData}
+                    selectedRepeatItem={editingRepeatItem}
+                    selectedRepeatIndex={editingRepeatIndex}
+                    onClose={() => {
+                        setIsCustomizeSubjectOpen(false);
+                        setEditingRepeatItem(null);
+                        setEditingRepeatIndex(-1);
+                    }}
                 />
             </TimeTableSettingsWrapper>
         </>

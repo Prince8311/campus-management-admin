@@ -3118,7 +3118,6 @@ export const TimeTableSettingsWrapper = styled('div')`
     }
 
     .page_bottom_sec {
-        /* make the whole bottom section stick to top when scrolling */
         position: sticky;
         top: 74px;
         z-index: 20;
@@ -3168,7 +3167,6 @@ export const TimeTableSettingsWrapper = styled('div')`
             margin-top: 30px;
 
             .left_item_sec {
-                /* keep left panel visible while right side scrolls */
                 position: sticky;
                 top: 15px;
                 align-self: flex-start;
@@ -3527,7 +3525,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                         .text_top_sec {
                             position: relative;
                             width: 100%;
-                            min-height: 80px;
+                            min-height: 60px;
                             display: flex;
                             flex-wrap: wrap;
 
@@ -3538,14 +3536,22 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 align-items: center;
                                 font-size: 10px;
                                 color: ${colors.customColors.blackColor1};
-                                margin-right: 5px;
+                                margin-bottom: 5px;
                                 padding: 4px 4px 4px 14px;;
                                 border-radius: 25px;
                                 border: 1px solid ${colors.customColors.borderColor};
                                 background: ${colors.customColors.whiteColor};
 
                                 &:last-of-type {
-                                    margin-right: 0;
+                                    margin-bottom: 0;
+                                }
+
+                                &.empty_message {
+                                    padding: 0 5px;
+                                    border: none;
+                                    background: transparent;
+                                    font-size: 11px;
+                                    color: ${colors.customColors.blackColor2};
                                 }
 
                                 .btns {
@@ -3659,7 +3665,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                 padding-left: 20px;
                 padding-right: 8px;
                 display: flex;
-                max-height: calc(100vh - 110px);
+                max-height: calc(100vh - 70px);
                 overflow-y: auto;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
@@ -3730,59 +3736,44 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 }
                             }
 
-                            a {
+                            .header_btn_sec {
                                 position: relative;
-                                height: 30px;
-                                width: 30px;
-                                text-decoration: none;
-                                border: 1px solid ${colors.customColors.blueColor2};
-                                background: ${colors.customColors.whiteColor};
-                                color: ${colors.customColors.blueColor2};
-                                font-size: 12px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                border-radius: 6px;
                                 margin-left: auto;
-                                opacity: 0;
-                                visibility: hidden;
-                                cursor: pointer;
-                                 transition: all 0.5s eases;
-                            }
 
-                            button {
-                                position: relative;
-                                height: 30px;
-                                padding: 0 20px;
-                                border: none;
-                                font-size: 12px;
-                                margin-left: 10px;
-                                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
-                                color: ${colors.customColors.whiteColor};
-                                border-radius: 6px;
-                                cursor: pointer;
-                                opacity: 0;
-                                visibility: hidden;
-                                transition: all 0.5s ease;
-
-                                i {
-                                    margin-right: 6px;
-                                }
-
-                                &:hover {
-                                    border-radius: 25px;
+                                button {
+                                    position: relative;
+                                    height: 30px;
+                                    padding: 0 20px;
+                                    border: none;
+                                    font-size: 12px;
+                                    margin-left: 10px;
+                                    background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                                    color: ${colors.customColors.whiteColor};
+                                    border-radius: 6px;
+                                    cursor: pointer;
+                                    opacity: 0;
+                                    visibility: hidden;
                                     transition: all 0.5s ease;
-                                }
-
-                                &.small_btn {
-                                    padding: 0 15px;
-                                    margin-left: auto;
-
+    
                                     i {
-                                        margin-right: 0;
+                                        margin-right: 6px;
+                                    }
+    
+                                    &:hover {
+                                        border-radius: 25px;
+                                        transition: all 0.5s ease;
+                                    }
+    
+                                    &.small_btn {
+                                        padding: 0 15px;
+    
+                                        i {
+                                            margin-right: 0;
+                                        }
                                     }
                                 }
                             }
+
                         }
 
                         .box_items {
@@ -3953,13 +3944,13 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 transition: all 0.5s ease;
                             }
 
-                            &:first-of-type {
+                            &.regenerate_btn {
                                 border: 2px solid ${colors.customColors.blueColor2};
                                 background: ${colors.customColors.whiteColor};
                                 color: ${colors.customColors.blueColor2};
                             }
 
-                            &:last-of-type {
+                            &.save_btn {
                                 margin-left: 20px;
                                 background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                                 color: ${colors.customColors.whiteColor};
