@@ -3529,7 +3529,7 @@ export const TimeTableSettingsWrapper = styled('div')`
                             display: flex;
                             flex-wrap: wrap;
 
-                            p {
+                            .repeat_data {
                                 position: relative;
                                 height: max-content;
                                 display: flex;
@@ -3544,6 +3544,11 @@ export const TimeTableSettingsWrapper = styled('div')`
 
                                 &:last-of-type {
                                     margin-bottom: 0;
+                                }
+
+                                p {
+                                    position: relative;
+
                                 }
 
                                 &.empty_message {
@@ -3771,6 +3776,11 @@ export const TimeTableSettingsWrapper = styled('div')`
                                             margin-right: 0;
                                         }
                                     }
+
+                                    &:disabled {
+                                        opacity: 0.4;
+                                        cursor: not-allowed;
+                                    }
                                 }
                             }
 
@@ -3954,6 +3964,11 @@ export const TimeTableSettingsWrapper = styled('div')`
                                 margin-left: 20px;
                                 background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                                 color: ${colors.customColors.whiteColor};
+
+                                &:disabled {
+                                    opacity: 0.4;
+                                    cursor: not-allowed;
+                                }
                             }
                         }
                     }

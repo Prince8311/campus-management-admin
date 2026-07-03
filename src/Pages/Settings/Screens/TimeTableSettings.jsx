@@ -6,6 +6,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import CustomizeSubjectRepetitionModal from "../../../Components/Modals/Setting/CustomizeSubjectRepetition";
+import ButtonLoader from "../../../Components/Loader/ButtonLoader";
 
 const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -33,6 +34,7 @@ const TimeTableSettingsPage = () => {
     const [timeTableData, setTimeTableData] = useState([]);
     const [isTimeTableSaved, setIsTimeTableSaved] = useState(false);
     const [isTimeTableSaving, setIsTimeTableSaving] = useState(false);
+    const [savingDay, setSavingDay] = useState('');
     const [originalFullDays, setOriginalFullDays] = useState([]);
     const [originalHalfDays, setOriginalHalfDays] = useState([]);
     const [originalSubjectRepeatData, setOriginalSubjectRepeatData] = useState([]);
@@ -333,6 +335,43 @@ const TimeTableSettingsPage = () => {
 
     }
 
+    const handleSaveTimeTable = async (type = 'week', day = null) => {
+        const payload = {
+            class: selectedClass,
+            section: selectedSection,
+        };
+
+        if (type === 'day' && day) {
+            payload.day = day;
+        }
+
+        if (type === 'week') {
+            setIsTimeTableSaving(true);
+        } else {
+            setSavingDay(day);
+        }
+
+        try {
+            const response = await axiosInstance.post(api.saveTimeTable, payload, {
+                params: {
+                    type: type,
+                },
+            });
+            if (response?.data.status === 200) {
+                setReloadTimeTable(true);
+                toast.success(response?.data.message);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            if (type === 'week') {
+                setIsTimeTableSaving(false);
+            } else {
+                setSavingDay('');
+            }
+        }
+    }
+
     return (
         <>
             <TimeTableSettingsWrapper>
@@ -527,14 +566,14 @@ const TimeTableSettingsPage = () => {
                                                         {
                                                             subjectRepeatData.length > 0 ? (
                                                                 subjectRepeatData.map((repeatItem, i) => (
-                                                                    <p key={`${repeatItem.subject}-${repeatItem.type}-${i}`}>
-                                                                        {repeatItem.subject} - {repeatItem.type.toLowerCase()} {repeatItem.value}
+                                                                    <div className="repeat_data"  key={`${repeatItem.subject}-${repeatItem.type}-${i}`}>
+                                                                        <p>{repeatItem.subject} - {repeatItem.type.toLowerCase()} {repeatItem.value}</p>
 
                                                                         <div className="btns">
                                                                             <a onClick={() => handleEditSubjectRepeat(repeatItem, i)}><i className="fa-regular fa-pen-to-square"></i></a>
                                                                             <a onClick={() => handleDeleteSubjectRepeat(i)}><i className="fa-regular fa-trash-can"></i></a>
                                                                         </div>
-                                                                    </p>
+                                                                    </div>
                                                                 ))
                                                             ) : (
                                                                 <p className="empty_message">No repetition rules added.</p>
@@ -581,7 +620,12 @@ const TimeTableSettingsPage = () => {
                                                                             <i className="fa-solid fa-arrow-rotate-left"></i>
                                                                         </button>
                                                                     )}
-                                                                    <button disabled={data.saved}><i className="fa-solid fa-floppy-disk"></i>Save</button>
+                                                                    <button
+                                                                        disabled={data.saved || isTimeTableSaving || Boolean(savingDay)}
+                                                                        onClick={() => handleSaveTimeTable('day', data.day)}
+                                                                    >
+                                                                        {savingDay === data.day ? <ButtonLoader /> : <><i className="fa-solid fa-floppy-disk"></i>Save</>}
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                             <div className="box_items">
@@ -625,7 +669,15 @@ const TimeTableSettingsPage = () => {
                                                         !hasPayloadChanged() &&
                                                         <button className="regenerate_btn" onClick={() => handleRegenerateTimeTable('week')}><i className="fa-solid fa-arrow-rotate-left"></i>Re-Generate</button>
                                                     }
-                                                    <button className="save_btn" disabled={isTimeTableSaved || isTimeTableSaving}><i className="fa-solid fa-floppy-disk"></i>Save</button>
+                                                    <button className="save_btn" disabled={isTimeTableSaved || isTimeTableSaving || Boolean(savingDay)} onClick={() => handleSaveTimeTable('week')}>
+                                                        {
+                                                            isTimeTableSaving ? (
+                                                                <ButtonLoader />
+                                                            ) : (
+                                                                <><i className="fa-solid fa-floppy-disk"></i>Save</>
+                                                            )
+                                                        }
+                                                    </button>
                                                 </div>
                                             </div>
                                         ) : (

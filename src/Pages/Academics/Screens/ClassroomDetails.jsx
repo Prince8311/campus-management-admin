@@ -309,7 +309,7 @@ const ClassroomDetailsPage = () => {
                                     {routinePeriods.map((period, index) => (
                                         <th key={index} className={period.type === "break" ? "break_header" : ""}>
                                             {period.type === "break" ? (
-                                                <span className="break_title">Break</span>
+                                                <span className="break_title">-</span>
                                             ) : (
                                                 <div className="period_header">
                                                     <span className="period_num">{period.name}</span>
