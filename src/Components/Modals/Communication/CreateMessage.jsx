@@ -1,9 +1,20 @@
+import { useState } from "react";
 import { MessageCreateWrapper } from "../../../Styles/Modals/CommunicationStyle";
 
 const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalOpen }) => {
+    const [messageId, setMessageId] = useState("");
+    const [isApproved, setIsApproved] = useState(false);
 
     const closeModal = () => {
         setIsMessageCreateModalOpen(false);
+    };
+
+    const handleMessageIdChange = (e) => {
+        const value = e.target.value.trim();
+        setMessageId(value);
+        if (!value) {
+            setIsApproved(false);
+        }
     };
 
     return (
@@ -28,7 +39,11 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
                             </div>
                             <div className="input_box">
                                 <span>Message Id <p>*</p></span>
-                                <input type="text" />
+                                <input
+                                    type="text"
+                                    value={messageId}
+                                    onChange={handleMessageIdChange}
+                                />
                             </div>
                         </div>
                     </div>
@@ -38,6 +53,9 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
                             <input
                                 type="checkbox"
                                 id="toggle"
+                                checked={isApproved}
+                                disabled={!messageId}
+                                onChange={(e) => setIsApproved(e.target.checked)}
                             />
                             <label htmlFor="toggle">
                                 <span></span>
