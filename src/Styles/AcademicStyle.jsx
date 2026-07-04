@@ -2759,16 +2759,18 @@ export const ClassroomDetailsWrapper = styled('div')`
         flex-direction: column;
         padding: 0 15px;
         margin-top: 25px;
-        padding-top: 25px;
 
-        &::before {
-            position: absolute;
-            content: "";
-            top: 0;
-            left: 15px;
-            width: calc(100% - 30px);
-            height: 1px;
-            background: ${colors.customColors.borderColor};
+        .table_heading {
+            position: relative;
+            width: 100;
+            display: flex;
+
+            h3 {
+                position: relative;
+                font-size: 17px;
+                font-weight: 500;
+                color: ${colors.customColors.blackColor1};
+            }
         }
 
         .routine_table_container {
@@ -2781,6 +2783,7 @@ export const ClassroomDetailsWrapper = styled('div')`
             box-shadow: 0 4px 20px ${colors.boxShadowColors.shadowColor2};
             overflow-x: auto;
             padding-bottom: 20px;
+            margin-top: 20px;
 
             &::-webkit-scrollbar {
                 height: 8px;

@@ -98,13 +98,7 @@ const routineData = {
         { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
         { subject: "SCIENCE", teacher: "Dr. S. Verma", color: "purple" },
         { subject: "G.K.", teacher: "Sonal Sen", color: "orange" },
-        { type: "break" },
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        { type: "break" }
     ]
 };
 
@@ -301,6 +295,9 @@ const ClassroomDetailsPage = () => {
                     }
                 </div>
                 <div className="class_routine_sec">
+                    <div className="table_heading">
+                        <h3>Time table Section</h3>
+                    </div>
                     <div className="routine_table_container">
                         <table>
                             <thead>
@@ -324,8 +321,10 @@ const ClassroomDetailsPage = () => {
                                 {["MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day, rowIdx) => (
                                     <tr key={day}>
                                         <td className="sticky_col day_col">{day}</td>
-                                        {routineData[day].map((cell, idx) => {
-                                            if (cell?.type === "break") {
+                                        {routinePeriods.map((period, idx) => {
+                                            const cell = routineData[day]?.[idx];
+
+                                            if (period.type === "break" || cell?.type === "break") {
                                                 if (rowIdx === 0) {
                                                     return (
                                                         <td key={idx} className="break_col" rowSpan={6}>
@@ -347,12 +346,12 @@ const ClassroomDetailsPage = () => {
                                                             <h6 className="sub_name">{cell.subject}</h6>
                                                             <p className="teacher_name">{cell.teacher}</p>
                                                         </div>
-                                                    ) : (
+                                                    ) : cell === null ? (
                                                         <div className="add_sub_card">
                                                             <span className="add_icon"><i className="fa-solid fa-plus"></i></span>
                                                             <p>Add Sub</p>
                                                         </div>
-                                                    )}
+                                                    ) : null}
                                                 </td>
                                             );
                                         })}

@@ -1350,6 +1350,47 @@ export const ProfileSettingsWrapper = styled('div')`
         }
     }
 
+    .tab_sec {
+        position: relative;
+        margin-top: 25px;
+        width: 100%;
+
+        .tab_inner {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid ${colors.themeColor};
+
+            li {
+                position: relative;
+                list-style: none;
+                height: 100%;
+                padding: 0 20px;
+                padding-top: 2px;
+                display: flex;
+                align-items: center;
+                font-size: 12.5px;
+                color: ${colors.customColors.blackColor1};
+                border-radius: 6px 6px 0 0;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                
+                &:hover {
+                    color: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+                
+                &.active {
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+            }
+        }
+    }
+
     .heading_option_part {
         position: relative;
         width: 100%;
@@ -1359,32 +1400,45 @@ export const ProfileSettingsWrapper = styled('div')`
 
         .inner_part {
             position: relative;
-            width: max-content;
-            padding: 6px;
-            background: ${colors.customColors.lightBackground};
-            border-radius: 6px;
+            width: 100%;
+            height: 30px;
             display: flex;
+            align-items: center;
+            border-bottom: 2px solid ${colors.themeColor};
 
             .part_box {
                 position: relative;
-                padding: 8px 20px;
-                cursor: pointer;
-                border-radius: 4px;
+                list-style: none;
+                height: 100%;
+                padding: 0 20px;
+                padding-top: 2px;
+                display: flex;
+                align-items: center;
                 text-decoration: none;
+                border-radius: 6px 6px 0 0;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                
+                &:hover {
+                    color: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
                 
                 &.active {
-                    background: ${colors.customColors.blueColor1};
+                    background: ${colors.themeColor};
+                    transition: all 0.5s ease;
                 }
 
                 h6 {
                     position: relative;
-                    font-size: 13px;
+                    font-size: 12.5px;
                     font-weight: 500;
                     color: ${colors.customColors.blackColor1};
                 }
                 
                 &.active h6 {
                     color: ${colors.customColors.whiteColor};
+                    transition: all 0.5s ease;
                 }
             }
         }
@@ -1463,19 +1517,21 @@ export const StudentWrapper = styled('div')`
 
                     button {
                         position: relative;
-                        width: 200px;
+                        width: 175px;
                         height: 35px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         cursor: pointer;
+                        border: none;
                         background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                         color: ${colors.customColors.whiteColor};
-                        border: none;
                         border-radius: 6px;
-                        font-size: 13px;
+                        font-size: 12.5px;
                         font-weight: 500;
-                        transition: all 0.3s ease;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.5s ease;
 
                         i {
                             margin-right: 8px;
@@ -1484,7 +1540,7 @@ export const StudentWrapper = styled('div')`
 
                         &:hover {
                             border-radius: 25px;
-                            transition: all 0.3s ease;
+                            transition: all 0.5s ease;
                         }
                     }
                 }
@@ -1644,6 +1700,18 @@ export const StudentWrapper = styled('div')`
                     }
                 }
             }
+
+            &:hover {
+                .box_top_sec {
+                    .add_btn {
+                        button {
+                            opacity: 1;
+                            visibility: visible;
+                            transition: all 0.5s ease;
+                        }
+                    }
+                }
+            }
         }
     }
 `;
@@ -1727,6 +1795,8 @@ export const StaffWrapper = styled('div')`
                         border-radius: 6px;
                         font-size: 13px;
                         font-weight: 500;
+                        opacity: 0;
+                        visibility: hidden;
                         transition: all 0.3s ease;
                         
                         &:hover {
@@ -1888,6 +1958,18 @@ export const StaffWrapper = styled('div')`
                         font-size: 13px;
                         margin-top: 10px;
                         color: ${colors.customColors.blackColor3};
+                    }
+                }
+            }
+
+            &:hover {
+                .box_top_sec {
+                    .add_btn {
+                        button {
+                            opacity: 1;
+                            visibility: visible;
+                            transition: all 0.5s ease;
+                        }
                     }
                 }
             }
