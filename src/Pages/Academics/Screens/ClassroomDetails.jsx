@@ -296,7 +296,7 @@ const ClassroomDetailsPage = () => {
                 </div>
                 <div className="class_routine_sec">
                     <div className="table_heading">
-                        <h3>Time table Section</h3>
+                        <h3>Class time table</h3>
                     </div>
                     <div className="routine_table_container">
                         <table>
