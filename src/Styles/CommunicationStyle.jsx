@@ -657,14 +657,9 @@ export const InstitutionWalletWrapper = styled('div')`
                                 align-items: center;
                                 border-radius: 20px;
                                 padding: 4px 15px;
-                                color: ${colors.customColors.yellowColor1};
-                                background: ${colors.customColors.yellowColorLight};
+                                color: ${colors.customColors.blackColor2};
 
-                                &.active {
-                                    color: ${colors.customColors.greenColor};
-                                    background: ${colors.customColors.greenColorLight};
-                                }
-                                &.pending {
+                                &.request {
                                     color: ${colors.customColors.orangeColor};
                                     background: ${colors.customColors.yellowColorLight};
                                 }

@@ -1,6 +1,13 @@
+import { useState } from "react";
+import AddInstitutionWalletModal from "../../../Components/Modals/Communication/AddInstitutionWallet";
 import { InstitutionWalletWrapper } from "../../../Styles/CommunicationStyle";
 
 const InstitutionWalletsPage = () => {
+    const [isAddInstitutionWalletModal, setIsAddInstitutionWalletModal] = useState(false);
+
+    const handleAddInstitutionWalletModalopen = () => {
+        setIsAddInstitutionWalletModal(true);
+    }
     return (
         <>
             <InstitutionWalletWrapper>
@@ -13,7 +20,7 @@ const InstitutionWalletsPage = () => {
                         <input type="text" placeholder="Search by Institution name..." />
                     </div>
                     <div className="add_btn">
-                        <button>
+                        <button onClick={handleAddInstitutionWalletModalopen}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add New</p>
                         </button>
@@ -26,7 +33,7 @@ const InstitutionWalletsPage = () => {
                                 <th>Institution Name</th>
                                 <th>Total Balance</th>
                                 <th>Avl Balance</th>
-                                <th>Request Status</th>
+                                <th>Institution Wallet</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -36,7 +43,18 @@ const InstitutionWalletsPage = () => {
                                 <td>10,000,00</td>
                                 <td>100000</td>
                                 <td>
-                                    <p className="active">Active</p>
+                                    <p className="request">Request</p>
+                                </td>
+                                <td>
+                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Abc Institution</td>
+                                <td>10,000,00</td>
+                                <td>100000</td>
+                                <td>
+                                    <p><i className="fa-solid fa-minus"></i></p>
                                 </td>
                                 <td>
                                     <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
@@ -45,6 +63,10 @@ const InstitutionWalletsPage = () => {
                         </tbody>
                     </table>
                 </div>
+                < AddInstitutionWalletModal
+                    isAddInstitutionWalletModal={isAddInstitutionWalletModal}
+                    setIsAddInstitutionWalletModal={setIsAddInstitutionWalletModal}
+                />
             </InstitutionWalletWrapper>
         </>
     );

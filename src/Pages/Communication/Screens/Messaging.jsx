@@ -4,6 +4,8 @@ import CreateMessageModal from "../../../Components/Modals/Communication/CreateM
 
 const MessagingPage = () => {
     const [isMessageCreateModalOpen, setIsMessageCreateModalOpen] = useState(false);
+    const tabs = ['Active', 'Requested'];
+    const [selectedTab, setSelectedTab] = useState(tabs[0]);
 
     const openMessageCreateModal = () => {
         setIsMessageCreateModalOpen(true);
@@ -72,8 +74,17 @@ const MessagingPage = () => {
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
-                        <li className="active">Active</li>
-                        <li>Requested</li>
+                        {
+                            tabs.map((tab, i) =>
+                                <li
+                                    key={i}
+                                    className={selectedTab === tab ? 'active' : ''}
+                                    onClick={() => setSelectedTab(tab)}
+                                >
+                                    {tab}
+                                </li>
+                            )
+                        }
                     </div>
                 </div>
                 <div className="page_content">
