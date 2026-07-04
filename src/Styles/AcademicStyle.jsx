@@ -2806,6 +2806,7 @@ export const ClassroomDetailsWrapper = styled('div')`
                 border-spacing: 0;
                 text-align: center;
                 border: none;
+                table-layout: fixed;
                 
                 thead {
                     tr {
@@ -2829,12 +2830,13 @@ export const ClassroomDetailsWrapper = styled('div')`
                             &.day_header {
                                 font-size: 13px;
                                 font-weight: 500;
-                                min-width: 80px;
+                                width: 100px;
                                 text-align: center;
                             }
 
                             &.break_header {
-                                min-width: 65px;
+                                width: 65px;
+                                min-width: 0;
                                 text-align: center;
                                 
                                 .break_title {
@@ -2908,7 +2910,8 @@ export const ClassroomDetailsWrapper = styled('div')`
                             }
 
                             &.break_col {
-                                min-width: 65px;
+                                width: 65px;
+                                min-width: 0;
                                 vertical-align: middle;
                                 background: ${colors.customColors.blueColorLight1};
                                 padding: 15px 4px;
@@ -2939,6 +2942,9 @@ export const ClassroomDetailsWrapper = styled('div')`
                             .subject_card {
                                 position: relative;
                                 width: 100%;
+                                max-width: 100%;
+                                min-width: 0;
+                                box-sizing: border-box;
                                 min-height: 56px;
                                 border-radius: 6px;
                                 padding: 9px 12px;
@@ -3113,16 +3119,21 @@ export const ClassroomDetailsWrapper = styled('div')`
     .class_details_sec {
         position: relative;
         width: 100%;
-        display: flex;
+        display: grid;
+        grid-template-columns: 365px minmax(0, 1fr);
+        gap: 20px;
         padding: 0 15px;
         margin-bottom: 15px;
+        align-items: start;
 
         .student_box {
-            position: relative;
-            width: 365px;
+            position: sticky;
+            top: 120px;
+            width: 100%;
+            max-width: 365px;
             display: flex;
-            padding-right: 25px;
             margin-top: 25px;
+            align-self: start;
 
             .student_box_inner {
                 position: relative;
@@ -3133,6 +3144,9 @@ export const ClassroomDetailsWrapper = styled('div')`
                 border-radius: 8px;
                 box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
                                     -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+                max-height: calc(100vh - 220px);
+                overflow: hidden;
+                background: ${colors.customColors.whiteColor};
                 
                 .student_heading {
                     position: relative;
@@ -3242,7 +3256,8 @@ export const ClassroomDetailsWrapper = styled('div')`
                     display: flex;
                     flex-direction: column;
                     margin-top: 20px;
-                    max-height: 270px;
+                    flex: 1;
+                    min-height: 0;
                     overflow-y: auto;
                     scrollbar-width: none;
                     -ms-overflow-style: none;
@@ -3354,10 +3369,13 @@ export const ClassroomDetailsWrapper = styled('div')`
 
         .details_box {
             position: relative;
-            width: calc(100% - 365px);
+            width: 100%;
             margin-top: 25px;
             display: flex;
             flex-direction: column;
+            min-height: 0;
+            max-height: calc(100vh - 220px);
+            overflow: hidden;
             border-radius: 8px;
             box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
                                     -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
@@ -3461,8 +3479,17 @@ export const ClassroomDetailsWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                padding: 10px;
                 flex-wrap: wrap;
+                padding: 10px;
+                overflow-y: auto;
+                min-height: 0;
+                flex: 1;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
 
                 .item {
                     position: relative;
