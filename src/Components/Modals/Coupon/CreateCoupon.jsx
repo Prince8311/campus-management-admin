@@ -1,10 +1,22 @@
+import { useState } from "react";
 import { CouponModalWrapper } from "../../../Styles/Modals/CouponModalStyle";
 
+
 const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
+
+    const couponTypes = ['Genaral', 'Private'];
+    const [showCouponTypeDropdown, setShowCouponTypeDropdown] = useState(false);
+    const [selectedCouponType, setSelectedCouponType] = useState('');
 
     const closeModal = () => {
         setIsCouponModalOpen(false);
     };
+
+    const handleSelectedCouponType = (couponType) => {
+        if (couponType === selectedCouponType) return;
+        setSelectedCouponType(couponType);
+        setShowCouponTypeDropdown(false);
+    }
 
     return (
         <>
@@ -21,15 +33,28 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                             <div className="select_box halfwidth">
                                 <span>Coupon Type <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
-                                        <p>General</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                    <div className="dropdown_btn" onClick={() => setShowCouponTypeDropdown(!showCouponTypeDropdown)}>
+                                        <p>{selectedCouponType}</p>
+                                        <i className={`fa-solid fa-angle-down ${showCouponTypeDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showCouponTypeDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li>General</li>
-                                                <li>Private</li>
+                                                {
+                                                    couponTypes.length > 0 ? (
+                                                        couponTypes.map((couponType, i) =>
+                                                            <li
+                                                                key={i}
+                                                                onClick={() => handleSelectedCouponType(couponType)}
+                                                                className={couponType === selectedCouponType ? 'active' : ''}
+                                                            >
+                                                                {couponType}
+                                                            </li>
+                                                        )
+                                                    ) : (
+                                                        <li className="empty_message">No coupontype available</li>
+                                                    )
+                                                }
                                             </ul>
                                         </div>
                                     </div>
