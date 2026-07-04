@@ -90,7 +90,6 @@ const routineData = {
         { subject: "G.K.", teacher: "Sonal Sen", color: "purple" },
         { subject: "VALUE ED.", teacher: "Priya Mehta", color: "grey" },
         null,
-        null,
         null
     ],
     SAT: [
