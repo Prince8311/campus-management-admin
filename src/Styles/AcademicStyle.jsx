@@ -2767,7 +2767,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
             h3 {
                 position: relative;
-                font-size: 17px;
+                font-size: 14px;
                 font-weight: 500;
                 color: ${colors.customColors.blackColor1};
             }
