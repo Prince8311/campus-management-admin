@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { ClassroomDetailsWrapper } from "../../../Styles/AcademicStyle";
@@ -13,95 +13,6 @@ import SubjectPreferenceModal from '../../../Components/Modals/Academics/Subject
 import AttendenceModal from '../../../Components/Modals/Academics/Attendence';
 import { useNavigate } from 'react-router-dom';
 
-const routinePeriods = [
-    { name: "First Period", time: "08:00 - 08:45" },
-    { name: "Second Period", time: "08:45 - 09:30" },
-    { name: "3rd", time: "09:30 - 10:15" },
-    { name: "4th", time: "10:15 - 11:00" },
-    { type: "break", name: "Tiffin" },
-    { name: "5th", time: "11:30 - 12:15" },
-    { name: "6th", time: "12:15 - 01:00" },
-    { name: "7th", time: "01:00 - 01:45" },
-    { name: "8th", time: "01:45 - 02:30" },
-    { name: "9th", time: "02:30 - 03:15" },
-    { name: "10th", time: "03:15 - 04:00" }
-];
-
-const routineData = {
-    MON: [
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
-        { subject: "MUSIC", teacher: "Samar Shukla", color: "orange" },
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { type: "break" },
-        { subject: "EVS", teacher: "Priya Mehta", color: "purple" },
-        { subject: "ENGLISH II", teacher: "Dr. Rajat K.", color: "green" },
-        { subject: "HISTORY", teacher: "Anil Kumar", color: "orange" },
-        null,
-        null,
-        null
-    ],
-    TUE: [
-        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        null,
-        { subject: "COMP. PRAC", teacher: "Vikram Dev", color: "grey" },
-        { type: "break" },
-        { subject: "ENGLISH II", teacher: "Dr. Rajat K.", color: "green" },
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { subject: "GEOGRAPHY", teacher: "Sonal Sen", color: "purple" },
-        { subject: "PT / YOGA", teacher: "R. K. Singh", color: "orange" },
-        null,
-        null
-    ],
-    WED: [
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
-        { subject: "SCIENCE", teacher: "Dr. S. Verma", color: "purple" },
-        { subject: "LIBRARY", teacher: "Manoj Das", color: "grey" },
-        { type: "break" },
-        { subject: "EVS", teacher: "Priya Mehta", color: "purple" },
-        null,
-        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
-        { subject: "ART / CRAFT", teacher: "Neelam Roy", color: "orange" },
-        null,
-        null
-    ],
-    THU: [
-        { subject: "SCIENCE", teacher: "Dr. S. Verma", color: "purple" },
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { subject: "ENGLISH II", teacher: "Dr. Rajat K.", color: "green" },
-        null,
-        { type: "break" },
-        { subject: "PT / YOGA", teacher: "R. K. Singh", color: "orange" },
-        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { subject: "COMP. THEORY", teacher: "Vikram Dev", color: "grey" },
-        null,
-        null
-    ],
-    FRI: [
-        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
-        null,
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { subject: "BENGALI", teacher: "Amitava B.", color: "green" },
-        { type: "break" },
-        { subject: "ART / CRAFT", teacher: "Neelam Roy", color: "orange" },
-        { subject: "G.K.", teacher: "Sonal Sen", color: "purple" },
-        { subject: "VALUE ED.", teacher: "Priya Mehta", color: "grey" },
-        null,
-        null,
-        null
-    ],
-    SAT: [
-        { subject: "MATHS", teacher: "Mrs. A. Sharma", color: "blue" },
-        { subject: "ENGLISH I", teacher: "Dr. Rajat K.", color: "green" },
-        { subject: "SCIENCE", teacher: "Dr. S. Verma", color: "purple" },
-        { subject: "G.K.", teacher: "Sonal Sen", color: "orange" },
-        { type: "break" }
-    ]
-};
-
 const ClassroomDetailsPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
@@ -112,6 +23,8 @@ const ClassroomDetailsPage = () => {
     const [classroomDetails, setClassroomDetails] = useState({});
     const [isDetailsLoading, setIsDetailsLoading] = useState(false);
 
+    const [periodTimings, setPeriodTimings] = useState([]);
+    const [scheduleData, setScheduleData] = useState([]);
     const [isAddSubjectModalOpen, setIsAddSubjectModalOpen] = useState(false);
     const [isManageSubjectModalOpen, setIsManageSubjectModalOpen] = useState(false);
     const [isManageTeacherModalOpen, setIsManageTeacherModalOpen] = useState(false);
@@ -123,12 +36,57 @@ const ClassroomDetailsPage = () => {
     const [isAttendenceModalOpen, setIsAttendenceModalOpen] = useState(false);
     const [isHistory, setIsHistory] = useState(false);
 
+    const timetableData = useMemo(() => scheduleData, [scheduleData]);
+
+    const timetablePeriods = useMemo(() => {
+        if (periodTimings.length > 0) {
+            return periodTimings.map((period) => period.name);
+        }
+        if (timetableData.length > 0) {
+            const ordered = [];
+            timetableData.forEach((day) => {
+                (day.schedule || []).forEach((item) => {
+                    const periodName = item?.period?.trim() || '';
+                    if (periodName && !ordered.includes(periodName)) {
+                        ordered.push(periodName);
+                    }
+                });
+            });
+            return ordered;
+        }
+        return [];
+    }, [timetableData, periodTimings]);
+
+    const timetableMap = useMemo(() => {
+        return new Map(
+            timetableData.map((day) => [
+                day.day,
+                new Map((day.schedule || []).map((item) => [item?.period || '', item]))
+            ])
+        );
+    }, [timetableData]);
+
+    const breakIndex = timetablePeriods.findIndex(
+        (name) => typeof name === 'string' && name.toLowerCase().includes('break')
+    );
+
     const getFormattedCurrentDate = () => {
         const today = new Date();
         const day = String(today.getDate()).padStart(2, '0');
         const month = today.toLocaleString('en-US', { month: 'long' });
         const year = today.getFullYear();
         return `${day} ${month}, ${year}`;
+    };
+
+    const getPeriodHeader = (name) => {
+        const matched = periodTimings.find(
+            (period) =>
+                period.name?.toLowerCase() === name?.toLowerCase()
+        );
+        return {
+            name,
+            time: matched?.time || ''
+        };
     };
 
     const [filterDate, setFilterDate] = useState(getFormattedCurrentDate());
@@ -228,6 +186,30 @@ const ClassroomDetailsPage = () => {
         navigate("/admin/settings/time-tables");
     };
 
+    const fetchTimeTable = async () => {
+        try {
+          const response = await axiosInstance.get(api.fetchTimeTable, {
+            params: {
+                class: selectedClass,
+                section: selectedSection,
+                intent: 'final'
+            }
+          });  
+          if(response?.data.status === 200) {
+            setPeriodTimings(response?.data.periodTimings || []);
+            setScheduleData(response?.data.data || []);
+          }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedClass && selectedSection) {
+            fetchTimeTable();
+        }
+    }, [selectedClass, selectedSection]);
+
     return (
         <>
             <ClassroomDetailsWrapper>
@@ -303,31 +285,36 @@ const ClassroomDetailsPage = () => {
                             <thead>
                                 <tr>
                                     <th className="sticky_col day_header">Day</th>
-                                    {routinePeriods.map((period, index) => (
-                                        <th key={index} className={period.type === "break" ? "break_header" : ""}>
-                                            {period.type === "break" ? (
-                                                <span className="break_title">-</span>
-                                            ) : (
-                                                <div className="period_header">
-                                                    <span className="period_num">{period.name}</span>
-                                                    <span className="period_time">({period.time})</span>
-                                                </div>
-                                            )}
-                                        </th>
-                                    ))}
+                                    {timetablePeriods.map((periodName, index) => {
+                                        const isBreak = typeof periodName === 'string' && periodName.toLowerCase().includes('break');
+                                        const periodHeader = getPeriodHeader(periodName);
+                                        return (
+                                            <th key={index} className={isBreak ? "break_header" : ""}>
+                                                {isBreak ? (
+                                                    <span className="break_title">-</span>
+                                                ) : (
+                                                    <div className="period_header">
+                                                        <span className="period_num">{periodHeader.name}</span>
+                                                        {periodHeader.time && <span className="period_time">({periodHeader.time})</span>}
+                                                    </div>
+                                                )}
+                                            </th>
+                                        );
+                                    })}
                                 </tr>
                             </thead>
                             <tbody>
-                                {["MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day, rowIdx) => (
-                                    <tr key={day}>
-                                        <td className="sticky_col day_col">{day}</td>
-                                        {routinePeriods.map((period, idx) => {
-                                            const cell = routineData[day]?.[idx];
+                                {timetableData.map((dayData, rowIdx) => (
+                                    <tr key={dayData.day || rowIdx}>
+                                        <td className="sticky_col day_col">{dayData.day || `Day ${rowIdx + 1}`}</td>
+                                        {timetablePeriods.map((periodName, idx) => {
+                                            const cell = timetableMap.get(dayData.day)?.get(periodName);
+                                            const isBreak = idx === breakIndex;
 
-                                            if (period.type === "break" || cell?.type === "break") {
+                                            if (isBreak) {
                                                 if (rowIdx === 0) {
                                                     return (
-                                                        <td key={idx} className="break_col" rowSpan={6}>
+                                                        <td key={idx} className="break_col" rowSpan={timetableData.length}>
                                                             <div className="recess_box">
                                                                 {"TIFFIN".split("").map((char, i) => (
                                                                     <span key={i}>{char}</span>
@@ -341,17 +328,18 @@ const ClassroomDetailsPage = () => {
 
                                             return (
                                                 <td key={idx} className="period_cell">
-                                                    {cell ? (
-                                                        <div className={`subject_card ${cell.color}`}>
+                                                    {cell && cell.subject ? (
+                                                        <div className={`subject_card ${cell.color || ''}`}>
                                                             <h6 className="sub_name">{cell.subject}</h6>
                                                             <p className="teacher_name">{cell.teacher}</p>
                                                         </div>
-                                                    ) : cell === null ? (
-                                                        <div className="add_sub_card">
-                                                            <span className="add_icon"><i className="fa-solid fa-plus"></i></span>
-                                                            <p>Add Sub</p>
-                                                        </div>
-                                                    ) : null}
+                                                    ) : (
+                                                        <></>
+                                                        // <div className="add_sub_card">
+                                                        //     <span className="add_icon"><i className="fa-solid fa-plus"></i></span>
+                                                        //     <p>Add Sub</p>
+                                                        // </div>
+                                                    )}
                                                 </td>
                                             );
                                         })}
