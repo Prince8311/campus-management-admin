@@ -4,7 +4,7 @@ import { CouponModalWrapper } from "../../../Styles/Modals/CouponModalStyle";
 
 const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
 
-    const couponTypes = ['Genaral', 'Private'];
+    const couponTypes = ['General', 'Private'];
     const [showCouponTypeDropdown, setShowCouponTypeDropdown] = useState(false);
     const [selectedCouponType, setSelectedCouponType] = useState('');
 
@@ -16,7 +16,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
     const [showAmountRangeDropdown, setShowAmountRangeDropdown] = useState(false);
     const [selectedAmountRange, setSelectedAmountRange] = useState('');
 
-    const offerTypes = ['Flet', 'Approx'];
+    const offerTypes = ['Flat', 'Approx'];
     const [showOfferTypeDropdown, setShowOfferTypeDropdown] = useState(false);
     const [selectedOfferType, setSelectedOfferType] = useState('');
 
@@ -120,39 +120,43 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="select_box halfwidth">
-                                <span>Institution <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={() =>
-                                        setShowInstitutionDropdown(!showInstitutionDropdown)
-                                    }>
-                                        <p>{selectedInstitution}</p>
-                                        <i className={`fa-solid fa-angle-down ${showInstitutionDropdown ? 'active' : ''}`}></i>
-                                    </div>
-                                    <div className={`dropdown ${showInstitutionDropdown ? 'active' : ''}`}>
-                                        <div className="dropdown_inner">
-                                            <ul>
-                                                {
-                                                    institutions.length > 0 ? (
-                                                        institutions.map((institution, i) =>
-                                                            <li
-                                                                key={i}
-                                                                onClickCapture={() =>
-                                                                    handleSelectedInstitutions(institution)}
-                                                                className={institution === selectedInstitution ? 'active' : ''}
-                                                            >
-                                                                {institution}
-                                                            </li>
-                                                        )
-                                                    ) : (
-                                                        <li className="empty_message">No Institutions available</li>
-                                                    )
-                                                }
-                                            </ul>
+                            {
+                                selectedCouponType === 'Private' && (
+                                    <div className="select_box halfwidth">
+                                        <span>Institution <p>*</p></span>
+                                        <div className="dropdown_sec">
+                                            <div className="dropdown_btn" onClick={() =>
+                                                setShowInstitutionDropdown(!showInstitutionDropdown)
+                                            }>
+                                                <p>{selectedInstitution}</p>
+                                                <i className={`fa-solid fa-angle-down ${showInstitutionDropdown ? 'active' : ''}`}></i>
+                                            </div>
+                                            <div className={`dropdown ${showInstitutionDropdown ? 'active' : ''}`}>
+                                                <div className="dropdown_inner">
+                                                    <ul>
+                                                        {
+                                                            institutions.length > 0 ? (
+                                                                institutions.map((institution, i) =>
+                                                                    <li
+                                                                        key={i}
+                                                                        onClickCapture={() =>
+                                                                            handleSelectedInstitutions(institution)}
+                                                                        className={institution === selectedInstitution ? 'active' : ''}
+                                                                    >
+                                                                        {institution}
+                                                                    </li>
+                                                                )
+                                                            ) : (
+                                                                <li className="empty_message">No Institutions available</li>
+                                                            )
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                )
+                            }
                             <div className="select_box halfwidth">
                                 <span>Bill Amount Range <p>*</p></span>
                                 <div className="dropdown_sec">
@@ -186,10 +190,14 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="input_box halfwidth">
-                                <span>Target Bill Amount(₹) <p>*</p></span>
-                                <input type="text" />
-                            </div>
+                            {
+                                selectedAmountRange === 'Above' && (
+                                    <div className="input_box halfwidth">
+                                        <span>Target Bill Amount(₹) <p>*</p></span>
+                                        <input type="text" />
+                                    </div>
+                                )
+                            }
                             <div className="select_box halfwidth">
                                 <span>Offer Type <p>*</p></span>
                                 <div className="dropdown_sec">
@@ -253,10 +261,14 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="input_box halfwidth">
-                                <span>Offer Limit(₹) <p>*</p></span>
-                                <input type="text" />
-                            </div>
+                            {
+                                selectedOfferType === 'Approx' && (
+                                    <div className="input_box halfwidth">
+                                        <span>Offer Limit(₹) <p>*</p></span>
+                                        <input type="text" />
+                                    </div>
+                                )
+                            }
                             <div className="select_box halfwidth">
                                 <span>Validity Type <p>*</p></span>
                                 <div className="dropdown_sec">
@@ -284,46 +296,56 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="select_box halfwidth">
-                                <span>Count Type <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={() => setShowCountTypeDropdown(!showCountTypeDropdown)}>
-                                        <p>{selectedCountType}</p>
-                                        <i className={showCountTypeDropdown ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"}></i>
-                                    </div>
-                                    <div className={`dropdown ${showCountTypeDropdown ? 'active' : ''}`}>
-                                        <div className="dropdown_inner">
-                                            <ul>
-                                                {
-                                                    countTypes.length > 0 ? (
-                                                        countTypes.map((countType, i) =>
-                                                            <li key={i} onClick={() => handleSelectedCountTypes(countType)}
-                                                                className={countType === selectedCountType ? 'active' : ''}>
-                                                                {countType}
-                                                            </li>
-                                                        )
-                                                    ) : (
-                                                        <li className="empty_message">No count types available</li>
-                                                    )
-                                                }
-                                            </ul>
+                            {
+                                selectedValidityType === 'Count' && (
+                                    <>
+                                        <div className="select_box halfwidth">
+                                            <span>Count Type <p>*</p></span>
+                                            <div className="dropdown_sec">
+                                                <div className="dropdown_btn" onClick={() => setShowCountTypeDropdown(!showCountTypeDropdown)}>
+                                                    <p>{selectedCountType}</p>
+                                                    <i className={showCountTypeDropdown ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"}></i>
+                                                </div>
+                                                <div className={`dropdown ${showCountTypeDropdown ? 'active' : ''}`}>
+                                                    <div className="dropdown_inner">
+                                                        <ul>
+                                                            {
+                                                                countTypes.length > 0 ? (
+                                                                    countTypes.map((countType, i) =>
+                                                                        <li key={i} onClick={() => handleSelectedCountTypes(countType)}
+                                                                            className={countType === selectedCountType ? 'active' : ''}>
+                                                                            {countType}
+                                                                        </li>
+                                                                    )
+                                                                ) : (
+                                                                    <li className="empty_message">No count types available</li>
+                                                                )
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="input_box halfwidth">
+                                            <span>Count Value <p>*</p></span>
+                                            <input type="text" />
+                                        </div>
+                                    </>
+                                )
+                            }
+                            {
+                                selectedValidityType === 'Date' && (
+                                    <div className="input_box halfwidth">
+                                        <span>Validity Date <p>*</p></span>
+                                        <div className="date_btn">
+                                            <p>12/05/2026</p>
+                                            <i className="fa-regular fa-calendar"></i>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="input_box halfwidth">
-                                <span>Count Value <p>*</p></span>
-                                <input type="text" />
-                            </div>
-                            <div className="input_box halfwidth">
-                                <span>Validity Date <p>*</p></span>
-                                <div className="date_btn">
-                                    <p>12/05/2026</p>
-                                    <i className="fa-regular fa-calendar"></i>
-                                </div>
-                            </div>
+                                )
+                            }
                             <div className="input_box fullwidth">
-                                <span>Count Code <p>*</p></span>
+                                <span>Coupon Code <p>*</p></span>
                                 <input type="text" />
                             </div>
                         </div>
