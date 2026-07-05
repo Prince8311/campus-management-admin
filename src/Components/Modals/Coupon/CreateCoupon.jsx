@@ -90,6 +90,10 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
+                            <div className="input_box fullwidth">
+                                <span>Coupon Code <p>*</p></span>
+                                <input type="text" />
+                            </div>
                             <div className="select_box halfwidth">
                                 <span>Coupon Type <p>*</p></span>
                                 <div className="dropdown_sec">
@@ -133,21 +137,26 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                             </div>
                                             <div className={`dropdown ${showInstitutionDropdown ? 'active' : ''}`}>
                                                 <div className="dropdown_inner">
+                                                    <div className="search_sec">
+                                                        <i className="fa-solid fa-magnifying-glass"></i>
+                                                        <input type="text" placeholder="Search by Institution Name..." />
+                                                    </div>
                                                     <ul>
                                                         {
                                                             institutions.length > 0 ? (
                                                                 institutions.map((institution, i) =>
-                                                                    <li
-                                                                        key={i}
-                                                                        onClickCapture={() =>
-                                                                            handleSelectedInstitutions(institution)}
-                                                                        className={institution === selectedInstitution ? 'active' : ''}
-                                                                    >
-                                                                        {institution}
-                                                                    </li>
+                                                                    <div className={`inst_box ${institution === selectedInstitution ? 'active' : ''}`} key={i} onClick={() => handleSelectedInstitutions(institution)}>
+                                                                        <div className="box_left">
+                                                                            <h6>{institution}</h6>
+                                                                        </div>
+                                                                        <div className="box_right">
+                                                                            <p>School</p>
+                                                                            <span>#12345</span>
+                                                                        </div>
+                                                                    </div>
                                                                 )
                                                             ) : (
-                                                                <li className="empty_message">No Institutions available</li>
+                                                                <p className="no_data">No institutions found</p>
                                                             )
                                                         }
                                                     </ul>
@@ -344,10 +353,6 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                     </div>
                                 )
                             }
-                            <div className="input_box fullwidth">
-                                <span>Coupon Code <p>*</p></span>
-                                <input type="text" />
-                            </div>
                         </div>
                     </div>
                     <div className="modal_btn">
