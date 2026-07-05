@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CouponModalWrapper } from "../../../Styles/Modals/CouponModalStyle";
+import Calender from "../../Calender";
 
 
 const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
@@ -31,6 +32,9 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
     const countTypes = ['Per User', 'Per Day'];
     const [showCountTypeDropdown, setShowCountTypeDropdown] = useState(false);
     const [selectedCountType, setSelectedCountType] = useState('');
+
+    const [selectedDate, setSelectedDate] = useState('');
+    const [showDateDropdown, setShowDateDropdown] = useState(false);
 
     const closeModal = () => {
         setIsCouponModalOpen(false);
@@ -76,6 +80,10 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
         if (countType === selectedCountType) return;
         setSelectedCountType(countType);
         setShowCountTypeDropdown(false);
+    }
+
+    const handleSelectDate = () => {
+        setShowDateDropdown(!showDateDropdown);
     }
 
     return (
@@ -247,7 +255,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                         <p>{selectedOfferUnit}</p>
                                         <i className={`fa-solid fa-angle-down ${showOfferUnitDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showOfferUnitDropdown ? 'active' : ''}`}>
+                                    <div className={`dropdown drop_up ${showOfferUnitDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
                                                 {
@@ -285,7 +293,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                         <p>{selectedValidityType}</p>
                                         <i className={`fa-solid fa-angle-down ${showValidityTypeDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showValidityTypeDropdown ? 'active' : ''}`}>
+                                    <div className={`dropdown drop_up ${showValidityTypeDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
                                                 {
@@ -315,7 +323,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                                     <p>{selectedCountType}</p>
                                                     <i className={showCountTypeDropdown ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"}></i>
                                                 </div>
-                                                <div className={`dropdown ${showCountTypeDropdown ? 'active' : ''}`}>
+                                                <div className={`dropdown drop_up ${showCountTypeDropdown ? 'active' : ''}`}>
                                                     <div className="dropdown_inner">
                                                         <ul>
                                                             {
@@ -344,11 +352,22 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                             }
                             {
                                 selectedValidityType === 'Date' && (
-                                    <div className="input_box halfwidth">
+                                    <div className="date_box halfwidth">
                                         <span>Validity Date <p>*</p></span>
-                                        <div className="date_btn">
-                                            <p>12/05/2026</p>
-                                            <i className="fa-regular fa-calendar"></i>
+                                        <div className="dropdown_sec">
+                                            <div className="dropdown_btn" onClick={handleSelectDate}>
+                                                <p>{selectedDate}</p>
+                                                <i className="fa-regular fa-calendar"></i>
+                                            </div>
+                                            {
+                                                showDateDropdown && (
+                                                    <div className="dropdown drop_up">
+                                                        <Calender setFinalSelectedDate={(date) => {
+                                                            setSelectedDate(date); setShowDateDropdown(false)
+                                                        }} />
+                                                    </div>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 )
