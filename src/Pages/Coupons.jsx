@@ -4,6 +4,8 @@ import { CouponWrapper } from "../Styles/CouponStyle";
 
 const CouponsPage = () => {
     const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
+    const tabs = ['General', 'Private'];
+    const [selectedTab, setSelectedTab] = useState(tabs[0]);
 
     const handleOpenCouponModal = () => {
         setIsCouponModalOpen(true);
@@ -23,8 +25,17 @@ const CouponsPage = () => {
                 </div>
                 <div className="tab_sec">
                     <div className="tab_inner">
-                        <li className="active">General</li>
-                        <li>Private</li>
+                        {
+                            tabs.map((tab, index) => (
+                                <li
+                                    key={index}
+                                    className={selectedTab === tab ? 'active' : ''}
+                                    onClick={() => setSelectedTab(tab)}
+                                >
+                                    {tab}
+                                </li>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className="table_sec">
