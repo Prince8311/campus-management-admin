@@ -2281,6 +2281,31 @@ export const AddStudentWrapper = styled('div')`
                                     object-fit: cover;
                                     border-radius: 4px;
                                 }
+
+                                button {
+                                    position: absolute;
+                                    top: 5px;
+                                    right: 5px;
+                                    width: 23px;
+                                    height: 23px;
+                                    background: ${colors.customColors.redColorLight};
+                                    border: none;
+                                    font-size: 11px;
+                                    border-radius: 4px;
+                                    color: ${colors.customColors.redColor};
+                                    cursor: pointer;
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    transition: all 0.5s ease;
+                                }
+
+                                &:hover {
+                                    button {
+                                        opacity: 1;
+                                        visibility: visible;
+                                        transition: all 0.5s ease; 
+                                    }
+                                }
                             }
 
                             .content_right {

@@ -284,6 +284,14 @@ const AddStudentPage = () => {
         }
     };
 
+    const handleRemoveProfileImage = () => {
+        setStudentProfileImage(null);
+        const fileInput = document.getElementById("profileImageUpload");
+        if (fileInput) {
+            fileInput.value = "";
+        }
+    };
+
     const areRequiredFieldsFilled = () => {
         for (const section of form) {
             for (const field of section.fields) {
@@ -438,6 +446,13 @@ const AddStudentPage = () => {
                                                 <div className="sec_content">
                                                     <div className="content_left">
                                                         <img src={studentProfileImage || "/images/profile-image.png"} alt="Profile" />
+                                                        {
+                                                            studentProfileImage && (
+                                                                <button type="button" className="remove_image_btn" onClick={handleRemoveProfileImage}>
+                                                                    <i className="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            )
+                                                        }
                                                     </div>
                                                     <div className="content_right">
                                                         <p>Upload passport size photo</p>
