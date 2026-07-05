@@ -6,6 +6,7 @@ const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, sele
     const [isCalendarDropdownOpen, setIsCalendarDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
     const filterBtnRef = useRef(null);
+    const [finalSelectedDate, setFinalSelectedDate] = useState(selectedDate);
 
     const closeModal = () => {
         setIsAttendenceModalOpen(false);
@@ -47,12 +48,12 @@ const AttendenceModal = ({ isAttendenceModalOpen, setIsAttendenceModalOpen, sele
                             <div className="filter_date_sec">
                                 <div className="filter_btn" onClick={openCalender} ref={filterBtnRef}>
                                     <i className="fa-regular fa-calendar"></i>
-                                    <p>{selectedDate}</p>
+                                    <p>{finalSelectedDate}</p>
                                 </div>
                                 {
                                     isCalendarDropdownOpen && (
                                         <div className="dropdown" ref={dropdownRef}>
-                                            <Calender />
+                                            <Calender setFinalSelectedDate={setFinalSelectedDate} />
                                         </div>
                                     )
                                 }

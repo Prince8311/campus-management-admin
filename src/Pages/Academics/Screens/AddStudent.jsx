@@ -23,6 +23,7 @@ const AddStudentPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isBulkUploading, setIsBulkUploading] = useState(false);
     const [isStudentUploading, setIsStudentUploading] = useState(false);
+    const [studentProfileImage, setStudentProfileImage] = useState(null);
 
     const fetchStudentForm = async () => {
         setIsFormLoading(true);
@@ -252,6 +253,37 @@ const AddStudentPage = () => {
         }
     };
 
+    const handleProfileImageSelect = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const allowedFormats = ['.png', '.jpg', '.jpeg'];
+        const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+        if (!allowedFormats.includes(fileExtension)) {
+            toast.warn("Only PNG, JPG, and JPEG formats are allowed");
+            return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+            toast.warn("File size must be less than 10MB");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            setStudentProfileImage(event.target.result);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleProfileImageUploadClick = () => {
+        const fileInput = document.getElementById("profileImageUpload");
+        if (fileInput) {
+            fileInput.click();
+        }
+    };
+
     const areRequiredFieldsFilled = () => {
         for (const section of form) {
             for (const field of section.fields) {
@@ -405,12 +437,19 @@ const AddStudentPage = () => {
                                                 <h6>Manually Add Student</h6>
                                                 <div className="sec_content">
                                                     <div className="content_left">
-                                                        <img src="/images/profile-image.png" alt="" />
+                                                        <img src={studentProfileImage || "/images/profile-image.png"} alt="Profile" />
                                                     </div>
                                                     <div className="content_right">
                                                         <p>Upload passport size photo</p>
                                                         <span>( File size: max 10MB | Formats: '.png', '.jpg', '.jpeg' )</span>
-                                                        <a><i className="fa-solid fa-cloud-arrow-up"></i>Upload Image</a>
+                                                        <input
+                                                            type="file"
+                                                            accept=".png, .jpg, .jpeg"
+                                                            id="profileImageUpload"
+                                                            hidden
+                                                            onChange={handleProfileImageSelect}
+                                                        />
+                                                        <a onClick={handleProfileImageUploadClick}><i className="fa-solid fa-cloud-arrow-up"></i>Upload Image</a>
                                                     </div>
                                                 </div>
                                             </div>
