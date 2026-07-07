@@ -14,19 +14,18 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
     const [offerValue, setOfferValue] = useState('');
     const [offerLimit, setOfferLimit] = useState('');
     const [countValue, setCountValue] = useState('');
-    const [selectedStatus, setSelectedStatus] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
-    const isFormValid = couponCode.trim() !== '' && selectedCouponType.trim() !== '' && selectedAmountRange.trim() !== '' && selectedOfferType.trim() !== '' && selectedOfferUnit.trim() !== '' && selectedValidityType.trim() !== '';
-    useState(false);
+    const [isStatus, setIsStatus] = useState(false);
 
 
     const couponTypes = ['General', 'Private'];
     const [showCouponTypeDropdown, setShowCouponTypeDropdown] = useState(false);
     const [selectedCouponType, setSelectedCouponType] = useState('');
 
-    const institutions = ['Abc', 'defg', 'ijkl'];
+    const [searchInput, setSearchInput] = useState('');
+    const [institutions, setInstitutions] = useState([]);
     const [showInstitutionDropdown, setShowInstitutionDropdown] = useState(false);
-    const [selectedInstitution, setSelectedInstitution] = useState('');
+    const [selectedInstitution, setSelectedInstitution] = useState({});
 
     const amountRanges = ['All', 'Above'];
     const [showAmountRangeDropdown, setShowAmountRangeDropdown] = useState(false);
@@ -36,7 +35,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
     const [showOfferTypeDropdown, setShowOfferTypeDropdown] = useState(false);
     const [selectedOfferType, setSelectedOfferType] = useState('');
 
-    const offerUnits = ['Percentage', 'Rupee'];
+    const offerUnits = selectedOfferType === 'Approx' ? ['Percentage'] : ['Percentage', 'Rupee'];
     const [showOfferUnitDropdown, setShowOfferUnitDropdown] = useState(false);
     const [selectedOfferUnit, setSelectedOfferUnit] = useState('');
 
@@ -53,7 +52,37 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
 
     const closeModal = () => {
         setIsCouponModalOpen(false);
+        resetForm();
     };
+
+    const fetchInstitutions = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchInstitutions, {
+                params: {
+                    isForm: true,
+                    search: searchInput
+                }
+            });
+            if (response?.data.status === 200) {
+                console.log('Institutions fetched successfully:', response.data);
+                setInstitutions(response.data.institutions);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (isCouponModalOpen) {
+            fetchInstitutions();
+        }
+    }, [isCouponModalOpen, searchInput]);
+
+    useEffect(() => {
+        if (selectedOfferType === 'Approx' && selectedOfferUnit !== 'Percentage') {
+            setSelectedOfferUnit('Percentage');
+        }
+    }, [selectedOfferType, selectedOfferUnit]);
 
     const handleSelectedCouponType = (couponType) => {
         if (couponType === selectedCouponType) return;
@@ -106,6 +135,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
         const payload = {
             code: couponCode,
             type: selectedCouponType,
+            inst_id: selectedInstitution?.inst_id || null,
             bill_amount_range: selectedAmountRange,
             target_bill_amount: targetBillAmount,
             offer_type: selectedOfferType,
@@ -116,13 +146,15 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
             count_type: selectedCountType,
             count_value: countValue,
             validity_date: selectedDate,
-            status: selectedStatus
+            status: isStatus
         };
+        // console.log('Payload for creating coupon:', payload);
         try {
             const response = await axiosInstance.post(api.createCoupon, payload);
-            if (response?.data.status === 200) { 
+            if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 closeModal();
+                resetForm();
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -130,23 +162,32 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
             setIsButtonLoading(false);
         }
     }
-    useEffect(() => {
-        if (!isCouponModalOpen) {
-            setCouponCode('');
-            setSelectedCouponType('');
-            setSelectedAmountRange('');
-            setTargetBillAmount('');
-            setSelectedOfferType('');
-            setOfferValue('');
-            setSelectedOfferUnit('');
-            setOfferLimit('');
-            setSelectedValidityType('');
-            setSelectedCountType('');
-            setCountValue('');
-            setSelectedDate('');
-            setSelectedStatus('');
-        }
-    }, [isCouponModalOpen]);
+
+    function resetForm() {
+        setCouponCode('');
+        setSelectedCouponType('');
+        setSelectedAmountRange('');
+        setTargetBillAmount('');
+        setSelectedOfferType('');
+        setOfferValue('');
+        setSelectedOfferUnit('');
+        setOfferLimit('');
+        setSelectedValidityType('');
+        setSelectedCountType('');
+        setCountValue('');
+        setSelectedDate('');
+        setIsStatus(false);
+    };
+
+    const getInitials = (name) => {
+        if (!name) return "";
+        const parts = name.trim().split(" ").filter(Boolean);
+        const first = parts[0]?.[0] || "";
+        const last = parts.length > 1 ? parts[parts.length - 1]?.[0] : "";
+        return (first + last).toUpperCase();
+    };
+
+    const isFormValid = couponCode.trim() !== '' && selectedCouponType.trim() !== '' && selectedAmountRange.trim() !== '' && selectedOfferType.trim() !== '' && selectedOfferUnit.trim() !== '' && selectedValidityType.trim() !== '';
 
     return (
         <>
@@ -202,26 +243,26 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                             <div className="dropdown_btn" onClick={() =>
                                                 setShowInstitutionDropdown(!showInstitutionDropdown)
                                             }>
-                                                <p>{selectedInstitution}</p>
+                                                <p>{selectedInstitution.inst_name}</p>
                                                 <i className={`fa-solid fa-angle-down ${showInstitutionDropdown ? 'active' : ''}`}></i>
                                             </div>
                                             <div className={`dropdown ${showInstitutionDropdown ? 'active' : ''}`}>
                                                 <div className="dropdown_inner">
                                                     <div className="search_sec">
                                                         <i className="fa-solid fa-magnifying-glass"></i>
-                                                        <input type="text" placeholder="Search by Institution Name..." />
+                                                        <input type="text" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} placeholder="Search by Institution Name..." />
                                                     </div>
                                                     <ul>
                                                         {
                                                             institutions.length > 0 ? (
                                                                 institutions.map((institution, i) =>
-                                                                    <div className={`inst_box ${institution === selectedInstitution ? 'active' : ''}`} key={i} onClick={() => handleSelectedInstitutions(institution)}>
+                                                                    <div className={`inst_box ${institution.inst_id === selectedInstitution.inst_id ? 'active' : ''}`} key={i} onClick={() => handleSelectedInstitutions(institution)}>
                                                                         <div className="box_left">
-                                                                            <h6>{institution}</h6>
+                                                                            <h6>{getInitials(institution.inst_name)}</h6>
                                                                         </div>
                                                                         <div className="box_right">
-                                                                            <p>School</p>
-                                                                            <span>#12345</span>
+                                                                            <p>{institution.inst_name}</p>
+                                                                            <span>#{institution.inst_id}</span>
                                                                         </div>
                                                                     </div>
                                                                 )
@@ -441,12 +482,22 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                             <input
                                 type="checkbox"
                                 id="toggle"
+                                checked={isStatus}
+                                onChange={(e) => setIsStatus(e.target.checked)}
                             />
                             <label htmlFor="toggle">
                                 <span></span>
                             </label>
                         </div>
-                        <button>Save</button>
+                        <button disabled={!isFormValid || isButtonLoading} onClick={handleCreatCoupon}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </CouponModalWrapper>

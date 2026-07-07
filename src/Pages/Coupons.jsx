@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateCouponModal from "../Components/Modals/Coupon/CreateCoupon";
 import { CouponWrapper } from "../Styles/CouponStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../Services/Api/ApiConfig";
+import SkeletonLoader from "../Components/Loader/SkeletonLoader";
+import Pagination from "../Components/Pagination";
 
 const CouponsPage = () => {
+    const api = getApiEndpoints();
     const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
     const tabs = ['General', 'Private'];
     const [selectedTab, setSelectedTab] = useState(tabs[0]);
+
+    const [page, setPage] = useState(1);
+    const [coupons, setCoupons] = useState([]);
+    const [isCouponsLoading, setIsCouponsLoading] = useState(false);
+    const [totalCount, setTotalCount] = useState('');
 
     const handleOpenCouponModal = () => {
         setIsCouponModalOpen(true);
