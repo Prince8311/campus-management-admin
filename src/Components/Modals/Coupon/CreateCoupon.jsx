@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CouponModalWrapper } from "../../../Styles/Modals/CouponModalStyle";
 import Calender from "../../Calender";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
 
 const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
+    const api = getApiEndpoints();
+    const [couponCode, setCouponCode] = useState('');
+    const [targetBillAmount, setTargetBillAmount] = useState('');
+    const [offerValue, setOfferValue] = useState('');
+    const [offerLimit, setOfferLimit] = useState('');
+    const [countValue, setCountValue] = useState('');
+    const [selectedStatus, setSelectedStatus] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const isFormValid = couponCode.trim() !== '' && selectedCouponType.trim() !== '' && selectedAmountRange.trim() !== '' && selectedOfferType.trim() !== '' && selectedOfferUnit.trim() !== '' && selectedValidityType.trim() !== '';
+    useState(false);
+
 
     const couponTypes = ['General', 'Private'];
     const [showCouponTypeDropdown, setShowCouponTypeDropdown] = useState(false);
@@ -86,6 +101,53 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
         setShowDateDropdown(!showDateDropdown);
     }
 
+    const handleCreatCoupon = async () => {
+        setIsButtonLoading(true);
+        const payload = {
+            code: couponCode,
+            type: selectedCouponType,
+            bill_amount_range: selectedAmountRange,
+            target_bill_amount: targetBillAmount,
+            offer_type: selectedOfferType,
+            offer_value: offerValue,
+            offer_unit: selectedOfferUnit,
+            offer_limit: offerLimit,
+            validity_type: selectedValidityType,
+            count_type: selectedCountType,
+            count_value: countValue,
+            validity_date: selectedDate,
+            status: selectedStatus
+        };
+        try {
+            const response = await axiosInstance.post(api.createCoupon, payload);
+            if (response?.data.status === 200) { 
+                toast.success(response?.data.message);
+                closeModal();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+    useEffect(() => {
+        if (!isCouponModalOpen) {
+            setCouponCode('');
+            setSelectedCouponType('');
+            setSelectedAmountRange('');
+            setTargetBillAmount('');
+            setSelectedOfferType('');
+            setOfferValue('');
+            setSelectedOfferUnit('');
+            setOfferLimit('');
+            setSelectedValidityType('');
+            setSelectedCountType('');
+            setCountValue('');
+            setSelectedDate('');
+            setSelectedStatus('');
+        }
+    }, [isCouponModalOpen]);
+
     return (
         <>
             <CouponModalWrapper className={isCouponModalOpen ? "active" : ''}>
@@ -100,7 +162,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                         <div className="body_inner">
                             <div className="input_box fullwidth">
                                 <span>Coupon Code <p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} />
                             </div>
                             <div className="select_box halfwidth">
                                 <span>Coupon Type <p>*</p></span>
@@ -211,7 +273,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                 selectedAmountRange === 'Above' && (
                                     <div className="input_box halfwidth">
                                         <span>Target Bill Amount(₹) <p>*</p></span>
-                                        <input type="text" />
+                                        <input type="text" value={targetBillAmount} onChange={(e) => setTargetBillAmount(e.target.value)} />
                                     </div>
                                 )
                             }
@@ -246,7 +308,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                             </div>
                             <div className="input_box halfwidth">
                                 <span>Offer Value <p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={offerValue} onChange={(e) => setOfferValue(e.target.value)} />
                             </div>
                             <div className="select_box halfwidth">
                                 <span>Offer Unit <p>*</p></span>
@@ -282,7 +344,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                 selectedOfferType === 'Approx' && (
                                     <div className="input_box halfwidth">
                                         <span>Offer Limit(₹) <p>*</p></span>
-                                        <input type="text" />
+                                        <input type="text" value={offerLimit} onChange={(e) => setOfferLimit(e.target.value)} />
                                     </div>
                                 )
                             }
@@ -345,7 +407,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                         </div>
                                         <div className="input_box halfwidth">
                                             <span>Count Value <p>*</p></span>
-                                            <input type="text" />
+                                            <input type="text" value={countValue} onChange={(e) => setCountValue(e.target.value)} />
                                         </div>
                                     </>
                                 )
