@@ -24,6 +24,7 @@ export const getApiEndpoints = () => {
 
         // Institutions 
         addInstitution: `${apiURL}/api/institutions/create.php`,
+        fetchInstitutions: `${apiURL}/api/institutions/list.php`,
 
         // Coupons 
         createCoupon: `${apiURL}/api/coupons/create.php`,
