@@ -28,6 +28,7 @@ export const getApiEndpoints = () => {
 
         // Coupons 
         createCoupon: `${apiURL}/api/coupons/create.php`,
+        fetchCoupons: `${apiURL}/api/coupons/list.php`,
 
         // Sessions 
         createSession: `${apiURL}/api/institutions/sessions/create.php`,
