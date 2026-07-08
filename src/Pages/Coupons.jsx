@@ -1,11 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateCouponModal from "../Components/Modals/Coupon/CreateCoupon";
 import { CouponWrapper } from "../Styles/CouponStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../Services/Api/ApiConfig";
+import SkeletonLoader from "../Components/Loader/SkeletonLoader";
+import Pagination from "../Components/Pagination";
 
 const CouponsPage = () => {
+    const api = getApiEndpoints();
     const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
     const tabs = ['General', 'Private'];
     const [selectedTab, setSelectedTab] = useState(tabs[0]);
+
+    const [page, setPage] = useState(1);
+    const [coupons, setCoupons] = useState([]);
+    const [isInitialCouponsLoading, setIsInitialCouponsLoading] = useState(false);
+    const [totalCount, setTotalCount] = useState('');
+
+    const fetchCoupons = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialCouponsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchCoupons, {
+                params: {
+                    page: pageNumber,
+                    type: selectedTab.toLowerCase()
+                }
+            });
+            if (response.data.status === 200) {
+                console.log('Coupons:', response.data);
+                setCoupons(response?.data.data);
+                setTotalCount(response.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialCouponsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedTab) {
+            fetchCoupons(true, page);
+        }
+    }, [selectedTab, page]);
 
     const handleOpenCouponModal = () => {
         setIsCouponModalOpen(true);
@@ -52,18 +92,41 @@ const CouponsPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Sourish-05</td>
-                                        <td>15%</td>
-                                        <td>10 days</td>
-                                        <td>
-                                            <p className="active">Active</p>
-                                        </td>
-                                        <td>
-                                            <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                            <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
+                                    {
+                                        isInitialCouponsLoading ? (
+                                            Array.from({ length: 2 }).map((_, index) => (
+                                                <tr key={index}>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="13px" /></td>
+                                                    <td>
+                                                        <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : coupons.length > 0 ? (
+                                            coupons.map((coupon, index) =>
+                                                <tr key={index}>
+                                                    <td>{coupon.code}</td>
+                                                    <td>{coupon.offer_value}</td>
+                                                    <td>{coupon.validity_date}</td>
+                                                    <td>
+                                                        <p className={coupon.status ? 'active' : ''}>{coupon.status ? 'Active' : 'Inactive'}</p>
+                                                    </td>
+                                                    <td>
+                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        ) : (
+                                            <tr>
+                                                <td className="empty_message">No coupons available.</td>
+                                            </tr>
+                                        )
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -84,19 +147,45 @@ const CouponsPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Sourish-05</td>
-                                        <td>15%</td>
-                                        <td>10 days</td>
-                                        <td>ABC Institution</td>
-                                        <td>
-                                            <p className="active">Active</p>
-                                        </td>
-                                        <td>
-                                            <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                            <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
+                                    {
+                                        isInitialCouponsLoading ? (
+                                            Array.from({ length: 2 }).map((_, index) => (
+                                                <tr key={index}>
+                                                    <td><SkeletonLoader width="100%" height="20px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="20px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="20px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="20px" /></td>
+                                                    <td><SkeletonLoader width="100%" height="20px" /></td>
+                                                    <td>
+                                                        <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
+                                                        <SkeletonLoader width="15px" height="15px" />
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : coupons.length > 0 ? (
+                                            coupons.map((coupon, index) => 
+                                                <tr key={index}>
+                                                    <td>{coupon.code}</td>
+                                                    <td>{coupon.offer_value}</td>
+                                                    <td>{coupon.validity_date}</td>
+                                                    <td>{coupon.institution?.inst_name}</td>
+                                                    <td>
+                                                        <p className={coupon.status ? 'active' : ''}>{coupon.status ? 'Active' : 'Inactive'}</p>
+                                                    </td>
+                                                    <td>
+                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="6" className="text-center">
+                                                    No coupons found.
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
                                 </tbody>
                             </table>
                         </div>
