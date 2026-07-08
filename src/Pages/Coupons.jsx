@@ -6,6 +6,7 @@ import axiosInstance from "../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../Services/Api/ApiConfig";
 import SkeletonLoader from "../Components/Loader/SkeletonLoader";
 import Pagination from "../Components/Pagination";
+import DeleteConfirmationModal from "../Components/Modals/DeleteConfirmation";
 
 const CouponsPage = () => {
     const api = getApiEndpoints();
@@ -17,6 +18,8 @@ const CouponsPage = () => {
     const [coupons, setCoupons] = useState([]);
     const [isInitialCouponsLoading, setIsInitialCouponsLoading] = useState(false);
     const [totalCount, setTotalCount] = useState('');
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [deletePayload, setDeletePayload] = useState({});
 
     const fetchCoupons = async (showSkeleton = false, pageNumber = 1) => {
         if (showSkeleton) {
@@ -50,6 +53,14 @@ const CouponsPage = () => {
     const handleOpenCouponModal = () => {
         setIsCouponModalOpen(true);
     };
+
+    const handleCouponDelete = () => {
+        const payload = {
+            couponId: coupons.id
+        }
+        setDeletePayload(payload);
+        setOpenDeleteModal(true);
+    }
 
     return (
         <>
@@ -117,7 +128,7 @@ const CouponsPage = () => {
                                                     </td>
                                                     <td>
                                                         <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                        <a className="delete_btn" onClick={() => handleCouponDelete(coupon.id)}><i className="fa-solid fa-trash-can"></i></a>
                                                     </td>
                                                 </tr>
                                             )
@@ -174,7 +185,7 @@ const CouponsPage = () => {
                                                     </td>
                                                     <td>
                                                         <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                                        <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                                        <a className="delete_btn" onClick={() => handleCouponDelete(coupon.id)}><i className="fa-solid fa-trash-can"></i></a>
                                                     </td>
                                                 </tr>
                                             )
@@ -195,6 +206,14 @@ const CouponsPage = () => {
                 <CreateCouponModal
                     isCouponModalOpen={isCouponModalOpen}
                     setIsCouponModalOpen={setIsCouponModalOpen}
+                />
+
+                <DeleteConfirmationModal
+                    isModalOpen={openDeleteModal}
+                    setIsModalOpen={setOpenDeleteModal}
+                    deleteObject="coupon"
+                    payload={deletePayload}
+                    endPoint={api.deleteCoupon}
                 />
             </CouponWrapper>
         </>
