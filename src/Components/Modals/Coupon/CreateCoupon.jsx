@@ -56,6 +56,95 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
         resetForm();
     };
 
+    const toggleCouponTypeDropdown = () => {
+        setShowCouponTypeDropdown(!showCouponTypeDropdown);
+        setShowInstitutionDropdown(false);
+        setShowAmountRangeDropdown(false);
+        setShowOfferTypeDropdown(false);
+        setShowOfferUnitDropdown(false);
+        setShowValidityTypeDropdown(false);
+        setShowCountTypeDropdown(false);
+        setShowDateDropdown(false);
+    }
+
+    const toggleInstitutionDropdown = () => {
+        setShowInstitutionDropdown(!showInstitutionDropdown);
+        setShowCouponTypeDropdown(false);
+        setShowAmountRangeDropdown(false);
+        setShowOfferTypeDropdown(false);
+        setShowOfferUnitDropdown(false);
+        setShowValidityTypeDropdown(false);
+        setShowCountTypeDropdown(false);
+        setShowDateDropdown(false);
+    }
+
+    const toggleAmountRangeDropdown = () => {
+        setShowAmountRangeDropdown(!showAmountRangeDropdown);
+        setShowCouponTypeDropdown(false);
+        setShowInstitutionDropdown(false);
+        setShowOfferTypeDropdown(false);
+        setShowOfferUnitDropdown(false);
+        setShowValidityTypeDropdown(false);
+        setShowCountTypeDropdown(false);
+        setShowDateDropdown(false);
+    }
+
+    const toggleOfferTypeDropdown = () => {
+        setShowOfferTypeDropdown(!showOfferTypeDropdown);
+        setShowCouponTypeDropdown(false);
+        setShowInstitutionDropdown(false);
+        setShowAmountRangeDropdown(false);
+        setShowOfferUnitDropdown(false);
+        setShowValidityTypeDropdown(false);
+        setShowCountTypeDropdown(false);
+        setShowDateDropdown(false);
+    }
+
+    const toggleOfferUnitDropdown = () => {
+        setShowOfferUnitDropdown(!showOfferUnitDropdown);
+        setShowCouponTypeDropdown(false);
+        setShowInstitutionDropdown(false);
+        setShowAmountRangeDropdown(false);
+        setShowOfferTypeDropdown(false);
+        setShowValidityTypeDropdown(false);
+        setShowCountTypeDropdown(false);
+        setShowDateDropdown(false);
+    }
+
+    const toggleValidityTypeDropdown = () => {
+        setShowValidityTypeDropdown(!showValidityTypeDropdown);
+        setShowCouponTypeDropdown(false);
+        setShowInstitutionDropdown(false);
+        setShowAmountRangeDropdown(false);
+        setShowOfferTypeDropdown(false);
+        setShowOfferUnitDropdown(false);
+        setShowCountTypeDropdown(false);
+        setShowDateDropdown(false);
+    }
+
+    const toggleCountTypeDropdown = () => {
+        setShowCountTypeDropdown(!showCountTypeDropdown);
+        setShowCouponTypeDropdown(false);
+        setShowInstitutionDropdown(false);
+        setShowAmountRangeDropdown(false);
+        setShowOfferTypeDropdown(false);
+        setShowOfferUnitDropdown(false);
+        setShowValidityTypeDropdown(false);
+        setShowDateDropdown(false);
+
+    }
+
+    const handleSelectDate = () => {
+        setShowDateDropdown(!showDateDropdown);
+        setShowCouponTypeDropdown(false);
+        setShowInstitutionDropdown(false);
+        setShowAmountRangeDropdown(false);
+        setShowOfferTypeDropdown(false);
+        setShowOfferUnitDropdown(false);
+        setShowValidityTypeDropdown(false);
+        setShowCountTypeDropdown(false);
+    }
+
     const fetchInstitutions = async () => {
         try {
             const response = await axiosInstance.get(api.fetchInstitutions, {
@@ -125,10 +214,6 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
         if (countType === selectedCountType) return;
         setSelectedCountType(countType);
         setShowCountTypeDropdown(false);
-    }
-
-    const handleSelectDate = () => {
-        setShowDateDropdown(!showDateDropdown);
     }
 
     const isEditMode = Boolean(selectedCoupon?.id);
@@ -243,7 +328,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
                             <div className="select_box halfwidth">
                                 <span>Coupon Type <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={() => setShowCouponTypeDropdown(!showCouponTypeDropdown)}>
+                                    <div className="dropdown_btn" onClick={toggleCouponTypeDropdown}>
                                         <p>{selectedCouponType}</p>
                                         <i className={`fa-solid fa-angle-down ${showCouponTypeDropdown ? 'active' : ''}`}></i>
                                     </div>
@@ -275,9 +360,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
                                     <div className="select_box halfwidth">
                                         <span>Institution <p>*</p></span>
                                         <div className="dropdown_sec">
-                                            <div className="dropdown_btn" onClick={() =>
-                                                setShowInstitutionDropdown(!showInstitutionDropdown)
-                                            }>
+                                            <div className="dropdown_btn" onClick={toggleInstitutionDropdown}>
                                                 <p>{selectedInstitution.inst_name}</p>
                                                 <i className={`fa-solid fa-angle-down ${showInstitutionDropdown ? 'active' : ''}`}></i>
                                             </div>
@@ -315,9 +398,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
                             <div className="select_box halfwidth">
                                 <span>Bill Amount Range <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={() =>
-                                        setShowAmountRangeDropdown(!showAmountRangeDropdown)
-                                    }>
+                                    <div className="dropdown_btn" onClick={toggleAmountRangeDropdown}>
                                         <p>{selectedAmountRange}</p>
                                         <i className={`fa-solid fa-angle-down ${showAmountRangeDropdown ? 'active' : ''}`}></i>
                                     </div>
@@ -356,7 +437,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
                             <div className="select_box halfwidth">
                                 <span>Offer Type <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={() => setShowOfferTypeDropdown(!showOfferTypeDropdown)}>
+                                    <div className="dropdown_btn" onClick={toggleOfferTypeDropdown}>
                                         <p>{selectedOfferType}</p>
                                         <i className={showOfferTypeDropdown ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"}></i>
                                     </div>
@@ -389,7 +470,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
                             <div className="select_box halfwidth">
                                 <span>Offer Unit <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={() => setShowOfferUnitDropdown(!showOfferUnitDropdown)}>
+                                    <div className="dropdown_btn" onClick={toggleOfferUnitDropdown}>
                                         <p>{selectedOfferUnit}</p>
                                         <i className={`fa-solid fa-angle-down ${showOfferUnitDropdown ? 'active' : ''}`}></i>
                                     </div>
@@ -427,7 +508,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
                             <div className="select_box halfwidth">
                                 <span>Validity Type <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={() => setShowValidityTypeDropdown(!showValidityTypeDropdown)}>
+                                    <div className="dropdown_btn" onClick={toggleValidityTypeDropdown}>
                                         <p>{selectedValidityType}</p>
                                         <i className={`fa-solid fa-angle-down ${showValidityTypeDropdown ? 'active' : ''}`}></i>
                                     </div>
@@ -457,7 +538,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCo
                                         <div className="select_box halfwidth">
                                             <span>Count Type <p>*</p></span>
                                             <div className="dropdown_sec">
-                                                <div className="dropdown_btn" onClick={() => setShowCountTypeDropdown(!showCountTypeDropdown)}>
+                                                <div className="dropdown_btn" onClick={toggleCountTypeDropdown}>
                                                     <p>{selectedCountType}</p>
                                                     <i className={showCountTypeDropdown ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"}></i>
                                                 </div>
