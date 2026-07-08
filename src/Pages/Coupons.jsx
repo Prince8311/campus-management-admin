@@ -20,6 +20,7 @@ const CouponsPage = () => {
     const [totalCount, setTotalCount] = useState('');
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [deletePayload, setDeletePayload] = useState({});
+    const [selectedCoupon, setSelectedCoupon] = useState(null);
 
     const fetchCoupons = async (showSkeleton = false, pageNumber = 1) => {
         if (showSkeleton) {
@@ -51,6 +52,7 @@ const CouponsPage = () => {
     }, [selectedTab, page]);
 
     const handleOpenCouponModal = () => {
+        setSelectedCoupon(null);
         setIsCouponModalOpen(true);
     };
 
@@ -60,6 +62,11 @@ const CouponsPage = () => {
         };
         setDeletePayload(payload);
         setOpenDeleteModal(true);
+    }
+
+    const handleCouponEdit = (coupon) => {
+        setSelectedCoupon(coupon);
+        setIsCouponModalOpen(true);
     }
 
     return (
@@ -127,7 +134,7 @@ const CouponsPage = () => {
                                                         <p className={coupon.status ? 'active' : ''}>{coupon.status ? 'Active' : 'Inactive'}</p>
                                                     </td>
                                                     <td>
-                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="edit_btn" onClick={() => handleCouponEdit(coupon)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                         <a className="delete_btn" onClick={() => handleCouponDelete(coupon.id)}><i className="fa-solid fa-trash-can"></i></a>
                                                     </td>
                                                 </tr>
@@ -184,7 +191,7 @@ const CouponsPage = () => {
                                                         <p className={coupon.status ? 'active' : ''}>{coupon.status ? 'Active' : 'Inactive'}</p>
                                                     </td>
                                                     <td>
-                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="edit_btn" onClick={() => handleCouponEdit(coupon)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                         <a className="delete_btn" onClick={() => handleCouponDelete(coupon.id)}><i className="fa-solid fa-trash-can"></i></a>
                                                     </td>
                                                 </tr>
@@ -204,6 +211,9 @@ const CouponsPage = () => {
                 <CreateCouponModal
                     isCouponModalOpen={isCouponModalOpen}
                     setIsCouponModalOpen={setIsCouponModalOpen}
+                    selectedCoupon={selectedCoupon}
+                    setSelectedCoupon={setSelectedCoupon}
+                    refreshData={() => fetchCoupons(false, page)}
                 />
 
                 <DeleteConfirmationModal

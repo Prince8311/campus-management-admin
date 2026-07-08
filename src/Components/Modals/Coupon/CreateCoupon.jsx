@@ -7,7 +7,7 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
 
-const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
+const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen, selectedCoupon, setSelectedCoupon, refreshData }) => {
     const api = getApiEndpoints();
     const [couponCode, setCouponCode] = useState('');
     const [targetBillAmount, setTargetBillAmount] = useState('');
@@ -52,6 +52,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
 
     const closeModal = () => {
         setIsCouponModalOpen(false);
+        setSelectedCoupon(null);
         resetForm();
     };
 
@@ -130,6 +131,29 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
         setShowDateDropdown(!showDateDropdown);
     }
 
+    const isEditMode = Boolean(selectedCoupon?.id);
+
+    useEffect(() => {
+        if (selectedCoupon) {
+            setCouponCode(selectedCoupon.code || '');
+            setSelectedCouponType(selectedCoupon.type || '');
+            setSelectedInstitution(selectedCoupon.institution || {});
+            setSelectedAmountRange(selectedCoupon.bill_amount_range || '');
+            setTargetBillAmount(selectedCoupon.target_bill_amount || '');
+            setSelectedOfferType(selectedCoupon.offer_type || '');
+            setOfferValue(selectedCoupon.offer_value || '');
+            setSelectedOfferUnit(selectedCoupon.offer_unit || '');
+            setOfferLimit(selectedCoupon.offer_limit || '');
+            setSelectedValidityType(selectedCoupon.validity_type || '');
+            setSelectedCountType(selectedCoupon.count_type || '');
+            setCountValue(selectedCoupon.count_value || '');
+            setSelectedDate(selectedCoupon.validity_date || '');
+            setIsStatus(Boolean(selectedCoupon.status));
+        } else {
+            resetForm();
+        }
+    }, [selectedCoupon]);
+
     const handleCreatCoupon = async () => {
         setIsButtonLoading(true);
         const payload = {
@@ -148,13 +172,21 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
             validity_date: selectedDate,
             status: isStatus
         };
-        // console.log('Payload for creating coupon:', payload);
         try {
-            const response = await axiosInstance.post(api.createCoupon, payload);
+            let response;
+
+            if (isEditMode) {
+                payload.couponId = selectedCoupon.id;
+                response = await axiosInstance.post(api.createCoupon, payload);
+            } else {
+                response = await axiosInstance.post(api.createCoupon, payload);
+            }
+
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 closeModal();
                 resetForm();
+                refreshData?.();
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -166,6 +198,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
     function resetForm() {
         setCouponCode('');
         setSelectedCouponType('');
+        setSelectedInstitution({});
         setSelectedAmountRange('');
         setTargetBillAmount('');
         setSelectedOfferType('');
@@ -189,12 +222,14 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
 
     const isFormValid = couponCode.trim() !== '' && selectedCouponType.trim() !== '' && selectedAmountRange.trim() !== '' && selectedOfferType.trim() !== '' && selectedOfferUnit.trim() !== '' && selectedValidityType.trim() !== '';
 
+    const modalHeading = isEditMode ? 'Edit Coupon' : 'Create Coupon';
+
     return (
         <>
             <CouponModalWrapper className={isCouponModalOpen ? "active" : ''}>
                 <div className={`modal_box ${isCouponModalOpen ? "active" : ''}`}>
                     <div className="modal_head">
-                        <h4>Create Coupon</h4>
+                        <h4>{modalHeading}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -494,7 +529,7 @@ const CreateCouponModal = ({ isCouponModalOpen, setIsCouponModalOpen }) => {
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>
