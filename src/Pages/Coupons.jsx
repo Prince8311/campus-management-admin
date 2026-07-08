@@ -54,10 +54,10 @@ const CouponsPage = () => {
         setIsCouponModalOpen(true);
     };
 
-    const handleCouponDelete = () => {
+    const handleCouponDelete = (id) => {
         const payload = {
-            couponId: coupons.id
-        }
+            couponId: id
+        };
         setDeletePayload(payload);
         setOpenDeleteModal(true);
     }
@@ -191,9 +191,7 @@ const CouponsPage = () => {
                                             )
                                         ) : (
                                             <tr>
-                                                <td colSpan="6" className="text-center">
-                                                    No coupons found.
-                                                </td>
+                                                <td className="empty_message">No coupons available.</td>
                                             </tr>
                                         )
                                     }
@@ -211,9 +209,10 @@ const CouponsPage = () => {
                 <DeleteConfirmationModal
                     isModalOpen={openDeleteModal}
                     setIsModalOpen={setOpenDeleteModal}
-                    deleteObject="coupon"
+                    deleteObject="Coupon"
                     payload={deletePayload}
                     endPoint={api.deleteCoupon}
+                    refreshData={() => fetchCoupons(false)}
                 />
             </CouponWrapper>
         </>
