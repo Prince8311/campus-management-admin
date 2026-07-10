@@ -330,17 +330,18 @@ const AddStudentPage = () => {
             ],
             isBulkUpload: false
         };
-        try {
-            const response = await axiosInstance.post(api.addStudent, payload);
-            if (response?.data.status === 200) {
-                toast.success(response.data?.message || "Student uploaded successfully");
-                handleRemoveFile();
-            }
-        } catch (error) {
-            toast.error(error.response?.data?.message || error.message);
-        } finally {
-            setIsStudentUploading(false);
-        }
+        console.log("Payload for adding student:", payload);
+        // try {
+        //     const response = await axiosInstance.post(api.addStudent, payload);
+        //     if (response?.data.status === 200) {
+        //         toast.success(response.data?.message || "Student uploaded successfully");
+        //         handleRemoveFile();
+        //     }
+        // } catch (error) {
+        //     toast.error(error.response?.data?.message || error.message);
+        // } finally {
+        //     setIsStudentUploading(false);
+        // }
     };
 
     return (
