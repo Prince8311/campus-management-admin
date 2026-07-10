@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DeleteConfirmationWrapper } from "../../Styles/SettingModalStyle";
 import ButtonLoader from "../Loader/ButtonLoader";
 import { toast } from "react-toastify";
@@ -9,6 +9,12 @@ const DeleteConfirmationModal = ({ isModalOpen, setIsModalOpen, deleteObject, pa
     function closeModal() {
         setIsModalOpen(false);
     }
+
+    useEffect(() => {
+        if (isModalOpen) { 
+            console.log("trdyasuvhbuionkm", payload);
+        }
+    }, [isModalOpen]);
 
     const handleSubmit = async () => {
         setIsConfirmButtonLoading(true);

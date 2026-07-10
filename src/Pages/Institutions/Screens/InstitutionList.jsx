@@ -1,16 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddInstitutionModal from "../../../Components/Modals/Institutions/AddInstitution";
 import { InstitutionListWrapper } from "../../../Styles/InstitutionStyle";
 import SelectAddressModal from "../../../Components/Modals/Setting/SelectAddress";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import Pagination from "../../../Components/Pagination";
+import DeleteConfirmationModal from "../../../Components/Modals/DeleteConfirmation";
 
 const InstitutionListPage = () => {
+    const api = getApiEndpoints();
     const [isAddInstitutionOpen, setIsAddInstitutionOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState('');
     const [showAddressModal, setShowAddressModal] = useState(false);
 
+    const [institutions, setInstitutions] = useState([]);
+    const [isInitialInstitutionsLoading, setIsInitialInstitutionsLoading] = useState(false);
+    const [totalCount, setTotalCount] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+
+
+    const fetchInstitutions = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialInstitutionsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchInstitutions, {
+                params: {
+                    page: pageNumber,
+                    search: searchInput
+                }
+            });
+            if (response.data.status === 200) {
+                console.log('Institutions:', response.data);
+                setInstitutions(response?.data.institutions);
+                setTotalCount(response.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialInstitutionsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchInstitutions(true);
+    }, []);
+
     const handleOpenAddInstitutionModal = () => {
         setIsAddInstitutionOpen(true);
     };
+
+    const handleEditInstitution = () => {
+        setIsAddInstitutionOpen(true);
+    }
 
     return (
         <>
@@ -43,36 +87,47 @@ const InstitutionListPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    Sri Sai Angels School
-                                </td>
-                                <td>9749708386</td>
-                                <td>1000</td>
-                                <td>1000</td>
-                                <td>
-                                    <p className="active">Active</p>
-                                </td>
-                                <td>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Sri Sai Angels School
-                                </td>
-                                <td>9749708386</td>
-                                <td>2000</td>
-                                <td>2000</td>
-                                <td>
-                                    <p className="">Inactive</p>
-                                </td>
-                                <td>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                isInitialInstitutionsLoading ? (
+                                    Array.from({ length: 2 }).map((_, i) => (
+                                        <tr key={i}>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td>
+                                                <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
+                                                <SkeletonLoader width="15px" height="15px" />
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : institutions.length > 0 ? (
+                                    institutions.map((institution, i) =>
+                                        <tr key={i}>
+                                            <td>{institution.inst_name}</td>
+                                            <td>{institution.phone}</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>
+                                                <p className={institution.status ? 'active' : ''}>{institution.status ? 'Active' : 'Inactive'}</p>
+                                            </td>
+                                            <td>
+                                                <a className="edit_btn" onClick={() => handleEditInstitution()}>
+                                                    <i className="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a className="delete_btn">
+                                                    <i className="fa-solid fa-trash-can"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    )
+                                ) : (
+                                    <tr>
+                                        <td className="empty_message">No institutions available.</td>
+                                    </tr>
+                                )
+                            }
                         </tbody>
                     </table>
                 </div>
