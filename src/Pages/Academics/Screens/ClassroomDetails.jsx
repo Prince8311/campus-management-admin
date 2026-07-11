@@ -188,17 +188,17 @@ const ClassroomDetailsPage = () => {
 
     const fetchTimeTable = async () => {
         try {
-          const response = await axiosInstance.get(api.fetchTimeTable, {
-            params: {
-                class: selectedClass,
-                section: selectedSection,
-                intent: 'final'
+            const response = await axiosInstance.get(api.fetchTimeTable, {
+                params: {
+                    class: selectedClass,
+                    section: selectedSection,
+                    intent: 'final'
+                }
+            });
+            if (response?.data.status === 200) {
+                setPeriodTimings(response?.data.periodTimings || []);
+                setScheduleData(response?.data.data || []);
             }
-          });  
-          if(response?.data.status === 200) {
-            setPeriodTimings(response?.data.periodTimings || []);
-            setScheduleData(response?.data.data || []);
-          }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
         }
@@ -281,77 +281,82 @@ const ClassroomDetailsPage = () => {
                         <h3>Class time table</h3>
                     </div>
                     <div className="routine_table_container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th className="sticky_col day_header">Day</th>
-                                    {timetablePeriods.map((periodName, index) => {
-                                        const isBreak = typeof periodName === 'string' && periodName.toLowerCase().includes('break');
-                                        const periodHeader = getPeriodHeader(periodName);
-                                        return (
-                                            <th key={index} className={isBreak ? "break_header" : ""}>
-                                                {isBreak ? (
-                                                    <span className="break_title">-</span>
-                                                ) : (
-                                                    <div className="period_header">
-                                                        <span className="period_num">{periodHeader.name}</span>
-                                                        {periodHeader.time && <span className="period_time">({periodHeader.time})</span>}
-                                                    </div>
-                                                )}
-                                            </th>
-                                        );
-                                    })}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {timetableData.map((dayData, rowIdx) => (
-                                    <tr key={dayData.day || rowIdx}>
-                                        <td className="sticky_col day_col">{dayData.day || `Day ${rowIdx + 1}`}</td>
-                                        {timetablePeriods.map((periodName, idx) => {
-                                            const cell = timetableMap.get(dayData.day)?.get(periodName);
-                                            const isBreak = idx === breakIndex;
-
-                                            if (isBreak) {
-                                                if (rowIdx === 0) {
-                                                    return (
-                                                        <td key={idx} className="break_col" rowSpan={timetableData.length}>
-                                                            <div className="recess_box">
-                                                                {"TIFFIN".split("").map((char, i) => (
-                                                                    <span key={i}>{char}</span>
-                                                                ))}
+                        {
+                            timetableData.length > 0 ? (
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className="sticky_col day_header">Day</th>
+                                            {timetablePeriods.map((periodName, index) => {
+                                                const isBreak = typeof periodName === 'string' && periodName.toLowerCase().includes('break');
+                                                const periodHeader = getPeriodHeader(periodName);
+                                                return (
+                                                    <th key={index} className={isBreak ? "break_header" : ""}>
+                                                        {isBreak ? (
+                                                            <span className="break_title">-</span>
+                                                        ) : (
+                                                            <div className="period_header">
+                                                                <span className="period_num">{periodHeader.name}</span>
+                                                                {periodHeader.time && <span className="period_time">({periodHeader.time})</span>}
                                                             </div>
+                                                        )}
+                                                    </th>
+                                                );
+                                            })}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {timetableData.map((dayData, rowIdx) => (
+                                            <tr key={dayData.day || rowIdx}>
+                                                <td className="sticky_col day_col">{dayData.day || `Day ${rowIdx + 1}`}</td>
+                                                {timetablePeriods.map((periodName, idx) => {
+                                                    const cell = timetableMap.get(dayData.day)?.get(periodName);
+                                                    const isBreak = idx === breakIndex;
+
+                                                    if (isBreak) {
+                                                        if (rowIdx === 0) {
+                                                            return (
+                                                                <td key={idx} className="break_col" rowSpan={timetableData.length}>
+                                                                    <div className="recess_box">
+                                                                        {"TIFFIN".split("").map((char, i) => (
+                                                                            <span key={i}>{char}</span>
+                                                                        ))}
+                                                                    </div>
+                                                                </td>
+                                                            );
+                                                        }
+                                                        return null;
+                                                    }
+
+                                                    return (
+                                                        <td key={idx} className="period_cell">
+                                                            {cell && cell.subject ? (
+                                                                <div className={`subject_card ${cell.color || ''}`}>
+                                                                    <h6 className="sub_name">{cell.subject}</h6>
+                                                                    <p className="teacher_name">{cell.teacher}</p>
+                                                                </div>
+                                                            ) : (
+                                                                <></>
+                                                                // <div className="add_sub_card">
+                                                                //     <span className="add_icon"><i className="fa-solid fa-plus"></i></span>
+                                                                //     <p>Add Sub</p>
+                                                                // </div>
+                                                            )}
                                                         </td>
                                                     );
-                                                }
-                                                return null;
-                                            }
-
-                                            return (
-                                                <td key={idx} className="period_cell">
-                                                    {cell && cell.subject ? (
-                                                        <div className={`subject_card ${cell.color || ''}`}>
-                                                            <h6 className="sub_name">{cell.subject}</h6>
-                                                            <p className="teacher_name">{cell.teacher}</p>
-                                                        </div>
-                                                    ) : (
-                                                        <></>
-                                                        // <div className="add_sub_card">
-                                                        //     <span className="add_icon"><i className="fa-solid fa-plus"></i></span>
-                                                        //     <p>Add Sub</p>
-                                                        // </div>
-                                                    )}
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <div className="empty_box" style={{ display: "none" }}>
-                            <img src="/images/no-fields.svg" alt="" />
-                            <p>No time table available for this class section.</p>
-                            <a onClick={handleRedirectTimeTablePage}><i className="fa-solid fa-sliders"></i>Create Tittle</a>
-                        </div>
+                                                })}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="empty_box">
+                                    <img src="/images/no-fields.svg" alt="" />
+                                    <p>No time table available for this class section.</p>
+                                    <a onClick={handleRedirectTimeTablePage}><i className="fa-solid fa-sliders"></i>Create Tittle</a>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 <div className="class_details_sec">
