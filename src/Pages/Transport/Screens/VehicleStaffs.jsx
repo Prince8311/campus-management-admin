@@ -34,6 +34,7 @@ const VehicleStaffsPage = () => {
                                 <th>Contact No.</th>
                                 <th>Role</th>
                                 <th>Driving License</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -47,6 +48,9 @@ const VehicleStaffsPage = () => {
                                 </td>
                                 <td>Driver</td>
                                 <td><i className="fa-solid fa-file-arrow-down"></i></td>
+                                <td>
+                                    <p className="active">Active</p>
+                                </td>
                                 <td>
                                     <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
                                     <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>

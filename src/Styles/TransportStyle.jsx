@@ -495,7 +495,7 @@ export const VehicleWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 25%;
+                        width: 20%;
                     }
 
                     &:nth-of-type(2) {
@@ -504,16 +504,21 @@ export const VehicleWrapper = styled('div')`
                     }
 
                     &:nth-of-type(3) {
-                        width: 20%;
+                        width: 15%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(4) {
-                        width: 20%;
+                        width: 18%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(5) {
+                        width: 12%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(6) {
                         width: 10%;
                         justify-content: center;
                     }
@@ -550,7 +555,7 @@ export const VehicleWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 25%;
+                            width: 20%;
                             display: flex;
                         }
 
@@ -561,18 +566,46 @@ export const VehicleWrapper = styled('div')`
                         }
 
                         &:nth-of-type(3) {
-                            width: 20%;
+                            width: 15%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(4) {
-                            width: 20%;
+                            width: 18%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(5) {
+                            width: 12%;
+                            align-items: center;
+                            justify-content: center;
+
+                            p {
+                                position: relative;
+                                font-size: 10px;
+                                font-weight: 500;
+                                line-height: 1;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 20px;
+                                padding: 4px 15px;
+                                color: ${colors.customColors.yellowColor1};
+                                background: ${colors.customColors.yellowColorLight};
+
+                                &.active {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
+                                }
+                                &.deactive {
+                                    color: ${colors.customColors.redColor};
+                                    background: ${colors.customColors.redColorLight};
+                                }
+                            }
+                        }
+
+                        &:nth-of-type(6) {
                             width: 10%;
                             align-items: center;
                             justify-content: center;
@@ -743,16 +776,16 @@ export const VehicleStaffWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 25%;
+                        width: 23%;
                     }
 
                     &:nth-of-type(2) {
-                        width: 25%;
+                        width: 20%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(3) {
-                        width: 25%;
+                        width: 20%;
                         justify-content: center;
                     }
 
@@ -762,6 +795,11 @@ export const VehicleStaffWrapper = styled('div')`
                     }
 
                     &:nth-of-type(5) {
+                        width: 12%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(6) {
                         width: 10%;
                         justify-content: center;
                     }
@@ -798,18 +836,18 @@ export const VehicleStaffWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 25%;
+                            width: 23%;
                             display: flex;
                         }
 
                         &:nth-of-type(2) {
-                            width: 25%;
+                            width: 20%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(3) {
-                            width: 25%;
+                            width: 20%;
                             align-items: center;
                             justify-content: center;
                         }
@@ -825,8 +863,35 @@ export const VehicleStaffWrapper = styled('div')`
                                 cursor: pointer;
                             }
                         }
-
                         &:nth-of-type(5) {
+                            width: 12%;
+                            align-items: center;
+                            justify-content: center;
+
+                            p {
+                                position: relative;
+                                font-size: 10px;
+                                font-weight: 500;
+                                line-height: 1;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 20px;
+                                padding: 4px 15px;
+                                color: ${colors.customColors.yellowColor1};
+                                background: ${colors.customColors.yellowColorLight};
+
+                                &.active {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
+                                }
+                                &.deactive {
+                                    color: ${colors.customColors.redColor};
+                                    background: ${colors.customColors.redColorLight};
+                                }
+                            }
+                        }
+
+                        &:nth-of-type(6) {
                             width: 10%;
                             align-items: center;
                             justify-content: center;

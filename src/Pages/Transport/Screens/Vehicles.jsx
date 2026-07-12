@@ -36,6 +36,7 @@ const VehiclesPage = () => {
                                 <th>Vehicles Number</th>
                                 <th>Type</th>
                                 <th>Capacity</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,6 +50,9 @@ const VehiclesPage = () => {
                                 </td>
                                 <td>Bus</td>
                                 <td>65</td>
+                                <td>
+                                    <p className="active">Active</p>
+                                </td>
                                 <td>
                                     <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
                                     <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
