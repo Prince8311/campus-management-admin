@@ -11,19 +11,19 @@ const TransportMainPage = () => {
                 <div className="heading_option_part">
                     <div className="inner_part">
                         <NavLink to="passengers" className="part_box">
-                            <h6>Passengers</h6>
+                            Passengers
                         </NavLink>
                         <NavLink to="vehicles" className="part_box">
-                            <h6>Vehicles</h6>
+                            Vehicles
                         </NavLink>
                         <NavLink to="staffs" className="part_box">
-                            <h6>Staffs</h6>
+                            Staffs
                         </NavLink>
                         <NavLink to="stopages" className="part_box">
-                            <h6>Stopages</h6>
+                            Stopages
                         </NavLink>
                         <NavLink to="routes" className="part_box">
-                            <h6>Routes</h6>
+                            Routes
                         </NavLink>
                     </div>
                 </div>

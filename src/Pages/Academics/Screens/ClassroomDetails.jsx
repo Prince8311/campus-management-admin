@@ -353,7 +353,7 @@ const ClassroomDetailsPage = () => {
                                 <div className="empty_box">
                                     <img src="/images/no-fields.svg" alt="" />
                                     <p>No time table available for this class section.</p>
-                                    <a onClick={handleRedirectTimeTablePage}><i className="fa-solid fa-sliders"></i>Create Tittle</a>
+                                    <a onClick={handleRedirectTimeTablePage}><i className="fa-solid fa-sliders"></i>Create Time Table</a>
                                 </div>
                             )
                         }

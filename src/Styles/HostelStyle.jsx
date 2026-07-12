@@ -567,7 +567,7 @@ export const HostelRoomWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 9%;
+                        width: 12%;
                     }
 
                     &:nth-of-type(2) {
@@ -595,7 +595,7 @@ export const HostelRoomWrapper = styled('div')`
                     }
 
                     &:nth-of-type(7) {
-                        width: 15%;
+                        width: 12%;
                         justify-content: center;
                     }
 
@@ -636,7 +636,7 @@ export const HostelRoomWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 9%;
+                            width: 12%;
                             align-items: flex-start;
                         }
 
@@ -671,9 +671,31 @@ export const HostelRoomWrapper = styled('div')`
                         }
 
                         &:nth-of-type(7) {
-                            width: 15%;
+                            width: 12%;
                             align-items: center;
                             justify-content: center;
+
+                            p {
+                                position: relative;
+                                font-size: 10px;
+                                font-weight: 500;
+                                line-height: 1;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 20px;
+                                padding: 4px 15px;
+                                color: ${colors.customColors.yellowColor1};
+                                background: ${colors.customColors.yellowColorLight};
+
+                                &.active {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
+                                }
+                                &.deactive {
+                                    color: ${colors.customColors.redColor};
+                                    background: ${colors.customColors.redColorLight};
+                                }
+                            }
                         }
 
                         &:nth-of-type(8) {

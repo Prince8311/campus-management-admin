@@ -81,13 +81,13 @@ const HostelRoomsPage = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Sl.No.</th>
                                 <th>Room No.</th>
                                 <th>Building</th>
                                 <th>Floor No.</th>
                                 <th>Bed Count</th>
                                 <th>Occupied</th>
                                 <th>Type</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -112,13 +112,15 @@ const HostelRoomsPage = () => {
                                 ) : rooms.length > 0 ? (
                                     rooms.map((room, i) =>
                                         <tr key={i}>
-                                            <td>{i + 1}</td>
                                             <td>{room.room_no}</td>
                                             <td>{room.building_name}</td>
                                             <td>{room.floor_no}</td>
                                             <td>{room.bed_count}</td>
                                             <td>{room.occupied}</td>
                                             <td>{room.type}</td>
+                                            <td>
+                                                <p className={room.status ? 'active' : ''}>{room.status ? 'Active' : 'Inactive'}</p>
+                                            </td>
                                             <td>
                                                 <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>

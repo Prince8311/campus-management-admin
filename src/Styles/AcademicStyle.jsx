@@ -3103,7 +3103,7 @@ export const ClassroomDetailsWrapper = styled('div')`
 
                 p {
                     position: relative;
-                    font-size: 15px;
+                    font-size: 13px;
                     margin-top: 10px;
                     color: ${colors.customColors.blackColor3};
                 }

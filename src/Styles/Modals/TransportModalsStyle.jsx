@@ -28,7 +28,7 @@ export const AddVehicleWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 550px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -100,10 +100,11 @@ export const AddVehicleWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
 
                 .input_box {
                     position: relative;
-                    width: 100%;
+                    width: 48.5%;
                     margin-bottom: 10px;
 
                     input {
@@ -136,7 +137,7 @@ export const AddVehicleWrapper = styled('div')`
 
                 .select_box {
                     position: relative;
-                    width: 100%;
+                    width: 48.5%;
                     margin-bottom: 10px;
 
                     span {
@@ -286,8 +287,8 @@ export const AddVehicleWrapper = styled('div')`
                 cursor: pointer;
                 border-radius: 6px;
                 overflow: hidden;
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 border: none;
-                background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
                 transition: all 0.5s ease;
 
@@ -673,8 +674,8 @@ export const AddStaffWrapper = styled('div')`
                 cursor: pointer;
                 border-radius: 6px;
                 overflow: hidden;
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 border: none;
-                background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
                 transition: all 0.5s ease;
 
@@ -965,8 +966,8 @@ export const StopageAddWrapper = styled('div')`
                 cursor: pointer;
                 border-radius: 6px;
                 overflow: hidden;
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 border: none;
-                background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
                 transition: all 0.5s ease;
 
@@ -1394,8 +1395,8 @@ export const PassengerAddWrapper = styled('div')`
                 cursor: pointer;
                 border-radius: 6px;
                 overflow: hidden;
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 border: none;
-                background: ${colors.customColors.blueColor1};
                 color: ${colors.customColors.whiteColor};
                 transition: all 0.5s ease;
 
