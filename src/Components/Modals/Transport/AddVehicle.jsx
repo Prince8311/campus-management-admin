@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { AddVehicleWrapper } from "../../../Styles/Modals/TransportModalsStyle";
 
 const AddVehicleModal = ({isAddVehicleModal, setIsAddVehicleModal}) => {
+    const [isStatus, setIsStatus] = useState(false);
 
     function closeModal() {
         setIsAddVehicleModal(false);
@@ -48,6 +50,17 @@ const AddVehicleModal = ({isAddVehicleModal, setIsAddVehicleModal}) => {
                         </div>
                     </div>
                     <div className="modal_btn">
+                        <div className="toggle_bar">
+                            <input
+                                type="checkbox"
+                                id="toggle"
+                                checked={isStatus}
+                                onChange={(e) => setIsStatus(e.target.checked)}
+                            />
+                            <label htmlFor="toggle">
+                                <span></span>
+                            </label>
+                        </div>
                         <button>Save</button>
                     </div>
                 </div>

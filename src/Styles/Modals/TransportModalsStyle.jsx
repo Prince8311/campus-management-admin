@@ -275,11 +275,55 @@ export const AddVehicleWrapper = styled('div')`
             width: 100%;
             padding: 13px 20px;
             display: flex;
-            justify-content: flex-end;
+            align-items: center;
             border-top: 1px solid ${colors.customColors.borderColor};
+
+            .toggle_bar {
+                position: relative;
+                width: 50px;
+                display: flex;
+                justify-content: flex-start;
+
+                input[type="checkbox"] {
+                    display: none;
+                }
+
+                label {
+                    position: relative;
+                    width: 40px;
+                    height: 21px;
+                    background: ${colors.customColors.whiteColor2};
+                    border-radius: 25px;
+                    padding: 3px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+
+                    span {
+                        position: relative;
+                        width: 15px;
+                        height: 100%;
+                        background: ${colors.customColors.whiteColor};
+                        border-radius: 50%;
+                        transition: all 0.5s ease;
+                    }
+                }
+
+                input[type="checkbox"]:checked ~ label {
+                    background: ${colors.customColors.greenColor};
+                    transition: all 0.5s ease;
+                }
+
+                input[type="checkbox"]:checked ~ label span {
+                    transform: translateX(19px);
+                    transition: all 0.5s ease;
+                }
+            }
 
             button {
                 position: relative;
+                margin-left: auto;
                 width: 160px;
                 height: 35px;
                 font-size: 13px;
@@ -662,11 +706,55 @@ export const AddStaffWrapper = styled('div')`
             width: 100%;
             padding: 13px 20px;
             display: flex;
-            justify-content: flex-end;
+            align-items: center;
             border-top: 1px solid ${colors.customColors.borderColor};
+
+            .toggle_bar {
+                position: relative;
+                width: 50px;
+                display: flex;
+                justify-content: flex-start;
+
+                input[type="checkbox"] {
+                    display: none;
+                }
+
+                label {
+                    position: relative;
+                    width: 40px;
+                    height: 21px;
+                    background: ${colors.customColors.whiteColor2};
+                    border-radius: 25px;
+                    padding: 3px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+
+                    span {
+                        position: relative;
+                        width: 15px;
+                        height: 100%;
+                        background: ${colors.customColors.whiteColor};
+                        border-radius: 50%;
+                        transition: all 0.5s ease;
+                    }
+                }
+
+                input[type="checkbox"]:checked ~ label {
+                    background: ${colors.customColors.greenColor};
+                    transition: all 0.5s ease;
+                }
+
+                input[type="checkbox"]:checked ~ label span {
+                    transform: translateX(19px);
+                    transition: all 0.5s ease;
+                }
+            }
 
             button {
                 position: relative;
+                margin-left: auto;
                 width: 160px;
                 height: 35px;
                 font-size: 13px;

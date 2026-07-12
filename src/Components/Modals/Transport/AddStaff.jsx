@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { AddStaffWrapper } from "../../../Styles/Modals/TransportModalsStyle";
 
 const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
+    const [isStatus, setIsStatus] = useState(false);
 
     function closeModal() {
         setIsStaffAddModal(false);
@@ -57,6 +59,17 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
+                         <div className="toggle_bar">
+                            <input
+                                type="checkbox"
+                                id="toggle"
+                                checked={isStatus}
+                                onChange={(e) => setIsStatus(e.target.checked)}
+                            />
+                            <label htmlFor="toggle">
+                                <span></span>
+                            </label>
+                        </div>
                         <button>Save</button>
                     </div>
                 </div>
