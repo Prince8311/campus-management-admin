@@ -23,7 +23,7 @@ export const getApiEndpoints = () => {
         fetchCitiesStatewise: `${apiURL}/api/state-cities/city-list.php`,
 
         // Institutions 
-        addInstitution: `${apiURL}/api/institutions/create.php`,
+        addInstitution: `${apiURL}/api/institutions/insert.php`,
         fetchInstitutions: `${apiURL}/api/institutions/list.php`,
 
         // Coupons 

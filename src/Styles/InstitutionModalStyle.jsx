@@ -174,8 +174,50 @@ export const AddInstitutionWrapper = styled('div')`
             padding: 13px 20px;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
             border-top: 1px solid ${colors.customColors.borderColor};
+
+            .toggle_bar {
+                position: relative;
+                width: 50px;
+                display: flex;
+                justify-content: flex-start;
+
+                input[type="checkbox"] {
+                    display: none;
+                }
+
+                label {
+                    position: relative;
+                    width: 40px;
+                    height: 21px;
+                    background: ${colors.customColors.whiteColor2};
+                    border-radius: 25px;
+                    padding: 3px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+
+                    span {
+                        position: relative;
+                        width: 15px;
+                        height: 100%;
+                        background: ${colors.customColors.whiteColor};
+                        border-radius: 50%;
+                        transition: all 0.5s ease;
+                    }
+                }
+
+                input[type="checkbox"]:checked ~ label {
+                    background: ${colors.customColors.greenColor};
+                    transition: all 0.5s ease;
+                }
+
+                input[type="checkbox"]:checked ~ label span {
+                    transform: translateX(19px);
+                    transition: all 0.5s ease;
+                }
+            }
 
             button {
                 position: relative;
@@ -186,9 +228,10 @@ export const AddInstitutionWrapper = styled('div')`
                 cursor: pointer;
                 border-radius: 6px;
                 overflow: hidden;
-                border: none;
-                background: ${colors.customColors.blueColor1};
+                margin-left: auto;
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 color: ${colors.customColors.whiteColor};
+                border: none;
                 margin-left: auto;
                 transition: all 0.3s ease;
 

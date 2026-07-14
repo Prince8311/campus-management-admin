@@ -1419,7 +1419,7 @@ export const EditStateCitiesWrapper = styled('div')`
                 span {
                     margin-left: 3px;
                     font-style: italic;
-                    color: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.blueColor2};
                 }
             }
 
@@ -1525,7 +1525,7 @@ export const EditStateCitiesWrapper = styled('div')`
 
                                 &.edit_btn {
                                     margin-left: 10px;
-                                    background: ${colors.customColors.blueColor1};
+                                    background: ${colors.customColors.blueColor2};
                                 }
 
                                 &.confirm_btn {

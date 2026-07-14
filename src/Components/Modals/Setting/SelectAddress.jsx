@@ -6,7 +6,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import { GoogleMap, LoadScript, Marker, Autocomplete, Circle } from "@react-google-maps/api";
 
-const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selectedAddress, setSelectedAddress, isAdmin = true }) => {
+const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selectedAddress, setSelectedAddress, setSelectState, setSelectCity, setLat, setLng, initialSelectedState, initialSelectedCity, isAdmin = true }) => {
     const api = getApiEndpoints();
     const [stateDropdownShow, setStateDropdownShow] = useState(false);
     const [selectedState, setSelectedState] = useState('');
@@ -97,9 +97,19 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
         }
     };
 
-    // When modal opens, prefill address and map if parent provided a selectedAddress
+    // When modal opens, prefill address, state & city and map if parent provided values
     useEffect(() => {
         if (!isShowAddressModal) return;
+
+        // Prefill selected state/city from parent if provided
+        if (initialSelectedState) {
+            setSelectedState(initialSelectedState);
+            setSelectState?.(initialSelectedState);
+        }
+        if (initialSelectedCity) {
+            setSelectedCity(initialSelectedCity);
+            setSelectCity?.(initialSelectedCity);
+        }
 
         if (selectedAddress) {
             setAddress(selectedAddress);
@@ -113,6 +123,8 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
                         setHighlightCenter(coords);
                         setZoomLevel(15);
                         setSearchBounds(coords.bounds || null);
+                        setLat?.(coords.lat);
+                        setLng?.(coords.lng);
                     }
                 } catch (e) {
                     // ignore geocode failures
@@ -122,12 +134,13 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
         } else {
             setAddress("");
         }
-    }, [isShowAddressModal, selectedAddress]);
+    }, [isShowAddressModal, selectedAddress, initialSelectedState, initialSelectedCity]);
 
     const handleSelectState = async (state) => {
         if (state === selectedState) return;
 
         setSelectedState(state);
+        setSelectState(state)
         setSelectedCity('');
         setStateDropdownShow(false);
         setSearchBounds(null);
@@ -171,6 +184,7 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
     const handleSelectCity = async (city) => {
         if (city === selectedCity) return;
         setSelectedCity(city);
+        setSelectCity(city);
         setCityDropdownShow(false);
 
         const coords = await geocodeLocation(`${city}, ${selectedState}, India`);
@@ -199,6 +213,8 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
             setHighlightCenter(coords);
             setZoomLevel(15);
             setAddress(place.formatted_address || "");
+            setLat?.(lat);
+            setLng?.(lng);
         }
     };
 
@@ -338,6 +354,8 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
                                             setMarkerPosition(coords);
                                             setMapCenter(coords);
                                             setHighlightCenter(coords);
+                                            setLat?.(coords.lat);
+                                            setLng?.(coords.lng);
                                         }}
                                     >
                                         <Marker
@@ -352,6 +370,8 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
                                                 setMarkerPosition(coords);
                                                 setMapCenter(coords);
                                                 setHighlightCenter(coords);
+                                                setLat?.(lat);
+                                                setLng?.(lng);
 
                                                 const address = await reverseGeocode(lat, lng);
                                                 if (address) {

@@ -23,10 +23,6 @@ const StateCityPage = () => {
         setIsShowAddCityModal(true);
     };
 
-    const handleOpenAddressModal = () => {
-        setIsShowAddressModal(true);
-    };
-
     const fetchStateCities = async (showSkeleton = false, pageNumber = 1) => {
         if (showSkeleton) {
             setIsInitialDataLoading(true);
@@ -60,10 +56,6 @@ const StateCityPage = () => {
                         <input type="text" placeholder="Search by State & Cities..." />
                     </div>
                     <div className="add_btn">
-                        <button onClick={handleOpenAddressModal}>
-                            <i className="fa-solid fa-plus"></i>
-                            <p>Add Address</p>
-                        </button>
                         <button onClick={handleOpenAddCityModal}>
                             <i className="fa-solid fa-plus"></i>
                             <p>Add City</p>

@@ -14,11 +14,16 @@ const InstitutionListPage = () => {
     const [isAddInstitutionOpen, setIsAddInstitutionOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState('');
     const [showAddressModal, setShowAddressModal] = useState(false);
+    const [selectedInstitution, setSelectedInstitution] = useState(null);
 
     const [institutions, setInstitutions] = useState([]);
     const [isInitialInstitutionsLoading, setIsInitialInstitutionsLoading] = useState(false);
     const [totalCount, setTotalCount] = useState('');
     const [searchInput, setSearchInput] = useState('');
+    const [selectState, setSelectState] = useState('');
+    const [selectCity, setSelectCity] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
 
 
     const fetchInstitutions = async (showSkeleton = false, pageNumber = 1) => {
@@ -49,12 +54,20 @@ const InstitutionListPage = () => {
     }, []);
 
     const handleOpenAddInstitutionModal = () => {
+        setSelectedInstitution(null);
+        setSelectedAddress('');
+        setSelectState('');
+        setSelectCity('');
         setIsAddInstitutionOpen(true);
     };
 
-    const handleEditInstitution = () => {
+    const handleEditInstitution = (institution) => {
+        setSelectedInstitution(institution);
+        setSelectedAddress(institution.location || institution.address || '');
+        setSelectState(institution.state || '');
+        setSelectCity(institution.city || '');
         setIsAddInstitutionOpen(true);
-    }
+    };
 
     return (
         <>
@@ -113,7 +126,7 @@ const InstitutionListPage = () => {
                                                 <p className={institution.status ? 'active' : ''}>{institution.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
-                                                <a className="edit_btn" onClick={() => handleEditInstitution()}>
+                                                <a className="edit_btn" onClick={() => handleEditInstitution(institution)}>
                                                     <i className="fa-solid fa-pen-to-square"></i>
                                                 </a>
                                                 <a className="delete_btn">
@@ -135,9 +148,20 @@ const InstitutionListPage = () => {
                 <AddInstitutionModal
                     isAddInstitutionOpen={isAddInstitutionOpen}
                     setIsAddInstitutionOpen={setIsAddInstitutionOpen}
+                    selectedInstitution={selectedInstitution}
+                    setSelectedInstitution={setSelectedInstitution}
                     selectedAddress={selectedAddress}
                     setSelectedAddress={setSelectedAddress}
                     setShowAddressModal={setShowAddressModal}
+                    selectState={selectState}
+                    setSelectState={setSelectState}
+                    selectCity={selectCity}
+                    setSelectCity={setSelectCity}
+                    lat={lat}
+                    lng={lng}
+                    setLat={setLat}
+                    setLng={setLng}
+                    refreshData={() => fetchInstitutions(false)}
                 />
 
                 <SelectAddressModal
@@ -145,6 +169,12 @@ const InstitutionListPage = () => {
                     setIsShowAddressModal={setShowAddressModal}
                     selectedAddress={selectedAddress}
                     setSelectedAddress={setSelectedAddress}
+                    setSelectState={setSelectState}
+                    setSelectCity={setSelectCity}
+                    setLat={setLat}
+                    setLng={setLng}
+                    initialSelectedState={selectState}
+                    initialSelectedCity={selectCity}
                 />
             </InstitutionListWrapper>
         </>
