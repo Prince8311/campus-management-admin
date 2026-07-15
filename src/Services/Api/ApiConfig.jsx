@@ -122,5 +122,9 @@ export const getApiEndpoints = () => {
         fetchRoomBeds: `${apiURL}/api/hostel/room/bed-list.php`,
         createHostelResident: `${apiURL}/api/hostel/resident/create.php`,
         fetchHostelResidents: `${apiURL}/api/hostel/resident/list.php`,
+
+        // Transport
+        addVehicle: `${apiURL}/api/transport/vehicles/insert.php`,
+        fetchVehicles: `${apiURL}/api/transport/vehicles/list.php`,
     };
 }

@@ -656,15 +656,30 @@ export const AddStaffWrapper = styled('div')`
                     .document_upload_sec {
                         position: relative;
                         width: 100%;
-                        height: 90px;
+                        height: 130px;
                         border: 1px dashed ${colors.customColors.borderColor1};
                         border-radius: 6px;
                         display: flex;
                         flex-direction: column;
+                        padding: 15px;
                         align-items: center;
                         justify-content: center;
-                        margin-top: 3px;
+                        margin-top: 5px;
                         cursor: pointer;
+                        transition: all 0.5s ease;
+
+                        &.drag_over {
+                            border: 1px solid ${colors.customColors.borderColor1};
+                            background: ${colors.customColors.lightBackground3};
+                            transition: all 0.5s ease;
+                        }
+                        
+                        &.file_selected {
+                            border: none;
+                            height: 150px;
+                            background: ${colors.customColors.lightBackground3};
+                            transition: all 0.5s ease;
+                        }
 
                         label {
                             position: relative;
@@ -694,6 +709,51 @@ export const AddStaffWrapper = styled('div')`
                                     color: ${colors.themeColor};
                                     margin-left: 5px;
                                 }
+                            }
+
+                            b {
+                                position: relative; 
+                                font-size: 11px;
+                                color: ${colors.customColors.blackColor2};
+                                font-weight: 400;
+                                margin-top: 2px;
+                            }
+                        }
+
+                        .file_preview {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+
+                            iframe {
+                                position: relative;
+                                width: calc(100% - 60px);
+                                height: 100%;
+                                border-radius: 4px;
+                            }
+
+                            img {
+                                position: relative;
+                                width: calc(100% - 60px);
+                                height: 100%;
+                                border-radius: 4px;
+                                border: 1px solid ${colors.customColors.borderColor};
+                            }
+
+                            a {
+                                position: relative;
+                                margin-left: 15px;
+                                width: 45px;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: ${colors.customColors.redColor};
+                                color: ${colors.customColors.whiteColor};
+                                font-size: 14px;
+                                border-radius: 4px;
+                                cursor: pointer;
                             }
                         }
                     }

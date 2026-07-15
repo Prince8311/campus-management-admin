@@ -19,6 +19,10 @@ const HomePage = () => {
     const [institutionName, setInstitutionName] = useState('');
     const [isEmail, setIsEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [selectState, setSelectState] = useState('');
+    const [selectCity, setSelectCity] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const isFormValid = institutionName.trim() !== '' && isEmail.trim() !== '' && phoneNumber.trim() !== '' && selectedAddress.trim() !== '';
 
@@ -307,6 +311,12 @@ const HomePage = () => {
                     setIsShowAddressModal={setShowAddressModal}
                     selectedAddress={selectedAddress}
                     setSelectedAddress={setSelectedAddress}
+                    setSelectState={setSelectState}
+                    setSelectCity={setSelectCity}
+                    setLat={setLat}
+                    setLng={setLng}
+                    initialSelectedState={selectState}
+                    initialSelectedCity={selectCity}
                     isAdmin={false}
                 />
 

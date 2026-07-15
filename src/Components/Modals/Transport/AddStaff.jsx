@@ -1,12 +1,74 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AddStaffWrapper } from "../../../Styles/Modals/TransportModalsStyle";
 
 const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
+    const roles = ["Driver", "Conductor"];
+    const [selectedRole, setSelectedRole] = useState('');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isStatus, setIsStatus] = useState(false);
+    const [staffName, setStaffName] = useState('');
+    const [contactNo, setContactNo] = useState('');
+    const [email, setEmail] = useState('');
+    const [licenseFile, setLicenseFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [isDragOver, setIsDragOver] = useState(false);
+    const fileInputRef = useRef(null);
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
+    const allowedExtensions = '.jpg,.jpeg,.png,.pdf';
+
+    const isFormValid = staffName.trim() && selectedRole && contactNo.trim() && email.trim() && licenseFile;
 
     function closeModal() {
         setIsStaffAddModal(false);
     }
+
+    function toggleDropdown() {
+        setIsDropdownOpen(!isDropdownOpen);
+    }
+
+    const handleRoleSelect = (role) => {
+        setSelectedRole(role);
+        setIsDropdownOpen(false);
+    }
+
+    const handleFileChange = (file) => {
+        if (file && allowedTypes.includes(file.type)) {
+            if (previewUrl) URL.revokeObjectURL(previewUrl);
+            setLicenseFile(file);
+            setPreviewUrl(URL.createObjectURL(file));
+        } else if (file) {
+            alert('Invalid file type. Please upload a JPG, PNG, JPEG, or PDF file.');
+        }
+    };
+
+    const handleInputChange = (e) => {
+        handleFileChange(e.target.files[0]);
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragOver(true);
+    };
+
+    const handleDragLeave = () => {
+        setIsDragOver(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragOver(false);
+        handleFileChange(e.dataTransfer.files[0]);
+    };
+
+    const handleRemoveFile = (e) => {
+        e.preventDefault();
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        setLicenseFile(null);
+        setPreviewUrl(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+    };
+
     return (
         <>
             <AddStaffWrapper className={isStaffAddModal ? 'active' : ''}>
@@ -21,19 +83,27 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                         <div className="body_inner">
                             <div className="input_box fullwidth">
                                 <span>Staff Name <p>*</p></span>
-                                <input type="text" />
+                                <input
+                                    type="text"
+                                    value={staffName}
+                                    onChange={(e) => setStaffName(e.target.value)}
+                                />
                             </div>
                             <div className="select_box">
                                 <span>Staff Role <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
-                                        <p>Driver</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                    <div className="dropdown_btn" onClick={toggleDropdown}>
+                                        <p>{selectedRole}</p>
+                                        <i className={`fa-solid fa-angle-down ${isDropdownOpen ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${isDropdownOpen ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li></li>
+                                                {
+                                                    roles.map((role, index) => (
+                                                        <li key={index} onClick={() => handleRoleSelect(role)}>{role}</li>
+                                                    ))
+                                                }
                                             </ul>
                                         </div>
                                     </div>
@@ -41,25 +111,67 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                             </div>
                             <div className="input_box halfwidth">
                                 <span>Contact No. <p>*</p></span>
-                                <input type="number" />
+                                <input
+                                    type="number"
+                                    value={contactNo}
+                                    onChange={(e) => setContactNo(e.target.value)}
+                                />
                             </div>
                             <div className="input_box fullwidth">
                                 <span>Email <p>*</p></span>
-                                <input type="email" />
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
                             <div className="upload_box">
                                 <span>Driving License <p>*</p></span>
-                                <div className="document_upload_sec">
-                                    <label htmlFor="fileUpload" className="upload_label">
-                                        <i className="fa-solid fa-cloud-arrow-up"></i>
-                                        <p>Drag and drop your file here or <span>browse files</span></p>
-                                    </label>
+                                <div
+                                    className={`document_upload_sec ${isDragOver ? 'drag_over' : ''} ${licenseFile ? 'file_selected' : ''}`}
+                                    onDragOver={handleDragOver}
+                                    onDragLeave={handleDragLeave}
+                                    onDrop={handleDrop}
+                                >
+                                    {licenseFile ? (
+                                        <div className="file_preview">
+                                            {licenseFile.type === 'application/pdf' ? (
+                                                <iframe
+                                                    src={previewUrl}
+                                                    title="License Preview"
+                                                    className="pdf_preview"
+                                                />
+                                            ) : (
+                                                <img src={previewUrl} alt="License Preview" className="image_preview" />
+                                            )}
+                                            <a className="remove_file" onClick={handleRemoveFile}><i class="fa-solid fa-trash-can"></i></a>
+                                        </div>
+                                    ) : isDragOver ?
+                                        (<label htmlFor="fileUpload" className="upload_label">
+                                            <i class="fa-brands fa-elementor"></i>
+                                            <p>Drop your file here.</p>
+                                        </label>
+                                        ) : (
+                                            <label htmlFor="fileUpload" className="upload_label">
+                                                <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                <p>Drag and drop your file here or <span>browse files</span></p>
+                                                <b>Supported: JPG, JPEG, PNG, PDF</b>
+                                            </label>
+                                        )}
+                                    <input
+                                        ref={fileInputRef}
+                                        id="fileUpload"
+                                        type="file"
+                                        accept={allowedExtensions}
+                                        style={{ display: 'none' }}
+                                        onChange={handleInputChange}
+                                    />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="modal_btn">
-                         <div className="toggle_bar">
+                        <div className="toggle_bar">
                             <input
                                 type="checkbox"
                                 id="toggle"
@@ -70,7 +182,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                                 <span></span>
                             </label>
                         </div>
-                        <button>Save</button>
+                        <button disabled={!isFormValid}>Save</button>
                     </div>
                 </div>
             </AddStaffWrapper>
