@@ -71,23 +71,48 @@ const VehicleStaffsPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    Joydeep Barik
-                                </td>
-                                <td>
-                                    9749708386
-                                </td>
-                                <td>Driver</td>
-                                <td><i className="fa-solid fa-file-arrow-down"></i></td>
-                                <td>
-                                    <p className="active">Active</p>
-                                </td>
-                                <td>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                isInitialVehicleStaffsLoading ? (
+                                    Array.from({ length: 2 }).map((_, index) => (
+                                        <tr key={index}>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td>
+                                                <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
+                                                <SkeletonLoader width="15px" height="15px" />
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : vehicleStaffs.length > 0 ? (
+                                    vehicleStaffs.map((staff, index) => (
+                                        <tr key={index}>
+                                            <td>
+                                                Joydeep Barik
+                                            </td>
+                                            <td>
+                                                9749708386
+                                            </td>
+                                            <td>Driver</td>
+                                            <td><i className="fa-solid fa-file-arrow-down"></i></td>
+                                            <td>
+                                                <p className="active">Active</p>
+                                            </td>
+                                            <td>
+                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td className="empty_message">No Staff available.</td>
+                                    </tr>
+                                )
+                            }
+
                         </tbody>
                     </table>
                 </div>
