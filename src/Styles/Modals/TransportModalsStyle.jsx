@@ -881,6 +881,204 @@ export const StopageAddWrapper = styled('div')`
                 display: flex;
                 flex-wrap: wrap;
 
+                .country_name_sec {
+                    position: relative;
+                    width: 100%;
+                    margin-bottom: 8px;
+
+                    p {
+                        position: relative;
+                        font-size: 12px;
+                        font-weight: 400;
+                        font-style: italic;
+                        color: ${colors.customColors.blackColor2};
+                        
+                        span {
+                            font-style: normal;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+                }
+
+                .state_city_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .select_box {
+                        position: relative;
+                        width: 48.9%;
+                        margin-bottom: 13px;
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor2};
+
+                            p {
+                                color: ${colors.customColors.redColor};
+                                margin-left: 2px;
+                            }
+                        }
+
+                        .dropdown_sec {
+                            position: relative;
+                            width: 100%;
+                            height: 37px;
+                            flex-direction: column;
+                            margin-top: 3px;
+
+                            .dropdown_btn {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                cursor: pointer;
+                                background: ${colors.customColors.lightBackground3};
+
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 25px);
+                                    display: flex;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                i {
+                                    position: relative;
+                                    margin-left: auto;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor2};
+                                    transition: all 0.5s ease;
+                                    
+                                    &.active {
+                                        transform: rotate(-180deg);
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+                            }
+
+                            .dropdown {
+                                position: absolute;
+                                top: 100%;
+                                left: 0px;
+                                width: 100%;
+                                z-index: 15;
+                                background: ${colors.customColors.whiteColor};
+                                border-radius: 5px;
+                                box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                                max-height: 0px;
+                                overflow: hidden;
+                                transition: all 0.5s ease;
+
+                                &.active {
+                                    max-height: 200px;
+                                    transition: all 0.5s ease;
+                                }
+
+                                .dropdown_inner {
+                                    position: relative;
+                                    width: 100%;
+                                    padding: 10px;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    .search_sec {
+                                        position: relative;
+                                        height: 32px;
+                                        padding: 5px 0;
+                                        display: flex;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        border-radius: 6px;
+                                        margin-bottom: 10px;
+
+                                        i {
+                                            position: relative;
+                                            width: 40px;
+                                            height: 100%;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor3};
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            border-right: 1px solid ${colors.customColors.borderColor};
+                                        }
+
+                                        input {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            border: none;
+                                            outline: none;
+                                            padding: 0 15px;
+                                            font-size: 10px;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
+                                    }
+
+                                    ul {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        max-height: 160px;
+                                        overflow-y: auto;
+                                        scrollbar-width: none;
+                                        -ms-overflow-style: none;
+
+                                        &::-webkit-scrollbar {
+                                            display: none;
+                                        }
+
+                                        li {
+                                            position: relative;
+                                            width: 100%;
+                                            list-style: none;
+                                            padding: 7px 15px;
+                                            cursor: pointer;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor1};
+                                            border-radius: 4px;
+                                            transition: all 0.5s ease;
+
+                                            &:hover {
+                                                background: ${colors.themeColor};
+                                                color: ${colors.customColors.whiteColor};
+                                                transition: all 0.5s ease;
+                                            }
+
+                                            &.active {
+                                                background: ${colors.customColors.lightBackground};
+                                                color: ${colors.customColors.blackColor};
+
+                                                &:hover {
+                                                    color: ${colors.customColors.blackColor};
+                                                }
+                                            }
+
+                                            &.empty_message {
+                                                padding: 5px 10px;
+                                                color: ${colors.customColors.blackColor3};
+                                                pointer-events: none;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 .search_sec_box {
                     position: relative;
                     width: 100%;
@@ -925,7 +1123,7 @@ export const StopageAddWrapper = styled('div')`
                 .map_box {
                     position: relative;
                     width: 100%;
-                    height: 180px;
+                    height: 150px;
                     margin-bottom: 10px;
                     padding: 5px;
                     display: flex;
@@ -941,7 +1139,7 @@ export const StopageAddWrapper = styled('div')`
                     textarea {
                         position: relative;
                         width: 100%;
-                        height: 70px;
+                        height: 60px;
                         font-size: 12px;
                         border-radius: 5px;
                         padding: 10px 15px;
