@@ -304,7 +304,6 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                 ? { classSection: selectedUser.class && selectedUser.section ? `${selectedUser.class} - ${selectedUser.section}` : "" }
                 : { role: selectedUser.role || "" })
         };
-        console.log("Payload for creating resident:", payload);
         try {
             const response = await axiosInstance.post(api.createHostelResident, payload);
             if (response?.data.status === 200) {
