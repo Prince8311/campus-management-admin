@@ -1,7 +1,12 @@
 import { useState, useRef } from "react";
 import { AddStaffWrapper } from "../../../Styles/Modals/TransportModalsStyle";
+import { toast } from "react-toastify";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
 const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
+    const api = getApiEndpoints();
     const roles = ["Driver", "Conductor"];
     const [selectedRole, setSelectedRole] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,11 +21,22 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
     const allowedExtensions = '.jpg,.jpeg,.png,.pdf';
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     const isFormValid = staffName.trim() && selectedRole && contactNo.trim() && email.trim() && licenseFile;
 
     function closeModal() {
         setIsStaffAddModal(false);
+        setSelectedRole('');
+        setIsDropdownOpen(false);
+        setIsStatus(false);
+        setStaffName('');
+        setContactNo('');
+        setEmail('');
+        setLicenseFile(null);
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        setPreviewUrl(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
     }
 
     function toggleDropdown() {
@@ -67,6 +83,35 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
         setLicenseFile(null);
         setPreviewUrl(null);
         if (fileInputRef.current) fileInputRef.current.value = '';
+    };
+
+    const handleSave = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const inputs = {
+            name: staffName,
+            role: selectedRole,
+            phone: contactNo,
+            email: email,
+            status: isStatus,
+        };
+        const formData = new FormData();
+        formData.append('inputs', JSON.stringify(inputs));
+        formData.append('license_file', licenseFile);
+        try {
+            const response = await axiosInstance.post(api.addVehicleStaff, formData, {
+                params: {
+                    intent: 'add',
+                }
+            });
+            if(response.data.status === 200) {
+                console.log('Staff added successfully:', response.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
     };
 
     return (
@@ -144,11 +189,11 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                                             ) : (
                                                 <img src={previewUrl} alt="License Preview" className="image_preview" />
                                             )}
-                                            <a className="remove_file" onClick={handleRemoveFile}><i class="fa-solid fa-trash-can"></i></a>
+                                            <a className="remove_file" onClick={handleRemoveFile}><i className="fa-solid fa-trash-can"></i></a>
                                         </div>
                                     ) : isDragOver ?
                                         (<label htmlFor="fileUpload" className="upload_label">
-                                            <i class="fa-brands fa-elementor"></i>
+                                            <i className="fa-brands fa-elementor"></i>
                                             <p>Drop your file here.</p>
                                         </label>
                                         ) : (
@@ -182,7 +227,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                                 <span></span>
                             </label>
                         </div>
-                        <button disabled={!isFormValid}>Save</button>
+                        <button disabled={!isFormValid} onClick={handleSave}>Save</button>
                     </div>
                 </div>
             </AddStaffWrapper>
