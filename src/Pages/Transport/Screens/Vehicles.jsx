@@ -10,7 +10,38 @@ import Pagination from "../../../Components/Pagination";
 const VehiclesPage = () => {
 
     const api = getApiEndpoints();
+    const [vehicles, setVehicles] = useState([]);
+    const [isInitialInstitutionsLoading, setIsInitialInstitutionsLoading] = useState(false);
+    const [totalCount, setTotalCount] = useState('');
+
     const [isAddVehicleModal, setIsAddVehicleModal] = useState(false);
+    const [page, setPage] = useState(1);
+
+    const fetchVehicles = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialInstitutionsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchVehicles, {
+                params: {
+                    page: pageNumber
+                }
+            });
+            if (response.data.status === 200) {
+                console.log('Vehicles:', response.data);
+                setVehicles(response?.data.vehicles);
+                setTotalCount(response.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialInstitutionsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchVehicles(true, page);
+    }, [page]);
 
     const handleOpenAddVehicleModal = () => {
         setIsAddVehicleModal(true);
@@ -47,30 +78,56 @@ const VehiclesPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    TATA-Seria
-                                </td>
-                                <td>
-                                    WB015- 777
-                                </td>
-                                <td>Bus</td>
-                                <td>65</td>
-                                <td>
-                                    <p className="active">Active</p>
-                                </td>
-                                <td>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                isInitialInstitutionsLoading ? (
+                                    Array.from({ length: 2 }).map((_, index) => (
+                                        <tr key={index}>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td>
+                                                <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
+                                                <SkeletonLoader width="15px" height="15px" />
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : vehicles.length > 0 ? (
+                                    vehicles.map((vehicle, index) => (
+                                        <tr key={index}>
+                                            <td>{vehicle.name}</td>
+                                            <td>{vehicle.number}</td>
+                                            <td>{vehicle.type}</td>
+                                            <td>{vehicle.capacity}</td>
+                                            <td>
+                                                <p className={vehicle.status ? 'active' : ''}>{vehicle.status ? 'Active' : 'Inactive'}</p>
+                                            </td>
+                                            <td>
+                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td className="empty_message">No vehicles found.</td>
+                                    </tr>
+                                )
+                            }
                         </tbody>
                     </table>
                 </div>
 
+                {
+                    totalCount > 10 &&
+                    <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
+                }
+
                 <AddVehicleModal
                     isAddVehicleModal={isAddVehicleModal}
                     setIsAddVehicleModal={setIsAddVehicleModal}
+                    refreshData={() => fetchVehicles(false)}
                 />
             </VehicleWrapper>
         </>
