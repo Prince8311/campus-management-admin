@@ -1,11 +1,20 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddRoutesWrapper } from "../../../Styles/TransportStyle";
 
 const AddRoutesPage = () => {
     const navigate = useNavigate();
+    const [stopages, setStopages] = useState([{ id: 1, label: "Stopage 1" }]);
 
     const handleRedirectionRoutesPage = () => {
         navigate("/admin/transport-management/routes");
+    }
+
+    const handleAddStopage = () => {
+        setStopages((prevStopages) => [
+            ...prevStopages,
+            { id: Date.now(), label: `Stopage ${prevStopages.length + 1}` }
+        ]);
     }
 
     return (
@@ -76,43 +85,45 @@ const AddRoutesPage = () => {
                                     <h6>Add Stopage</h6>
                                 </div>
                                 <div className="sec_content">
-                                    <div className="content_box">
-                                        <a>Stopage 1</a>
-                                        <div className="box_items">
-                                            <div className="select_box">
-                                                <span>Select Stopage <p>*</p></span>
-                                                <div className="dropdown_sec">
-                                                    <div className="dropdown_btn">
-                                                        <p>Driver</p>
-                                                        <i className="fa-solid fa-angle-down"></i>
-                                                    </div>
-                                                    <div className="dropdown">
-                                                        <div className="dropdown_inner">
-                                                            <ul>
-                                                                <li></li>
-                                                            </ul>
+                                    {stopages.map((stopage) => (
+                                        <div className="content_box" key={stopage.id}>
+                                            <a>{stopage.label}</a>
+                                            <div className="box_items">
+                                                <div className="select_box">
+                                                    <span>Select Stopage <p>*</p></span>
+                                                    <div className="dropdown_sec">
+                                                        <div className="dropdown_btn">
+                                                            <p>Driver</p>
+                                                            <i className="fa-solid fa-angle-down"></i>
+                                                        </div>
+                                                        <div className="dropdown">
+                                                            <div className="dropdown_inner">
+                                                                <ul>
+                                                                    <li></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>Pick up Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
+                                                <div className="date_box">
+                                                    <span>Pick up Time <p>*</p></span>
+                                                    <div className="date_btn">
+                                                        <p>Set Time</p>
+                                                        <i className="fa-regular fa-clock"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="date_box">
-                                                <span>Drop Time <p>*</p></span>
-                                                <div className="date_btn">
-                                                    <p>Set Time</p>
-                                                    <i className="fa-regular fa-clock"></i>
+                                                <div className="date_box">
+                                                    <span>Drop Time <p>*</p></span>
+                                                    <div className="date_btn">
+                                                        <p>Set Time</p>
+                                                        <i className="fa-regular fa-clock"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="add_sec">
-                                        <span><i class="fa-solid fa-plus"></i>Add more</span>
+                                    ))}
+                                    <div className="add_sec" onClick={handleAddStopage} style={{ cursor: "pointer" }}>
+                                        <span><i className="fa-solid fa-plus"></i>Add more</span>
                                     </div>
                                 </div>
                             </div>

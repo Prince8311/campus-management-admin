@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { VehicleWrapper } from "../../../Styles/TransportStyle";
 import AddVehicleModal from "../../../Components/Modals/Transport/AddVehicle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import Pagination from "../../../Components/Pagination";
 
 const VehiclesPage = () => {
 
+    const api = getApiEndpoints();
     const [isAddVehicleModal, setIsAddVehicleModal] = useState(false);
 
     const handleOpenAddVehicleModal = () => {
