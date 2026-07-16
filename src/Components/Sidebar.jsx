@@ -220,7 +220,7 @@ const Sidebar = () => {
                                     </div>
                                 }
                                 {
-                                    userDetails.user_type === 'inst_admin' &&
+                                    // userDetails.user_type === 'inst_admin' &&
                                     <div className={`dropdown_item ${activeDropdown === 3 ? 'active' : ''}`}>
                                         <div className="dropdown_btn" onClick={() => toggleDropdown(3)}>
                                             <li>

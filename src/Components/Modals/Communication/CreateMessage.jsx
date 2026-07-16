@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { MessageCreateWrapper } from "../../../Styles/Modals/CommunicationStyle";
+import { UserData } from "../../../Context/PageContext";
 
 const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalOpen }) => {
+
+    const { userDetails } = UserData();
     const [messageId, setMessageId] = useState("");
     const [isApproved, setIsApproved] = useState(false);
 
@@ -37,32 +40,40 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
                                 <span>Message Body <p>*</p></span>
                                 <textarea name="" ></textarea>
                             </div>
-                            <div className="input_box">
-                                <span>Message Id <p>*</p></span>
-                                <input
-                                    type="text"
-                                    value={messageId}
-                                    onChange={handleMessageIdChange}
-                                />
-                            </div>
+                            {userDetails?.user_type === "super_admin" && (
+                                <div className="input_box">
+                                    <span>Message Id <p>*</p></span>
+                                    <input
+                                        type="text"
+                                        value={messageId}
+                                        onChange={handleMessageIdChange}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
+
                     <div className="modal_btn">
-                        <p>Approve by</p>
-                        <div className="toggle_bar">
-                            <input
-                                type="checkbox"
-                                id="toggle"
-                                checked={isApproved}
-                                disabled={!messageId}
-                                onChange={(e) => setIsApproved(e.target.checked)}
-                            />
-                            <label htmlFor="toggle">
-                                <span></span>
-                            </label>
-                        </div>
+                        {userDetails?.user_type === "super_admin" && (
+                            <>
+                                <p>Approve</p>
+                                <div className="toggle_bar">
+                                    <input
+                                        type="checkbox"
+                                        id="toggle"
+                                        checked={isApproved}
+                                        disabled={!messageId}
+                                        onChange={(e) => setIsApproved(e.target.checked)}
+                                    />
+                                    <label htmlFor="toggle">
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </>
+                        )}
                         <button> Save </button>
                     </div>
+
                 </div>
             </MessageCreateWrapper>
         </>

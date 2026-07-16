@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { MessagingWrapper } from "../../../Styles/CommunicationStyle";
 import CreateMessageModal from "../../../Components/Modals/Communication/CreateMessage";
+import { UserData } from "../../../Context/PageContext";
 
 const MessagingPage = () => {
+    const { userDetails } = UserData();
     const [isMessageCreateModalOpen, setIsMessageCreateModalOpen] = useState(false);
     const tabs = ['Active', 'Requested'];
     const [selectedTab, setSelectedTab] = useState(tabs[0]);
@@ -42,9 +44,12 @@ const MessagingPage = () => {
                                 <p>Available Balance</p>
                             </div>
                             <span>20000</span>
-                            <div className="box_btn">
-                                <button>Recharge<i className="fa-solid fa-hourglass-half"></i></button>
-                            </div>
+                            {
+                                userDetails?.user_type === "inst_admin" &&
+                                <div className="box_btn">
+                                    <button>Recharge<i className="fa-solid fa-hourglass-half"></i></button>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

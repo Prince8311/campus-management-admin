@@ -6,9 +6,11 @@ import states from "../../../Data/States.json";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import { Autocomplete, Circle, GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { UserData } from "../../../Context/PageContext";
 
 const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
     const api = getApiEndpoints();
+    const { userDetails } = UserData();
     const [stateDropdownShow, setStateDropdownShow] = useState(false);
     const [selectedState, setSelectedState] = useState('');
     const [cityDropdownShow, setCityDropdownShow] = useState(false);
@@ -28,6 +30,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
     const [searchBounds, setSearchBounds] = useState(null);
 
     const [address, setAddress] = useState("");
+    const [distance, setDistance] = useState("");
+    const [hasLocationSelection, setHasLocationSelection] = useState(false);
 
     const isSearchEnabled = selectedState && selectedCity;
     const circleRef = useRef(null);
@@ -45,6 +49,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
         setAutocomplete(null);
         setSearchBounds(null);
         setAddress("");
+        setDistance("");
+        setHasLocationSelection(false);
         setIsStopageAdd(false);
     }
 
@@ -52,6 +58,45 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
         setStateDropdownShow(!stateDropdownShow);
         setCityDropdownShow(false);
     }
+
+    const calculateDistanceInKm = (fromLat, fromLng, toLat, toLng) => {
+        if (!fromLat || !fromLng || !toLat || !toLng) return "";
+
+        const toRad = (value) => (value * Math.PI) / 180;
+        const earthRadiusKm = 6371;
+
+        const dLat = toRad(toLat - fromLat);
+        const dLng = toRad(toLng - fromLng);
+        const lat1 = toRad(fromLat);
+        const lat2 = toRad(toLat);
+
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = earthRadiusKm * c;
+
+        return Number.isFinite(distance) ? distance.toFixed(2) : "";
+    };
+
+    const updateDistance = (coords) => {
+        if (!coords) {
+            setDistance("");
+            return;
+        }
+
+        const fromLat = Number(userDetails?.institution?.latitude);
+        const fromLng = Number(userDetails?.institution?.longitude);
+
+        if (!Number.isFinite(fromLat) || !Number.isFinite(fromLng)) {
+            setDistance("");
+            return;
+        }
+
+        const computedDistance = calculateDistanceInKm(fromLat, fromLng, coords.lat, coords.lng);
+        setDistance(computedDistance);
+    };
 
     const geocodeLocation = async (address) => {
         try {
@@ -114,6 +159,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
             setMarkerPosition(coords);
             setHighlightCenter(coords);
             setZoomLevel(7);
+            setHasLocationSelection(true);
+            updateDistance(coords);
         }
     }
 
@@ -156,6 +203,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
             setHighlightCenter(coords);
             setZoomLevel(12);
             setSearchBounds(coords.bounds);
+            setHasLocationSelection(true);
+            updateDistance(coords);
         }
     }
 
@@ -174,8 +223,15 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
             setHighlightCenter(coords);
             setZoomLevel(15);
             setAddress(place.formatted_address || "");
+            setHasLocationSelection(true);
+            updateDistance(coords);
         }
     };
+
+    useEffect(() => {
+        if (!hasLocationSelection) return;
+        updateDistance(markerPosition);
+    }, [hasLocationSelection, markerPosition.lat, markerPosition.lng, userDetails?.institution?.latitude, userDetails?.institution?.longitude]);
 
     return (
         <>
@@ -313,6 +369,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                             setMarkerPosition(coords);
                                             setMapCenter(coords);
                                             setHighlightCenter(coords);
+                                            setHasLocationSelection(true);
+                                            updateDistance(coords);
                                         }}
                                     >
                                         <Marker
@@ -327,6 +385,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                                 setMarkerPosition(coords);
                                                 setMapCenter(coords);
                                                 setHighlightCenter(coords);
+                                                setHasLocationSelection(true);
+                                                updateDistance(coords);
 
                                                 const address = await reverseGeocode(lat, lng);
                                                 if (address) {
@@ -373,7 +433,7 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                 <div className="input_box">
                                     <span>Distance <p>*</p></span>
                                     <div className="input_wrapper">
-                                        <input type="text" placeholder="0" />
+                                        <input type="text" value={distance} readOnly placeholder="0" />
                                         <p>Km</p>
                                     </div>
                                 </div>
