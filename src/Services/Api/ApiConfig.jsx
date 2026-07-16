@@ -109,6 +109,10 @@ export const getApiEndpoints = () => {
         createFeeConfiguration: `${apiURL}/api/fee/configuration/create.php`,
         fetchFeeConfigurations: `${apiURL}/api/fee/configuration/list.php`,
 
+        // Communication 
+        insertCommunicationMsgTemplate: `${apiURL}/api/communication/message-templates/insert.php`,
+        fetchCommunicationMsgTemplats: `${apiURL}/api/communication/message-templates/list.php`,
+
         // Roles & Permissions
         createUpdateRole: `${apiURL}/api/role-permission/create-edit.php`,
         fetchRoles: `${apiURL}/api/role-permission/list.php`,
