@@ -111,7 +111,7 @@ const VehiclesPage = () => {
                                     ))
                                 ) : (
                                     <tr>
-                                        <td className="empty_message">No vehicles found.</td>
+                                        <td className="empty_message">No vehicles available.</td>
                                     </tr>
                                 )
                             }
