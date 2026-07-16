@@ -5,7 +5,7 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
+const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => {
     const api = getApiEndpoints();
     const roles = ["Driver", "Conductor"];
     const [selectedRole, setSelectedRole] = useState('');
@@ -112,6 +112,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                 console.log('Staff added successfully:', response.data);
                 toast.success(response.data.message);
                 resetForm();
+                refreshData();
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { VehicleStaffWrapper } from "../../../Styles/TransportStyle";
 import AddStaffModal from "../../../Components/Modals/Transport/AddStaff";
 import { toast } from "react-toastify";
-import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import { documentBaseURL, getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
@@ -14,12 +14,44 @@ const VehicleStaffsPage = () => {
     const [totalCount, setTotalCount] = useState('');
     const [page, setPage] = useState(1);
 
+    const handleDownloadLicense = async (fileName) => {
+        if (!fileName) {
+            toast.error("License file not available");
+            return;
+        }
+
+        try {
+            const fileUrl = `${documentBaseURL}/driving-license/${fileName}`;
+            const response = await fetch(fileUrl);
+
+            if (!response.ok) {
+                throw new Error("Failed to download file");
+            }
+
+            const fileBlob = await response.blob();
+            const downloadUrl = window.URL.createObjectURL(fileBlob);
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(downloadUrl);
+        } catch (error) {
+            toast.error(error.message || "Unable to download license file");
+        }
+    };
+
     const fetchVehicleStaffs = async (showSkeleton = false, pageNumber = 1) => {
         if (showSkeleton) {
             setIsInitialVehicleStaffsLoading(true);
         }
         try {
-            const response = await axiosInstance.get(api.fetchVehicleStaffs);
+            const response = await axiosInstance.get(api.fetchVehicleStaffs, {
+                params: {
+                    page: pageNumber
+                }
+            });
             if (response?.data.status === 200) {
                 console.log("staffs", response);
                 setVehicleStaffs(response?.data.staffs);
@@ -90,15 +122,19 @@ const VehicleStaffsPage = () => {
                                     vehicleStaffs.map((staff, index) => (
                                         <tr key={index}>
                                             <td>
-                                                Joydeep Barik
+                                                {staff.name}
                                             </td>
                                             <td>
-                                                9749708386
+                                                {staff.contact_no}
                                             </td>
-                                            <td>Driver</td>
-                                            <td><i className="fa-solid fa-file-arrow-down"></i></td>
+                                            <td>{staff.role}</td>
                                             <td>
-                                                <p className="active">Active</p>
+                                                <a onClick={() => handleDownloadLicense(staff.license_file)}>
+                                                    <i className="fa-solid fa-file-arrow-down"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <p className={staff.status ? 'active' : ''}>{staff.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
                                                 <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
@@ -120,6 +156,7 @@ const VehicleStaffsPage = () => {
                 <AddStaffModal
                     isStaffAddModal={isStaffAddModal}
                     setIsStaffAddModal={setIsStaffAddModal}
+                    refreshData={() => fetchVehicleStaffs(false, page)}
                 />
             </VehicleStaffWrapper>
         </>

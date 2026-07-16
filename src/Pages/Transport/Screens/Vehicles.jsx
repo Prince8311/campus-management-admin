@@ -127,7 +127,7 @@ const VehiclesPage = () => {
                 <AddVehicleModal
                     isAddVehicleModal={isAddVehicleModal}
                     setIsAddVehicleModal={setIsAddVehicleModal}
-                    refreshData={() => fetchVehicles(false)}
+                    refreshData={() => fetchVehicles(false, page)}
                 />
             </VehicleWrapper>
         </>

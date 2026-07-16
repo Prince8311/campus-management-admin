@@ -3,6 +3,8 @@ import { add } from "@dnd-kit/utilities";
 export const baseURL = 'https://api.educonnekt.in';
 export const apiURL = `${baseURL}/admin`;
 
+export const documentBaseURL = `${baseURL}/documents`;
+
 export const getApiEndpoints = () => {
     return {
         // Public
