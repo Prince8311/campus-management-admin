@@ -39,7 +39,11 @@ const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData 
             status: isStatus
         }
         try {
-            const response = await axiosInstance.post(api.addVehicle, payload);
+            const response = await axiosInstance.post(api.addVehicle, payload, {
+                params: {
+                    intent: 'add',
+                }
+            });
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 closeModal();
@@ -102,9 +106,9 @@ const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData 
                                                 {
                                                     types.map((type, index) => (
                                                         <li key={index}
-                                                        onClick={() => handleSelectType(type)}
-                                                        className={vehicleType === type ? 'active' : ''}
-                                                    > {type}
+                                                            onClick={() => handleSelectType(type)}
+                                                            className={vehicleType === type ? 'active' : ''}
+                                                        > {type}
                                                         </li>
                                                     ))
                                                 }

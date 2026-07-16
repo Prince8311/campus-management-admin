@@ -111,7 +111,7 @@ export const getApiEndpoints = () => {
 
         // Communication 
         insertCommunicationMsgTemplate: `${apiURL}/api/communication/message-templates/insert.php`,
-        fetchCommunicationMsgTemplats: `${apiURL}/api/communication/message-templates/list.php`,
+        fetchCommunicationMsgTemplates: `${apiURL}/api/communication/message-templates/list.php`,
 
         // Roles & Permissions
         createUpdateRole: `${apiURL}/api/role-permission/create-edit.php`,
