@@ -5,7 +5,7 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
+const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => {
     const api = getApiEndpoints();
     const roles = ["Driver", "Conductor"];
     const [selectedRole, setSelectedRole] = useState('');
@@ -26,7 +26,11 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
     const isFormValid = staffName.trim() && selectedRole && contactNo.trim() && email.trim() && licenseFile;
 
     function closeModal() {
+        resetForm();
         setIsStaffAddModal(false);
+    }
+
+    function resetForm() {
         setSelectedRole('');
         setIsDropdownOpen(false);
         setIsStatus(false);
@@ -104,8 +108,11 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                     intent: 'add',
                 }
             });
-            if(response.data.status === 200) {
+            if (response.data.status === 200) {
                 console.log('Staff added successfully:', response.data);
+                toast.success(response.data.message);
+                resetForm();
+                refreshData();
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -227,7 +234,15 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal }) => {
                                 <span></span>
                             </label>
                         </div>
-                        <button disabled={!isFormValid} onClick={handleSave}>Save</button>
+                        <button disabled={!isFormValid} onClick={handleSave}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </AddStaffWrapper>
