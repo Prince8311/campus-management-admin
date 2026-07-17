@@ -30,10 +30,17 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
     const [searchBounds, setSearchBounds] = useState(null);
 
     const [address, setAddress] = useState("");
+    const [stopageName, setStopageName] = useState("");
     const [distance, setDistance] = useState("");
     const [hasLocationSelection, setHasLocationSelection] = useState(false);
 
     const isSearchEnabled = selectedState && selectedCity;
+    const isFormComplete =
+        Boolean(selectedState?.trim()) &&
+        Boolean(selectedCity?.trim()) &&
+        Boolean(address?.trim()) &&
+        Boolean(stopageName?.trim()) &&
+        Boolean(distance?.toString().trim());
     const circleRef = useRef(null);
 
     function closeModal() {
@@ -49,6 +56,7 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
         setAutocomplete(null);
         setSearchBounds(null);
         setAddress("");
+        setStopageName("");
         setDistance("");
         setHasLocationSelection(false);
         setIsStopageAdd(false);
@@ -149,6 +157,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
 
         setSelectedState(state);
         setSelectedCity('');
+        setAddress("");
+        setDistance("");
         setStateDropdownShow(false);
         setSearchBounds(null);
 
@@ -160,7 +170,6 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
             setHighlightCenter(coords);
             setZoomLevel(7);
             setHasLocationSelection(true);
-            updateDistance(coords);
         }
     }
 
@@ -193,6 +202,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
     const handleSelectCity = async (city) => {
         if (city === selectedCity) return;
         setSelectedCity(city);
+        setAddress("");
+        setDistance("");
         setCityDropdownShow(false);
 
         const coords = await geocodeLocation(`${city}, ${selectedState}, India`);
@@ -204,7 +215,6 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
             setZoomLevel(12);
             setSearchBounds(coords.bounds);
             setHasLocationSelection(true);
-            updateDistance(coords);
         }
     }
 
@@ -224,14 +234,16 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
             setZoomLevel(15);
             setAddress(place.formatted_address || "");
             setHasLocationSelection(true);
-            updateDistance(coords);
         }
     };
 
     useEffect(() => {
-        if (!hasLocationSelection) return;
+        if (!hasLocationSelection || !address.trim()) {
+            setDistance("");
+            return;
+        }
         updateDistance(markerPosition);
-    }, [hasLocationSelection, markerPosition.lat, markerPosition.lng, userDetails?.institution?.latitude, userDetails?.institution?.longitude]);
+    }, [hasLocationSelection, address, markerPosition.lat, markerPosition.lng, userDetails?.institution?.latitude, userDetails?.institution?.longitude]);
 
     return (
         <>
@@ -331,6 +343,7 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                         <i className="fa-solid fa-magnifying-glass"></i>
 
                                         <Autocomplete
+                                            className="input_box"
                                             onLoad={(auto) => setAutocomplete(auto)}
                                             onPlaceChanged={onPlaceChanged}
                                             options={{
@@ -360,7 +373,7 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                         mapContainerStyle={{ width: "100%", height: "100%", borderRadius: "3px" }}
                                         center={highlightCenter || mapCenter}
                                         zoom={zoomLevel}
-                                        onClick={(e) => {
+                                        onClick={async (e) => {
                                             const coords = {
                                                 lat: e.latLng.lat(),
                                                 lng: e.latLng.lng()
@@ -370,7 +383,9 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                             setMapCenter(coords);
                                             setHighlightCenter(coords);
                                             setHasLocationSelection(true);
-                                            updateDistance(coords);
+
+                                            const resolvedAddress = await reverseGeocode(coords.lat, coords.lng);
+                                            setAddress(resolvedAddress || "");
                                         }}
                                     >
                                         <Marker
@@ -386,12 +401,9 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                                 setMapCenter(coords);
                                                 setHighlightCenter(coords);
                                                 setHasLocationSelection(true);
-                                                updateDistance(coords);
 
                                                 const address = await reverseGeocode(lat, lng);
-                                                if (address) {
-                                                    setAddress(address);
-                                                }
+                                                setAddress(address || "");
                                             }}
                                         />
 
@@ -428,7 +440,11 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                             <div className="distance_sec">
                                 <div className="input_box">
                                     <span>Stopage Name <p>*</p></span>
-                                    <input type="text" />
+                                    <input
+                                        type="text"
+                                        value={stopageName}
+                                        onChange={(e) => setStopageName(e.target.value)}
+                                    />
                                 </div>
                                 <div className="input_box">
                                     <span>Distance <p>*</p></span>
@@ -441,7 +457,7 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={!isFormComplete}>Save</button>
                     </div>
                 </div>
             </StopageAddWrapper>

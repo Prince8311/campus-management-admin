@@ -861,7 +861,7 @@ export const StopageAddWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 575px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -1160,15 +1160,21 @@ export const StopageAddWrapper = styled('div')`
                             border-right: 1px solid ${colors.customColors.borderColor};
                         }
 
-                        input {
+                        .input_box {
                             position: relative;
                             width: calc(100% - 40px);
                             height: 100%;
-                            border: none;
-                            outline: none;
-                            padding: 0 15px;
-                            font-size: 12px;
-                            color: ${colors.customColors.blackColor1};
+
+                            input {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                border: none;
+                                outline: none;
+                                padding: 0 15px;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor1};
+                            }
                         }
                     }
                 }
