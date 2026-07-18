@@ -16,28 +16,71 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
     const [balance, setBalance] = useState('');
     const [isStatus, setIsStatus] = useState(false);
     const [body, setBody] = useState('');
+
+    const [initialData, setInitialData] = useState(null);
+    const [isFormChanged, setIsFormChanged] = useState(false);
+
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const isFormValid = tittle.trim() !== '' && body.trim() !== '';
 
     // Pre-fill form when selectedTemplate changes
     useEffect(() => {
         if (selectedTemplate) {
-            setTittle(selectedTemplate.template_title || '');
-            setBody(selectedTemplate.template_body || '');
-            setMessageId(selectedTemplate.message_id || '');
-            setIsApproved(selectedTemplate.is_approved || false);
+            const data = {
+                tittle: selectedTemplate.template_title || "",
+                body: selectedTemplate.template_body || "",
+                messageId: selectedTemplate.message_id || "",
+                balance: selectedTemplate.balance || "",
+                isStatus: selectedTemplate.status || false,
+            };
+
+            setTittle(data.tittle);
+            setBody(data.body);
+            setMessageId(data.messageId);
+            setBalance(data.balance);
+            setIsStatus(data.isStatus);
+
+            setInitialData(data);
+            setIsFormChanged(false);
+        } else {
+            setTittle("");
+            setBody("");
+            setMessageId("");
+            setBalance("");
+            setIsStatus(false);
+
+            setInitialData(null);
+            setIsFormChanged(true);
         }
     }, [selectedTemplate]);
 
+    useEffect(() => {
+        if (!initialData) return;
+
+        const changed =
+            tittle !== initialData.tittle ||
+            body !== initialData.body ||
+            messageId !== initialData.messageId ||
+            balance !== initialData.balance ||
+            isStatus !== initialData.isStatus;
+
+        setIsFormChanged(changed);
+    }, [tittle, body, messageId, balance, isStatus, initialData]);
+
     const closeModal = () => {
         setIsMessageCreateModalOpen(false);
-        setTittle('');
-        setBody('');
-        setMessageId('');
-        setIsApproved(false);
-        setSelectedTemplate(null);
+
+        setTittle("");
+        setBody("");
+        setMessageId("");
+        setBalance("");
         setIsStatus(false);
-        setBalance('');
+        setIsApproved(false);
+
+        setInitialData(null);
+        setIsFormChanged(false);
+
+        setSelectedTemplate(null);
     };
 
     const handleSaveTemplate = async (e) => {
@@ -148,16 +191,18 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
                             </>
                         )}
                         <button
-                            disabled={!isFormValid || isButtonLoading}
+                            disabled={
+                                !isFormValid ||
+                                isButtonLoading ||
+                                (selectedTemplate && !isFormChanged)
+                            }
                             onClick={handleSaveTemplate}
                         >
-                            {
-                                isButtonLoading ? (
-                                    <ButtonLoader />
-                                ) : (
-                                    <>{selectedTemplate ? 'Update' : 'Save'}</>
-                                )
-                            }
+                            {isButtonLoading ? (
+                                <ButtonLoader />
+                            ) : (
+                                selectedTemplate ? "Update" : "Save"
+                            )}
                         </button>
                     </div>
 
