@@ -134,5 +134,7 @@ export const getApiEndpoints = () => {
         fetchVehicles: `${apiURL}/api/transport/vehicles/list.php`,
         addVehicleStaff: `${apiURL}/api/transport/staffs/insert.php`,
         fetchVehicleStaffs: `${apiURL}/api/transport/staffs/list.php`,
+        addStopage: `${apiURL}/api/transport/stopages/insert.php`,
+        fetchStopages: `${apiURL}/api/transport/stopages/list.php`,
     };
 }

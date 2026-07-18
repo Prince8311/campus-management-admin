@@ -53,7 +53,7 @@ const VehicleStaffsPage = () => {
                 }
             });
             if (response?.data.status === 200) {
-                console.log("staffs", response);
+                // console.log("staffs", response);
                 setVehicleStaffs(response?.data.staffs);
                 setTotalCount(response?.data.totalCount);
             }

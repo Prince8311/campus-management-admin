@@ -234,7 +234,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
                                 <span></span>
                             </label>
                         </div>
-                        <button disabled={!isFormValid} onClick={handleSave}>
+                        <button disabled={!isFormValid || isButtonLoading} onClick={handleSave}>
                             {
                                 isButtonLoading ? (
                                     <ButtonLoader />

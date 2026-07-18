@@ -28,7 +28,7 @@ const VehiclesPage = () => {
                 }
             });
             if (response.data.status === 200) {
-                console.log('Vehicles:', response.data);
+                // console.log('Vehicles:', response.data);
                 setVehicles(response?.data.vehicles);
                 setTotalCount(response.data.totalCount);
             }

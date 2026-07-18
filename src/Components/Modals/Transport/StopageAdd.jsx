@@ -1,16 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { StopageAddWrapper } from "../../../Styles/Modals/TransportModalsStyle";
-import { AddStateCitiesWrapper } from "../../../Styles/SettingModalStyle";
 import { toast } from "react-toastify";
 import states from "../../../Data/States.json";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
-import { Autocomplete, Circle, GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { Autocomplete, Circle, GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { UserData } from "../../../Context/PageContext";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
-const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
+const GOOGLE_MAP_LIBRARIES = ["places"];
+
+const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshData }) => {
     const api = getApiEndpoints();
     const { userDetails } = UserData();
+    const { isLoaded: isMapLoaded, loadError } = useJsApiLoader({
+        id: "google-map-script-stopage-add",
+        googleMapsApiKey: "AIzaSyDKX4TjlGMne-DIIucVFT6FRmTiMXKkcqs",
+        libraries: GOOGLE_MAP_LIBRARIES
+    });
     const [stateDropdownShow, setStateDropdownShow] = useState(false);
     const [selectedState, setSelectedState] = useState('');
     const [cityDropdownShow, setCityDropdownShow] = useState(false);
@@ -42,9 +49,14 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
         Boolean(stopageName?.trim()) &&
         Boolean(distance?.toString().trim());
     const circleRef = useRef(null);
+    const [isStatus, setIsStatus] = useState(false);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const [mapResetKey, setMapResetKey] = useState(0);
 
-    function closeModal() {
+    function resetFormAndMap() {
         circleRef.current = null;
+        setStateDropdownShow(false);
+        setCityDropdownShow(false);
         setSelectedState('');
         setSelectedCity('');
         setCities([]);
@@ -59,7 +71,13 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
         setStopageName("");
         setDistance("");
         setHasLocationSelection(false);
-        setIsStopageAdd(false);
+        setIsStatus(false);
+        setMapResetKey((prev) => prev + 1);
+    }
+
+    function closeModal() {
+        resetFormAndMap();
+        setShowStopageAddModal(false);
     }
 
     const toggleStateDropdown = () => {
@@ -107,6 +125,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
     };
 
     const geocodeLocation = async (address) => {
+        if (!window.google?.maps) return null;
+
         try {
             const geocoder = new window.google.maps.Geocoder();
             const result = await new Promise((resolve, reject) => {
@@ -131,6 +151,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
     };
 
     const reverseGeocode = async (lat, lng) => {
+        if (!window.google?.maps) return "";
+
         try {
             const geocoder = new window.google.maps.Geocoder();
 
@@ -245,10 +267,41 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
         updateDistance(markerPosition);
     }, [hasLocationSelection, address, markerPosition.lat, markerPosition.lng, userDetails?.institution?.latitude, userDetails?.institution?.longitude]);
 
+    const handleSave = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            name: stopageName,
+            state: selectedState,
+            city: selectedCity,
+            location: address,
+            distance: distance,
+            latitude: markerPosition.lat,
+            longitude: markerPosition.lng,
+            status: isStatus
+        };
+        try {
+            const response = await axiosInstance.post(api.addStopage, payload, {
+                params: {
+                    intent: 'add',
+                }
+            });
+            if(response?.data.status === 200) {
+                toast.success(response?.data.message);
+                refreshData();
+                resetFormAndMap();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+
     return (
         <>
-            <StopageAddWrapper className={isStopageAdd ? 'active' : ''}>
-                <div className={`modal_box ${isStopageAdd ? 'active' : ''}`}>
+            <StopageAddWrapper className={showStopageAddModal ? 'active' : ''}>
+                <div className={`modal_box ${showStopageAddModal ? 'active' : ''}`}>
                     <div className="modal_head">
                         <h4>Add Stopage</h4>
                         <div className="close_sec">
@@ -334,15 +387,26 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                     </div>
                                 </div>
                             </div>
-                            <LoadScript
-                                googleMapsApiKey="AIzaSyDKX4TjlGMne-DIIucVFT6FRmTiMXKkcqs"
-                                libraries={["places"]}
-                            >
+                            {loadError ? (
+                                <div className="search_sec_box">
+                                    <div className="search_sec">
+                                        <p>Map failed to load. Please retry.</p>
+                                    </div>
+                                </div>
+                            ) : !isMapLoaded ? (
+                                <div className="search_sec_box">
+                                    <div className="search_sec">
+                                        <p>Loading map...</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
                                 <div className="search_sec_box">
                                     <div className="search_sec">
                                         <i className="fa-solid fa-magnifying-glass"></i>
 
                                         <Autocomplete
+                                            key={`autocomplete-${mapResetKey}`}
                                             className="input_box"
                                             onLoad={(auto) => setAutocomplete(auto)}
                                             onPlaceChanged={onPlaceChanged}
@@ -370,6 +434,7 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                 </div>
                                 <div className="map_box">
                                     <GoogleMap
+                                        key={`map-${mapResetKey}`}
                                         mapContainerStyle={{ width: "100%", height: "100%", borderRadius: "3px" }}
                                         center={highlightCenter || mapCenter}
                                         zoom={zoomLevel}
@@ -432,7 +497,8 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                                         )}
                                     </GoogleMap>
                                 </div>
-                            </LoadScript>
+                                </>
+                            )}
                             <div className="text_box">
                                 <span>Location <p>*</p></span>
                                 <textarea value={address} readOnly />
@@ -457,7 +523,26 @@ const StopageAddModal = ({ isStopageAdd, setIsStopageAdd }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button disabled={!isFormComplete}>Save</button>
+                        <div className="toggle_bar">
+                            <input
+                                type="checkbox"
+                                id="toggle"
+                                checked={isStatus}
+                                onChange={(e) => setIsStatus(e.target.checked)}
+                            />
+                            <label htmlFor="toggle">
+                                <span></span>
+                            </label>
+                        </div>
+                        <button disabled={!isFormComplete || isButtonLoading} onClick={handleSave}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </StopageAddWrapper>
