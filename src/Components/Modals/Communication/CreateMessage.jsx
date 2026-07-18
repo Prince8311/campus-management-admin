@@ -45,10 +45,13 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
         setIsButtonLoading(true);
         const payload = {
             template_title: tittle,
-            template_body: body,
-            template_id: messageId,
-            balance: balance,
-            status: isStatus
+            template_body: body
+        }
+
+        if (userDetails.user_type === 'super_admin') {
+            payload.template_id = messageId;
+            payload.balance = balance;
+            payload.status = isStatus;
         }
 
         if (selectedTemplate?.id) {
