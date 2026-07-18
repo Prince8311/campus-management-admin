@@ -358,13 +358,18 @@ export const MessagingWrapper = styled('div')`
 
                 span {
                     position: relative;
-                    padding: 4px 15px;
+                    padding: 2px 15px;
                     border-radius: 25px;
                     background: ${colors.customColors.yellowColorLight};
                     color: ${colors.customColors.orangeColor};
-                    font-size: 10px;
+                    font-size: 11px;
                     font-weight: 400;
                     margin-left: 10px;
+
+                    &.active {
+                        background: ${colors.customColors.greenColorLight};
+                        color: ${colors.customColors.greenColor};
+                    }
                 }
 
                 a {
@@ -381,7 +386,7 @@ export const MessagingWrapper = styled('div')`
 
                     i {
                         font-size: 12px;
-                        margin-left: 6px;
+                        margin-right: 6px;
                     }
                 }
             }
@@ -435,6 +440,31 @@ export const MessagingWrapper = styled('div')`
                         color: ${colors.customColors.blackColor2};
                     }
                 }
+            }
+        }
+
+        .empty_box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+
+            img {
+                position: relative;
+                width: 150px;
+                opacity: 0.5;
+            }
+
+            p {
+                position: relative;
+                font-size: 13px;
+                margin-top: 10px;
+                color: ${colors.customColors.blackColor3};
             }
         }
     }

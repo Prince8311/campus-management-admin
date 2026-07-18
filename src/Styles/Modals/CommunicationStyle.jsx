@@ -104,8 +104,15 @@ export const MessageCreateWrapper = styled('div')`
 
                 .input_box {
                     position: relative;
-                    width: 100%;
                     margin-bottom: 10px;
+
+                    &.fullWidth {
+                        width: 100%;
+                    }
+
+                    &.halfWidth {
+                        width: 48%; 
+                    }
 
                     input {
                         position: relative;
@@ -126,7 +133,7 @@ export const MessageCreateWrapper = styled('div')`
                         height: 80px;
                         font-size: 12px;
                         border-radius: 5px;
-                        padding: 5px 15px;
+                        padding: 10px 15px;
                         outline: none;
                         border: none;
                         margin-top: 3px;
