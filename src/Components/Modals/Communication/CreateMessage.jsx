@@ -6,21 +6,38 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalOpen }) => {
+const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalOpen, selectedTemplate, setSelectedTemplate, refreshData }) => {
     const api = getApiEndpoints();
     const { userDetails } = UserData();
     const [messageId, setMessageId] = useState("");
     const [isApproved, setIsApproved] = useState(false);
 
     const [tittle, setTittle] = useState('');
+    const [balance, setBalance] = useState('');
+    const [isStatus, setIsStatus] = useState(false);
     const [body, setBody] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const isFormValid = tittle.trim() !== '' && body.trim() !== '';
+
+    // Pre-fill form when selectedTemplate changes
+    useEffect(() => {
+        if (selectedTemplate) {
+            setTittle(selectedTemplate.template_title || '');
+            setBody(selectedTemplate.template_body || '');
+            setMessageId(selectedTemplate.message_id || '');
+            setIsApproved(selectedTemplate.is_approved || false);
+        }
+    }, [selectedTemplate]);
 
     const closeModal = () => {
         setIsMessageCreateModalOpen(false);
         setTittle('');
         setBody('');
+        setMessageId('');
+        setIsApproved(false);
+        setSelectedTemplate(null);
+        setIsStatus(false);
+        setBalance('');
     };
 
     const handleSaveTemplate = async (e) => {
@@ -28,17 +45,28 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
         setIsButtonLoading(true);
         const payload = {
             template_title: tittle,
-            template_body: body
+            template_body: body,
+            template_id: messageId,
+            balance: balance,
+            status: isStatus
         }
+
+        if (selectedTemplate?.id) {
+            payload.id = selectedTemplate.id;
+        }
+
         try {
+            const params = {
+                intent: selectedTemplate ? 'update' : 'add'
+            };
+
             const response = await axiosInstance.post(api.insertCommunicationMsgTemplate, payload, {
-                params: {
-                    intent: 'add',
-                }
+                params
             });
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 closeModal();
+                refreshData(); // Call the refreshData function to update the list of templates
             }
         } catch (error) {
             toast.error(error?.response?.data?.message || "An error occurred");
@@ -60,30 +88,40 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
             <MessageCreateWrapper className={isMessageCreateModalOpen ? "active" : ''}>
                 <div className={`modal_box ${isMessageCreateModalOpen ? "active" : ""}`}>
                     <div className="modal_head">
-                        <h4>Add Template</h4>
+                        <h4>{selectedTemplate ? 'Edit Template' : 'Add Template'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="input_box">
+                            <div className="input_box fullWidth">
                                 <span>Tittle <p>*</p></span>
                                 <input type="text" value={tittle} onChange={(e) => setTittle(e.target.value)} />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box fullWidth">
                                 <span>Body <p>*</p></span>
                                 <textarea name="" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
                             </div>
                             {userDetails?.user_type === "super_admin" && (
-                                <div className="input_box">
-                                    <span>Message Id <p>*</p></span>
-                                    <input
-                                        type="text"
-                                        value={messageId}
-                                        onChange={handleMessageIdChange}
-                                    />
-                                </div>
+                                <>
+                                    <div className="input_box halfWidth">
+                                        <span>Message Id <p>*</p></span>
+                                        <input
+                                            type="text"
+                                            value={messageId}
+                                            onChange={handleMessageIdChange}
+                                        />
+                                    </div>
+                                    <div className="input_box halfWidth">
+                                        <span>Balance <p>*</p></span>
+                                        <input
+                                            type="text"
+                                            value={balance}
+                                            onChange={(e) => setBalance(e.target.value)}
+                                        />
+                                    </div>
+                                </>
                             )}
                         </div>
                     </div>
@@ -96,9 +134,9 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
                                     <input
                                         type="checkbox"
                                         id="toggle"
-                                        checked={isApproved}
+                                        checked={isStatus}
                                         disabled={!messageId}
-                                        onChange={(e) => setIsApproved(e.target.checked)}
+                                        onChange={(e) => setIsStatus(e.target.checked)}
                                     />
                                     <label htmlFor="toggle">
                                         <span></span>
@@ -114,7 +152,7 @@ const CreateMessageModal = ({ isMessageCreateModalOpen, setIsMessageCreateModalO
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{selectedTemplate ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>
