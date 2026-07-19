@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
-import { UserData } from "../../../Context/PageContext";
 import CircleLoader from "../../../Components/Loader/CircleLoader";
+import ButtonLoader from "../../../Components/Loader/ButtonLoader";
 
 const AddStaffPage = () => {
     const api = getApiEndpoints();
@@ -22,6 +22,9 @@ const AddStaffPage = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isBulkUploading, setIsBulkUploading] = useState(false);
+    const [isStaffUploading, setIsStaffUploading] = useState(false);
+    const [staffProfileImage, setStaffProfileImage] = useState(null);
+    const [staffProfileImageFile, setStaffProfileImageFile] = useState(null);
 
     const fetchStaffForm = async () => {
         setIsFormLoading(true);
@@ -151,7 +154,7 @@ const AddStaffPage = () => {
         return map;
     };
 
-     const handleCSVUpload = async () => {
+    const handleCSVUpload = async () => {
         if (!selectedFile) {
             toast.warn("Please select a file first");
             return;
@@ -214,7 +217,12 @@ const AddStaffPage = () => {
                     staffType: staffType,
                     isBulkUpload: true
                 };
-                const response = await axiosInstance.post(api.addStaff, payload);
+                const fd = new FormData();
+                fd.append("staffs", JSON.stringify(payload.staffs));
+                fd.append("staffType", payload.staffType || "");
+                fd.append("isBulkUpload", "true");
+
+                const response = await axiosInstance.post(api.addStaff, fd);
                 if (response?.data.status === 200) {
                     toast.success(response.data?.message || "Staff uploaded successfully");
                     handleRemoveFile();
@@ -242,7 +250,49 @@ const AddStaffPage = () => {
         }
     };
 
-     const areRequiredFieldsFilled = () => {
+    const handleProfileImageSelect = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const allowedFormats = [".png", ".jpg", ".jpeg"];
+        const fileExtension = "." + file.name.split(".").pop().toLowerCase();
+
+        if (!allowedFormats.includes(fileExtension)) {
+            toast.warn("Only PNG, JPG, and JPEG formats are allowed");
+            return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+            toast.warn("File size must be less than 10MB");
+            return;
+        }
+
+        setStaffProfileImageFile(file);
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            setStaffProfileImage(event.target.result);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleProfileImageUploadClick = () => {
+        const fileInput = document.getElementById("profileImageUpload");
+        if (fileInput) {
+            fileInput.click();
+        }
+    };
+
+    const handleRemoveProfileImage = () => {
+        setStaffProfileImage(null);
+        setStaffProfileImageFile(null);
+        const fileInput = document.getElementById("profileImageUpload");
+        if (fileInput) {
+            fileInput.value = "";
+        }
+    };
+
+    const areRequiredFieldsFilled = () => {
         for (const section of form) {
             for (const field of section.fields) {
                 if (field.is_required) {
@@ -257,7 +307,8 @@ const AddStaffPage = () => {
         return true;
     };
 
-     const handleFormSubmit = () => {
+    const handleFormSubmit = async () => {
+        setIsStaffUploading(true);
         const staffData = [];
         Object.entries(formData).forEach(([sectionId, fields]) => {
             Object.entries(fields).forEach(([fieldName, value]) => {
@@ -271,21 +322,33 @@ const AddStaffPage = () => {
                 }
             });
         });
-        const payload = {
-            staffs: [
-                {
-                    staff_fields: staffData
-                }
-            ],
-            staffType: staffType,
-            isBulkUpload: false
-        };
-        try {
-            
-        } catch (error) {
-            
+
+        const staffsArray = [
+            {
+                staff_fields: staffData
+            }
+        ];
+        const fd = new FormData();
+        fd.append("staffs", JSON.stringify(staffsArray));
+        fd.append("staffType", staffType || "");
+        fd.append("isBulkUpload", "false");
+
+        if (staffProfileImageFile) {
+            fd.append("profile_image", staffProfileImageFile);
         }
-        console.log("Single upload", payload);
+
+        try {
+            const response = await axiosInstance.post(api.addStaff, fd);
+            if (response?.data.status === 200) {
+                toast.success(response.data?.message || "Staff uploaded successfully");
+                setFormData({});
+                handleRemoveProfileImage();
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || error.message);
+        } finally {
+            setIsStaffUploading(false);
+        }
     };
 
     return (
@@ -390,12 +453,26 @@ const AddStaffPage = () => {
                                                 <h6>Manually Add Staff</h6>
                                                 <div className="sec_content">
                                                     <div className="content_left">
-                                                        <img src="/images/profile-image.png" alt="" />
+                                                        <img src={staffProfileImage || "/images/profile-image.png"} alt="Profile" />
+                                                        {
+                                                            staffProfileImage && (
+                                                                <button type="button" className="remove_image_btn" onClick={handleRemoveProfileImage}>
+                                                                    <i className="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            )
+                                                        }
                                                     </div>
                                                     <div className="content_right">
                                                         <p>Upload passport size photo</p>
                                                         <span>( File size: max 10MB | Formats: '.png', '.jpg', '.jpeg' )</span>
-                                                        <a><i className="fa-solid fa-cloud-arrow-up"></i>Upload Image</a>
+                                                        <input
+                                                            type="file"
+                                                            accept=".png, .jpg, .jpeg"
+                                                            id="profileImageUpload"
+                                                            hidden
+                                                            onChange={handleProfileImageSelect}
+                                                        />
+                                                        <a onClick={handleProfileImageUploadClick}><i className="fa-solid fa-cloud-arrow-up"></i>Upload Image</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -436,7 +513,15 @@ const AddStaffPage = () => {
                                             }
                                         </div>
                                         <div className="btn_sec">
-                                            <button><i className="fa-solid fa-plus"></i>Add Staff</button>
+                                            <button onClick={handleFormSubmit} disabled={!areRequiredFieldsFilled() || isStaffUploading}>
+                                                {
+                                                    isStaffUploading ? (
+                                                        <ButtonLoader/>
+                                                    ) : (
+                                                        <><i className="fa-solid fa-plus"></i>Add Staff</>
+                                                    )
+                                                }
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

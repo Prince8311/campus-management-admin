@@ -8,6 +8,7 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../../Context/PageContext";
 import CircleLoader from "../../../Components/Loader/CircleLoader";
+import ButtonLoader from "../../../Components/Loader/ButtonLoader";
 
 const AddStudentPage = () => {
     const api = getApiEndpoints();
@@ -224,7 +225,11 @@ const AddStudentPage = () => {
                     students: formattedData,
                     isBulkUpload: true
                 };
-                const response = await axiosInstance.post(api.addStudent, payload);
+                const fd = new FormData();
+                fd.append("students", JSON.stringify(payload.students));
+                fd.append("isBulkUpload", "true");
+
+                const response = await axiosInstance.post(api.addStudent, fd);
 
                 if (response?.data.status === 200) {
                     toast.success(response.data?.message || "Students uploaded successfully");
@@ -322,26 +327,30 @@ const AddStudentPage = () => {
                 }
             });
         });
-        const payload = {
-            students: [
-                {
-                    student_fields: studentData
-                }
-            ],
-            isBulkUpload: false
-        };
-        console.log("Payload for adding student:", payload);
-        // try {
-        //     const response = await axiosInstance.post(api.addStudent, payload);
-        //     if (response?.data.status === 200) {
-        //         toast.success(response.data?.message || "Student uploaded successfully");
-        //         handleRemoveFile();
-        //     }
-        // } catch (error) {
-        //     toast.error(error.response?.data?.message || error.message);
-        // } finally {
-        //     setIsStudentUploading(false);
-        // }
+
+        const studentsArray = [{ student_fields: studentData }];
+        const fd = new FormData();
+        fd.append("students", JSON.stringify(studentsArray));
+        fd.append("isBulkUpload", "false");
+
+        const profileImageInput = document.getElementById("profileImageUpload");
+        const profileImageFile = profileImageInput?.files?.[0];
+        if (profileImageFile) {
+            fd.append("profile_image", profileImageFile);
+        }
+
+        try {
+            const response = await axiosInstance.post(api.addStudent, fd);
+            if (response?.data.status === 200) {
+                toast.success(response.data?.message || "Student uploaded successfully");
+                setFormData({});
+                handleRemoveProfileImage();
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || error.message);
+        } finally {
+            setIsStudentUploading(false);
+        }
     };
 
     return (
@@ -506,7 +515,15 @@ const AddStudentPage = () => {
                                             }
                                         </div>
                                         <div className="btn_sec">
-                                            <button onClick={handleFormSubmit} disabled={!areRequiredFieldsFilled()}><i className="fa-solid fa-plus"></i>Add Student</button>
+                                            <button onClick={handleFormSubmit} disabled={!areRequiredFieldsFilled() || isStudentUploading}>
+                                                {
+                                                    isStudentUploading ? (
+                                                        <ButtonLoader/>
+                                                    ) : (
+                                                        <><i className="fa-solid fa-plus"></i>Add Student</>
+                                                    )
+                                                }
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
