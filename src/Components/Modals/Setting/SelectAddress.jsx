@@ -4,10 +4,12 @@ import states from "../../../Data/States.json";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
-import { GoogleMap, LoadScript, Marker, Autocomplete, Circle } from "@react-google-maps/api";
+import { GoogleMap, Marker, Autocomplete, Circle, useJsApiLoader } from "@react-google-maps/api";
+import { googleMapsLoaderOptions } from "../../../Services/Api/GoogleMapsConfig";
 
 const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selectedAddress, setSelectedAddress, setSelectState, setSelectCity, setLat, setLng, initialSelectedState, initialSelectedCity, isAdmin = true }) => {
     const api = getApiEndpoints();
+    const { isLoaded: isMapLoaded, loadError } = useJsApiLoader(googleMapsLoaderOptions);
     const [stateDropdownShow, setStateDropdownShow] = useState(false);
     const [selectedState, setSelectedState] = useState('');
     const [cityDropdownShow, setCityDropdownShow] = useState(false);
@@ -307,105 +309,112 @@ const SelectAddressModal = ({ isShowAddressModal, setIsShowAddressModal, selecte
                                     </div>
                                 </div>
                             </div>
-                            <LoadScript
-                                googleMapsApiKey="AIzaSyDKX4TjlGMne-DIIucVFT6FRmTiMXKkcqs"
-                                libraries={["places"]}
-                            >
-                                <div className="search_sec_box">
-                                    <div className="search_sec">
-                                        <i className="fa-solid fa-magnifying-glass"></i>
-
-                                        <Autocomplete
-                                            onLoad={(auto) => setAutocomplete(auto)}
-                                            onPlaceChanged={onPlaceChanged}
-                                            options={{
-                                                bounds: searchBounds || undefined,
-                                                strictBounds: true,
-                                                componentRestrictions: { country: "in" }
-                                            }}
-                                        >
-                                            <input
-                                                type="text"
-                                                placeholder={
-                                                    isSearchEnabled
-                                                        ? "Search location..."
-                                                        : "Select state & city first"
-                                                }
-                                                disabled={!isSearchEnabled}
-                                                style={{
-                                                    opacity: isSearchEnabled ? 1 : 0.5
-                                                }}
-                                            />
-                                        </Autocomplete>
-
-                                    </div>
-                                </div>
+                            {loadError ? (
                                 <div className="map_box">
-                                    <GoogleMap
-                                        mapContainerStyle={{ width: "100%", height: "100%", borderRadius: "3px" }}
-                                        center={highlightCenter || mapCenter}
-                                        zoom={zoomLevel}
-                                        onClick={(e) => {
-                                            const coords = {
-                                                lat: e.latLng.lat(),
-                                                lng: e.latLng.lng()
-                                            };
+                                    <p>Failed to load Google Maps.</p>
+                                </div>
+                            ) : !isMapLoaded ? (
+                                <div className="map_box">
+                                    <p>Loading Google Maps...</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="search_sec_box">
+                                        <div className="search_sec">
+                                            <i className="fa-solid fa-magnifying-glass"></i>
 
-                                            setMarkerPosition(coords);
-                                            setMapCenter(coords);
-                                            setHighlightCenter(coords);
-                                            setLat?.(coords.lat);
-                                            setLng?.(coords.lng);
-                                        }}
-                                    >
-                                        <Marker
-                                            position={markerPosition}
-                                            draggable={true}
-                                            onDragEnd={async (e) => {
-                                                const lat = e.latLng.lat();
-                                                const lng = e.latLng.lng();
+                                            <Autocomplete
+                                                onLoad={(auto) => setAutocomplete(auto)}
+                                                onPlaceChanged={onPlaceChanged}
+                                                options={{
+                                                    bounds: searchBounds || undefined,
+                                                    strictBounds: true,
+                                                    componentRestrictions: { country: "in" }
+                                                }}
+                                            >
+                                                <input
+                                                    type="text"
+                                                    placeholder={
+                                                        isSearchEnabled
+                                                            ? "Search location..."
+                                                            : "Select state & city first"
+                                                    }
+                                                    disabled={!isSearchEnabled}
+                                                    style={{
+                                                        opacity: isSearchEnabled ? 1 : 0.5
+                                                    }}
+                                                />
+                                            </Autocomplete>
 
-                                                const coords = { lat, lng };
+                                        </div>
+                                    </div>
+                                    <div className="map_box">
+                                        <GoogleMap
+                                            mapContainerStyle={{ width: "100%", height: "100%", borderRadius: "3px" }}
+                                            center={highlightCenter || mapCenter}
+                                            zoom={zoomLevel}
+                                            onClick={(e) => {
+                                                const coords = {
+                                                    lat: e.latLng.lat(),
+                                                    lng: e.latLng.lng()
+                                                };
 
                                                 setMarkerPosition(coords);
                                                 setMapCenter(coords);
                                                 setHighlightCenter(coords);
-                                                setLat?.(lat);
-                                                setLng?.(lng);
-
-                                                const address = await reverseGeocode(lat, lng);
-                                                if (address) {
-                                                    setAddress(address);
-                                                }
+                                                setLat?.(coords.lat);
+                                                setLng?.(coords.lng);
                                             }}
-                                        />
+                                        >
+                                            <Marker
+                                                position={markerPosition}
+                                                draggable={true}
+                                                onDragEnd={async (e) => {
+                                                    const lat = e.latLng.lat();
+                                                    const lng = e.latLng.lng();
 
-                                        {highlightCenter && (
-                                            <Circle
-                                                center={highlightCenter}
-                                                radius={zoomLevel >= 10 ? 20000 : 100000}
-                                                options={{
-                                                    fillColor: "#1DA1F2",
-                                                    fillOpacity: 0.2,
-                                                    strokeColor: "#1DA1F2"
-                                                }}
-                                                onLoad={(circle) => {
-                                                    if (circleRef.current) {
-                                                        circleRef.current.setMap(null);
-                                                    }
-                                                    circleRef.current = circle;
-                                                }}
-                                                onUnmount={() => {
-                                                    if (circleRef.current) {
-                                                        circleRef.current.setMap(null);
-                                                        circleRef.current = null;
+                                                    const coords = { lat, lng };
+
+                                                    setMarkerPosition(coords);
+                                                    setMapCenter(coords);
+                                                    setHighlightCenter(coords);
+                                                    setLat?.(lat);
+                                                    setLng?.(lng);
+
+                                                    const address = await reverseGeocode(lat, lng);
+                                                    if (address) {
+                                                        setAddress(address);
                                                     }
                                                 }}
                                             />
-                                        )}
-                                    </GoogleMap>
-                                </div>
-                            </LoadScript>
+
+                                            {highlightCenter && (
+                                                <Circle
+                                                    center={highlightCenter}
+                                                    radius={zoomLevel >= 10 ? 20000 : 100000}
+                                                    options={{
+                                                        fillColor: "#1DA1F2",
+                                                        fillOpacity: 0.2,
+                                                        strokeColor: "#1DA1F2"
+                                                    }}
+                                                    onLoad={(circle) => {
+                                                        if (circleRef.current) {
+                                                            circleRef.current.setMap(null);
+                                                        }
+                                                        circleRef.current = circle;
+                                                    }}
+                                                    onUnmount={() => {
+                                                        if (circleRef.current) {
+                                                            circleRef.current.setMap(null);
+                                                            circleRef.current = null;
+                                                        }
+                                                    }}
+                                                />
+                                            )}
+                                        </GoogleMap>
+                                    </div>
+                                </>
+                            )}
                             <div className="text_box">
                                 <span>Location <p>*</p></span>
                                 <textarea value={address} readOnly />

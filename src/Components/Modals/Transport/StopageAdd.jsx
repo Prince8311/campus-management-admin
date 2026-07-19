@@ -7,17 +7,12 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import { Autocomplete, Circle, GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { UserData } from "../../../Context/PageContext";
 import ButtonLoader from "../../Loader/ButtonLoader";
-
-const GOOGLE_MAP_LIBRARIES = ["places"];
+import { googleMapsLoaderOptions } from "../../../Services/Api/GoogleMapsConfig";
 
 const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshData }) => {
     const api = getApiEndpoints();
     const { userDetails } = UserData();
-    const { isLoaded: isMapLoaded, loadError } = useJsApiLoader({
-        id: "google-map-script-stopage-add",
-        googleMapsApiKey: "AIzaSyDKX4TjlGMne-DIIucVFT6FRmTiMXKkcqs",
-        libraries: GOOGLE_MAP_LIBRARIES
-    });
+    const { isLoaded: isMapLoaded, loadError } = useJsApiLoader(googleMapsLoaderOptions);
     const [stateDropdownShow, setStateDropdownShow] = useState(false);
     const [selectedState, setSelectedState] = useState('');
     const [cityDropdownShow, setCityDropdownShow] = useState(false);

@@ -22,64 +22,13 @@ export const TransportMainWrapper = styled('div')`
             font-family: "SUSE", sans-serif;
         }
     }
-
-                            cursor: grab;
-                            user-select: none;
-
-                            &.dragging {
-                                opacity: 0.65;
-                                border-color: ${colors.themeColor};
-                                box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-                            }
     .heading_option_part {
         position: relative;
         width: 100%;
         padding: 0 15px;
         display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-
-                                .delete_btn {
-                                    position: relative;
-                                    width: 26px;
-                                    height: 26px;
-                                    border-radius: 50%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    cursor: pointer;
-                                    background: ${colors.customColors.redColorLight};
-            border-bottom: 2px solid ${colors.themeColor};
-                                    i {
-                                        font-size: 11px;
-                                        color: ${colors.customColors.redColor};
-                color: ${colors.customColors.blackColor1};
-                border-radius: 6px 6px 0 0;
-                cursor: pointer;
-                transition: all 0.5s ease;
-                
-                &:hover {
-                    color: ${colors.themeColor};
-                    transition: all 0.5s ease;
-                }
-                
-                &.active {
-                    color: ${colors.customColors.whiteColor};
-                    background: ${colors.themeColor};
-                }
-
-                h6 {
-                    position: relative;
-                    font-size: 13px;
-                    font-weight: 500;
-                    color: ${colors.customColors.blackColor1};
-                }
-                
-                &.active h6 {
-                    color: ${colors.customColors.whiteColor};
-                }
-            }
-        }
+        align-items: center;
+        justify-content: space-between;
     }
 
     .page_contents {

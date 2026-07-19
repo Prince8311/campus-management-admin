@@ -8,19 +8,14 @@ import ButtonLoader from "../../../Components/Loader/ButtonLoader";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../../Context/PageContext";
 import { DirectionsRenderer, GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-
-const GOOGLE_MAP_LIBRARIES = ["places"];
+import { googleMapsLoaderOptions } from "../../../Services/Api/GoogleMapsConfig";
 
 const AddRoutesPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
     const { userDetails } = UserData();
     const mapRef = useRef(null);
-    const { isLoaded: isMapLoaded, loadError } = useJsApiLoader({
-        id: "google-map-script-add-routes",
-        googleMapsApiKey: "AIzaSyDKX4TjlGMne-DIIucVFT6FRmTiMXKkcqs",
-        libraries: GOOGLE_MAP_LIBRARIES
-    });
+    const { isLoaded: isMapLoaded, loadError } = useJsApiLoader(googleMapsLoaderOptions);
     const instLat = parseFloat(userDetails?.institution?.latitude);
     const instLng = parseFloat(userDetails?.institution?.longitude);
     const instCenter = (isFinite(instLat) && isFinite(instLng))
