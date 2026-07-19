@@ -1655,8 +1655,11 @@ export const AddRoutesWrapper = styled('div')`
                                 }
 
                                 &.staff_dropdown {
+                                    max-height: inherit;
+                                    height: 0;
                                     &.active {
-                                        max-height: 260px;
+                                        max-height: inherit;
+                                        height: max-content;
                                     }
 
                                     .dropdown_inner {
@@ -1785,7 +1788,6 @@ export const AddRoutesWrapper = styled('div')`
                                         flex-direction: column;
                                         border: 1px solid ${colors.customColors.borderColor};
                                         border-radius: 5px;
-                                        overflow: hidden;
 
                                         .group_header {
                                             position: relative;
@@ -1797,6 +1799,7 @@ export const AddRoutesWrapper = styled('div')`
                                             background: ${colors.customColors.lightBackground};
                                             cursor: pointer;
                                             user-select: none;
+                                            border-radius: 5px 5px 0 0;
 
                                             b {
                                                 font-size: 11px;
