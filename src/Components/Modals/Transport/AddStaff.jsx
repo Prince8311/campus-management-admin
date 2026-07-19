@@ -7,7 +7,7 @@ import ButtonLoader from "../../Loader/ButtonLoader";
 
 const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => {
     const api = getApiEndpoints();
-    const roles = ["Driver", "Conductor"];
+    const roles = ["Driver", "Conductor", "Cleaner"];
     const [selectedRole, setSelectedRole] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isStatus, setIsStatus] = useState(false);

@@ -1,6 +1,21 @@
+import { useState, useEffect } from "react";
 import { AddInstitutionWalletWrapper } from "../../../Styles/Modals/CommunicationStyle";
 
 const AddInstitutionWalletModal = ({isAddInstitutionWalletModal, setIsAddInstitutionWalletModal}) => {
+
+    const institutions = ['abc', 'sai angel', 'oxfoard'];
+    const [showInstitutionDropdown, setShowInstitutionDropdown] = useState(false);
+    const [institutionName, setInstitutionName] = useState('');
+
+    const handleSelectedInstitutionDropdown = () => {
+        setShowInstitutionDropdown(!showInstitutionDropdown);
+    }
+
+    const handleSelectInstitutionName = (institution) => {
+        setInstitutionName(institution);
+        setShowInstitutionDropdown(false);
+    }
+
 
     function closeModal () {
         setIsAddInstitutionWalletModal(false);
@@ -20,18 +35,28 @@ const AddInstitutionWalletModal = ({isAddInstitutionWalletModal, setIsAddInstitu
                             <div className="select_box">
                                 <span>Select Instritution Name <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
-                                        <p>Sri Sai Angels School</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                    <div className="dropdown_btn" onClick={handleSelectedInstitutionDropdown}>
+                                        <p>{institutionName}</p>
+                                        <i className={`fa-solid fa-angle-down ${showInstitutionDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showInstitutionDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <div className="search_sec">
                                                 <i className="fa-solid fa-magnifying-glass"></i>
                                                 <input type="text" placeholder="Search by Subject Name..." />
                                             </div>
                                             <ul>
-                                                <li></li>
+                                                {
+                                                    institutions.map((institution, i) => (
+
+                                                        <li key={i}
+                                                            onClick={() => handleSelectInstitutionName(institution)}
+                                                            className={institutionName === institution ? 'active' : ''}
+                                                        >
+                                                            {institution}
+                                                        </li>
+                                                    ))
+                                                }
                                             </ul>
                                         </div>
                                     </div>

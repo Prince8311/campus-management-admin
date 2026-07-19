@@ -459,6 +459,13 @@ const AddRoutesPage = () => {
                                         </div>
                                         <div className={`dropdown ${showVehicleDropdown ? 'active' : ''}`}>
                                             <div className="dropdown_inner">
+                                                <div className="search_sec">
+                                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Search by Vehicle..."
+                                                    />
+                                                </div>
                                                 <ul>
                                                     {
                                                         isVehiclesLoading ? (
@@ -489,6 +496,13 @@ const AddRoutesPage = () => {
                                         </div>
                                         <div className={`dropdown staff_dropdown ${showStaffDropdown ? 'active' : ''}`}>
                                             <div className="dropdown_inner">
+                                                <div className="search_sec">
+                                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Search by Staff..."
+                                                    />
+                                                </div>
                                                 {isStaffsLoading ? (
                                                     <ul>
                                                         {Array.from({ length: 2 }).map((_, idx) => (
@@ -617,6 +631,13 @@ const AddRoutesPage = () => {
                                                                 </div>
                                                                 <div className={`dropdown ${openStopageDropdownId === stopage.id ? 'active' : ''} ${isDropUpMap[stopage.id] ? 'drop_up' : ''}`}>
                                                                     <div className="dropdown_inner">
+                                                                        <div className="search_sec">
+                                                                            <i className="fa-solid fa-magnifying-glass"></i>
+                                                                            <input
+                                                                                type="text"
+                                                                                placeholder="Search by Vehicle..."
+                                                                            />
+                                                                        </div>
                                                                         <ul>
                                                                             {
                                                                                 isStopagesLoading ? (
@@ -666,11 +687,15 @@ const AddRoutesPage = () => {
                                             </div>
                                         );
                                     })}
-                                    {canAddMoreStopages && (
-                                        <div className="add_sec" onClick={handleAddStopage} style={{ cursor: "pointer" }}>
-                                            <span><i className="fa-solid fa-plus"></i>Add more</span>
-                                        </div>
-                                    )}
+                                    <div className="routes_button">
+                                        {canAddMoreStopages && (
+                                            <div className="add_sec" onClick={handleAddStopage} style={{ cursor: "pointer" }}>
+                                                <span><i className="fa-solid fa-plus"></i>Add more</span>
+                                            </div>
+                                        )}
+                                        <a><i className="fa-regular fa-floppy-disk"></i>Save</a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

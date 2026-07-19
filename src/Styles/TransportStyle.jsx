@@ -26,9 +26,42 @@ export const TransportMainWrapper = styled('div')`
         position: relative;
         width: 100%;
         padding: 0 15px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        margin-top: 25px;
+
+        .inner_part {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid ${colors.themeColor};
+
+            .part_box {
+                position: relative;
+                text-decoration: none;
+                height: 100%;
+                padding: 0 20px;
+                padding-top: 2px;
+                display: flex;
+                align-items: center;
+                font-size: 12.5px;
+                color: ${colors.customColors.blackColor1};
+                border-radius: 6px 6px 0 0;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                
+                &:hover {
+                    color: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+                
+                &.active {
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+            }
+        }
     }
 
     .page_contents {
@@ -1638,6 +1671,39 @@ export const AddRoutesWrapper = styled('div')`
                                     display: flex;
                                     flex-direction: column;
 
+                                    .search_sec {
+                                        position: relative;
+                                        height: 32px;
+                                        padding: 5px 0;
+                                        display: flex;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        border-radius: 6px;
+                                        margin-bottom: 10px;
+
+                                        i {
+                                            position: relative;
+                                            width: 40px;
+                                            height: 100%;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor3};
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            border-right: 1px solid ${colors.customColors.borderColor};
+                                        }
+
+                                        input {
+                                            position: relative;
+                                            width: 100%;
+                                            height: 100%;
+                                            border: none;
+                                            outline: none;
+                                            padding: 0 15px;
+                                            font-size: 10px;
+                                            color: ${colors.customColors.blackColor1};
+                                        }
+                                    }
+
                                     ul {
                                         position: relative;
                                         width: 100%;
@@ -2012,7 +2078,7 @@ export const AddRoutesWrapper = styled('div')`
 
                                     .select_box {
                                         position: relative;
-                                        width: 45%;
+                                        width: 32%;
                                         margin-bottom: 8px;
                                         z-index: 49;
 
@@ -2104,6 +2170,39 @@ export const AddRoutesWrapper = styled('div')`
                                                     display: flex;
                                                     flex-direction: column;
 
+                                                    .search_sec {
+                                                        position: relative;
+                                                        height: 32px;
+                                                        padding: 5px 0;
+                                                        display: flex;
+                                                        border: 1px solid ${colors.customColors.borderColor};
+                                                        border-radius: 6px;
+                                                        margin-bottom: 10px;
+
+                                                        i {
+                                                            position: relative;
+                                                            width: 40px;
+                                                            height: 100%;
+                                                            font-size: 12px;
+                                                            color: ${colors.customColors.blackColor3};
+                                                            display: flex;
+                                                            align-items: center;
+                                                            justify-content: center;
+                                                            border-right: 1px solid ${colors.customColors.borderColor};
+                                                        }
+
+                                                        input {
+                                                            position: relative;
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            border: none;
+                                                            outline: none;
+                                                            padding: 0 15px;
+                                                            font-size: 10px;
+                                                            color: ${colors.customColors.blackColor1};
+                                                        }
+                                                    }
+
                                                     ul {
                                                         position: relative;
                                                         width: 100%;
@@ -2152,7 +2251,7 @@ export const AddRoutesWrapper = styled('div')`
 
                                     .date_box {
                                         position: relative;
-                                        width: 25%;
+                                        width: 32%;
                                         margin-bottom: 8px;
 
                                         span {
@@ -2204,28 +2303,63 @@ export const AddRoutesWrapper = styled('div')`
                             }
                         }
 
-                        .add_sec {
+                        .routes_button {
                             position: relative;
                             width: 100%;
                             display: flex;
                             margin-top: 20px;
+                            align-items: center;
 
-                            span {
+                            .add_sec {
                                 position: relative;
-                                padding: 7px 25px;
+                                width: 100%;
+                                display: flex;
+
+                                span {
+                                    position: relative;
+                                    padding: 7px 25px;
+                                    border-radius: 8px;
+                                    background: ${colors.customColors.whiteColor};
+                                    font-size: 13px;
+                                    border: 1px dashed ${colors.customColors.blueColor2};
+                                    color: ${colors.customColors.blueColor2};
+                                    font-weight: 500;
+                                    cursor: pointer;
+
+                                    i {
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
+
+                            a {
+                                position: relative;
+                                width: 150px;
+                                padding: 7px 0;
                                 border-radius: 8px;
-                                background: ${colors.customColors.whiteColor};
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
                                 font-size: 13px;
-                                border: 1px dashed ${colors.customColors.blueColor2};
-                                color: ${colors.customColors.blueColor2};
+                                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                                border: none;
+                                color: ${colors.customColors.whiteColor};
                                 font-weight: 500;
                                 cursor: pointer;
-
+                                text-decoration: none;
+                                transition: all 0.5s ease;
+                                
                                 i {
-                                    margin-right: 5px;
+                                    margin-right: 7px;
+                                }
+                                
+                                &:hover {
+                                    border-radius: 25px;
+                                    transition: all 0.5s ease;
                                 }
                             }
                         }
+                        
                     }
                 }
 
