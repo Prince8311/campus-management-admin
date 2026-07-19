@@ -22,8 +22,21 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
     const allowedExtensions = '.jpg,.jpeg,.png,.pdf';
     const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const isDriverRole = selectedRole === 'Driver';
 
-    const isFormValid = staffName.trim() && selectedRole && contactNo.trim() && email.trim() && licenseFile;
+    const isFormValid =
+        staffName.trim() &&
+        selectedRole &&
+        contactNo.trim() &&
+        email.trim() &&
+        (!isDriverRole || licenseFile);
+
+    const clearLicenseFile = () => {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        setLicenseFile(null);
+        setPreviewUrl(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+    };
 
     function closeModal() {
         resetForm();
@@ -37,10 +50,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
         setStaffName('');
         setContactNo('');
         setEmail('');
-        setLicenseFile(null);
-        if (previewUrl) URL.revokeObjectURL(previewUrl);
-        setPreviewUrl(null);
-        if (fileInputRef.current) fileInputRef.current.value = '';
+        clearLicenseFile();
     }
 
     function toggleDropdown() {
@@ -50,6 +60,10 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
     const handleRoleSelect = (role) => {
         setSelectedRole(role);
         setIsDropdownOpen(false);
+
+        if (role !== 'Driver') {
+            clearLicenseFile();
+        }
     }
 
     const handleFileChange = (file) => {
@@ -83,15 +97,12 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
 
     const handleRemoveFile = (e) => {
         e.preventDefault();
-        if (previewUrl) URL.revokeObjectURL(previewUrl);
-        setLicenseFile(null);
-        setPreviewUrl(null);
-        if (fileInputRef.current) fileInputRef.current.value = '';
+        clearLicenseFile();
     };
 
     const handleSave = async (e) => {
         e.preventDefault();
-        setIsButtonLoading(true);
+        // setIsButtonLoading(true);
         const inputs = {
             name: staffName,
             role: selectedRole,
@@ -101,7 +112,9 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
         };
         const formData = new FormData();
         formData.append('inputs', JSON.stringify(inputs));
-        formData.append('license_file', licenseFile);
+        if (isDriverRole && licenseFile) {
+            formData.append('license_file', licenseFile);
+        }
         try {
             const response = await axiosInstance.post(api.addVehicleStaff, formData, {
                 params: {
@@ -177,7 +190,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
-                            <div className="upload_box">
+                            {isDriverRole && <div className="upload_box">
                                 <span>Driving License <p>*</p></span>
                                 <div
                                     className={`document_upload_sec ${isDragOver ? 'drag_over' : ''} ${licenseFile ? 'file_selected' : ''}`}
@@ -219,7 +232,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                            </div>
+                            </div>}
                         </div>
                     </div>
                     <div className="modal_btn">

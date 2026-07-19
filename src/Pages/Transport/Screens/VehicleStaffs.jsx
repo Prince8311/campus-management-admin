@@ -129,9 +129,15 @@ const VehicleStaffsPage = () => {
                                             </td>
                                             <td>{staff.role}</td>
                                             <td>
-                                                <a onClick={() => handleDownloadLicense(staff.license_file)}>
-                                                    <i className="fa-solid fa-file-arrow-down"></i>
-                                                </a>
+                                                {
+                                                    staff.license_file ? (
+                                                        <a onClick={() => handleDownloadLicense(staff.license_file)}>
+                                                            <i className="fa-solid fa-file-arrow-down"></i>
+                                                        </a>
+                                                    ) : (
+                                                        <>-</>
+                                                    )
+                                                }
                                             </td>
                                             <td>
                                                 <p className={staff.status ? 'active' : ''}>{staff.status ? 'Active' : 'Inactive'}</p>
