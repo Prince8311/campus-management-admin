@@ -1,8 +1,17 @@
+import { useState } from "react";
 import { UserData } from "../../../Context/PageContext";
 import { ControlCenterWrapper } from "../../../Styles/CommunicationStyle";
+import SelectTemplateTypeModal from "../../../Components/Modals/Communication/SelectTemplateType";
+import ManageTemplateModal from "../../../Components/Modals/Communication/ManageTemplate";
 
 const ControlCenterPage = () => {
     const { userDetails } = UserData();
+    const [isSelectTemplateTypeOpen, setIsSelectTemplateTypeOpen] = useState(false);
+    const [isManageTemplateOpen, setIsManageTemplateOpen] = useState(false);
+
+    const handleOpenSelectTemplateTypeModal = () => {
+        setIsSelectTemplateTypeOpen(true);
+    }
     return (
         <>
             <ControlCenterWrapper>
@@ -45,7 +54,7 @@ const ControlCenterPage = () => {
                 </div>
                 <div className="filter_search_sec">
                     <div className="search_head">
-                        <h5>Configure automated reminders and notification templates.</h5>
+                        <h5>Configure automated reminders and notification templates types.</h5>
                     </div>
                     <div className="search_item">
                         <div className="search_sec">
@@ -60,7 +69,7 @@ const ControlCenterPage = () => {
                             <div className="filter_dropdown"></div>
                         </div>
                         <div className="add_btn">
-                            <button>
+                            <button onClick={handleOpenSelectTemplateTypeModal}>
                                 <i className="fa-solid fa-plus"></i>
                                 <p>Add New</p>
                             </button>
@@ -138,6 +147,18 @@ const ControlCenterPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <SelectTemplateTypeModal 
+                    isSelectTemplateTypeOpen={isSelectTemplateTypeOpen}
+                    setIsSelectTemplateTypeOpen={setIsSelectTemplateTypeOpen}
+                    isManageTemplateOpen= {isManageTemplateOpen}
+                    setIsManageTemplateOpen={setIsManageTemplateOpen}
+                />
+
+                <ManageTemplateModal
+                    isManageTemplateOpen= {isManageTemplateOpen}
+                    setIsManageTemplateOpen={setIsManageTemplateOpen}
+                />
             </ControlCenterWrapper>
         </>
     );

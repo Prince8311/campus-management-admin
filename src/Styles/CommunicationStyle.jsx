@@ -955,14 +955,13 @@ export const ControlCenterWrapper = styled('div')`
                 span {
                     position: relative;
                     color: ${colors.customColors.blueColor2};
-                    font-size: 12px;
+                    padding: 4px 15px;
+                    border-radius: 25px;
+                    background: ${colors.customColors.blueColorLight};
+                    font-size: 10px;
                     font-weight: 500;
                     margin-left: auto;
                     cursor: pointer;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
                 }
 
                 a {
