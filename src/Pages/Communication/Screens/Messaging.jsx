@@ -60,41 +60,7 @@ const MessagingPage = () => {
         <>
             <MessagingWrapper>
                 <div className="page_head">
-                    <h2>Message Setup</h2>
-                </div>
-                <div className="balance_section">
-                    <div className="balance_box">
-                        <div className="box_inner">
-                            <div className="inner_top">
-                                <p>Total Balance</p>
-                                <a><i className="fa-solid fa-wallet"></i></a>
-                            </div>
-                            <span>15,00,000</span>
-                        </div>
-                    </div>
-                    <div className="balance_box">
-                        <div className="box_inner">
-                            <div className="inner_top">
-                                <p>Total Used</p>
-                                <a><i className="fa-solid fa-paper-plane"></i></a>
-                            </div>
-                            <span>200000</span>
-                        </div>
-                    </div>
-                    <div className="balance_box">
-                        <div className="box_inner">
-                            <div className="inner_top">
-                                <p>Available Balance</p>
-                            </div>
-                            <span>20000</span>
-                            {
-                                userDetails?.user_type === "inst_admin" &&
-                                <div className="box_btn">
-                                    <button>Recharge<i className="fa-solid fa-hourglass-half"></i></button>
-                                </div>
-                            }
-                        </div>
-                    </div>
+                    <h2>Manage Templates</h2>
                 </div>
                 <div className="filter_search_sec">
                     <div className="search_head">
@@ -167,12 +133,12 @@ const MessagingPage = () => {
                                         {
                                             template.approved_by ? (
                                                 (template.approved_by.id === template.created_by.id) ? (
-                                                    <p><b>Created & approved by :</b>{template.created_by.name}</p>
+                                                    <p><i className="fa-solid fa-user"></i><b>Created & approved by :</b>{template.created_by.name}</p>
                                                 ) : (
                                                     <>
-                                                        <p><b>Created by :</b>{template.created_by.name}</p>
+                                                        <p><i className="fa-solid fa-user"></i><b>Created by :</b>{template.created_by.name}</p>
                                                         <span><i className="fa-solid fa-circle"></i></span>
-                                                        <p><b>Approved by :</b>{template.approved_by.name}</p>
+                                                        <p><i className="fa-solid fa-user"></i><b>Approved by :</b>{template.approved_by.name}</p>
                                                     </>
                                                 )
                                             ) : (
@@ -185,7 +151,7 @@ const MessagingPage = () => {
                                             template.balance && (
                                                 <>
                                                     <span><i className="fa-solid fa-circle"></i></span>
-                                                    <p><b>Balance will debit :</b>{template.balance}</p>
+                                                    <p><i className="fa-solid fa-wallet"></i><b>Balance consumed :</b>{template.balance} SMS</p>
                                                 </>
                                             )
                                         }

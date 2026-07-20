@@ -232,9 +232,13 @@ const Sidebar = () => {
                                             </li>
                                         </div>
                                         <div className="dropdown">
-                                            <NavLink to="/admin/communication/messaging">
+                                            <NavLink to="/admin/communication/message-templates">
                                                 <i className="fa-solid fa-message prefix"></i>
-                                                <p>Messaging</p>
+                                                <p>Message Templates</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/communication/control-center">
+                                                <i className="fa-solid fa-sliders prefix"></i>
+                                                <p>Control Center</p>
                                             </NavLink>
                                             <NavLink to="/admin/communication/institution-wallets">
                                                 <i className="fa-solid fa-wallet prefix"></i>
