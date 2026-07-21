@@ -3,6 +3,8 @@ import { ManageTemplateWrapper } from "../../../Styles/Modals/CommunicationStyle
 
 const ManageTemplateModal = ({ isManageTemplateOpen, setIsManageTemplateOpen }) => {
     const [step, setStep] = useState(1);
+    const tabs = ["Staff", "Student"];
+    const [activeTab, setActiveTab] = useState(tabs[0]);
 
     function closeModal() {
         setIsManageTemplateOpen(false);
@@ -119,7 +121,7 @@ const ManageTemplateModal = ({ isManageTemplateOpen, setIsManageTemplateOpen }) 
                                     </div>
                                 </div>
                                 <div className="category_btn">
-                                    <button onClick={() => {setStep(2)}}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
+                                    <button onClick={() => { setStep(2) }}>Save & Next <i className="fa-solid fa-angle-right"></i></button>
                                 </div>
                             </div>
                         }
@@ -193,8 +195,17 @@ const ManageTemplateModal = ({ isManageTemplateOpen, setIsManageTemplateOpen }) 
                                 </div>
                                 <div className="tab_sec">
                                     <div className="tab_inner">
-                                        <li className="active">Student</li>
-                                        <li>Staff</li>
+                                        {
+                                            tabs.map((tab) => (
+                                                <li
+                                                    key={tab}
+                                                    className={activeTab === tab ? "active" : ""}
+                                                    onClick={() => setActiveTab(tab)}
+                                                >
+                                                    {tab}
+                                                </li>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                                 <div className="reciver_type_sec">
@@ -221,47 +232,108 @@ const ManageTemplateModal = ({ isManageTemplateOpen, setIsManageTemplateOpen }) 
                                         </label>
                                     </div>
                                 </div>
-                                <div className="table_sec">
-                                    <div className="search_sec">
-                                        <i className="fa-solid fa-magnifying-glass"></i>
-                                        <input type="text" placeholder="Search by Teacher name..." />
-                                    </div>
-                                    <div className="sec_inner">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Teacher Name</th>
-                                                    <th>Contact No.</th>
-                                                    <th>Assign</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div className="left_table_sec">
-                                                            <h5>SB</h5>
-                                                        </div>
-                                                        <div className="right_table_sec">
-                                                            <h6>Subhadeep Barik</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td>749708386</td>
-                                                    <td>
-                                                        <div className="toggle_bar">
+                                {
+                                    activeTab === "Staff" && (
+                                        <div className="table_sec">
+                                            <div className="search_sec">
+                                                <i className="fa-solid fa-magnifying-glass"></i>
+                                                <input type="text" placeholder="Search by Teacher name..." />
+                                            </div>
+                                            <div className="sec_inner">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Teacher Name</th>
+                                                            <th>Contact No.</th>
+                                                            <th>Assign</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div className="left_table_sec">
+                                                                    <h5>SB</h5>
+                                                                </div>
+                                                                <div className="right_table_sec">
+                                                                    <h6>Subhadeep Barik</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>749708386</td>
+                                                            <td>
+                                                                <div className="toggle_bar">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id="check"
+                                                                    />
+                                                                    <label htmlFor="check">
+                                                                        <span></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                {
+                                    activeTab === "Student" && (
+                                        <div className="student_reciver_sec">
+                                            <div className="sec_item">
+                                                <div className="class_item">
+                                                    <div className="top_part">
+                                                        <div className="left_info">
                                                             <input
                                                                 type="checkbox"
-                                                                id="check"
+                                                                id="reciver"
                                                             />
-                                                            <label htmlFor="check">
-                                                                <span></span>
+                                                            <label htmlFor="reciver">
+                                                                <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                <p>Class 1</p>
                                                             </label>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                                        <div className="icon"><i className="fa-solid fa-angle-right active"></i></div>
+                                                    </div>
+                                                    <div className="bottom_part active">
+                                                        <div className="bottom_inner">
+                                                            <div className="class_box">
+                                                                <div className="box_top">
+                                                                    <div className="top_left">
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="top"
+                                                                        />
+                                                                        <label htmlFor="top">
+                                                                            <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                            <p>Class</p>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="box_bottom">
+                                                                    <div className="bottom_inner">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <input
+                                                                                    type="checkbox"
+                                                                                    id="bottom"
+                                                                                />
+                                                                                <label htmlFor="bottom">
+                                                                                    <span className="check_box"><img src="/images/check-icon.png" alt="check" /></span>
+                                                                                    <p>Section</p>
+                                                                                </label>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                                 <div className="reciver_btn">
                                     <button onClick={() => setStep(step - 1)}><i class="fa-solid fa-angle-left"></i>Previous</button>
                                     <button><i class="fa-solid fa-floppy-disk"></i>Save</button>

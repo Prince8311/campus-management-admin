@@ -1840,6 +1840,314 @@ export const ManageTemplateWrapper = styled('div')`
                     }
                 }
 
+                .sec_item {
+                    position: relative;
+                    width: 100%;
+                    padding: 0 15px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .class_item {
+                        position: relative;
+                        margin-top: 15px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 8px;
+                        box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+
+                        .top_part {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            padding: 10px 16px;
+                            cursor: pointer;
+                            border-radius: 8px 8px 0 0;
+                            transition: all 0.5s ease;
+
+                            &.active {
+                                background: ${colors.customColors.lightBackground1};
+                            }
+
+                            .left_info {
+                                position: relative;
+
+                                input[type="checkbox"] {
+                                    display: none;
+                                }
+
+                                label {
+                                    position: relative;
+                                    cursor: pointer;
+                                    font-size: 13px;
+                                    color: ${colors.customColors.blackColor2};
+                                    line-height: 1;
+                                    display: flex;
+                                    align-items: center;
+
+                                    .check_box {
+                                        position: relative;
+                                        width: 18px;
+                                        height: 18px;
+                                        border: 1px solid ${colors.customColors.borderColor1};
+                                        border-radius: 4px;
+                                        cursor: pointer;
+                                        transition: all 0.4s ease;
+
+                                        img {
+                                            position: absolute;
+                                            left: 2px;
+                                            bottom: 2px;
+                                            width: 20px;
+                                            opacity: 0;
+                                            transition: all 0.4s ease;
+                                        }
+                                    }
+
+                                    p {
+                                        position: relative;
+                                        margin-left: 10px;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
+                                }
+
+                                input[type="checkbox"]:checked ~ label {
+                                    color: ${colors.customColors.blackColor1};
+                                    transition: all 0.5s ease;
+
+                                    .check_box {
+                                        border: 1px solid ${colors.customColors.blackColor1};
+                                        transition: all 0.4s ease;
+
+                                        img {
+                                            opacity: 1;
+                                            transition: all 0.4s ease;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .icon {
+                                position: relative;
+                                margin-left: auto;
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                                cursor: pointer;
+
+                                i {
+                                    position: relative;
+                                    font-size: 14px;
+                                    color: ${colors.customColors.blackColor2};
+                                    transition: all 0.5s ease;
+
+                                    &.active {
+                                        transform: rotate(90deg);
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+                            }
+                        }
+
+                        .bottom_part {
+                            position: relative;
+                            width: 100%;
+                            height: 0;
+                            overflow: hidden;
+
+                            &.active {
+                                height: max-content;
+                            }
+
+                            .bottom_inner {
+                                position: relative;
+                                width: 100%;
+                                padding: 15px;
+                                display: flex;
+                                flex-direction: column;
+
+                                .class_box {
+                                    position: relative;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    border-radius: 8px;
+                                    box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+                                    margin-bottom: 15px;
+
+                                    &:last-of-type {
+                                        margin-bottom: 0;
+                                    }
+
+                                    .box_top {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 10px 16px;
+                                        cursor: pointer;
+                                        border-radius: 8px 8px 0 0;
+                                        background: ${colors.customColors.lightBackground1};
+
+                                        .top_left {
+                                            position: relative;
+
+                                            input[type="checkbox"] {
+                                                display: none;
+                                            }
+
+                                            label {
+                                                position: relative;
+                                                cursor: pointer;
+                                                font-size: 13px;
+                                                color: ${colors.customColors.blackColor2};
+                                                line-height: 1;
+                                                display: flex;
+                                                align-items: center;
+
+                                                .check_box {
+                                                    position: relative;
+                                                    width: 18px;
+                                                    height: 18px;
+                                                    border: 1px solid ${colors.customColors.borderColor1};
+                                                    border-radius: 4px;
+                                                    cursor: pointer;
+                                                    transition: all 0.4s ease;
+
+                                                    img {
+                                                        position: absolute;
+                                                        left: 2px;
+                                                        bottom: 2px;
+                                                        width: 20px;
+                                                        opacity: 0;
+                                                        transition: all 0.4s ease;
+                                                    }
+                                                }
+
+                                                p {
+                                                    position: relative;
+                                                    margin-left: 10px;
+                                                    font-weight: 500;
+                                                    color: ${colors.customColors.blackColor1};
+                                                }
+                                            }
+
+                                            input[type="checkbox"]:checked ~ label {
+                                                color: ${colors.customColors.blackColor1};
+                                                transition: all 0.5s ease;
+
+                                                .check_box {
+                                                    border: 1px solid ${colors.customColors.blackColor1};
+                                                    transition: all 0.4s ease;
+
+                                                    img {
+                                                        opacity: 1;
+                                                        transition: all 0.4s ease;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .box_bottom {
+                                        position: relative;
+                                        width: 100%;
+
+                                        .bottom_inner {
+                                            position: relative;
+                                            width: 100%;
+                                            padding: 10px;
+
+                                            ul {
+                                                position: relative;
+                                                width: 100%;
+                                                display: flex;
+                                                flex-wrap: wrap;
+                                                max-height: 100px;
+                                                overflow-y: auto;
+                                                scrollbar-width: none;
+                                                -ms-overflow-style: none;
+
+                                                li {
+                                                    position: relative;
+                                                    list-style: none;
+                                                    margin: 5px;
+
+                                                    input[type="checkbox"] {
+                                                        display: none;
+                                                    }
+
+                                                    label {
+                                                        position: relative;
+                                                        padding: 7px 20px;
+                                                        padding-left: 10px;
+                                                        cursor: pointer;
+                                                        border-radius: 4px;
+                                                        border: 1px solid ${colors.customColors.borderColor};
+                                                        font-size: 12px;
+                                                        color: ${colors.customColors.blackColor2};
+                                                        line-height: 1;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        transition: all 0.5s ease;
+
+                                                        .check_box {
+                                                            position: relative;
+                                                            width: 15px;
+                                                            height: 15px;
+                                                            border: 1px solid ${colors.customColors.borderColor};
+                                                            border-radius: 4px;
+                                                            cursor: pointer;
+                                                            transition: all 0.4s ease;
+
+                                                            img {
+                                                                position: absolute;
+                                                                left: 2px;
+                                                                bottom: 2px;
+                                                                width: 18px;
+                                                                opacity: 0;
+                                                                transition: all 0.4s ease;
+                                                            }
+                                                        }
+
+                                                        p {
+                                                            position: relative;
+                                                            margin-left: 10px;
+                                                        }
+                                                    }
+
+                                                    input[type="checkbox"]:checked ~ label {
+                                                        color: ${colors.customColors.blackColor1};
+                                                        transition: all 0.5s ease;
+
+                                                        .check_box {
+                                                            border: 1px solid ${colors.customColors.blackColor1};
+                                                            transition: all 0.4s ease;
+
+                                                            img {
+                                                                opacity: 1;
+                                                                transition: all 0.4s ease;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 .reciver_btn {
                     position: relative;
                     width: 100%;
