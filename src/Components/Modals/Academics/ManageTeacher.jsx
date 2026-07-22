@@ -289,7 +289,7 @@ const ManageTeacher = ({ isManageTeacherModalOpen, setIsManageTeacherModalOpen, 
                             </table>
                         </div>
                         {
-                            totalCount > 10 &&
+                            totalCount > 7 &&
                             <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={7} onPageChange={(newPage) => setPage(newPage)} />
                         }
                     </div>
