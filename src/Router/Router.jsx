@@ -94,6 +94,7 @@ import NonTeachingStaffPage from "../Pages/Reports/Screens/NonTeachingStaff";
 
 // Transport
 import TransportMainPage from "../Pages/Transport/Index";
+import TransportOverviewPage from "../Pages/Transport/Screens/Overview";
 import PassengersPage from "../Pages/Transport/Screens/Passengers";
 import StopagesPage from "../Pages/Transport/Screens/Stopages";
 import VehiclesPage from "../Pages/Transport/Screens/Vehicles";
@@ -199,7 +200,8 @@ const Routers = () => {
                             <Route path="hostel-buildings" element={<HostelBuildingsPage />} />
                         </Route>
                         <Route path="transport-management" element={<TransportMainPage />}>
-                            <Route path="" element={<Navigate to="passengers" />} />
+                            <Route path="" element={<Navigate to="overview" />} />
+                            <Route path="overview" element={<TransportOverviewPage />} />
                             <Route path="passengers" element={<PassengersPage />} />
                             <Route path="stopages" element={<StopagesPage />} />
                             <Route path="vehicles" element={<VehiclesPage />} />

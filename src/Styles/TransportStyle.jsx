@@ -2,75 +2,6 @@ import { styled } from "@mui/material";
 import { colorNames } from "../Theme/Colors";
 const colors = colorNames();
 
-export const TransportMainWrapper = styled('div')`
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .page_head {
-        position: relative;
-        width: 100%;
-        display: flex;
-        padding: 0 15px;
-
-        h2 {
-            position: relative;
-            font-size: 21px;
-            font-weight: 600;
-            color: ${colors.customColors.blackColor};
-            font-family: "SUSE", sans-serif;
-        }
-    }
-    .heading_option_part {
-        position: relative;
-        width: 100%;
-        padding: 0 15px;
-        margin-top: 25px;
-
-        .inner_part {
-            position: relative;
-            width: 100%;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            border-bottom: 2px solid ${colors.themeColor};
-
-            .part_box {
-                position: relative;
-                text-decoration: none;
-                height: 100%;
-                padding: 0 20px;
-                padding-top: 2px;
-                display: flex;
-                align-items: center;
-                font-size: 12.5px;
-                color: ${colors.customColors.blackColor1};
-                border-radius: 6px 6px 0 0;
-                cursor: pointer;
-                transition: all 0.5s ease;
-                
-                &:hover {
-                    color: ${colors.themeColor};
-                    transition: all 0.5s ease;
-                }
-                
-                &.active {
-                    color: ${colors.customColors.whiteColor};
-                    background: ${colors.themeColor};
-                    transition: all 0.5s ease;
-                }
-            }
-        }
-    }
-
-    .page_contents {
-        position: relative;
-        width: 100%;
-        margin-top: 20px;
-    }
-`;
-
 export const PassengersWrapper = styled('div')`
     position: relative;
     width: 100%;
@@ -86,9 +17,10 @@ export const PassengersWrapper = styled('div')`
 
         h6 {
             position: relative;
-            font-size: 14px;
-            font-weight: 500;
-            color: ${colors.customColors.blackColor1};
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
         }
 
         .filter_search_sec {
@@ -366,9 +298,10 @@ export const VehicleWrapper = styled('div')`
 
         h6 {
             position: relative;
-            font-size: 14px;
-            font-weight: 500;
-            color: ${colors.customColors.blackColor1};
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
         }
 
         .filter_search_sec {
@@ -647,9 +580,10 @@ export const VehicleStaffWrapper = styled('div')`
 
         h6 {
             position: relative;
-            font-size: 14px;
-            font-weight: 500;
-            color: ${colors.customColors.blackColor1};
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
         }
 
         .filter_search_sec {
@@ -933,9 +867,10 @@ export const VehicleRoutesWrapper = styled('div')`
 
         h6 {
             position: relative;
-            font-size: 14px;
-            font-weight: 500;
-            color: ${colors.customColors.blackColor1};
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
         }
 
         .filter_search_sec {
@@ -1203,9 +1138,10 @@ export const StopagesWrapper = styled('div')`
 
         h6 {
             position: relative;
-            font-size: 14px;
-            font-weight: 500;
-            color: ${colors.customColors.blackColor1};
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
         }
 
         .filter_search_sec {

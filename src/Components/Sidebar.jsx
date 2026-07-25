@@ -324,10 +324,6 @@ const Sidebar = () => {
                                                 <i className="fa-solid fa-id-card-clip prefix"></i>
                                                 <p>Id Cards</p>
                                             </a>
-                                            <NavLink to="/admin/transport-management">
-                                                <i className="fa-solid fa-bus"></i>
-                                                <p>Transport</p>
-                                            </NavLink>
                                         </div>
                                     </div>
                                 }
@@ -395,6 +391,46 @@ const Sidebar = () => {
                                         }
                                     </div>
                                 </div>
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 8 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(8)}>
+                                            <li>
+                                                <i className="fa-solid fa-bus prefix"></i>
+                                                <span>
+                                                    <p>Transport Management</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/transport-management/overview">
+                                                <i className="fa-solid fa-magnifying-glass-chart prefix"></i>
+                                                <p>Overview</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/transport-management/passengers">
+                                                <i className="fa-solid fa-users prefix"></i>
+                                                <p>Passengers</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/transport-management/stopages">
+                                                <i className="fa-solid fa-door-open prefix"></i>
+                                                <p>Stopages</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/transport-management/vehicles">
+                                                <i className="fa-solid fa-building prefix"></i>
+                                                <p>Vehicles</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/transport-management/staffs">
+                                                <i className="fa-solid fa-building prefix"></i>
+                                                <p>Staffs</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/transport-management/routes">
+                                                <i className="fa-solid fa-building prefix"></i>
+                                                <p>Routes</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                }
                                 {
                                     userDetails.user_type === 'inst_admin' &&
                                     <NavLink to="/admin/billing">
