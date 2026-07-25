@@ -4858,3 +4858,211 @@ export const SubscriptionSettingWrapper = styled('div')`
         }
     }
 `;
+
+export const AccountSettingWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 0 15px;
+
+        h2 {
+            position: relative;
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
+        }
+    }
+    .profile_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px;
+
+        .image_sec {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            border: 1px solid ${colors.customColors.borderColor};
+            border-radius: 50%;
+            padding: 4px;
+
+            img {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                border-radius: 50%;
+            }
+
+            span {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                width: 25px;
+                height: 25px;
+                border-radius: 4px;
+                cursor: pointer;
+                background: ${colors.customColors.blueColor2};
+                color: ${colors.customColors.whiteColor};
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
+            }
+        }
+    }
+
+    .page_contents {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+
+        .content_box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+
+            .box_head {
+                position: relative;
+                width: 100%;
+                display: flex;
+                padding: 0 15px;
+
+                h4 {
+                   position: relative;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor1};
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 15px;
+                    width: calc(100% - 30px);
+                    bottom: 0;
+                    width: 100%;
+                    height: 2px;
+                    background: linear-gradient(to right, ${colors.customColors.borderColor}, #fff);
+                }
+            }
+
+            .content_items {
+                position: relative;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                margin-top: 12px;
+                padding: 0 7px;
+
+                .input_box {
+                    position: relative;
+                    margin-bottom: 15px;
+                    padding: 0 8px;
+
+                    &.full {
+                        width: 100%;
+                    }
+
+                    &.half {
+                        width: 33.33%;
+                    }
+
+                    input {
+                        position: relative;
+                        width: 100%;
+                        height: 37px;
+                        font-size: 12px;
+                        border-radius: 5px;
+                        padding: 5px 15px;
+                        outline: none;
+                        border: none;
+                        margin-top: 3px;
+                        background: ${colors.customColors.lightBackground3};
+                    }
+
+                    textarea {
+                        position: relative;
+                        width: 100%;
+                        height: 80px;
+                        font-size: 12px;
+                        border-radius: 5px;
+                        padding: 10px 15px;
+                        outline: none;
+                        border: none;
+                        margin-top: 3px;
+                        background: ${colors.customColors.lightBackground3};
+                        resize: none;
+                    }
+
+                    span {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .btn_sec {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        margin-top: 30px;
+
+        button {
+            position: relative;
+            width: 160px;
+            height: 35px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            overflow: hidden;
+            border: none;
+            background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+            color: ${colors.customColors.whiteColor};
+            margin-left: auto;
+            transition: all 0.5s ease;
+
+            i {
+                margin-right: 6px;
+            }
+
+            &:hover {
+                border-radius: 25px;
+                transition: all 0.5s ease;
+            }
+        }
+    }
+`;

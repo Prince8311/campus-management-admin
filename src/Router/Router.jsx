@@ -70,6 +70,7 @@ import SectionFieldsPage from "../Pages/Settings/Screens/SectionFields";
 import SubjectSettingsPage from "../Pages/Settings/Screens/SubjectSettings";
 import StateCityPage from "../Pages/Settings/Screens/StateCities";
 import SubscriptionSettingPage from "../Pages/Settings/Screens/SubscriptionSetting";
+import AccountSettingPage from "../Pages/Settings/Screens/AccountSetting";
 
 import AlumniPage from "../Pages/Alumni";
 import BillingPage from "../Pages/Billing";
@@ -218,6 +219,7 @@ const Routers = () => {
                             <Route path="subscription-setting" element={<SubscriptionSettingPage />} />
                             <Route path="state-cities" element={<StateCityPage />} />
                             <Route path="subject-settings" element={<SubjectSettingsPage />} />
+                            <Route path="account-settings" element={<AccountSettingPage />} />
                             <Route path="profile-settings" element={<ProfileSettingPage />}>
                                 <Route path="" element={<Navigate to="student" />} />
                                 <Route path="student" element={<StudentPage />} />

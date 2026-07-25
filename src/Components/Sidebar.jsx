@@ -356,6 +356,13 @@ const Sidebar = () => {
                                                 <p>Subjects</p>
                                             </NavLink>
                                         }
+                                        {
+                                            userDetails.user_type === 'inst_admin' &&
+                                            <NavLink to="/admin/settings/account-settings">
+                                                <i className="fa-solid fa-user"></i>
+                                                <p>Account Setting</p>
+                                            </NavLink>
+                                        }
                                         <NavLink to="/admin/settings/time-tables">
                                             <i className="fa-solid fa-calendar-days"></i>
                                             <p>Time Table</p>
