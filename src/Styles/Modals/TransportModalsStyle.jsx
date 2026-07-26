@@ -1401,7 +1401,7 @@ export const PassengerAddWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 550px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -1473,11 +1473,19 @@ export const PassengerAddWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
 
                 .select_box {
                     position: relative;
-                    width: 100%;
                     margin-bottom: 10px;
+
+                    &.full {
+                        width: 100%;
+                    }
+
+                    &.half {
+                        width: 48.5%;
+                    }
 
                     span {
                         position: relative;
@@ -1549,8 +1557,13 @@ export const PassengerAddWrapper = styled('div')`
                             overflow: hidden;
                             transition: all 0.5s ease;
 
+                            &.dropUp {
+                                top: inherit;
+                                bottom: 100%;
+                            }
+
                             &.active {
-                                max-height: 200px;
+                                max-height: 170px;
                                 transition: all 0.5s ease;
                             }
 
@@ -1560,6 +1573,39 @@ export const PassengerAddWrapper = styled('div')`
                                 padding: 10px;
                                 display: flex;
                                 flex-direction: column;
+
+                                .search_sec {
+                                    position: relative;
+                                    height: 32px;
+                                    padding: 5px 0;
+                                    display: flex;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    border-radius: 6px;
+                                    margin-bottom: 10px;
+
+                                    i {
+                                        position: relative;
+                                        width: 40px;
+                                        height: 100%;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor3};
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border-right: 1px solid ${colors.customColors.borderColor};
+                                    }
+
+                                    input {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 100%;
+                                        border: none;
+                                        outline: none;
+                                        padding: 0 15px;
+                                        font-size: 11px;
+                                        color: ${colors.customColors.blackColor1};
+                                    }
+                                }
 
                                 ul {
                                     position: relative;
@@ -1584,21 +1630,114 @@ export const PassengerAddWrapper = styled('div')`
                                         font-size: 12px;
                                         color: ${colors.customColors.blackColor1};
                                         border-radius: 4px;
+                                        display: flex;
+                                        align-items: center;
                                         transition: all 0.5s ease;
+
+                                        span {
+                                            position: relative;
+                                            font-size: 11px;
+                                            margin-left: 2px;
+                                            color: ${colors.customColors.blackColor2};
+                                        }
 
                                         &:hover {
                                             background: ${colors.themeColor};
                                             color: ${colors.customColors.whiteColor};
                                             transition: all 0.5s ease;
+
+                                            span {
+                                                color: ${colors.customColors.whiteColor};
+                                            }
                                         }
 
                                         &.active {
                                             background: ${colors.customColors.lightBackground};
                                             color: ${colors.customColors.blackColor};
 
+                                            span {
+                                                color: ${colors.customColors.blackColor1};
+                                            }
+
                                             &:hover {
                                                 color: ${colors.customColors.blackColor};
+
+                                                span {
+                                                    color: ${colors.customColors.blackColor1};
+                                                }
                                             }
+                                        }
+
+                                    }
+
+                                    .no_data {
+                                        position: relative;
+                                        width: 100%;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor3};
+                                        padding: 3px 10px;
+                                    }
+
+                                    .user_box {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 7px;
+                                        cursor: pointer;
+                                        list-style: none;
+                                        border-bottom: 1px solid ${colors.customColors.borderColor};
+                                        transition: all 0.5s ease;
+
+                                        &:last-of-type {
+                                            border-bottom: none;
+                                        }
+
+                                        .box_left {
+                                            position: relative;
+                                            width: 25px;
+                                            height: 25px;
+                                            border-radius: 5px;
+                                            background: ${colors.customColors.blueColor1};
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            
+                                            h6 {
+                                                font-size: 11px;
+                                                color: ${colors.customColors.whiteColor};
+                                                font-weight: 500;
+                                            }
+                                        }
+
+                                        .box_right {
+                                            position: relative;
+                                            width: calc(100% - 25px);
+                                            padding-left: 6px;
+                                            display: flex;
+                                            flex-direction: column;
+
+                                            p {
+                                                font-size: 11px;
+                                                color: ${colors.customColors.blackColor1};
+                                                line-height: 1;
+                                                font-weight: 500;
+                                            }
+
+                                            span {
+                                                font-size: 9px;
+                                                color: ${colors.customColors.blackColor2};
+                                                margin-top: 1px;
+                                            }
+                                        }
+
+                                        &:hover {
+                                            background: ${colors.customColors.lightBackground};
+                                            transition: all 0.5s ease;
+                                        }
+
+                                        &.active {
+                                            background: ${colors.customColors.lightBackground};
                                         }
                                     }
                                 }

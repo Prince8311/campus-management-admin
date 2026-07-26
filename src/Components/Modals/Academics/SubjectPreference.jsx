@@ -11,14 +11,14 @@ const SubjectPreferenceModal = ({ isSubjectPreferenceModalOpen, setIsSubjectPref
             <SubjectPreferenceWrapper className={isSubjectPreferenceModalOpen ? "active" : ''}>
                 <div className={`modal_box ${isSubjectPreferenceModalOpen ? "active" : ""}`}>
                     <div className="modal_head">
-                        <h4>Manage Subject Compalsary</h4>
+                        <h4>Manage Subject Mandatory</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <a>You want to make <span>Math</span> compalsary for</a>
+                            <a>You want to make <span>Math</span> mandatory for</a>
                             <div className="selection_type">
                                 <li>
                                     <input

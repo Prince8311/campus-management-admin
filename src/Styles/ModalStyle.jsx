@@ -2668,7 +2668,7 @@ export const ManageSubjectWrapper = styled('div')`
     position: fixed;
     top: 0;
     right: -100%;
-    width: 750px;
+    width: 600px;
     height: 100vh;
     border-top-left-radius: 10px;
     background: ${colors.customColors.whiteColor};
@@ -2786,11 +2786,11 @@ export const ManageSubjectWrapper = styled('div')`
                             font-weight: 600;
 
                             &:nth-of-type(1) {
-                                width: 45%;
+                                width: 40%;
                             }
 
                             &:nth-of-type(2) {
-                                width: 30%;
+                                width: 35%;
                                 justify-content: center;
                             }
 
@@ -2831,7 +2831,7 @@ export const ManageSubjectWrapper = styled('div')`
                                 line-height: 1.5;
 
                                 &:nth-of-type(1) {
-                                    width: 45%;
+                                    width: 40%;
                                     display: flex;
                                     align-items: center;
 
@@ -2870,7 +2870,7 @@ export const ManageSubjectWrapper = styled('div')`
                                 }
 
                                 &:nth-of-type(2) {
-                                    width: 30%;
+                                    width: 35%;
                                     align-items: center;
                                     justify-content: center;
                                 }
@@ -3423,7 +3423,7 @@ export const SubjectPreferenceWrapper = styled('div')`
         .modal_body {
             position: relative;
             width: 100%;
-            padding: 11px 30px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
 

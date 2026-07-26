@@ -10,7 +10,7 @@ const ManageSubjectModal = ({ isManageSubjectModalOpen, setIsManageSubjectModalO
             <ManageSubjectWrapper className={isManageSubjectModalOpen ? "active" : ""}>
                 <div className={`modal_box ${isManageSubjectModalOpen ? "active" : ""}`}>
                     <div className="modal_head">
-                        <h4>Manage Math for 10 - D</h4>
+                        <h4>Manage students of 10 - d for math</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-angle-right"></i></a>
                         </div>

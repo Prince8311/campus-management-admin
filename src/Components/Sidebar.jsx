@@ -403,7 +403,7 @@ const Sidebar = () => {
                                     <div className={`dropdown_item ${activeDropdown === 8 ? 'active' : ''}`}>
                                         <div className="dropdown_btn" onClick={() => toggleDropdown(8)}>
                                             <li>
-                                                <i className="fa-solid fa-bus prefix"></i>
+                                                <i className="fa-solid fa-truck-fast prefix"></i>
                                                 <span>
                                                     <p>Transport Management</p>
                                                     <i className="fa-solid fa-angle-right suffix"></i>
@@ -420,19 +420,19 @@ const Sidebar = () => {
                                                 <p>Passengers</p>
                                             </NavLink>
                                             <NavLink to="/admin/transport-management/stopages">
-                                                <i className="fa-solid fa-door-open prefix"></i>
+                                                <i className="fa-solid fa-map-location prefix"></i>
                                                 <p>Stopages</p>
                                             </NavLink>
                                             <NavLink to="/admin/transport-management/vehicles">
-                                                <i className="fa-solid fa-building prefix"></i>
+                                                <i className="fa-solid fa-bus prefix"></i>
                                                 <p>Vehicles</p>
                                             </NavLink>
                                             <NavLink to="/admin/transport-management/staffs">
-                                                <i className="fa-solid fa-building prefix"></i>
+                                                <i className="fa-solid fa-users prefix"></i>
                                                 <p>Staffs</p>
                                             </NavLink>
                                             <NavLink to="/admin/transport-management/routes">
-                                                <i className="fa-solid fa-building prefix"></i>
+                                                <i className="fa-solid fa-route prefix"></i>
                                                 <p>Routes</p>
                                             </NavLink>
                                         </div>
