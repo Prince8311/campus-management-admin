@@ -3,6 +3,7 @@ import { BankAccountsWrapper } from "../../../Styles/FinanceStyle";
 import AddBankAccountModal from "../../../Components/Modals/FinanceManagement/AddBankAccount";
 import AllAccountsPage from "./AllAccounts";
 import SplitAccountsPage from "./SplitAccounts";
+import MapAccountModal from "../../../Components/Modals/FinanceManagement/MapAccountModal";
 
 const BankAccountPage = () => {
     const tabs = [
@@ -10,6 +11,16 @@ const BankAccountPage = () => {
         { label: "Split Accounts", value: "split-accounts" }
     ];
     const [selectedTab, setSelectedTab] = useState(tabs[0].value);
+    const [isAddBankAccountModalOpen, setIsAddBankAccountModalOpen] = useState(false);
+    const [isMapAccountModalOpen, setIsMapAccountModalOpen] = useState(false);
+
+    const handleOpenAddBankAccountModal = () => {
+        setIsAddBankAccountModalOpen(true);
+    };
+
+    const handleOpenMapAccountModal = () => {
+        setIsMapAccountModalOpen(true);
+    };
 
     return (
         <>
@@ -19,12 +30,12 @@ const BankAccountPage = () => {
                     <div className="add_btn">
                         {
                             selectedTab === "all-accounts" ? (
-                                <button>
+                                <button onClick={handleOpenAddBankAccountModal}>
                                     <i className="fa-solid fa-plus"></i>
                                     <p>Add Account</p>
                                 </button>
                             ) : (
-                                <button>
+                                <button onClick={handleOpenMapAccountModal}>
                                     <i className="fa-solid fa-arrows-split-up-and-left"></i>
                                     <p>Map Account</p>
                                 </button>
@@ -47,7 +58,14 @@ const BankAccountPage = () => {
                 </div>
                 {selectedTab === "all-accounts" && <AllAccountsPage />}
                 {selectedTab === "split-accounts" && <SplitAccountsPage />}
-                <AddBankAccountModal />
+                <AddBankAccountModal
+                    isAddBankAccountModalOpen={isAddBankAccountModalOpen}
+                    setIsAddBankAccountModalOpen={setIsAddBankAccountModalOpen}
+                />
+                <MapAccountModal
+                    isMapAccountModalOpen={isMapAccountModalOpen}
+                    setIsMapAccountModalOpen={setIsMapAccountModalOpen}
+                />
             </BankAccountsWrapper>
         </>
     );

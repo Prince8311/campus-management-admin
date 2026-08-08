@@ -969,7 +969,7 @@ export const FeesStructureWrapper = styled('div')`
             font-family: "SUSE", sans-serif;
         }
 
-        .add_btn {
+        .btns_sec {
             position: relative;
             margin-left: auto;
             display: flex;
@@ -985,28 +985,26 @@ export const FeesStructureWrapper = styled('div')`
                 border: none;
                 padding: 0 25px;
                 font-size: 12.5px;
+                cursor: pointer;
 
                 &.feeType {
-                    background: ${colors.customColors.greenColor};
-                    border: 1px solid ${colors.customColors.greenColor};
-                    color: ${colors.customColors.whiteColor};
-                    cursor: pointer;
-                    border-bottom-left-radius: 6px;
-                    border-top-left-radius: 6px;
+                    background: ${colors.customColors.whiteColor};
+                    border: 2px solid ${colors.customColors.blueColor2};
+                    color: ${colors.customColors.blueColor2};
+                    border-radius: 6px;
                 }
                 
                 &.addStructure {
-                    background: ${colors.customColors.whiteColor};
-                    border: 1px solid ${colors.customColors.greenColor};
-                    color:  ${colors.customColors.greenColor};
-                    cursor: pointer;
-                    border-top-right-radius: 6px;
-                    border-bottom-right-radius: 6px;
+                    margin-left: 20px;
+                    background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                    color: ${colors.customColors.whiteColor};
+                    border-radius: 6px;
+                    font-weight: 500;
                 }
 
                 i {
-                    font-size: 10px;
-                    margin-right: 4px;
+                    font-size: 12px;
+                    margin-right: 5px;
                 }
             }
         }

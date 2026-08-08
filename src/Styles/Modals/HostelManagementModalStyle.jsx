@@ -1107,7 +1107,7 @@ export const AddResidentWrapper = styled('div')`
                 border-radius: 6px;
                 overflow: hidden;
                 border: none;
-                background: ${colors.customColors.blueColor1};
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
                 color: ${colors.customColors.whiteColor};
                 margin-left: auto;
                 transition: all 0.5s ease;

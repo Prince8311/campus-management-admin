@@ -98,15 +98,9 @@ const FeesStructurePage = () => {
             <FeesStructureWrapper>
                 <div className="page_head">
                     <h2>Fees Structure</h2>
-                    <div className="add_btn">
-                        <button className="feeType" onClick={handleOpenAddNewFeesType}>
-                            <i className="fa-solid fa-plus"></i>
-                            <p>Add Fees Type</p>
-                        </button>
-                        <button className="addStructure" onClick={handleOpenFeesStructure}>
-                            <i className="fa-solid fa-plus"></i>
-                            <p>Create Structure</p>
-                        </button>
+                    <div className="btns_sec">
+                        <button className="feeType" onClick={handleOpenAddNewFeesType}><i className="fa-solid fa-plus"></i>Add Fees Type</button>
+                        <button className="addStructure" onClick={handleOpenFeesStructure}><i className="fa-solid fa-plus"></i>Create Structure</button>
                     </div>
                 </div>
                 <div className="tab_sec">
