@@ -1,3 +1,4 @@
+import AddBankAccountModal from "../../../Components/Modals/FinanceManagement/AddBankAccount";
 import { AllAccountsWrapper } from "../../../Styles/FinanceStyle";
 
 const AllAccountsPage = () => {
@@ -36,6 +37,7 @@ const AllAccountsPage = () => {
                         </tbody>
                     </table>
                 </div>
+                <AddBankAccountModal />
             </AllAccountsWrapper>
         </>
     );

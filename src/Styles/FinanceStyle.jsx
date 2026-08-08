@@ -1512,7 +1512,7 @@ export const BankAccountsWrapper = styled('div')`
         position: relative;
         width: 100%;
         display: flex;
-        margin-top: 20px;
+        margin-top: 10px;
         padding: 0 15px;
 
         h2 {
