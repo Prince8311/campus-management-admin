@@ -650,3 +650,7 @@ export const AddPaymentAmoutDateWrapper = styled('div')`
         }
     }
 `;
+
+export const AddBankAccountWrapper = styled('div')`
+    
+`;

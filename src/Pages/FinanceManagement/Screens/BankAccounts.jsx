@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { BankAccountsWrapper } from "../../../Styles/FinanceStyle";
+import AddBankAccountModal from "../../../Components/Modals/FinanceManagement/AddBankAccount";
 
 const BankAccountPage = () => {
     return (
@@ -21,6 +22,8 @@ const BankAccountPage = () => {
                     </div>
                 </div>
                 <Outlet />
+
+                <AddBankAccountModal />
             </BankAccountsWrapper>
         </>
     );
