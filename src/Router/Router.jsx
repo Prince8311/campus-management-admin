@@ -43,8 +43,6 @@ import FeeConfigurationPage from "../Pages/FinanceManagement/Screens/FeeConfigur
 import FeesStructurePage from "../Pages/FinanceManagement/Screens/FeesStructure";
 import DiscountPage from "../Pages/FinanceManagement/Screens/Discount";
 import BankAccountPage from "../Pages/FinanceManagement/Screens/BankAccounts";
-import AllAccountsPage from "../Pages/FinanceManagement/Screens/AllAccounts";
-import SplitAccountsPage from "../Pages/FinanceManagement/Screens/SplitAccounts";
 import AddFeesStructure from "../Pages/FinanceManagement/Screens/AddFeesStructure";
 
 // Communication 
@@ -176,11 +174,7 @@ const Routers = () => {
                                 <Route path="fee-structure" element={<FeesStructurePage />} />
                                 <Route path="discount" element={<DiscountPage />} />
                             </Route>
-                            <Route path="bank-accounts" element={<BankAccountPage />}>
-                                <Route path="" element={<Navigate to="all-accounts" />} />
-                                <Route path="all-accounts" element={<AllAccountsPage />} />
-                                <Route path="split-accounts" element={<SplitAccountsPage />} />
-                            </Route>
+                            <Route path="accounts" element={<BankAccountPage />} />
                         </Route>
                         <Route path="communication" element={<CommunicationMainPage />}>
                             <Route path="" element={<Navigate to="messaging" />} />

@@ -1529,8 +1529,8 @@ export const BankAccountsWrapper = styled('div')`
 
             button {
                 position: relative;
-                width: 200px;
                 height: 35px;
+                padding: 0 35px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1564,9 +1564,9 @@ export const BankAccountsWrapper = styled('div')`
             align-items: center;
             border-bottom: 2px solid ${colors.themeColor};
 
-            a {
+            li {
                 position: relative;
-                text-decoration: none;
+                list-style: none;
                 height: 100%;
                 padding: 0 20px;
                 padding-top: 2px;
