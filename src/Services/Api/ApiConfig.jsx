@@ -109,6 +109,10 @@ export const getApiEndpoints = () => {
         createFeeConfiguration: `${apiURL}/api/fee/configuration/create.php`,
         fetchFeeConfigurations: `${apiURL}/api/fee/configuration/list.php`,
 
+        //Bank Accounts
+        addBankAccount: `${apiURL}/api/bank-account/create.php`,
+        fetchBankAccounts: `${apiURL}/api/bank-account/list.php`,
+
         // Communication 
         insertCommunicationMsgTemplate: `${apiURL}/api/communication/message-templates/insert.php`,
         fetchCommunicationMsgTemplates: `${apiURL}/api/communication/message-templates/list.php`,

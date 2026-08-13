@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BankAccountsWrapper } from "../../../Styles/FinanceStyle";
+import { toast } from "react-toastify";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import AddBankAccountModal from "../../../Components/Modals/FinanceManagement/AddBankAccount";
 import AllAccountsPage from "./AllAccounts";
 import SplitAccountsPage from "./SplitAccounts";
 import MapAccountModal from "../../../Components/Modals/FinanceManagement/MapAccountModal";
 
 const BankAccountPage = () => {
+    const api = getApiEndpoints();
     const tabs = [
         { label: "Accounts", value: "all-accounts" },
         { label: "Split Accounts", value: "split-accounts" }
@@ -13,6 +17,35 @@ const BankAccountPage = () => {
     const [selectedTab, setSelectedTab] = useState(tabs[0].value);
     const [isAddBankAccountModalOpen, setIsAddBankAccountModalOpen] = useState(false);
     const [isMapAccountModalOpen, setIsMapAccountModalOpen] = useState(false);
+    const [bankAccounts, setBankAccounts] = useState([]);
+    const [isInitialBankAccountsLoading, setIsInitialBankAccountsLoading] = useState(false);
+    const [totalCount, setTotalCount] = useState('');
+    const [page, setPage] = useState(1);
+
+    const fetchBankAccounts = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialBankAccountsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchBankAccounts, {
+                params: {
+                    page: pageNumber
+                }
+            });
+            if (response?.data.status === 200) {
+                setBankAccounts(response?.data.data);
+                setTotalCount(response?.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialBankAccountsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchBankAccounts(true, page);
+    }, [page]);
 
     const handleOpenAddBankAccountModal = () => {
         setIsAddBankAccountModalOpen(true);
@@ -56,11 +89,20 @@ const BankAccountPage = () => {
                         ))}
                     </div>
                 </div>
-                {selectedTab === "all-accounts" && <AllAccountsPage />}
+                {selectedTab === "all-accounts" && (
+                    <AllAccountsPage 
+                        bankAccounts={bankAccounts}
+                        isInitialBankAccountsLoading={isInitialBankAccountsLoading}
+                        page={page}
+                        setPage={setPage}
+                        totalCount={totalCount}
+                    />
+                )}
                 {selectedTab === "split-accounts" && <SplitAccountsPage />}
                 <AddBankAccountModal
                     isAddBankAccountModalOpen={isAddBankAccountModalOpen}
                     setIsAddBankAccountModalOpen={setIsAddBankAccountModalOpen}
+                    refreshData={() => fetchBankAccounts(false, page)}
                 />
                 <MapAccountModal
                     isMapAccountModalOpen={isMapAccountModalOpen}

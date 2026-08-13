@@ -1,6 +1,8 @@
+import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import { AllAccountsWrapper } from "../../../Styles/FinanceStyle";
 
-const AllAccountsPage = () => {
+const AllAccountsPage = ({ bankAccounts, isInitialBankAccountsLoading, page, setPage, totalCount }) => {
+
     return (
         <>
             <AllAccountsWrapper>
@@ -12,27 +14,55 @@ const AllAccountsPage = () => {
                                 <th>A/C Number</th>
                                 <th>IFSC Code</th>
                                 <th>Beneficiary Name</th>
+                                <th>Cancell Cheque</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Joydeep Barik</td>
-                                <td>25478900114759</td>
-                                <td>PUNB0007</td>
-                                <td>Joydeep Barik</td>
-                                <td>
-                                    <input type="checkbox" id="status" />
-                                    <label htmlFor="status">
-                                        <span></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
-                                    <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                isInitialBankAccountsLoading ? (
+                                    Array.from({ length: 2 }).map((_, index) => (
+                                        <tr key={index}>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td><SkeletonLoader width="100%" height="13px" /></td>
+                                            <td>
+                                                <SkeletonLoader width="15px" height="15px" margin="0 0 0 6px" />
+                                                <SkeletonLoader width="15px" height="15px" />
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : bankAccounts.length > 0 ? (
+                                    bankAccounts.map((account, index) => (
+                                        <tr key={index}>
+                                            <td>{account.account_name}</td>
+                                            <td>{account.account_no}</td>
+                                            <td>{account.ifsc_code}</td>
+                                            <td>{account.beneficiary_name}</td>
+                                            <td><a href=""><i className="fa-solid fa-circle-info"></i></a></td>
+                                            <td>
+                                                <input type="checkbox" id="status" />
+                                                <label htmlFor="status">
+                                                    <span></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) :(
+                                    <tr>
+                                        <td className="empty_message">No bank account available.</td>
+                                    </tr>
+                                )
+                            }
+
                         </tbody>
                     </table>
                 </div>

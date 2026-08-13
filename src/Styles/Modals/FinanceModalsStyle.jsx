@@ -768,6 +768,16 @@ export const AddBankAccountWrapper = styled('div')`
                         background: ${colors.customColors.lightBackground3};
                     }
 
+                    input.no-spinner::-webkit-outer-spin-button,
+                    input.no-spinner::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+
+                    input.no-spinner[type=number] {
+                        -moz-appearance: textfield;
+                    }
+
                     .sec_box {
                         position: relative;
                         width: 100%;
