@@ -1730,7 +1730,7 @@ export const AllAccountsWrapper = styled('div')`
                             justify-content: center;
 
                             a {
-                                color: ${colors.customColors.blackColor2};
+                                color: ${colors.customColors.blueColor2};
                                 text-decoration: none;
                                 cursor: pointer;
                             }

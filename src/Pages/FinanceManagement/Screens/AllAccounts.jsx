@@ -43,7 +43,7 @@ const AllAccountsPage = ({ bankAccounts, isInitialBankAccountsLoading, page, set
                                             <td>{account.account_no}</td>
                                             <td>{account.ifsc_code}</td>
                                             <td>{account.beneficiary_name}</td>
-                                            <td><a href=""><i className="fa-solid fa-circle-info"></i></a></td>
+                                            <td><a href=""><i className="fa-regular fa-eye"></i></a></td>
                                             <td>
                                                 <input type="checkbox" id="status" />
                                                 <label htmlFor="status">
