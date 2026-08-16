@@ -345,6 +345,34 @@ const Sidebar = () => {
                                 }
                                 {
                                     userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 9 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(9)}>
+                                            <li>
+                                                <i className="fa-solid fa-book prefix"></i>
+                                                <span>
+                                                    <p>Library Management</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/library-management/library-overview">
+                                                <i className="fa-solid fa-magnifying-glass-chart prefix"></i>
+                                                <p>Overview</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/library-management/book-catelog">
+                                                <i className="fa-solid fa-book-open prefix"></i>
+                                                <p>Book Catelog</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/library-management/library-member">
+                                                <i className="fa-solid fa-users prefix"></i>
+                                                <p>Library Members</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
                                     <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
                                         <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
                                             <li>

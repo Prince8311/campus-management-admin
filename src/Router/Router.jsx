@@ -108,6 +108,13 @@ import HostelResidentsPage from "../Pages/HostelManagement/Screens/Residents";
 import HostelRoomsPage from "../Pages/HostelManagement/Screens/HostelRooms";
 import HostelBuildingsPage from "../Pages/HostelManagement/Screens/HostelBuildings";
 
+// Library Management
+import LibraryMainPage from "../Pages/LibraryManagement/Index";
+import OverviewPage from "../Pages/LibraryManagement/Screens/Overview";
+import BookCatelogPage from "../Pages/LibraryManagement/Screens/BookCatelog";
+import LibraryMembersPage from "../Pages/LibraryManagement/Screens/LibraryMembers";
+
+
 const Routers = () => {
     return (
         <>
@@ -202,6 +209,12 @@ const Routers = () => {
                             <Route path="vehicles" element={<VehiclesPage />} />
                             <Route path="staffs" element={<VehicleStaffsPage />} />
                             <Route path="routes" element={<VehicleRoutesPage />} />
+                        </Route>
+                        <Route path="library-management" element={<LibraryMainPage />}>
+                            <Route path="" element={<Navigate to="library-overview" />} />
+                            <Route path="library-overview" element={<OverviewPage />} />
+                            <Route path="book-catelog" element={<BookCatelogPage />} />
+                            <Route path="library-member" element={<LibraryMembersPage />} />
                         </Route>
                         <Route path="add-routes" element={<AddRoutesPage />} />
                         <Route path="settings" element={<SettingsMainPage />}>

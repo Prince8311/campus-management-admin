@@ -749,11 +749,19 @@ export const AddBankAccountWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
 
                 .input_box {
                     position: relative;
-                    width: 100%;
                     margin-bottom: 8px;
+
+                    &.half {
+                        width: 48.5%;
+                    }
+
+                    &.full {
+                        width: 100%;
+                    }
 
                     input {
                         position: relative;

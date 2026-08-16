@@ -91,7 +91,7 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="input_box">
+                            <div className="input_box full">
                                 <span>Account Name <p>*</p></span>
                                 <input
                                     type="text"
@@ -99,7 +99,7 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
                                     onChange={(e) => setAccountName(e.target.value)}
                                 />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box full">
                                 <span>Account Number <p>*</p></span>
                                 <input
                                     type="number"
@@ -108,7 +108,7 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
                                     className="no-spinner"
                                 />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box half">
                                 <span>IFSC Code <p>*</p></span>
                                 <input
                                     type="text"
@@ -116,7 +116,7 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
                                     onChange={(e) => setIfscCode(e.target.value)}
                                 />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box half">
                                 <span>Beneficiary Name <p>*</p></span>
                                 <input
                                     type="text"
@@ -124,7 +124,7 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
                                     onChange={(e) => setBeneficiaryName(e.target.value)}
                                 />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box full">
                                 <span>Cancelled Cheque <p>*</p></span>
                                 <div
                                     className="sec_box"
