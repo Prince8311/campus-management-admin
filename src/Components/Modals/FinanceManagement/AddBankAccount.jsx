@@ -20,7 +20,7 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
     const allowedExtensions = '.jpg,.jpeg,.png';
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const normalizeStatus = (value) => value === true || value === 1 || value === '1' || value === 'true' || value === 'active' || value === 'yes';
-    const recordId = selectedBankAccount?.id ?? selectedBankAccount?.bank_account_id ?? selectedBankAccount?.account_id ?? selectedBankAccount?.bankAccountId ?? selectedBankAccount?._id;
+    const recordId = selectedBankAccount?.id ;
     const isEditMode = Boolean(recordId);
     const isFormValid =
         accountName.trim() &&
