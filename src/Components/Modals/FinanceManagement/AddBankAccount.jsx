@@ -65,7 +65,11 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
         formData.append('inputs', JSON.stringify(inputs));
         formData.append('cancelled_cheque', cancelledCheque);
         try {
-            const response = await axiosInstance.post(api.addBankAccount, formData);
+            const response = await axiosInstance.post(api.addBankAccount, formData, {
+                params: {
+                    intent: 'add'
+                }
+            });
             if (response.data.status === 200) {
                 console.log('bank Account added successfully:', response.data);
                 toast.success(response.data.message);

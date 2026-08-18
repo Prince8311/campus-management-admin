@@ -897,13 +897,6 @@ export const MapAccountWrapper = styled('div')`
         flex-direction: column;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
 
         &.active {
             transform: translateY(0);
@@ -984,6 +977,7 @@ export const MapAccountWrapper = styled('div')`
                         outline: none;
                         border: none;
                         margin-top: 3px;
+                        color: ${colors.customColors.blackColor2};
                         background: ${colors.customColors.lightBackground3};
                     }
 
@@ -1090,7 +1084,7 @@ export const MapAccountWrapper = styled('div')`
                             }
 
                             &.active {
-                                max-height: 170px;
+                                max-height: 200px;
                                 transition: all 0.5s ease;
                             }
 
@@ -1108,7 +1102,7 @@ export const MapAccountWrapper = styled('div')`
                                     display: flex;
                                     border: 1px solid ${colors.customColors.borderColor};
                                     border-radius: 6px;
-                                    margin-bottom: 10px;
+                                    margin-bottom: 6px;
 
                                     i {
                                         position: relative;
@@ -1139,7 +1133,7 @@ export const MapAccountWrapper = styled('div')`
                                     width: 100%;
                                     display: flex;
                                     flex-direction: column;
-                                    max-height: 115px;
+                                    max-height: 120px;
                                     overflow-y: auto;
                                     scrollbar-width: none;
                                     -ms-overflow-style: none;
@@ -1195,6 +1189,11 @@ export const MapAccountWrapper = styled('div')`
                                             }
                                         }
 
+                                        &.empty_message {
+                                            padding: 5px 10px;
+                                            color: ${colors.customColors.blackColor3};
+                                            pointer-events: none;
+                                        }
                                     }
 
                                     .no_data {
@@ -1253,7 +1252,7 @@ export const MapAccountWrapper = styled('div')`
                                             span {
                                                 font-size: 9px;
                                                 color: ${colors.customColors.blackColor2};
-                                                margin-top: 1px;
+                                                margin-top: 2px;
                                             }
                                         }
 

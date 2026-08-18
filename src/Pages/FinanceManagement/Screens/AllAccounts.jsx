@@ -1,4 +1,5 @@
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import { documentBaseURL } from "../../../Services/Api/ApiConfig";
 import { AllAccountsWrapper } from "../../../Styles/FinanceStyle";
 
 const AllAccountsPage = ({ bankAccounts, isInitialBankAccountsLoading, page, setPage, totalCount }) => {
@@ -43,12 +44,9 @@ const AllAccountsPage = ({ bankAccounts, isInitialBankAccountsLoading, page, set
                                             <td>{account.account_no}</td>
                                             <td>{account.ifsc_code}</td>
                                             <td>{account.beneficiary_name}</td>
-                                            <td><a href=""><i className="fa-regular fa-eye"></i></a></td>
+                                            <td><a target="_blank" href={`${documentBaseURL}/cheque/${account.cancelled_cheque}`} rel="noopener noreferrer"><i className="fa-solid fa-file-lines"></i></a></td>
                                             <td>
-                                                <input type="checkbox" id="status" />
-                                                <label htmlFor="status">
-                                                    <span></span>
-                                                </label>
+                                                <p className={account.status ? 'active' : ''}>{account.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
                                                 <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>

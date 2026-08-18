@@ -1726,12 +1726,14 @@ export const AllAccountsWrapper = styled('div')`
                         }
                         &:nth-of-type(5) {
                             width: 15%;
+                            padding: 5px 25px;
                             align-items: center;
                             justify-content: center;
 
                             a {
                                 color: ${colors.customColors.blueColor2};
                                 text-decoration: none;
+                                font-size: 14px;
                                 cursor: pointer;
                             }
                         }
@@ -1740,40 +1742,22 @@ export const AllAccountsWrapper = styled('div')`
                             width: 10%;
                             justify-content: center;
 
-                            input[type="checkbox"] {
-                                display: none;
-                            }
-
-                            label {
+                            p {
                                 position: relative;
-                                width: 40px;
-                                height: 21px;
-                                background: ${colors.customColors.whiteColor2};
-                                border-radius: 25px;
-                                padding: 3px;
+                                font-size: 10px;
+                                font-weight: 500;
+                                line-height: 1;
                                 display: flex;
                                 align-items: center;
-                                cursor: pointer;
-                                transition: all 0.5s ease;
+                                border-radius: 20px;
+                                padding: 4px 15px;
+                                color: ${colors.customColors.redColor};
+                                background: ${colors.customColors.redColorLight};
 
-                                span {
-                                    position: relative;
-                                    width: 15px;
-                                    height: 100%;
-                                    background: ${colors.customColors.whiteColor};
-                                    border-radius: 50%;
-                                    transition: all 0.5s ease;
+                                &.active {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
                                 }
-                            }
-
-                            input[type="checkbox"]:checked ~ label {
-                                background: ${colors.customColors.greenColor};
-                                transition: all 0.5s ease;
-                            }
-
-                            input[type="checkbox"]:checked ~ label span {
-                                transform: translateX(19px);
-                                transition: all 0.5s ease;
                             }
                         }
 

@@ -684,16 +684,12 @@ export const HostelRoomWrapper = styled('div')`
                                 align-items: center;
                                 border-radius: 20px;
                                 padding: 4px 15px;
-                                color: ${colors.customColors.yellowColor1};
-                                background: ${colors.customColors.yellowColorLight};
+                                color: ${colors.customColors.redColor};
+                                background: ${colors.customColors.redColorLight};
 
                                 &.active {
                                     color: ${colors.customColors.greenColor};
                                     background: ${colors.customColors.greenColorLight};
-                                }
-                                &.deactive {
-                                    color: ${colors.customColors.redColor};
-                                    background: ${colors.customColors.redColorLight};
                                 }
                             }
                         }

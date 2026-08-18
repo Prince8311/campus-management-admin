@@ -1,59 +1,178 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapAccountWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
+import { toast } from "react-toastify";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import SkeletonLoader from "../../Loader/SkeletonLoader";
 
 const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) => {
+    const api = getApiEndpoints();
 
+    const [isAccountsLoading, setIsAccountsLoading] = useState(false);
     const accountNameList = ['joyddep', 'sourish', 'abhayji'];
-    // const [accountNameList, setAccountNameList] = useState([]);
-    const [showAccountNameDropdown, setShowAccountNameDropdown] = useState(false);
-    const [selectedAccountName, setSelectedAccountName] = useState('');
+    const [accountList, setAccountList] = useState([]);
+    const [showAccountDropdown, setShowAccountDropdown] = useState(false);
+    const [selectedAccount, setSelectedAccount] = useState({});
 
-    const feeTypes = ['tution', 'hostel', 'travel'];
-    // const [feeTypes, setFeeTypes] = useState([]);
+    const [isFeeTypesLoading, setIsFeeTypesLoading] = useState(false);
+    const [feeTypes, setFeeTypes] = useState([]);
     const [showFeeTypeDropdown, setShowFeeTypeDropdown] = useState(false);
-    const [selectedFeesType, setSelectedFeesType] = useState('');
+    const [selectedFeeType, setSelectedFeeType] = useState('');
 
-    const classList = ['Class1', ' Class2', 'class3', ' class4'];
-    // const [classList, setClassList] = useState([]);
+    const [isClassListLoading, setIsClassListLoading] = useState(false);
+    const [classList, setClassList] = useState([]);
     const [showClassDropdown, setShowClassDropdown] = useState(false);
     const [selectedClass, setSelectedClass] = useState('');
 
-    const sectionList = ['a', 'b', 'c'];
-    // const [sectionList, setSectionList] = useState([]);
+    const [isSectionListLoading, setIsSectionListLoading] = useState(false);
+    const [sectionList, setSectionList] = useState([]);
     const [showSectionDropdown, setShowSectionDropdown] = useState(false);
     const [selectedSection, setSelectedSection] = useState('');
 
-    const handleSelectedAccountNameDropdown = () => {
-        setShowAccountNameDropdown(!showAccountNameDropdown);
+    const getInitials = (name) => {
+        if (!name) return "";
+        const parts = name.trim().split(" ").filter(Boolean);
+        const first = parts[0]?.[0] || "";
+        const last = parts.length > 1 ? parts[parts.length - 1]?.[0] : "";
+        return (first + last).toUpperCase();
+    };
+
+    const fetchAccountList = async () => {
+        setIsAccountsLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchBankAccounts, {
+                params: {
+                    isForm: true
+                }
+            });
+            if (response.data.status === 200) {
+                setAccountList(response.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsAccountsLoading(false);
+        }
     }
 
-    const handleSelectedClassDropdown = () => {
+    useEffect(() => {
+        if (showAccountDropdown) {
+            fetchAccountList();
+        }
+    }, [showAccountDropdown]);
+
+    const handleAccountDropdown = () => {
+        setShowAccountDropdown(!showAccountDropdown);
+        setShowFeeTypeDropdown(false);
+        setShowClassDropdown(false);
+        setShowSectionDropdown(false);
+    }
+    
+
+    const handleSelectAccount = (account) => {
+        setSelectedAccount(account);
+        setShowAccountDropdown(false);
+    }
+
+    const fetchFeeTypes = async () => {
+        setIsFeeTypesLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchFeeTypes);
+            if (response.data.status === 200) {
+                setFeeTypes(response.data.types);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsFeeTypesLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (showFeeTypeDropdown) {
+            fetchFeeTypes();
+        }
+    }, [showFeeTypeDropdown]);
+
+    const handleSelectFeeType = (type) => {
+        setSelectedFeeType(type);
+        setShowFeeTypeDropdown(false);
+    }
+
+    const handleFeeTypeDropdown = () => {
+        setShowFeeTypeDropdown(!showFeeTypeDropdown);
+        setShowAccountDropdown(false);
+        setShowClassDropdown(false);
+        setShowSectionDropdown(false);
+    }
+
+    const fetchClassList = async () => {
+        setIsClassListLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchClasses, {
+                params: {
+                    isForm: true
+                }
+            });
+            if (response.data.status === 200) {
+                setClassList(response.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsClassListLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (showClassDropdown) {
+            fetchClassList();
+        }
+    }, [showClassDropdown]);
+
+    const handleClassDropdown = () => {
         setShowClassDropdown(!showClassDropdown);
+        setShowAccountDropdown(false);
+        setShowFeeTypeDropdown(false);
+        setShowSectionDropdown(false);
     }
 
-    const handleSelectedSectionDropdown = () => {
+    const fetchSectionList = async () => {
+        setIsSectionListLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchClassSections, {
+                params: {
+                    isForm: true,
+                    class: selectedClass
+                }
+            });
+            if (response.data.status === 200) {
+                setSectionList(response.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsSectionListLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (showSectionDropdown && selectedClass) {
+            fetchSectionList();
+        }
+    }, [showSectionDropdown, selectedClass]);
+
+    const handleSectionDropdown = () => {
         setShowSectionDropdown(!showSectionDropdown);
     }
 
-    const handleSelectedFeeTypeDropdown = () => {
-        setShowFeeTypeDropdown(!showFeeTypeDropdown);
-    }
-
-    const handleSelectAccountName = (name) => {
-        setSelectedAccountName(name);
-        setShowAccountNameDropdown(false);
-    }
-    const handleSelectClass = (cla) => {
-        setSelectedClass(cla);
+    const handleSelectClass = (className) => {
+        setSelectedClass(className);
         setShowClassDropdown(false);
     }
     const handleSelectSection = (section) => {
         setSelectedSection(section);
         setShowSectionDropdown(false);
-    }
-    const handleSelectFeeType = (fee) => {
-        setSelectedFeesType(fee);
-        setShowFeeTypeDropdown(false);
     }
 
     function closeModal() {
@@ -74,34 +193,54 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
                             <div className="select_box halfwidth">
                                 <span>Account Name <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={handleSelectedAccountNameDropdown}>
-                                        <p>{selectedAccountName}</p>
-                                        <i className={`fa-solid fa-angle-down ${showAccountNameDropdown ? 'active' : ''}`}></i>
+                                    <div className="dropdown_btn" onClick={handleAccountDropdown}>
+                                        <p>{selectedAccount.account_name}</p>
+                                        <i className={`fa-solid fa-angle-down ${showAccountDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showAccountNameDropdown ? 'active' : ''}`}>
+                                    <div className={`dropdown ${showAccountDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
-                                            <div className="search_sec">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search by Account Name and number..."
-                                                />
-                                            </div>
+                                            {
+                                                (!isAccountsLoading && accountList.length > 6) && (
+                                                    <div className="search_sec">
+                                                        <i className="fa-solid fa-magnifying-glass"></i>
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Search by Account Name and Number..."
+                                                        />
+                                                    </div>
+                                                )
+                                            }
                                             <ul>
                                                 {
-                                                    accountNameList.map((name, i) => (
-                                                        <div className={`user_box ${selectedAccountName === name ? 'active' : ''}`} key={i}
-                                                            onClick={()=> handleSelectAccountName(name)}
-                                                        >
-                                                            <div className="box_left">
-                                                                <h6>JB</h6>
+                                                    isAccountsLoading ? (
+                                                        Array.from({ length: 2 }).map((_, index) => (
+                                                            <div className="user_box" key={index}>
+                                                                <div className="box_left">
+                                                                    <SkeletonLoader width="100%" height="100%" />
+                                                                </div>
+                                                                <div className="box_right">
+                                                                    <SkeletonLoader width="250" height="13px" />
+                                                                    <SkeletonLoader width="150" height="10px" />
+                                                                </div>
                                                             </div>
-                                                            <div className="box_right">
-                                                                <p>{name}</p>
-                                                                <span>#1458759351000</span>
+                                                        ))
+                                                    ) : accountList.length > 0 ? (
+                                                        accountList.map((account, i) => (
+                                                            <div className={`user_box ${account.id === selectedAccount.id ? 'active' : ''}`} key={i}
+                                                                onClick={() => handleSelectAccount(account)}
+                                                            >
+                                                                <div className="box_left">
+                                                                    <h6>{getInitials(account.account_name)}</h6>
+                                                                </div>
+                                                                <div className="box_right">
+                                                                    <p>{account.account_name}</p>
+                                                                    <span>#{account.account_no}</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    ))
+                                                        ))
+                                                    ) : (
+                                                        <li className="empty_message">No accounts available</li>
+                                                    )
                                                 }
                                             </ul>
                                         </div>
@@ -110,34 +249,76 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
                             </div>
                             <div className="input_box halfwidth">
                                 <span>Account Number <p>*</p></span>
-                                <input type="text" readOnly />
+                                <input type="text" value={selectedAccount.account_no ?? ''} readOnly />
+                            </div>
+                            <div className="input_box halfwidth">
+                                <span>IFSC Code <p>*</p></span>
+                                <input type="text" value={selectedAccount.ifsc_code ?? ''} readOnly />
+                            </div>
+                            <div className="select_box halfwidth">
+                                <span>Fee Type <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn" onClick={handleFeeTypeDropdown}>
+                                        <p>{selectedFeeType}</p>
+                                        <i className={`fa-solid fa-angle-down ${showFeeTypeDropdown ? 'active' : ''}`}></i>
+                                    </div>
+                                    <div className={`dropdown ${showFeeTypeDropdown ? 'active' : ''}`}>
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                {
+                                                    isFeeTypesLoading ? (
+                                                        Array.from({ length: 2 }).map((_, index) => (
+                                                            <li key={index}>
+                                                                <SkeletonLoader width="100%" height="13px" />
+                                                            </li>
+                                                        ))
+                                                    ) : feeTypes.length > 0 ? (
+                                                        feeTypes.map((fee, i) => (
+                                                            <li key={i}
+                                                                onClick={() => handleSelectFeeType(fee)}
+                                                                className={selectedFeeType === fee ? 'active' : ''}
+                                                            >
+                                                                {fee}
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="empty_message">No fee types available</li>
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="select_box halfwidth">
                                 <span>Class <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={handleSelectedClassDropdown}>
+                                    <div className="dropdown_btn" onClick={handleClassDropdown}>
                                         <p>{selectedClass}</p>
                                         <i className={`fa-solid fa-angle-down ${showClassDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showClassDropdown ? 'active' : ''}`}>
+                                    <div className={`dropdown dropUp ${showClassDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
-                                            <div className="search_sec">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search by Account Name and number..."
-                                                />
-                                            </div>
                                             <ul>
                                                 {
-                                                    classList.map((cla, i) => (
-                                                        <li key={i}
-                                                            onClick={() => handleSelectClass(cla)}
-                                                            className={selectedClass === cla ? 'active' : ''}
-                                                        >
-                                                            {cla}
-                                                        </li>
-                                                    ))
+                                                    isClassListLoading ? (
+                                                        Array.from({ length: 2 }).map((_, index) => (
+                                                            <li key={index}>
+                                                                <SkeletonLoader width="100%" height="13px" />
+                                                            </li>
+                                                        ))
+                                                    ) : classList.length > 0 ? (
+                                                        classList.map((className, i) => (
+                                                            <li key={i}
+                                                                onClick={() => handleSelectClass(className)}
+                                                                className={selectedClass === className ? 'active' : ''}
+                                                            >
+                                                                {className}
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="empty_message">No classes available</li>
+                                                    )
                                                 }
                                             </ul>
                                         </div>
@@ -147,70 +328,37 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
                             <div className="select_box halfwidth">
                                 <span>Section <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={handleSelectedSectionDropdown}>
+                                    <div className="dropdown_btn" onClick={handleSectionDropdown}>
                                         <p>{selectedSection}</p>
                                         <i className={`fa-solid fa-angle-down ${showSectionDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showSectionDropdown ? 'active' : ''}`}>
+                                    <div className={`dropdown dropUp ${showSectionDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
-                                            <div className="search_sec">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search by Account Name and number..."
-                                                />
-                                            </div>
                                             <ul>
                                                 {
-                                                    sectionList.map((section, i) => (
-                                                        <li key={i}
-                                                            onClick={() => handleSelectSection(section)}
-                                                            className={selectedSection === section ? 'active' : ''}
-                                                        >
-                                                            {section}
-                                                        </li>
-                                                    ))
+                                                    isSectionListLoading ? (
+                                                        Array.from({ length: 2 }).map((_, index) => (
+                                                            <li key={index}>
+                                                                <SkeletonLoader width="100%" height="13px" />
+                                                            </li>
+                                                        ))
+                                                    ) : sectionList.length > 0 ? (
+                                                        sectionList.map((section, i) => (
+                                                            <li key={i}
+                                                                onClick={() => handleSelectSection(section)}
+                                                                className={selectedSection === section ? 'active' : ''}
+                                                            >
+                                                                {section}
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="empty_message">No sections available</li>
+                                                    )
                                                 }
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="select_box halfwidth">
-                                <span>Fee Type <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={handleSelectedFeeTypeDropdown}>
-                                        <p>{selectedFeesType}</p>
-                                        <i className={`fa-solid fa-angle-down ${showFeeTypeDropdown ? 'active' : ''}`}></i>
-                                    </div>
-                                    <div className={`dropdown ${showFeeTypeDropdown ? 'active' : ''}`}>
-                                        <div className="dropdown_inner">
-                                            <div className="search_sec">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search by feetype..."
-                                                />
-                                            </div>
-                                            <ul>
-                                                {
-                                                    feeTypes.map((fee, i) => (
-                                                        <li key={i}
-                                                            onClick={() => handleSelectFeeType(fee)}
-                                                            className={selectedFeesType === fee ? 'active' : ''}
-                                                        >
-                                                            {fee}
-                                                        </li>
-                                                    ))
-                                                }
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="input_box halfwidth">
-                                <span>IFSC Code <p>*</p></span>
-                                <input type="text" readOnly />
                             </div>
                         </div>
                     </div>

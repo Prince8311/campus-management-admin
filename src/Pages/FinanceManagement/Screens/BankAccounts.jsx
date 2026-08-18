@@ -33,6 +33,7 @@ const BankAccountPage = () => {
                 }
             });
             if (response?.data.status === 200) {
+                console.log('Bank Accounts fetched successfully:', response?.data);
                 setBankAccounts(response?.data.data);
                 setTotalCount(response?.data.totalCount);
             }
