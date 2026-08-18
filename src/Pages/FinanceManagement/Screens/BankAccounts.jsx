@@ -16,6 +16,7 @@ const BankAccountPage = () => {
     ];
     const [selectedTab, setSelectedTab] = useState(tabs[0].value);
     const [isAddBankAccountModalOpen, setIsAddBankAccountModalOpen] = useState(false);
+    const [selectedBankAccount, setSelectedBankAccount] = useState(null);
     const [isMapAccountModalOpen, setIsMapAccountModalOpen] = useState(false);
     const [bankAccounts, setBankAccounts] = useState([]);
     const [isInitialBankAccountsLoading, setIsInitialBankAccountsLoading] = useState(false);
@@ -48,7 +49,8 @@ const BankAccountPage = () => {
         fetchBankAccounts(true, page);
     }, [page]);
 
-    const handleOpenAddBankAccountModal = () => {
+    const handleOpenAddBankAccountModal = (account = null) => {
+        setSelectedBankAccount(account);
         setIsAddBankAccountModalOpen(true);
     };
 
@@ -97,12 +99,15 @@ const BankAccountPage = () => {
                         page={page}
                         setPage={setPage}
                         totalCount={totalCount}
+                        onEditAccount={handleOpenAddBankAccountModal}
                     />
                 )}
                 {selectedTab === "split-accounts" && <SplitAccountsPage />}
                 <AddBankAccountModal
                     isAddBankAccountModalOpen={isAddBankAccountModalOpen}
                     setIsAddBankAccountModalOpen={setIsAddBankAccountModalOpen}
+                    selectedBankAccount={selectedBankAccount}
+                    setSelectedBankAccount={setSelectedBankAccount}
                     refreshData={() => fetchBankAccounts(false, page)}
                 />
                 <MapAccountModal

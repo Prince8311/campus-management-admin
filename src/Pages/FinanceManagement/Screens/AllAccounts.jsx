@@ -2,7 +2,7 @@ import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import { documentBaseURL } from "../../../Services/Api/ApiConfig";
 import { AllAccountsWrapper } from "../../../Styles/FinanceStyle";
 
-const AllAccountsPage = ({ bankAccounts, isInitialBankAccountsLoading, page, setPage, totalCount }) => {
+const AllAccountsPage = ({ bankAccounts, isInitialBankAccountsLoading, page, setPage, totalCount, onEditAccount }) => {
 
     return (
         <>
@@ -49,7 +49,7 @@ const AllAccountsPage = ({ bankAccounts, isInitialBankAccountsLoading, page, set
                                                 <p className={account.status ? 'active' : ''}>{account.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="edit_btn" onClick={() => onEditAccount(account)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
