@@ -1320,6 +1320,164 @@ export const MapAccountWrapper = styled('div')`
                         }
                     }
                 }
+
+                .multi_select_box {
+                    position: relative;
+                    flex-direction: column;
+                    margin-bottom: 10px;
+
+                    &.fullwidth {
+                        width: 100%;
+                    }
+
+                    &.halfwidth {
+                        width: 48.5%;
+                    }
+
+                    span {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
+                    }
+
+                    .select_btn {
+                        position: relative;
+                        width: 100%;
+                        height: 37px;
+                        display: flex;
+                        align-items: center;
+                        border-radius: 5px;
+                        padding: 5px 15px;
+                        background: ${colors.customColors.lightBackground3};
+                        cursor: pointer;
+
+                        p {
+                            position: relative;
+                            width: calc(100% - 25px);
+                            display: block;
+                            font-size: 12px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        i {
+                            position: relative;
+                            margin-left: auto;
+                            display: flex;
+                            justify-content: flex-end;
+                            cursor: pointer;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor2};
+                            transition: all 0.5s ease;
+
+                            &.rotate {
+                                transform: rotate(-180deg);
+                                transition: all 0.5s ease;
+                            }
+                        }
+                    }
+
+                    .dropdown {
+                        position: absolute;
+                        top: 100%;
+                        left: 0px;
+                        width: 100%;
+                        z-index: 15;
+                        background: ${colors.customColors.whiteColor};
+                        border-radius: 5px;
+                        box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                        height: max-content;
+                        overflow: hidden;
+                        transition: all 0.5s ease;
+                        
+                        &.drop_up {
+                            top: inherit;
+                            bottom: 100%;
+                        }
+
+                        .dropdown_inner {
+                            position: relative;
+                            width: 100%;
+                            padding: 10px;
+                            display: flex;
+                            flex-direction: column;
+
+                            ul {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                max-height: 160px;
+                                overflow-y: auto;
+                                scrollbar-width: none;
+                                -ms-overflow-style: none;
+
+                                &::-webkit-scrollbar {
+                                    display: none;
+                                }
+
+                                li {
+                                    position: relative;
+                                    width: 100%;
+                                    list-style: none;
+                                    padding: 7px 15px;
+                                    cursor: pointer;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    border-radius: 4px;
+                                    margin-bottom: 8px;
+                                    display: flex;
+                                    align-items: center;
+                                    transition: all 0.5s ease;
+
+                                    &:last-of-type {
+                                        margin-bottom: 0;
+                                    }
+
+                                    p {
+                                        position: relative;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
+
+                                    span {
+                                        position: relative;
+                                        margin-left: auto;
+                                        width: 15px;
+                                        height: 15px;
+                                        border: 1px solid ${colors.customColors.borderColor};
+                                        border-radius: 3px;
+
+                                        img {
+                                            position: absolute;
+                                            left: 1px;
+                                            bottom: 2px;
+                                            width: 18px;
+                                        }
+                                    }
+
+                                    &.empty_message {
+                                        padding: 5px 10px;
+                                        color: ${colors.customColors.blackColor3};
+                                        border: none;
+                                        padding: 5px 10px;
+                                        font-size: 12px;
+                                        pointer-events: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
