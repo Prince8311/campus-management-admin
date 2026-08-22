@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MapAccountWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 import { toast } from "react-toastify";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
@@ -27,7 +27,11 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
     const [isSectionListLoading, setIsSectionListLoading] = useState(false);
     const [sectionList, setSectionList] = useState([]);
     const [showSectionDropdown, setShowSectionDropdown] = useState(false);
-    const [selectedSection, setSelectedSection] = useState('');
+    const [selectedSections, setSelectedSections] = useState([]);
+
+    const textRef = useRef(null);
+    const [displayText, setDisplayText] = useState('');
+    const [isDropUp, setIsDropUp] = useState(false);
 
     const getInitials = (name) => {
         if (!name) return "";
@@ -67,7 +71,7 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
         setShowClassDropdown(false);
         setShowSectionDropdown(false);
     }
-    
+
 
     const handleSelectAccount = (account) => {
         setSelectedAccount(account);
@@ -163,17 +167,114 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
     }, [showSectionDropdown, selectedClass]);
 
     const handleSectionDropdown = () => {
-        setShowSectionDropdown(!showSectionDropdown);
+        if (!selectedClass) {
+            toast.warning("Please select a class first");
+            return;
+        }
+
+        setShowSectionDropdown((prev) => !prev);
+
+        setShowAccountDropdown(false);
+        setShowFeeTypeDropdown(false);
+        setShowClassDropdown(false);
     }
 
     const handleSelectClass = (className) => {
         setSelectedClass(className);
         setShowClassDropdown(false);
-    }
-    const handleSelectSection = (section) => {
-        setSelectedSection(section);
+
+        setSectionList([]);
         setShowSectionDropdown(false);
-    }
+    };
+
+    const handleMultiSelect = (section) => {
+        // =========================
+        // ALL SECTION
+        // =========================
+        if (section === "All Section") {
+            const existingAllSection = selectedSections.some(
+                (item) =>
+                    item.className === selectedClass &&
+                    item.isAll === true
+            );
+
+            if (existingAllSection) {
+                // Current class-এর All Section remove
+                setSelectedSections((prev) =>
+                    prev.filter(
+                        (item) => item.className !== selectedClass
+                    )
+                );
+            } else {
+                // Current class-এর আগের সব section remove
+                // তারপর All Section add
+                setSelectedSections((prev) => [
+                    ...prev.filter(
+                        (item) => item.className !== selectedClass
+                    ),
+                    {
+                        className: selectedClass,
+                        section: "All Section",
+                        isAll: true,
+                    },
+                ]);
+            }
+
+            return;
+        }
+
+        // =========================
+        // NORMAL SECTION
+        // =========================
+
+        const isCurrentClassAllSelected = selectedSections.some(
+            (item) =>
+                item.className === selectedClass &&
+                item.isAll === true
+        );
+
+        // All Section selected থাকলে normal section select হবে না
+        if (isCurrentClassAllSelected) {
+            return;
+        }
+
+        setSelectedSections((prev) => {
+            const alreadySelected = prev.some(
+                (item) =>
+                    item.className === selectedClass &&
+                    item.section === section
+            );
+
+            if (alreadySelected) {
+                // শুধু current class-এর এই section remove
+                return prev.filter(
+                    (item) =>
+                        !(
+                            item.className === selectedClass &&
+                            item.section === section
+                        )
+                );
+            }
+
+            // নতুন section add
+            return [
+                ...prev,
+                {
+                    className: selectedClass,
+                    section: section,
+                    isAll: false,
+                },
+            ];
+        });
+    };
+
+    const currentClassSelectedSections = selectedSections.filter(
+        item => item.className === selectedClass
+    );
+
+    const allSelected = currentClassSelectedSections.some(
+        item => item.isAll === true
+    );
 
     function closeModal() {
         setIsMapAccountModalOpen(false);
@@ -190,7 +291,7 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="select_box halfwidth">
+                            <div className="select_box fullwidth">
                                 <span>Account Name <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={handleAccountDropdown}>
@@ -247,7 +348,7 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
                                     </div>
                                 </div>
                             </div>
-                            <div className="input_box halfwidth">
+                            <div className="input_box fullwidth">
                                 <span>Account Number <p>*</p></span>
                                 <input type="text" value={selectedAccount.account_no ?? ''} readOnly />
                             </div>
@@ -325,41 +426,135 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
                                     </div>
                                 </div>
                             </div>
-                            <div className="select_box halfwidth">
+                            <div className="multi_select_box halfwidth">
                                 <span>Section <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={handleSectionDropdown}>
-                                        <p>{selectedSection}</p>
-                                        <i className={`fa-solid fa-angle-down ${showSectionDropdown ? 'active' : ''}`}></i>
-                                    </div>
-                                    <div className={`dropdown dropUp ${showSectionDropdown ? 'active' : ''}`}>
+                                <div className="select_btn" onClick={handleSectionDropdown}>
+                                    <p>
+                                        {allSelected
+                                            ? "All Section"
+                                            : currentClassSelectedSections.length > 0
+                                                ? currentClassSelectedSections
+                                                    .map((item) => item.section)
+                                                    .join(", ")
+                                                : ""
+                                        }
+                                    </p>
+
+                                    <i
+                                        className={`fa-solid fa-angle-down ${showSectionDropdown ? "active" : ""
+                                            }`}
+                                    ></i>
+                                </div>
+                                {
+                                    showSectionDropdown &&
+                                    <div className={`dropdown ${isDropUp ? "drop_up" : ""}`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                {
-                                                    isSectionListLoading ? (
-                                                        Array.from({ length: 2 }).map((_, index) => (
-                                                            <li key={index}>
-                                                                <SkeletonLoader width="100%" height="13px" />
-                                                            </li>
-                                                        ))
-                                                    ) : sectionList.length > 0 ? (
-                                                        sectionList.map((section, i) => (
-                                                            <li key={i}
-                                                                onClick={() => handleSelectSection(section)}
-                                                                className={selectedSection === section ? 'active' : ''}
-                                                            >
-                                                                {section}
-                                                            </li>
-                                                        ))
-                                                    ) : (
-                                                        <li className="empty_message">No sections available</li>
-                                                    )
-                                                }
+                                                {isSectionListLoading ? (
+                                                    Array.from({ length: 3 }).map((_, index) => (
+                                                        <li key={index}>
+                                                            <SkeletonLoader
+                                                                width="100%"
+                                                                height="13px"
+                                                            />
+                                                        </li>
+                                                    ))
+                                                ) : sectionList.length > 0 ? (
+                                                    <>
+                                                        <li
+                                                            onClick={() => handleMultiSelect("All Section")}
+                                                            className={allSelected ? "selected" : ""}
+                                                        >
+                                                            <p>All Section</p>
+
+                                                            <span>
+                                                                {allSelected && (
+                                                                    <img
+                                                                        src="/images/check-icon.png"
+                                                                        alt="selected"
+                                                                    />
+                                                                )}
+                                                            </span>
+                                                        </li>
+
+                                                        {/* Sections */}
+                                                        {sectionList.map((section, i) => {
+                                                            const isSelected = selectedSections.some(
+                                                                item =>
+                                                                    item.className === selectedClass &&
+                                                                    item.section === section
+                                                            );
+
+                                                            return (
+                                                                <li
+                                                                    key={i}
+                                                                    onClick={() => handleMultiSelect(section)}
+                                                                    className={`
+                                                                        ${isSelected ? "selected" : ""}
+                                                                        ${allSelected ? "disabled" : ""}
+                                                                    `}
+                                                                >
+                                                                    <p>{section}</p>
+
+                                                                    <span>
+                                                                        {isSelected && (
+                                                                            <img
+                                                                                src="/images/check-icon.png"
+                                                                                alt="selected"
+                                                                            />
+                                                                        )}
+                                                                    </span>
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </>
+                                                ) : (
+                                                    <li className="empty_message">
+                                                        No sections available
+                                                    </li>
+                                                )}
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             </div>
+                            {selectedSections.length > 0 && (
+                                <div className="box_content">
+                                    {selectedSections.map((item, index) => (
+                                        <li
+                                            key={`${item.className}-${item.section}-${index}`}
+                                        >
+                                            <p>
+                                                {item.className} -{" "}
+                                                <a>
+                                                    {item.isAll
+                                                        ? "All Section"
+                                                        : item.section}
+                                                </a>
+                                            </p>
+
+                                            <span>
+                                                <i
+                                                    className="fa-solid fa-circle-xmark"
+                                                    onClick={() =>
+                                                        setSelectedSections((prev) =>
+                                                            prev.filter(
+                                                                (sectionItem) =>
+                                                                    !(
+                                                                        sectionItem.className ===
+                                                                        item.className &&
+                                                                        sectionItem.section ===
+                                                                        item.section
+                                                                    )
+                                                            )
+                                                        )
+                                                    }
+                                                ></i>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="modal_btn">

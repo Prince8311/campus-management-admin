@@ -938,7 +938,7 @@ export const MapAccountWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 650px;
+        width: 500px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -1358,6 +1358,7 @@ export const MapAccountWrapper = styled('div')`
                         padding: 5px 15px;
                         background: ${colors.customColors.lightBackground3};
                         cursor: pointer;
+                        margin-top: 3px;
 
                         p {
                             position: relative;
@@ -1381,6 +1382,10 @@ export const MapAccountWrapper = styled('div')`
                             transition: all 0.5s ease;
 
                             &.rotate {
+                                transform: rotate(-180deg);
+                                transition: all 0.5s ease;
+                            }
+                            &.active {
                                 transform: rotate(-180deg);
                                 transition: all 0.5s ease;
                             }
@@ -1465,6 +1470,21 @@ export const MapAccountWrapper = styled('div')`
                                         }
                                     }
 
+                                        &.disabled {
+                                            opacity: 0.45;
+                                            cursor: not-allowed;
+                                            background: #f5f5f5;
+                                            pointer-events: none;
+
+                                            p {
+                                                color: #999;
+                                            }
+
+                                            span {
+                                                border-color: #d5d5d5;
+                                            }
+                                        }
+
                                     &.empty_message {
                                         padding: 5px 10px;
                                         color: ${colors.customColors.blackColor3};
@@ -1475,6 +1495,46 @@ export const MapAccountWrapper = styled('div')`
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+
+                .box_content {
+                    position: relative;
+                    width: 100%;
+                    min-height: 70px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: flex-start;
+                    margin-top: 3px;
+                    padding: 7px;
+                    background: ${colors.customColors.lightBackground3};
+                    border-radius: 5px;
+
+                    li {
+                        position: relative;
+                        width: max-content;
+                        display: flex;
+                        align-items: center;
+                        list-style: none;
+                        padding: 5px 5px 5px 10px;
+                        border-radius: 25px;
+                        background: ${colors.customColors.blueColorLight};
+                        border: 1px solid ${colors.customColors.blueColor1};
+                        margin: 3px;
+
+                        p {
+                            position: relative;
+                            font-size: 11px;
+                            color: ${colors.customColors.blueColor1};
+                        }
+
+                        span {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blueColor1};
+                            margin-left: 6px;
+                            cursor: pointer;
                         }
                     }
                 }
