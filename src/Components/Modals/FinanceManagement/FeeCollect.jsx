@@ -4,6 +4,20 @@ import { FeeCollectWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal }) => {
     const [recordType, setRecordType] = useState('');
     const [paymentMode, setPaymentMode] = useState('');
+    const [adjustmentType, setAdjustmentType] = useState('');
+
+    const bankAccounts = ['Pnb', 'sbi', 'axis', 'hdfc'];
+    const [showBankAccountDropdown, setShowBankAccountDropdown] = useState(false);
+    const [selectAccount, setSelectAccount] = useState('');
+
+    const handleSelectAccount = (account) => {
+        setSelectAccount(account);
+        setShowBankAccountDropdown(false);
+    }
+
+    const handleOpenAccountDropdown = () => {
+        setShowBankAccountDropdown(!showBankAccountDropdown);
+    }
 
     function closeModal() {
         setIsOpenFeeCollectModal(false);
@@ -217,18 +231,28 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                     <div className="select_box half">
                                         <span>Company Bank Account <p>*</p></span>
                                         <div className="dropdown_sec">
-                                            <div className="dropdown_btn">
-                                                <p>Joydeep Barik</p>
-                                                <i className="fa-solid fa-angle-down"></i>
+                                            <div className="dropdown_btn" onClick={handleOpenAccountDropdown}>
+                                                <p>{selectAccount}</p>
+                                                <i className={`fa-solid fa-angle-down ${showBankAccountDropdown} ? 'active' : ''`}></i>
                                             </div>
-                                            <div className="dropdown">
+                                            <div className={`dropdown ${showBankAccountDropdown ? 'active' : ''}`}>
                                                 <div className="dropdown_inner">
                                                     <div className="search_sec">
                                                         <i className="fa-solid fa-magnifying-glass"></i>
                                                         <input type="text" placeholder="Search by Account Name..." />
                                                     </div>
                                                     <ul>
-                                                        <div className="user_box">
+                                                        {
+                                                            bankAccounts.map((account, i) => (
+                                                                <li key={i}
+                                                                    onClick={() => handleSelectAccount(account)}
+                                                                    className={selectAccount === account ? 'active' : ''}
+                                                                >
+                                                                    {account}
+                                                                </li>
+                                                            ))
+                                                        }
+                                                        {/* <div className="user_box">
                                                             <div className="box_left">
                                                                 <h6>JB</h6>
                                                             </div>
@@ -236,7 +260,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                                                 <p>Joydeep Barik</p>
                                                                 <span>A/c : 427961575535</span>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -246,9 +270,59 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                             )}
                         </div>
                         <div className="btn_sec">
-                            <button><i className="fa-solid fa-plus"></i>Add Fine</button>
-                            <button><i className="fa-solid fa-plus"></i>Add Wallet</button>
+                            <button type="button" onClick={() => setAdjustmentType(adjustmentType === 'fine' ? '' : 'fine')}>
+                                <i className="fa-solid fa-plus"></i>Add Fine
+                            </button>
+                            <button type="button" onClick={() => setAdjustmentType(adjustmentType === 'discount' ? '' : 'discount')}>
+                                <i className="fa-solid fa-plus"></i>Add Discount
+                            </button>
                         </div>
+                        {adjustmentType && (
+                            <div className="reason_from_sec">
+                                <div className="sec_inner">
+                                    {adjustmentType === 'fine' && (
+                                        <>
+                                            <div className="input_box fullWidth">
+                                                <span>Fine Amount <p>*</p></span>
+                                                <input type="text" />
+                                            </div>
+                                            <div className="input_box fullWidth">
+                                                <span>Reason <p>*</p></span>
+                                                <textarea type="text" />
+                                            </div>
+                                        </>
+                                    )}
+                                    {adjustmentType === 'discount' && (
+                                        <>
+                                            <div className="input_box fullWidth">
+                                                <span>Discount Amount <p>*</p></span>
+                                                <input type="text" />
+                                            </div>
+                                            <div className="select_box full">
+                                                <span>Select Discount Reason <p>*</p></span>
+                                                <div className="dropdown_sec">
+                                                    <div className="dropdown_btn">
+                                                        <p>Advance Payment</p>
+                                                        <i className="fa-solid fa-angle-down"></i>
+                                                    </div>
+                                                    <div className="dropdown">
+                                                        <div className="dropdown_inner">
+                                                            <ul>
+                                                                <li></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                    <div className="from_btns">
+                                        <button>Cancel</button>
+                                        <button>Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div className="modal_btn">
                         <button>Collect <span>(₹10000)</span></button>

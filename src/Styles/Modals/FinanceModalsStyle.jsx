@@ -2541,6 +2541,304 @@ export const FeeCollectWrapper = styled('div')`
                     }
                 }
             }
+
+            .reason_from_sec {
+                position: relative;
+                width: 100%;
+                display: flex;
+                margin-bottom: 20px;
+                padding: 0 20px;
+
+                .sec_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    border: 1px dashed ${colors.customColors.borderColor1};
+                    border-radius: 5px;
+                    padding: 15px;
+
+                    .select_box {
+                        position: relative;
+                        margin-bottom: 8px;
+
+                        &.full {
+                            width: 100%;
+                        }
+
+                        &.half {
+                            width: 48%;
+                        }
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor2};
+
+                            p {
+                                color: ${colors.customColors.redColor};
+                                margin-left: 2px;
+                            }
+                        }
+
+                        .dropdown_sec {
+                            position: relative;
+                            width: 100%;
+                            height: 37px;
+                            flex-direction: column;
+                            margin-top: 3px;
+
+                            .dropdown_btn {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                cursor: pointer;
+                                background: ${colors.customColors.lightBackground3};
+
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 25px);
+                                    display: flex;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                i {
+                                    position: relative;
+                                    margin-left: auto;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor2};
+                                    transition: all 0.5s ease;
+                                    
+                                    &.active {
+                                        transform: rotate(-180deg);
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+                            }
+
+                            .dropdown {
+                                position: absolute;
+                                top: 100%;
+                                left: 0px;
+                                width: 100%;
+                                z-index: 15;
+                                background: ${colors.customColors.whiteColor};
+                                border-radius: 5px;
+                                box-shadow: 5px 8px 15px ${colors.boxShadowColors.shadowColor1};
+                                max-height: 0px;
+                                overflow: hidden;
+                                transition: all 0.5s ease;
+
+                                &.active {
+                                    max-height: 200px;
+                                    transition: all 0.5s ease;
+                                }
+
+                                .dropdown_inner {
+                                    position: relative;
+                                    width: 100%;
+                                    padding: 10px;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    ul {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        max-height: 135px;
+                                        overflow-y: auto;
+                                        scrollbar-width: none;
+                                        -ms-overflow-style: none;
+
+                                        &::-webkit-scrollbar {
+                                            display: none;
+                                        }
+
+                                        li {
+                                            position: relative;
+                                            width: 100%;
+                                            list-style: none;
+                                            padding: 7px 15px;
+                                            cursor: pointer;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor1};
+                                            border-radius: 4px;
+                                            transition: all 0.5s ease;
+
+                                            &:hover {
+                                                background: ${colors.themeColor};
+                                                color: ${colors.customColors.whiteColor};
+                                                transition: all 0.5s ease;
+                                            }
+
+                                            &.active {
+                                                background: ${colors.customColors.lightBackground};
+                                                color: ${colors.customColors.blackColor};
+
+                                                &:hover {
+                                                    color: ${colors.customColors.blackColor};
+                                                }
+                                            }
+
+                                            &.empty_message {
+                                                padding: 5px 10px;
+                                                pointer-events: none;
+                                                color: ${colors.customColors.blackColor3};
+                                            }
+                                        }
+
+                                        .no_data {
+                                            position: relative;
+                                            width: 100%;
+                                            font-size: 12px;
+                                            color: ${colors.customColors.blackColor3};
+                                            padding: 3px 10px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .input_box {
+                        position: relative;
+                        margin-bottom: 10px;
+
+                        &.fullWidth {
+                            width: 100%;
+                        }
+
+                        &.halfWidth {
+                            width: 48%;
+                        }
+
+                        input {
+                            position: relative;
+                            width: 100%;
+                            height: 37px;
+                            font-size: 12px;
+                            border-radius: 5px;
+                            padding: 5px 15px;
+                            outline: none;
+                            border: none;
+                            margin-top: 3px;
+                            background: ${colors.customColors.lightBackground3};
+                        }
+
+                        textarea {
+                            position: relative;
+                            width: 100%;
+                            height: 60px;
+                            font-size: 12px;
+                            border-radius: 5px;
+                            padding: 10px 15px;
+                            outline: none;
+                            border: none;
+                            margin-top: 3px;
+                            background: ${colors.customColors.lightBackground3};
+                            resize: none;
+                        }
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: ${colors.customColors.blackColor2};
+
+                            p {
+                                color: ${colors.customColors.redColor};
+                                margin-left: 2px;
+                            }
+                        }
+
+                        .sec_box {
+                            position: relative;
+                            width: 100%; 
+
+                            .time_btn {
+                                position: relative;
+                                width: 100%;
+                                height: 37px;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                background: ${colors.customColors.lightBackground3};
+
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 25px);
+                                    font-size: 12px;
+                                    outline: none;
+                                    background: transparent;
+                                    padding: 0;
+                                }
+
+                                i {
+                                    position: relative;
+                                    width: 25px;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor2};
+                                }
+                            }
+
+                            .dropdown {
+                                position: absolute;
+                                bottom: 100%;
+                                left: 0px;
+                                width: 100%;
+                                z-index: 5;
+                            }
+                        }
+                    }
+
+                    .from_btns {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+                        margin-top: 7px;
+
+                        button {
+                            position: relative;
+                            width: auto;
+                            padding: 6px 20px;
+                            border: none;
+                            border-radius: 4px;
+                            font-size: 10px;
+                            cursor: pointer;
+
+                            &:first-of-type {
+                                background: ${colors.customColors.lightBackground2};
+                                color:  ${colors.customColors.blackColor};
+                                margin-right: 20px;
+                            }
+                            &:last-of-type {
+                                background: ${colors.customColors.blueColor1};
+                                color:  ${colors.customColors.whiteColor};
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         .modal_btn {
