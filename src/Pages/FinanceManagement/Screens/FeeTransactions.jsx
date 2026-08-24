@@ -30,7 +30,7 @@ const FeeTransactionsPage = () => {
                                 <th>Receipt No</th>
                                 <th>Paid On</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Invoice</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +50,7 @@ const FeeTransactionsPage = () => {
                                 <td>7 Dec 2025</td>
                                 <td><p className="success">Success</p></td>
                                 <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                    <a className="download"><i className="fa-solid fa-file-arrow-down"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -69,7 +69,7 @@ const FeeTransactionsPage = () => {
                                 <td>7 Dec 2025</td>
                                 <td><p className="">Pending</p></td>
                                 <td>
-                                    <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
+                                    <a className="download"><i className="fa-solid fa-file-arrow-down"></i></a>
                                 </td>
                             </tr>
                         </tbody>

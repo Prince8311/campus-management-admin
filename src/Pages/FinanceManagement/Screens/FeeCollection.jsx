@@ -1,6 +1,13 @@
+import { useState } from "react";
+import FeeCollectionModal from "../../../Components/Modals/FinanceManagement/FeeCollect";
 import { FeeCollectionWrapper } from "../../../Styles/FinanceStyle";
 
 const FeeCollectionPage = () => {
+    const [isOpenFeeCollectModal, setIsOpenFeeCollectModal] = useState(false);
+
+    const handleopenFeeCollectModal = () => {
+        setIsOpenFeeCollectModal(true);
+    }
     return (
         <>
             <FeeCollectionWrapper>
@@ -99,7 +106,7 @@ const FeeCollectionPage = () => {
                                                             <p><b>₹</b>30.00K</p>
                                                         </td>
                                                         <td>
-                                                            <a className="collect_btn">Collect Now</a>
+                                                            <a className="collect_btn" onClick={handleopenFeeCollectModal}>Collect Now</a>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -120,7 +127,7 @@ const FeeCollectionPage = () => {
                                                             <p><b>₹</b>30.00K</p>
                                                         </td>
                                                         <td>
-                                                            <a className="collect_btn">Collect Now</a>
+                                                            <a className="collect_btn" onClick={handleopenFeeCollectModal}>Collect Now</a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -319,6 +326,11 @@ const FeeCollectionPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <FeeCollectionModal
+                    isOpenFeeCollectModal={isOpenFeeCollectModal}
+                    setIsOpenFeeCollectModal={setIsOpenFeeCollectModal}
+                />
             </FeeCollectionWrapper>
         </>
     );

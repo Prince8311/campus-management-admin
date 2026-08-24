@@ -879,7 +879,7 @@ export const FeeTransactionsWrapper = styled('div')`
                                 cursor: pointer;
                                 font-size: 13px;
 
-                               &.view_btn {
+                               &.download {
                                     color: ${colors.customColors.blueColor1};
                                }
                             }
