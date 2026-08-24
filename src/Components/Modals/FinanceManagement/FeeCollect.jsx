@@ -245,6 +245,10 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                 </>
                             )}
                         </div>
+                        <div className="btn_sec">
+                            <button><i className="fa-solid fa-plus"></i>Add Fine</button>
+                            <button><i className="fa-solid fa-plus"></i>Add Wallet</button>
+                        </div>
                     </div>
                     <div className="modal_btn">
                         <button>Collect <span>(₹10000)</span></button>

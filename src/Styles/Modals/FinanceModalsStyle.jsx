@@ -2505,6 +2505,42 @@ export const FeeCollectWrapper = styled('div')`
                     }
                 }
             }
+
+            .btn_sec {
+                position: relative;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding: 20px;
+
+                button {
+                    position: relative;
+                    padding: 5px 15px;
+                    display: flex;
+                    align-items: center;
+                    font-size: 12px;
+                    font-weight: 400;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    i {
+                        margin-right: 6px;
+                        font-size: 10px;
+                    }
+
+                    &:first-of-type {
+                        color: ${colors.customColors.redColor};
+                        background: ${colors.customColors.redColorLight};
+                        border: 1px solid ${colors.customColors.redColor};
+                    }
+                    &:last-of-type {
+                        color: ${colors.customColors.blueColor1};
+                        background: ${colors.customColors.blueColorLight};
+                        border: 1px solid ${colors.customColors.blueColor1};
+                        margin-left: 25px;
+                    }
+                }
+            }
         }
 
         .modal_btn {
@@ -2524,14 +2560,10 @@ export const FeeCollectWrapper = styled('div')`
                 border: none;
                 border-radius: 6px;
                 cursor: pointer;
-                background: ${colors.customColors.blueColor1};
+                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+                border: none;
                 color: ${colors.customColors.whiteColor};
                 transition: all 0.5s ease;
-
-                &:hover {
-                    border-radius: 25px;
-                    transition: all 0.5s ease;
-                }
 
                 &:disabled {
                     cursor: not-allowed;
