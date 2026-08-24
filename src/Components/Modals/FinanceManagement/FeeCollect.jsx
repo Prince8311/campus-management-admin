@@ -151,14 +151,14 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                         <div className="method_box">
                                             <input type="radio" id="link" name="method" />
                                             <label htmlFor="link">
-                                                <a><i className="fa-solid fa-money-bills"></i></a>
+                                                <a><i className="fa-solid fa-link"></i></a>
                                                 <p>Payment Link</p>
                                             </label>
                                         </div>
                                         <div className="method_box">
                                             <input type="radio" id="upi" name="method" />
                                             <label htmlFor="upi">
-                                                <a><i className="fa-solid fa-money-bills"></i></a>
+                                                <a><i className="fa-solid fa-qrcode"></i></a>
                                                 <p>Upi QR</p>
                                             </label>
                                         </div>
@@ -169,21 +169,21 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                         <div className="method_box">
                                             <input type="radio" id="cash" name="method" />
                                             <label htmlFor="cash">
-                                                <a><i className="fa-solid fa-money-bills"></i></a>
+                                                <a><i className="fa-solid fa-money-bill"></i></a>
                                                 <p>Cash</p>
                                             </label>
                                         </div>
                                         <div className="method_box">
                                             <input type="radio" id="dd" name="method" />
                                             <label htmlFor="dd">
-                                                <a><i className="fa-solid fa-money-bills"></i></a>
+                                                <a><i className="fa-solid fa-money-check"></i></a>
                                                 <p>Demand Draft</p>
                                             </label>
                                         </div>
                                         <div className="method_box">
                                             <input type="radio" id="cheque" name="method" />
                                             <label htmlFor="cheque">
-                                                <a><i className="fa-solid fa-money-bills"></i></a>
+                                                <a><i className="fa-solid fa-money-check"></i></a>
                                                 <p>Cheque</p>
                                             </label>
                                         </div>
