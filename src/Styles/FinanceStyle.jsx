@@ -1899,12 +1899,34 @@ export const SplitAccountsWrapper = styled('div')`
                         }
                     }
 
+                    .fee_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        font-size: 11px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor};
+                        text-decoration: none;
+                        margin-top: 6px;
+
+                        i {
+                            font-size: 10px;
+                            margin-right: 3px;
+                        }
+
+                        span {
+                            margin-left: 4px;
+                            color: ${colors.customColors.blackColor2};
+                            font-size: 11px;
+                        }
+                    }
                     .class_sec {
                         position: relative;
                         width: 100%;
                         display: flex;
                         align-items: flex-end;
-                        font-size: 12px;
+                        font-size: 11px;
                         font-weight: 500;
                         color: ${colors.customColors.blackColor};
                         text-decoration: none;
@@ -1965,6 +1987,30 @@ export const SplitAccountsWrapper = styled('div')`
                         }
                     }
                 }
+            }
+        }
+
+        .empty_messege {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+            margin-top: 60px;
+
+            img {
+                position: relative;
+                width: 250px;
+                opacity: 0.5;
+            }
+
+            p {
+                position: relative;
+                font-size: 13px;
+                margin-top: 10px;
+                color: ${colors.customColors.blackColor3};
             }
         }
     }

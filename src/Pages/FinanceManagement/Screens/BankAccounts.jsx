@@ -23,6 +23,11 @@ const BankAccountPage = () => {
     const [totalCount, setTotalCount] = useState('');
     const [page, setPage] = useState(1);
 
+    const [splitAccounts, setSplitAccounts] = useState([]);
+    const [isInitialSplitAccountsLoading, setIsInitialSplitAccountsLoading] = useState(false);
+    const [totalSplitCount, setTotalSplitCount] = useState('');
+    const [splitPage, setSplitPage] = useState(1);
+
     const fetchBankAccounts = async (showSkeleton = false, pageNumber = 1) => {
         if (showSkeleton) {
             setIsInitialBankAccountsLoading(true);
@@ -34,8 +39,7 @@ const BankAccountPage = () => {
                 }
             });
             if (response?.data.status === 200) {
-                console.log('Bank Accounts fetched successfully:', response?.data);
-                setBankAccounts(response?.data.data);
+                setBankAccounts(Array.isArray(response?.data.data) ? response.data.data : []);
                 setTotalCount(response?.data.totalCount);
             }
         } catch (error) {
@@ -45,9 +49,31 @@ const BankAccountPage = () => {
         }
     };
 
+    const fetchSplitAccounts = async (showSkeleton = false, pageNumber = 1) => {
+        if (showSkeleton) {
+            setIsInitialSplitAccountsLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchSplitAccounts, {
+                params: {
+                    page: pageNumber
+                }
+            });
+            if (response?.data.status === 200) {
+                setSplitAccounts(Array.isArray(response?.data.data) ? response.data.data : []);
+                setTotalSplitCount(response?.data.totalCount);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsInitialSplitAccountsLoading(false);
+        }
+    };
+
     useEffect(() => {
         fetchBankAccounts(true, page);
-    }, [page]);
+        fetchSplitAccounts(true, splitPage);
+    }, [page, splitPage]);
 
     const handleOpenAddBankAccountModal = (account = null) => {
         setSelectedBankAccount(account);
@@ -102,7 +128,15 @@ const BankAccountPage = () => {
                         onEditAccount={handleOpenAddBankAccountModal}
                     />
                 )}
-                {selectedTab === "split-accounts" && <SplitAccountsPage />}
+                {selectedTab === "split-accounts" && (
+                    <SplitAccountsPage
+                        splitAccounts={splitAccounts}
+                        isInitialSplitAccountsLoading={isInitialSplitAccountsLoading}
+                        page={splitPage}
+                        setPage={setSplitPage}
+                        totalCount={totalSplitCount}
+                    />
+                )}
                 <AddBankAccountModal
                     isAddBankAccountModalOpen={isAddBankAccountModalOpen}
                     setIsAddBankAccountModalOpen={setIsAddBankAccountModalOpen}
@@ -113,6 +147,7 @@ const BankAccountPage = () => {
                 <MapAccountModal
                     isMapAccountModalOpen={isMapAccountModalOpen}
                     setIsMapAccountModalOpen={setIsMapAccountModalOpen}
+                    refreshData={() => fetchSplitAccounts(false, splitPage)}
                 />
             </BankAccountsWrapper>
         </>

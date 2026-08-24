@@ -4,12 +4,12 @@ import { toast } from "react-toastify";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import SkeletonLoader from "../../Loader/SkeletonLoader";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
-const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) => {
+const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen, refreshData }) => {
     const api = getApiEndpoints();
 
     const [isAccountsLoading, setIsAccountsLoading] = useState(false);
-    const accountNameList = ['joyddep', 'sourish', 'abhayji'];
     const [accountList, setAccountList] = useState([]);
     const [showAccountDropdown, setShowAccountDropdown] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState({});
@@ -32,6 +32,8 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
     const textRef = useRef(null);
     const [displayText, setDisplayText] = useState('');
     const [isDropUp, setIsDropUp] = useState(false);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const isFormValid = Boolean(selectedAccount?.id) && selectedFeeType.trim() !== '' && selectedClass.trim() !== '' && selectedSections.length > 0;
 
     const getInitials = (name) => {
         if (!name) return "";
@@ -279,6 +281,37 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
     function closeModal() {
         setIsMapAccountModalOpen(false);
     }
+
+    const handleSave = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            accountId: selectedAccount.id,
+            classSections: selectedSections
+                .map((item) => item.isAll ? item.className : `${item.className}${item.section}`)
+                .join(","),
+            feeType: selectedFeeType
+        };
+
+        try {
+            const response = await axiosInstance.post(api.splitBankAccount, payload, {
+                params: {
+                    intent: 'add'
+                }
+            });
+            if (response.data.status === 200) {
+                console.log("Account mapped successfully", response.data);
+                toast.success(response.data.message);
+                closeModal();
+                refreshData();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+
     return (
         <>
             <MapAccountWrapper className={isMapAccountModalOpen ? 'active' : ''}>
@@ -558,7 +591,15 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen }) =>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button> Save</button>
+                        <button disabled={!isFormValid || isButtonLoading} onClick={handleSave}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </MapAccountWrapper>

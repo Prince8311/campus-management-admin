@@ -112,6 +112,8 @@ export const getApiEndpoints = () => {
         //Bank Accounts
         addBankAccount: `${apiURL}/api/bank-account/insert.php`,
         fetchBankAccounts: `${apiURL}/api/bank-account/list.php`,
+        splitBankAccount: `${apiURL}/api/bank-account/split-account.php`,
+        fetchSplitAccounts: `${apiURL}/api/bank-account/split-list.php`,
 
         // Communication 
         insertCommunicationMsgTemplate: `${apiURL}/api/communication/message-templates/insert.php`,
