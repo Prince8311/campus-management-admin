@@ -1985,7 +1985,7 @@ export const SplitAccountsWrapper = styled('div')`
                         font-weight: 500;
                         color: ${colors.customColors.blackColor};
                         text-decoration: none;
-                        margin-top: 6px;
+                        margin-top: 4px;
 
                         span {
                             margin-left: 4px;

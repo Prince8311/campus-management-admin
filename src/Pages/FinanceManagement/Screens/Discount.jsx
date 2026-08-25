@@ -33,8 +33,7 @@ const DiscountPage = () => {
                                     </div>
                                 </div>
                                 <div className="fee_sec">
-                                    <i className="fa-solid fa-layer-group"></i>
-                                    Type : <span>Tution Fee</span>
+                                    Fees Type : <span>Tution Fee</span>
                                 </div>
                             </div>
                             <div className="bottom_btn">

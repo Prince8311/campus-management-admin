@@ -50,8 +50,30 @@ const FeesStructurePage = () => {
 
     const formatClasses = (classes = []) => {
         const result = {};
+        let normalizedClasses = classes;
 
-        classes.forEach(item => {
+        if (typeof classes === "string") {
+            try {
+                const parsedClasses = JSON.parse(classes);
+                normalizedClasses = Array.isArray(parsedClasses)
+                    ? parsedClasses
+                    : classes.split(",");
+            } catch {
+                normalizedClasses = classes.split(",");
+            }
+        }
+
+        if (!Array.isArray(normalizedClasses)) normalizedClasses = [];
+
+        normalizedClasses.forEach(classValue => {
+            const value = String(classValue).trim();
+            const compactClassMatch = value.match(/^(\d+)([A-Za-z]+)$/);
+            const item = compactClassMatch
+                ? `${compactClassMatch[1]}-${compactClassMatch[2]}`
+                : value;
+
+            if (!item) return;
+
             if (item.includes("-")) {
                 const [cls, section] = item.split("-");
 

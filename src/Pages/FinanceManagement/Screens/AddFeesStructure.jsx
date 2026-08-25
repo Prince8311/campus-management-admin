@@ -235,7 +235,9 @@ const AddFeesStructure = () => {
             type: feesStructureType,
             applicable_type: selectedApplicableType,
             tax_percentage: Number(taxValue || 0),
-            classes: JSON.stringify(selectedClasses),
+            classes: selectedClasses
+                .map(className => className.replaceAll("-", ""))
+                .join(","),
             scheduled_payments: JSON.stringify(
                 scheduledPaymets.map(({ paymentDate, amount }) => ({
                     paymentDate,

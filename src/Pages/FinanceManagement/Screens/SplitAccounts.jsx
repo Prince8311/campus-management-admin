@@ -55,8 +55,7 @@ const SplitAccountsPage = ({ splitAccounts, isInitialSplitAccountsLoading }) => 
                                         </div>
                                     </div>
                                     <div className="fee_sec">
-                                        <i className="fa-solid fa-layer-group"></i>
-                                        Type : <span>{account.fee_type}</span>
+                                        Fees Type : <span>{account.fee_type}</span>
                                     </div>
                                     <div className="class_sec">
                                         Classes:
