@@ -6,13 +6,16 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import SkeletonLoader from "../../Loader/SkeletonLoader";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const DiscountModal = ({ isOpenDiscountModal, setIsDiscountModal }) => {
+const DiscountModal = ({ isOpenDiscountModal, setIsDiscountModal, refreshDiscounts }) => {
     const api = getApiEndpoints();
 
     const [isFeeTypesLoading, setIsFeeTypesLoading] = useState(false);
     const [feeTypes, setFeeTypes] = useState([]);
     const [showFeeTypeDropdown, setShowFeeTypeDropdown] = useState(false);
     const [selectedFeeType, setSelectedFeeType] = useState('');
+    const [discountName, setDiscountName] = useState('');
+    const [discountAmount, setDiscountAmount] = useState('');
+    const isFormValid = discountName.trim() !== '' && discountAmount.trim() !== '' && selectedFeeType.trim() !== '';
 
     function closeModal() {
         setIsDiscountModal(false);
@@ -47,6 +50,32 @@ const DiscountModal = ({ isOpenDiscountModal, setIsDiscountModal }) => {
         setShowFeeTypeDropdown(!showFeeTypeDropdown);
     }
 
+    const handleSaveDiscount = async (e) => {
+        e.preventDefault();
+        setIsFeeTypesLoading(true);
+        const payload = {
+            name: discountName,
+            amount: discountAmount,
+            feeType: selectedFeeType
+        };
+        try {
+            const response = await axiosInstance.post(api.insertFeeDiscount, payload, {
+                params: {
+                    intent: 'add'
+                }
+            });
+            if (response.data.status === 200) {
+                toast.success(response.data.message);
+                closeModal();
+                refreshDiscounts();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsFeeTypesLoading(false);
+        }
+    }
+
     return (
         <>
             <DiscountModalWrapper className={isOpenDiscountModal ? 'active' : ''}>
@@ -61,11 +90,11 @@ const DiscountModal = ({ isOpenDiscountModal, setIsDiscountModal }) => {
                         <div className="body_inner">
                             <div className="input_box fullwidth">
                                 <span>Discount Name <p>*</p></span>
-                                <input type="text" />
+                                <input type="text" value={discountName} onChange={(e) => setDiscountName(e.target.value)} />
                             </div>
                             <div className="input_box halfwidth">
-                                <span>Discount <p>*</p></span>
-                                <input type="text" />
+                                <span>Discount Amount <p>*</p></span>
+                                <input type="text" value={discountAmount} onChange={(e) => setDiscountAmount(e.target.value)} />
                             </div>
                             <div className="select_box halfwidth">
                                 <span>Fee Type <p>*</p></span>
@@ -105,7 +134,15 @@ const DiscountModal = ({ isOpenDiscountModal, setIsDiscountModal }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={!isFormValid || isFeeTypesLoading} onClick={handleSaveDiscount}>
+                            {
+                                isFeeTypesLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </DiscountModalWrapper>
