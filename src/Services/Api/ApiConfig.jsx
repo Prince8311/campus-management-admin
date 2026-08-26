@@ -109,6 +109,10 @@ export const getApiEndpoints = () => {
         createFeeConfiguration: `${apiURL}/api/fee/configuration/create.php`,
         fetchFeeConfigurations: `${apiURL}/api/fee/configuration/list.php`,
 
+        // Discount 
+        insertFeeDiscount: `${apiURL}/api/fee/discount/insert.php`,
+        fetchFeeDiscounts: `${apiURL}/api/fee/discount/list.php`,
+
         //Bank Accounts
         addBankAccount: `${apiURL}/api/bank-account/insert.php`,
         fetchBankAccounts: `${apiURL}/api/bank-account/list.php`,

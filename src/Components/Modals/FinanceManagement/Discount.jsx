@@ -1,11 +1,52 @@
+import { useEffect, useState } from "react";
 import { DiscountModalWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
+import { toast } from "react-toastify";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import SkeletonLoader from "../../Loader/SkeletonLoader";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
+const DiscountModal = ({ isOpenDiscountModal, setIsDiscountModal }) => {
+    const api = getApiEndpoints();
 
-const DiscountModal = ({isOpenDiscountModal, setIsDiscountModal}) => {
+    const [isFeeTypesLoading, setIsFeeTypesLoading] = useState(false);
+    const [feeTypes, setFeeTypes] = useState([]);
+    const [showFeeTypeDropdown, setShowFeeTypeDropdown] = useState(false);
+    const [selectedFeeType, setSelectedFeeType] = useState('');
 
     function closeModal() {
         setIsDiscountModal(false);
     }
+
+    const fetchFeeTypes = async () => {
+        setIsFeeTypesLoading(true);
+        try {
+            const response = await axiosInstance.get(api.fetchFeeTypes);
+            if (response.data.status === 200) {
+                setFeeTypes(response.data.types);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsFeeTypesLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (showFeeTypeDropdown) {
+            fetchFeeTypes();
+        }
+    }, [showFeeTypeDropdown]);
+
+    const handleSelectFeeType = (type) => {
+        setSelectedFeeType(type);
+        setShowFeeTypeDropdown(false);
+    }
+
+    const handleFeeTypeDropdown = () => {
+        setShowFeeTypeDropdown(!showFeeTypeDropdown);
+    }
+
     return (
         <>
             <DiscountModalWrapper className={isOpenDiscountModal ? 'active' : ''}>
@@ -29,14 +70,33 @@ const DiscountModal = ({isOpenDiscountModal, setIsDiscountModal}) => {
                             <div className="select_box halfwidth">
                                 <span>Fee Type <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
-                                        <p>Tution</p>
-                                        <i className="fa-solid fa-angle-down"></i>
+                                    <div className="dropdown_btn" onClick={handleFeeTypeDropdown}>
+                                        <p>{selectedFeeType}</p>
+                                        <i className={`fa-solid fa-angle-down ${showFeeTypeDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className="dropdown">
+                                    <div className={`dropdown ${showFeeTypeDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <ul>
-                                                <li></li>
+                                                {
+                                                    isFeeTypesLoading ? (
+                                                        Array.from({ length: 2 }).map((_, index) => (
+                                                            <li key={index}>
+                                                                <SkeletonLoader width="100%" height="13px" />
+                                                            </li>
+                                                        ))
+                                                    ) : feeTypes.length > 0 ? (
+                                                        feeTypes.map((fee, i) => (
+                                                            <li key={i}
+                                                                onClick={() => handleSelectFeeType(fee)}
+                                                                className={selectedFeeType === fee ? 'active' : ''}
+                                                            >
+                                                                {fee}
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="empty_message">No fee types available</li>
+                                                    )
+                                                }
                                             </ul>
                                         </div>
                                     </div>

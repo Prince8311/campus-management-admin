@@ -29,8 +29,6 @@ const MapAccountModal = ({ isMapAccountModalOpen, setIsMapAccountModalOpen, refr
     const [showSectionDropdown, setShowSectionDropdown] = useState(false);
     const [selectedSections, setSelectedSections] = useState([]);
 
-    const textRef = useRef(null);
-    const [displayText, setDisplayText] = useState('');
     const [isDropUp, setIsDropUp] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const isFormValid = Boolean(selectedAccount?.id) && selectedFeeType.trim() !== '' && selectedClass.trim() !== '' && selectedSections.length > 0;
