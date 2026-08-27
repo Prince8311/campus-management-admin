@@ -192,8 +192,7 @@ const FeesStructurePage = () => {
                                                 )).toFixed(2)}</span></h5>
                                             </div>
                                             <div className="btns_sec">
-                                                <button className="edit">Edit Name</button>
-                                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                                <button className="delete"><i className="fa-solid fa-trash"></i>Remove</button>
                                             </div>
                                         </div>
                                     </div>

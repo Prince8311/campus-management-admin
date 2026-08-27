@@ -1257,14 +1257,8 @@ export const FeesStructureWrapper = styled('div')`
                             border: none;
                             padding: 0 10px;
 
-                            &.edit {
-                                background: ${colors.customColors.blueColorLight};
-                                color: ${colors.customColors.blueColor2};
-                                font-size: 10px;
-                                cursor: pointer;
-                                font-weight: 500;
-                                border-bottom-left-radius: 4px;
-                                border-top-left-radius: 4px;
+                            i {
+                                margin-right: 5px;
                             }
 
                             &.delete {
@@ -1272,8 +1266,7 @@ export const FeesStructureWrapper = styled('div')`
                                 color:  ${colors.customColors.redColor};
                                 font-size: 10px;
                                 cursor: pointer;
-                                border-top-right-radius: 4px;
-                                border-bottom-right-radius: 4px;
+                                border-radius: 4px;
                             }
                         }
                     }

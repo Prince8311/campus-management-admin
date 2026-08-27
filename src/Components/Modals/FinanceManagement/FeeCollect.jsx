@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FeeCollectWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 
 const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal }) => {
-    const [recordType, setRecordType] = useState('');
+    const [recordType, setRecordType] = useState('installments');
     const [paymentMode, setPaymentMode] = useState('');
     const [adjustmentType, setAdjustmentType] = useState('');
 
@@ -282,23 +282,23 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                 <div className="sec_inner">
                                     {adjustmentType === 'fine' && (
                                         <>
-                                            <div className="input_box fullWidth">
+                                            <div className="input_box halfWidth">
                                                 <span>Fine Amount <p>*</p></span>
                                                 <input type="text" />
                                             </div>
-                                            <div className="input_box fullWidth">
+                                            <div className="input_box halfWidth">
                                                 <span>Reason <p>*</p></span>
-                                                <textarea type="text" />
+                                                <input type="text" />
                                             </div>
                                         </>
                                     )}
                                     {adjustmentType === 'discount' && (
                                         <>
-                                            <div className="input_box fullWidth">
+                                            <div className="input_box halfWidth">
                                                 <span>Discount Amount <p>*</p></span>
                                                 <input type="text" />
                                             </div>
-                                            <div className="select_box full">
+                                            <div className="select_box half">
                                                 <span>Select Discount Reason <p>*</p></span>
                                                 <div className="dropdown_sec">
                                                     <div className="dropdown_btn">
@@ -317,7 +317,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                         </>
                                     )}
                                     <div className="from_btns">
-                                        <button>Cancel</button>
+                                        <button type="button" onClick={() => setAdjustmentType('')}>Cancel</button>
                                         <button>Add</button>
                                     </div>
                                 </div>

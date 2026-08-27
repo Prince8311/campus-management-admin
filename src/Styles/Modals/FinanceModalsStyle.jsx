@@ -2731,20 +2731,6 @@ export const FeeCollectWrapper = styled('div')`
                             background: ${colors.customColors.lightBackground3};
                         }
 
-                        textarea {
-                            position: relative;
-                            width: 100%;
-                            height: 60px;
-                            font-size: 12px;
-                            border-radius: 5px;
-                            padding: 10px 15px;
-                            outline: none;
-                            border: none;
-                            margin-top: 3px;
-                            background: ${colors.customColors.lightBackground3};
-                            resize: none;
-                        }
-
                         span {
                             position: relative;
                             display: flex;
