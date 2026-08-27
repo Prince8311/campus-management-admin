@@ -8,9 +8,10 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 
 const DiscountPage = () => {
     const api = getApiEndpoints();
-    const [isOpenDiscountModal, setIsDiscountModal] = useState(false);
+    const [isOpenDiscountModal, setIsOpenDiscountModal] = useState(false);
     const [isdiscountLoading, setIsdiscountLoading] = useState(false);
     const [discounts, setDiscounts] = useState([]);
+    const [selectedDiscount, setSelectedDiscount] = useState(null);
 
     const fetchDiscounts = async () => {
         setIsdiscountLoading(true);
@@ -32,7 +33,13 @@ const DiscountPage = () => {
     }, []);
 
     const handleOPenDiscountModal = () => {
-        setIsDiscountModal(true);
+        setSelectedDiscount(null);
+        setIsOpenDiscountModal(true);
+    }
+
+    const handleEditDiscount = (discount) => {
+        setSelectedDiscount(discount);
+        setIsOpenDiscountModal(true);
     }
 
     return (
@@ -73,7 +80,7 @@ const DiscountPage = () => {
                                         </div>
                                         <div className="bottom_btn">
                                             <div className="btns_sec">
-                                                <button className="edit"><i className="fa-regular fa-pen-to-square"></i>Edit</button>
+                                                <button className="edit" onClick={() => handleEditDiscount(discount)}><i className="fa-regular fa-pen-to-square"></i>Edit</button>
                                                 <button className="delete"><i className="fa-solid fa-trash"></i></button>
                                             </div>
                                         </div>
@@ -92,7 +99,9 @@ const DiscountPage = () => {
 
                 <DiscountModal
                     isOpenDiscountModal={isOpenDiscountModal}
-                    setIsDiscountModal={setIsDiscountModal}
+                    setIsOpenDiscountModal={setIsOpenDiscountModal}
+                    selectedDiscount={selectedDiscount}
+                    setSelectedDiscount={setSelectedDiscount}
                     refreshDiscounts={fetchDiscounts}
                 />
             </DiscountWrapper>
