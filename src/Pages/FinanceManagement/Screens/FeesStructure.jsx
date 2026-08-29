@@ -96,7 +96,14 @@ const FeesStructurePage = () => {
             }
         });
 
-        return Object.values(result);
+        return Object.values(result).map(classGroup => ({
+            ...classGroup,
+            sections: Array.isArray(classGroup.sections)
+                ? [...classGroup.sections].sort((a, b) =>
+                    a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
+                )
+                : classGroup.sections
+        }));
     };
 
     const formatScheduledDate = (dateStr = "") => {
