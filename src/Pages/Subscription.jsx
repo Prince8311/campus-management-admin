@@ -16,18 +16,15 @@ const SubscriptionPage = () => {
                             <div className="left_content_inner">
                                 <div className="lisence_sec">
                                     <div className="top_sec">
-                                        <div className="top_left">
-                                            <div className="icon">
-                                                <i className="fa-solid fa-graduation-cap"></i>
-                                            </div>
+                                        <div className="icon">
+                                            <i className="fa-solid fa-graduation-cap"></i>
+                                        </div>
+                                        <div className="top_right">
                                             <div className="left_item">
-                                                <h5>Base License</h5>
+                                                <h5>Base License <a>Active</a></h5>
                                                 <p>Includes LMS, Attendance, Examination, and Fee Management for every enrolled student.</p>
                                                 <a> <span>₹200</span> per student / month</a>
                                             </div>
-                                        </div>
-                                        <div className="top_right">
-                                            <a>Active</a>
                                         </div>
                                     </div>
                                     <div className="bottom_sec">
