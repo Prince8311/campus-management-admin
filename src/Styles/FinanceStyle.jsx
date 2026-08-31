@@ -37,6 +37,17 @@ export const FeeCollectionWrapper = styled('div')`
             align-items: center;
             border-bottom: 2px solid ${colors.themeColor};
 
+            .swiper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .swiper-slide {
+                    position: relative;
+                    width: max-content !important;
+                }
+            }
+
             li {
                 position: relative;
                 list-style: none;
@@ -125,6 +136,8 @@ export const FeeCollectionWrapper = styled('div')`
                     border: 1px solid ${colors.customColors.borderColor};
                     border-radius: 8px;
                     box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2};
+                    overflow: hidden;
+                    transition: border-color 0.35s ease, box-shadow 0.35s ease;
 
                     .top_part {
                         position: relative;
@@ -133,11 +146,17 @@ export const FeeCollectionWrapper = styled('div')`
                         align-items: center;
                         padding: 10px 16px;
                         cursor: pointer;
-                        border-radius: 8px 8px 0 0;
-                        transition: all 0.5s ease;
+                        border-radius: 8px;
+                        transition: background-color 0.35s ease, border-radius 0.35s ease;
 
                         &.active {
                             background: ${colors.customColors.lightBackground1};
+                            border-radius: 8px 8px 0 0;
+                        }
+
+                        &:focus-visible {
+                            outline: 2px solid ${colors.themeColor};
+                            outline-offset: -2px;
                         }
 
                         .left_info {
@@ -258,6 +277,7 @@ export const FeeCollectionWrapper = styled('div')`
                                     b {
                                         font-weight: 500;
                                         font-size: 11px;
+                                        margin-right: 1px;
                                     }
 
                                     &.applied {
@@ -289,11 +309,19 @@ export const FeeCollectionWrapper = styled('div')`
                             align-items: center;
                             justify-content: center;
                             box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                            transition: background-color 0.35s ease, transform 0.35s ease;
 
                             i {
                                 position: relative;
                                 font-size: 14px;
                                 color: ${colors.customColors.blackColor2};
+                                transition: transform 0.35s ease, color 0.35s ease;
+                            }
+                        }
+
+                        &.active .icon {
+                            i {
+                                transform: rotate(90deg);
                             }
                         }
                     }
@@ -301,13 +329,33 @@ export const FeeCollectionWrapper = styled('div')`
                     .bottom_part {
                         position: relative;
                         width: 100%;
+                        display: grid;
+                        grid-template-rows: 0fr;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: grid-template-rows 0.45s ease, opacity 0.3s ease, visibility 0s linear 0.45s;
+
+                        &.active {
+                            grid-template-rows: 1fr;
+                            opacity: 1;
+                            visibility: visible;
+                            transition: grid-template-rows 0.45s ease, opacity 0.35s ease 0.08s, visibility 0s linear;
+
+                            .bottom_inner {
+                                padding-top: 15px;
+                                padding-bottom: 15px;
+                            }
+                        }
 
                         .bottom_inner {
                             position: relative;
                             width: 100%;
-                            padding: 15px;
+                            min-height: 0;
+                            overflow: hidden;
+                            padding: 0 15px;
                             display: flex;
                             flex-direction: column;
+                            transition: padding 0.45s ease;
 
                             .filter_search_sec {
                                 position: relative;
@@ -504,7 +552,7 @@ export const FeeCollectionWrapper = styled('div')`
                                                         }
 
                                                         p {
-                                                            font-size: 12px;
+                                                            font-size: 10px;
                                                             font-weight: 400;
                                                             color: ${colors.customColors.blackColor2};
                                                             /* margin-top: 3px; */
@@ -568,6 +616,14 @@ export const FeeCollectionWrapper = styled('div')`
                                                         cursor: pointer;
                                                     }
                                                 }
+
+                                                &.student_empty_message {
+                                                    width: 100%;
+                                                    min-height: 80px;
+                                                    align-items: center;
+                                                    justify-content: center;
+                                                    color: ${colors.customColors.blackColor2};
+                                                }
                                             }
                                         }
                                     }
@@ -577,6 +633,30 @@ export const FeeCollectionWrapper = styled('div')`
                     }
                 }
             }
+        }
+    }
+
+    .empty_messege {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+        margin-top: 100px;
+
+        img {
+            position: relative;
+            width: 300px;
+            opacity: 0.5;
+        }
+
+        p {
+            position: relative;
+            font-size: 15px;
+            margin-top: 10px;
+            color: ${colors.customColors.blackColor3};
         }
     }
 `;
