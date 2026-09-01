@@ -2015,7 +2015,6 @@ export const FeeCollectWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     align-items: center;
-                    margin-top: 5px;
                     padding: 0 10px;
 
                     .content_box {
@@ -2127,7 +2126,6 @@ export const FeeCollectWrapper = styled('div')`
                     display: flex;
                     align-items: center;
                     flex-wrap: wrap;
-                    margin-top: 5px;
                     padding: 0 10px;
 
                     .method_box {
