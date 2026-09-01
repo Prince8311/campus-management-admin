@@ -38,8 +38,11 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                 <div className="box_inner">
                                     <div className="top_part">
                                         <div className="part_content">
-                                            <a><i className="fa-solid fa-money-bill"></i></a>
-                                            <h6>15 Aug</h6>
+                                            <a><i className="fa-regular fa-calendar-days"></i></a>
+                                            <div className="middle_sec">
+                                                <h6>15 Aug</h6>
+                                                <h4>Total amt : <b>₹30000</b></h4>
+                                            </div>
                                             <span className="paid">paid</span>
                                         </div>
                                         <div className="amount_sec">
@@ -59,8 +62,11 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                 <div className="box_inner">
                                     <div className="top_part">
                                         <div className="part_content">
-                                            <a><i className="fa-solid fa-money-bill"></i></a>
-                                            <h6>15 Aug</h6>
+                                            <a><i className="fa-regular fa-calendar-days"></i></a>
+                                            <div className="middle_sec">
+                                                <h6>15 Aug</h6>
+                                                <h4>Total amt : <b>₹30000</b></h4>
+                                            </div>
                                             <span className="unpaid">Unpaid</span>
                                         </div>
                                         <div className="amount_sec">
@@ -117,7 +123,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                     <h6>₹0</h6>
                                 </div>
                                 <div className="amount">
-                                    <p>Due till date <span>(including fine)</span></p>
+                                    <p>Overdue<span>(including fine)</span></p>
                                     <h6>₹0</h6>
                                 </div>
                             </div>
@@ -165,8 +171,9 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                         <div className="method_box">
                                             <input type="radio" id="link" name="method" />
                                             <label htmlFor="link">
-                                                <a><i className="fa-solid fa-link"></i></a>
+                                                <a className="link"><i className="fa-solid fa-link"></i></a>
                                                 <p>Payment Link</p>
+                                                <span>(Send payment link)</span>
                                             </label>
                                         </div>
                                         <div className="method_box">
@@ -174,6 +181,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                             <label htmlFor="upi">
                                                 <a><i className="fa-solid fa-qrcode"></i></a>
                                                 <p>Upi QR</p>
+                                                <span>(Scan QR code)</span>
                                             </label>
                                         </div>
                                     </>
@@ -183,22 +191,25 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                         <div className="method_box">
                                             <input type="radio" id="cash" name="method" />
                                             <label htmlFor="cash">
-                                                <a><i className="fa-solid fa-money-bill"></i></a>
+                                                <a className="cash"><i className="fa-solid fa-money-bill"></i></a>
                                                 <p>Cash</p>
+                                                <span>(Cash Payment)</span>
                                             </label>
                                         </div>
                                         <div className="method_box">
                                             <input type="radio" id="dd" name="method" />
                                             <label htmlFor="dd">
-                                                <a><i className="fa-solid fa-money-check"></i></a>
+                                                <a className="dd"><i className="fa-solid fa-money-check"></i></a>
                                                 <p>Demand Draft</p>
+                                                <span>(Bank Draft Payment)</span>
                                             </label>
                                         </div>
                                         <div className="method_box">
                                             <input type="radio" id="cheque" name="method" />
                                             <label htmlFor="cheque">
-                                                <a><i className="fa-solid fa-money-check"></i></a>
+                                                <a className="cheque"><i className="fa-solid fa-money-check"></i></a>
                                                 <p>Cheque</p>
+                                                <span>(Cheque Payment)</span>
                                             </label>
                                         </div>
                                     </>

@@ -1699,9 +1699,9 @@ export const FeeCollectWrapper = styled('div')`
                                 
                                 a {
                                     position: relative;
-                                    width: 28px;
-                                    height: 28px;
-                                    border-radius: 50%;
+                                    width: 30px;
+                                    height: 30px;
+                                    border-radius: 4px;
                                     background: ${colors.customColors.blueColorLight};
                                     display: flex;
                                     align-items: center;
@@ -1711,27 +1711,51 @@ export const FeeCollectWrapper = styled('div')`
                                     text-decoration: none;
                                     cursor: pointer;
                                 }
-                                
-                                h6 {
+
+                                .middle_sec {
                                     position: relative;
-                                    padding-left: 12px;
-                                    font-size: 12px;
-                                    font-style: italic;
-                                    font-weight: 500;
-                                    color: ${colors.customColors.blackColor};
-                                    overflow: hidden;
-                                    white-space: nowrap;
-                                    text-overflow: ellipsis;
+                                    width: calc(100% - 90px);
+                                    padding: 0 10px;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    h6 {
+                                        position: relative;
+                                        font-size: 12px;
+                                        font-style: italic;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                        line-height: 1;
+                                    }
+
+                                    h4 {
+                                        position: relative;
+                                        font-size: 10px;
+                                        font-weight: 400;
+                                        margin-top: 3px;
+                                        color: ${colors.customColors.blackColor3};
+
+                                        b {
+                                            color: ${colors.customColors.blackColor1};
+                                            margin-left: 3px;
+                                            font-weight: 500;
+                                        }
+                                    }
                                 }
 
                                 span {
                                     position: relative;
-                                    width: max-content;
+                                    width: 60px;
                                     display: flex;
+                                    align-items: center;
+                                    justify-content: center;
                                     font-size: 10px;
                                     margin-top: 2px;
                                     border-radius: 25px;
-                                    padding: 3px 15px;
+                                    padding: 3px 0;
                                     margin-left: auto;
                                     font-weight: 500;
 
@@ -2003,6 +2027,14 @@ export const FeeCollectWrapper = styled('div')`
                             display: none;
                         }
 
+                        &:first-of-type {
+                            label {
+                                a {
+                                    color: ${colors.customColors.greenColor};
+                                }
+                            }
+                        }
+
                         label {
                             position: relative;
                             width: 100%;
@@ -2025,7 +2057,9 @@ export const FeeCollectWrapper = styled('div')`
                                 font-weight: 500;
                                 font-size: 12px;
                                 color: ${colors.customColors.blackColor2};
-                                margin: 6px 0;
+                                margin-top: 7px;
+                                margin-bottom: 4px;
+                                line-height: 1;
                             }
 
                             a {
@@ -2051,8 +2085,8 @@ export const FeeCollectWrapper = styled('div')`
                         }
 
                         input[type="radio"]:checked ~ label {
-                            border: 1px solid ${colors.customColors.blueColor1};
-                            background: ${colors.customColors.blueColorLight};
+                            border: 1px solid ${colors.customColors.borderColor1};
+                            background: ${colors.customColors.lightBackground3};
                             transition: all 0.5s ease;
 
                             p {
@@ -2060,7 +2094,8 @@ export const FeeCollectWrapper = styled('div')`
                             }
 
                             span {
-                                color: ${colors.customColors.blueColor1};
+                                color: ${colors.customColors.blueColor2};
+                                opacity: 0.8;
                                 transition: all 0.5s ease;
                             }
                         }
@@ -2126,7 +2161,16 @@ export const FeeCollectWrapper = styled('div')`
                                 font-weight: 500;
                                 font-size: 12px;
                                 color: ${colors.customColors.blackColor2};
-                                margin: 6px 0;
+                                line-height: 1;
+                                margin-top: 7px;
+                                margin-bottom: 4px;
+                            }
+
+                            span {
+                                font-size: 10px;
+                                color: ${colors.customColors.blackColor2};
+                                font-weight: 400;
+                                transition: all 0.5s ease;
                             }
 
                             a {
@@ -2141,6 +2185,25 @@ export const FeeCollectWrapper = styled('div')`
                                 color: ${colors.customColors.blueColor1};
                                 background: ${colors.customColors.blueColorLight};
                                 text-decoration: none;
+
+                                &.cash {
+                                    color: ${colors.customColors.greenColor};
+                                    background: ${colors.customColors.greenColorLight};
+                                }
+
+                                &.dd {
+                                    color: ${colors.customColors.yellowColor1};
+                                    background: ${colors.customColors.yellowColorLight};
+                                }
+                                &.cheque {
+                                    color: ${colors.customColors.violet};
+                                    background: ${colors.customColors.violetLight};
+                                }
+
+                                &.link {
+                                    color: ${colors.customColors.blueColor5};
+                                    background: ${colors.customColors.lightBackground2};
+                                }
                             }
                         }
 
@@ -2151,6 +2214,11 @@ export const FeeCollectWrapper = styled('div')`
 
                             p {
                                 color: ${colors.customColors.blueColor2};
+                            }
+
+                            span {
+                                color: ${colors.customColors.blueColor2};
+                                opacity: 0.8;
                             }
                         }
                     }
