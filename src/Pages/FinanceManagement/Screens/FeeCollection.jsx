@@ -15,6 +15,7 @@ const FeeCollectionPage = () => {
     const [selectedAcademicLevel, setSelectedAcademicLevel] = useState({});
     const [isAcademicLevelLoading, setIsAcademicLevelLoading] = useState(false);
     const [isOpenFeeCollectModal, setIsOpenFeeCollectModal] = useState(false);
+    const [selectedStudentDetails, setSelectedStudentDetails] = useState(null);
     const [isFeeCollectionInitiallyLoading, setIsFeeCollectionInitiallyLoading] = useState(false);
     const [feeCollectionData, setFeeCollectionData] = useState([]);
     const [expandedClassItem, setExpandedClassItem] = useState(null);
@@ -146,7 +147,13 @@ const FeeCollectionPage = () => {
         }
     }, [selectedAcademicLevel]);
 
-    const handleopenFeeCollectModal = () => {
+    const handleopenFeeCollectModal = (student, className, sectionName) => {
+        setSelectedStudentDetails({
+            studentId: student.student_id,
+            studentName: student.student_name,
+            className,
+            sectionName,
+        });
         setIsOpenFeeCollectModal(true);
     }
 
@@ -334,7 +341,12 @@ const FeeCollectionPage = () => {
                                                                                             <p><b>₹</b>{student.due_amount}</p>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <a className="collect_btn" onClick={handleopenFeeCollectModal}>Collect Now</a>
+                                                                                            <a
+                                                                                                className="collect_btn"
+                                                                                                onClick={() => handleopenFeeCollectModal(student, classData.class, section.section)}
+                                                                                            >
+                                                                                                Collect Now
+                                                                                            </a>
                                                                                         </td>
                                                                                     </tr>
                                                                                 ))
@@ -378,6 +390,7 @@ const FeeCollectionPage = () => {
                 <FeeCollectionModal
                     isOpenFeeCollectModal={isOpenFeeCollectModal}
                     setIsOpenFeeCollectModal={setIsOpenFeeCollectModal}
+                    studentDetails={selectedStudentDetails}
                 />
             </FeeCollectionWrapper>
         </>

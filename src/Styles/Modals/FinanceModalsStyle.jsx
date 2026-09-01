@@ -1827,7 +1827,7 @@ export const FeeCollectWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: space-between;
                 padding: 0 20px;
                 /* margin-top: 10px; */
@@ -1936,7 +1936,7 @@ export const FeeCollectWrapper = styled('div')`
                     align-items: center;
                     border: 1px solid ${colors.customColors.borderColor};
                     border-radius: 6px;
-                    padding: 12px 10px;
+                    padding: 10px 12px;
 
                     .amount {
                         position: relative;
@@ -1946,7 +1946,7 @@ export const FeeCollectWrapper = styled('div')`
 
                         &:last-of-type {
                             width: 60%;
-                            padding-left: 10px;
+                            padding-left: 12px;
                         
                             &::before {
                                 content: '';
@@ -2189,18 +2189,14 @@ export const FeeCollectWrapper = styled('div')`
                                     background: ${colors.customColors.greenColorLight};
                                 }
 
-                                &.dd {
+                                &.dd,
+                                &.link {
                                     color: ${colors.customColors.yellowColor1};
                                     background: ${colors.customColors.yellowColorLight};
                                 }
                                 &.cheque {
                                     color: ${colors.customColors.violet};
                                     background: ${colors.customColors.violetLight};
-                                }
-
-                                &.link {
-                                    color: ${colors.customColors.blueColor5};
-                                    background: ${colors.customColors.lightBackground2};
                                 }
                             }
                         }
@@ -2523,6 +2519,7 @@ export const FeeCollectWrapper = styled('div')`
                     .sec_box {
                         position: relative;
                         width: 100%; 
+                        margin-top: 3px;
 
                         .time_btn {
                             position: relative;

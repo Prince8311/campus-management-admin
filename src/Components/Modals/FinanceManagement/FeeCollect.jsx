@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FeeCollectWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 
-const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal }) => {
+const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, studentDetails }) => {
     const [recordType, setRecordType] = useState('installments');
     const [paymentMode, setPaymentMode] = useState('');
     const [adjustmentType, setAdjustmentType] = useState('');
@@ -37,7 +37,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
             <FeeCollectWrapper className={isOpenFeeCollectModal ? 'active' : ''}>
                 <div className={`modal_box ${isOpenFeeCollectModal ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Collect Fee for Joydeep barik</h4>
+                        <h4>Collect Fee for {studentDetails?.studentName}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-angle-right"></i></a>
                         </div>
@@ -51,7 +51,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                             <a><i className="fa-regular fa-calendar-days"></i></a>
                                             <div className="middle_sec">
                                                 <h6>15 Aug</h6>
-                                                <h4>Total amt : <b>₹30000</b></h4>
+                                                <h4>Total amount: <b>₹30000</b></h4>
                                             </div>
                                             <span className="paid">paid</span>
                                         </div>
@@ -75,7 +75,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                             <a><i className="fa-regular fa-calendar-days"></i></a>
                                             <div className="middle_sec">
                                                 <h6>15 Aug</h6>
-                                                <h4>Total amt : <b>₹30000</b></h4>
+                                                <h4>Total amount: <b>₹30000</b></h4>
                                             </div>
                                             <span className="unpaid">Unpaid</span>
                                         </div>
