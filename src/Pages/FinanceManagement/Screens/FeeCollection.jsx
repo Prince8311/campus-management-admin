@@ -241,7 +241,7 @@ const FeeCollectionPage = () => {
                                                     >
                                                         <div className="left_info">
                                                             <li>
-                                                                <p>Class</p>
+                                                                <p><i className="fa-solid fa-book"></i></p>
                                                                 <span>{classData.class} - {section.section}</span>
                                                             </li>
                                                         </div>
@@ -283,6 +283,7 @@ const FeeCollectionPage = () => {
                                                                     <input type="text" placeholder="Search by Mobile Number" />
                                                                 </div>
                                                                 <div className="filter_sec">
+                                                                    <h6>Accademic Session</h6>
                                                                     <div className="filter_btn">
                                                                         <p>All Students</p>
                                                                         <i className="fa-solid fa-angle-down"></i>

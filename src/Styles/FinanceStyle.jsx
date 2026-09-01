@@ -166,13 +166,13 @@ export const FeeCollectionWrapper = styled('div')`
                                 position: relative;
                                 list-style: none;
                                 display: flex;
-                                flex-direction: column;
+                                align-items: center;
 
                                 p {
                                     position: relative;
-                                    font-size: 10px;
-                                    color: ${colors.customColors.blackColor2};
-                                    font-style: italic;
+                                    font-size: 15px;
+                                    color: ${colors.customColors.blueColor1};
+                                    margin-right: 7px;
                                 }
 
                                 span {
@@ -397,11 +397,21 @@ export const FeeCollectionWrapper = styled('div')`
 
                                 .filter_sec {
                                     position: relative;
-                                    margin-left: 20px;
+                                    margin-left: auto;
+                                    display: flex;
+                                    align-items: center;
+
+                                    h6 {
+                                        position: relative;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor1};
+                                        margin-right: 6px;
+                                        font-weight: 500;
+                                    }
 
                                     .filter_btn {
                                         position: relative;
-                                        width: 150px;
+                                        width: 250px;
                                         height: 35px;
                                         border: 1px solid ${colors.customColors.borderColor};
                                         border-radius: 6px;
