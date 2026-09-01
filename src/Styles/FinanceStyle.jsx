@@ -170,7 +170,14 @@ export const FeeCollectionWrapper = styled('div')`
 
                                 p {
                                     position: relative;
-                                    font-size: 15px;
+                                    width: 35px;
+                                    height: 35px;
+                                    border-radius: 4px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    background: ${colors.customColors.blueColorLight};
+                                    font-size: 13px;
                                     color: ${colors.customColors.blueColor1};
                                     margin-right: 7px;
                                 }
@@ -406,12 +413,12 @@ export const FeeCollectionWrapper = styled('div')`
                                         font-size: 12px;
                                         color: ${colors.customColors.blackColor1};
                                         margin-right: 6px;
-                                        font-weight: 500;
+                                        font-weight: 400;
                                     }
 
                                     .filter_btn {
                                         position: relative;
-                                        width: 250px;
+                                        width: 200px;
                                         height: 35px;
                                         border: 1px solid ${colors.customColors.borderColor};
                                         border-radius: 6px;
@@ -537,13 +544,13 @@ export const FeeCollectionWrapper = styled('div')`
                                                         display: flex;
                                                         align-items: center;
                                                         justify-content: center;
-                                                        border: 1px solid ${colors.customColors.borderColor1};
+                                                        background: ${colors.customColors.blueColor2};
 
                                                         h5 {
                                                             position: relative;
                                                             font-size: 14px;
                                                             font-weight: 500;
-                                                            color: ${colors.customColors.blackColor2};
+                                                            color: ${colors.customColors.whiteColor};
                                                             text-transform: uppercase;
                                                         }
                                                     }
@@ -877,13 +884,13 @@ export const FeeTransactionsWrapper = styled('div')`
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                border: 1px solid ${colors.customColors.borderColor1};
+                                background: ${colors.customColors.blueColor2};
 
                                 h5 {
                                     position: relative;
                                     font-size: 14px;
                                     font-weight: 500;
-                                    color: ${colors.customColors.blackColor2};
+                                    color: ${colors.customColors.whiteColor};
                                     text-transform: uppercase;
                                 }
                             }

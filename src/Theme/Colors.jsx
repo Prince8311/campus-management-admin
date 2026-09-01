@@ -38,6 +38,8 @@ export const colorNames = () => {
         blueColor5: "rgb(71, 85, 105)",
         blueColorLight: "rgba(2, 192, 255, 0.08)",
         blueColorLight1: "rgba(2, 192, 255, 0.03)",
+        violet: "rgb(235, 38, 218)",
+        violetLight: "rgba(235, 38, 219, 0.199)",
       }
     };
   }

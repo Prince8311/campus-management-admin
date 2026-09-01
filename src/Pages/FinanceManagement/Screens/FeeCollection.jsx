@@ -283,7 +283,7 @@ const FeeCollectionPage = () => {
                                                                     <input type="text" placeholder="Search by Mobile Number" />
                                                                 </div>
                                                                 <div className="filter_sec">
-                                                                    <h6>Accademic Session</h6>
+                                                                    <h6>Accademic Session : </h6>
                                                                     <div className="filter_btn">
                                                                         <p>All Students</p>
                                                                         <i className="fa-solid fa-angle-down"></i>

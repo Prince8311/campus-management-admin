@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FeeCollectWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 
 const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal }) => {
@@ -9,6 +9,16 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
     const bankAccounts = ['Pnb', 'sbi', 'axis', 'hdfc'];
     const [showBankAccountDropdown, setShowBankAccountDropdown] = useState(false);
     const [selectAccount, setSelectAccount] = useState('');
+
+    useEffect(() => {
+        if (isOpenFeeCollectModal) {
+            setRecordType('installments');
+            setPaymentMode('');
+            setAdjustmentType('');
+            setShowBankAccountDropdown(false);
+            setSelectAccount('');
+        }
+    }, [isOpenFeeCollectModal]);
 
     const handleSelectAccount = (account) => {
         setSelectAccount(account);
@@ -38,8 +48,11 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                 <div className="box_inner">
                                     <div className="top_part">
                                         <div className="part_content">
-                                            <a><i className="fa-solid fa-money-bill"></i></a>
-                                            <h6>15 Aug</h6>
+                                            <a><i className="fa-regular fa-calendar-days"></i></a>
+                                            <div className="middle_sec">
+                                                <h6>15 Aug</h6>
+                                                <h4>Total amt : <b>₹30000</b></h4>
+                                            </div>
                                             <span className="paid">paid</span>
                                         </div>
                                         <div className="amount_sec">
@@ -59,8 +72,11 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                 <div className="box_inner">
                                     <div className="top_part">
                                         <div className="part_content">
-                                            <a><i className="fa-solid fa-money-bill"></i></a>
-                                            <h6>15 Aug</h6>
+                                            <a><i className="fa-regular fa-calendar-days"></i></a>
+                                            <div className="middle_sec">
+                                                <h6>15 Aug</h6>
+                                                <h4>Total amt : <b>₹30000</b></h4>
+                                            </div>
                                             <span className="unpaid">Unpaid</span>
                                         </div>
                                         <div className="amount_sec">
@@ -117,7 +133,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                     <h6>₹0</h6>
                                 </div>
                                 <div className="amount">
-                                    <p>Due till date <span>(including fine)</span></p>
+                                    <p>Overdue<span>(including fine)</span></p>
                                     <h6>₹0</h6>
                                 </div>
                             </div>
@@ -157,54 +173,61 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal })
                                 </div>
                             </div>
                         </div>
-                        <div className="payment_method_sec">
-                            <h4>Payment Methhods</h4>
-                            <div className="method_sec_content">
-                                {paymentMode === 'online' && (
-                                    <>
-                                        <div className="method_box">
-                                            <input type="radio" id="link" name="method" />
-                                            <label htmlFor="link">
-                                                <a><i className="fa-solid fa-link"></i></a>
-                                                <p>Payment Link</p>
-                                            </label>
-                                        </div>
-                                        <div className="method_box">
-                                            <input type="radio" id="upi" name="method" />
-                                            <label htmlFor="upi">
-                                                <a><i className="fa-solid fa-qrcode"></i></a>
-                                                <p>Upi QR</p>
-                                            </label>
-                                        </div>
-                                    </>
-                                )}
-                                {paymentMode === 'offline' && (
-                                    <>
-                                        <div className="method_box">
-                                            <input type="radio" id="cash" name="method" />
-                                            <label htmlFor="cash">
-                                                <a><i className="fa-solid fa-money-bill"></i></a>
-                                                <p>Cash</p>
-                                            </label>
-                                        </div>
-                                        <div className="method_box">
-                                            <input type="radio" id="dd" name="method" />
-                                            <label htmlFor="dd">
-                                                <a><i className="fa-solid fa-money-check"></i></a>
-                                                <p>Demand Draft</p>
-                                            </label>
-                                        </div>
-                                        <div className="method_box">
-                                            <input type="radio" id="cheque" name="method" />
-                                            <label htmlFor="cheque">
-                                                <a><i className="fa-solid fa-money-check"></i></a>
-                                                <p>Cheque</p>
-                                            </label>
-                                        </div>
-                                    </>
-                                )}
+                        {paymentMode && (
+                            <div className="payment_method_sec">
+                                <h4>Payment Methods</h4>
+                                <div className="method_sec_content">
+                                    {paymentMode === 'online' && (
+                                        <>
+                                            <div className="method_box">
+                                                <input type="radio" id="link" name="method" />
+                                                <label htmlFor="link">
+                                                    <a className="link"><i className="fa-solid fa-link"></i></a>
+                                                    <p>Payment Link</p>
+                                                    <span>(Send payment link)</span>
+                                                </label>
+                                            </div>
+                                            <div className="method_box">
+                                                <input type="radio" id="upi" name="method" />
+                                                <label htmlFor="upi">
+                                                    <a><i className="fa-solid fa-qrcode"></i></a>
+                                                    <p>Upi QR</p>
+                                                    <span>(Scan QR code)</span>
+                                                </label>
+                                            </div>
+                                        </>
+                                    )}
+                                    {paymentMode === 'offline' && (
+                                        <>
+                                            <div className="method_box">
+                                                <input type="radio" id="cash" name="method" />
+                                                <label htmlFor="cash">
+                                                    <a className="cash"><i className="fa-solid fa-money-bill"></i></a>
+                                                    <p>Cash</p>
+                                                    <span>(Cash Payment)</span>
+                                                </label>
+                                            </div>
+                                            <div className="method_box">
+                                                <input type="radio" id="dd" name="method" />
+                                                <label htmlFor="dd">
+                                                    <a className="dd"><i className="fa-solid fa-money-check"></i></a>
+                                                    <p>Demand Draft</p>
+                                                    <span>(Bank Draft Payment)</span>
+                                                </label>
+                                            </div>
+                                            <div className="method_box">
+                                                <input type="radio" id="cheque" name="method" />
+                                                <label htmlFor="cheque">
+                                                    <a className="cheque"><i className="fa-solid fa-money-check"></i></a>
+                                                    <p>Cheque</p>
+                                                    <span>(Cheque Payment)</span>
+                                                </label>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className="content_input_sec">
                             {recordType === 'lumpSum' && (
                                 <div className="input_box halfWidth">
