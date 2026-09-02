@@ -1,14 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect,useRef, useCallback } from "react";
 import { FeeCollectWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../Loader/SkeletonLoader";
+import Calender from "../../Calender";
 
 const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, studentDetails }) => {
     const api = getApiEndpoints();
     const [recordType, setRecordType] = useState('installments');
     const [paymentMode, setPaymentMode] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('');
     const [adjustmentType, setAdjustmentType] = useState('');
     const [studentFeeDetails, setStudentFeeDetails] = useState({
         total_due: '0.00',
@@ -21,11 +23,16 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
     const bankAccounts = ['Pnb', 'sbi', 'axis', 'hdfc'];
     const [showBankAccountDropdown, setShowBankAccountDropdown] = useState(false);
     const [selectAccount, setSelectAccount] = useState('');
+    const filterBtnRef = useRef(null);
+    const dropdownRef = useRef(null);
+    const [isCalendarDropdownOpen, setIsCalendarDropdownOpen] = useState(false);
+    const [finalSelectedDate, setFinalSelectedDate] = useState('');
 
     useEffect(() => {
         if (isOpenFeeCollectModal) {
             setRecordType('installments');
             setPaymentMode('');
+            setPaymentMethod('');
             setAdjustmentType('');
             setShowBankAccountDropdown(false);
             setSelectAccount('');
@@ -68,7 +75,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
     }, [api.fetchStudentFeeDetails, studentDetails?.studentId, studentDetails?.className, studentDetails?.sectionName]);
 
     useEffect(() => {
-        if(isOpenFeeCollectModal) {
+        if (isOpenFeeCollectModal) {
             fetchStudentFeeDetails();
         }
     }, [isOpenFeeCollectModal, fetchStudentFeeDetails]);
@@ -84,6 +91,10 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
 
     function closeModal() {
         setIsOpenFeeCollectModal(false);
+    }
+
+    const openCalender = () => {
+        setIsCalendarDropdownOpen(!isCalendarDropdownOpen)
     }
     return (
         <>
@@ -247,7 +258,14 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                     {paymentMode === 'online' && (
                                         <>
                                             <div className="method_box">
-                                                <input type="radio" id="link" name="method" />
+                                                <input
+                                                    type="radio"
+                                                    id="link"
+                                                    name="method"
+                                                    value="link"
+                                                    checked={paymentMethod === 'link'}
+                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                />
                                                 <label htmlFor="link">
                                                     <a className="link"><i className="fa-solid fa-link"></i></a>
                                                     <p>Payment Link</p>
@@ -255,7 +273,14 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                 </label>
                                             </div>
                                             <div className="method_box">
-                                                <input type="radio" id="upi" name="method" />
+                                                <input
+                                                    type="radio"
+                                                    id="upi"
+                                                    name="method"
+                                                    value="upi"
+                                                    checked={paymentMethod === 'upi'}
+                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                />
                                                 <label htmlFor="upi">
                                                     <a><i className="fa-solid fa-qrcode"></i></a>
                                                     <p>Upi QR</p>
@@ -267,7 +292,14 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                     {paymentMode === 'offline' && (
                                         <>
                                             <div className="method_box">
-                                                <input type="radio" id="cash" name="method" />
+                                                <input
+                                                    type="radio"
+                                                    id="cash"
+                                                    name="method"
+                                                    value="cash"
+                                                    checked={paymentMethod === 'cash'}
+                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                />
                                                 <label htmlFor="cash">
                                                     <a className="cash"><i className="fa-solid fa-money-bill"></i></a>
                                                     <p>Cash</p>
@@ -275,7 +307,14 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                 </label>
                                             </div>
                                             <div className="method_box">
-                                                <input type="radio" id="dd" name="method" />
+                                                <input
+                                                    type="radio"
+                                                    id="dd"
+                                                    name="method"
+                                                    value="dd"
+                                                    checked={paymentMethod === 'dd'}
+                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                />
                                                 <label htmlFor="dd">
                                                     <a className="dd"><i className="fa-solid fa-money-check"></i></a>
                                                     <p>Demand Draft</p>
@@ -283,7 +322,14 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                 </label>
                                             </div>
                                             <div className="method_box">
-                                                <input type="radio" id="cheque" name="method" />
+                                                <input
+                                                    type="radio"
+                                                    id="cheque"
+                                                    name="method"
+                                                    value="cheque"
+                                                    checked={paymentMethod === 'cheque'}
+                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                />
                                                 <label htmlFor="cheque">
                                                     <a className="cheque"><i className="fa-solid fa-money-check"></i></a>
                                                     <p>Cheque</p>
@@ -307,17 +353,25 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                     <div className="input_box halfWidth">
                                         <span>Payment Date <p>*</p></span>
                                         <div className="sec_box">
-                                            <div className="time_btn">
-                                                <p>23 Aug, 2026</p>
-                                                <i className="fa-regular fa-calendar-days"></i>
+                                            <div className="time_btn" onClick={openCalender} ref={filterBtnRef}>
+                                                <p>{finalSelectedDate}</p>
+                                                <i className="fa-regular fa-calendar"></i>
                                             </div>
-                                            <div className="dropdown"></div>
+                                            {
+                                                isCalendarDropdownOpen && (
+                                                    <div className="dropdown" ref={dropdownRef}>
+                                                        <Calender setFinalSelectedDate={setFinalSelectedDate} />
+                                                    </div>
+                                                )
+                                            }
                                         </div>
                                     </div>
-                                    <div className="input_box halfWidth">
-                                        <span>Reference Number</span>
-                                        <input type="text" />
-                                    </div>
+                                    {(paymentMethod === 'dd' || paymentMethod === 'cheque') && (
+                                        <div className="input_box halfWidth">
+                                            <span>{paymentMethod === 'dd' ? 'Demand Draft Number' : 'Cheque Number'}</span>
+                                            <input type="text" />
+                                        </div>
+                                    )}
                                     <div className="select_box half">
                                         <span>Company Bank Account <p>*</p></span>
                                         <div className="dropdown_sec">
