@@ -110,6 +110,7 @@ export const getApiEndpoints = () => {
         fetchFeeConfigurations: `${apiURL}/api/fee/configuration/list.php`,
         fetchFeeCollectionList: `${apiURL}/api/fee/collection/list.php`,
         fetchFeeCollectionStudentList: `${apiURL}/api/fee/collection/students.php`,
+        fetchStudentFeeDetails: `${apiURL}/api/fee/collection/student-details.php`,
 
         // Discount 
         insertFeeDiscount: `${apiURL}/api/fee/discount/insert.php`,

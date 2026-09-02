@@ -151,8 +151,8 @@ const FeeCollectionPage = () => {
         setSelectedStudentDetails({
             studentId: student.student_id,
             studentName: student.student_name,
-            className,
-            sectionName,
+            className: className,
+            sectionName: sectionName,
         });
         setIsOpenFeeCollectModal(true);
     }

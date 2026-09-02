@@ -1,10 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FeeCollectWrapper } from "../../../Styles/Modals/FinanceModalsStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../Loader/SkeletonLoader";
 
 const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, studentDetails }) => {
+    const api = getApiEndpoints();
     const [recordType, setRecordType] = useState('installments');
     const [paymentMode, setPaymentMode] = useState('');
     const [adjustmentType, setAdjustmentType] = useState('');
+    const [studentFeeDetails, setStudentFeeDetails] = useState({
+        total_due: '0.00',
+        overdue: '0.00',
+        installments: [],
+    });
+    const [isStudentFeeDetailsLoading, setIsStudentFeeDetailsLoading] = useState(false);
 
     const bankAccounts = ['Pnb', 'sbi', 'axis', 'hdfc'];
     const [showBankAccountDropdown, setShowBankAccountDropdown] = useState(false);
@@ -19,6 +30,38 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
             setSelectAccount('');
         }
     }, [isOpenFeeCollectModal]);
+
+    const fetchStudentFeeDetails = useCallback(async () => {
+        setIsStudentFeeDetailsLoading(true);
+        setStudentFeeDetails({ total_due: '0.00', overdue: '0.00', installments: [] });
+        try {
+            const response = await axiosInstance.get(api.fetchStudentFeeDetails, {
+                params: {
+                    studentId: studentDetails?.studentId,
+                    class: studentDetails?.className,
+                    section: studentDetails?.sectionName,
+                }
+            });
+            if (response?.data.status === 200) {
+                const feeDetails = response?.data?.data || response?.data;
+                setStudentFeeDetails({
+                    total_due: feeDetails?.total_due ?? '0.00',
+                    overdue: feeDetails?.overdue ?? '0.00',
+                    installments: feeDetails?.installments || [],
+                });
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsStudentFeeDetailsLoading(false);
+        }
+    }, [api.fetchStudentFeeDetails, studentDetails?.studentId, studentDetails?.className, studentDetails?.sectionName]);
+
+    useEffect(() => {
+        if(isOpenFeeCollectModal) {
+            fetchStudentFeeDetails();
+        }
+    }, [isOpenFeeCollectModal, fetchStudentFeeDetails]);
 
     const handleSelectAccount = (account) => {
         setSelectAccount(account);
@@ -44,54 +87,58 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                     </div>
                     <div className="modal_content_sec">
                         <div className="installment_box_sec">
-                            <div className="installment_box">
-                                <div className="box_inner">
-                                    <div className="top_part">
-                                        <div className="part_content">
-                                            <a><i className="fa-regular fa-calendar-days"></i></a>
-                                            <div className="middle_sec">
-                                                <h6>15 Aug</h6>
-                                                <h4>Total amount: <b>₹30000</b></h4>
-                                            </div>
-                                            <span className="paid">paid</span>
+                            {
+                                isStudentFeeDetailsLoading ? (
+                                    Array.from({ length: 2 }).map((_, index) => (
+                                        <div className="installment_box" key={index}>
+                                            <SkeletonLoader width="100%" height="115px" />
                                         </div>
-                                        <div className="amount_sec">
-                                            <div className="amt_box">
-                                                <p>Paid Amount</p>
-                                                <span className="paid">₹50000</span>
+                                    ))
+                                ) : studentFeeDetails.installments.length > 0 ? (
+                                    studentFeeDetails.installments.map((installment) => {
+                                        const statusClass = installment.status?.toLowerCase().replace(/\s+/g, '_');
+                                        const isInactive = installment.isActive === false;
+
+                                        return (
+                                            <div
+                                                className={`installment_box ${isInactive ? 'inactive' : ''}`}
+                                                key={`${installment.configuration_id}-${installment.installment_id}`}
+                                            >
+                                                <div className="box_inner">
+                                                    <div className="top_part">
+                                                        <div className="part_content">
+                                                            <a><i className="fa-regular fa-calendar-days"></i></a>
+                                                            <div className="middle_sec">
+                                                                <h6>{installment.scheduled_date}</h6>
+                                                                <h4>Total amount: <b>₹{installment.amount}</b></h4>
+                                                            </div>
+                                                            <span className={statusClass}>{installment.status}</span>
+                                                        </div>
+                                                        {isInactive ? (
+                                                            <div className="installment_message">
+                                                                <p>{installment.message}</p>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="amount_sec">
+                                                                <div className="amt_box">
+                                                                    <p>Paid Amount</p>
+                                                                    <span className="paid">₹{installment.paid_amount}</span>
+                                                                </div>
+                                                                <div className="amt_box">
+                                                                    <p>Due Amount</p>
+                                                                    <span className="due">₹{installment.due_amount}</span>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="amt_box">
-                                                <p>Due Amount</p>
-                                                <span className="due">₹10000</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="installment_box">
-                                <div className="box_inner">
-                                    <div className="top_part">
-                                        <div className="part_content">
-                                            <a><i className="fa-regular fa-calendar-days"></i></a>
-                                            <div className="middle_sec">
-                                                <h6>15 Aug</h6>
-                                                <h4>Total amount: <b>₹30000</b></h4>
-                                            </div>
-                                            <span className="unpaid">Unpaid</span>
-                                        </div>
-                                        <div className="amount_sec">
-                                            <div className="amt_box">
-                                                <p>Paid Amount</p>
-                                                <span className="paid">₹50000</span>
-                                            </div>
-                                            <div className="amt_box">
-                                                <p>Due Amount</p>
-                                                <span className="due">₹10000</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    <p>No installments available.</p>
+                                )
+                            }
                         </div>
                         <div className="installment_type_sec">
                             <div className="type_box">
@@ -130,11 +177,17 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                             <div className="amount_box">
                                 <div className="amount">
                                     <p>Total Due</p>
-                                    <h6>₹0</h6>
+                                    {isStudentFeeDetailsLoading
+                                        ? <SkeletonLoader width="70px" height="16px" margin="5px 0 0 0" />
+                                        : <h6>₹{studentFeeDetails.total_due}</h6>
+                                    }
                                 </div>
                                 <div className="amount">
                                     <p>Overdue<span>(including fine)</span></p>
-                                    <h6>₹0</h6>
+                                    {isStudentFeeDetailsLoading
+                                        ? <SkeletonLoader width="70px" height="16px" margin="5px 0 0 0" />
+                                        : <h6>₹{studentFeeDetails.overdue}</h6>
+                                    }
                                 </div>
                             </div>
                         </div>

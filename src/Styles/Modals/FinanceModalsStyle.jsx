@@ -1669,6 +1669,13 @@ export const FeeCollectWrapper = styled('div')`
                     max-height: 135px;
                     padding: 10px;
 
+                    &.inactive {
+                        .box_inner {
+                            opacity: 0.65;
+                            box-shadow: 2px 2px 5px ${colors.boxShadowColors.shadowColor2};
+                        }
+                    }
+
                     .box_inner {
                         position: relative;
                         width: 100%;
@@ -1693,7 +1700,7 @@ export const FeeCollectWrapper = styled('div')`
                                 position: relative;
                                 width: 100%;
                                 display: flex;
-                                align-items: center;
+                                align-items: flex-start;
                                 padding-bottom: 8px;
                                 border-bottom: 1px solid ${colors.customColors.borderColor};
                                 
@@ -1728,14 +1735,13 @@ export const FeeCollectWrapper = styled('div')`
                                         overflow: hidden;
                                         white-space: nowrap;
                                         text-overflow: ellipsis;
-                                        line-height: 1;
                                     }
 
                                     h4 {
                                         position: relative;
                                         font-size: 10px;
                                         font-weight: 400;
-                                        margin-top: 3px;
+                                        margin-top: 1px;
                                         color: ${colors.customColors.blackColor3};
 
                                         b {
@@ -1816,6 +1822,22 @@ export const FeeCollectWrapper = styled('div')`
                                             color: ${colors.customColors.redColor};
                                         }
                                     }
+                                }
+                            }
+
+                            .installment_message {
+                                position: relative;
+                                width: 100%;
+                                min-height: 29px;
+                                display: flex;
+                                align-items: center;
+                                margin-top: 8px;
+
+                                p {
+                                    font-size: 10px;
+                                    line-height: 1.35;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor1};
                                 }
                             }
                         }
