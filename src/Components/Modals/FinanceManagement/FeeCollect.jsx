@@ -14,6 +14,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
         total_due: '0.00',
         overdue: '0.00',
         installments: [],
+        canSelectInstallment: true,
     });
     const [isStudentFeeDetailsLoading, setIsStudentFeeDetailsLoading] = useState(false);
 
@@ -33,7 +34,12 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
 
     const fetchStudentFeeDetails = useCallback(async () => {
         setIsStudentFeeDetailsLoading(true);
-        setStudentFeeDetails({ total_due: '0.00', overdue: '0.00', installments: [] });
+        setStudentFeeDetails({
+            total_due: '0.00',
+            overdue: '0.00',
+            installments: [],
+            canSelectInstallment: true,
+        });
         try {
             const response = await axiosInstance.get(api.fetchStudentFeeDetails, {
                 params: {
@@ -44,11 +50,15 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
             });
             if (response?.data.status === 200) {
                 const feeDetails = response?.data?.data || response?.data;
+                const canSelectInstallment = feeDetails?.canSelectInstallment ?? true;
+
                 setStudentFeeDetails({
                     total_due: feeDetails?.total_due ?? '0.00',
                     overdue: feeDetails?.overdue ?? '0.00',
                     installments: feeDetails?.installments || [],
+                    canSelectInstallment,
                 });
+                setRecordType(canSelectInstallment ? 'installments' : 'lumpSum');
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -144,7 +154,10 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                             <div className="type_box">
                                 <h5>Record By</h5>
                                 <div className="box_content">
-                                    <div className="content">
+                                    <div
+                                        className="content"
+                                        title={!studentFeeDetails.canSelectInstallment ? 'Installment selection is not available.' : ''}
+                                    >
                                         <input
                                             id="int"
                                             name="type"
@@ -152,6 +165,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                             value="installments"
                                             checked={recordType === 'installments'}
                                             onChange={(event) => setRecordType(event.target.value)}
+                                            disabled={!studentFeeDetails.canSelectInstallment}
                                         />
                                         <label htmlFor="int">
                                             <span><i className="fa-solid fa-circle"></i></span>

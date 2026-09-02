@@ -125,7 +125,25 @@ const FeeCollectionPage = () => {
                 }
             });
             if (response?.data.status === 200) {
-                setFeeCollectionData(response?.data?.classes || []);
+                const classes = response?.data?.classes || [];
+                setFeeCollectionData(classes);
+
+                const firstClass = classes[0];
+                const firstSection = firstClass?.sections?.[0];
+
+                if (firstClass && firstSection) {
+                    const firstItemKey = `${selectedAcademicLevel.id}-${firstClass.id ?? firstClass.class}-${firstSection.id ?? firstSection.section}-0-0`;
+
+                    setExpandedClassItem(firstItemKey);
+                    setActiveClassSection({
+                        className: firstClass.class,
+                        sectionName: firstSection.section,
+                    });
+                    setFeeCollectionStudents([]);
+                    setStudentTotalCount(0);
+                    setStudentPage(1);
+                    fetchFeeCollectionStudents(firstClass.class, firstSection.section, 1);
+                }
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);

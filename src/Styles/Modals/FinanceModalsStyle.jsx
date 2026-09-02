@@ -1947,6 +1947,22 @@ export const FeeCollectWrapper = styled('div')`
                                     font-weight: 500;
                                 }
                             }
+
+                            input[type="radio"]:disabled ~ label {
+                                opacity: 0.45;
+                                cursor: not-allowed;
+
+                                span {
+                                    cursor: not-allowed;
+                                    background: ${colors.customColors.borderColor};
+                                    border-color: ${colors.customColors.borderColor};
+                                }
+
+                                p {
+                                    color: ${colors.customColors.blackColor2};
+                                    font-weight: 400;
+                                }
+                            }
                         }
                     }
                 }
