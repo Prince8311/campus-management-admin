@@ -737,36 +737,6 @@ export const FeeTransactionsWrapper = styled('div')`
                 color: ${colors.customColors.blackColor1};
             }
         }
-
-        .filter_sec {
-            position: relative;
-            margin-left: 20px;
-
-            .filter_btn {
-                position: relative;
-                width: 200px;
-                height: 35px;
-                border: 1px solid ${colors.customColors.borderColor};
-                border-radius: 6px;
-                display: flex;
-                align-items: center;
-                padding: 5px 15px;
-                cursor: pointer;
-
-                p {
-                    position: relative;
-                    font-size: 12px;
-                    color: ${colors.customColors.blackColor1};
-                }
-
-                i {
-                    position: relative;
-                    margin-left: auto;
-                    color: ${colors.customColors.blackColor1};
-                    font-size: 13px;
-                }
-            }
-        }
     }
 
     .table_sec {
@@ -808,11 +778,11 @@ export const FeeTransactionsWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 20%;
+                        width: 16%;
                     }
 
                     &:nth-of-type(2) {
-                        width: 12%;
+                        width: 11%;
                         justify-content: center;
                     }
 
@@ -822,22 +792,26 @@ export const FeeTransactionsWrapper = styled('div')`
                     }
 
                     &:nth-of-type(4) {
-                        width: 17%;
+                        width: 15%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(5) {
-                        width: 17%;
+                        width: 10%;
                         justify-content: center;
                     }
-
                     &:nth-of-type(6) {
-                        width: 12%;
+                        width: 15%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(7) {
-                        width: 10%;
+                        width: 12%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(8) {
+                        width: 9%;
                         justify-content: center;
                     }
                 }
@@ -873,7 +847,7 @@ export const FeeTransactionsWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 20%;
+                            width: 16%;
                             display: flex;
 
                             .left_table_sec {
@@ -909,16 +883,15 @@ export const FeeTransactionsWrapper = styled('div')`
                                 }
 
                                 p {
-                                    font-size: 12px;
+                                    font-size: 11px;
                                     font-weight: 400;
                                     color: ${colors.customColors.blackColor2};
-                                    /* margin-top: 3px; */
                                 }
                             }
                         }
 
                         &:nth-of-type(2) {
-                            width: 12%;
+                            width: 11%;
                             justify-content: center;
                             align-items: center;
                         }
@@ -930,18 +903,24 @@ export const FeeTransactionsWrapper = styled('div')`
                         }
 
                         &:nth-of-type(4) {
-                            width: 17%;
+                            width: 15%;
                             justify-content: center;
                             align-items: center;
                         }
 
                         &:nth-of-type(5) {
-                            width: 17%;
+                            width: 10%;
                             justify-content: center;
                             align-items: center;
                         }
 
                         &:nth-of-type(6) {
+                            width: 15%;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        &:nth-of-type(7) {
                             width: 12%;
                             justify-content: center;
                             align-items: center;
@@ -965,8 +944,8 @@ export const FeeTransactionsWrapper = styled('div')`
                             }
                         }
 
-                        &:nth-of-type(7) {
-                            width: 10%;
+                        &:nth-of-type(8) {
+                            width: 9%;
                             justify-content: center;
                             align-items: center;
 

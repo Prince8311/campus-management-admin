@@ -12,13 +12,6 @@ const FeeTransactionsPage = () => {
                         <i className="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Search by Amount" />
                     </div>
-                    <div className="filter_sec">
-                        <div className="filter_btn">
-                            <p>Download</p>
-                            <i className="fa-solid fa-angle-down"></i>
-                        </div>
-                        <div className="filter_dropdown"></div>
-                    </div>
                 </div>
                 <div className="table_sec">
                     <table>
@@ -28,6 +21,7 @@ const FeeTransactionsPage = () => {
                                 <th>Class</th>
                                 <th>Amount</th>
                                 <th>Receipt No</th>
+                                <th>Paid By</th>
                                 <th>Paid On</th>
                                 <th>Status</th>
                                 <th>Invoice</th>
@@ -47,10 +41,11 @@ const FeeTransactionsPage = () => {
                                 <td>10 - A</td>
                                 <td>30,000</td>
                                 <td>SAS-2025-26-684</td>
+                                <td>Cash</td>
                                 <td>7 Dec 2025</td>
                                 <td><p className="success">Success</p></td>
                                 <td>
-                                    <a className="download"><i className="fa-solid fa-file-arrow-down"></i></a>
+                                    <a className="download"><i className="fa-solid fa-download"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -66,10 +61,11 @@ const FeeTransactionsPage = () => {
                                 <td>10 - A</td>
                                 <td>30,000</td>
                                 <td>SAS-2025-26-684</td>
+                                <td>Cash</td>
                                 <td>7 Dec 2025</td>
                                 <td><p className="">Pending</p></td>
                                 <td>
-                                    <a className="download"><i className="fa-solid fa-file-arrow-down"></i></a>
+                                    <a className="download"><i className="fa-solid fa-download"></i></a>
                                 </td>
                             </tr>
                         </tbody>
