@@ -128,7 +128,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                 <div className="box_inner">
                                                     <div className="top_part">
                                                         <div className="part_content">
-                                                            <a><i className="fa-regular fa-calendar-days"></i></a>
+                                                            <a><i className="fa-solid fa-calendar-day"></i></a>
                                                             <div className="middle_sec">
                                                                 <h6>{installment.scheduled_date}</h6>
                                                                 <h4>Total amount: <b>₹{installment.amount}</b></h4>

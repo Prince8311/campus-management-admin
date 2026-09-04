@@ -1721,8 +1721,8 @@ export const FeeCollectWrapper = styled('div')`
 
                                 .middle_sec {
                                     position: relative;
-                                    width: calc(100% - 90px);
-                                    padding: 0 10px;
+                                    width: calc(100% - 30px);
+                                    padding-left: 10px;
                                     display: flex;
                                     flex-direction: column;
 
@@ -1753,15 +1753,16 @@ export const FeeCollectWrapper = styled('div')`
                                 }
 
                                 span {
-                                    position: relative;
-                                    width: 60px;
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    width: auto;
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
-                                    font-size: 10px;
-                                    margin-top: 2px;
+                                    padding: 3px 15px;
+                                    font-size: 9px;
                                     border-radius: 25px;
-                                    padding: 3px 0;
                                     margin-left: auto;
                                     font-weight: 500;
 
@@ -1852,7 +1853,6 @@ export const FeeCollectWrapper = styled('div')`
                 align-items: flex-start;
                 justify-content: space-between;
                 padding: 0 20px;
-                /* margin-top: 10px; */
 
                 .type_box {
                     position: relative;
@@ -1923,7 +1923,7 @@ export const FeeCollectWrapper = styled('div')`
                                 p {
                                     position: relative;
                                     width: calc(100% - 16px);
-                                    padding-left: 10px;
+                                    padding-left: 6px;
                                     transition: all 0.5s ease;
                                 }
                             }
