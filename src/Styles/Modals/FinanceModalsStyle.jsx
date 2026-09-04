@@ -2337,7 +2337,7 @@ export const FeeCollectWrapper = styled('div')`
 
                         .dropdown {
                             position: absolute;
-                            top: 100%;
+                            bottom: 100%;
                             left: 0px;
                             width: 100%;
                             z-index: 15;
