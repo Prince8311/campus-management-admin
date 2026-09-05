@@ -39,11 +39,11 @@ import ClassroomDetailsPage from "../Pages/Academics/Screens/ClassroomDetails";
 import FinanceManagementMainPage from "../Pages/FinanceManagement/Index";
 import FeeCollectionPage from "../Pages/FinanceManagement/Screens/FeeCollection";
 import FeeTransactionsPage from "../Pages/FinanceManagement/Screens/FeeTransactions";
-import FeeConfigurationPage from "../Pages/FinanceManagement/Screens/FeeConfiguration";
 import FeesStructurePage from "../Pages/FinanceManagement/Screens/FeesStructure";
 import DiscountPage from "../Pages/FinanceManagement/Screens/Discount";
 import BankAccountPage from "../Pages/FinanceManagement/Screens/BankAccounts";
 import AddFeesStructure from "../Pages/FinanceManagement/Screens/AddFeesStructure";
+import DiscountFinePage from "../Pages/FinanceManagement/Screens/DiscountFine";
 
 // Communication 
 import CommunicationMainPage from "../Pages/Communication/Index";
@@ -169,11 +169,8 @@ const Routers = () => {
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
                             <Route path="fee-transactions" element={<FeeTransactionsPage />} />
                             <Route path="add-fee-structure" element={<AddFeesStructure />} />
-                            <Route path="fee-configuration" element={<FeeConfigurationPage />}>
-                                <Route path="" element={<Navigate to="fee-structure" />} />
-                                <Route path="fee-structure" element={<FeesStructurePage />} />
-                                <Route path="discount" element={<DiscountPage />} />
-                            </Route>
+                            <Route path="fee-configuration" element={<FeesStructurePage />} />
+                            <Route path="discount-fine" element={<DiscountFinePage />} />
                             <Route path="accounts" element={<BankAccountPage />} />
                         </Route>
                         <Route path="communication" element={<CommunicationMainPage />}>
