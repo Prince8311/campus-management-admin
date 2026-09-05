@@ -1713,7 +1713,7 @@ export const FeeCollectWrapper = styled('div')`
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
-                                    font-size: 12px;
+                                    font-size: 14px;
                                     color: ${colors.customColors.blueColor1};
                                     text-decoration: none;
                                     cursor: pointer;
@@ -1754,8 +1754,8 @@ export const FeeCollectWrapper = styled('div')`
 
                                 span {
                                     position: absolute;
-                                    top: 0;
-                                    right: 0;
+                                    top: -3px;
+                                    right: -3px;
                                     width: auto;
                                     display: flex;
                                     align-items: center;
@@ -2076,7 +2076,7 @@ export const FeeCollectWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             padding: 10px 20px;
-                            padding-left: 10px;
+                            padding-top: 13px;
                             cursor: pointer;
                             border-radius: 6px;
                             border: 1px solid ${colors.customColors.borderColor};
@@ -2094,20 +2094,20 @@ export const FeeCollectWrapper = styled('div')`
                                 font-weight: 500;
                                 font-size: 12px;
                                 color: ${colors.customColors.blackColor2};
-                                margin-top: 7px;
-                                margin-bottom: 4px;
+                                margin-top: 8px;
+                                margin-bottom: 3px;
                                 line-height: 1;
                             }
 
                             a {
                                 position: relative;
-                                width: 30px;
-                                height: 30px;
+                                width: 32px;
+                                height: 32px;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
                                 border-radius: 5px;
-                                font-size: 14px;
+                                font-size: 15px;
                                 color: ${colors.customColors.blueColor1};
                                 background: ${colors.customColors.blueColorLight};
                                 text-decoration: none;
@@ -2136,6 +2136,117 @@ export const FeeCollectWrapper = styled('div')`
                                 transition: all 0.5s ease;
                             }
                         }
+                    }
+                }
+            }
+
+            .account_details_sec {
+                position: relative;
+                width: calc(100% - 40px);
+                margin: 20px 20px 0;
+                padding: 14px 16px;
+                border: 1px solid ${colors.customColors.borderColor};
+                border-radius: 8px;
+                background: ${colors.customColors.whiteColor};
+                box-shadow: 3px 4px 10px ${colors.boxShadowColors.shadowColor2};
+
+                .section_heading {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    .heading_icon {
+                        position: relative;
+                        width: 34px;
+                        height: 34px;
+                        flex-shrink: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 6px;
+                        font-size: 14px;
+                        color: ${colors.customColors.blueColor1};
+                        background: ${colors.customColors.blueColorLight};
+                    }
+
+                    > div:last-of-type {
+                        min-width: 0;
+                        padding-left: 10px;
+                    }
+
+                    h4 {
+                        font-size: 13px;
+                        line-height: 1;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor1};
+                    }
+
+                    p {
+                        margin-top: 5px;
+                        font-size: 10px;
+                        line-height: 1;
+                        color: ${colors.customColors.blackColor2};
+                    }
+                }
+
+                .account_details_grid {
+                    position: relative;
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 12px 20px;
+                    margin-top: 14px;
+                    padding-top: 13px;
+                    border-top: 1px solid ${colors.customColors.borderColor};
+
+                    .detail_item {
+                        min-width: 0;
+
+                        span {
+                            display: block;
+                            font-size: 10px;
+                            line-height: 1;
+                            color: ${colors.customColors.blackColor2};
+                        }
+
+                        p {
+                            margin-top: 5px;
+                            overflow: hidden;
+                            font-size: 12px;
+                            line-height: 1.2;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+
+                            &.account_number,
+                            &.ifsc_code {
+                                letter-spacing: 0.4px;
+                            }
+                        }
+                    }
+                }
+
+                .account_details_empty {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 12px;
+                    padding: 10px 12px;
+                    border-radius: 5px;
+                    color: ${colors.customColors.blackColor2};
+                    background: ${colors.customColors.lightBackground3};
+
+                    i {
+                        margin-right: 7px;
+                        font-size: 12px;
+                        color: ${colors.customColors.blueColor1};
+                    }
+
+                    p {
+                        font-size: 11px;
                     }
                 }
             }
@@ -2179,7 +2290,7 @@ export const FeeCollectWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             padding: 10px 20px;
-                            padding-left: 10px;
+                            padding-top: 13px;
                             cursor: pointer;
                             border-radius: 6px;
                             border: 1px solid ${colors.customColors.borderColor};
@@ -2198,8 +2309,8 @@ export const FeeCollectWrapper = styled('div')`
                                 font-size: 12px;
                                 color: ${colors.customColors.blackColor2};
                                 line-height: 1;
-                                margin-top: 7px;
-                                margin-bottom: 4px;
+                                margin-top: 8px;
+                                margin-bottom: 3px;
                             }
 
                             span {
@@ -2605,33 +2716,112 @@ export const FeeCollectWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
                 padding: 20px;
 
-                button {
+                .adjustment_title {
+                    width: 100%;
+                    margin-bottom: 2px;
+
+                    h4 {
+                        font-size: 13px;
+                        line-height: 1;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor1};
+                    }
+
+                    p {
+                        margin-top: 5px;
+                        font-size: 10px;
+                        color: ${colors.customColors.blackColor2};
+                    }
+                }
+
+                .adjustment_btn {
                     position: relative;
-                    padding: 5px 15px;
+                    width: calc(50% - 5px);
+                    min-height: 64px;
+                    padding: 10px 12px;
                     display: flex;
                     align-items: center;
-                    font-size: 12px;
-                    font-weight: 400;
-                    border-radius: 5px;
+                    text-align: left;
+                    border: 1px solid ${colors.customColors.borderColor};
+                    border-radius: 8px;
                     cursor: pointer;
+                    background: ${colors.customColors.whiteColor};
+                    box-shadow: 2px 3px 8px ${colors.boxShadowColors.shadowColor2};
+                    transition: all 0.25s ease;
 
-                    i {
-                        margin-right: 6px;
-                        font-size: 10px;
+                    .action_icon {
+                        width: 38px;
+                        height: 38px;
+                        flex-shrink: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 7px;
+                        font-size: 14px;
                     }
 
-                    &:first-of-type {
+                    .action_copy {
+                        min-width: 0;
+                        display: flex;
+                        flex-direction: column;
+                        padding-left: 10px;
+
+                        strong {
+                            font-size: 11px;
+                            line-height: 1;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        small {
+                            margin-top: 5px;
+                            overflow: hidden;
+                            font-size: 9px;
+                            color: ${colors.customColors.blackColor2};
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
+                    .action_arrow {
+                        margin-left: auto;
+                        padding-left: 8px;
+                        font-size: 9px;
+                        color: ${colors.customColors.blackColor3};
+                        transition: transform 0.25s ease;
+                    }
+
+                    &.fine .action_icon {
                         color: ${colors.customColors.redColor};
                         background: ${colors.customColors.redColorLight};
-                        border: 1px solid ${colors.customColors.redColor};
                     }
-                    &:last-of-type {
+
+                    &.discount .action_icon {
                         color: ${colors.customColors.blueColor1};
                         background: ${colors.customColors.blueColorLight};
-                        border: 1px solid ${colors.customColors.blueColor1};
-                        margin-left: 25px;
+                    }
+
+                    &:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 3px 6px 12px ${colors.boxShadowColors.shadowColor1};
+
+                        .action_arrow {
+                            transform: translateX(2px);
+                        }
+                    }
+
+                    &.fine.active {
+                        border-color: ${colors.customColors.redColor};
+                        background: ${colors.customColors.redColorLight};
+                    }
+
+                    &.discount.active {
+                        border-color: ${colors.customColors.blueColor1};
+                        background: ${colors.customColors.blueColorLight};
                     }
                 }
             }
@@ -2917,6 +3107,220 @@ export const FeeCollectWrapper = styled('div')`
                             }
                         }
                     }
+                }
+            }
+
+            .reason_from_sec {
+                animation: adjustmentPanelIn 0.28s ease;
+
+                @keyframes adjustmentPanelIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-6px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .sec_inner {
+                    padding: 16px;
+                    border-style: solid;
+                    border-color: ${colors.customColors.borderColor};
+                    border-radius: 10px;
+                    background: ${colors.customColors.whiteColor};
+                    box-shadow: 3px 5px 14px ${colors.boxShadowColors.shadowColor2};
+
+                    .adjustment_form_head {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 15px;
+                        padding-bottom: 13px;
+                        border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                        .head_icon {
+                            width: 38px;
+                            height: 38px;
+                            flex-shrink: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 8px;
+                            font-size: 14px;
+                        }
+
+                        .head_copy {
+                            min-width: 0;
+                            padding: 0 12px;
+
+                            h4 {
+                                font-size: 12px;
+                                line-height: 1;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor1};
+                            }
+
+                            p {
+                                margin-top: 6px;
+                                font-size: 9px;
+                                line-height: 1.3;
+                                color: ${colors.customColors.blackColor2};
+                            }
+                        }
+
+                        .close_adjustment {
+                            width: 28px;
+                            height: 28px;
+                            flex-shrink: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-left: auto;
+                            border: none;
+                            border-radius: 50%;
+                            font-size: 11px;
+                            color: ${colors.customColors.blackColor2};
+                            cursor: pointer;
+                            background: ${colors.customColors.lightBackground3};
+                            transition: all 0.2s ease;
+
+                            &:hover {
+                                color: ${colors.customColors.redColor};
+                                background: ${colors.customColors.redColorLight};
+                                transform: rotate(90deg);
+                            }
+                        }
+                    }
+
+                    .input_box,
+                    .select_box {
+                        margin-bottom: 4px;
+
+                        > span {
+                            margin-bottom: 6px;
+                            font-size: 10px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+
+                    .input_box {
+                        > input {
+                            height: 40px;
+                            margin-top: 0;
+                            border: 1px solid transparent;
+                            color: ${colors.customColors.blackColor1};
+                            transition: all 0.2s ease;
+
+                            &::placeholder {
+                                color: ${colors.customColors.blackColor3};
+                            }
+
+                            &:focus {
+                                border-color: ${colors.customColors.blueColor1};
+                                background: ${colors.customColors.whiteColor};
+                                box-shadow: 0 0 0 3px ${colors.customColors.blueColorLight};
+                            }
+                        }
+
+                        .amount_input {
+                            width: 100%;
+                            height: 40px;
+                            display: flex;
+                            align-items: center;
+                            padding: 0 13px;
+                            border: 1px solid transparent;
+                            border-radius: 6px;
+                            background: ${colors.customColors.lightBackground3};
+                            transition: all 0.2s ease;
+
+                            > i {
+                                width: 20px;
+                                font-size: 11px;
+                                color: ${colors.customColors.blackColor2};
+                                border-right: 1px solid ${colors.customColors.borderColor};
+                            }
+
+                            input {
+                                height: 100%;
+                                margin: 0;
+                                padding: 0 0 0 10px;
+                                border: none;
+                                background: transparent;
+                            }
+
+                            &:focus-within {
+                                border-color: ${colors.customColors.blueColor1};
+                                background: ${colors.customColors.whiteColor};
+                                box-shadow: 0 0 0 3px ${colors.customColors.blueColorLight};
+                            }
+                        }
+                    }
+
+                    .select_box .dropdown_sec {
+                        height: 40px;
+                        margin-top: 0;
+
+                        .dropdown_btn {
+                            border: 1px solid transparent;
+                            border-radius: 6px;
+                        }
+                    }
+
+                    .from_btns {
+                        margin-top: 17px;
+                        padding-top: 13px;
+                        border-top: 1px solid ${colors.customColors.borderColor};
+
+                        button {
+                            min-width: 88px;
+                            height: 34px;
+                            padding: 0 18px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 6px;
+                            font-size: 10px;
+                            font-weight: 500;
+                            transition: all 0.2s ease;
+
+                            &:first-of-type {
+                                margin-right: 10px;
+                                border: 1px solid ${colors.customColors.borderColor};
+                                background: ${colors.customColors.whiteColor};
+
+                                &:hover {
+                                    background: ${colors.customColors.lightBackground3};
+                                }
+                            }
+
+                            &:last-of-type {
+                                box-shadow: 0 4px 10px ${colors.boxShadowColors.shadowColor1};
+
+                                i {
+                                    margin-right: 6px;
+                                    font-size: 9px;
+                                }
+
+                                &:hover {
+                                    transform: translateY(-1px);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.fine .adjustment_form_head .head_icon {
+                    color: ${colors.customColors.redColor};
+                    background: ${colors.customColors.redColorLight};
+                }
+
+                &.discount .adjustment_form_head .head_icon {
+                    color: ${colors.customColors.blueColor1};
+                    background: ${colors.customColors.blueColorLight};
                 }
             }
         }

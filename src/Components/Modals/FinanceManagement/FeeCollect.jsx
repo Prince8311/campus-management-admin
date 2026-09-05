@@ -11,18 +11,18 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
     const [recordType, setRecordType] = useState('installments');
     const [paymentMode, setPaymentMode] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [paymentReferenceNumber, setPaymentReferenceNumber] = useState('');
     const [adjustmentType, setAdjustmentType] = useState('');
+    const [collectionAmount, setCollectionAmount] = useState('0.00');
     const [studentFeeDetails, setStudentFeeDetails] = useState({
         total_due: '0.00',
         overdue: '0.00',
         installments: [],
         canSelectInstallment: true,
+        account_details: null,
     });
     const [isStudentFeeDetailsLoading, setIsStudentFeeDetailsLoading] = useState(false);
 
-    const bankAccounts = ['Pnb', 'sbi', 'axis', 'hdfc'];
-    const [showBankAccountDropdown, setShowBankAccountDropdown] = useState(false);
-    const [selectAccount, setSelectAccount] = useState('');
     const filterBtnRef = useRef(null);
     const dropdownRef = useRef(null);
     const [isCalendarDropdownOpen, setIsCalendarDropdownOpen] = useState(false);
@@ -33,19 +33,23 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
             setRecordType('installments');
             setPaymentMode('');
             setPaymentMethod('');
+            setPaymentReferenceNumber('');
             setAdjustmentType('');
-            setShowBankAccountDropdown(false);
-            setSelectAccount('');
+            setCollectionAmount('0.00');
+            setFinalSelectedDate('');
+            setIsCalendarDropdownOpen(false);
         }
     }, [isOpenFeeCollectModal]);
 
     const fetchStudentFeeDetails = useCallback(async () => {
         setIsStudentFeeDetailsLoading(true);
+        setCollectionAmount('0.00');
         setStudentFeeDetails({
             total_due: '0.00',
             overdue: '0.00',
             installments: [],
             canSelectInstallment: true,
+            account_details: null,
         });
         try {
             const response = await axiosInstance.get(api.fetchStudentFeeDetails, {
@@ -58,14 +62,20 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
             if (response?.data.status === 200) {
                 const feeDetails = response?.data?.data || response?.data;
                 const canSelectInstallment = feeDetails?.canSelectInstallment ?? true;
+                const installments = feeDetails?.installments || [];
+                const totalDue = feeDetails?.total_due ?? '0.00';
+                const activeInstallment = installments.find((installment) => installment.isActive === true);
+                const defaultRecordType = canSelectInstallment ? 'installments' : 'lumpSum';
 
                 setStudentFeeDetails({
-                    total_due: feeDetails?.total_due ?? '0.00',
+                    total_due: totalDue,
                     overdue: feeDetails?.overdue ?? '0.00',
-                    installments: feeDetails?.installments || [],
+                    installments,
                     canSelectInstallment,
+                    account_details: feeDetails?.account_details || null,
                 });
-                setRecordType(canSelectInstallment ? 'installments' : 'lumpSum');
+                setRecordType(defaultRecordType);
+                setCollectionAmount(activeInstallment?.due_amount ?? '0.00');
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -80,18 +90,48 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
         }
     }, [isOpenFeeCollectModal, fetchStudentFeeDetails]);
 
-    const handleSelectAccount = (account) => {
-        setSelectAccount(account);
-        setShowBankAccountDropdown(false);
-    }
-
-    const handleOpenAccountDropdown = () => {
-        setShowBankAccountDropdown(!showBankAccountDropdown);
-    }
-
     function closeModal() {
         setIsOpenFeeCollectModal(false);
     }
+
+    const handleRecordTypeChange = (event) => {
+        const selectedRecordType = event.target.value;
+        const activeInstallment = studentFeeDetails.installments.find(
+            (installment) => installment.isActive === true
+        );
+
+        setRecordType(selectedRecordType);
+        setCollectionAmount(activeInstallment?.due_amount ?? '0.00');
+    };
+
+    const handleLumpSumAmountChange = (event) => {
+        const { value } = event.target;
+
+        if (/^\d*\.?\d{0,2}$/.test(value)) {
+            setCollectionAmount(value);
+        }
+    };
+
+    const handlePaymentModeChange = (event) => {
+        setPaymentMode(event.target.value);
+        setPaymentMethod('');
+        setPaymentReferenceNumber('');
+        setFinalSelectedDate('');
+        setIsCalendarDropdownOpen(false);
+    };
+
+    const handlePaymentMethodChange = (event) => {
+        setPaymentMethod(event.target.value);
+        setPaymentReferenceNumber('');
+    };
+
+    const requiresReferenceNumber = paymentMode === 'offline'
+        && (paymentMethod === 'dd' || paymentMethod === 'cheque');
+    const isFormValid = Number(collectionAmount) > 0
+        && Boolean(paymentMode)
+        && Boolean(paymentMethod)
+        && (paymentMode !== 'offline' || Boolean(finalSelectedDate))
+        && (!requiresReferenceNumber || Boolean(paymentReferenceNumber.trim()));
 
     const openCalender = () => {
         setIsCalendarDropdownOpen(!isCalendarDropdownOpen)
@@ -175,7 +215,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                             type="radio"
                                             value="installments"
                                             checked={recordType === 'installments'}
-                                            onChange={(event) => setRecordType(event.target.value)}
+                                            onChange={handleRecordTypeChange}
                                             disabled={!studentFeeDetails.canSelectInstallment}
                                         />
                                         <label htmlFor="int">
@@ -190,7 +230,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                             type="radio"
                                             value="lumpSum"
                                             checked={recordType === 'lumpSum'}
-                                            onChange={(event) => setRecordType(event.target.value)}
+                                            onChange={handleRecordTypeChange}
                                         />
                                         <label htmlFor="lump">
                                             <span><i className="fa-solid fa-circle"></i></span>
@@ -216,6 +256,44 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                 </div>
                             </div>
                         </div>
+                        <div className="account_details_sec">
+                            <div className="section_heading">
+                                <div className="heading_icon">
+                                    <i className="fa-solid fa-building-columns"></i>
+                                </div>
+                                <div>
+                                    <h4>Account Details</h4>
+                                    <p>Bank account linked with this class &amp; section</p>
+                                </div>
+                            </div>
+                            {isStudentFeeDetailsLoading ? (
+                                <SkeletonLoader width="100%" height="92px" margin="12px 0 0 0" />
+                            ) : studentFeeDetails.account_details ? (
+                                <div className="account_details_grid">
+                                    <div className="detail_item">
+                                        <span>Account Name</span>
+                                        <p>{studentFeeDetails.account_details.account_name || '—'}</p>
+                                    </div>
+                                    <div className="detail_item">
+                                        <span>Account Number</span>
+                                        <p className="account_number">{studentFeeDetails.account_details.account_no || '—'}</p>
+                                    </div>
+                                    <div className="detail_item">
+                                        <span>Beneficiary Name</span>
+                                        <p>{studentFeeDetails.account_details.beneficiary_name || '—'}</p>
+                                    </div>
+                                    <div className="detail_item">
+                                        <span>IFSC Code</span>
+                                        <p className="ifsc_code">{studentFeeDetails.account_details.ifsc_code || '—'}</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="account_details_empty">
+                                    <i className="fa-solid fa-circle-info"></i>
+                                    <p>No bank account details are available.</p>
+                                </div>
+                            )}
+                        </div>
                         <div className="payment_type_sec">
                             <h4>Payment Mode</h4>
                             <div className="type_sec_content">
@@ -226,7 +304,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                         name="category"
                                         value="offline"
                                         checked={paymentMode === 'offline'}
-                                        onChange={(event) => setPaymentMode(event.target.value)}
+                                        onChange={handlePaymentModeChange}
                                     />
                                     <label htmlFor="offline">
                                         <a><i className="fa-solid fa-money-bills"></i></a>
@@ -241,7 +319,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                         name="category"
                                         value="online"
                                         checked={paymentMode === 'online'}
-                                        onChange={(event) => setPaymentMode(event.target.value)}
+                                        onChange={handlePaymentModeChange}
                                     />
                                     <label htmlFor="online">
                                         <a><i className="fa-solid fa-qrcode"></i></a>
@@ -264,7 +342,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                     name="method"
                                                     value="link"
                                                     checked={paymentMethod === 'link'}
-                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                    onChange={handlePaymentMethodChange}
                                                 />
                                                 <label htmlFor="link">
                                                     <a className="link"><i className="fa-solid fa-link"></i></a>
@@ -279,7 +357,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                     name="method"
                                                     value="upi"
                                                     checked={paymentMethod === 'upi'}
-                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                    onChange={handlePaymentMethodChange}
                                                 />
                                                 <label htmlFor="upi">
                                                     <a><i className="fa-solid fa-qrcode"></i></a>
@@ -298,7 +376,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                     name="method"
                                                     value="cash"
                                                     checked={paymentMethod === 'cash'}
-                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                    onChange={handlePaymentMethodChange}
                                                 />
                                                 <label htmlFor="cash">
                                                     <a className="cash"><i className="fa-solid fa-money-bill"></i></a>
@@ -313,7 +391,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                     name="method"
                                                     value="dd"
                                                     checked={paymentMethod === 'dd'}
-                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                    onChange={handlePaymentMethodChange}
                                                 />
                                                 <label htmlFor="dd">
                                                     <a className="dd"><i className="fa-solid fa-money-check"></i></a>
@@ -328,7 +406,7 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                     name="method"
                                                     value="cheque"
                                                     checked={paymentMethod === 'cheque'}
-                                                    onChange={(event) => setPaymentMethod(event.target.value)}
+                                                    onChange={handlePaymentMethodChange}
                                                 />
                                                 <label htmlFor="cheque">
                                                     <a className="cheque"><i className="fa-solid fa-money-check"></i></a>
@@ -341,98 +419,118 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                 </div>
                             </div>
                         )}
-                        <div className="content_input_sec">
-                            {recordType === 'lumpSum' && (
-                                <div className="input_box halfWidth">
-                                    <span>Lump Sum Amount</span>
-                                    <input type="text" />
-                                </div>
-                            )}
-                            {paymentMode !== 'online' && (
-                                <>
+                        {(recordType === 'lumpSum' || paymentMode === 'offline') && (
+                            <div className="content_input_sec">
+                                {recordType === 'lumpSum' && (
                                     <div className="input_box halfWidth">
-                                        <span>Payment Date <p>*</p></span>
-                                        <div className="sec_box">
-                                            <div className="time_btn" onClick={openCalender} ref={filterBtnRef}>
-                                                <p>{finalSelectedDate}</p>
-                                                <i className="fa-regular fa-calendar"></i>
-                                            </div>
-                                            {
-                                                isCalendarDropdownOpen && (
+                                        <span>Lump Sum Amount</span>
+                                        <input
+                                            type="text"
+                                            inputMode="decimal"
+                                            value={collectionAmount}
+                                            onChange={handleLumpSumAmountChange}
+                                        />
+                                    </div>
+                                )}
+                                {paymentMode === 'offline' && (
+                                    <>
+                                        <div className="input_box halfWidth">
+                                            <span>Payment Date <p>*</p></span>
+                                            <div className="sec_box">
+                                                <div className="time_btn" onClick={openCalender} ref={filterBtnRef}>
+                                                    <p>{finalSelectedDate}</p>
+                                                    <i className="fa-regular fa-calendar"></i>
+                                                </div>
+                                                {isCalendarDropdownOpen && (
                                                     <div className="dropdown" ref={dropdownRef}>
                                                         <Calender setFinalSelectedDate={setFinalSelectedDate} />
                                                     </div>
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                    {(paymentMethod === 'dd' || paymentMethod === 'cheque') && (
-                                        <div className="input_box halfWidth">
-                                            <span>{paymentMethod === 'dd' ? 'Demand Draft Number' : 'Cheque Number'}</span>
-                                            <input type="text" />
-                                        </div>
-                                    )}
-                                    <div className="select_box half">
-                                        <span>Company Bank Account <p>*</p></span>
-                                        <div className="dropdown_sec">
-                                            <div className="dropdown_btn" onClick={handleOpenAccountDropdown}>
-                                                <p>{selectAccount}</p>
-                                                <i className={`fa-solid fa-angle-down ${showBankAccountDropdown} ? 'active' : ''`}></i>
-                                            </div>
-                                            <div className={`dropdown ${showBankAccountDropdown ? 'active' : ''}`}>
-                                                <div className="dropdown_inner">
-                                                    <div className="search_sec">
-                                                        <i className="fa-solid fa-magnifying-glass"></i>
-                                                        <input type="text" placeholder="Search by Account Name..." />
-                                                    </div>
-                                                    <ul>
-                                                        {
-                                                            bankAccounts.map((account, i) => (
-                                                                <li key={i}
-                                                                    onClick={() => handleSelectAccount(account)}
-                                                                    className={selectAccount === account ? 'active' : ''}
-                                                                >
-                                                                    {account}
-                                                                </li>
-                                                            ))
-                                                        }
-                                                        {/* <div className="user_box">
-                                                            <div className="box_left">
-                                                                <h6>JB</h6>
-                                                            </div>
-                                                            <div className="box_right">
-                                                                <p>Joydeep Barik</p>
-                                                                <span>A/c : 427961575535</span>
-                                                            </div>
-                                                        </div> */}
-                                                    </ul>
-                                                </div>
+                                                )}
                                             </div>
                                         </div>
-                                    </div>
-                                </>
-                            )}
-                        </div>
+                                        {requiresReferenceNumber && (
+                                            <div className="input_box halfWidth">
+                                                <span>
+                                                    {paymentMethod === 'dd' ? 'Demand Draft Number' : 'Cheque Number'}
+                                                    <p>*</p>
+                                                </span>
+                                                <input
+                                                    type="text"
+                                                    value={paymentReferenceNumber}
+                                                    onChange={(event) => setPaymentReferenceNumber(event.target.value)}
+                                                />
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        )}
                         <div className="btn_sec">
-                            <button type="button" onClick={() => setAdjustmentType(adjustmentType === 'fine' ? '' : 'fine')}>
-                                <i className="fa-solid fa-plus"></i>Add Fine
+                            <div className="adjustment_title">
+                                <h4>Payment Adjustments</h4>
+                                <p>Add an optional fine or discount to this collection</p>
+                            </div>
+                            <button
+                                type="button"
+                                className={`adjustment_btn fine ${adjustmentType === 'fine' ? 'active' : ''}`}
+                                onClick={() => setAdjustmentType(adjustmentType === 'fine' ? '' : 'fine')}
+                            >
+                                <span className="action_icon"><i className="fa-solid fa-receipt"></i></span>
+                                <span className="action_copy">
+                                    <strong>Add Fine</strong>
+                                    <small>Apply an extra charge</small>
+                                </span>
+                                <i className="fa-solid fa-chevron-right action_arrow"></i>
                             </button>
-                            <button type="button" onClick={() => setAdjustmentType(adjustmentType === 'discount' ? '' : 'discount')}>
-                                <i className="fa-solid fa-plus"></i>Add Discount
+                            <button
+                                type="button"
+                                className={`adjustment_btn discount ${adjustmentType === 'discount' ? 'active' : ''}`}
+                                onClick={() => setAdjustmentType(adjustmentType === 'discount' ? '' : 'discount')}
+                            >
+                                <span className="action_icon"><i className="fa-solid fa-tags"></i></span>
+                                <span className="action_copy">
+                                    <strong>Add Discount</strong>
+                                    <small>Reduce the payable amount</small>
+                                </span>
+                                <i className="fa-solid fa-chevron-right action_arrow"></i>
                             </button>
                         </div>
                         {adjustmentType && (
-                            <div className="reason_from_sec">
+                            <div className={`reason_from_sec ${adjustmentType}`}>
                                 <div className="sec_inner">
+                                    <div className="adjustment_form_head">
+                                        <div className="head_icon">
+                                            <i className={`fa-solid ${adjustmentType === 'fine' ? 'fa-receipt' : 'fa-tags'}`}></i>
+                                        </div>
+                                        <div className="head_copy">
+                                            <h4>{adjustmentType === 'fine' ? 'Add Fine Details' : 'Add Discount Details'}</h4>
+                                            <p>
+                                                {adjustmentType === 'fine'
+                                                    ? 'Enter the charge and mention why it is being applied.'
+                                                    : 'Enter the concession and select the applicable reason.'}
+                                            </p>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            className="close_adjustment"
+                                            aria-label="Close adjustment form"
+                                            onClick={() => setAdjustmentType('')}
+                                        >
+                                            <i className="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
                                     {adjustmentType === 'fine' && (
                                         <>
                                             <div className="input_box halfWidth">
                                                 <span>Fine Amount <p>*</p></span>
-                                                <input type="text" />
+                                                <div className="amount_input">
+                                                    <i className="fa-solid fa-indian-rupee-sign"></i>
+                                                    <input type="text" inputMode="decimal" placeholder="Enter amount" />
+                                                </div>
                                             </div>
                                             <div className="input_box halfWidth">
                                                 <span>Reason <p>*</p></span>
-                                                <input type="text" />
+                                                <input type="text" placeholder="e.g. Late payment" />
                                             </div>
                                         </>
                                     )}
@@ -440,7 +538,10 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                         <>
                                             <div className="input_box halfWidth">
                                                 <span>Discount Amount <p>*</p></span>
-                                                <input type="text" />
+                                                <div className="amount_input">
+                                                    <i className="fa-solid fa-indian-rupee-sign"></i>
+                                                    <input type="text" inputMode="decimal" placeholder="Enter amount" />
+                                                </div>
                                             </div>
                                             <div className="select_box half">
                                                 <span>Select Discount Reason <p>*</p></span>
@@ -462,14 +563,19 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                     )}
                                     <div className="from_btns">
                                         <button type="button" onClick={() => setAdjustmentType('')}>Cancel</button>
-                                        <button>Add</button>
+                                        <button type="button">
+                                            <i className="fa-solid fa-check"></i>
+                                            {adjustmentType === 'fine' ? 'Apply Fine' : 'Apply Discount'}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         )}
                     </div>
                     <div className="modal_btn">
-                        <button>Collect <span>(₹10000)</span></button>
+                        <button disabled={!isFormValid}>
+                            Collect <span>(&#8377;{collectionAmount || '0.00'})</span>
+                        </button>
                     </div>
                 </div>
             </FeeCollectWrapper>
