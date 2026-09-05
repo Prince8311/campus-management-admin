@@ -4,8 +4,9 @@ import { AddRoutesWrapper } from "../../../Styles/TransportStyle";
 import { toast } from "react-toastify";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
-import ButtonLoader from "../../../Components/Loader/ButtonLoader";
+import { calculateStopTimes, distanceFromSchool } from "../routeTiming";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import TimeBox from "../../../Components/TimeBox";
 import { UserData } from "../../../Context/PageContext";
 import { DirectionsRenderer, GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { googleMapsLoaderOptions } from "../../../Services/Api/GoogleMapsConfig";
@@ -15,6 +16,20 @@ const AddRoutesPage = () => {
     const navigate = useNavigate();
     const { userDetails } = UserData();
     const mapRef = useRef(null);
+    const startTimeRef = useRef(null);
+    const endTimeRef = useRef(null);
+    const [schoolTiming, setSchoolTiming] = useState({ start: '', end: '' });
+    const [openSchoolTimeBox, setOpenSchoolTimeBox] = useState(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!startTimeRef.current?.contains(event.target) && !endTimeRef.current?.contains(event.target)) {
+                setOpenSchoolTimeBox(null);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
     const { isLoaded: isMapLoaded, loadError } = useJsApiLoader(googleMapsLoaderOptions);
     const instLat = parseFloat(userDetails?.institution?.latitude);
     const instLng = parseFloat(userDetails?.institution?.longitude);
@@ -40,7 +55,6 @@ const AddRoutesPage = () => {
     const stopagePositionRef = useRef({});
     const [stopages, setStopages] = useState([{ id: 1, label: "Stopage 1" }]);
     const [directionsResult, setDirectionsResult] = useState(null);
-    const [draggingStopageId, setDraggingStopageId] = useState(null);
     const selectedStopageIds = new Set(
         Object.values(selectedStopagesByBox)
             .map((stopage) => stopage?.id)
@@ -58,7 +72,7 @@ const AddRoutesPage = () => {
         stopagePositionRef.current = previousPositions;
     };
 
-    const getProjectedStopageOrder = (stopageBoxes, stopageSelections) => {
+    const getDistanceSortedStopageOrder = (stopageBoxes, stopageSelections) => {
         const selectedEntries = stopageBoxes
             .map((box) => {
                 const stopage = stopageSelections[box.id];
@@ -86,38 +100,9 @@ const AddRoutesPage = () => {
             return stopageBoxes;
         }
 
-        const routeAnchor = selectedEntries.reduce((farthest, current) => {
-            const farthestDistance = Math.pow(farthest.stopage.lat - instCenter.lat, 2) + Math.pow(farthest.stopage.lng - instCenter.lng, 2);
-            const currentDistance = Math.pow(current.stopage.lat - instCenter.lat, 2) + Math.pow(current.stopage.lng - instCenter.lng, 2);
-            return currentDistance > farthestDistance ? current : farthest;
-        });
-
-        const baseVector = {
-            lat: routeAnchor.stopage.lat - instCenter.lat,
-            lng: routeAnchor.stopage.lng - instCenter.lng
-        };
-        const baseLengthSq = Math.pow(baseVector.lat, 2) + Math.pow(baseVector.lng, 2);
-
         const sortedSelectedBoxes = [...selectedEntries]
-            .sort((a, b) => {
-                if (!baseLengthSq) {
-                    const aDistance = Math.pow(a.stopage.lat - instCenter.lat, 2) + Math.pow(a.stopage.lng - instCenter.lng, 2);
-                    const bDistance = Math.pow(b.stopage.lat - instCenter.lat, 2) + Math.pow(b.stopage.lng - instCenter.lng, 2);
-                    return aDistance - bDistance;
-                }
-
-                const aProjection = ((a.stopage.lat - instCenter.lat) * baseVector.lat + (a.stopage.lng - instCenter.lng) * baseVector.lng) / baseLengthSq;
-                const bProjection = ((b.stopage.lat - instCenter.lat) * baseVector.lat + (b.stopage.lng - instCenter.lng) * baseVector.lng) / baseLengthSq;
-
-                if (aProjection === bProjection) {
-                    const aDistance = Math.pow(a.stopage.lat - instCenter.lat, 2) + Math.pow(a.stopage.lng - instCenter.lng, 2);
-                    const bDistance = Math.pow(b.stopage.lat - instCenter.lat, 2) + Math.pow(b.stopage.lng - instCenter.lng, 2);
-                    return aDistance - bDistance;
-                }
-
-                return aProjection - bProjection;
-            })
-            .map((entry) => entry.box);
+            .sort((a, b) => distanceFromSchool(a.stopage, instCenter) - distanceFromSchool(b.stopage, instCenter))
+            .map(entry => entry.box);
 
         const selectedBoxIds = new Set(sortedSelectedBoxes.map((box) => box.id));
         const unselectedBoxes = stopageBoxes.filter((box) => !selectedBoxIds.has(box.id));
@@ -233,45 +218,6 @@ const AddRoutesPage = () => {
         ]);
     }
 
-    const reorderStopages = (fromId, toId) => {
-        if (fromId === toId) return;
-
-        captureStopagePositions();
-
-        setStopages((prev) => {
-            const fromIndex = prev.findIndex((stopage) => stopage.id === fromId);
-            const toIndex = prev.findIndex((stopage) => stopage.id === toId);
-
-            if (fromIndex === -1 || toIndex === -1) {
-                return prev;
-            }
-
-            const next = [...prev];
-            const [moved] = next.splice(fromIndex, 1);
-            next.splice(toIndex, 0, moved);
-            return next;
-        });
-    };
-
-    const reorderStopagesByIdOrder = (orderedIds) => {
-        if (!orderedIds.length) return;
-
-        captureStopagePositions();
-        setStopages((prev) => {
-            const stopageMap = new Map(prev.map((stopage) => [stopage.id, stopage]));
-            const orderedStopages = orderedIds.map((id) => stopageMap.get(id)).filter(Boolean);
-            const orderedIdSet = new Set(orderedIds);
-            const remainingStopages = prev.filter((stopage) => !orderedIdSet.has(stopage.id));
-            const next = [...orderedStopages, ...remainingStopages];
-
-            if (next.length === prev.length && next.every((stopage, index) => stopage.id === prev[index]?.id)) {
-                return prev;
-            }
-
-            return next;
-        });
-    };
-
     useEffect(() => {
         const previousPositions = stopagePositionRef.current;
         const animationFrame = requestAnimationFrame(() => {
@@ -307,7 +253,6 @@ const AddRoutesPage = () => {
             return updated;
         });
         if (openStopageDropdownId === boxId) setOpenStopageDropdownId(null);
-        if (draggingStopageId === boxId) setDraggingStopageId(null);
     };
 
     const checkStopageDropPosition = (boxId) => {
@@ -330,15 +275,9 @@ const AddRoutesPage = () => {
 
     const handleSelectStopageForBox = (boxId, stopageOption) => {
         captureStopagePositions();
-        setSelectedStopagesByBox((prev) => {
-            const updatedSelections = {
-                ...prev,
-                [boxId]: stopageOption
-            };
-
-            setStopages((prevStopages) => getProjectedStopageOrder(prevStopages, updatedSelections));
-            return updatedSelections;
-        });
+        const updatedSelections = { ...selectedStopagesByBox, [boxId]: stopageOption };
+        setSelectedStopagesByBox(updatedSelections);
+        setStopages(getDistanceSortedStopageOrder(stopages, updatedSelections));
         setOpenStopageDropdownId(null);
     };
 
@@ -364,55 +303,74 @@ const AddRoutesPage = () => {
         fetchStopageList();
     }, []);
 
-    const selectedMarkerIds = selectedStopageMarkers.map((s) => s.id).join(',');
+    const [routeTravel, setRouteTravel] = useState(null);
+    const [routeError, setRouteError] = useState('');
+    const [routeRetry, setRouteRetry] = useState(0);
+    // A stable key avoids requesting routes again when only a school time changes.
+    const routeKey = JSON.stringify({
+        school: { lat: instLat, lng: instLng },
+        stops: stopages.filter(box => selectedStopagesByBox[box.id]).map(box => ({
+            boxId: box.id,
+            lat: Number.parseFloat(selectedStopagesByBox[box.id].latitude),
+            lng: Number.parseFloat(selectedStopagesByBox[box.id].longitude)
+        }))
+    });
 
     useEffect(() => {
-        if (!isMapLoaded || !window.google?.maps || selectedStopageMarkers.length === 0) {
-            setDirectionsResult(null);
+        let cancelled = false;
+        setRouteTravel(null);
+        setDirectionsResult(null);
+        setRouteError('');
+        const { school, stops } = JSON.parse(routeKey);
+        if (!stops.length || !isMapLoaded || !window.google?.maps) return;
+        const validPoint = point => Number.isFinite(point.lat) && Number.isFinite(point.lng) && Math.abs(point.lat) <= 90 && Math.abs(point.lng) <= 180;
+        if (![school, ...stops].every(validPoint)) {
+            setRouteError('School or stop coordinates are missing or invalid. Update them to calculate times.');
             return;
         }
-
-        const directionsService = new window.google.maps.DirectionsService();
-        const sortedMarkers = getProjectedStopageOrder(
-            selectedStopageMarkers.map((stopage) => ({ id: stopage.id })),
-            selectedStopageMarkers.reduce((acc, stopage) => {
-                acc[stopage.id] = stopage;
-                return acc;
-            }, {})
-        ).map((box) => selectedStopageMarkers.find((stopage) => stopage.id === box.id)).filter(Boolean);
-
-        const routeWaypoints = sortedMarkers.slice(0, -1);
-        const waypoints = routeWaypoints.map((s) => ({
-            location: { lat: s.lat, lng: s.lng },
-            stopover: true
-        }));
-        const destination = sortedMarkers[sortedMarkers.length - 1];
-
-        directionsService.route(
-            {
-                origin: instCenter,
-                destination: { lat: destination.lat, lng: destination.lng },
-                waypoints,
+        const service = new window.google.maps.DirectionsService();
+        const requestRoute = points => new Promise((resolve, reject) => {
+            service.route({
+                origin: points[0],
+                destination: points[points.length - 1],
+                waypoints: points.slice(1, -1).map(location => ({ location, stopover: true })),
                 travelMode: window.google.maps.TravelMode.DRIVING,
-                optimizeWaypoints: true
-            },
-            (result, status) => {
-                if (status === window.google.maps.DirectionsStatus.OK) {
-                    setDirectionsResult(result);
-
-                    const waypointOrder = result?.routes?.[0]?.waypoint_order || [];
-                    const optimizedWaypoints = waypointOrder.length > 0
-                        ? waypointOrder.map((index) => routeWaypoints[index]).filter(Boolean)
-                        : routeWaypoints;
-                    const optimizedStopageIds = [...optimizedWaypoints, destination].map((stopage) => stopage.id);
-
-                    reorderStopagesByIdOrder(optimizedStopageIds);
-                } else {
-                    setDirectionsResult(null);
-                }
+                optimizeWaypoints: false
+            }, (result, status) => {
+                if (status === window.google.maps.DirectionsStatus.OK) resolve(result);
+                else reject(new Error(status));
+            });
+        });
+        const points = stops.map(({ lat, lng }) => ({ lat, lng }));
+        Promise.all([
+            requestRoute([school, ...points]),
+            requestRoute([...points].reverse().concat(school))
+        ]).then(([dropRoute, pickupRoute]) => {
+            if (cancelled) return;
+            const dropLegs = dropRoute.routes[0].legs;
+            const pickupLegs = pickupRoute.routes[0].legs;
+            if ([dropLegs, pickupLegs].some(legs => legs.length !== stops.length || legs.some(leg => !Number.isFinite(leg.duration?.value) || leg.duration.value < 0 || !Number.isFinite(leg.distance?.value)))) {
+                throw new Error('Missing route distance or duration');
             }
-        );
-    }, [isMapLoaded, selectedMarkerIds]);
+            setDirectionsResult(dropRoute);
+            setRouteTravel({ key: routeKey, dropLegs, pickupLegs });
+        }).catch(() => {
+            if (!cancelled) setRouteError('Unable to calculate road travel times. Check the selected stops and try again.');
+        });
+        return () => { cancelled = true; };
+    }, [isMapLoaded, routeKey, routeRetry]);
+
+    const currentTravel = routeTravel?.key === routeKey ? routeTravel : null;
+    const stopTimes = currentTravel ? calculateStopTimes(
+        stopages.filter(box => selectedStopagesByBox[box.id]).map(box => box.id),
+        currentTravel.pickupLegs, currentTravel.dropLegs, schoolTiming
+    ) : {};
+    const getStopTimeLabel = (boxId, type) => {
+        if (!selectedStopagesByBox[boxId]) return 'Select stopage';
+        if (!schoolTiming[type === 'pickup' ? 'start' : 'end']) return type === 'pickup' ? 'Set school start time' : 'Set school end time';
+        if (routeError || loadError) return 'Unavailable';
+        return stopTimes[boxId]?.[type] || 'Calculating...';
+    };
 
     useEffect(() => {
         if (!isMapLoaded || !mapRef.current || !window.google?.maps) {
@@ -550,29 +508,46 @@ const AddRoutesPage = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="date_box">
+                                <div className="date_box" ref={startTimeRef}>
                                     <span>School Start Time <p>*</p></span>
-                                    <div className="date_btn">
-                                        <p>Set Time</p>
+                                    <div className="date_btn" onClick={() => setOpenSchoolTimeBox(prev => prev === 'start' ? null : 'start')}>
+                                        <p>{schoolTiming.start || 'Set Time'}</p>
                                         <i className="fa-regular fa-clock"></i>
                                     </div>
+                                    {openSchoolTimeBox === 'start' && (
+                                        <div className="school_time_dropdown">
+                                            <TimeBox
+                                                selectedTime={schoolTiming.start}
+                                                onTimeChange={(time) => setSchoolTiming(prev => ({ ...prev, start: time }))}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="date_box">
+                                <div className="date_box" ref={endTimeRef}>
                                     <span>School End Time <p>*</p></span>
-                                    <div className="date_btn">
-                                        <p>Set Time</p>
+                                    <div className="date_btn" onClick={() => setOpenSchoolTimeBox(prev => prev === 'end' ? null : 'end')}>
+                                        <p>{schoolTiming.end || 'Set Time'}</p>
                                         <i className="fa-regular fa-clock"></i>
                                     </div>
+                                    {openSchoolTimeBox === 'end' && (
+                                        <div className="school_time_dropdown">
+                                            <TimeBox
+                                                selectedTime={schoolTiming.end}
+                                                onTimeChange={(time) => setSchoolTiming(prev => ({ ...prev, end: time }))}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
                             <div className="stopage_sections">
+                                <p className="timing_note">Estimated road travel times. Pickup runs from last stop to first, with 3 minutes per stop, 15 minutes early arrival and a 20-minute buffer. Drop-off starts 30 minutes after school ends, with 3 minutes per stop.</p>
+                                {routeError && <p className="timing_note" role="alert">{routeError} <button type="button" onClick={() => setRouteRetry(value => value + 1)}>Retry</button></p>}
                                 <div className="sec_head">
                                     <h6>Add Stopage</h6>
                                 </div>
                                 <div className="sec_content">
                                     {stopages.map((stopage, index) => {
-                                        const canDragStopages = stopages.length > 1;
                                         const selectedElsewhereIds = new Set(
                                             Object.entries(selectedStopagesByBox)
                                                 .filter(([boxId]) => String(boxId) !== String(stopage.id))
@@ -584,31 +559,11 @@ const AddRoutesPage = () => {
                                         );
                                         return (
                                             <div
-                                                className={`content_box ${draggingStopageId === stopage.id ? 'dragging' : ''} ${openStopageDropdownId === stopage.id ? 'dropdown_open' : ''}`}
+                                                className={`content_box ${openStopageDropdownId === stopage.id ? 'dropdown_open' : ''}`}
                                                 key={stopage.id}
                                                 ref={(el) => { stopageCardRefs.current[stopage.id] = el; }}
-                                                onDragOver={(event) => event.preventDefault()}
-                                                onDrop={() => {
-                                                    if (draggingStopageId != null) {
-                                                        reorderStopages(draggingStopageId, stopage.id);
-                                                    }
-                                                    setDraggingStopageId(null);
-                                                }}
                                             >
-                                                {canDragStopages && (
-                                                    <div className="box_drag">
-                                                        <span
-                                                            className="drag_handle"
-                                                            draggable
-                                                            onDragStart={() => setDraggingStopageId(stopage.id)}
-                                                            onDragEnd={() => setDraggingStopageId(null)}
-                                                            title="Drag to reorder"
-                                                        >
-                                                            <i className="fa-solid fa-grip-vertical"></i>
-                                                        </span>
-                                                    </div>
-                                                )}
-                                                <div className={`box_content ${canDragStopages ? '' : 'no_drag'}`}>
+                                                <div className="box_content">
                                                     <div className="box_head">
                                                         <a>{`Stopage ${index + 1}`}</a>
                                                         {stopages.indexOf(stopage) !== 0 && (
@@ -670,15 +625,15 @@ const AddRoutesPage = () => {
                                                         </div>
                                                         <div className="date_box">
                                                             <span>Pick up Time <p>*</p></span>
-                                                            <div className="date_btn">
-                                                                <p>Set Time</p>
+                                                            <div className="date_btn" aria-live="polite">
+                                                                <p>{getStopTimeLabel(stopage.id, 'pickup')}</p>
                                                                 <i className="fa-regular fa-clock"></i>
                                                             </div>
                                                         </div>
                                                         <div className="date_box">
                                                             <span>Drop Time <p>*</p></span>
-                                                            <div className="date_btn">
-                                                                <p>Set Time</p>
+                                                            <div className="date_btn" aria-live="polite">
+                                                                <p>{getStopTimeLabel(stopage.id, 'drop')}</p>
                                                                 <i className="fa-regular fa-clock"></i>
                                                             </div>
                                                         </div>

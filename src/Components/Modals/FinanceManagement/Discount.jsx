@@ -14,36 +14,57 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
     const [showFeeTypeDropdown, setShowFeeTypeDropdown] = useState(false);
     const [selectedFeeType, setSelectedFeeType] = useState('');
     const [discountName, setDiscountName] = useState('');
+    const [discountUnit, setDiscountUnit] = useState('');
+    const [discountType, setDiscountType] = useState('');
+    const [discountLimit, setDiscountLimit] = useState('');
+    const [openDiscountDropdown, setOpenDiscountDropdown] = useState(null);
     const [discountAmount, setDiscountAmount] = useState('');
     const initialDiscountStateRef = useRef(null);
     const recordId = selectedDiscount?.id;
     const isEditMode = Boolean(recordId);
-    const isFormValid = discountName.trim() !== '' && discountAmount.trim() !== '' && selectedFeeType.trim() !== '';
+    const showDiscountType = discountUnit === 'Percentage';
+    const showDiscountLimit = showDiscountType && discountType === 'Approx';
+    const isFormValid = discountName.trim() !== '' && discountAmount.trim() !== '' && selectedFeeType.trim() !== '' &&
+        ['Rupees', 'Percentage'].includes(discountUnit) && (!showDiscountType || ['Approx', 'Flat'].includes(discountType)) &&
+        (!showDiscountLimit || discountLimit.trim() !== '');
     const isFormChanged = isEditMode && initialDiscountStateRef.current ? (
         discountName !== initialDiscountStateRef.current.discountName ||
+        discountUnit !== initialDiscountStateRef.current.discountUnit ||
+        (showDiscountType && discountType !== initialDiscountStateRef.current.discountType) ||
+        (showDiscountLimit && discountLimit !== initialDiscountStateRef.current.discountLimit) ||
         discountAmount !== initialDiscountStateRef.current.discountAmount ||
         selectedFeeType !== initialDiscountStateRef.current.selectedFeeType
     ) : false;
 
     useEffect(() => {
-        if (selectedDiscount && recordId) {
+        if (isOpenDiscountModal && selectedDiscount && recordId) {
             const nextDiscountState = {
                 discountName: String(selectedDiscount.name || ''),
+                discountUnit: selectedDiscount.discount_unit ?? selectedDiscount.discountUnit ?? '',
+                discountType: selectedDiscount.discount_type ?? selectedDiscount.discountType ?? '',
+                discountLimit: String(selectedDiscount.discount_limit ?? selectedDiscount.discountLimit ?? ''),
                 discountAmount: String(selectedDiscount.amount || ''),
                 selectedFeeType: selectedDiscount.fee_type || selectedDiscount.feeType || ''
             };
             setDiscountName(nextDiscountState.discountName);
+            setDiscountUnit(nextDiscountState.discountUnit);
+            setDiscountType(nextDiscountState.discountType);
+            setDiscountLimit(nextDiscountState.discountLimit);
             setDiscountAmount(nextDiscountState.discountAmount);
             setSelectedFeeType(nextDiscountState.selectedFeeType);
             initialDiscountStateRef.current = nextDiscountState;
         } else {
             setDiscountName('');
+            setDiscountUnit('');
+            setDiscountType('');
+            setDiscountLimit('');
             setDiscountAmount('');
             setSelectedFeeType('');
             initialDiscountStateRef.current = null;
         }
         setShowFeeTypeDropdown(false);
-    }, [selectedDiscount, recordId]);
+        setOpenDiscountDropdown(null);
+    }, [isOpenDiscountModal, selectedDiscount, recordId]);
 
     function closeModal() {
         setSelectedDiscount(null);
@@ -76,14 +97,19 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
     }
 
     const handleFeeTypeDropdown = () => {
+        setOpenDiscountDropdown(null);
         setShowFeeTypeDropdown(!showFeeTypeDropdown);
     }
 
     const handleSaveDiscount = async (e) => {
         e.preventDefault();
+        if (!isFormValid || isFeeTypesLoading || (isEditMode && !isFormChanged)) return;
         setIsFeeTypesLoading(true);
         const payload = {
             name: discountName,
+            discountUnit,
+            discountType: showDiscountType ? discountType : null,
+            discountLimit: showDiscountLimit ? discountLimit : null,
             amount: discountAmount,
             feeType: selectedFeeType,
             ...(recordId ? { id: recordId } : {})
@@ -122,10 +148,45 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
                                 <span>Discount Name <p>*</p></span>
                                 <input type="text" value={discountName} onChange={(e) => setDiscountName(e.target.value)} />
                             </div>
+                            {[
+                                { label: 'Discount Unit', value: discountUnit, options: ['Rupees', 'Percentage'], onSelect: setDiscountUnit, visible: true },
+                                { label: 'Discount Type', value: discountType, options: ['Approx', 'Flat'], onSelect: setDiscountType, visible: showDiscountType }
+                            ].filter(({ visible }) => visible).map(({ label, value, options, onSelect }) => (
+                                <div className="select_box halfwidth" key={label}>
+                                    <span>{label} <p>*</p></span>
+                                    <div className="dropdown_sec">
+                                        <div className="dropdown_btn" onClick={() => {
+                                            setShowFeeTypeDropdown(false);
+                                            setOpenDiscountDropdown(openDiscountDropdown === label ? null : label);
+                                        }}>
+                                            <p>{value}</p>
+                                            <i className={`fa-solid fa-angle-down ${openDiscountDropdown === label ? 'active' : ''}`}></i>
+                                        </div>
+                                        <div className={`dropdown ${openDiscountDropdown === label ? 'active' : ''}`}>
+                                            <div className="dropdown_inner">
+                                                <ul>
+                                                    {options.map(option => (
+                                                        <li key={option} className={value === option ? 'active' : ''} onClick={() => {
+                                                            onSelect(option);
+                                                            setOpenDiscountDropdown(null);
+                                                        }}>{option}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                             <div className="input_box halfwidth">
                                 <span>Discount Amount <p>*</p></span>
                                 <input type="text" value={discountAmount} onChange={(e) => setDiscountAmount(e.target.value)} />
                             </div>
+                            {showDiscountLimit && (
+                                <div className="input_box halfwidth">
+                                    <span>Discount Limit <p>*</p></span>
+                                    <input type="text" value={discountLimit} onChange={(e) => setDiscountLimit(e.target.value)} />
+                                </div>
+                            )}
                             <div className="select_box halfwidth">
                                 <span>Fee Type <p>*</p></span>
                                 <div className="dropdown_sec">

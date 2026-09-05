@@ -1402,6 +1402,14 @@ export const StopagesWrapper = styled('div')`
 `;
 
 export const AddRoutesWrapper = styled('div')`
+    .timing_note {
+        padding: 0 15px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: ${colors.customColors.blackColor2};
+    }
+
     position: relative;
     width: 100%;
     display: flex;
@@ -1888,6 +1896,15 @@ export const AddRoutesWrapper = styled('div')`
                                 color: ${colors.customColors.blackColor2};
                             }
                         }
+
+                        .school_time_dropdown {
+                            position: absolute;
+                            top: 100%;
+                            left: 8px;
+                            width: calc(100% - 16px);
+                            min-width: 210px;
+                            z-index: 20;
+                        }
                     }
                 }
 
@@ -1934,40 +1951,12 @@ export const AddRoutesWrapper = styled('div')`
                                 z-index: 60;
                             }
 
-                            &.dragging {
-                                opacity: 0.65;
-                                border-color: ${colors.themeColor};
-                                box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-                                cursor: grabbing;
-                            }
-
-                            .box_drag {
-                                position: relative;
-                                width: 28px;
-                                display: flex;
-                                background: ${colors.customColors.lightBackground1};
-                                align-items: center;
-                                justify-content: center;
-                                border-radius: 6px 0px 0px 6px;
-                                cursor: grab;
-
-                                span {
-                                    position: relative;
-                                    font-size: 16px;
-                                    color: ${colors.customColors.blackColor2};
-                                }
-                            }
-
                             .box_content {
                                 position: relative;
-                                width: calc(100% - 28px);
+                                width: 100%;
                                 display: flex;
                                 flex-direction: column;
                                 padding: 15px;
-
-                                &.no_drag {
-                                    width: 100%;
-                                }
 
                                 .box_head {
                                     position: relative;
