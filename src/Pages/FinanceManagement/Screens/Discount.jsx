@@ -1,59 +1,13 @@
-import { useState, useEffect } from "react";
 import { DiscountWrapper } from "../../../Styles/FinanceStyle";
-import DiscountModal from "../../../Components/Modals/FinanceManagement/Discount";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
-import { toast } from "react-toastify";
-import axiosInstance from "../../../Services/Middleware/AxiosInstance";
-import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import StaffChildDiscount from './StaffChildDiscount';
 
-const DiscountPage = () => {
-    const api = getApiEndpoints();
-    const [isOpenDiscountModal, setIsOpenDiscountModal] = useState(false);
-    const [isdiscountLoading, setIsdiscountLoading] = useState(false);
-    const [discounts, setDiscounts] = useState([]);
-    const [selectedDiscount, setSelectedDiscount] = useState(null);
-
-    const fetchDiscounts = async () => {
-        setIsdiscountLoading(true);
-        try {
-            const response = await axiosInstance.get(api.fetchFeeDiscounts);
-            if (response?.data.status === 200) {
-                const discountList = response.data.discounts || response.data.data || [];
-                setDiscounts(Array.isArray(discountList) ? discountList : []);
-            }
-        } catch (error) {
-            setDiscounts([]);
-            toast.error(error.response?.data.message || error.message);
-        } finally {
-            setIsdiscountLoading(false);
-        }
-    }
-    useEffect(() => {
-        fetchDiscounts();
-    }, []);
-
-    const handleOPenDiscountModal = () => {
-        setSelectedDiscount(null);
-        setIsOpenDiscountModal(true);
-    }
-
-    const handleEditDiscount = (discount) => {
-        setSelectedDiscount(discount);
-        setIsOpenDiscountModal(true);
-    }
-
+const DiscountPage = ({ discounts, isdiscountLoading, onEditDiscount, staffChildDiscount, setStaffChildDiscount }) => {
     return (
         <>
             <DiscountWrapper>
-                <div className="page_head">
-                    <h2>Discounts</h2>
-                    <div className="add_btn">
-                        <button onClick={handleOPenDiscountModal}>
-                            <i className="fa-solid fa-plus"></i>
-                            <p>Create Discount</p>
-                        </button>
-                    </div>
-                </div>
+                <StaffChildDiscount value={staffChildDiscount} onChange={setStaffChildDiscount} />
+                <h5 className="regular_discounts_title">Regular Discounts</h5>
                 <div className="discount_boxes">
                     {
                         isdiscountLoading ? (
@@ -63,30 +17,45 @@ const DiscountPage = () => {
                                 </div>
                             ))
                         ) : discounts.length > 0 ? (
-                            discounts.map((discount, index) => (
-                                <div className="discount_box" key={index}>
-                                    <div className="box_inner">
-                                        <div className="top_part">
-                                            <div className="part_content">
-                                                <a><i className="fa-solid fa-tag"></i></a>
-                                                <div className="content_item">
-                                                    <h6>{discount.name}</h6>
-                                                    <p>Discount :<span>{discount.amount}%</span></p>
+                            discounts.map((discount, index) => {
+                                const unit = discount.unit ?? discount.discount_unit ?? discount.discountUnit;
+                                const type = unit === 'Rupees' ? 'Flat' : (discount.type ?? discount.discount_type ?? discount.discountType);
+                                const limit = discount.discount_limit ?? discount.discountLimit;
+                                const hasLimit = unit === 'Percentage' && type === 'Approx' && limit !== null && limit !== undefined && String(limit).trim() !== '';
+                                const amount = unit === 'Rupees' ? `₹${discount.amount}` : `${discount.amount}%`;
+                                return (
+                                    <div className="discount_box" key={discount.id ?? index}>
+                                        <div className="box_inner">
+                                            <div className="card_heading">
+                                                <span className="discount_icon" aria-hidden="true"><i className="fa-solid fa-tag"></i></span>
+                                                <h6 title={discount.name}>{discount.name}</h6>
+                                            </div>
+                                            <div className="offer">
+                                                <div className="offer_value">
+                                                    <span className="offer_label">{type === 'Flat' ? 'Flat discount' : 'Discount'}</span>
+                                                    <p><strong>{amount}</strong><span className="offer_suffix"> off</span></p>
                                                 </div>
+                                                {hasLimit && (
+                                                    <div className="offer_limit">
+                                                        <span className="offer_label">Maximum saving</span>
+                                                        <p><span className="limit_prefix">up to </span><strong>₹{limit}</strong></p>
+                                                    </div>
+                                                )}
                                             </div>
-                                            <div className="fee_sec">
-                                                Fees Type : <span>{discount.fee_type}</span>
-                                            </div>
-                                        </div>
-                                        <div className="bottom_btn">
-                                            <div className="btns_sec">
-                                                <button className="edit" onClick={() => handleEditDiscount(discount)}><i className="fa-regular fa-pen-to-square"></i>Edit</button>
-                                                <button className="delete"><i className="fa-solid fa-trash"></i></button>
+                                            <div className="card_footer">
+                                                <div className="fee_sec">
+                                                    <span className="fee_label">Applied to:</span>
+                                                    <span className="fee_name">{discount.fee_type ?? discount.feeType}</span>
+                                                </div>
+                                                <div className="btns_sec">
+                                                    <button type="button" className="edit" onClick={() => onEditDiscount(discount)}><i className="fa-regular fa-pen-to-square" aria-hidden="true"></i>Edit</button>
+                                                    <button type="button" className="delete" aria-label={`Delete ${discount.name}`}><i className="fa-solid fa-trash" aria-hidden="true"></i></button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))
+                                );
+                            })
                         ) : (
                             <div className="empty_box">
                                 <img src="/images/no-fields.svg" alt="" />
@@ -96,14 +65,6 @@ const DiscountPage = () => {
                     }
                 </div>
 
-
-                <DiscountModal
-                    isOpenDiscountModal={isOpenDiscountModal}
-                    setIsOpenDiscountModal={setIsOpenDiscountModal}
-                    selectedDiscount={selectedDiscount}
-                    setSelectedDiscount={setSelectedDiscount}
-                    refreshDiscounts={fetchDiscounts}
-                />
             </DiscountWrapper>
         </>
     );

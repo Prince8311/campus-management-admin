@@ -1402,6 +1402,37 @@ export const StopagesWrapper = styled('div')`
 `;
 
 export const AddRoutesWrapper = styled('div')`
+    .route_save_btn {
+        margin-left: auto; display: flex; align-items: center; justify-content: center; gap: 7px;
+        min-width: 110px; height: 34px; padding: 0 20px; border: none; border-radius: 6px;
+        background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
+        color: ${colors.customColors.whiteColor}; font-size: 12px; font-weight: 500; cursor: pointer;
+        &:hover { filter: brightness(0.96); }
+        &:focus-visible { outline: 2px solid ${colors.customColors.blueColor2}; outline-offset: 3px; }
+    }
+    .route_timing_guide { margin: 0 15px 18px; }
+    .timing_guide_heading {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 5px 12px; margin-bottom: 10px;
+        > span { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: ${colors.customColors.blackColor1}; }
+        i { color: ${colors.customColors.blueColor2}; }
+        p { font-size: 10px; color: ${colors.customColors.blackColor2}; }
+    }
+    .timing_guide_grid {
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
+        @media (max-width: 900px) { grid-template-columns: 1fr; }
+    }
+    .timing_guide_card {
+        border: 1px solid #e2e9ee; border-radius: 8px; padding: 12px 14px; background: #f8fafc;
+        h3 { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; font-size: 12px; font-weight: 600; color: #344b60; }
+        h3 > span { margin-left: auto; font-size: 9px; font-weight: 400; color: #71808c; }
+        h3 > i { font-size: 11px; color: #4f7e9e; }
+        ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px 14px; list-style: none; padding: 0; margin: 0; }
+        li { display: flex; flex-direction: column; gap: 2px; }
+        li > span { font-size: 10px; color: #7a858e; }
+        li > strong { font-size: 11px; font-weight: 500; color: #3c4b56; }
+        .departure_rule { grid-column: 1 / -1; }
+        &.dropoff { background: #f8fbf9; border-color: #e2ebe5; h3, h3 > i { color: #48745b; } }
+    }
     .timing_note {
         padding: 0 15px;
         margin-bottom: 10px;

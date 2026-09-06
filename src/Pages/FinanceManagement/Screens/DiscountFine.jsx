@@ -1,8 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import DiscountModal from "../../../Components/Modals/FinanceManagement/Discount";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import { DiscountFineWrapper } from "../../../Styles/FinanceStyle";
 import DiscountPage from "./Discount";
 
 const DiscountFinePage = () => {
+    const { fetchFeeDiscounts } = getApiEndpoints();
+    const [isOpenDiscountModal, setIsOpenDiscountModal] = useState(false);
+    const [isdiscountLoading, setIsdiscountLoading] = useState(false);
+    const [discounts, setDiscounts] = useState([]);
+    const [selectedDiscount, setSelectedDiscount] = useState(null);
+    const [staffChildDiscount, setStaffChildDiscount] = useState({
+        enabled: false, name: 'Staff Child', unit: '', type: '', amount: '', limit: '', feeType: ''
+    });
+
+    const fetchDiscounts = async (showSkeleton = false) => {
+        if (showSkeleton) {
+            setIsdiscountLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(fetchFeeDiscounts);
+            if (response?.data.status === 200) {
+                const discountList = response.data.discounts || response.data.data || [];
+                setDiscounts(Array.isArray(discountList) ? discountList : []);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsdiscountLoading(false);
+        }
+    };
+    useEffect(() => {
+        fetchDiscounts(true);
+    }, []);
+
+    const handleOpenDiscountModal = () => {
+        setSelectedDiscount(null);
+        setIsOpenDiscountModal(true);
+    }
+
+    const handleEditDiscount = (discount) => {
+        setSelectedDiscount(discount);
+        setIsOpenDiscountModal(true);
+    }
+
     const tabs = [
         { label: "Discount", value: "discounts" },
         { label: "Fine", value: "fines" }
@@ -16,7 +59,7 @@ const DiscountFinePage = () => {
                     <div className="add_btn">
                         {
                             selectedTab === "discounts" ? (
-                                <button>
+                                <button onClick={handleOpenDiscountModal}>
                                     <i className="fa-solid fa-tag"></i>
                                     <p>Create Discount</p>
                                 </button>
@@ -43,8 +86,15 @@ const DiscountFinePage = () => {
                     </div>
                 </div>
                 {selectedTab === "discounts" && (
-                    <DiscountPage />
+                    <DiscountPage discounts={discounts} isdiscountLoading={isdiscountLoading} onEditDiscount={handleEditDiscount} staffChildDiscount={staffChildDiscount} setStaffChildDiscount={setStaffChildDiscount} />
                 )}
+                <DiscountModal
+                    isOpenDiscountModal={isOpenDiscountModal}
+                    setIsOpenDiscountModal={setIsOpenDiscountModal}
+                    selectedDiscount={selectedDiscount}
+                    setSelectedDiscount={setSelectedDiscount}
+                    refreshDiscounts={() => fetchDiscounts(false)}
+                />
             </DiscountFineWrapper>
         </>
     );

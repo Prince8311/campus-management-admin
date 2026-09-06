@@ -1377,250 +1377,163 @@ export const FeesStructureWrapper = styled('div')`
 `;
 
 export const DiscountWrapper = styled('div')`
-    position: relative;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .page_head {
-        position: relative;
-        width: 100%;
-        display: flex;
-        margin-top: 20px;
-        padding: 0 15px;
-
-        h2 {
-            position: relative;
-            font-size: 21px;
-            font-weight: 600;
-            color: ${colors.customColors.blackColor};
-            font-family: "SUSE", sans-serif;
-        }
-
-        .add_btn {
-            position: relative;
-            margin-left: auto;
-
-            button {
-                position: relative;
-                width: 200px;
-                height: 35px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                background: linear-gradient(45deg, ${colors.customColors.blueColor1}, ${colors.customColors.blueColor3});
-                border: none;
-                color: ${colors.customColors.whiteColor};
-                border-radius: 6px;
-                font-size: 13px;
-                font-weight: 500;
-
-                i {
-                    margin-right: 8px;
-                    font-size: 12px;
-                }
-            }
+    .staff_discount_section { padding: 20px 15px 16px; }
+    .box_inner.staff_discount_card {
+        max-width: 640px; min-height: 0; height: auto; padding: 0;
+        border: 1px solid #dfe6e2; border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(24, 49, 35, 0.035);
+        > .card_heading { padding: 16px 18px; gap: 12px; }
+        .discount_icon { width: 38px; height: 38px; border-radius: 10px; background: #edf5ef; color: #34714c; }
+        .staff_heading_text { flex: 1; min-width: 0; }
+        .staff_eyebrow { display: block; margin-bottom: 3px; font-size: 8px; font-weight: 600; letter-spacing: 1px; color: #63816d; }
+        h6 { font-size: 13px; font-weight: 600; font-style: normal; line-height: 1.4; white-space: normal; }
+        .staff_heading_text p { font-size: 10px; line-height: 1.5; color: #7a827e; margin-top: 3px; }
+        .staff_configuration { padding: 14px 18px 0; border-top: 1px solid #e8ede9; background: #fbfcfb; border-radius: 0 0 10px 10px; }
+        .staff_configuration_heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; color: #36473d; }
+        .staff_draft_badge { font-size: 9px; font-weight: 400; color: #7a827e; }
+        .offer { margin: 14px 0 0; padding: 9px 12px; background: #f0f6f2; }
+        .staff_configuration_footer { display: flex; align-items: center; gap: 6px; margin-top: 14px; padding: 10px 0; border-top: 1px solid #e8ede9; font-size: 9px; color: #87908a; }
+        @media (max-width: 480px) {
+            > .card_heading { flex-wrap: wrap; padding: 13px; }
+            .staff_discount_toggle { margin-left: auto; }
+            .staff_configuration { padding: 12px 13px 0; }
         }
     }
-
+    .staff_discount_description { margin: 8px 0 0; font-size: 11px; line-height: 1.5; color: ${colors.customColors.blackColor2}; }
+    .regular_discounts_title { margin: 0 15px; padding-top: 14px; border-top: 1px solid ${colors.customColors.borderColor}; font-size: 12px; font-weight: 600; color: ${colors.customColors.blackColor1}; }
+    .staff_discount_toggle {
+        position: relative; display: flex; align-items: center; gap: 7px; cursor: pointer;
+        font-size: 10px; color: ${colors.customColors.blackColor2}; flex-shrink: 0;
+        input { position: absolute; right: 0; width: 32px; height: 18px; opacity: 0; cursor: pointer; }
+        .toggle_track { width: 32px; height: 18px; border-radius: 12px; background: #cbd2ce; transition: background 0.2s; pointer-events: none; }
+        .toggle_track::after { content: ''; display: block; width: 14px; height: 14px; margin: 2px; border-radius: 50%; background: white; box-shadow: 0 1px 3px #0002; transition: transform 0.2s; }
+        input:checked + .toggle_track { background: #287344; }
+        input:checked + .toggle_track::after { transform: translateX(14px); }
+        input:focus-visible + .toggle_track { outline: 2px solid #287344; outline-offset: 3px; }
+    }
+    .staff_discount_fields {
+        display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 0; margin-top: 14px;
+        .input_box, .select_box {
+            position: relative; min-width: 0;
+            &.fullwidth { width: 100%; }
+            &.halfwidth { width: 48.5%; }
+            > span { display: flex; align-items: center; font-size: 12px; font-weight: 400; color: ${colors.customColors.blackColor2}; }
+            > span p { margin-left: 2px; color: ${colors.customColors.redColor}; }
+        }
+        .input_box input, .dropdown_btn {
+            position: relative; width: 100%; height: 37px; font-size: 12px;
+            border-radius: 5px; padding: 5px 15px; outline: none; border: none; margin-top: 3px;
+            color: ${colors.customColors.blackColor2}; background: ${colors.customColors.lightBackground3};
+        }
+        .input_box input:focus-visible { outline: none; }
+        button:focus-visible { outline: 2px solid #287344; outline-offset: 1px; }
+        .dropdown_sec { position: relative; width: 100%; }
+        .dropdown_btn {
+            display: flex; align-items: center; cursor: pointer;
+            p { width: calc(100% - 25px); text-align: left; font-size: 12px; color: ${colors.customColors.blackColor1}; }
+            i { margin-left: auto; font-size: 12px; transition: transform 0.3s; }
+            i.active { transform: rotate(-180deg); }
+            &:disabled { opacity: 0.6; cursor: not-allowed; }
+        }
+        .dropdown {
+            display: none; position: absolute; top: 100%; left: 0; width: 100%; z-index: 30;
+            background: ${colors.customColors.whiteColor}; border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            &.active { display: block; }
+            &.dropUp { top: auto; bottom: 100%; }
+            .dropdown_inner { padding: 5px; max-height: 180px; overflow-y: auto; }
+            ul { list-style: none; margin: 0; padding: 0; }
+            li { border-radius: 4px; font-size: 12px; color: ${colors.customColors.blackColor2}; }
+            li button { width: 100%; padding: 9px 10px; text-align: left; border: none; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+            li:hover, li.active { background: ${colors.customColors.lightBackground3}; }
+            .empty_message { padding: 9px 10px; }
+        }
+        @media (max-width: 480px) { .input_box.halfwidth, .select_box.halfwidth { width: 100%; } }
+    }
     .discount_boxes {
-        position: relative;
-        width: 100%;
-        padding: 0 5px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+        gap: 18px;
+        padding: 20px 15px;
+    }
+    .discount_box { min-width: 0; }
+    .box_inner {
+        height: 100%;
+        min-height: 145px;
         display: flex;
-        flex-wrap: wrap;
-        margin-top: 10px;
-
-        .discount_box {
-            position: relative;
-            width: 25%;
-            max-width: 302.75px;
-            padding: 10px;
-
-            .box_inner {
-                position: relative;
-                width: 100%;
-                padding: 12px;
-                padding-left: 15px;
-                background: ${colors.customColors.whiteColor};
-                border: 1px solid ${colors.customColors.borderColor};
-                border-left: 4px solid ${colors.customColors.greenColor};
-                border-radius: 8px;
-                display: flex;
-                flex-direction: column;
-                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
-                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
-
-                .top_part {
-                    position: relative;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    padding-bottom: 8px;
-                    border-bottom: 1px solid ${colors.customColors.borderColor};
-
-                    .part_content {
-                        position: relative;
-                        width: 100%;
-                        display: flex;
-                        align-items: center;
-                        
-                        a {
-                            position: relative;
-                            width: 32px;
-                            height: 32px;
-                            border-radius: 50%;
-                            background: ${colors.customColors.greenColorLight};
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-size: 12px;
-                            color: ${colors.customColors.greenColor};
-                            text-decoration: none;
-                            cursor: pointer;
-                        }
-
-                        .content_item {
-                            position: relative;
-                            width: calc(100% - 32px);
-                            padding-left: 10px;
-                            display: flex;
-                            flex-direction: column;
-
-                            h6 {
-                                position: relative;
-                                width: 100%;
-                                font-size: 13.5px;
-                                font-style: italic;
-                                font-weight: 500;
-                                color: ${colors.customColors.blackColor};
-                                overflow: hidden;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;
-                            }
-
-                            p {
-                                position: relative;
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                font-size: 10px;
-                                color: ${colors.customColors.blackColor1};
-                                margin-top: 2px;
-                                font-weight: 500;
-
-                                i {
-                                    color: ${colors.customColors.greenColor1};
-                                    font-size: 10px;
-                                    margin-right: 3px;
-                                }
-                                
-                                span {
-                                    color: ${colors.customColors.blackColor2};
-                                    margin-left: 4px;
-                                }
-                            }
-                        }
-                    }
-
-                    .fee_sec {
-                        position: relative;
-                        width: 100%;
-                        display: flex;
-                        align-items: center;
-                        font-size: 11px;
-                        font-weight: 500;
-                        color: ${colors.customColors.blackColor};
-                        text-decoration: none;
-                        margin-top: 10px;
-
-                        i {
-                            font-size: 10px;
-                            margin-right: 3px;
-                        }
-
-                        span {
-                            margin-left: 4px;
-                            color: ${colors.customColors.blackColor2};
-                            font-size: 11px;
-                        }
-                    }
-                }
-
-                .bottom_btn {
-                    position: relative;
-                    width: 100%;
-                    display: flex;
-                    align-items: flex-end;
-                    margin-top: 8px;
-
-                    .btns_sec {
-                        position: relative;
-                        margin-left: auto;
-                        display: flex;
-
-                        button {
-                            position: relative;
-                            width: max-content;
-                            height: 25px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            border: none;
-                            padding: 0 10px;
-
-                            &.edit {
-                                background: ${colors.customColors.blueColorLight};
-                                color: ${colors.customColors.blueColor2};
-                                font-size: 10px;
-                                cursor: pointer;
-                                font-weight: 500;
-                                border-bottom-left-radius: 4px;
-                                border-top-left-radius: 4px;
-
-                                i {
-                                    margin-right: 6px;
-                                }
-                            }
-
-                            &.delete {
-                                background: ${colors.customColors.redColorLight};
-                                color:  ${colors.customColors.redColor};
-                                font-size: 10px;
-                                cursor: pointer;
-                                border-top-right-radius: 4px;
-                                border-bottom-right-radius: 4px;
-                            }
-                        }
-                    }
-                }
-            }
+        flex-direction: column;
+        background: ${colors.customColors.whiteColor};
+        border: 1px solid ${colors.customColors.borderColor};
+        border-left: 4px solid ${colors.customColors.greenColor};
+        border-radius: 8px;
+        padding: 12px 12px 10px 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.045);
+        transition: box-shadow 0.2s ease;
+        &:hover { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.075); }
+    }
+    .card_heading { display: flex; align-items: center; gap: 9px; }
+    .discount_icon {
+        width: 32px; height: 32px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; font-size: 12px;
+        background: ${colors.customColors.greenColorLight};
+        color: ${colors.customColors.greenColor};
+    }
+    h6 {
+        flex: 1; min-width: 0; font-size: 13.5px; font-weight: 500; font-style: italic;
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        color: ${colors.customColors.blackColor};
+    }
+    .offer {
+        display: flex; align-items: stretch; gap: 12px;
+        margin: 12px 0 10px;
+        padding: 8px 12px 7px 12px;
+        border: 1px solid #e8ecea;
+        border-radius: 7px;
+        background: linear-gradient(110deg, #f3f8f5, #fafcfb);
+        color: ${colors.customColors.blackColor1};
+        .offer_value { flex: 1; min-width: 0; }
+        .offer_label {
+            display: block; margin-bottom: 2px;
+            font-size: 9px; line-height: 1.3; font-weight: 500;
+            letter-spacing: 0.2px; color: #69766e;
         }
-
-        .empty_messege {
-            position: relative;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 10px;
-            margin-top: 60px;
-
-            img {
-                position: relative;
-                width: 250px;
-                opacity: 0.5;
-            }
-
-            p {
-                position: relative;
-                font-size: 13px;
-                margin-top: 10px;
-                color: ${colors.customColors.blackColor3};
-            }
+        p { margin: 0; font-size: 11px; line-height: 1.3; overflow-wrap: anywhere; }
+        strong { font-size: 16px; font-weight: 600; color: #23643e; font-variant-numeric: tabular-nums; }
+        .offer_suffix { font-size: 10px; color: #69766e; }
+        .offer_limit {
+            flex: 1; min-width: 0;
+            margin-left: auto;
+            padding-left: 12px;
+            border-left: 1px solid #dde6e0;
+            text-align: right;
+            strong { font-size: 13px; font-weight: 600; color: #35443b; }
+            .limit_prefix { font-size: 10px; color: #69766e; }
         }
+    }
+    .card_footer {
+        display: flex; align-items: center; justify-content: space-between; gap: 10px;
+        margin-top: auto; padding-top: 8px; border-top: 1px solid ${colors.customColors.borderColor};
+    }
+    .fee_sec { display: flex; flex: 1; flex-wrap: wrap; gap: 2px 4px; min-width: 0; }
+    .fee_label { font-size: 12px; color: ${colors.customColors.blackColor}; }
+    .fee_name { font-size: 12px; overflow-wrap: anywhere; color: ${colors.customColors.blackColor2}; }
+    .btns_sec {
+        display: flex; flex-shrink: 0;
+        button {
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+            height: 27px; padding: 0 10px; border: none; border-radius: 0;
+            font-size: 11px; font-weight: 500; cursor: pointer;
+            &:focus-visible { outline: 2px solid ${colors.customColors.blueColor2}; outline-offset: 2px; }
+        }
+        .edit { border-radius: 4px 0 0 4px; background: ${colors.customColors.blueColorLight}; color: ${colors.customColors.blueColor2}; }
+        .delete { border-radius: 0 4px 4px 0; background: ${colors.customColors.redColorLight}; color: ${colors.customColors.redColor}; }
+    }
+    .empty_box {
+        grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; padding: 40px 10px;
+        img { width: 220px; max-width: 100%; opacity: 0.5; }
+        p { margin-top: 12px; font-size: 12px; color: ${colors.customColors.blackColor3}; }
     }
 `;
 

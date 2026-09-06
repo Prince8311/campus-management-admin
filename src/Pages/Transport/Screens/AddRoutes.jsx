@@ -402,6 +402,7 @@ const AddRoutesPage = () => {
                             <div className="page_head">
                                 <div className="icon" onClick={handleRedirectionRoutesPage}><i className="fa-solid fa-angle-left"></i></div>
                                 <h2>Add Routes</h2>
+                                <button type="button" className="route_save_btn"><i className="fa-regular fa-floppy-disk" aria-hidden="true"></i>Save</button>
                             </div>
                             <div className="top_sec">
                                 <div className="input_box">
@@ -541,7 +542,31 @@ const AddRoutesPage = () => {
                             </div>
 
                             <div className="stopage_sections">
-                                <p className="timing_note">Estimated road travel times. Pickup runs from last stop to first, with 3 minutes per stop, 15 minutes early arrival and a 20-minute buffer. Drop-off starts 30 minutes after school ends, with 3 minutes per stop.</p>
+                                <section className="route_timing_guide" aria-label="Route timing rules">
+                                    <div className="timing_guide_heading">
+                                        <span><i className="fa-regular fa-clock" aria-hidden="true"></i>Automatic timing</span>
+                                        <p>Based on estimated road travel times</p>
+                                    </div>
+                                    <div className="timing_guide_grid">
+                                        <div className="timing_guide_card">
+                                            <h3><i className="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>Pickup <span>To school</span></h3>
+                                            <ul>
+                                                <li><span>Stop order</span><strong>Last to first</strong></li>
+                                                <li><span>At each stop</span><strong>3 minutes</strong></li>
+                                                <li><span>Early arrival</span><strong>15 minutes</strong></li>
+                                                <li><span>Travel buffer</span><strong>20 minutes</strong></li>
+                                            </ul>
+                                        </div>
+                                        <div className="timing_guide_card dropoff">
+                                            <h3><i className="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>Drop-off <span>From school</span></h3>
+                                            <ul>
+                                                <li><span>Stop order</span><strong>First to last</strong></li>
+                                                <li><span>At each stop</span><strong>3 minutes</strong></li>
+                                                <li className="departure_rule"><span>Leave school</span><strong>30 minutes after school ends</strong></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
                                 {routeError && <p className="timing_note" role="alert">{routeError} <button type="button" onClick={() => setRouteRetry(value => value + 1)}>Retry</button></p>}
                                 <div className="sec_head">
                                     <h6>Add Stopage</h6>
@@ -648,7 +673,6 @@ const AddRoutesPage = () => {
                                                 <span><i className="fa-solid fa-plus"></i>Add more</span>
                                             </div>
                                         )}
-                                        <a><i className="fa-regular fa-floppy-disk"></i>Save</a>
                                     </div>
 
                                 </div>

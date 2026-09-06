@@ -212,13 +212,13 @@ const Sidebar = () => {
                                                 <i className="fa-solid fa-gear prefix"></i>
                                                 <p>Fee Configuration</p>
                                             </NavLink>
-                                            <NavLink to="/admin/finance-management/accounts">
-                                                <i className="fa-solid fa-building-columns prefix"></i>
-                                                <p>Bank Accounts</p>
-                                            </NavLink>
                                             <NavLink to="/admin/finance-management/discount-fine">
                                                 <i className="fa-solid fa-tags prefix"></i>
                                                 <p>Discount & Fine</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/finance-management/accounts">
+                                                <i className="fa-solid fa-building-columns prefix"></i>
+                                                <p>Bank Accounts</p>
                                             </NavLink>
                                         </div>
                                     </div>
