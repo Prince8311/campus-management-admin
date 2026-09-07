@@ -2167,7 +2167,7 @@ export const AddRoutesWrapper = styled('div')`
                                                         width: 100%;
                                                         display: flex;
                                                         flex-direction: column;
-                                                        max-height: 160px;
+                                                        max-height: 135px;
                                                         overflow-y: auto;
                                                         scrollbar-width: none;
                                                         -ms-overflow-style: none;

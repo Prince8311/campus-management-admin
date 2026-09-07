@@ -6,7 +6,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import SkeletonLoader from "../../Loader/SkeletonLoader";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDiscount, setSelectedDiscount, refreshDiscounts }) => {
+const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDiscount, setSelectedDiscount, refreshDiscounts, fixedName = '', onSaveDraft }) => {
     const api = getApiEndpoints();
 
     const [isFeeTypesLoading, setIsFeeTypesLoading] = useState(false);
@@ -38,9 +38,9 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
     ) : false;
 
     useEffect(() => {
-        if (isOpenDiscountModal && selectedDiscount && recordId) {
+        if (isOpenDiscountModal && selectedDiscount && (recordId || fixedName)) {
             const nextDiscountState = {
-                discountName: String(selectedDiscount.name || ''),
+                discountName: fixedName || String(selectedDiscount.name || ''),
                 discountUnit: selectedDiscount.unit ?? selectedDiscount.discount_unit ?? selectedDiscount.discountUnit ?? '',
                 discountType: selectedDiscount.type ?? selectedDiscount.discount_type ?? selectedDiscount.discountType ?? '',
                 discountLimit: String(selectedDiscount.discount_limit ?? selectedDiscount.discountLimit ?? ''),
@@ -58,7 +58,7 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
             setSelectedFeeType(nextDiscountState.selectedFeeType);
             initialDiscountStateRef.current = nextDiscountState;
         } else {
-            setDiscountName('');
+            setDiscountName(isOpenDiscountModal ? fixedName : '');
             setDiscountUnit('');
             setDiscountType('');
             setDiscountLimit('');
@@ -68,7 +68,7 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
         }
         setShowFeeTypeDropdown(false);
         setOpenDiscountDropdown(null);
-    }, [isOpenDiscountModal, selectedDiscount, recordId]);
+    }, [isOpenDiscountModal, selectedDiscount, recordId, fixedName]);
 
     function closeModal() {
         setSelectedDiscount(null);
@@ -127,6 +127,11 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
             ...(recordId ? { id: recordId } : {})
         };
         try {
+            if (onSaveDraft) {
+                await onSaveDraft({ ...payload, name: fixedName || discountName });
+                closeModal();
+                return;
+            }
             const response = await axiosInstance.post(api.insertFeeDiscount, payload, {
                 params: {
                     intent: isEditMode ? 'update' : 'add'
@@ -158,7 +163,7 @@ const DiscountModal = ({ isOpenDiscountModal, setIsOpenDiscountModal, selectedDi
                         <div className="body_inner">
                             <div className="input_box fullwidth">
                                 <span>Discount Name <p>*</p></span>
-                                <input type="text" value={discountName} onChange={(e) => setDiscountName(e.target.value)} />
+                                <input type="text" value={discountName} readOnly={Boolean(fixedName)} onChange={(e) => setDiscountName(e.target.value)} />
                             </div>
                             {[
                                 { label: 'Discount Unit', value: discountUnit, options: ['Rupees', 'Percentage'], onSelect: handleSelectDiscountUnit, visible: true },

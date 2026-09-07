@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import DiscountModal from "../../../Components/Modals/FinanceManagement/Discount";
+import FineModal from "../../../Components/Modals/FinanceManagement/Fine";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
@@ -12,9 +13,27 @@ const DiscountFinePage = () => {
     const [isdiscountLoading, setIsdiscountLoading] = useState(false);
     const [discounts, setDiscounts] = useState([]);
     const [selectedDiscount, setSelectedDiscount] = useState(null);
-    const [staffChildDiscount, setStaffChildDiscount] = useState({
-        enabled: false, name: 'Staff Child', unit: '', type: '', amount: '', limit: '', feeType: ''
+    const [isOpenFineModal, setIsOpenFineModal] = useState(false);
+    const [fineDraft, setFineDraft] = useState(null);
+    const [specialDiscounts, setSpecialDiscounts] = useState({
+        staff: { enabled: false, name: 'Staff Child' },
+        advance: { enabled: false, name: 'Advance Pay' }
     });
+    const [activeSpecialDiscount, setActiveSpecialDiscount] = useState(null);
+
+    const openSpecialDiscount = (key) => {
+        setActiveSpecialDiscount(key);
+        setSelectedDiscount(specialDiscounts[key]);
+        setIsOpenDiscountModal(true);
+    };
+    const toggleSpecialDiscount = (key) => {
+        if (specialDiscounts[key].enabled) {
+            setSpecialDiscounts(previous => ({ ...previous, [key]: { ...previous[key], enabled: false } }));
+        } else openSpecialDiscount(key);
+    };
+    const saveSpecialDiscount = (draft) => {
+        setSpecialDiscounts(previous => ({ ...previous, [activeSpecialDiscount]: { ...draft, enabled: true } }));
+    };
 
     const fetchDiscounts = async (showSkeleton = false) => {
         if (showSkeleton) {
@@ -37,11 +56,13 @@ const DiscountFinePage = () => {
     }, []);
 
     const handleOpenDiscountModal = () => {
+        setActiveSpecialDiscount(null);
         setSelectedDiscount(null);
         setIsOpenDiscountModal(true);
     }
 
     const handleEditDiscount = (discount) => {
+        setActiveSpecialDiscount(null);
         setSelectedDiscount(discount);
         setIsOpenDiscountModal(true);
     }
@@ -64,7 +85,7 @@ const DiscountFinePage = () => {
                                     <p>Create Discount</p>
                                 </button>
                             ) : (
-                                <button>
+                                <button onClick={() => setIsOpenFineModal(true)}>
                                     <i className="fa-solid fa-receipt"></i>
                                     <p>Setup Fine</p>
                                 </button>
@@ -86,7 +107,7 @@ const DiscountFinePage = () => {
                     </div>
                 </div>
                 {selectedTab === "discounts" && (
-                    <DiscountPage discounts={discounts} isdiscountLoading={isdiscountLoading} onEditDiscount={handleEditDiscount} staffChildDiscount={staffChildDiscount} setStaffChildDiscount={setStaffChildDiscount} />
+                    <DiscountPage discounts={discounts} isdiscountLoading={isdiscountLoading} onEditDiscount={handleEditDiscount} specialDiscounts={specialDiscounts} onToggleSpecialDiscount={toggleSpecialDiscount} onEditSpecialDiscount={openSpecialDiscount} />
                 )}
                 <DiscountModal
                     isOpenDiscountModal={isOpenDiscountModal}
@@ -94,7 +115,10 @@ const DiscountFinePage = () => {
                     selectedDiscount={selectedDiscount}
                     setSelectedDiscount={setSelectedDiscount}
                     refreshDiscounts={() => fetchDiscounts(false)}
+                    fixedName={activeSpecialDiscount ? specialDiscounts[activeSpecialDiscount].name : ''}
+                    onSaveDraft={activeSpecialDiscount ? saveSpecialDiscount : undefined}
                 />
+                <FineModal isOpenFineModal={isOpenFineModal} setIsOpenFineModal={setIsOpenFineModal} fineDraft={fineDraft} onSaveDraft={setFineDraft} />
             </DiscountFineWrapper>
         </>
     );

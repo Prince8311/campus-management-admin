@@ -3805,3 +3805,10 @@ export const DiscountModalWrapper = styled('div')`
         }
     }
 `;
+
+export const FineModalWrapper = styled(DiscountModalWrapper)`
+    .fine_help { width: 100%; margin: 2px 0 10px; font-size: 11px; line-height: 1.5; color: ${colors.customColors.blackColor2}; }
+    .dropdown_btn { border: none; text-align: left; }
+    .dropdown li button { width: 100%; background: none; border: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+    .close_sec button { background: none; border: none; cursor: pointer; color: inherit; }
+`;

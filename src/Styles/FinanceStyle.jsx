@@ -1378,17 +1378,27 @@ export const FeesStructureWrapper = styled('div')`
 
 export const DiscountWrapper = styled('div')`
     width: 100%;
+    .special_discounts_row {
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; padding: 20px 15px 16px;
+        .staff_discount_section { padding: 0; min-width: 0; }
+        .box_inner.staff_discount_card { max-width: none; height: 100%; }
+        .staff_discount_card > .card_heading { flex-wrap: wrap; }
+        .staff_heading_text { flex-basis: 130px; }
+        .staff_discount_toggle { margin-left: auto; }
+        .special_discount_footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 10px; font-size: 11px; color: ${colors.customColors.blackColor2}; }
+        @media (max-width: 700px) { grid-template-columns: 1fr; }
+    }
     .staff_discount_section { padding: 20px 15px 16px; }
     .box_inner.staff_discount_card {
         max-width: 640px; min-height: 0; height: auto; padding: 0;
         border: 1px solid #dfe6e2; border-radius: 10px;
         box-shadow: 0 2px 6px rgba(24, 49, 35, 0.035);
-        > .card_heading { padding: 16px 18px; gap: 12px; }
-        .discount_icon { width: 38px; height: 38px; border-radius: 10px; background: #edf5ef; color: #34714c; }
+        > .card_heading { padding: 16px 18px; gap: 12px; align-items: flex-start; }
+        .discount_icon { width: 42px; height: 42px; border-radius: 10px; background: #edf5ef; color: #34714c; font-size: 14px}
         .staff_heading_text { flex: 1; min-width: 0; }
-        .staff_eyebrow { display: block; margin-bottom: 3px; font-size: 8px; font-weight: 600; letter-spacing: 1px; color: #63816d; }
+        .staff_eyebrow { display: block; margin-bottom: 1px; font-size: 8px; font-weight: 600; letter-spacing: 1px; color: #63816d; }
         h6 { font-size: 13px; font-weight: 600; font-style: normal; line-height: 1.4; white-space: normal; }
-        .staff_heading_text p { font-size: 10px; line-height: 1.5; color: #7a827e; margin-top: 3px; }
+        .staff_heading_text p { font-size: 10px; line-height: 1.5; color: #7a827e; margin-top: 2px; }
         .staff_configuration { padding: 14px 18px 0; border-top: 1px solid #e8ede9; background: #fbfcfb; border-radius: 0 0 10px 10px; }
         .staff_configuration_heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; color: #36473d; }
         .staff_draft_badge { font-size: 9px; font-weight: 400; color: #7a827e; }
@@ -1401,7 +1411,7 @@ export const DiscountWrapper = styled('div')`
         }
     }
     .staff_discount_description { margin: 8px 0 0; font-size: 11px; line-height: 1.5; color: ${colors.customColors.blackColor2}; }
-    .regular_discounts_title { margin: 0 15px; padding-top: 14px; border-top: 1px solid ${colors.customColors.borderColor}; font-size: 12px; font-weight: 600; color: ${colors.customColors.blackColor1}; }
+    .regular_discounts_title { margin: 0 15px; padding-top: 12px; border-top: 1px solid ${colors.customColors.borderColor}; font-size: 16px; font-weight: 600; color: ${colors.customColors.blackColor}; font-family: "SUSE", sans-serif;}
     .staff_discount_toggle {
         position: relative; display: flex; align-items: center; gap: 7px; cursor: pointer;
         font-size: 10px; color: ${colors.customColors.blackColor2}; flex-shrink: 0;
@@ -1411,45 +1421,6 @@ export const DiscountWrapper = styled('div')`
         input:checked + .toggle_track { background: #287344; }
         input:checked + .toggle_track::after { transform: translateX(14px); }
         input:focus-visible + .toggle_track { outline: 2px solid #287344; outline-offset: 3px; }
-    }
-    .staff_discount_fields {
-        display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 0; margin-top: 14px;
-        .input_box, .select_box {
-            position: relative; min-width: 0;
-            &.fullwidth { width: 100%; }
-            &.halfwidth { width: 48.5%; }
-            > span { display: flex; align-items: center; font-size: 12px; font-weight: 400; color: ${colors.customColors.blackColor2}; }
-            > span p { margin-left: 2px; color: ${colors.customColors.redColor}; }
-        }
-        .input_box input, .dropdown_btn {
-            position: relative; width: 100%; height: 37px; font-size: 12px;
-            border-radius: 5px; padding: 5px 15px; outline: none; border: none; margin-top: 3px;
-            color: ${colors.customColors.blackColor2}; background: ${colors.customColors.lightBackground3};
-        }
-        .input_box input:focus-visible { outline: none; }
-        button:focus-visible { outline: 2px solid #287344; outline-offset: 1px; }
-        .dropdown_sec { position: relative; width: 100%; }
-        .dropdown_btn {
-            display: flex; align-items: center; cursor: pointer;
-            p { width: calc(100% - 25px); text-align: left; font-size: 12px; color: ${colors.customColors.blackColor1}; }
-            i { margin-left: auto; font-size: 12px; transition: transform 0.3s; }
-            i.active { transform: rotate(-180deg); }
-            &:disabled { opacity: 0.6; cursor: not-allowed; }
-        }
-        .dropdown {
-            display: none; position: absolute; top: 100%; left: 0; width: 100%; z-index: 30;
-            background: ${colors.customColors.whiteColor}; border-radius: 5px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            &.active { display: block; }
-            &.dropUp { top: auto; bottom: 100%; }
-            .dropdown_inner { padding: 5px; max-height: 180px; overflow-y: auto; }
-            ul { list-style: none; margin: 0; padding: 0; }
-            li { border-radius: 4px; font-size: 12px; color: ${colors.customColors.blackColor2}; }
-            li button { width: 100%; padding: 9px 10px; text-align: left; border: none; background: transparent; color: inherit; font: inherit; cursor: pointer; }
-            li:hover, li.active { background: ${colors.customColors.lightBackground3}; }
-            .empty_message { padding: 9px 10px; }
-        }
-        @media (max-width: 480px) { .input_box.halfwidth, .select_box.halfwidth { width: 100%; } }
     }
     .discount_boxes {
         display: grid;
@@ -1535,6 +1506,10 @@ export const DiscountWrapper = styled('div')`
         img { width: 220px; max-width: 100%; opacity: 0.5; }
         p { margin-top: 12px; font-size: 12px; color: ${colors.customColors.blackColor3}; }
     }
+`;
+
+export const FineWrapper = styled('div')`
+    position: relative;
 `;
 
 export const BankAccountsWrapper = styled('div')`

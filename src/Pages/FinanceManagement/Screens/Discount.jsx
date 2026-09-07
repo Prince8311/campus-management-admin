@@ -2,11 +2,14 @@ import { DiscountWrapper } from "../../../Styles/FinanceStyle";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 import StaffChildDiscount from './StaffChildDiscount';
 
-const DiscountPage = ({ discounts, isdiscountLoading, onEditDiscount, staffChildDiscount, setStaffChildDiscount }) => {
+const DiscountPage = ({ discounts, isdiscountLoading, onEditDiscount, specialDiscounts, onToggleSpecialDiscount, onEditSpecialDiscount }) => {
     return (
         <>
             <DiscountWrapper>
-                <StaffChildDiscount value={staffChildDiscount} onChange={setStaffChildDiscount} />
+                <div className="special_discounts_row">
+                    <StaffChildDiscount value={specialDiscounts.staff} onToggle={() => onToggleSpecialDiscount('staff')} onEdit={() => onEditSpecialDiscount('staff')} />
+                    <StaffChildDiscount value={specialDiscounts.advance} isAdvance onToggle={() => onToggleSpecialDiscount('advance')} onEdit={() => onEditSpecialDiscount('advance')} />
+                </div>
                 <h5 className="regular_discounts_title">Regular Discounts</h5>
                 <div className="discount_boxes">
                     {
