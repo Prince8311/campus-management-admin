@@ -108,6 +108,12 @@ import HostelResidentsPage from "../Pages/HostelManagement/Screens/Residents";
 import HostelRoomsPage from "../Pages/HostelManagement/Screens/HostelRooms";
 import HostelBuildingsPage from "../Pages/HostelManagement/Screens/HostelBuildings";
 
+// Expense Management
+import ExpenseManagementpage from "../Pages/Expenses/ExpenseManagement";
+import GeneralExpensesPage from "../Pages/Expenses/GeneralExpenses";
+import EventExpensesPage from "../Pages/Expenses/EventExpenses";
+
+
 const Routers = () => {
     return (
         <>
@@ -217,6 +223,11 @@ const Routers = () => {
                                 <Route path="staff" element={<StaffPage />} />
                                 <Route path="section-fields" element={<SectionFieldsPage />} />
                             </Route>
+                        </Route>
+                        <Route path="expense" element={<ExpenseManagementpage />}>
+                            <Route path="" element={<Navigate to="general-expenses" />} />
+                            <Route path="general-expenses" element={<GeneralExpensesPage />} />
+                            <Route path="event-expenses" element={<EventExpensesPage />} />
                         </Route>
                         <Route path="alumni" element={<AlumniPage />} />
                         <Route path="billing" element={<BillingPage />} />
