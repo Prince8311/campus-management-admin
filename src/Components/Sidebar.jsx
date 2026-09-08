@@ -444,6 +444,13 @@ const Sidebar = () => {
                                 </div>
                                 {
                                     userDetails.user_type === 'inst_admin' &&
+                                    <NavLink to="/admin/expense">
+                                        <i className="fa-solid fa-circle-dollar-to-slot"></i>
+                                        <p>Expense Management</p>
+                                    </NavLink>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
                                     <NavLink to="/admin/billing">
                                         <i className="fa-solid fa-hand-holding-dollar"></i>
                                         <p>Billing</p>
