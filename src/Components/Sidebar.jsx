@@ -27,11 +27,26 @@ const Sidebar = () => {
         const pathName = path.split('/').filter(Boolean).pop() || 'Dashboard';
         const formattedPageName = formatPathName(pathName);
         setPageName(formattedPageName);
-        if (path.startsWith('/academics')) {
+        if (path.startsWith('/admin/reports')) {
+            setActiveDropdown(0);
+        } else if (path.startsWith('/admin/academics')) {
             setActiveDropdown(1);
-        } else if (path.startsWith('/finance-management')) {
+        } else if (path.startsWith('/admin/finance-management')) {
             setActiveDropdown(2);
+        } else if (path.startsWith('/admin/communication')) {
+            setActiveDropdown(3);
+        } else if (path.startsWith('/admin/staff-management')) {
+            setActiveDropdown(4);
+        } else if (path.startsWith('/admin/hostel-management')) {
+            setActiveDropdown(5);
+        } else if (path.startsWith('/admin/transport-management')) {
+            setActiveDropdown(6);
+        } else if (path.startsWith('/admin/settings')) {
+            setActiveDropdown(8);
+        } else if (path.startsWith('/admin/accounting')) {
+            setActiveDropdown(9);
         }
+        console.log("ewsgfrewgherth", path);
     }, [location, setPageName]);
 
     const toggleDropdown = (index) => {
@@ -309,8 +324,8 @@ const Sidebar = () => {
                                 }
                                 {
                                     userDetails.user_type === 'inst_admin' &&
-                                    <div className={`dropdown_item ${activeDropdown === 8 ? 'active' : ''}`}>
-                                        <div className="dropdown_btn" onClick={() => toggleDropdown(8)}>
+                                    <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
                                             <li>
                                                 <i className="fa-solid fa-truck-fast prefix"></i>
                                                 <span>
@@ -349,8 +364,8 @@ const Sidebar = () => {
                                 }
                                 {
                                     userDetails.user_type === 'inst_admin' &&
-                                    <div className={`dropdown_item ${activeDropdown === 6 ? 'active' : ''}`}>
-                                        <div className="dropdown_btn" onClick={() => toggleDropdown(6)}>
+                                    <div className={`dropdown_item ${activeDropdown === 7 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(7)}>
                                             <li>
                                                 <i className="fa-solid fa-user-shield prefix"></i>
                                                 <span>
@@ -371,8 +386,8 @@ const Sidebar = () => {
                                         </div>
                                     </div>
                                 }
-                                <div className={`dropdown_item ${activeDropdown === 7 ? 'active' : ''}`}>
-                                    <div className="dropdown_btn" onClick={() => toggleDropdown(7)}>
+                                <div className={`dropdown_item ${activeDropdown === 8 ? 'active' : ''}`}>
+                                    <div className="dropdown_btn" onClick={() => toggleDropdown(8)}>
                                         <li>
                                             <i className="fa-solid fa-gears prefix"></i>
                                             <span>
@@ -444,10 +459,31 @@ const Sidebar = () => {
                                 </div>
                                 {
                                     userDetails.user_type === 'inst_admin' &&
-                                    <NavLink to="/admin/expense">
-                                        <i className="fa-solid fa-circle-dollar-to-slot"></i>
-                                        <p>Expense Management</p>
-                                    </NavLink>
+                                    <div className={`dropdown_item ${activeDropdown === 9 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(9)}>
+                                            <li>
+                                                <i className="fa-solid fa-circle-dollar-to-slot prefix"></i>
+                                                <span>
+                                                    <p>Accounting</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/accounting/overview">
+                                                <i className="fa-solid fa-magnifying-glass-chart prefix"></i>
+                                                <p>Overview</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/accounting/expense-management">
+                                                <i className="fa-solid fa-receipt"></i>
+                                                <p>Expense Management</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/accounting/stock-management">
+                                                <i className="fa-solid fa-boxes-stacked prefix"></i>
+                                                <p>Stock Management</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
                                 }
                                 {
                                     userDetails.user_type === 'inst_admin' &&

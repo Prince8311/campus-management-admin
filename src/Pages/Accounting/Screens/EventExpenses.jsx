@@ -1,4 +1,4 @@
-import { EventExpenseWrapper } from "../../Styles/ExpenseStyle";
+import { EventExpenseWrapper } from "../../../Styles/ExpenseStyle";
 
 const EventExpensesPage = () => {
     return(

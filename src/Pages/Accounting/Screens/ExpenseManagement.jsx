@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ExpenseManagementWrapper } from "../../Styles/ExpenseStyle";
+import { ExpenseManagementWrapper } from "../../../Styles/ExpenseStyle";
 import EventExpensesPage from "./EventExpenses";
 import GeneralExpensesPage from "./GeneralExpenses";
-import AddEventExpenseModal from "../../Components/Modals/ExpenseManagement/AddEventExpense";
-import AddGeneralExpenseModal from "../../Components/Modals/ExpenseManagement/AddGeneralExpense";
+import AddEventExpenseModal from "../../../Components/Modals/ExpenseManagement/AddEventExpense";
+import AddGeneralExpenseModal from "../../../Components/Modals/ExpenseManagement/AddGeneralExpense";
 
 const ExpenseManagementpage = () => {
     const tabs = [
