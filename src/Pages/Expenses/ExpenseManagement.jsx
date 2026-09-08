@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ExpenseManagementWrapper } from "../../Styles/ExpenseStyle";
 import EventExpensesPage from "./EventExpenses";
 import GeneralExpensesPage from "./GeneralExpenses";
+import AddEventExpenseModal from "../../Components/Modals/ExpenseManagement/AddEventExpense";
+import AddGeneralExpenseModal from "../../Components/Modals/ExpenseManagement/AddGeneralExpense";
 
 const ExpenseManagementpage = () => {
     const tabs = [
@@ -9,6 +11,11 @@ const ExpenseManagementpage = () => {
         { label: "Event", value: "event" }
     ];
     const [selectedTab, setSelectedTab] = useState(tabs[0].value);
+    const [isAddGeneralExpense, setIsAddGeneralExpense] = useState(false);
+
+    const handleOpenGeneralExpenseModal = () => {
+        setIsAddGeneralExpense(true);
+    }
     return (
         <>
             <ExpenseManagementWrapper>
@@ -17,7 +24,7 @@ const ExpenseManagementpage = () => {
                     <div className="add_btn">
                         {
                             selectedTab === "general" ? (
-                                <button>
+                                <button onClick={handleOpenGeneralExpenseModal}>
                                     <i className="fa-solid fa-plus"></i>
                                     <p>Add General Expense</p>
                                 </button>
@@ -49,6 +56,11 @@ const ExpenseManagementpage = () => {
                 {selectedTab === "event" && (
                     <EventExpensesPage />
                 )}
+                <AddGeneralExpenseModal
+                    isAddGeneralExpense={isAddGeneralExpense}
+                    setIsAddGeneralExpense={setIsAddGeneralExpense}
+                />
+                <AddEventExpenseModal />
             </ExpenseManagementWrapper>
         </>
     );
