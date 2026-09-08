@@ -1,0 +1,18 @@
+# React BrowserRouter fallback for Apache / compatible hosting.
+# Deploy beside index.html; Create React App copies this file into build/.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Serve real files and directories normally.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Keep API requests and missing assets out of the React fallback.
+    RewriteRule ^(?:api|static|images|scripts)(?:/|$) - [L,NC]
+    RewriteRule \.[^/]+$ - [L]
+
+    # Internally serve React without changing the requested URL.
+    RewriteCond %{REQUEST_METHOD} ^(?:GET|HEAD)$
+    RewriteRule ^ index.html [L]
+</IfModule>
