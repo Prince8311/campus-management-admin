@@ -273,12 +273,11 @@ export const EventExpenseWrapper = styled('div')`
             display: flex;
             padding: 5px;
             cursor: pointer;
-
             border-radius: 3px;
 
-                &:hover {
-                    background: ${colors.customColors.lightBackground3};
-                }
+            &:hover {
+                background: ${colors.customColors.lightBackground3};
+            }
 
             .box_inner {
                 position: relative;
@@ -314,7 +313,7 @@ export const EventExpenseWrapper = styled('div')`
                 a {
                     position: relative;
                     width: auto;
-                    padding: 5px 25px;
+                    padding: 4px 25px;
                     display: flex;
                     align-items: center;
                     font-size: 11px;
@@ -326,8 +325,21 @@ export const EventExpenseWrapper = styled('div')`
                     border-radius: 25px;
 
                     i {
-                        font-size: 8px;
+                        font-size: 6px;
                         margin-right: 6px;
+                    }
+
+                    &.active {
+                        color: ${colors.customColors.greenColor};
+                        background:  ${colors.customColors.greenColorLight};
+                    }
+                    &.cancel {
+                        color: ${colors.customColors.redColor};
+                        background:  ${colors.customColors.redColorLight};
+                    }
+                    &.conclude {
+                        color: ${colors.customColors.yellowColor};
+                        background:  ${colors.customColors.yellowColorLight};
                     }
                 }
             }

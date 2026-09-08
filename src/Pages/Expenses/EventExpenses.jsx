@@ -20,7 +20,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="cancel"><i className="fa-solid fa-circle"></i>Cancel</a>
                         </div>
                     </div>
                     <div className="folder_box">
@@ -29,7 +29,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="conclude"><i className="fa-solid fa-circle"></i>Conclude</a>
                         </div>
                     </div>
                     <div className="folder_box">
@@ -38,7 +38,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="active"><i className="fa-solid fa-circle"></i>Active</a>
                         </div>
                     </div>
                     <div className="folder_box">
@@ -47,7 +47,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="cancel"><i className="fa-solid fa-circle"></i>Cancel</a>
                         </div>
                     </div>
                     <div className="folder_box">
@@ -56,7 +56,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="conclude"><i className="fa-solid fa-circle"></i>Conclude</a>
                         </div>
                     </div>
                     <div className="folder_box">
@@ -65,7 +65,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="active"><i className="fa-solid fa-circle"></i>Active</a>
                         </div>
                     </div>
                     <div className="folder_box">
@@ -74,7 +74,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="conclude"><i className="fa-solid fa-circle"></i>Conclude</a>
                         </div>
                     </div>
                     <div className="folder_box">
@@ -83,7 +83,7 @@ const EventExpensesPage = () => {
                                 <img src="/images/folder1.png" alt="" />
                             </div>
                             <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
+                            <a className="cancel"><i className="fa-solid fa-circle"></i>Cancel</a>
                         </div>
                     </div>
                 </div>
