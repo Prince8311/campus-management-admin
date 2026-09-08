@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ExpenseManagementWrapper } from "../../Styles/ExpenseStyle";
+import EventExpensesPage from "./EventExpenses";
+import GeneralExpensesPage from "./GeneralExpenses";
 
 const ExpenseManagementpage = () => {
     const tabs = [
@@ -41,6 +43,12 @@ const ExpenseManagementpage = () => {
                         ))}
                     </div>
                 </div>
+                {selectedTab === "general" && (
+                    <GeneralExpensesPage />
+                )}
+                {selectedTab === "event" && (
+                    <EventExpensesPage />
+                )}
             </ExpenseManagementWrapper>
         </>
     );
