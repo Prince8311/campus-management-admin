@@ -12,9 +12,14 @@ const ExpenseManagementpage = () => {
     ];
     const [selectedTab, setSelectedTab] = useState(tabs[0].value);
     const [isAddGeneralExpense, setIsAddGeneralExpense] = useState(false);
+    const [isAddEventExpense, setIsAddEventExpense] = useState(false);
 
     const handleOpenGeneralExpenseModal = () => {
         setIsAddGeneralExpense(true);
+    }
+
+    const handleOpenEventExpenseModal = () => {
+        setIsAddEventExpense(true);
     }
     return (
         <>
@@ -29,7 +34,7 @@ const ExpenseManagementpage = () => {
                                     <p>Add General Expense</p>
                                 </button>
                             ) : (
-                                <button>
+                                <button onClick={handleOpenEventExpenseModal}>
                                     <i className="fa-solid fa-plus"></i>
                                     <p>Create Event</p>
                                 </button>
@@ -60,7 +65,10 @@ const ExpenseManagementpage = () => {
                     isAddGeneralExpense={isAddGeneralExpense}
                     setIsAddGeneralExpense={setIsAddGeneralExpense}
                 />
-                <AddEventExpenseModal />
+                <AddEventExpenseModal
+                    isAddEventExpense={isAddEventExpense}
+                    setIsAddEventExpense={setIsAddEventExpense}
+                />
             </ExpenseManagementWrapper>
         </>
     );
