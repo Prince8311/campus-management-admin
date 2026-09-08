@@ -286,6 +286,7 @@ export const EventExpenseWrapper = styled('div')`
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                padding: 8px 0;
 
                 .img_sec {
                     position: relative;
@@ -313,11 +314,11 @@ export const EventExpenseWrapper = styled('div')`
                 a {
                     position: relative;
                     width: auto;
-                    padding: 4px 25px;
+                    padding: 3px 15px;
                     display: flex;
                     align-items: center;
-                    font-size: 11px;
-                    font-weight: 600;
+                    font-size: 10px;
+                    font-weight: 500;
                     color: ${colors.customColors.greenColor};
                     background:  ${colors.customColors.greenColorLight};
                     margin-top: 5px;
