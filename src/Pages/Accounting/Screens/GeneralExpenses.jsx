@@ -1,4 +1,4 @@
-import { GeneralExpenseWrapper } from "../../Styles/ExpenseStyle";
+import { GeneralExpenseWrapper } from "../../../Styles/ExpenseStyle";
 
 const GeneralExpensesPage = () => {
     return (

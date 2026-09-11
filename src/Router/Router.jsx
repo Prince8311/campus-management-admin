@@ -109,10 +109,10 @@ import HostelRoomsPage from "../Pages/HostelManagement/Screens/HostelRooms";
 import HostelBuildingsPage from "../Pages/HostelManagement/Screens/HostelBuildings";
 
 // Expense Management
-import ExpenseManagementpage from "../Pages/Expenses/ExpenseManagement";
-import GeneralExpensesPage from "../Pages/Expenses/GeneralExpenses";
-import EventExpensesPage from "../Pages/Expenses/EventExpenses";
-
+import AccountingMainPage from "../Pages/Accounting/Index";
+import AccountingOverviewPage from "../Pages/Accounting/Screens/Overview";
+import ExpenseManagementpage from "../Pages/Accounting/Screens/ExpenseManagement";
+import StockManagementPage from "../Pages/Accounting/Screens/StockManagement";
 
 const Routers = () => {
     return (
@@ -149,21 +149,18 @@ const Routers = () => {
                                     <Route path="student-wise" element={<StudentWisePage />} />
                                 </Route>
                                 <Route path="staff-report" element={<StaffReportPage />}>
-                                    <Route path="" element={<Navigate to="staffoverview" />} />
                                     <Route path="staffoverview" element={<StaffOverViewPage />} />
                                     <Route path="teaching-staff" element={<TeachingStaffPage />} />
                                     <Route path="non-teaching-staff" element={<NonTeachingStaffPage />} />
                                 </Route>
                             </Route>
                             <Route path="academics" element={<AcademicsPage />}>
-                                <Route path="" element={<Navigate to="student-wise-academic" />} />
                                 <Route path="student-wise-academic" element={<StudentWiseAcademicPage />} />
                                 <Route path="teacher-wise-academic" element={<TeacherWiseAcademicPage />} />
                                 <Route path="class-wise-academic" element={<ClassWiseAcademicPage />} />
                             </Route>
                         </Route>
                         <Route path="academics" element={<AcademicMainPage />}>
-                            <Route path="" element={<Navigate to="student-information" />} />
                             <Route path="student-information" element={<StudentInformationPage />} />
                             <Route path="classrooms" element={<ClassroomPage />} />
                             <Route path="student-attendence" element={<StudentAttendencePage />} />
@@ -171,7 +168,6 @@ const Routers = () => {
                             <Route path="classroom-details" element={<ClassroomDetailsPage />} />
                         </Route>
                         <Route path="finance-management" element={<FinanceManagementMainPage />}>
-                            <Route path="" element={<Navigate to="fee-collection" />} />
                             <Route path="fee-collection" element={<FeeCollectionPage />} />
                             <Route path="fee-transactions" element={<FeeTransactionsPage />} />
                             <Route path="add-fee-structure" element={<AddFeesStructure />} />
@@ -180,25 +176,21 @@ const Routers = () => {
                             <Route path="accounts" element={<BankAccountPage />} />
                         </Route>
                         <Route path="communication" element={<CommunicationMainPage />}>
-                            <Route path="" element={<Navigate to="messaging" />} />
                             <Route path="message-templates" element={<MessagingPage />} />
                             <Route path="institution-wallets" element={<InstitutionWalletsPage />} />
                             <Route path="control-center" element={<ControlCenterPage />} />
                         </Route>
                         <Route path="staff-management" element={<StaffManagementMainPage />}>
-                            <Route path="" element={<Navigate to="staff-information" />} />
                             <Route path="staff-information" element={<StaffInformationPage />} />
                             <Route path="add-staff" element={<AddStaffPage />} />
                         </Route>
                         <Route path="hostel-management" element={<HostelManagementMainPage />}>
-                            <Route path="" element={<Navigate to="hostel-overview" />} />
                             <Route path="hostel-overview" element={<HostelOverviewPage />} />
                             <Route path="residents" element={<HostelResidentsPage />} />
                             <Route path="hostel-rooms" element={<HostelRoomsPage />} />
                             <Route path="hostel-buildings" element={<HostelBuildingsPage />} />
                         </Route>
                         <Route path="transport-management" element={<TransportMainPage />}>
-                            <Route path="" element={<Navigate to="overview" />} />
                             <Route path="overview" element={<TransportOverviewPage />} />
                             <Route path="passengers" element={<PassengersPage />} />
                             <Route path="stopages" element={<StopagesPage />} />
@@ -208,7 +200,6 @@ const Routers = () => {
                         </Route>
                         <Route path="add-routes" element={<AddRoutesPage />} />
                         <Route path="settings" element={<SettingsMainPage />}>
-                            <Route path="" element={<Navigate to="roles-permissions" />} />
                             <Route path="roles-permissions" element={<RolesPermissionsPage />} />
                             <Route path="role/:roleName" element={<AddRolePermissionPage />} />
                             <Route path="add-roles-permissions" element={<AddRolePermissionPage />} />
@@ -224,10 +215,10 @@ const Routers = () => {
                                 <Route path="section-fields" element={<SectionFieldsPage />} />
                             </Route>
                         </Route>
-                        <Route path="expense" element={<ExpenseManagementpage />}>
-                            <Route path="" element={<Navigate to="general-expenses" />} />
-                            <Route path="general-expenses" element={<GeneralExpensesPage />} />
-                            <Route path="event-expenses" element={<EventExpensesPage />} />
+                        <Route path="accounting" element={<AccountingMainPage />}>
+                            <Route path="overview" element={<AccountingOverviewPage />} />
+                            <Route path="expense-management" element={<ExpenseManagementpage />} />
+                            <Route path="stock-management" element={<StockManagementPage />} />
                         </Route>
                         <Route path="alumni" element={<AlumniPage />} />
                         <Route path="billing" element={<BillingPage />} />
