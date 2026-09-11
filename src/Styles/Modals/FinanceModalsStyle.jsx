@@ -1856,7 +1856,7 @@ export const FeeCollectWrapper = styled('div')`
 
                 .type_box {
                     position: relative;
-                    width: 48%;
+                    width: 55%;
                     display: flex;
                     flex-direction: column;
                     border: 1px solid ${colors.customColors.borderColor};
@@ -1881,7 +1881,7 @@ export const FeeCollectWrapper = styled('div')`
 
                         .content {
                             position: relative;
-                            width: 50%;
+                            width: 33.33%;
                             display: flex;
                             align-items: center;
 
@@ -1893,7 +1893,7 @@ export const FeeCollectWrapper = styled('div')`
                                 position: relative;
                                 width: 100%;
                                 cursor: pointer;
-                                font-size: 12px;
+                                font-size: 11px;
                                 color: ${colors.customColors.blackColor2};
                                 line-height: 1;
                                 display: flex;
@@ -1969,7 +1969,7 @@ export const FeeCollectWrapper = styled('div')`
 
                 .amount_box {
                     position: relative;
-                    width: 48%;
+                    width: 43%;
                     display: flex;
                     align-items: center;
                     border: 1px solid ${colors.customColors.borderColor};
@@ -2279,7 +2279,7 @@ export const FeeCollectWrapper = styled('div')`
 
                     .method_box {
                         position: relative;
-                        width: 33.33%;
+                        width: 25%;
                         padding: 10px;
 
                         input[type="radio"] {
@@ -2289,7 +2289,7 @@ export const FeeCollectWrapper = styled('div')`
                         label {
                             position: relative;
                             width: 100%;
-                            padding: 10px 20px;
+                            padding: 10px 12px;
                             padding-top: 13px;
                             cursor: pointer;
                             border-radius: 6px;
@@ -2346,6 +2346,10 @@ export const FeeCollectWrapper = styled('div')`
                                 &.cheque {
                                     color: ${colors.customColors.violet};
                                     background: ${colors.customColors.violetLight};
+                                }
+                                &.instUpi {
+                                    color: ${colors.customColors.blueColor1};
+                                    background: ${colors.customColors.blueColorLight};
                                 }
                             }
                         }

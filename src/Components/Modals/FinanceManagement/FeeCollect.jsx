@@ -237,6 +237,18 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                             <p>Lump Sum</p>
                                         </label>
                                     </div>
+                                    <div className="content">
+                                        <input
+                                            id="all"
+                                            name="type"
+                                            type="radio"
+                                            value="all"
+                                        />
+                                        <label htmlFor="all">
+                                            <span><i className="fa-solid fa-circle"></i></span>
+                                            <p>Four Close</p>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div className="amount_box">
@@ -412,6 +424,21 @@ const FeeCollectionModal = ({ isOpenFeeCollectModal, setIsOpenFeeCollectModal, s
                                                     <a className="cheque"><i className="fa-solid fa-money-check"></i></a>
                                                     <p>Cheque</p>
                                                     <span>(Cheque Payment)</span>
+                                                </label>
+                                            </div>
+                                            <div className="method_box">
+                                                <input
+                                                    type="radio"
+                                                    id="instUpi"
+                                                    name="method"
+                                                    value="instUpi"
+                                                    checked={paymentMethod === 'instUpi'}
+                                                    onChange={handlePaymentMethodChange}
+                                                />
+                                                <label htmlFor="instUpi">
+                                                    <a className="instUpi"><i className="fa-solid fa-qrcode"></i></a>
+                                                    <p>UPI</p>
+                                                    <span>(Institution UPI)</span>
                                                 </label>
                                             </div>
                                         </>
