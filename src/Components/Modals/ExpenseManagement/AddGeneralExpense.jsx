@@ -1,6 +1,6 @@
 import { AddGreneralExpenseWrapper } from "../../../Styles/Modals/ExpenseManagementStyle";
 
-const AddGeneralExpenseModal = ({isAddGeneralExpense, setIsAddGeneralExpense}) => {
+const AddGeneralExpenseModal = ({ isAddGeneralExpense, setIsAddGeneralExpense }) => {
 
     function closeModal() {
         setIsAddGeneralExpense(false);
@@ -59,6 +59,16 @@ const AddGeneralExpenseModal = ({isAddGeneralExpense, setIsAddGeneralExpense}) =
                                             </ul>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div className="upload_box">
+                                <span>Billing Image<p>*</p></span>
+                                <div className="document_upload_sec" >
+                                    <label htmlFor="fileUpload" className="upload_label">
+                                        <i className="fa-solid fa-cloud-arrow-up"></i>
+                                        <p>Drag and drop your file here or <span>browse files</span></p>
+                                        <b>Supported: JPG, JPEG, PNG, PDF</b>
+                                    </label>
                                 </div>
                             </div>
                         </div>
