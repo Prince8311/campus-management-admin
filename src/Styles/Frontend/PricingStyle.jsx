@@ -264,6 +264,7 @@ export const PricingPageWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         display: flex;
+                        flex-wrap: wrap;
                         justify-content: space-between;
 
                         .top_box {
@@ -275,6 +276,7 @@ export const PricingPageWrapper = styled('div')`
                             display: flex;
                             flex-direction: column;
                             padding: 20px;
+                            margin-bottom: 20px;
 
                             .box_head {
                                 position: relative;
@@ -307,10 +309,24 @@ export const PricingPageWrapper = styled('div')`
                                 }
                             }
 
-                            &:last-of-type {
+                            &:nth-of-type(2) {
                                 .box_head {
                                     .head_img {
                                         background: ${colors.customColors.yellowColorLight};
+                                    }
+                                }
+                            }
+                            &:nth-of-type(3) {
+                                .box_head {
+                                    .head_img {
+                                        background: ${colors.customColors.blueColorLight};
+                                    }
+                                }
+                            }
+                            &:nth-of-type(4) {
+                                .box_head {
+                                    .head_img {
+                                        background: ${colors.customColors.greenColorLight};
                                     }
                                 }
                             }
@@ -354,7 +370,6 @@ export const PricingPageWrapper = styled('div')`
                     .right_bottom_sec {
                         position: relative;
                         width: 100%;
-                        margin-top: 20px;
                         display: flex;
                         padding: 5px 5px 20px 5px;
                         border-radius: 6px;
@@ -1403,6 +1418,7 @@ export const SubcriptionWrapper = styled('div')`
                         position: relative;
                         width: 100%;
                         display: flex;
+                        flex-wrap: wrap;
                         margin-top: 20px;
                         justify-content: space-between;
 
@@ -1415,6 +1431,7 @@ export const SubcriptionWrapper = styled('div')`
                             display: flex;
                             flex-direction: column;
                             padding: 20px;
+                            margin-bottom: 20px;
 
                             .box_head {
                                 position: relative;
@@ -1447,10 +1464,24 @@ export const SubcriptionWrapper = styled('div')`
                                 }
                             }
 
-                            &:last-of-type {
+                            &:nth-of-type(2) {
                                 .box_head {
                                     .head_img {
                                         background: ${colors.customColors.yellowColorLight};
+                                    }
+                                }
+                            }
+                            &:nth-of-type(3) {
+                                .box_head {
+                                    .head_img {
+                                        background: ${colors.customColors.blueColorLight};
+                                    }
+                                }
+                            }
+                            &:nth-of-type(4) {
+                                .box_head {
+                                    .head_img {
+                                        background: ${colors.customColors.greenColorLight};
                                     }
                                 }
                             }
@@ -1545,7 +1576,6 @@ export const SubcriptionWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         align-items: center;
-                        margin-top: 20px;
                         background: ${colors.customColors.blueColorLight};
                         border-radius: 6px;
                         padding: 15px;

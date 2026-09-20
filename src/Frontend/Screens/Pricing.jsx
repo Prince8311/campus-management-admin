@@ -69,6 +69,30 @@ const PricingPage = () => {
                                             <a> <span>₹30</span> / student</a>
                                         </div>
                                     </div>
+                                    <div className="top_box">
+                                        <div className="box_head">
+                                            <div className="head_img">
+                                                <img src="/images/Accounting Icon.svg" alt="" />
+                                            </div>
+                                            <h6>Acconting</h6>
+                                        </div>
+                                        <div className="box_item">
+                                            <p>Real-time fleet tracking, route optimization, and driver management portal.</p>
+                                            <a> <span>₹40</span> / student</a>
+                                        </div>
+                                    </div>
+                                    <div className="top_box">
+                                        <div className="box_head">
+                                            <div className="head_img">
+                                                <img src="/images/Books Icon.svg" alt="" />
+                                            </div>
+                                            <h6>Library Management</h6>
+                                        </div>
+                                        <div className="box_item">
+                                            <p>Real-time fleet tracking, route optimization, and driver management portal.</p>
+                                            <a> <span>₹25</span> / student</a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="right_bottom_sec">
                                     <div className="bottom_box">
