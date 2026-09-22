@@ -4,11 +4,13 @@ import EventExpensesPage from "./EventExpenses";
 import GeneralExpensesPage from "./GeneralExpenses";
 import AddEventExpenseModal from "../../../Components/Modals/ExpenseManagement/AddEventExpense";
 import AddGeneralExpenseModal from "../../../Components/Modals/ExpenseManagement/AddGeneralExpense";
+import RetailExpensePage from "./RetailExpense";
 
 const ExpenseManagementpage = () => {
     const tabs = [
         { label: "General", value: "general" },
-        { label: "Event", value: "event" }
+        { label: "Event", value: "event" },
+        {label: "Retailer", value: "retailer"}
     ];
     const [selectedTab, setSelectedTab] = useState(tabs[0].value);
     const [isAddGeneralExpense, setIsAddGeneralExpense] = useState(false);
@@ -61,6 +63,10 @@ const ExpenseManagementpage = () => {
                 {selectedTab === "event" && (
                     <EventExpensesPage />
                 )}
+                {selectedTab === "retailer" && (
+                    <RetailExpensePage />
+                )}
+                
                 <AddGeneralExpenseModal
                     isAddGeneralExpense={isAddGeneralExpense}
                     setIsAddGeneralExpense={setIsAddGeneralExpense}

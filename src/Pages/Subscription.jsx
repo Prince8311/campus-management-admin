@@ -120,6 +120,52 @@ const SubscriptionPage = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="item_box">
+                                        <div className="box_head">
+                                            <div className="head_img">
+                                                <img src="/images/Accounting Icon.svg" alt="" />
+                                            </div>
+                                            <h6>Accounting</h6>
+                                        </div>
+                                        <div className="box_item">
+                                            <p>Double-entry bookkeeping, GST invoicing, and financial audit reports.</p>
+                                            <div className="bottom_item">
+                                                <a> <span>₹30</span> / month</a>
+                                                <div className="toggle_bar">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="travel"
+                                                    />
+                                                    <label htmlFor="travel">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="item_box">
+                                        <div className="box_head">
+                                            <div className="head_img">
+                                                <img src="/images/Books Icon.svg" alt="" />
+                                            </div>
+                                            <h6>Library Management</h6>
+                                        </div>
+                                        <div className="box_item">
+                                            <p>Digital cataloging, RFID/barcode book tracking, issue & return management.</p>
+                                            <div className="bottom_item">
+                                                <a> <span>₹25</span> / month</a>
+                                                <div className="toggle_bar">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="travel"
+                                                    />
+                                                    <label htmlFor="travel">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="elite_campus_sec">
