@@ -5,6 +5,7 @@
             {
                 "id": 1,
                 "name": "Institutions",
+                "icon": "fa-building-user",
                 "sub_modules": [
                     {
                         "key": "INSTITUTIONS",
@@ -15,14 +16,11 @@
             {
                 "id": 8,
                 "name": "Settings",
+                "icon": "fa-gears",
                 "sub_modules": [
                     {
                         "key": "DEVICE_SETTINGS",
                         "value": "Device Settings"
-                    },
-                    {
-                        "key": "PROFILE_SETTINGS",
-                        "value": "Profile Settings"
                     },
                     {
                         "key": "GENERAL_SETTINGS",

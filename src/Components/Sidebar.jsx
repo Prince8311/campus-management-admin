@@ -16,6 +16,9 @@ const Sidebar = () => {
     const { setAuthToken, setPageName, isAuthLoading, userDetails, setUserDetails } = UserData();
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [failedProfileImage, setFailedProfileImage] = useState(null);
+    const profileName = userDetails.name?.trim() || 'Super Admin';
+    const profileInitials = profileName.split(/\s+/).slice(0, 2).map(part => part[0]).join('').toUpperCase();
 
     useEffect(() => {
         const formatPathName = (pathName) => {
@@ -81,29 +84,63 @@ const Sidebar = () => {
                 <div className="logo">
                     <img src="/images/logo.png" alt="" />
                 </div>
-                <div className="institution_brief">
-                    <div className="brief_inner">
-                        <div className="top_part">
-                            <div className="image_box">
-                                <i className="fa-solid fa-school"></i>
+                {
+                    userDetails.user_type === 'inst_admin' &&
+                    <div className="institution_brief">
+                        <div className="brief_inner">
+                            <div className="top_part">
+                                <div className="image_box">
+                                    <i className="fa-solid fa-school"></i>
+                                </div>
+                                <li>
+                                    <h4>{userDetails.institution?.inst_name}</h4>
+                                    <p><b>INT ID :</b>{userDetails.institution?.inst_id}</p>
+                                </li>
                             </div>
-                            <li>
-                                <h4>{userDetails.institution?.inst_name}</h4>
-                                <p><b>INT ID :</b>{userDetails.institution?.inst_id}</p>
-                            </li>
-                        </div>
-                        <div className="bottom_part">
-                            <li>
-                                <p>Ongoing Session :</p>
-                                <span>{userDetails.institution?.ongoingSession?.name}</span>
-                            </li>
-                            <div className="btn_sec">
-                                <button className="view_btn">View Details</button>
-                                <a className="manage_btn" onClick={handleOpenSessionsPage}>Manage Sessions<i className="fa-solid fa-angle-right"></i></a>
+                            <div className="bottom_part">
+                                <li>
+                                    <p>Ongoing Session :</p>
+                                    <span>{userDetails.institution?.ongoingSession?.name}</span>
+                                </li>
+                                <div className="btn_sec">
+                                    <button className="view_btn">View Details</button>
+                                    <a className="manage_btn" onClick={handleOpenSessionsPage}>Manage Sessions<i className="fa-solid fa-angle-right"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+                {userDetails.user_type === 'super_admin' && (
+                    <section className="admin_profile">
+                        <div className="admin_profile_card">
+                            <div className="admin_profile_identity">
+                                <div className="admin_profile_avatar">
+                                    {userDetails.image && failedProfileImage !== userDetails.image ? (
+                                        <img
+                                            src={userDetails.image}
+                                            alt={profileName}
+                                            onError={() => setFailedProfileImage(userDetails.image)}
+                                        />
+                                    ) : (
+                                        <span aria-hidden="true">{profileInitials}</span>
+                                    )}
+                                </div>
+                                <div className="admin_profile_details">
+                                    <h4>{profileName}</h4>
+                                    <span className="admin_profile_role">
+                                        <i className="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                                        {userDetails.user_role || 'Super Admin'}
+                                    </span>
+                                </div>
+                            </div>
+                            <NavLink className="admin_profile_settings" to="/admin/settings/account-settings">
+                                <i className="fa-solid fa-gear" aria-hidden="true"></i>
+                                <span>Account Settings</span>
+                                <i className="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </NavLink>
+                        </div>
+                    </section>
+                )}
                 <div className="sidebar_items">
                     {
                         isAuthLoading ? (
@@ -415,17 +452,17 @@ const Sidebar = () => {
                                                 <p>Subjects</p>
                                             </NavLink>
                                         }
+                                        <NavLink to="/admin/settings/account-settings">
+                                            <i className="fa-solid fa-user"></i>
+                                            <p>Account Setting</p>
+                                        </NavLink>
                                         {
                                             userDetails.user_type === 'inst_admin' &&
-                                            <NavLink to="/admin/settings/account-settings">
-                                                <i className="fa-solid fa-user"></i>
-                                                <p>Account Setting</p>
+                                            <NavLink to="/admin/settings/time-tables">
+                                                <i className="fa-solid fa-calendar-days"></i>
+                                                <p>Time Table</p>
                                             </NavLink>
                                         }
-                                        <NavLink to="/admin/settings/time-tables">
-                                            <i className="fa-solid fa-calendar-days"></i>
-                                            <p>Time Table</p>
-                                        </NavLink>
                                         <a>
                                             <i className="fa-solid fa-gear prefix"></i>
                                             <p>General Settings</p>

@@ -81,6 +81,108 @@ export const SidebarWrapper = styled('div')`
         }
     }
 
+    .admin_profile {
+        padding: 4px 10px 0 20px;
+        flex-shrink: 0;
+
+        .admin_profile_card {
+            padding: 16px 14px 12px;
+            border: 1px solid rgba(91, 106, 208, 0.16);
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ffffff 10%, #eef2ff 100%);
+            box-shadow: 0 5px 16px rgba(42, 54, 111, 0.08);
+        }
+
+        .admin_profile_identity {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .admin_profile_avatar {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 14px;
+            background: linear-gradient(135deg, ${colors.themeColor}, #6965db);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(66, 72, 150, 0.18);
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .admin_profile_details {
+            min-width: 0;
+
+            h4 {
+                margin: 4px 0 6px;
+                color: ${colors.customColors.blackColor};
+                font-size: 13px;
+                font-weight: 600;
+                line-height: 1.4;
+                overflow-wrap: anywhere;
+            }
+        }
+
+        .admin_profile_label {
+            color: #64708b;
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+        }
+
+        .admin_profile_role {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 7px;
+            border-radius: 6px;
+            background: #e5e9fc;
+            color: #454e93;
+            font-size: 9px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .admin_profile_settings {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 10px;
+            border: 1px solid rgba(91, 106, 208, 0.18);
+            border-radius: 9px;
+            background: ${colors.customColors.whiteColor};
+            color: ${colors.themeColor};
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 150ms ease, box-shadow 150ms ease;
+
+            i:last-child { margin-left: auto; }
+
+            &:hover, &.active {
+                background: #e9edff;
+                box-shadow: 0 2px 6px rgba(42, 54, 111, 0.08);
+            }
+
+            &:focus-visible {
+                outline: 2px solid ${colors.themeColor};
+                outline-offset: 3px;
+            }
+        }
+    }
+
     .institution_brief {
         position: relative;
         width: 100%;
