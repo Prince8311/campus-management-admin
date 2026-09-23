@@ -1409,6 +1409,7 @@ export const AddRoutesWrapper = styled('div')`
         color: ${colors.customColors.whiteColor}; font-size: 12px; font-weight: 500; cursor: pointer;
         &:hover { filter: brightness(0.96); }
         &:focus-visible { outline: 2px solid ${colors.customColors.blueColor2}; outline-offset: 3px; }
+        &:disabled { cursor: not-allowed; opacity: 0.4; }
     }
     .route_timing_guide { margin: 0 15px 18px; }
     .timing_guide_heading {

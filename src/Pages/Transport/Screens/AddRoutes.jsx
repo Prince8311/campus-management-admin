@@ -10,6 +10,7 @@ import TimeBox from "../../../Components/TimeBox";
 import { UserData } from "../../../Context/PageContext";
 import { DirectionsRenderer, GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { googleMapsLoaderOptions } from "../../../Services/Api/GoogleMapsConfig";
+import ButtonLoader from "../../../Components/Loader/ButtonLoader";
 
 const AddRoutesPage = () => {
     const api = getApiEndpoints();
@@ -40,6 +41,11 @@ const AddRoutesPage = () => {
     const [isVehiclesLoading, setIsVehiclesLoading] = useState(false);
     const [showVehicleDropdown, setShowVehicleDropdown] = useState(false);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
+    const [routeName, setRouteName] = useState('Route 1 - Main Road');
+    const normalizeTimeValue = (value) => {
+        if (!value) return '';
+        return String(value).trim();
+    };
     const [isStaffsLoading, setIsStaffsLoading] = useState(false);
     const [showStaffDropdown, setShowStaffDropdown] = useState(false);
     const [staffList, setStaffList] = useState([]);
@@ -55,6 +61,7 @@ const AddRoutesPage = () => {
     const stopagePositionRef = useRef({});
     const [stopages, setStopages] = useState([{ id: 1, label: "Stopage 1" }]);
     const [directionsResult, setDirectionsResult] = useState(null);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
     const selectedStopageIds = new Set(
         Object.values(selectedStopagesByBox)
             .map((stopage) => stopage?.id)
@@ -372,6 +379,32 @@ const AddRoutesPage = () => {
         return stopTimes[boxId]?.[type] || 'Calculating...';
     };
 
+    const isFormValid = Boolean(
+        routeName.trim() &&
+        selectedVehicle?.id &&
+        selectedStaffs.length > 0 &&
+        schoolTiming.start &&
+        schoolTiming.end &&
+        stopages.some((box) => selectedStopagesByBox[box.id])
+    );
+
+    const resetRouteForm = () => {
+        setRouteName('Route 1 - Main Road');
+        setSelectedVehicle(null);
+        setSelectedStaffs([]);
+        setSchoolTiming({ start: '', end: '' });
+        setOpenSchoolTimeBox(null);
+        setStopages([{ id: 1, label: 'Stopage 1' }]);
+        setSelectedStopagesByBox({});
+        setOpenStopageDropdownId(null);
+        setRouteTravel(null);
+        setDirectionsResult(null);
+        setRouteError('');
+        setRouteRetry((prev) => prev + 1);
+        setShowVehicleDropdown(false);
+        setShowStaffDropdown(false);
+    };
+
     useEffect(() => {
         if (!isMapLoaded || !mapRef.current || !window.google?.maps) {
             return;
@@ -393,6 +426,51 @@ const AddRoutesPage = () => {
         mapRef.current.fitBounds(bounds, 80);
     }, [instCenter.lat, instCenter.lng, isMapLoaded, selectedStopageMarkers]);
 
+    const handleSaveRoute = async (e) => {
+        e.preventDefault();
+        if (!isFormValid) return;
+
+        setIsButtonLoading(true);
+        let isSuccess = false;
+
+        try {
+            const payload = {
+                routeName: routeName.trim() || 'Route 1 - Main Road',
+                vehicleId: Number(selectedVehicle?.id || 0),
+                staffs: selectedStaffs.map((staff) => staff.id).join(',') || '2,3',
+                startTime: normalizeTimeValue(schoolTiming.start),
+                endTime: normalizeTimeValue(schoolTiming.end),
+                stopages: stopages
+                    .filter((box) => selectedStopagesByBox[box.id])
+                    .map((box) => ({
+                        id: Number(selectedStopagesByBox[box.id]?.id || box.id),
+                        pickup_time: normalizeTimeValue(stopTimes[box.id]?.pickup),
+                        drop_time: normalizeTimeValue(stopTimes[box.id]?.drop)
+                    }))
+            };
+
+            const response = await axiosInstance.post(api.addRoute, payload, {
+                params: {
+                    intent: 'add',
+                }
+            });
+
+            isSuccess = response?.data.status === 200;
+            if (isSuccess) {
+                toast.success(response?.data.message || 'Route added successfully');
+            } else {
+                toast.error(response?.data.message || 'Unable to add route');
+            }
+        } catch (error) {
+            toast.error(error?.response?.data?.message || 'An error occurred');
+        } finally {
+            setIsButtonLoading(false);
+            if (isSuccess) {
+                resetRouteForm();
+            }
+        }
+    }
+
     return (
         <>
             <AddRoutesWrapper>
@@ -402,12 +480,21 @@ const AddRoutesPage = () => {
                             <div className="page_head">
                                 <div className="icon" onClick={handleRedirectionRoutesPage}><i className="fa-solid fa-angle-left"></i></div>
                                 <h2>Add Routes</h2>
-                                <button type="button" className="route_save_btn"><i className="fa-regular fa-floppy-disk" aria-hidden="true"></i>Save</button>
+                                <button type="button" className="route_save_btn" onClick={handleSaveRoute} disabled={!isFormValid || isButtonLoading}>
+                                    {isButtonLoading ? (
+                                        <ButtonLoader />
+                                    ) : (
+                                        <>
+                                            <i className="fa-regular fa-floppy-disk" aria-hidden="true"></i>
+                                            Save
+                                        </>
+                                    )}
+                                </button>
                             </div>
                             <div className="top_sec">
                                 <div className="input_box">
                                     <span>Route Name <p>*</p></span>
-                                    <input type="text" />
+                                    <input type="text" value={routeName} onChange={(e) => setRouteName(e.target.value)} />
                                 </div>
                                 <div className="select_box">
                                     <span>Assign Vehicle <p>*</p></span>
