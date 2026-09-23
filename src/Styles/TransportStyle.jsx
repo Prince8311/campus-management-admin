@@ -985,25 +985,29 @@ export const VehicleRoutesWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 20%;
+                        width: 15%;
                     }
 
                     &:nth-of-type(2) {
-                        width: 25%;
+                        width: 20%;
                         justify-content: center;
                     }
-
                     &:nth-of-type(3) {
-                        width: 25%;
+                        width: 15%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(4) {
-                        width: 20%;
+                        width: 25%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(5) {
+                        width: 15%;
+                        justify-content: center;
+                    }
+
+                    &:nth-of-type(6) {
                         width: 10%;
                         justify-content: center;
                     }
@@ -1040,17 +1044,22 @@ export const VehicleRoutesWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 20%;
+                            width: 15%;
                             display: flex;
                         }
 
                         &:nth-of-type(2) {
-                            width: 25%;
+                            width: 20%;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        &:nth-of-type(3) {
+                            width: 15%;
                             align-items: center;
                             justify-content: center;
                         }
 
-                        &:nth-of-type(3) {
+                        &:nth-of-type(4) {
                             width: 25%;
                             align-items: center;
                             justify-content: center;
@@ -1078,13 +1087,13 @@ export const VehicleRoutesWrapper = styled('div')`
                             }
                         }
 
-                        &:nth-of-type(4) {
-                            width: 20%;
+                        &:nth-of-type(5) {
+                            width: 15%;
                             align-items: center;
                             justify-content: center;
                         }
 
-                        &:nth-of-type(5) {
+                        &:nth-of-type(6) {
                             width: 10%;
                             align-items: center;
                             justify-content: center;
