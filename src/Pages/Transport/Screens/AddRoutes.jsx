@@ -16,9 +16,10 @@ const AddRoutesPage = () => {
     const navigate = useNavigate();
     const { userDetails } = UserData();
     const mapRef = useRef(null);
-    const startTimeRef = useRef(null);
-    const endTimeRef = useRef(null);
-    const [schoolTiming, setSchoolTiming] = useState({ start: '', end: '' });
+    const schoolTiming = {
+        start: userDetails?.institution?.start_time || '',
+        end: userDetails?.institution?.end_time || ''
+    };
     const { isLoaded: isMapLoaded, loadError } = useJsApiLoader(googleMapsLoaderOptions);
     const instLat = parseFloat(userDetails?.institution?.latitude);
     const instLng = parseFloat(userDetails?.institution?.longitude);
@@ -29,7 +30,7 @@ const AddRoutesPage = () => {
     const [isVehiclesLoading, setIsVehiclesLoading] = useState(false);
     const [showVehicleDropdown, setShowVehicleDropdown] = useState(false);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
-    const [routeName, setRouteName] = useState('Route 1 - Main Road');
+    const [routeName, setRouteName] = useState('');
     const normalizeTimeValue = (value) => {
         if (!value) return '';
         return String(value).trim();
@@ -377,10 +378,9 @@ const AddRoutesPage = () => {
     );
 
     const resetRouteForm = () => {
-        setRouteName('Route 1 - Main Road');
+        setRouteName('');
         setSelectedVehicle(null);
         setSelectedStaffs([]);
-        setSchoolTiming({ start: '', end: '' });
         setStopages([{ id: 1, label: 'Stopage 1' }]);
         setSelectedStopagesByBox({});
         setOpenStopageDropdownId(null);
@@ -422,11 +422,9 @@ const AddRoutesPage = () => {
 
         try {
             const payload = {
-                routeName: routeName.trim() || 'Route 1 - Main Road',
+                routeName: routeName.trim() || '',
                 vehicleId: Number(selectedVehicle?.id || 0),
                 staffs: selectedStaffs.map((staff) => staff.id).join(',') || '2,3',
-                startTime: normalizeTimeValue(schoolTiming.start),
-                endTime: normalizeTimeValue(schoolTiming.end),
                 stopages: stopages
                     .filter((box) => selectedStopagesByBox[box.id])
                     .map((box) => ({
@@ -593,14 +591,14 @@ const AddRoutesPage = () => {
                                     <div className="date_box halfwidth">
                                         <span>Start Time <p>*</p></span>
                                         <div className="date_btn" >
-                                            <p>8 : 50 PM</p>
+                                            <p>{schoolTiming.start || 'Not set'}</p>
                                             <i className="fa-regular fa-clock"></i>
                                         </div>
                                     </div>
                                     <div className="date_box halfwidth">
                                         <span>End Time <p>*</p></span>
                                         <div className="date_btn" >
-                                            <p>8 : 30 AM</p>
+                                            <p>{schoolTiming.end || 'Not set'}</p>
                                             <i className="fa-regular fa-clock"></i>
                                         </div>
                                     </div>

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { documentBaseURL, getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import Pagination from "../../../Components/Pagination";
 
 const VehicleStaffsPage = () => {
     const api = getApiEndpoints();
@@ -158,7 +159,10 @@ const VehicleStaffsPage = () => {
                         </tbody>
                     </table>
                 </div>
-
+                {
+                    totalCount > 10 &&
+                    <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
+                }
                 <AddStaffModal
                     isStaffAddModal={isStaffAddModal}
                     setIsStaffAddModal={setIsStaffAddModal}
