@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
+import TimeBox from "../../TimeBox";
 
 const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen, selectedInstitution, setSelectedInstitution, selectedAddress, setShowAddressModal, setSelectedAddress, selectState, setSelectState, selectCity, setSelectCity, lat, setLat, lng, setLng, refreshData }) => {
     const api = getApiEndpoints();
@@ -16,6 +17,14 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen, se
     const originalData = useRef(null);
     const [hasChanges, setHasChanges] = useState(false);
     const [isStatus, setIsStatus] = useState(false);
+
+    const startTimeRef = useRef(null);
+    const endTimeRef = useRef(null);
+    const [institutionTiming, setInstitutionTiming] = useState({ start: '', end: '' });
+    const [openTimeBox, setOpenTimeBox] = useState(null);
+    const boards = ["State", "CBSC", "Central"];
+    const [selectedBoard, setSelectedBoard] = useState('');
+    const [isBoardDropdownOpen, setIsBoardDropdownOpen] = useState(false);
 
     function closeModal() {
         setIsAddInstitutionOpen(false);
@@ -68,6 +77,15 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen, se
             resetForm();
             setIsButtonLoading(false);
         }
+    }
+
+    function toggleDropdown() {
+        setIsBoardDropdownOpen(!isBoardDropdownOpen);
+    }
+
+    const handleSelectBoard = (board) => {
+        setSelectedBoard(board);
+        setIsBoardDropdownOpen(false);
     }
 
     useEffect(() => {
@@ -129,15 +147,15 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen, se
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="input_box">
+                            <div className="input_box fullwidth">
                                 <span>Institution Name <p>*</p></span>
                                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} readOnly={isEditMode} />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box halfwidth">
                                 <span>Email Address <p>*</p></span>
                                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} readOnly={isEditMode} />
                             </div>
-                            <div className="input_box">
+                            <div className="input_box halfwidth">
                                 <span>Contact No. <p>*</p></span>
                                 <input
                                     type="tel"
@@ -147,7 +165,61 @@ const AddInstitutionModal = ({ isAddInstitutionOpen, setIsAddInstitutionOpen, se
                                     onChange={(e) => setPhone(e.target.value)}
                                 />
                             </div>
-                            <div className="input_box" onClick={() => setShowAddressModal(true)}>
+                            <div className="date_box halfwidth" ref={startTimeRef}>
+                                <span>Start Time <p>*</p></span>
+                                <div className="date_btn" onClick={() => setOpenTimeBox(prev => prev === 'start' ? null : 'start')}>
+                                    <p>{institutionTiming.start || 'Set Time'}</p>
+                                    <i className="fa-regular fa-clock"></i>
+                                </div>
+                                {openTimeBox === 'start' && (
+                                    <div className="time_dropdown">
+                                        <TimeBox
+                                            selectedTime={institutionTiming.start}
+                                            onTimeChange={(time) => setInstitutionTiming(prev => ({ ...prev, start: time }))}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                            <div className="date_box halfwidth" ref={endTimeRef}>
+                                <span>End Time <p>*</p></span>
+                                <div className="date_btn" onClick={() => setOpenTimeBox(prev => prev === 'end' ? null : 'end')}>
+                                    <p>{institutionTiming.end || 'Set Time'}</p>
+                                    <i className="fa-regular fa-clock"></i>
+                                </div>
+                                {openTimeBox === 'end' && (
+                                    <div className="time_dropdown">
+                                        <TimeBox
+                                            selectedTime={institutionTiming.end}
+                                            onTimeChange={(time) => setInstitutionTiming(prev => ({ ...prev, end: time }))}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                            <div className="select_box halfwidth">
+                                <span>Education Board <p>*</p></span>
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn" onClick={toggleDropdown}>
+                                        <p>{selectedBoard}</p>
+                                        <i className={`fa-solid fa-angle-down ${isBoardDropdownOpen ? 'active' : ''}`}></i>
+                                    </div>
+                                    <div className={`dropdown ${isBoardDropdownOpen ? 'active' : ''}`}>
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                {
+                                                    boards.map((board, index) => (
+                                                        <li key={index} onClick={() => handleSelectBoard(board)}>{board}</li>
+                                                    ))
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="input_box halfwidth">
+                                <span>Affiliation Number<p>*</p></span>
+                                <input type="text" placeholder="enter the number" />
+                            </div>
+                            <div className="input_box fullwidth" onClick={() => setShowAddressModal(true)}>
                                 <span>Location <a>(Google map location)</a><p>*</p></span>
                                 <textarea readOnly value={selectedAddress}></textarea>
                             </div>

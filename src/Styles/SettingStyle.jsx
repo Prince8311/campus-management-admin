@@ -4391,7 +4391,7 @@ export const SubscriptionSettingWrapper = styled('div')`
 
                 button {
                     position: relative;
-                    width: 150px;
+                    padding: 0 15px;
                     height: 35px;
                     display: flex;
                     align-items: center;
@@ -4427,7 +4427,7 @@ export const SubscriptionSettingWrapper = styled('div')`
 
             .price_box {
                 position: relative;
-                width: 25%;
+                width: 33.33%;
                 display: flex;
                 padding: 10px;
 
@@ -4589,6 +4589,10 @@ export const SubscriptionSettingWrapper = styled('div')`
                                     font-size: 14px;
                                     font-weight: 600;
                                 }
+
+                                &:last-of-type {
+                                    border-bottom: none;
+                                }
                             }
                         }
 
@@ -4596,70 +4600,121 @@ export const SubscriptionSettingWrapper = styled('div')`
                             position: relative;
                             width: 100%;
                             display: flex;
-                            flex-direction: column;
+                            flex-wrap: wrap;
                             margin-top: 10px;
 
                             .sec_box {
                                 position: relative;
-                                width: 100%;
+                                width: 50%;
                                 display: flex;
-                                align-items: center;
-                                margin-bottom: 8px;
-                                padding-bottom: 5px;
-                                border-bottom: 1px solid ${colors.customColors.borderColor1};
-
-                                &:last-of-type {
-                                    margin-bottom: 0;
-                                    border-bottom: none;
-                                }
-
-                                h4 {
-                                    font-size: 13px;
-                                    color: ${colors.customColors.blackColor};
-                                    font-weight: 500;
-                                }
-
-                                .toggle_bar {
+                                padding: 5px;
+                            
+                                .sec_box_inner {
                                     position: relative;
-                                    width: 50px;
+                                    width: 100%;
                                     display: flex;
-                                    justify-content: flex-start;
-                                    margin-left: auto;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                    padding: 15px;
+                                    border: 1px solid ${colors.customColors.borderColor};
+                                    border-radius: 6px;
 
-                                    input[type="checkbox"] {
-                                        display: none;
-                                    }
-
-                                    label {
+                                    a {
                                         position: relative;
-                                        width: 40px;
-                                        height: 21px;
-                                        background: ${colors.customColors.whiteColor2};
-                                        border-radius: 25px;
-                                        padding: 3px;
+                                        width: 35px;
+                                        height: 35px;
                                         display: flex;
                                         align-items: center;
-                                        cursor: pointer;
-                                        transition: all 0.5s ease;
+                                        justify-content: center;
+                                        border-radius: 50%;
+                                        background: ${colors.customColors.blueColorLight};
+                                        font-size: 15px;
+                                        color: ${colors.customColors.blueColor2};
+                                        text-decoration: none;
+                                    }
 
-                                        span {
+                                    h4 {
+                                        font-size: 13px;
+                                        color: ${colors.customColors.blackColor};
+                                        font-weight: 500;
+                                        margin-top: 4px;
+                                    }
+
+                                    p {
+                                        font-size: 11px;
+                                        color: ${colors.customColors.blackColor2};
+                                        font-weight: 400;
+                                        margin-top: 2px;
+                                        margin-bottom: 4px;
+                                    }
+
+                                    .toggle_bar {
+                                        position: relative;
+                                        width: 50px;
+                                        display: flex;
+
+                                        input[type="radio"] {
+                                            display: none;
+                                        }
+
+                                        label {
                                             position: relative;
-                                            width: 15px;
-                                            height: 100%;
-                                            background: ${colors.customColors.whiteColor};
-                                            border-radius: 50%;
+                                            width: 40px;
+                                            height: 21px;
+                                            background: ${colors.customColors.whiteColor2};
+                                            border-radius: 25px;
+                                            padding: 3px;
+                                            display: flex;
+                                            align-items: center;
+                                            cursor: pointer;
+                                            transition: all 0.5s ease;
+
+                                            span {
+                                                position: relative;
+                                                width: 15px;
+                                                height: 100%;
+                                                background: ${colors.customColors.whiteColor};
+                                                border-radius: 50%;
+                                                transition: all 0.5s ease;
+                                            }
+                                        }
+
+                                        input[type="radio"]:checked ~ label {
+                                            background: ${colors.customColors.blueColor1};
+                                            transition: all 0.5s ease;
+                                        }
+
+                                        input[type="radio"]:checked ~ label span {
+                                            transform: translateX(19px);
                                             transition: all 0.5s ease;
                                         }
                                     }
+                                }
 
-                                    input[type="checkbox"]:checked ~ label {
-                                        background: ${colors.customColors.blueColor1};
-                                        transition: all 0.5s ease;
+                                &:nth-of-type(2) {
+                                    .sec_box_inner {
+                                        a {
+                                            background: ${colors.customColors.yellowColorLight};
+                                            color: ${colors.customColors.yellowColor};
+                                        }
                                     }
+                                }
 
-                                    input[type="checkbox"]:checked ~ label span {
-                                        transform: translateX(19px);
-                                        transition: all 0.5s ease;
+                                &:nth-of-type(3) {
+                                    .sec_box_inner {
+                                        a {
+                                            background: ${colors.customColors.violetLight};
+                                            color: ${colors.customColors.violet};
+                                        }
+                                    }
+                                }
+                                &:nth-of-type(4) {
+                                    .sec_box_inner {
+                                        a {
+                                            background: ${colors.customColors.greenColorLight};
+                                            color: ${colors.customColors.greenColor};
+                                        }
                                     }
                                 }
                             }
@@ -4837,6 +4892,11 @@ export const SubscriptionSettingWrapper = styled('div')`
 
                                     &.edit_btn {
                                         color: ${colors.customColors.greenColor};
+                                        margin: 0 10px;
+                                    }
+
+                                    &.delete_btn {
+                                        color: ${colors.customColors.redColor};
                                     }
                                 }
                             }

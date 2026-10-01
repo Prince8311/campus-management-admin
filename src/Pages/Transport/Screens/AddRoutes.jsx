@@ -6,7 +6,6 @@ import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { calculateStopTimes, distanceFromSchool } from "../routeTiming";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
-import TimeBox from "../../../Components/TimeBox";
 import { UserData } from "../../../Context/PageContext";
 import { DirectionsRenderer, GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { googleMapsLoaderOptions } from "../../../Services/Api/GoogleMapsConfig";
@@ -17,20 +16,10 @@ const AddRoutesPage = () => {
     const navigate = useNavigate();
     const { userDetails } = UserData();
     const mapRef = useRef(null);
-    const startTimeRef = useRef(null);
-    const endTimeRef = useRef(null);
-    const [schoolTiming, setSchoolTiming] = useState({ start: '', end: '' });
-    const [openSchoolTimeBox, setOpenSchoolTimeBox] = useState(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (!startTimeRef.current?.contains(event.target) && !endTimeRef.current?.contains(event.target)) {
-                setOpenSchoolTimeBox(null);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+    const schoolTiming = {
+        start: userDetails?.institution?.start_time || '',
+        end: userDetails?.institution?.end_time || ''
+    };
     const { isLoaded: isMapLoaded, loadError } = useJsApiLoader(googleMapsLoaderOptions);
     const instLat = parseFloat(userDetails?.institution?.latitude);
     const instLng = parseFloat(userDetails?.institution?.longitude);
@@ -41,7 +30,7 @@ const AddRoutesPage = () => {
     const [isVehiclesLoading, setIsVehiclesLoading] = useState(false);
     const [showVehicleDropdown, setShowVehicleDropdown] = useState(false);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
-    const [routeName, setRouteName] = useState('Route 1 - Main Road');
+    const [routeName, setRouteName] = useState('');
     const normalizeTimeValue = (value) => {
         if (!value) return '';
         return String(value).trim();
@@ -389,11 +378,9 @@ const AddRoutesPage = () => {
     );
 
     const resetRouteForm = () => {
-        setRouteName('Route 1 - Main Road');
+        setRouteName('');
         setSelectedVehicle(null);
         setSelectedStaffs([]);
-        setSchoolTiming({ start: '', end: '' });
-        setOpenSchoolTimeBox(null);
         setStopages([{ id: 1, label: 'Stopage 1' }]);
         setSelectedStopagesByBox({});
         setOpenStopageDropdownId(null);
@@ -435,11 +422,9 @@ const AddRoutesPage = () => {
 
         try {
             const payload = {
-                routeName: routeName.trim() || 'Route 1 - Main Road',
+                routeName: routeName.trim() || '',
                 vehicleId: Number(selectedVehicle?.id || 0),
                 staffs: selectedStaffs.map((staff) => staff.id).join(',') || '2,3',
-                startTime: normalizeTimeValue(schoolTiming.start),
-                endTime: normalizeTimeValue(schoolTiming.end),
                 stopages: stopages
                     .filter((box) => selectedStopagesByBox[box.id])
                     .map((box) => ({
@@ -596,35 +581,27 @@ const AddRoutesPage = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="date_box" ref={startTimeRef}>
-                                    <span>School Start Time <p>*</p></span>
-                                    <div className="date_btn" onClick={() => setOpenSchoolTimeBox(prev => prev === 'start' ? null : 'start')}>
-                                        <p>{schoolTiming.start || 'Set Time'}</p>
-                                        <i className="fa-regular fa-clock"></i>
-                                    </div>
-                                    {openSchoolTimeBox === 'start' && (
-                                        <div className="school_time_dropdown">
-                                            <TimeBox
-                                                selectedTime={schoolTiming.start}
-                                                onTimeChange={(time) => setSchoolTiming(prev => ({ ...prev, start: time }))}
-                                            />
-                                        </div>
-                                    )}
+                            </div>
+
+                            <div className="institution_time_sec">
+                                <div className="head">
+                                    <h3>Institution Time</h3>
                                 </div>
-                                <div className="date_box" ref={endTimeRef}>
-                                    <span>School End Time <p>*</p></span>
-                                    <div className="date_btn" onClick={() => setOpenSchoolTimeBox(prev => prev === 'end' ? null : 'end')}>
-                                        <p>{schoolTiming.end || 'Set Time'}</p>
-                                        <i className="fa-regular fa-clock"></i>
-                                    </div>
-                                    {openSchoolTimeBox === 'end' && (
-                                        <div className="school_time_dropdown">
-                                            <TimeBox
-                                                selectedTime={schoolTiming.end}
-                                                onTimeChange={(time) => setSchoolTiming(prev => ({ ...prev, end: time }))}
-                                            />
+                                <div className="time_sec_content">
+                                    <div className="date_box halfwidth">
+                                        <span>Start Time <p>*</p></span>
+                                        <div className="date_btn" >
+                                            <p>{schoolTiming.start || 'Not set'}</p>
+                                            <i className="fa-regular fa-clock"></i>
                                         </div>
-                                    )}
+                                    </div>
+                                    <div className="date_box halfwidth">
+                                        <span>End Time <p>*</p></span>
+                                        <div className="date_btn" >
+                                            <p>{schoolTiming.end || 'Not set'}</p>
+                                            <i className="fa-regular fa-clock"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

@@ -1053,6 +1053,73 @@ export const HomePageWrapper = styled('div')`
                             }
                         }
 
+                        .date_box {
+                            position: relative;
+                            margin-bottom: 10px;
+
+                            &.fullwidth {
+                                width: 100%;
+                            }
+
+                            &.halfwidth {
+                                width: 48.5%;
+                            }
+
+                            span {
+                                position: relative;
+                                display: flex;
+                                align-items: center;
+                                font-size: 12px;
+                                font-weight: 400;
+                                color: ${colors.customColors.blackColor2};
+
+                                p {
+                                    color: ${colors.customColors.redColor};
+                                    margin-left: 2px;
+                                }
+                            }
+
+                            .date_btn {
+                                position: relative;
+                                width: 100%;
+                                height: 37px;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 5px 15px;
+                                background: ${colors.customColors.lightBackground3};
+                                cursor: pointer;
+                                margin-top: 3px;
+
+                                p {
+                                    position: relative;
+                                    width: calc(100% - 25px);
+                                    display: flex;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                i {
+                                    position: relative;
+                                    width: 25px;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor2};
+                                }
+                            }
+
+                            .time_dropdown {
+                                position: absolute;
+                                top: 100%;
+                                left: 8px;
+                                width: calc(100% - 16px);
+                                min-width: 210px;
+                                z-index: 20;
+                            }
+                        }
+
                         .select_box {
                             position: relative;
                             margin-bottom: 10px;

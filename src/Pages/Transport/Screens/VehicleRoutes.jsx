@@ -5,8 +5,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
-import { Pagination } from "@mui/material";
-
+import Pagination from "../../../Components/Pagination";
 
 const VehicleRoutesPage = () => {
     const navigate = useNavigate();
@@ -127,6 +126,7 @@ const VehicleRoutesPage = () => {
                         </tbody>
                     </table>
                 </div>
+                <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
             </VehicleRoutesWrapper>
         </>
     );

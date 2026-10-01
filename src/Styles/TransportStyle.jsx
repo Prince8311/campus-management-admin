@@ -1886,65 +1886,135 @@ export const AddRoutesWrapper = styled('div')`
                             }
                         }
                     }
+                }
 
-                    .date_box {
+                .institution_time_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 10px;
+                    padding: 0 8px;
+
+                    .head {
                         position: relative;
-                        width: 33.33%;
-                        margin-bottom: 10px;
+                        width: 100%;
+                        display: flex;
                         padding: 0 8px;
 
-                        span {
+                        h3 {
                             position: relative;
-                            display: flex;
-                            align-items: center;
-                            font-size: 12px;
-                            font-weight: 400;
+                            font-size: 14px;
                             color: ${colors.customColors.blackColor2};
-
-                            p {
-                                color: ${colors.customColors.redColor};
-                                margin-left: 2px;
-                            }
+                            font-weight: 500;
                         }
+                    }
 
-                        .date_btn {
+                    .time_sec_content {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-top: 8px;
+
+                        .date_box {
                             position: relative;
-                            width: 100%;
-                            height: 37px;
-                            display: flex;
-                            align-items: center;
-                            border-radius: 5px;
-                            padding: 5px 15px;
-                            background: ${colors.customColors.lightBackground3};
-                            cursor: pointer;
-                            margin-top: 3px;
+                            width: 50%;
+                            margin-bottom: 12px;
+                            padding: 0 8px;
 
-                            p {
+                            span {
                                 position: relative;
-                                width: calc(100% - 25px);
                                 display: flex;
+                                align-items: center;
                                 font-size: 12px;
-                                color: ${colors.customColors.blackColor1};
-                            }
-
-                            i {
-                                position: relative;
-                                width: 25px;
-                                display: flex;
-                                justify-content: flex-end;
-                                cursor: pointer;
-                                font-size: 12px;
+                                font-weight: 400;
                                 color: ${colors.customColors.blackColor2};
-                            }
-                        }
 
-                        .school_time_dropdown {
-                            position: absolute;
-                            top: 100%;
-                            left: 8px;
-                            width: calc(100% - 16px);
-                            min-width: 210px;
-                            z-index: 20;
+                                p {
+                                    color: ${colors.customColors.redColor};
+                                    margin-left: 2px;
+                                }
+                            }
+
+                            .date_btn {
+                                position: relative;
+                                width: 100%;
+                                height: 45px;
+                                display: flex;
+                                align-items: center;
+                                gap: 20px;
+                                overflow: hidden;
+                                isolation: isolate;
+                                border: 1px solid rgba(255, 255, 255, 0.9);
+                                border-radius: 6px;
+                                padding: 10px 24px 10px 16px;
+                                background: linear-gradient(115deg, #f5fbff 0%, #e9f6ff 62%, #c9eaff 100%);
+                                box-shadow: 0 10px 25px rgba(40, 151, 234, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+                                cursor: pointer;
+                                margin-top: 6px;
+
+                                &::before,
+                                &::after {
+                                    content: "";
+                                    position: absolute;
+                                    right: -28px;
+                                    bottom: -48px;
+                                    width: 190px;
+                                    height: 105px;
+                                    border-radius: 50%;
+                                    background: rgba(69, 173, 246, 0.2);
+                                    transform: rotate(-12deg);
+                                    z-index: -1;
+                                }
+
+                                &::after {
+                                    right: -48px;
+                                    bottom: -63px;
+                                    width: 215px;
+                                    background: rgba(31, 149, 238, 0.17);
+                                }
+
+                                p {
+                                    position: relative;
+                                    width: auto;
+                                    display: flex;
+                                    align-items: baseline;
+                                    font-size: 15px;
+                                    line-height: 1;
+                                    font-weight: 600;
+                                    letter-spacing: 0.5px;
+                                    color: #07112f;
+                                    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+                                    z-index: 1;
+                                }
+
+                                i {
+                                    position: relative;
+                                    order: -1;
+                                    flex: 0 0 25px;
+                                    width: 25px;
+                                    height: 25px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    cursor: pointer;
+                                    font-size: 13px;
+                                    color: #1598f5;
+                                    border: 7px solid rgba(255, 255, 255, 0.72);
+                                    border-radius: 50%;
+                                    background: #ffffff;
+                                    box-shadow: 0 5px 14px rgba(19, 144, 235, 0.28);
+                                    z-index: 1;
+                                }
+                            }
+
+                            .time_dropdown {
+                                position: absolute;
+                                top: calc(100% + 2px);
+                                left: 8px;
+                                z-index: 20;
+                            }
                         }
                     }
                 }

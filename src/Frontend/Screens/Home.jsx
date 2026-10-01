@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomePageWrapper } from "../../Styles/Frontend/HomeStyle";
 import SelectAddressModal from "../../Components/Modals/Setting/SelectAddress";
@@ -8,6 +8,7 @@ import { getApiEndpoints } from "../../Services/Api/ApiConfig";
 import axiosInstance from "../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Components/Loader/ButtonLoader";
+import TimeBox from "../../Components/TimeBox";
 
 const HomePage = () => {
     const api = getApiEndpoints();
@@ -25,12 +26,30 @@ const HomePage = () => {
     const [lng, setLng] = useState('');
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const [registrationView, setRegistrationView] = useState('intro');
-    const isFormValid = institutionName.trim() !== '' && isEmail.trim() !== '' && phoneNumber.trim() !== '' && selectedAddress.trim() !== '';
+    const startTimeRef = useRef(null);
+    const endTimeRef = useRef(null);
+    const [institutionTiming, setInstitutionTiming] = useState({ start: '', end: '' });
+    const [openTimeBox, setOpenTimeBox] = useState(null);
+    const boards = ["State", "CBSC", "Central"];
+    const [selectedBoard, setSelectedBoard] = useState('');
+    const [isBoardDropdownOpen, setIsBoardDropdownOpen] = useState(false);
+    const [isAffiliationNumber, setIsAffiliationNumber] = useState('');
+    const isFormValid = institutionName.trim() !== '' && isEmail.trim() !== '' && phoneNumber.trim() !== '' && selectedAddress.trim() !== '' && selectedBoard.trim() !== '' && isAffiliationNumber.trim() !== '';
+
 
 
     const handleGetStarted = () => {
         navigate("/auth", { replace: true });
     };
+
+    function toggleDropdown() {
+        setIsBoardDropdownOpen(!isBoardDropdownOpen);
+    }
+
+    const handleSelectBoard = (board) => {
+        setSelectedBoard(board);
+        setIsBoardDropdownOpen(false);
+    }
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -60,25 +79,36 @@ const HomePage = () => {
 
     const handleRegisterInstitution = async (e) => {
         e.preventDefault();
-        setIsButtonLoading(true);
+        // setIsButtonLoading(true);
         const payload = {
             institutionName: institutionName,
             phone: phoneNumber,
             email: isEmail,
-            location: selectedAddress
+            location: selectedAddress,
+            city: selectCity,
+            state: selectState,
+            latitude: lat,
+            longitude: lng,
+            board: selectedBoard,
+            affiliationNo: isAffiliationNumber,
+            startTime: institutionTiming.start,
+            endTime: institutionTiming.end
         };
         try {
             const response = await axiosInstance.post(api.register, payload);
             if (response?.data.status === 200) {
                 setIsSuccessModalOpen(true);
+                setIsEmail('');
+                setPhoneNumber('');
+                setInstitutionTiming({ start: '', end: '' });
+                setSelectedAddress('');
+                setSelectedBoard('');
+                setIsAffiliationNumber('');
+                setInstitutionName('');
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
         } finally {
-            setInstitutionName('');
-            setIsEmail('');
-            setPhoneNumber('');
-            setSelectedAddress('');
             setIsButtonLoading(false);
         }
     }
@@ -288,25 +318,60 @@ const HomePage = () => {
                                         <span>Institution Name <p>*</p></span>
                                         <input type="text" placeholder="Enter your institution's name" value={institutionName} onChange={(e) => setInstitutionName(e.target.value)} />
                                     </div>
-                                    <div className="input_box fullwidth">
+                                    <div className="input_box halfwidth">
                                         <span>Admin Email <p>*</p></span>
                                         <input type="text" placeholder="admin@institution.edu" value={isEmail} onChange={(e) => setIsEmail(e.target.value)} />
                                     </div>
-                                    <div className="input_box fullwidth">
+                                    <div className="input_box halfwidth">
                                         <span>Phone Number <p>*</p></span>
                                         <input type="text" placeholder="+91 (555) 000-0000" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                                     </div>
+                                    <div className="date_box halfwidth" ref={startTimeRef}>
+                                        <span>Start Time <p>*</p></span>
+                                        <div className="date_btn" onClick={() => setOpenTimeBox(prev => prev === 'start' ? null : 'start')}>
+                                            <p>{institutionTiming.start || 'Set Time'}</p>
+                                            <i className="fa-regular fa-clock"></i>
+                                        </div>
+                                        {openTimeBox === 'start' && (
+                                            <div className="time_dropdown">
+                                                <TimeBox
+                                                    selectedTime={institutionTiming.start}
+                                                    onTimeChange={(time) => setInstitutionTiming(prev => ({ ...prev, start: time }))}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="date_box halfwidth" ref={endTimeRef}>
+                                        <span>End Time <p>*</p></span>
+                                        <div className="date_btn" onClick={() => setOpenTimeBox(prev => prev === 'end' ? null : 'end')}>
+                                            <p>{institutionTiming.end || 'Set Time'}</p>
+                                            <i className="fa-regular fa-clock"></i>
+                                        </div>
+                                        {openTimeBox === 'end' && (
+                                            <div className="time_dropdown">
+                                                <TimeBox
+                                                    selectedTime={institutionTiming.end}
+                                                    onTimeChange={(time) => setInstitutionTiming(prev => ({ ...prev, end: time }))}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+
                                     <div className="select_box halfwidth">
                                         <span>Education Board <p>*</p></span>
                                         <div className="dropdown_sec">
-                                            <div className="dropdown_btn">
-                                                <p>CBSC</p>
-                                                <i className="fa-solid fa-angle-down"></i>
+                                            <div className="dropdown_btn" onClick={toggleDropdown}>
+                                                <p>{selectedBoard}</p>
+                                                <i className={`fa-solid fa-angle-down ${isBoardDropdownOpen ? 'active' : ''}`}></i>
                                             </div>
-                                            <div className="dropdown">
+                                            <div className={`dropdown ${isBoardDropdownOpen ? 'active' : ''}`}>
                                                 <div className="dropdown_inner">
                                                     <ul>
-                                                        <li></li>
+                                                        {
+                                                            boards.map((board, index) => (
+                                                                <li key={index} onClick={() => handleSelectBoard(board)}>{board}</li>
+                                                            ))
+                                                        }
                                                     </ul>
                                                 </div>
                                             </div>
@@ -314,7 +379,7 @@ const HomePage = () => {
                                     </div>
                                     <div className="input_box halfwidth">
                                         <span>Affiliation Number<p>*</p></span>
-                                        <input type="text" placeholder="enter the number" />
+                                        <input type="text" placeholder="enter the number" value={isAffiliationNumber} onChange={(e) => setIsAffiliationNumber(e.target.value)} />
                                     </div>
                                     <div className="text_box" onClick={handleAddressModalOpen}>
                                         <span>Location <p>*</p></span>
