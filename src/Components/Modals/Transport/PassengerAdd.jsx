@@ -146,7 +146,7 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
                     </div>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <div className="select_box full">
+                            <div className="select_box half">
                                 <span>Select User <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={handleSelectedUserDropdown}>
@@ -190,6 +190,14 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="input_box">
+                                <span>Contact No. <p>*</p></span>
+                                <input
+                                    type="text"
+                                    value={selectedUser.phone || ''}
+                                    readOnly
+                                />
                             </div>
                             <div className="select_box half">
                                 <span>Select Route <p>*</p></span>

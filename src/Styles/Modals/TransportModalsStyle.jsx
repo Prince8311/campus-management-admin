@@ -1746,6 +1746,39 @@ export const PassengerAddWrapper = styled('div')`
                         }
                     }
                 }
+
+                .input_box {
+                    position: relative;
+                    width: 48.5%;
+                    margin-bottom: 10px;
+
+                    input {
+                        position: relative;
+                        width: 100%;
+                        height: 37px;
+                        font-size: 12px;
+                        border-radius: 5px;
+                        padding: 5px 15px;
+                        outline: none;
+                        border: none;
+                        margin-top: 3px;
+                        background: ${colors.customColors.lightBackground3};
+                    }
+
+                    span {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: ${colors.customColors.blackColor2};
+
+                        p {
+                            color: ${colors.customColors.redColor};
+                            margin-left: 2px;
+                        }
+                    }
+                }
             }
         }
 
