@@ -74,6 +74,7 @@ const ExpenseManagementpage = () => {
                 <AddEventExpenseModal
                     isAddEventExpense={isAddEventExpense}
                     setIsAddEventExpense={setIsAddEventExpense}
+                    nameLabel={selectedTab === "retailer" ? "Retailer Name" : "Event Name"}
                 />
             </ExpenseManagementWrapper>
         </>
