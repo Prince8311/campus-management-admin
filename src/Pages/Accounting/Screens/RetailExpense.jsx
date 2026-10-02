@@ -8,7 +8,7 @@ const RetailExpensePage = () => {
                     <div className="folder_box">
                         <div className="box_inner">
                             <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
+                                <img src="/images/retail.png" alt="" />
                             </div>
                             <p>Abc Retailer</p>
                             <a className="paid"><i className="fa-solid fa-circle"></i>Paid</a>
@@ -17,7 +17,7 @@ const RetailExpensePage = () => {
                     <div className="folder_box">
                         <div className="box_inner">
                             <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
+                                <img src="/images/retail.png" alt="" />
                             </div>
                             <p>Def retail</p>
                             <a className="due"><i className="fa-solid fa-circle"></i>Due</a>

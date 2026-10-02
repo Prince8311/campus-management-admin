@@ -1,6 +1,6 @@
 import { AddEventExpenseWrapper } from "../../../Styles/Modals/ExpenseManagementStyle";
 
-const AddEventExpenseModal = ({isAddEventExpense, setIsAddEventExpense}) => {
+const AddEventExpenseModal = ({isAddEventExpense, setIsAddEventExpense, nameLabel = "Event Name"}) => {
 
     function closeModal() {
         setIsAddEventExpense(false);
@@ -18,24 +18,8 @@ const AddEventExpenseModal = ({isAddEventExpense, setIsAddEventExpense}) => {
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="input_box fullwidth">
-                                <span>Item Name <p>*</p></span>
+                                <span>{nameLabel} <p>*</p></span>
                                 <input type="text" />
-                            </div>
-                            <div className="select_box fullwidth">
-                                <span>Creater Name <p>*</p></span>
-                                <div className="dropdown_sec">
-                                    <div className="dropdown_btn">
-                                        <p>Joydeep Barik</p>
-                                        <i className="fa-solid fa-angle-down"></i>
-                                    </div>
-                                    <div className="dropdown">
-                                        <div className="dropdown_inner">
-                                            <ul>
-                                                <li></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
