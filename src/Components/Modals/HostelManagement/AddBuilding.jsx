@@ -35,7 +35,11 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuil
             status: isStatus
         };
         try {
-            const response = await axiosInstance.post(api.createHostelBuilding, payload);
+            const response = await axiosInstance.post(api.addHostelBuilding, payload, {
+                params: {
+                    intent: 'add'
+                }
+            });
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 refreshBuildings();

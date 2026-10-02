@@ -274,12 +274,18 @@ const AddRolePermissionPage = () => {
                                     <p>Control access to modules and sub-features</p>
                                 </div>
                                 <div className="head_right_sec">
-                                    <li onClick={handleSelectAll}>
+                                    <li>
                                         <input
                                             type="checkbox"
                                             id="allSellect"
                                             checked={isAllPermissionsSelected()}
-                                            onChange={handleSelectAll}
+                                            onChange={(event) => {
+                                                if (event.target.checked) {
+                                                    handleSelectAll();
+                                                } else {
+                                                    handleDeselectAll();
+                                                }
+                                            }}
                                         />
                                         <label htmlFor="allSellect">
                                             <span className="check_box"><i className="fa-solid fa-check"></i></span>
@@ -307,15 +313,21 @@ const AddRolePermissionPage = () => {
                                                     </div>
                                                     <p>{module.name}</p>
                                                 </div>
-                                                <div className="top_btns">
-                                                    <li onClick={() => handleSelectModulePermissions(index)}>
+                                                <div className="top_btns" onClick={(event) => event.stopPropagation()}>
+                                                    <li>
                                                         <input
                                                             type="checkbox"
-                                                            id="allreportsSellect"
+                                                            id={`module-select-all-${module.id ?? index}`}
                                                             checked={isModuleAllPermissionsSelected(index)}
-                                                            onChange={() => handleSelectModulePermissions(index)}
+                                                            onChange={(event) => {
+                                                                if (event.target.checked) {
+                                                                    handleSelectModulePermissions(index);
+                                                                } else {
+                                                                    handleDeselectModulePermissions(index);
+                                                                }
+                                                            }}
                                                         />
-                                                        <label htmlFor="allreportsSellect">
+                                                        <label htmlFor={`module-select-all-${module.id ?? index}`}>
                                                             <span className="check_box"><i className="fa-solid fa-check"></i></span>
                                                             <p>Select All</p>
                                                         </label>

@@ -28,6 +28,7 @@ export const getApiEndpoints = () => {
         // Institutions 
         addInstitution: `${apiURL}/api/institutions/insert.php`,
         fetchInstitutions: `${apiURL}/api/institutions/list.php`,
+        fetchAllUsers: `${apiURL}/api/institutions/user-list.php`,
 
         // Coupons 
         createCoupon: `${apiURL}/api/coupons/create.php`,
@@ -134,11 +135,10 @@ export const getApiEndpoints = () => {
         deleteRole: `${apiURL}/api/role-permission/delete.php`,
 
         // Hostel Management
-        createHostelBuilding: `${apiURL}/api/hostel/building/create.php`,
+        addHostelBuilding: `${apiURL}/api/hostel/building/insert.php`,
         fetchHostelBuilding: `${apiURL}/api/hostel/building/list.php`,
-        createHostelRoom: `${apiURL}/api/hostel/room/create.php`,
+        addHostelRoom: `${apiURL}/api/hostel/room/create.php`,
         fetchHostelRoom: `${apiURL}/api/hostel/room/list.php`,
-        fetchUserlist: `${apiURL}/api/hostel/resident/user-list.php`,
         fetchRoomBeds: `${apiURL}/api/hostel/room/bed-list.php`,
         createHostelResident: `${apiURL}/api/hostel/resident/create.php`,
         fetchHostelResidents: `${apiURL}/api/hostel/resident/list.php`,
@@ -153,6 +153,5 @@ export const getApiEndpoints = () => {
         fetchStopagesRoutewise: `${apiURL}/api/transport/stopages/routewise-list.php`,
         addRoute: `${apiURL}/api/transport/routes/insert.php`,
         fetchRoutes: `${apiURL}/api/transport/routes/list.php`,
-        fetchAllUsers: `${apiURL}/api/transport/passengers/user-list.php`,
     };
 }

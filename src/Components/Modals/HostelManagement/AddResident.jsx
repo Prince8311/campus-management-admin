@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { AddResidentWrapper } from "../../../Styles/Modals/HostelManagementModalStyle";
-import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import { getApiEndpoints, profileImageBaseURL } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
 const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, refreshResidents }) => {
     const api = getApiEndpoints();
-    const [userList, setUserList] = useState([]);
-    const [userSearch, setUserSearch] = useState("");
+    const [users, setUsers] = useState([]);
+    const [userSearchInput, setUserSearchInput] = useState('');
     const [buildingList, setBuildingList] = useState([]);
     const [roomList, setRoomList] = useState([]);
     const [roomBedList, setRoomBedList] = useState([]);
@@ -123,16 +123,15 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
         setShowRoomBedDropdown(false);
     }
 
-    const fetchUsers = async (search = "") => {
+    const fetchUsers = async () => {
         try {
-            const respose = await axiosInstance.get(api.fetchUserlist, {
+            const respose = await axiosInstance.get(api.fetchAllUsers, {
                 params: {
-                    userType: activeTab,
-                    search: search
+                    search: userSearchInput
                 }
             });
             if (respose?.data.status === 200) {
-                setUserList(respose?.data.users);
+                setUsers(respose?.data.users);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -157,7 +156,13 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
 
     useEffect(() => {
         if (isAddResidentOpen) {
-            fetchUsers("");
+            fetchUsers();
+        }
+    }, [isAddResidentOpen, userSearchInput]);
+
+    useEffect(() => {
+        if (isAddResidentOpen) {
+            fetchUsers();
             fetchHostelBuildings();
         }
     }, [isAddResidentOpen]);
@@ -170,8 +175,8 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
         return (first + last).toUpperCase();
     };
 
-    const handleUserSelect = (user) => {
-        if (selectedUser.user_id === user.user_id) return;
+    const handleSelectUser = (user) => {
+        if (selectedUser.id === user.id) return;
         setSelectedUser(user);
         setShowUserDropdown(false);
     }
@@ -334,7 +339,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                 <span>Select Resident <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={toggleUserDropdown}>
-                                        <p>{selectedUser.name}</p>
+                                        <p>{selectedUser.name || ''}</p>
                                         <i className={`fa-solid fa-angle-down ${showUserDropdown ? "active" : ''}`}></i>
                                     </div>
                                     <div className={`dropdown ${showUserDropdown ? "active" : ''}`}>
@@ -344,31 +349,34 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                                 <input
                                                     type="text"
                                                     placeholder="Search by Resident Name..."
-                                                    value={userSearch}
-                                                    onChange={e => {
-                                                        setUserSearch(e.target.value);
-                                                        fetchUsers(e.target.value);
-                                                    }}
+                                                    value={userSearchInput}
+                                                    onChange={(e) => setUserSearchInput(e.target.value)}
                                                 />
                                             </div>
                                             <ul>
-                                                {
-                                                    userList && userList.length > 0 ? (
-                                                        userList.map((user, i) =>
-                                                            <div className={`user_box ${selectedUser.user_id === user.user_id ? "active" : ""}`} key={i} onClick={() => handleUserSelect(user)}>
-                                                                <div className="box_left">
-                                                                    <h6>{getInitials(user.name)}</h6>
-                                                                </div>
-                                                                <div className="box_right">
-                                                                    <p>{user.name}</p>
-                                                                    <span>#{user.user_id} - {activeTab === 'Student' ? `Class ${user.class}/${user.section}` : `${user.role}`}</span>
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    ) : (
-                                                        <p className="no_data">No users found</p>
-                                                    )
-                                                }
+                                                {users.map((user, i) => (
+                                                    <li
+                                                        key={i}
+                                                        className={`user_box ${selectedUser.id === user.id ? "active" : ""}`}
+                                                        onClick={() => handleSelectUser(user)}
+                                                    >
+                                                        <div className="box_left">
+                                                            {user.image ? (
+                                                                <img
+                                                                    src={`${profileImageBaseURL}/${user.directory}/${user.image}`}
+                                                                    alt={user.name}
+                                                                />
+                                                            ) : (
+                                                                <h6>{getInitials(user.name)}</h6>
+                                                            )}
+                                                        </div>
+
+                                                        <div className="box_right">
+                                                            <p>{user.name}</p>
+                                                            <span>#{user.enroll_id}</span>
+                                                        </div>
+                                                    </li>
+                                                ))}
                                             </ul>
                                         </div>
                                     </div>

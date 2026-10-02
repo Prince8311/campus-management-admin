@@ -71,7 +71,11 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
             status: isStatus
         }
         try {
-            const response = await axiosInstance.post(api.createHostelRoom, payload);
+            const response = await axiosInstance.post(api.addHostelRoom, payload, {
+                params: {
+                    intent: 'add'
+                }
+            });
             if (response?.data.status === 200) {
                 toast.success(response?.data.message);
                 refreshRooms();

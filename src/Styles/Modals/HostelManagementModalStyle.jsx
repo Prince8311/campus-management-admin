@@ -831,7 +831,7 @@ export const AddResidentWrapper = styled('div')`
                             }
 
                             &.active {
-                                max-height: 170px;
+                                max-height: 220px;
                                 transition: all 0.5s ease;
                             }
 
@@ -949,12 +949,12 @@ export const AddResidentWrapper = styled('div')`
                                     }
                                 }
 
-                                ul {
+                                 ul {
                                     position: relative;
                                     width: 100%;
                                     display: flex;
                                     flex-direction: column;
-                                    max-height: 115px;
+                                    max-height: 130px;
                                     overflow-y: auto;
                                     scrollbar-width: none;
                                     -ms-overflow-style: none;
@@ -1018,6 +1018,7 @@ export const AddResidentWrapper = styled('div')`
                                         font-size: 12px;
                                         color: ${colors.customColors.blackColor3};
                                         padding: 3px 10px;
+                                        pointer-events: none;
                                     }
 
                                     .user_box {
@@ -1027,6 +1028,7 @@ export const AddResidentWrapper = styled('div')`
                                         align-items: center;
                                         padding: 7px;
                                         cursor: pointer;
+                                        list-style: none;
                                         border-bottom: 1px solid ${colors.customColors.borderColor};
                                         transition: all 0.5s ease;
 
@@ -1043,6 +1045,13 @@ export const AddResidentWrapper = styled('div')`
                                             display: flex;
                                             align-items: center;
                                             justify-content: center;
+                                            overflow: hidden;
+
+                                            img {
+                                                width: 100%;
+                                                height: 100%;
+                                                object-fit: cover;
+                                            }
                                             
                                             h6 {
                                                 font-size: 11px;
