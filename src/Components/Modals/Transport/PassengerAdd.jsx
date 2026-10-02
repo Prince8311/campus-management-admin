@@ -1,43 +1,133 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PassengerAddWrapper } from "../../../Styles/Modals/TransportModalsStyle";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
+import { getApiEndpoints, profileImageBaseURL } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
 const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
-    const passengers = ['Joydeep Barik', 'Sourish Mondal'];
-    const [showPassengerDropdown, setShowPassengerDropdown] = useState(false);
-    const [passengerName, setPassengerName] = useState('');
+    const api = getApiEndpoints();
 
-    const routes = ['abc', 'gantok'];
+    // const passengers = ['Joydeep Barik', 'Sourish Mondal'];
+    const [users, setUsers] = useState([]);
+    const [userSearchInput, setUserSearchInput] = useState('');
+    const [showUserDropdown, setShowUserDropdown] = useState(false);
+    const [selectedUser, setSelectedUser] = useState({});
+
+    const [routes, setRoutes] = useState([]);
+    const [routeSearchInput, setRouteSearchInput] = useState('');
     const [showRoutesDropdown, setShowRoutesDropdown] = useState(false);
-    const [routeName, setRouteName] = useState('');
+    const [selectedRoute, setSelectedRoute] = useState({});
 
-    const stopages = ['newTown', 'ecopark'];
+    const [stopages, setStopages] = useState([]);
+    const [stoppageSearchInput, setStoppageSearchInput] = useState('');
     const [showStopagesDropdown, setShowStopagesDropdown] = useState(false);
-    const [stopageName, setStopageName] = useState('');
+    const [selectedStopage, setSelectedStopage] = useState({});
 
-    const handleSelectedPassemgerDropdown = () => {
-        setShowPassengerDropdown(!showPassengerDropdown);
+    const handleSelectedUserDropdown = () => {
+        setShowUserDropdown(!showUserDropdown);
+        setShowRoutesDropdown(false);
+        setShowStopagesDropdown(false);
     }
 
     const handleSelectedRouteDropdown = () => {
         setShowRoutesDropdown(!showRoutesDropdown);
+        setShowStopagesDropdown(false);
     }
 
     const handleSelectedStopageDropdown = () => {
+        setShowRoutesDropdown(false);
         setShowStopagesDropdown(!showStopagesDropdown);
     }
 
-    const handleSelectPassengerName = (passenger) => {
-        setPassengerName(passenger);
-        setShowPassengerDropdown(false);
+    const fetchAllUsers = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchAllUsers, {
+                params: {
+                    search: userSearchInput
+                }
+            });
+            if (response.data.status === 200) {
+                console.log('Users:', response.data);
+                setUsers(response.data.users ?? []);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
     }
 
-    const handleSelectRouteName = (route) => {
-        setRouteName(route);
+    useEffect(() => {
+        if (isAddPassenger) {
+            fetchAllUsers();
+        }
+    }, [isAddPassenger, userSearchInput]);
+
+    const fetchRoutes = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchRoutes, {
+                params: {
+                    isForm: true,
+                    search: routeSearchInput
+                }
+            });
+            if (response.data.status === 200) {
+                setRoutes(response.data.routes ?? []);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (isAddPassenger) {
+            fetchRoutes();
+        }
+    }, [isAddPassenger, routeSearchInput]);
+
+    const fetchStopages = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchStopagesRoutewise, {
+                params: {
+                    id: selectedRoute.id,
+                    search: stoppageSearchInput
+                }
+            });
+            if (response.data.status === 200) {
+                setStopages(response.data.stopages ?? []);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedRoute.id) {
+            fetchStopages();
+        }
+    }, [isAddPassenger, selectedRoute, stoppageSearchInput]);
+
+    const handleSelectUser = (user) => {
+        setSelectedUser(user);
+        setShowUserDropdown(false);
+    }
+
+    const getInitials = (name) => {
+        if (!name) return "";
+        const parts = name.trim().split(" ").filter(Boolean);
+        const first = parts[0]?.[0] || "";
+        const last = parts.length > 1 ? parts[parts.length - 1]?.[0] : "";
+        return (first + last).toUpperCase();
+    };
+
+
+    const handleSelectRoute = (route) => {
+        setSelectedRoute(route);
+        setSelectedStopage({});
         setShowRoutesDropdown(false);
     }
 
-    const handleSelectStopageName = (stopage) => {
-        setStopageName(stopage);
+    const handleSelectStopage = (stopage) => {
+        setSelectedStopage(stopage);
         setShowStopagesDropdown(false);
     }
 
@@ -57,35 +147,42 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
                     <div className="modal_body">
                         <div className="body_inner">
                             <div className="select_box full">
-                                <span>Select Passenger <p>*</p></span>
+                                <span>Select User <p>*</p></span>
                                 <div className="dropdown_sec">
-                                    <div className="dropdown_btn" onClick={handleSelectedPassemgerDropdown}>
-                                        <p>{passengerName}</p>
-                                        <i className={`fa-solid fa-angle-down ${showPassengerDropdown ? 'active' : ''}`}></i>
+                                    <div className="dropdown_btn" onClick={handleSelectedUserDropdown}>
+                                        <p>{selectedUser.name || ''}</p>
+                                        <i className={`fa-solid fa-angle-down ${showUserDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showPassengerDropdown ? 'active' : ''}`}>
+                                    <div className={`dropdown ${showUserDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
                                             <div className="search_sec">
                                                 <i className="fa-solid fa-magnifying-glass"></i>
                                                 <input
                                                     type="text"
-                                                    placeholder="Search by passenger Name..."
+                                                    placeholder="Search by user Name..."
                                                 />
                                             </div>
                                             <ul>
-                                                {passengers.map((passenger, i) => (
+                                                {users.map((user, i) => (
                                                     <li
                                                         key={i}
-                                                        className={`user_box ${passengerName === passenger ? "active" : ""}`}
-                                                        onClick={() => handleSelectPassengerName(passenger)}
+                                                        className={`user_box ${selectedUser.id === user.id ? "active" : ""}`}
+                                                        onClick={() => handleSelectUser(user)}
                                                     >
                                                         <div className="box_left">
-                                                            <h6>JB</h6>
+                                                            {user.image ? (
+                                                                <img
+                                                                    src={`${profileImageBaseURL}/${user.directory}/${user.image}`}
+                                                                    alt={user.name}
+                                                                />
+                                                            ) : (
+                                                                <h6>{getInitials(user.name)}</h6>
+                                                            )}
                                                         </div>
 
                                                         <div className="box_right">
-                                                            <p>{passenger}</p>
-                                                            <span>#20152d5</span>
+                                                            <p>{user.name}</p>
+                                                            <span>#{user.enroll_id}</span>
                                                         </div>
                                                     </li>
                                                 ))}
@@ -98,29 +195,37 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
                                 <span>Select Route <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={handleSelectedRouteDropdown}>
-                                        <p>{routeName}</p>
+                                        <p>{selectedRoute.name || ''}</p>
                                         <i className={`fa-solid fa-angle-down ${showRoutesDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showRoutesDropdown ? 'active' : ''} dropUp`}>
+                                    <div className={`dropdown ${showRoutesDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
-                                            <div className="search_sec">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search by Route Name..."
-                                                />
-                                            </div>
+                                            {
+                                                routes.length > 10 &&
+                                                <div className="search_sec">
+                                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                                    <input
+                                                        type="text"
+                                                        value={routeSearchInput}
+                                                        onChange={(e) => setRouteSearchInput(e.target.value)}
+                                                        placeholder="Search by Route Name..."
+                                                    />
+                                                </div>
+                                            }
                                             <ul>
                                                 {
-                                                    routes.map((route, i) => (
-
-                                                        <li key={i}
-                                                            onClick={() => handleSelectRouteName(route)}
-                                                            className={routeName === route ? 'active' : ''}
-                                                        >
-                                                            {route}
-                                                        </li>
-                                                    ))
+                                                    routes.length > 0 ? (
+                                                        routes.map((route, i) => (
+                                                            <li key={i}
+                                                                onClick={() => handleSelectRoute(route)}
+                                                                className={selectedRoute.id === route.id ? 'active' : ''}
+                                                            >
+                                                                {route.name}
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="no_data">No routes found</li>
+                                                    )
                                                 }
                                             </ul>
                                         </div>
@@ -131,30 +236,37 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
                                 <span>Select Stopage <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={handleSelectedStopageDropdown}>
-                                        <p>{stopageName}</p>
+                                        <p>{selectedStopage.name || ''}</p>
                                         <i className={`fa-solid fa-angle-down ${showStopagesDropdown ? 'active' : ''}`}></i>
                                     </div>
-                                    <div className={`dropdown ${showStopagesDropdown ? 'active' : ''} dropUp`}>
+                                    <div className={`dropdown ${showStopagesDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">
-                                            <div className="search_sec">
-                                                <i className="fa-solid fa-magnifying-glass"></i>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search by Stopage Name..."
-                                                />
-                                            </div>
+                                            {
+                                                stopages.length > 10 &&
+                                                <div className="search_sec">
+                                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                                    <input
+                                                        type="text"
+                                                        value={stoppageSearchInput}
+                                                        onChange={(e) => setStoppageSearchInput(e.target.value)}
+                                                        placeholder="Search by Stopage Name..."
+                                                    />
+                                                </div>
+                                            }
                                             <ul>
                                                 {
-                                                    stopages.map((stopage, i) => (
-
-                                                        <li key={i}
-                                                            onClick={() => handleSelectStopageName(stopage)}
-                                                            className={stopageName === stopage ? 'active' : ''}
-                                                        >
-                                                            {stopage}
-                                                        </li>
-                                                    ))
-                                                }
+                                                    stopages.length > 0 ? (
+                                                        stopages.map((stopage, i) => (
+                                                            <li key={i}
+                                                                onClick={() => handleSelectStopage(stopage)}
+                                                                className={selectedStopage.id === stopage.id ? 'active' : ''}
+                                                            >
+                                                                {stopage.name}
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="no_data">No stopages found</li>
+                                                    )}
                                             </ul>
                                         </div>
                                     </div>

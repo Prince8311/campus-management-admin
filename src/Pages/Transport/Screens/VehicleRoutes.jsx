@@ -126,7 +126,10 @@ const VehicleRoutesPage = () => {
                         </tbody>
                     </table>
                 </div>
-                <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
+                {
+                    totalCount > 10 &&
+                    <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
+                }
             </VehicleRoutesWrapper>
         </>
     );

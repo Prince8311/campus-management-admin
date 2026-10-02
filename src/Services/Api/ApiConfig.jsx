@@ -4,6 +4,7 @@ export const baseURL = 'https://api.educonnekt.in';
 export const apiURL = `${baseURL}/admin`;
 
 export const documentBaseURL = `${baseURL}/documents`;
+export const profileImageBaseURL = `${baseURL}/profile-images`;
 
 export const getApiEndpoints = () => {
     return {
@@ -149,7 +150,9 @@ export const getApiEndpoints = () => {
         fetchVehicleStaffs: `${apiURL}/api/transport/staffs/list.php`,
         addStopage: `${apiURL}/api/transport/stopages/insert.php`,
         fetchStopages: `${apiURL}/api/transport/stopages/list.php`,
+        fetchStopagesRoutewise: `${apiURL}/api/transport/stopages/routewise-list.php`,
         addRoute: `${apiURL}/api/transport/routes/insert.php`,
         fetchRoutes: `${apiURL}/api/transport/routes/list.php`,
+        fetchAllUsers: `${apiURL}/api/transport/passengers/user-list.php`,
     };
 }
