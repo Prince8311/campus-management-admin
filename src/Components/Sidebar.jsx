@@ -44,10 +44,12 @@ const Sidebar = () => {
             setActiveDropdown(5);
         } else if (path.startsWith('/admin/transport-management')) {
             setActiveDropdown(6);
+        } else if (path.startsWith('/admin/library-management')) {
+            setActiveDropdown(7);
         } else if (path.startsWith('/admin/settings')) {
-            setActiveDropdown(8);
-        } else if (path.startsWith('/admin/accounting')) {
             setActiveDropdown(9);
+        } else if (path.startsWith('/admin/accounting')) {
+            setActiveDropdown(10);
         }
         console.log("ewsgfrewgherth", path);
     }, [location, setPageName]);
@@ -404,6 +406,34 @@ const Sidebar = () => {
                                     <div className={`dropdown_item ${activeDropdown === 7 ? 'active' : ''}`}>
                                         <div className="dropdown_btn" onClick={() => toggleDropdown(7)}>
                                             <li>
+                                                <i className="fa-solid fa-book prefix"></i>
+                                                <span>
+                                                    <p>Library Management</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/library-management/library-overview">
+                                                <i className="fa-solid fa-magnifying-glass-chart prefix"></i>
+                                                <p>Overview</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/library-management/book-catelog">
+                                                <i className="fa-solid fa-book-open prefix"></i>
+                                                <p>Book Catelog</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/library-management/library-member">
+                                                <i className="fa-solid fa-users prefix"></i>
+                                                <p>Library Members</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 8 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(8)}>
+                                            <li>
                                                 <i className="fa-solid fa-user-shield prefix"></i>
                                                 <span>
                                                     <p>Administration</p>
@@ -423,8 +453,8 @@ const Sidebar = () => {
                                         </div>
                                     </div>
                                 }
-                                <div className={`dropdown_item ${activeDropdown === 8 ? 'active' : ''}`}>
-                                    <div className="dropdown_btn" onClick={() => toggleDropdown(8)}>
+                                <div className={`dropdown_item ${activeDropdown === 9 ? 'active' : ''}`}>
+                                    <div className="dropdown_btn" onClick={() => toggleDropdown(9)}>
                                         <li>
                                             <i className="fa-solid fa-gears prefix"></i>
                                             <span>
@@ -496,8 +526,8 @@ const Sidebar = () => {
                                 </div>
                                 {
                                     userDetails.user_type === 'inst_admin' &&
-                                    <div className={`dropdown_item ${activeDropdown === 9 ? 'active' : ''}`}>
-                                        <div className="dropdown_btn" onClick={() => toggleDropdown(9)}>
+                                    <div className={`dropdown_item ${activeDropdown === 10 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(10)}>
                                             <li>
                                                 <i className="fa-solid fa-circle-dollar-to-slot prefix"></i>
                                                 <span>
