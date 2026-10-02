@@ -197,6 +197,45 @@ export const PassengersWrapper = styled('div')`
                         &:nth-of-type(1) {
                             width: 22%;
                             display: flex;
+
+                            .left_table_sec {
+                                position: relative;
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 6px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: ${colors.customColors.blueColor2};
+
+                                h5 {
+                                    position: relative;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.whiteColor};
+                                    text-transform: uppercase;
+                                }
+                            }
+
+                            .right_table_sec {
+                                position: relative;
+                                width: calc(100% - 30px);
+                                padding-left: 7px;
+                                display: flex;
+                                flex-direction: column;
+
+                                h6 {
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                p {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor2};
+                                }
+                            }
                         }
 
                         &:nth-of-type(2) {
@@ -216,12 +255,6 @@ export const PassengersWrapper = styled('div')`
                                     font-size: 12px;
                                     font-weight: 400;
                                     color: ${colors.customColors.blackColor1};
-                                }
-
-                                p {
-                                    font-size: 10px;
-                                    font-weight: 400;
-                                    color: ${colors.customColors.blackColor2};
                                 }
                             }
                         }

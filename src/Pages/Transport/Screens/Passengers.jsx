@@ -41,12 +41,17 @@ const PassengersPage = () => {
                         <tbody>
                             <tr>
                                 <td>
-                                    Joydeep Barik
+                                    <div className="left_table_sec">
+                                        <h5>JB</h5>
+                                    </div>
+                                    <div className="right_table_sec">
+                                        <h6>Joydeep Barik</h6>
+                                        <p>#12345</p>
+                                    </div>
                                 </td>
                                 <td>
                                     <div className="type_sec">
                                         <h5>Student</h5>
-                                        <p>Class - 1 A</p>
                                     </div>
                                 </td>
                                 <td>Kolkata</td>
