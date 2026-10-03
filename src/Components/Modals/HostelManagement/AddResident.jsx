@@ -37,6 +37,11 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
 
     const closeModal = () => {
         setIsAddResidentOpen(false);
+        setUsers([]);
+        setUserSearchInput('');
+        setBuildingList([]);
+        setRoomList([]);
+        setRoomBedList([]);
         setSelectedUser({});
         setSelectedBuilding({});
         setSelectedFloor('');
@@ -310,7 +315,11 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                 : { role: selectedUser.role || "" })
         };
         try {
-            const response = await axiosInstance.post(api.createHostelResident, payload);
+            const response = await axiosInstance.post(api.addHostelResident, payload, {
+                params: {
+                    intent: 'add'
+                }
+            });
             if (response?.data.status === 200) {
                 toast.success(response.data.message);
                 refreshResidents();
