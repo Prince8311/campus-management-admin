@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
+import Pagination from "../../../Components/Pagination";
 
 const StopagesPage = () => {
     const api = getApiEndpoints();
@@ -13,6 +14,7 @@ const StopagesPage = () => {
     const [totalCount, setTotalCount] = useState('');
     const [page, setPage] = useState(1);
     const [showStopageAddModal, setShowStopageAddModal] = useState(false);
+    const [selectedStopage, setSelectedStopage] = useState(null);
 
     const fetchStopages = async (showSkeleton = false, pageNumber = 1) => {
         if (showSkeleton) {
@@ -41,6 +43,12 @@ const StopagesPage = () => {
     }, [page]);
 
     const handleOpenAddStopageModal = () => {
+        setSelectedStopage(null);
+        setShowStopageAddModal(true);
+    }
+
+    const handleOpenEditStopageModal = (stopage) => {
+        setSelectedStopage(stopage);
         setShowStopageAddModal(true);
     }
     return (
@@ -99,10 +107,10 @@ const StopagesPage = () => {
                                                 {stopage.location}
                                             </td>
                                             <td>{stopage.distance}km</td>
-                                            <td>-</td>
+                                            <td>{stopage.passengers}</td>
                                             <td><p className={stopage.status ? 'active' : ''}>{stopage.status ? 'Active' : 'Inactive'}</p></td>
                                             <td>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="edit_btn" onClick={() => handleOpenEditStopageModal(stopage)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
@@ -117,10 +125,18 @@ const StopagesPage = () => {
                     </table>
                 </div>
 
+                {
+                    totalCount > 10 &&
+                    <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
+                }
+
+
                 <StopageAddModal
                     showStopageAddModal={showStopageAddModal}
                     setShowStopageAddModal={setShowStopageAddModal}
-                    refreshData={() => fetchStopages(true, page)}
+                    selectedStopage={selectedStopage}
+                    setSelectedStopage={setSelectedStopage}
+                    refreshData={() => fetchStopages(false, page)}
                 />
             </StopagesWrapper>
         </>

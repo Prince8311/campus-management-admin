@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AddVehicleWrapper } from "../../../Styles/Modals/TransportModalsStyle";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData }) => {
+const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, selectedVehicle, setSelectedVehicle, refreshData }) => {
     const api = getApiEndpoints();
     const [vehicleNumber, setVehicleNumber] = useState('');
     const [vehicleName, setVehicleName] = useState('');
@@ -17,7 +17,44 @@ const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData 
 
     const [isStatus, setIsStatus] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const initialVehicleStateRef = useRef(null);
+    const isEditMode = Boolean(selectedVehicle);
     const isFormValid = vehicleNumber.trim() !== '' && vehicleName.trim() !== '' && vehicleType.trim() !== '' && vehicleCapacity.trim() !== '';
+    const isFormChanged = isEditMode && initialVehicleStateRef.current ? (
+        vehicleNumber !== initialVehicleStateRef.current.vehicleNumber ||
+        vehicleName !== initialVehicleStateRef.current.vehicleName ||
+        vehicleType !== initialVehicleStateRef.current.vehicleType ||
+        vehicleCapacity !== initialVehicleStateRef.current.vehicleCapacity ||
+        isStatus !== initialVehicleStateRef.current.isStatus
+    ) : false;
+
+    const normalizeStatus = (value) => value === true || value === 1 || value === '1' || value === 'true' || value === 'active';
+
+    useEffect(() => {
+        if (isAddVehicleModal && selectedVehicle) {
+            const initialVehicleState = {
+                vehicleNumber: String(selectedVehicle.number ?? ''),
+                vehicleName: String(selectedVehicle.name ?? ''),
+                vehicleType: String(selectedVehicle.type ?? ''),
+                vehicleCapacity: String(selectedVehicle.capacity ?? ''),
+                isStatus: normalizeStatus(selectedVehicle.status)
+            };
+
+            setVehicleNumber(initialVehicleState.vehicleNumber);
+            setVehicleName(initialVehicleState.vehicleName);
+            setVehicleType(initialVehicleState.vehicleType);
+            setVehicleCapacity(initialVehicleState.vehicleCapacity);
+            setIsStatus(initialVehicleState.isStatus);
+            initialVehicleStateRef.current = initialVehicleState;
+        } else if (isAddVehicleModal) {
+            setVehicleNumber('');
+            setVehicleName('');
+            setVehicleType('');
+            setVehicleCapacity('');
+            setIsStatus(false);
+            initialVehicleStateRef.current = null;
+        }
+    }, [isAddVehicleModal, selectedVehicle]);
 
     function closeModal() {
         setIsAddVehicleModal(false);
@@ -26,6 +63,9 @@ const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData 
         setVehicleType('');
         setVehicleCapacity('');
         setIsStatus(false);
+        setShowTypeDropdown(false);
+        initialVehicleStateRef.current = null;
+        setSelectedVehicle(null);
     }
 
     const handleAddVehicle = async (e) => {
@@ -36,12 +76,13 @@ const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData 
             number: vehicleNumber,
             type: vehicleType,
             capacity: vehicleCapacity,
-            status: isStatus
+            status: isStatus,
+            ...(isEditMode ? { id: selectedVehicle.id } : {})
         }
         try {
             const response = await axiosInstance.post(api.addVehicle, payload, {
                 params: {
-                    intent: 'add',
+                    intent: isEditMode ? 'update' : 'add',
                 }
             });
             if (response?.data.status === 200) {
@@ -70,7 +111,7 @@ const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData 
             <AddVehicleWrapper className={isAddVehicleModal ? 'active' : ''}>
                 <div className={`modal_box ${isAddVehicleModal ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Vehicle</h4>
+                        <h4>{isEditMode ? 'Edit Vehicle' : 'Add Vehicle'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -140,14 +181,14 @@ const AddVehicleModal = ({ isAddVehicleModal, setIsAddVehicleModal, refreshData 
                             </label>
                         </div>
                         <button
-                            disabled={!isFormValid || isButtonLoading}
+                            disabled={!isFormValid || isButtonLoading || (isEditMode && !isFormChanged)}
                             onClick={handleAddVehicle}
                         >
                             {
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>

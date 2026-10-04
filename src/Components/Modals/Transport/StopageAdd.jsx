@@ -9,7 +9,9 @@ import { UserData } from "../../../Context/PageContext";
 import ButtonLoader from "../../Loader/ButtonLoader";
 import { googleMapsLoaderOptions } from "../../../Services/Api/GoogleMapsConfig";
 
-const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshData }) => {
+const DEFAULT_CENTER = { lat: 20.5937, lng: 78.9629 };
+
+const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, selectedStopage, setSelectedStopage, refreshData }) => {
     const api = getApiEndpoints();
     const { userDetails } = UserData();
     const { isLoaded: isMapLoaded, loadError } = useJsApiLoader(googleMapsLoaderOptions);
@@ -20,10 +22,8 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
     const [selectedCity, setSelectedCity] = useState('');
     const [searchInput, setSearchInput] = useState('');
 
-    const defaultCenter = { lat: 20.5937, lng: 78.9629 };
-
-    const [mapCenter, setMapCenter] = useState(defaultCenter);
-    const [markerPosition, setMarkerPosition] = useState(defaultCenter);
+    const [mapCenter, setMapCenter] = useState(DEFAULT_CENTER);
+    const [markerPosition, setMarkerPosition] = useState(DEFAULT_CENTER);
     const [highlightCenter, setHighlightCenter] = useState(null);
 
     const [zoomLevel, setZoomLevel] = useState(5);
@@ -47,6 +47,56 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
     const [isStatus, setIsStatus] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const [mapResetKey, setMapResetKey] = useState(0);
+    const initialStopageStateRef = useRef(null);
+    const isEditMode = Boolean(selectedStopage);
+
+    const isFormChanged = isEditMode && initialStopageStateRef.current ? (
+        selectedState !== initialStopageStateRef.current.selectedState ||
+        selectedCity !== initialStopageStateRef.current.selectedCity ||
+        address !== initialStopageStateRef.current.address ||
+        stopageName !== initialStopageStateRef.current.stopageName ||
+        markerPosition.lat !== initialStopageStateRef.current.latitude ||
+        markerPosition.lng !== initialStopageStateRef.current.longitude ||
+        isStatus !== initialStopageStateRef.current.isStatus
+    ) : false;
+
+    const normalizeStatus = (value) => value === true || value === 1 || value === '1' || value === 'true' || value === 'active';
+
+    useEffect(() => {
+        if (showStopageAddModal && selectedStopage) {
+            const latitude = Number(selectedStopage.latitude);
+            const longitude = Number(selectedStopage.longitude);
+            const hasValidCoordinates = Number.isFinite(latitude) && Number.isFinite(longitude);
+            const coordinates = hasValidCoordinates ? { lat: latitude, lng: longitude } : DEFAULT_CENTER;
+            const initialStopageState = {
+                selectedState: String(selectedStopage.state ?? ''),
+                selectedCity: String(selectedStopage.city ?? ''),
+                address: String(selectedStopage.location ?? ''),
+                stopageName: String(selectedStopage.name ?? ''),
+                latitude: coordinates.lat,
+                longitude: coordinates.lng,
+                isStatus: normalizeStatus(selectedStopage.status)
+            };
+
+            setStateDropdownShow(false);
+            setCityDropdownShow(false);
+            setSelectedState(initialStopageState.selectedState);
+            setSelectedCity(initialStopageState.selectedCity);
+            setSearchInput('');
+            setMapCenter(coordinates);
+            setMarkerPosition(coordinates);
+            setHighlightCenter(hasValidCoordinates ? coordinates : null);
+            setZoomLevel(hasValidCoordinates ? 15 : 5);
+            setSearchBounds(null);
+            setAddress(initialStopageState.address);
+            setStopageName(initialStopageState.stopageName);
+            setDistance(String(selectedStopage.distance ?? ''));
+            setHasLocationSelection(hasValidCoordinates);
+            setIsStatus(initialStopageState.isStatus);
+            setMapResetKey((prev) => prev + 1);
+            initialStopageStateRef.current = initialStopageState;
+        }
+    }, [showStopageAddModal, selectedStopage]);
 
     function resetFormAndMap() {
         circleRef.current = null;
@@ -56,8 +106,8 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
         setSelectedCity('');
         setCities([]);
         setSearchInput('');
-        setMapCenter(defaultCenter);
-        setMarkerPosition(defaultCenter);
+        setMapCenter(DEFAULT_CENTER);
+        setMarkerPosition(DEFAULT_CENTER);
         setHighlightCenter(null);
         setZoomLevel(5);
         setAutocomplete(null);
@@ -68,11 +118,13 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
         setHasLocationSelection(false);
         setIsStatus(false);
         setMapResetKey((prev) => prev + 1);
+        initialStopageStateRef.current = null;
     }
 
     function closeModal() {
         resetFormAndMap();
         setShowStopageAddModal(false);
+        setSelectedStopage(null);
     }
 
     const toggleStateDropdown = () => {
@@ -273,18 +325,19 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
             distance: distance,
             latitude: markerPosition.lat,
             longitude: markerPosition.lng,
-            status: isStatus
+            status: isStatus,
+            ...(isEditMode ? { id: selectedStopage.id } : {})
         };
         try {
             const response = await axiosInstance.post(api.addStopage, payload, {
                 params: {
-                    intent: 'add',
+                    intent: isEditMode ? 'update' : 'add',
                 }
             });
             if(response?.data.status === 200) {
                 toast.success(response?.data.message);
                 refreshData();
-                resetFormAndMap();
+                closeModal();
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -298,7 +351,7 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
             <StopageAddWrapper className={showStopageAddModal ? 'active' : ''}>
                 <div className={`modal_box ${showStopageAddModal ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Stopage</h4>
+                        <h4>{isEditMode ? 'Edit Stopage' : 'Add Stopage'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -312,11 +365,15 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
                                 <div className="select_box">
                                     <span>Select State <p>*</p></span>
                                     <div className="dropdown_sec">
-                                        <div className="dropdown_btn" onClick={toggleStateDropdown}>
+                                        <div
+                                            className={`dropdown_btn ${isEditMode ? 'disabled' : ''}`}
+                                            onClick={isEditMode ? undefined : toggleStateDropdown}
+                                            aria-disabled={isEditMode}
+                                        >
                                             <p>{selectedState}</p>
                                             <i className={`fa-solid fa-angle-down ${stateDropdownShow ? 'active' : ''}`}></i>
                                         </div>
-                                        <div className={`dropdown ${stateDropdownShow ? 'active' : ''}`}>
+                                        <div className={`dropdown ${!isEditMode && stateDropdownShow ? 'active' : ''}`}>
                                             <div className="dropdown_inner">
                                                 <ul>
                                                     {
@@ -342,11 +399,15 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
                                 <div className="select_box">
                                     <span>Select City <p>*</p></span>
                                     <div className="dropdown_sec">
-                                        <div className="dropdown_btn" onClick={toggleCityDropdown}>
+                                        <div
+                                            className={`dropdown_btn ${isEditMode ? 'disabled' : ''}`}
+                                            onClick={isEditMode ? undefined : toggleCityDropdown}
+                                            aria-disabled={isEditMode}
+                                        >
                                             <p>{selectedCity}</p>
                                             <i className={`fa-solid fa-angle-down ${cityDropdownShow ? 'active' : ''}`}></i>
                                         </div>
-                                        <div className={`dropdown ${cityDropdownShow ? 'active' : ''}`}>
+                                        <div className={`dropdown ${!isEditMode && cityDropdownShow ? 'active' : ''}`}>
                                             <div className="dropdown_inner">
                                                 {
                                                     cities.length > 8 &&
@@ -529,12 +590,12 @@ const StopageAddModal = ({ showStopageAddModal, setShowStopageAddModal, refreshD
                                 <span></span>
                             </label>
                         </div>
-                        <button disabled={!isFormComplete || isButtonLoading} onClick={handleSave}>
+                        <button disabled={!isFormComplete || isButtonLoading || (isEditMode && !isFormChanged)} onClick={handleSave}>
                             {
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>

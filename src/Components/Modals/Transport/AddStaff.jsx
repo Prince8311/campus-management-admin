@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AddStaffWrapper } from "../../../Styles/Modals/TransportModalsStyle";
 import { toast } from "react-toastify";
-import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import { documentBaseURL, getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => {
+const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, selectedStaff, setSelectedStaff, refreshData }) => {
     const api = getApiEndpoints();
     const roles = ["Driver", "Conductor", "Cleaner"];
     const [selectedRole, setSelectedRole] = useState('');
@@ -18,18 +18,67 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
     const [previewUrl, setPreviewUrl] = useState(null);
     const [isDragOver, setIsDragOver] = useState(false);
     const fileInputRef = useRef(null);
+    const initialStaffStateRef = useRef(null);
 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
     const allowedExtensions = '.jpg,.jpeg,.png,.pdf';
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const isDriverRole = selectedRole === 'Driver';
+    const isEditMode = Boolean(selectedStaff);
 
     const isFormValid =
         staffName.trim() &&
         selectedRole &&
         contactNo.trim() &&
         email.trim() &&
-        (!isDriverRole || licenseFile);
+        (!isDriverRole || licenseFile || previewUrl);
+
+    const isFormChanged = isEditMode && initialStaffStateRef.current ? (
+        staffName !== initialStaffStateRef.current.staffName ||
+        selectedRole !== initialStaffStateRef.current.selectedRole ||
+        contactNo !== initialStaffStateRef.current.contactNo ||
+        email !== initialStaffStateRef.current.email ||
+        isStatus !== initialStaffStateRef.current.isStatus ||
+        licenseFile !== null
+    ) : false;
+
+    const normalizeStatus = (value) => value === true || value === 1 || value === '1' || value === 'true' || value === 'active';
+
+    useEffect(() => {
+        if (isStaffAddModal && selectedStaff) {
+            const initialStaffState = {
+                staffName: String(selectedStaff.name ?? ''),
+                selectedRole: String(selectedStaff.role ?? ''),
+                contactNo: String(selectedStaff.contact_no ?? ''),
+                email: String(selectedStaff.email ?? ''),
+                isStatus: normalizeStatus(selectedStaff.status)
+            };
+
+            setStaffName(initialStaffState.staffName);
+            setSelectedRole(initialStaffState.selectedRole);
+            setContactNo(initialStaffState.contactNo);
+            setEmail(initialStaffState.email);
+            setIsStatus(initialStaffState.isStatus);
+            setLicenseFile(null);
+            setPreviewUrl(selectedStaff.license_file
+                ? `${documentBaseURL}/driving-license/${selectedStaff.license_file}`
+                : null
+            );
+            initialStaffStateRef.current = initialStaffState;
+        } else if (isStaffAddModal) {
+            setSelectedRole('');
+            setIsDropdownOpen(false);
+            setIsStatus(false);
+            setStaffName('');
+            setContactNo('');
+            setEmail('');
+            setLicenseFile(null);
+            setPreviewUrl(null);
+            setIsDragOver(false);
+            initialStaffStateRef.current = null;
+            if (fileInputRef.current) fileInputRef.current.value = '';
+        }
+    }, [isStaffAddModal, selectedStaff]);
 
     const clearLicenseFile = () => {
         if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -41,6 +90,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
     function closeModal() {
         resetForm();
         setIsStaffAddModal(false);
+        setSelectedStaff(null);
     }
 
     function resetForm() {
@@ -51,6 +101,8 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
         setContactNo('');
         setEmail('');
         clearLicenseFile();
+        setIsDragOver(false);
+        initialStaffStateRef.current = null;
     }
 
     function toggleDropdown() {
@@ -102,13 +154,14 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
 
     const handleSave = async (e) => {
         e.preventDefault();
-        // setIsButtonLoading(true);
+        setIsButtonLoading(true);
         const inputs = {
             name: staffName,
             role: selectedRole,
             phone: contactNo,
             email: email,
             status: isStatus,
+            ...(isEditMode ? { id: selectedStaff.id } : {})
         };
         const formData = new FormData();
         formData.append('inputs', JSON.stringify(inputs));
@@ -118,13 +171,12 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
         try {
             const response = await axiosInstance.post(api.addVehicleStaff, formData, {
                 params: {
-                    intent: 'add',
+                    intent: isEditMode ? 'update' : 'add',
                 }
             });
             if (response.data.status === 200) {
-                console.log('Staff added successfully:', response.data);
                 toast.success(response.data.message);
-                resetForm();
+                closeModal();
                 refreshData();
             }
         } catch (error) {
@@ -139,7 +191,7 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
             <AddStaffWrapper className={isStaffAddModal ? 'active' : ''}>
                 <div className={`modal_box ${isStaffAddModal ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Vehicle Staff</h4>
+                        <h4>{isEditMode ? 'Edit Vehicle Staff' : 'Add Vehicle Staff'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -193,14 +245,14 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
                             {isDriverRole && <div className="upload_box">
                                 <span>Driving License <p>*</p></span>
                                 <div
-                                    className={`document_upload_sec ${isDragOver ? 'drag_over' : ''} ${licenseFile ? 'file_selected' : ''}`}
+                                    className={`document_upload_sec ${isDragOver ? 'drag_over' : ''} ${previewUrl ? 'file_selected' : ''}`}
                                     onDragOver={handleDragOver}
                                     onDragLeave={handleDragLeave}
                                     onDrop={handleDrop}
                                 >
-                                    {licenseFile ? (
+                                    {previewUrl ? (
                                         <div className="file_preview">
-                                            {licenseFile.type === 'application/pdf' ? (
+                                            {(licenseFile?.type === 'application/pdf' || (!licenseFile && selectedStaff?.license_file?.toLowerCase().endsWith('.pdf'))) ? (
                                                 <iframe
                                                     src={previewUrl}
                                                     title="License Preview"
@@ -247,12 +299,12 @@ const AddStaffModal = ({ isStaffAddModal, setIsStaffAddModal, refreshData }) => 
                                 <span></span>
                             </label>
                         </div>
-                        <button disabled={!isFormValid || isButtonLoading} onClick={handleSave}>
+                        <button disabled={!isFormValid || isButtonLoading || (isEditMode && !isFormChanged)} onClick={handleSave}>
                             {
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>

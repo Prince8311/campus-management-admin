@@ -10,6 +10,7 @@ import Pagination from "../../../Components/Pagination";
 const VehicleStaffsPage = () => {
     const api = getApiEndpoints();
     const [isStaffAddModal, setIsStaffAddModal] = useState(false);
+    const [selectedStaff, setSelectedStaff] = useState(null);
     const [vehicleStaffs, setVehicleStaffs] = useState([]);
     const [isInitialVehicleStaffsLoading, setIsInitialVehicleStaffsLoading] = useState(false);
     const [totalCount, setTotalCount] = useState('');
@@ -70,6 +71,12 @@ const VehicleStaffsPage = () => {
     }, [page]);
 
     const handleOpenAddStaffModal = () => {
+        setSelectedStaff(null);
+        setIsStaffAddModal(true);
+    };
+
+    const handleOpenEditStaffModal = (staff) => {
+        setSelectedStaff(staff);
         setIsStaffAddModal(true);
     };
 
@@ -144,7 +151,7 @@ const VehicleStaffsPage = () => {
                                                 <p className={staff.status ? 'active' : ''}>{staff.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="edit_btn" onClick={() => handleOpenEditStaffModal(staff)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
@@ -166,6 +173,8 @@ const VehicleStaffsPage = () => {
                 <AddStaffModal
                     isStaffAddModal={isStaffAddModal}
                     setIsStaffAddModal={setIsStaffAddModal}
+                    selectedStaff={selectedStaff}
+                    setSelectedStaff={setSelectedStaff}
                     refreshData={() => fetchVehicleStaffs(false, page)}
                 />
             </VehicleStaffWrapper>

@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PassengerAddWrapper } from "../../../Styles/Modals/TransportModalsStyle";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints, profileImageBaseURL } from "../../../Services/Api/ApiConfig";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
+const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger, selectedPassenger, setSelectedPassenger, refreshData }) => {
     const api = getApiEndpoints();
 
-    // const passengers = ['Joydeep Barik', 'Sourish Mondal'];
     const [users, setUsers] = useState([]);
     const [userSearchInput, setUserSearchInput] = useState('');
     const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -23,6 +22,46 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
     const [stoppageSearchInput, setStoppageSearchInput] = useState('');
     const [showStopagesDropdown, setShowStopagesDropdown] = useState(false);
     const [selectedStopage, setSelectedStopage] = useState({});
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const initialPassengerStateRef = useRef(null);
+    const isEditMode = Boolean(selectedPassenger);
+    const isFormComplete =
+        Boolean(selectedUser.id) &&
+        Boolean(selectedUser.phone?.toString().trim()) &&
+        Boolean(selectedRoute.id) &&
+        Boolean(selectedStopage.id);
+    const isFormChanged = isEditMode && initialPassengerStateRef.current ? (
+        String(selectedUser.id ?? '') !== String(initialPassengerStateRef.current.userId ?? '') ||
+        String(selectedRoute.id ?? '') !== String(initialPassengerStateRef.current.routeId ?? '') ||
+        String(selectedStopage.id ?? '') !== String(initialPassengerStateRef.current.stopageId ?? '')
+    ) : false;
+
+    useEffect(() => {
+        if (!isAddPassenger || !selectedPassenger) return;
+
+        const transportDetails = selectedPassenger.transport_details ?? {};
+        const userId = selectedPassenger.user_id ?? selectedPassenger.userId ?? selectedPassenger.user?.id ?? selectedPassenger.id;
+        const routeId = transportDetails.route_id ?? transportDetails.routeId ?? selectedPassenger.route_id ?? selectedPassenger.routeId ?? transportDetails.route?.id;
+        const stopageId = transportDetails.stopage_id ?? transportDetails.stopageId ?? transportDetails.stoppage_id ?? selectedPassenger.stopage_id ?? selectedPassenger.stopageId ?? transportDetails.stopage?.id;
+        const routeName = typeof transportDetails.route === 'object' ? transportDetails.route?.name : transportDetails.route;
+        const stopageName = typeof transportDetails.stopage === 'object' ? transportDetails.stopage?.name : transportDetails.stopage;
+
+        setSelectedUser({
+            ...selectedPassenger,
+            id: userId,
+            type: selectedPassenger.user_type ?? selectedPassenger.type,
+            phone: selectedPassenger.phone ?? selectedPassenger.contact_no ?? selectedPassenger.user?.phone ?? ''
+        });
+        setSelectedRoute({ id: routeId, name: routeName ?? selectedPassenger.route_name ?? '' });
+        setSelectedStopage({ id: stopageId, name: stopageName ?? selectedPassenger.stopage_name ?? '' });
+        setUserSearchInput('');
+        setRouteSearchInput('');
+        setStoppageSearchInput('');
+        setShowUserDropdown(false);
+        setShowRoutesDropdown(false);
+        setShowStopagesDropdown(false);
+        initialPassengerStateRef.current = { userId, routeId, stopageId };
+    }, [isAddPassenger, selectedPassenger]);
 
     const handleSelectedUserDropdown = () => {
         setShowUserDropdown(!showUserDropdown);
@@ -84,6 +123,18 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
         }
     }, [isAddPassenger, routeSearchInput]);
 
+    useEffect(() => {
+        if (!isEditMode || selectedRoute.id || !selectedRoute.name || routes.length === 0) return;
+
+        const matchingRoute = routes.find((route) => route.name === selectedRoute.name);
+        if (matchingRoute) {
+            setSelectedRoute(matchingRoute);
+            if (initialPassengerStateRef.current) {
+                initialPassengerStateRef.current.routeId = matchingRoute.id;
+            }
+        }
+    }, [isEditMode, routes, selectedRoute]);
+
     const fetchStopages = async () => {
         try {
             const response = await axiosInstance.get(api.fetchStopagesRoutewise, {
@@ -105,6 +156,18 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
             fetchStopages();
         }
     }, [isAddPassenger, selectedRoute, stoppageSearchInput]);
+
+    useEffect(() => {
+        if (!isEditMode || selectedStopage.id || !selectedStopage.name || stopages.length === 0) return;
+
+        const matchingStopage = stopages.find((stopage) => stopage.name === selectedStopage.name);
+        if (matchingStopage) {
+            setSelectedStopage(matchingStopage);
+            if (initialPassengerStateRef.current) {
+                initialPassengerStateRef.current.stopageId = matchingStopage.id;
+            }
+        }
+    }, [isEditMode, stopages, selectedStopage]);
 
     const handleSelectUser = (user) => {
         setSelectedUser(user);
@@ -132,14 +195,56 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
     }
 
     function closeModal() {
+        setSelectedUser({});
+        setSelectedRoute({});
+        setSelectedStopage({});
+        setUserSearchInput('');
+        setRouteSearchInput('');
+        setStoppageSearchInput('');
+        setShowUserDropdown(false);
+        setShowRoutesDropdown(false);
+        setShowStopagesDropdown(false);
+        setStopages([]);
+        initialPassengerStateRef.current = null;
         setIsAddPassenger(false);
+        setSelectedPassenger(null);
     }
+
+    const handleAddPassenger = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const payload = {
+            userId: selectedUser.id,
+            userType: selectedUser.type,
+            routeId: selectedRoute.id,
+            stopageId: selectedStopage.id,
+            ...(isEditMode ? { id: selectedPassenger.id } : {})
+        };
+
+        try {
+            const response = await axiosInstance.post(api.addPassenger, payload, {
+                params: {
+                    intent: isEditMode ? 'update' : 'add',
+                }
+            });
+            if (response.data.status === 200) {
+                toast.success(response.data.message);
+                refreshData();
+                closeModal();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
+    }
+
     return (
         <>
             <PassengerAddWrapper className={isAddPassenger ? 'active' : ''}>
                 <div className={`modal_box ${isAddPassenger ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Passenger</h4>
+                        <h4>{isEditMode ? 'Edit Passenger' : 'Add Passenger'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -283,7 +388,18 @@ const PassengerAddModal = ({ isAddPassenger, setIsAddPassenger }) => {
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button
+                            disabled={!isFormComplete || isButtonLoading || (isEditMode && !isFormChanged)}
+                            onClick={handleAddPassenger}
+                        >
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </PassengerAddWrapper>

@@ -6,13 +6,16 @@ import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
 
-const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
+const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, roomToEdit, setRoomToEdit, refreshRooms }) => {
     const api = getApiEndpoints();
     const [showBuildingDropdown, setShowBuildingDropdown] = useState(false);
     const [buildings, setBuildings] = useState([]);
     const [selectedBuilding, setSelectedBuilding] = useState({});
 
+    const [showFloorDropdown, setShowFloorDropdown] = useState(false);
     const [floorNumber, setFloorNumber] = useState('');
+    const [showRoomDropdown, setShowRoomDropdown] = useState(false);
+    const [roomNumbers, setRoomNumbers] = useState([]);
     const [roomNumber, setRoomNumber] = useState('');
     const [totalBed, setTotalBed] = useState('');
 
@@ -26,7 +29,22 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
 
     const [isStatus, setIsStatus] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
-    const isFormValid = selectedBuilding?.id && floorNumber.trim() !== '' && roomNumber.trim() !== '' && totalBed.trim() !== '' && selectedCategory.trim() !== '' && selectedType.trim() !== '';
+    const [initialFormValues, setInitialFormValues] = useState(null);
+    const isEditMode = Boolean(roomToEdit?.id);
+    const isFormValid = selectedBuilding?.id && floorNumber !== '' && roomNumber !== '' && totalBed.trim() !== '' && selectedCategory.trim() !== '' && selectedType.trim() !== '';
+    const currentFormValues = {
+        buildingId: String(selectedBuilding?.id ?? ''),
+        floorNo: String(floorNumber),
+        roomNo: String(roomNumber),
+        bedCount: String(totalBed),
+        category: selectedCategory,
+        type: selectedType,
+        status: Boolean(isStatus)
+    };
+    const hasFormChanged = !isEditMode || (initialFormValues && JSON.stringify(currentFormValues) !== JSON.stringify(initialFormValues));
+    const totalFloors = Number.parseInt(selectedBuilding?.total_floors, 10) || 0;
+    const floorOptions = Array.from({ length: totalFloors }, (_, index) => index + 1);
+    const formatFloorNumber = (floor) => String(floor).padStart(2, '0');
 
     const closeModal = () => {
         setIsAddRoomOpen(false);
@@ -36,6 +54,12 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
         setIsStatus(false);
         setSelectedCategory('');
         setSelectedType('');
+        setSelectedBuilding({});
+        setInitialFormValues(null);
+        setRoomToEdit(null);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
+        setRoomNumbers([]);
     };
 
     const fetchAllBuildings = async () => {
@@ -55,13 +79,77 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
     useEffect(() => {
         if (isAddRoomOpen) {
             fetchAllBuildings();
+
+            if (roomToEdit) {
+                const values = {
+                    buildingId: String(roomToEdit.building_id ?? roomToEdit.buildingId ?? roomToEdit.hostel_building_id ?? ''),
+                    floorNo: String(roomToEdit.floor_no ?? roomToEdit.floorNo ?? ''),
+                    roomNo: String(roomToEdit.room_no ?? roomToEdit.roomNo ?? ''),
+                    bedCount: String(roomToEdit.bed_count ?? roomToEdit.bedCount ?? ''),
+                    category: roomToEdit.category ?? roomToEdit.room_category ?? '',
+                    type: roomToEdit.type ?? '',
+                    status: roomToEdit.status === true || roomToEdit.status === 1 || roomToEdit.status === '1' || roomToEdit.status === 'true'
+                };
+
+                setSelectedBuilding({
+                    id: values.buildingId,
+                    building_name: roomToEdit.building_name ?? ''
+                });
+                setFloorNumber(values.floorNo);
+                setRoomNumber(values.roomNo);
+                setTotalBed(values.bedCount);
+                setSelectedCategory(values.category);
+                setSelectedType(values.type);
+                setIsStatus(values.status);
+                setInitialFormValues(values);
+            }
         }
-    }, [isAddRoomOpen]);
+    }, [isAddRoomOpen, roomToEdit]);
+
+    useEffect(() => {
+        if (isEditMode && buildings.length > 0) {
+            const matchingBuilding = buildings.find(
+                (building) => String(building.id) === String(roomToEdit.building_id ?? roomToEdit.buildingId ?? roomToEdit.hostel_building_id)
+            );
+            if (matchingBuilding) setSelectedBuilding(matchingBuilding);
+        }
+    }, [buildings, isEditMode, roomToEdit]);
+
+    const fetchAvailableRooms = async () => {
+        try {
+            const response = await axiosInstance.get(api.fetchHostelRoom, {
+                params: {
+                    isRoomForm: true,
+                    building_id: selectedBuilding.id
+                }
+            });
+            if (response?.data.status === 200) {
+                let availableRoomNumbers = Array.isArray(response.data.roomNumbers)
+                    ? response.data.roomNumbers.map(Number).filter(Number.isFinite)
+                    : [];
+                const originalBuildingId = roomToEdit?.building_id ?? roomToEdit?.buildingId ?? roomToEdit?.hostel_building_id;
+                const originalRoomNumber = Number(roomToEdit?.room_no ?? roomToEdit?.roomNo);
+                if (isEditMode && String(selectedBuilding.id) === String(originalBuildingId) && Number.isFinite(originalRoomNumber)) {
+                    availableRoomNumbers = [...new Set([...availableRoomNumbers, originalRoomNumber])].sort((a, b) => a - b);
+                }
+                setRoomNumbers(availableRoomNumbers);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (isAddRoomOpen && selectedBuilding?.id) {
+            fetchAvailableRooms();
+        }
+    }, [isAddRoomOpen, selectedBuilding]);
 
     const handleCreateRoom = async (e) => {
         e.preventDefault();
         setIsButtonLoading(true);
         const payload = {
+            ...(isEditMode && { id: roomToEdit.id }),
             buildingId: selectedBuilding.id,
             floorNo: floorNumber,
             roomNo: roomNumber,
@@ -73,7 +161,7 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
         try {
             const response = await axiosInstance.post(api.addHostelRoom, payload, {
                 params: {
-                    intent: 'add'
+                    intent: isEditMode ? 'update' : 'add'
                 }
             });
             if (response?.data.status === 200) {
@@ -91,15 +179,40 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
     const handleSelectBuilding = (building) => {
         if (building.id === selectedBuilding.id) return;
         setSelectedBuilding(building);
+        setFloorNumber('');
+        setRoomNumber('');
+        setRoomNumbers([]);
         setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
         setShowCategoryDropdown(false);
         setShowTypeDropdown(false);
     }
+
+    const handleSelectFloor = (floor) => {
+        setFloorNumber(floor);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
+        setShowBuildingDropdown(false);
+        setShowCategoryDropdown(false);
+        setShowTypeDropdown(false);
+    };
+
+    const handleSelectRoom = (room) => {
+        setRoomNumber(room);
+        setShowRoomDropdown(false);
+        setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
+        setShowCategoryDropdown(false);
+        setShowTypeDropdown(false);
+    };
 
     const handleSelectCategory = (category) => {
         setSelectedCategory(category);
         setShowCategoryDropdown(false);
         setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
         setShowTypeDropdown(false);
     };
 
@@ -108,10 +221,30 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
         setShowCategoryDropdown(false);
         setShowTypeDropdown(false);
         setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
     };
 
     const handleOpenBuildingDropdown = () => {
         setShowBuildingDropdown(!showBuildingDropdown);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
+        setShowCategoryDropdown(false);
+        setShowTypeDropdown(false);
+    };
+
+    const handleOpenFloorDropdown = () => {
+        setShowFloorDropdown(!showFloorDropdown);
+        setShowBuildingDropdown(false);
+        setShowRoomDropdown(false);
+        setShowCategoryDropdown(false);
+        setShowTypeDropdown(false);
+    };
+
+    const handleOpenRoomDropdown = () => {
+        setShowRoomDropdown(!showRoomDropdown);
+        setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
         setShowCategoryDropdown(false);
         setShowTypeDropdown(false);
     };
@@ -119,34 +252,17 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
     const handleOpenCategoryDropdown = () => {
         setShowCategoryDropdown(!showCategoryDropdown);
         setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
         setShowTypeDropdown(false);
     };
 
     const handleOpenTypeDropdown = () => {
         setShowTypeDropdown(!showTypeDropdown);
         setShowBuildingDropdown(false);
+        setShowFloorDropdown(false);
+        setShowRoomDropdown(false);
         setShowCategoryDropdown(false);
-    };
-
-    const handleFloorNumberChange = (e) => {
-        const raw = e.target.value;
-        const digitsOnly = raw.replace(/\D/g, '');
-        if (digitsOnly === '') {
-            setFloorNumber('');
-            return;
-        }
-        // Ensure a building is selected before allowing floor input
-        if (!selectedBuilding?.id) {
-            toast.warn('Please select a building first');
-            return;
-        }
-        const valueNum = parseInt(digitsOnly, 10);
-        const maxFloors = selectedBuilding?.total_floors ? parseInt(selectedBuilding.total_floors, 10) : null;
-        if (maxFloors && valueNum > maxFloors) {
-            toast.warn(`Floor cannot exceed ${maxFloors}`);
-            return;
-        }
-        setFloorNumber(String(valueNum));
     };
 
 
@@ -155,7 +271,7 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
             <AddRoomsWrapper className={isAddRoomOpen ? "active" : ''}>
                 <div className={`modal_box ${isAddRoomOpen ? "active" : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Hostel Living Room</h4>
+                        <h4>{isEditMode ? 'Edit Hostel Room' : 'Add Hostel Living Room'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -182,7 +298,7 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
                                                             >{building.building_name}</li>
                                                         )
                                                     ) : (
-                                                        <li className="empty_message">No building available</li>
+                                                        <li className="no_data">No building available</li>
                                                     )
                                                 }
                                             </ul>
@@ -190,13 +306,63 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="input_box">
+                            <div className="select_box halfwidth">
                                 <span>Floor No. <p>*</p></span>
-                                <input type="text" value={floorNumber} onChange={handleFloorNumberChange} inputMode="numeric" />
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn" onClick={handleOpenFloorDropdown}>
+                                        <p>{floorNumber === '' ? '' : formatFloorNumber(floorNumber)}</p>
+                                        <i className={`fa-solid fa-angle-down ${showFloorDropdown ? 'active' : ''}`}></i>
+                                    </div>
+                                    <div className={`dropdown ${showFloorDropdown ? 'active' : ''}`}>
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                {
+                                                    floorOptions.length > 0 ? (
+                                                        floorOptions.map((floor) => (
+                                                            <li
+                                                                key={floor}
+                                                                onClick={() => handleSelectFloor(floor)}
+                                                                className={floorNumber === floor ? 'active' : ''}
+                                                            >{formatFloorNumber(floor)}</li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="no_data">Select a building first</li>
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="input_box">
+                            <div className="select_box halfwidth">
                                 <span>Room Number <p>*</p></span>
-                                <input type="text" value={roomNumber} onChange={(e) => setRoomNumber(e.target.value)} />
+                                <div className="dropdown_sec">
+                                    <div className="dropdown_btn" onClick={handleOpenRoomDropdown}>
+                                        <p>{roomNumber === '' ? '' : formatFloorNumber(roomNumber)}</p>
+                                        <i className={`fa-solid fa-angle-down ${showRoomDropdown ? 'active' : ''}`}></i>
+                                    </div>
+                                    <div className={`dropdown ${showRoomDropdown ? 'active' : ''}`}>
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                {
+                                                    roomNumbers.length > 0 ? (
+                                                        roomNumbers.map((room) => (
+                                                            <li
+                                                                key={room}
+                                                                onClick={() => handleSelectRoom(room)}
+                                                                className={roomNumber === room ? 'active' : ''}
+                                                            >{formatFloorNumber(room)}</li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="no_data">
+                                                            {selectedBuilding?.id ? 'No rooms available' : 'Select a building first'}
+                                                        </li>
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="input_box">
                                 <span>Total Beds <p>*</p></span>
@@ -267,14 +433,14 @@ const AddRoomsModal = ({ isAddRoomOpen, setIsAddRoomOpen, refreshRooms }) => {
                             </label>
                         </div>
                         <button
-                            disabled={!isFormValid || isButtonLoading}
+                            disabled={!isFormValid || isButtonLoading || !hasFormChanged}
                             onClick={handleCreateRoom}
                         >
                             {
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>

@@ -15,6 +15,7 @@ const VehiclesPage = () => {
     const [totalCount, setTotalCount] = useState('');
 
     const [isAddVehicleModal, setIsAddVehicleModal] = useState(false);
+    const [selectedVehicle, setSelectedVehicle] = useState(null);
     const [page, setPage] = useState(1);
 
     const fetchVehicles = async (showSkeleton = false, pageNumber = 1) => {
@@ -44,6 +45,12 @@ const VehiclesPage = () => {
     }, [page]);
 
     const handleOpenAddVehicleModal = () => {
+        setSelectedVehicle(null);
+        setIsAddVehicleModal(true);
+    };
+
+    const handleOpenEditVehicleModal = (vehicle) => {
+        setSelectedVehicle(vehicle);
         setIsAddVehicleModal(true);
     };
 
@@ -104,7 +111,7 @@ const VehiclesPage = () => {
                                                 <p className={vehicle.status ? 'active' : ''}>{vehicle.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="edit_btn" onClick={() => handleOpenEditVehicleModal(vehicle)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
@@ -127,6 +134,8 @@ const VehiclesPage = () => {
                 <AddVehicleModal
                     isAddVehicleModal={isAddVehicleModal}
                     setIsAddVehicleModal={setIsAddVehicleModal}
+                    selectedVehicle={selectedVehicle}
+                    setSelectedVehicle={setSelectedVehicle}
                     refreshData={() => fetchVehicles(false, page)}
                 />
             </VehicleWrapper>

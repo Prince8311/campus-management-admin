@@ -5,7 +5,7 @@ import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, refreshResidents }) => {
+const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, residentToEdit, setResidentToEdit, activeTab, refreshResidents }) => {
     const api = getApiEndpoints();
     const [users, setUsers] = useState([]);
     const [userSearchInput, setUserSearchInput] = useState('');
@@ -34,6 +34,18 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
     const [showStatusDropdown, setShowStatusDropdown] = useState(false);
     const [showFoodPreferenceDropdown, setShowFoodPreferenceDropdown] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const [initialFormValues, setInitialFormValues] = useState(null);
+    const isEditMode = Boolean(residentToEdit?.id);
+
+    const getFormValues = (user, building, floor, room, bed, status, foodPreference) => ({
+        userId: String(user?.user_id ?? ''),
+        buildingId: String(building?.id ?? ''),
+        floor: String(floor ?? ''),
+        roomId: String(room?.id ?? ''),
+        bedNo: String(bed ?? ''),
+        status: status ?? '',
+        foodPreference: foodPreference ?? ''
+    });
 
     const closeModal = () => {
         setIsAddResidentOpen(false);
@@ -49,6 +61,8 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
         setSelectedRoomBed('');
         setSelectedStatus('');
         setSelectedFoodPreference('');
+        setInitialFormValues(null);
+        setResidentToEdit(null);
         setShowUserDropdown(false);
         setShowBuildingDropdown(false);
         setShowFloorDropdown(false);
@@ -169,8 +183,65 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
         if (isAddResidentOpen) {
             fetchUsers();
             fetchHostelBuildings();
+
+            if (residentToEdit) {
+                const room = residentToEdit.room ?? {};
+                const user = residentToEdit.user_details ?? {};
+                const selectedUserValue = {
+                    ...user,
+                    user_id: residentToEdit.user_id ?? user.user_id ?? user.id,
+                    name: residentToEdit.name ?? user.name,
+                };
+                const selectedBuildingValue = {
+                    id: room.building_id ?? room.buildingId ?? room.hostel_building_id ?? residentToEdit.building_id ?? residentToEdit.buildingId,
+                    building_name: room.building ?? room.building_name ?? residentToEdit.building_name ?? ''
+                };
+                const selectedRoomValue = {
+                    ...room,
+                    id: room.room_id ?? residentToEdit.room_id ?? room.id,
+                    room_no: room.room_no ?? room.number
+                };
+                const floor = room.floor_no ?? room.floor ?? residentToEdit.floor_no ?? '';
+                const bed = room.bed_no ?? residentToEdit.bed_no ?? '';
+                const status = residentToEdit.status ?? '';
+                const foodPreference = residentToEdit.food_preference ?? residentToEdit.foodPreference ?? '';
+
+                setSelectedUser(selectedUserValue);
+                setSelectedBuilding(selectedBuildingValue);
+                setSelectedFloor(String(floor));
+                setSelectedRoom(selectedRoomValue);
+                setSelectedRoomBed(String(bed));
+                setSelectedStatus(status);
+                setSelectedFoodPreference(foodPreference);
+                setInitialFormValues(getFormValues(
+                    selectedUserValue,
+                    selectedBuildingValue,
+                    floor,
+                    selectedRoomValue,
+                    bed,
+                    status,
+                    foodPreference
+                ));
+            }
         }
-    }, [isAddResidentOpen]);
+    }, [isAddResidentOpen, residentToEdit]);
+
+    useEffect(() => {
+        if (isAddResidentOpen && isEditMode && buildingList.length > 0) {
+            const matchingBuilding = buildingList.find(
+                (building) => (
+                    selectedBuilding?.id !== undefined &&
+                    selectedBuilding?.id !== null &&
+                    String(building.id) === String(selectedBuilding.id)
+                ) || (
+                    selectedBuilding?.building_name &&
+                    String(building.building_name).trim().toLowerCase() ===
+                    String(selectedBuilding.building_name).trim().toLowerCase()
+                )
+            );
+            if (matchingBuilding) setSelectedBuilding(matchingBuilding);
+        }
+    }, [buildingList, isAddResidentOpen, isEditMode, selectedBuilding?.id, selectedBuilding?.building_name]);
 
     const getInitials = (name) => {
         if (!name) return "";
@@ -180,8 +251,14 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
         return (first + last).toUpperCase();
     };
 
+    const formatNumberForDisplay = (number) => {
+        if (number === null || number === undefined || number === '') return '';
+        const value = String(number);
+        return /^\d$/.test(value) ? `0${value}` : value;
+    };
+
     const handleSelectUser = (user) => {
-        if (selectedUser.id === user.id) return;
+        if (selectedUser.user_id === user.user_id) return;
         setSelectedUser(user);
         setShowUserDropdown(false);
     }
@@ -227,7 +304,37 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
             });
             if (response?.data.status === 200) {
                 console.log(response.data);
-                setRoomList(response?.data.rooms);
+                const rooms = response?.data.rooms ?? [];
+                const originalRoom = residentToEdit?.room ?? {};
+                const roomIdCandidates = [
+                    originalRoom.room_id,
+                    originalRoom.id,
+                    residentToEdit?.room_id,
+                    selectedRoom?.room_id,
+                    selectedRoom?.id
+                ].filter((id) => id !== undefined && id !== null && id !== '');
+                const selectedRoomNumber = selectedRoom?.room_no ?? selectedRoom?.number ??
+                    originalRoom.room_no ?? originalRoom.number;
+                // Room number is the safest edit-mode match because some resident
+                // responses use `room.id` for the allocation rather than the room.
+                const matchingRoom = rooms.find((room) =>
+                    selectedRoomNumber !== undefined && selectedRoomNumber !== null &&
+                    String(room.room_no) === String(selectedRoomNumber)
+                ) ?? rooms.find((room) =>
+                    roomIdCandidates.some((id) => String(room.id) === String(id))
+                );
+
+                if (isEditMode && matchingRoom) {
+                    // Use the canonical room returned by the room API. Resident data can
+                    // contain an allocation id in `room.id`, which otherwise creates a
+                    // duplicate option and sends the wrong id while fetching beds.
+                    setSelectedRoom(matchingRoom);
+                    setRoomList(rooms);
+                } else if (isEditMode && selectedRoom?.id && !rooms.some((room) => String(room.id) === String(selectedRoom.id))) {
+                    setRoomList([...rooms, selectedRoom]);
+                } else {
+                    setRoomList(rooms);
+                }
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -235,10 +342,10 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
     }
 
     useEffect(() => {
-        if (selectedBuilding && selectedFloor) {
+        if (isAddResidentOpen && selectedBuilding?.id && selectedFloor) {
             fetchRooms();
         }
-    }, [selectedBuilding, selectedFloor, selectedTypes, selectedCategories]);
+    }, [isAddResidentOpen, selectedBuilding?.id, selectedFloor, selectedTypes, selectedCategories]);
 
     const fetchRoomBeds = async () => {
         try {
@@ -251,7 +358,14 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
             });
             if (response?.data.status === 200) {
                 console.log(response.data);
-                setRoomBedList(response?.data.availableBeds);
+                const availableBeds = response?.data.availableBeds ?? [];
+                const originalBed = residentToEdit?.room?.bed_no ?? residentToEdit?.bed_no;
+                const beds = isEditMode && originalBed !== undefined && originalBed !== null &&
+                    String(selectedRoomBed) === String(originalBed) &&
+                    !availableBeds.some((bed) => String(bed) === String(originalBed))
+                    ? [...availableBeds, originalBed]
+                    : availableBeds;
+                setRoomBedList(beds);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -259,10 +373,10 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
     }
 
     useEffect(() => {
-        if (selectedRoom && selectedRoom.id) {
+        if (isAddResidentOpen && selectedBuilding?.id && selectedFloor && selectedRoom?.id) {
             fetchRoomBeds();
         }
-    }, [selectedRoom]);
+    }, [isAddResidentOpen, selectedBuilding?.id, selectedFloor, selectedRoom?.id]);
 
     const handleRoomSelect = (room) => {
         if (selectedRoom.id === room.id) return;
@@ -289,7 +403,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
         setShowFoodPreferenceDropdown(false);
     }
 
-    const isSaveDisabled = !(
+    const isFormValid = Boolean(
         selectedUser && selectedUser.user_id &&
         selectedBuilding && selectedBuilding.id &&
         selectedFloor &&
@@ -298,11 +412,23 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
         selectedStatus &&
         selectedFoodPreference
     );
+    const currentFormValues = getFormValues(
+        selectedUser,
+        selectedBuilding,
+        selectedFloor,
+        selectedRoom,
+        selectedRoomBed,
+        selectedStatus,
+        selectedFoodPreference
+    );
+    const hasFormChanged = !isEditMode || (initialFormValues && JSON.stringify(currentFormValues) !== JSON.stringify(initialFormValues));
+    const isSaveDisabled = !isFormValid || isButtonLoading || !hasFormChanged;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsButtonLoading(true);
         const payload = {
+            ...(isEditMode && { id: residentToEdit.id }),
             name: selectedUser.name,
             userId: selectedUser.user_id,
             userType: activeTab,
@@ -311,13 +437,13 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
             status: selectedStatus,
             foodPreference: selectedFoodPreference,
             ...(activeTab === 'Student'
-                ? { classSection: selectedUser.class && selectedUser.section ? `${selectedUser.class} - ${selectedUser.section}` : "" }
-                : { role: selectedUser.role || "" })
+                ? { classSection: selectedUser.class && selectedUser.section ? `${selectedUser.class} - ${selectedUser.section}` : (selectedUser.class_section || '') }
+                : { role: selectedUser.role || '' })
         };
         try {
             const response = await axiosInstance.post(api.addHostelResident, payload, {
                 params: {
-                    intent: 'add'
+                    intent: isEditMode ? 'update' : 'add'
                 }
             });
             if (response?.data.status === 200) {
@@ -337,7 +463,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
             <AddResidentWrapper className={isAddResidentOpen ? "active" : ''}>
                 <div className={`modal_box ${isAddResidentOpen ? "active" : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Resident</h4>
+                        <h4>{isEditMode ? 'Edit Resident' : 'Add Resident'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -366,7 +492,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                                 {users.map((user, i) => (
                                                     <li
                                                         key={i}
-                                                        className={`user_box ${selectedUser.id === user.id ? "active" : ""}`}
+                                                        className={`user_box ${selectedUser.user_id === user.user_id ? "active" : ""}`}
                                                         onClick={() => handleSelectUser(user)}
                                                     >
                                                         <div className="box_left">
@@ -421,7 +547,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                 <span>Floor No. <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={toggleFloorDropdown}>
-                                        <p>{selectedFloor}</p>
+                                        <p>{formatNumberForDisplay(selectedFloor)}</p>
                                         <i className={`fa-solid fa-angle-down ${showFloorDropdown ? "active" : ''}`}></i>
                                     </div>
                                     <div className={`dropdown ${showFloorDropdown ? "active" : ''}`}>
@@ -431,7 +557,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                                     floorOptions.length > 0 ? (
                                                         floorOptions.map((option) => (
                                                             <li key={option} className={selectedFloor === option ? "active" : ""} onClick={() => handleFloorSelect(option)}>
-                                                                {option}
+                                                                {formatNumberForDisplay(option)}
                                                             </li>
                                                         ))
                                                     ) : (
@@ -447,7 +573,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                 <span>Select Room <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={toggleRoomDropdown}>
-                                        <p>{selectedRoom.room_no}</p>
+                                        <p>{formatNumberForDisplay(selectedRoom.room_no)}</p>
                                         <i className={`fa-solid fa-angle-down ${showRoomDropdown ? "active" : ''}`}></i>
                                     </div>
                                     <div className={`dropdown ${showRoomDropdown ? "active" : ''}`}>
@@ -505,11 +631,11 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                                     roomList && roomList.length > 0 ? (
                                                         roomList.map((room, i) => {
                                                             const bedCount = Number(room.bed_count) || 0;
-                                                            const occupied = room.occupied === null ? 0 : Number(room.occupied);
+                                                            const occupied = Number(room.occupied) || 0;
                                                             const available = bedCount - occupied;
                                                             return (
-                                                                <li key={i} className={selectedRoom.id === room.id ? "active" : ""} onClick={() => handleRoomSelect(room)}>
-                                                                    {room.room_no} <span>( Beds: {bedCount} / Avl: {available} )</span>
+                                                                <li key={room.id ?? i} className={String(selectedRoom.id) === String(room.id) ? "active" : ""} onClick={() => handleRoomSelect(room)}>
+                                                                    {formatNumberForDisplay(room.room_no)} <span>( Beds: {bedCount} / Avl: {available} )</span>
                                                                 </li>
                                                             );
                                                         })
@@ -526,7 +652,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                 <span>Select Bed No. <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn" onClick={toggleRoomBedDropdown}>
-                                        <p>{selectedRoomBed}</p>
+                                        <p>{formatNumberForDisplay(selectedRoomBed)}</p>
                                         <i className={`fa-solid fa-angle-down ${showRoomBedDropdown ? "active" : ''}`}></i>
                                     </div>
                                     <div className={`dropdown ${showRoomBedDropdown ? "active" : ''} dropUp`}>
@@ -536,7 +662,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                                     roomBedList && roomBedList.length > 0 ? (
                                                         roomBedList.map((bed, i) =>
                                                             <li key={i} className={selectedRoomBed === bed ? "active" : ""} onClick={() => handleRoomBedSelect(bed)}>
-                                                                {bed}
+                                                                {formatNumberForDisplay(bed)}
                                                             </li>
                                                         )
                                                     ) : (
@@ -600,7 +726,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, activeTab, 
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>

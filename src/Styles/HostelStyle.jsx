@@ -302,6 +302,13 @@ export const ResidentsWrapper = styled('div')`
                                 align-items: center;
                                 justify-content: center;
                                 background: ${colors.customColors.blueColor2};
+                                overflow: hidden;
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
 
                                 h5 {
                                     position: relative;

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AddBuildingWrapper } from "../../../Styles/Modals/HostelManagementModalStyle";
 import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuildings }) => {
+const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, selectedBuilding, setSelectedBuilding, refreshBuildings }) => {
     const api = getApiEndpoints();
     const [buildName, setBuildName] = useState('');
     const [totalFloor, setTotalFloor] = useState('');
@@ -13,7 +13,44 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuil
     const [sickRoom, setSickRoom] = useState('');
     const [isStatus, setIsStatus] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const initialBuildingStateRef = useRef(null);
+    const isEditMode = Boolean(selectedBuilding);
     const isFormValid = buildName.trim() !== '' && totalFloor.trim() !== '' && livingRoom.trim() !== '' && sickRoom.trim() !== '';
+    const isFormChanged = isEditMode && initialBuildingStateRef.current ? (
+        buildName !== initialBuildingStateRef.current.buildName ||
+        totalFloor !== initialBuildingStateRef.current.totalFloor ||
+        livingRoom !== initialBuildingStateRef.current.livingRoom ||
+        sickRoom !== initialBuildingStateRef.current.sickRoom ||
+        isStatus !== initialBuildingStateRef.current.isStatus
+    ) : false;
+
+    const normalizeStatus = (value) => value === true || value === 1 || value === '1' || value === 'true' || value === 'active';
+
+    useEffect(() => {
+        if (isAddBuildingOpen && selectedBuilding) {
+            const initialBuildingState = {
+                buildName: String(selectedBuilding.name ?? ''),
+                totalFloor: String(selectedBuilding.total_floors ?? ''),
+                livingRoom: String(selectedBuilding.living_rooms ?? ''),
+                sickRoom: String(selectedBuilding.sick_rooms ?? ''),
+                isStatus: normalizeStatus(selectedBuilding.status)
+            };
+
+            setBuildName(initialBuildingState.buildName);
+            setTotalFloor(initialBuildingState.totalFloor);
+            setLivingRoom(initialBuildingState.livingRoom);
+            setSickRoom(initialBuildingState.sickRoom);
+            setIsStatus(initialBuildingState.isStatus);
+            initialBuildingStateRef.current = initialBuildingState;
+        } else if (isAddBuildingOpen) {
+            setBuildName('');
+            setTotalFloor('');
+            setLivingRoom('');
+            setSickRoom('');
+            setIsStatus(false);
+            initialBuildingStateRef.current = null;
+        }
+    }, [isAddBuildingOpen, selectedBuilding]);
 
     const closeModal = () => {
         setIsAddBuildingOpen(false);
@@ -22,6 +59,8 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuil
         setLivingRoom('');
         setSickRoom('');
         setIsStatus(false);
+        initialBuildingStateRef.current = null;
+        setSelectedBuilding(null);
     };
 
     const handleCreateBuilding = async (e) => {
@@ -32,12 +71,13 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuil
             totalFloors: totalFloor,
             livingRoom: livingRoom,
             sickRoom: sickRoom,
-            status: isStatus
+            status: isStatus,
+            ...(isEditMode ? { id: selectedBuilding.id } : {})
         };
         try {
             const response = await axiosInstance.post(api.addHostelBuilding, payload, {
                 params: {
-                    intent: 'add'
+                    intent: isEditMode ? 'update' : 'add'
                 }
             });
             if (response?.data.status === 200) {
@@ -57,7 +97,7 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuil
             <AddBuildingWrapper className={isAddBuildingOpen ? "active" : ''}>
                 <div className={`modal_box ${isAddBuildingOpen ? "active" : ''}`}>
                     <div className="modal_head">
-                        <h4>Add Hostel Building</h4>
+                        <h4>{isEditMode ? 'Edit Hostel Building' : 'Add Hostel Building'}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -96,14 +136,14 @@ const AddBuildingModal = ({ isAddBuildingOpen, setIsAddBuildingOpen, refreshBuil
                             </label>
                         </div>
                         <button
-                            disabled={!isFormValid || isButtonLoading}
+                            disabled={!isFormValid || isButtonLoading || (isEditMode && !isFormChanged)}
                             onClick={handleCreateBuilding}
                         >
                             {
                                 isButtonLoading ? (
                                     <ButtonLoader />
                                 ) : (
-                                    <>Save</>
+                                    <>{isEditMode ? 'Update' : 'Save'}</>
                                 )
                             }
                         </button>

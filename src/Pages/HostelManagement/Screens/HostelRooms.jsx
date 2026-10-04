@@ -9,6 +9,7 @@ import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 const HostelRoomsPage = () => {
     const api = getApiEndpoints();
     const [isAddRoomOpen, setIsAddRoomOpen] = useState(false);
+    const [roomToEdit, setRoomToEdit] = useState(null);
     const tabs = [
         { label: "Living Rooms", value: "Living Room" },
         { label: "Sick Rooms", value: "Sick Room" }
@@ -20,6 +21,12 @@ const HostelRoomsPage = () => {
     const [totalCount, setTotalCount] = useState('');
 
     const handleOpenAddRoomModal = () => {
+        setRoomToEdit(null);
+        setIsAddRoomOpen(true);
+    };
+
+    const handleOpenEditRoomModal = (room) => {
+        setRoomToEdit(room);
         setIsAddRoomOpen(true);
     };
 
@@ -111,8 +118,8 @@ const HostelRoomsPage = () => {
                                     ))
                                 ) : rooms.length > 0 ? (
                                     rooms.map((room, i) =>
-                                        <tr key={i}>
-                                            <td>{room.room_no}</td>
+                                        <tr key={room.id ?? i}>
+                                            <td>{String(room.room_no).padStart(2, '0')}</td>
                                             <td>{room.building_name}</td>
                                             <td>{room.floor_no}</td>
                                             <td>{room.bed_count}</td>
@@ -122,7 +129,11 @@ const HostelRoomsPage = () => {
                                                 <p className={room.status ? 'active' : ''}>{room.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a
+                                                    className="edit_btn"
+                                                    role="button"
+                                                    onClick={() => handleOpenEditRoomModal(room)}
+                                                ><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
@@ -131,7 +142,6 @@ const HostelRoomsPage = () => {
                                     <tr>
                                         <td className="empty_message">No Hostel Room available.</td>
                                     </tr>
-
                                 )
                             }
                         </tbody>
@@ -141,6 +151,8 @@ const HostelRoomsPage = () => {
                 <AddRoomsModal
                     isAddRoomOpen={isAddRoomOpen}
                     setIsAddRoomOpen={setIsAddRoomOpen}
+                    roomToEdit={roomToEdit}
+                    setRoomToEdit={setRoomToEdit}
                     refreshRooms={() => fetchRooms(false)}
                 />
             </HostelRoomWrapper>

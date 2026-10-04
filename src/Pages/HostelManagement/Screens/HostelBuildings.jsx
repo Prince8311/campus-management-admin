@@ -9,12 +9,19 @@ import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 const HostelBuildingsPage = () => {
     const api = getApiEndpoints();
     const [isAddBuildingOpen, setIsAddBuildingOpen] = useState(false);
+    const [selectedBuilding, setSelectedBuilding] = useState(null);
     const [page, setPage] = useState(1);
     const [buildings, setBuildings] = useState([]);
     const [isInitialBuildingsLoading, setIsInitialBuildingsLoading] = useState(true);
     const [totalCount, setTotalCount] = useState('');
 
     const handleOpenAddBuildingModal = () => {
+        setSelectedBuilding(null);
+        setIsAddBuildingOpen(true);
+    };
+
+    const handleOpenEditBuildingModal = (building) => {
+        setSelectedBuilding(building);
         setIsAddBuildingOpen(true);
     };
 
@@ -99,7 +106,7 @@ const HostelBuildingsPage = () => {
                                                 <p className={building.status ? 'active' : ''}>{building.status ? 'Active' : 'Inactive'}</p>
                                             </td>
                                             <td>
-                                                <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                <a className="edit_btn" onClick={() => handleOpenEditBuildingModal(building)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                 <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
@@ -118,7 +125,9 @@ const HostelBuildingsPage = () => {
                 <AddBuildingModal
                     isAddBuildingOpen={isAddBuildingOpen}
                     setIsAddBuildingOpen={setIsAddBuildingOpen}
-                    refreshBuildings={() => fetchBuildings(false)}
+                    selectedBuilding={selectedBuilding}
+                    setSelectedBuilding={setSelectedBuilding}
+                    refreshBuildings={() => fetchBuildings(false, page)}
                 />
             </HostelBuildingsWrapper>
         </>

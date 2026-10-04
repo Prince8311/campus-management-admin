@@ -3,7 +3,7 @@ import { ResidentsWrapper } from "../../../Styles/HostelStyle";
 import AddResidentModal from "../../../Components/Modals/HostelManagement/AddResident";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
-import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import { getApiEndpoints, profileImageBaseURL } from "../../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../../Components/Loader/SkeletonLoader";
 
 const HostelResidentsPage = () => {
@@ -11,12 +11,19 @@ const HostelResidentsPage = () => {
     const tabs = ["Student", "Staff"];
     const [activeTab, setActiveTab] = useState(tabs[0]);
     const [isAddResidentOpen, setIsAddResidentOpen] = useState(false);
+    const [residentToEdit, setResidentToEdit] = useState(null);
     const [page, setPage] = useState(1);
     const [residents, setResidents] = useState([]);
     const [isInitialResidentsLoading, setIsInitialResidentsLoading] = useState(true);
     const [totalCount, setTotalCount] = useState('');
 
     const handleOpenAddResidentModal = () => {
+        setResidentToEdit(null);
+        setIsAddResidentOpen(true);
+    };
+
+    const handleOpenEditResidentModal = (resident) => {
+        setResidentToEdit(resident);
         setIsAddResidentOpen(true);
     };
 
@@ -144,23 +151,32 @@ const HostelResidentsPage = () => {
                                                 <tr key={i}>
                                                     <td>
                                                         <div className="left_table_sec">
-                                                            <h5>{getInitials(resident.resident_name)}</h5>
+                                                            {
+                                                                resident.user_details.image ? (
+                                                                    <img
+                                                                        src={`${profileImageBaseURL}/${resident.directory}/${resident.user_details.image}`}
+                                                                        alt={resident.user_details.name}
+                                                                    />
+                                                                ) : (
+                                                                    <h5>{getInitials(resident.name)}</h5>
+                                                                )
+                                                            }
                                                         </div>
                                                         <div className="right_table_sec">
-                                                            <h6>{resident.resident_name}</h6>
-                                                            <p>#{resident.user_id}</p>
+                                                            <h6>{resident.name}</h6>
+                                                            <p>#{resident.user_details.enrollment_id}</p>
                                                         </div>
                                                     </td>
-                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}-{resident.room_details.bed_no}</td>
-                                                    <td>{resident.class_section}</td>
-                                                    <td>{resident.resident_details.phone}</td>
+                                                    <td>{resident.room.building}-{resident.room.floor} floor-{resident.room.number}-{resident.room.bed_no}</td>
+                                                    <td>{resident.user_details.class_section}</td>
+                                                    <td>{resident.user_details.phone}</td>
                                                     <td>{resident.food_preference}</td>
                                                     <td>
                                                         <p className={getStatusClass(resident.status)}>{resident.status}</p>
                                                     </td>
                                                     <td>
                                                         <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="edit_btn" role="button" onClick={() => handleOpenEditResidentModal(resident)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                         <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                                     </td>
                                                 </tr>
@@ -229,23 +245,32 @@ const HostelResidentsPage = () => {
                                                 <tr key={i}>
                                                     <td>
                                                         <div className="left_table_sec">
-                                                            <h5>{getInitials(resident.resident_name)}</h5>
+                                                            {
+                                                                resident.user_details.image ? (
+                                                                    <img
+                                                                        src={`${profileImageBaseURL}/${resident.directory}/${resident.user_details.image}`}
+                                                                        alt={resident.user_details.name}
+                                                                    />
+                                                                ) : (
+                                                                    <h5>{getInitials(resident.name)}</h5>
+                                                                )
+                                                            }
                                                         </div>
                                                         <div className="right_table_sec">
-                                                            <h6>{resident.resident_name}</h6>
-                                                            <p>#{resident.user_id}</p>
+                                                            <h6>{resident.name}</h6>
+                                                            <p>#{resident.user_details.staff_id}</p>
                                                         </div>
                                                     </td>
-                                                    <td>{resident.room_details.building_name}-{resident.room_details.room_no}-{resident.room_details.bed_no}</td>
-                                                    <td>{resident.role}</td>
-                                                    <td>{resident.resident_details.phone}</td>
+                                                    <td>{resident.room.building}-{resident.room.floor} floor-{resident.room.number}-{resident.room.bed_no}</td>
+                                                    <td>{resident.user_details.role}</td>
+                                                    <td>{resident.user_details.phone}</td>
                                                     <td>{resident.food_preference}</td>
                                                     <td>
                                                         <p className={getStatusClass(resident.status)}>{resident.status}</p>
                                                     </td>
                                                     <td>
                                                         <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
-                                                        <a className="edit_btn"><i className="fa-solid fa-pen-to-square"></i></a>
+                                                        <a className="edit_btn" role="button" onClick={() => handleOpenEditResidentModal(resident)}><i className="fa-solid fa-pen-to-square"></i></a>
                                                         <a className="delete_btn"><i className="fa-solid fa-trash-can"></i></a>
                                                     </td>
                                                 </tr>
@@ -265,6 +290,8 @@ const HostelResidentsPage = () => {
                 <AddResidentModal
                     isAddResidentOpen={isAddResidentOpen}
                     setIsAddResidentOpen={setIsAddResidentOpen}
+                    residentToEdit={residentToEdit}
+                    setResidentToEdit={setResidentToEdit}
                     activeTab={activeTab}
                     refreshResidents={() => fetchResidents(false)}
                 />
