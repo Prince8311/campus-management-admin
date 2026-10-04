@@ -106,14 +106,8 @@ const HostelResidentsPage = () => {
                                 <thead>
                                     <tr>
                                         <th>Student Name</th>
-                                        <th>
-                                            Room
-                                            <label>
-                                                <i className="fa-solid fa-circle-info"></i>
-                                                <a>Building No. - Room No. - Bed No.</a>
-                                            </label>
-                                        </th>
-                                        <th>Class</th>
+                                        <th>Building</th>
+                                        <th>Room No.</th>
                                         <th>Contact No.</th>
                                         <th>Food Preference</th>
                                         <th>Status</th>
@@ -167,8 +161,8 @@ const HostelResidentsPage = () => {
                                                             <p>#{resident.user_details.enrollment_id}</p>
                                                         </div>
                                                     </td>
-                                                    <td>{resident.room.building}-{resident.room.floor} floor-{resident.room.number}-{resident.room.bed_no}</td>
-                                                    <td>{resident.user_details.class_section}</td>
+                                                    <td>{resident.room.building}</td>
+                                                    <td>{resident.room.number}</td>
                                                     <td>{resident.user_details.phone}</td>
                                                     <td>{resident.food_preference}</td>
                                                     <td>
@@ -200,14 +194,8 @@ const HostelResidentsPage = () => {
                                 <thead>
                                     <tr>
                                         <th>Student Name</th>
-                                        <th>
-                                            Room
-                                            <label>
-                                                <i className="fa-solid fa-circle-info"></i>
-                                                <a>Building No. - Room No. - Bed No.</a>
-                                            </label>
-                                        </th>
-                                        <th>Role</th>
+                                        <th>Building No. </th>
+                                        <th>Room No.</th>
                                         <th>Contact No.</th>
                                         <th>Food Preference</th>
                                         <th>Status</th>
@@ -261,8 +249,8 @@ const HostelResidentsPage = () => {
                                                             <p>#{resident.user_details.staff_id}</p>
                                                         </div>
                                                     </td>
-                                                    <td>{resident.room.building}-{resident.room.floor} floor-{resident.room.number}-{resident.room.bed_no}</td>
-                                                    <td>{resident.user_details.role}</td>
+                                                    <td>{resident.room.building}</td>
+                                                    <td>{resident.room.number}</td>
                                                     <td>{resident.user_details.phone}</td>
                                                     <td>{resident.food_preference}</td>
                                                     <td>

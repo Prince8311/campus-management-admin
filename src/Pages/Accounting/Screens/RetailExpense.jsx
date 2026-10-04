@@ -1,10 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { RetailExpenseWrapper } from "../../../Styles/ExpenseStyle";
 
 const RetailExpensePage = () => {
+    const navigate = useNavigate();
+
+    const handleFolderClick = (event) => {
+        if (event.target.closest(".folder_box")) {
+            navigate("/admin/accounting/retail-details");
+        }
+    }
+
     return (
         <>
             <RetailExpenseWrapper>
-                <div className="folder_section">
+                <div className="folder_section" onClick={handleFolderClick}>
                     <div className="folder_box">
                         <div className="box_inner">
                             <div className="img_sec">

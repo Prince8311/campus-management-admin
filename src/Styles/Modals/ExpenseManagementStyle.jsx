@@ -55,7 +55,6 @@ export const AddGreneralExpenseWrapper = styled('div')`
                 position: relative;
                 max-width: calc(100% - 40px);
                 font-size: 14px;
-                line-height: 1;
                 font-weight: 600;
                 font-style: italic;
                 color: ${colors.customColors.blackColor1};
@@ -629,7 +628,6 @@ export const AddEventExpenseWrapper = styled('div')`
                 position: relative;
                 max-width: calc(100% - 40px);
                 font-size: 14px;
-                line-height: 1;
                 font-weight: 600;
                 font-style: italic;
                 color: ${colors.customColors.blackColor1};

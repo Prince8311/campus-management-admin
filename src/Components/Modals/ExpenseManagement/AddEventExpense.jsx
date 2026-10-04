@@ -1,6 +1,6 @@
 import { AddEventExpenseWrapper } from "../../../Styles/Modals/ExpenseManagementStyle";
 
-const AddEventExpenseModal = ({isAddEventExpense, setIsAddEventExpense, nameLabel = "Event Name"}) => {
+const AddEventExpenseModal = ({isAddEventExpense, setIsAddEventExpense, nameLabel = "Event Name", title = "Create Event"}) => {
 
     function closeModal() {
         setIsAddEventExpense(false);
@@ -10,7 +10,7 @@ const AddEventExpenseModal = ({isAddEventExpense, setIsAddEventExpense, nameLabe
             <AddEventExpenseWrapper className={isAddEventExpense ? 'active' : ''}>
                 <div className={`modal_box ${isAddEventExpense ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Create Event Expense</h4>
+                        <h4>{title}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>

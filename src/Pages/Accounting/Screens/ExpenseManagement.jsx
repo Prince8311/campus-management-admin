@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ExpenseManagementWrapper } from "../../../Styles/ExpenseStyle";
 import EventExpensesPage from "./EventExpenses";
 import GeneralExpensesPage from "./GeneralExpenses";
@@ -7,12 +8,16 @@ import AddGeneralExpenseModal from "../../../Components/Modals/ExpenseManagement
 import RetailExpensePage from "./RetailExpense";
 
 const ExpenseManagementpage = () => {
+    const location = useLocation();
     const tabs = [
         { label: "General", value: "general" },
         { label: "Event", value: "event" },
         {label: "Retailer", value: "retailer"}
     ];
-    const [selectedTab, setSelectedTab] = useState(tabs[0].value);
+    const initialTab = tabs.some((tab) => tab.value === location.state?.selectedTab)
+        ? location.state.selectedTab
+        : tabs[0].value;
+    const [selectedTab, setSelectedTab] = useState(initialTab);
     const [isAddGeneralExpense, setIsAddGeneralExpense] = useState(false);
     const [isAddEventExpense, setIsAddEventExpense] = useState(false);
 
@@ -38,7 +43,7 @@ const ExpenseManagementpage = () => {
                             ) : (
                                 <button onClick={handleOpenEventExpenseModal}>
                                     <i className="fa-solid fa-plus"></i>
-                                    <p>Create Event</p>
+                                    <p>{selectedTab === "retailer" ? "Create Retailer" : "Create Event"}</p>
                                 </button>
                             )
                         }
@@ -75,6 +80,7 @@ const ExpenseManagementpage = () => {
                     isAddEventExpense={isAddEventExpense}
                     setIsAddEventExpense={setIsAddEventExpense}
                     nameLabel={selectedTab === "retailer" ? "Retailer Name" : "Event Name"}
+                    title={selectedTab === "retailer" ? "Create retailer" : "Create Event"}
                 />
             </ExpenseManagementWrapper>
         </>

@@ -184,54 +184,6 @@ export const ResidentsWrapper = styled('div')`
                     &:nth-of-type(2) {
                         width: 15%;
                         justify-content: center;
-
-                        label {
-                            position: relative;
-                            margin-left: 3px;
-                            z-index: 5;
-
-                            i {
-                                font-size: 9px;
-                                cursor: pointer;
-                            }
-
-                            a {
-                                position: absolute;
-                                right: -10px;
-                                top: -42px;
-                                width: 135px;
-                                padding: 7px 10px;
-                                background: ${colors.customColors.whiteColor};
-                                box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
-                                color: ${colors.customColors.blackColor2};
-                                border-radius: 5px;
-                                font-size: 9px;
-                                pointer-events: none;
-                                opacity: 0;
-                                visibility: hidden;
-                                transition: all 0.5s ease;
-
-                                &::after {
-                                    content: '';
-                                    position: absolute;
-                                    bottom: -4px;
-                                    right: 10.5px;
-                                    width: 8px;
-                                    height: 8px;
-                                    background: ${colors.customColors.whiteColor};
-                                    transform: rotate(45deg);
-                                    box-shadow: 4px 4px 5px ${colors.boxShadowColors.shadowColor1};
-                                }
-                            }
-
-                            &:hover {
-                                a {
-                                    opacity: 1;
-                                    visibility: visible;
-                                    transition: all 0.5s ease;
-                                }
-                            }
-                        }
                     }
 
                     &:nth-of-type(3) {

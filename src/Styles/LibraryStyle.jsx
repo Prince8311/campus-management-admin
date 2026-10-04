@@ -349,16 +349,16 @@ export const LibraryMenberWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 25%;
+                        width: 30%;
                     }
 
                     &:nth-of-type(2) {
-                        width: 12%;
+                        width: 15%;
                         justify-content: center;
                     }
 
                     &:nth-of-type(3) {
-                        width: 18%;
+                        width: 25%;
                         justify-content: center;
                     }
 
@@ -368,11 +368,6 @@ export const LibraryMenberWrapper = styled('div')`
                     }
 
                     &:nth-of-type(5) {
-                        width: 15%;
-                        justify-content: center;
-                    }
-
-                    &:nth-of-type(6) {
                         width: 15%;
                         justify-content: center;
                     }
@@ -409,7 +404,7 @@ export const LibraryMenberWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 25%;
+                            width: 30%;
                             display: flex;
 
                             .left_table_sec {
@@ -465,14 +460,14 @@ export const LibraryMenberWrapper = styled('div')`
                         }
 
                         &:nth-of-type(2) {
-                            width: 12%;
+                            width: 15%;
                             align-items: center;
                             justify-content: center;
                         }
 
                         &:nth-of-type(3) {
                             align-items: center;
-                            width: 18%;
+                            width: 25%;
                             justify-content: center;
                         }
 
@@ -483,12 +478,6 @@ export const LibraryMenberWrapper = styled('div')`
                         }
 
                         &:nth-of-type(5) {
-                            width: 15%;
-                            align-items: center;
-                            justify-content: center;
-                        }
-
-                        &:nth-of-type(6) {
                             width: 15%;
                             align-items: center;
                             justify-content: center;
