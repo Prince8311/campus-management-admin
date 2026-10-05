@@ -5,6 +5,7 @@ export const apiURL = `${baseURL}/admin`;
 
 export const documentBaseURL = `${baseURL}/documents`;
 export const profileImageBaseURL = `${baseURL}/profile-images`;
+export const libraryBookImageBaseURL = `${baseURL}/library-books`;
 
 export const getApiEndpoints = () => {
     return {
@@ -155,5 +156,9 @@ export const getApiEndpoints = () => {
         fetchRoutes: `${apiURL}/api/transport/routes/list.php`,
         addPassenger: `${apiURL}/api/transport/passengers/insert.php`,
         fetchPassenger: `${apiURL}/api/transport/passengers/list.php`,
+
+        // Library Management
+        addBook: `${apiURL}/api/library/books/insert.php`,
+        fetchBooks: `${apiURL}/api/library/books/list.php`,
     };
 }

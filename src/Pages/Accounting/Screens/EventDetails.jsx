@@ -18,7 +18,7 @@ const EventDetailsPage = () => {
             <EventDetailsWrapper>
                 <div className="event_details_container">
                     <div className="back_icon">
-                        <a onClick={handleBackToEvents}><i className="fa-solid fa-angle-right"></i></a>
+                        <a onClick={handleBackToEvents}><i className="fa-solid fa-angle-left"></i></a>
                     </div>
                     <div className="contain_item_sec">
                         <div className="icon">

@@ -178,8 +178,8 @@ export const AddBookWrapper = styled('div')`
 
                         .img_box {
                             position: relative;
-                            width: 120px;
-                            height: 150px;
+                            width: 115px;
+                            height: 140px;
                             display: flex;
                             flex-direction: column;
                             align-items: center;
@@ -200,15 +200,14 @@ export const AddBookWrapper = styled('div')`
 
                             i {
                                 color: ${colors.customColors.blackColor3};
-                                font-size: 19px;
+                                font-size: 21px;
                             }
 
                             p {
                                 position: relative;
-                                z-index: 1;
                                 color: ${colors.customColors.blackColor2};
-                                font-size: 11px;
-                                margin-top: 6px;
+                                font-size: 10px;
+                                margin-top: 8px;
                                 text-align: center;
 
                                 a {

@@ -99,7 +99,6 @@ export const BookCatelogWrapper = styled('div')`
 
                     &:nth-of-type(2) {
                         width: 25%;
-                        justify-content: center;
                     }
 
                     &:nth-of-type(3) {
@@ -161,7 +160,6 @@ export const BookCatelogWrapper = styled('div')`
                         &:nth-of-type(2) {
                             width: 25%;
                             align-items: center;
-                            justify-content: center;
                         }
 
                         &:nth-of-type(3) {
@@ -190,12 +188,15 @@ export const BookCatelogWrapper = styled('div')`
                                 align-items: center;
                                 border-radius: 20px;
                                 padding: 4px 15px;
-                                color: ${colors.customColors.yellowColor1};
-                                background: ${colors.customColors.yellowColorLight};
 
-                                &.yes {
+                                &.available {
                                     color: ${colors.customColors.greenColor};
                                     background: ${colors.customColors.greenColorLight};
+                                }
+
+                                &.not_available {
+                                    color: ${colors.customColors.yellowColor1};
+                                    background: ${colors.customColors.yellowColorLight};
                                 }
                             }
                         }

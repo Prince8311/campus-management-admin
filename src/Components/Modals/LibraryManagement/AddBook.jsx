@@ -1,11 +1,35 @@
 import { useRef, useState } from "react";
 import { AddBookWrapper } from "../../../Styles/Modals/LibraryManagementStyle";
+import { toast } from "react-toastify";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import ButtonLoader from "../../Loader/ButtonLoader";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 
-const AddBookModal = ({isAddBookModal, setIsAddBookModal}) => {
+const AddBookModal = ({ isAddBookModal, setIsAddBookModal, refreshData }) => {
+    const api = getApiEndpoints();
     const [previewUrl, setPreviewUrl] = useState('');
+    const [coverImage, setCoverImage] = useState(null);
     const fileInputRef = useRef(null);
+    const [bookName, setBookName] = useState('');
+    const [authorName, setAuthorName] = useState('');
+    const [selfNumber, setSelfNumber] = useState('');
+    const [stock, setStock] = useState('');
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const isFormComplete = Boolean(
+        coverImage &&
+        bookName.trim() &&
+        authorName.trim() &&
+        stock.trim() &&
+        selfNumber.trim()
+    );
 
     function closeModal() {
+        setCoverImage(null);
+        setPreviewUrl('');
+        setBookName('');
+        setAuthorName('');
+        setSelfNumber('');
+        setStock('');
         setIsAddBookModal(false);
     }
 
@@ -15,6 +39,8 @@ const AddBookModal = ({isAddBookModal, setIsAddBookModal}) => {
         if (!file) return;
 
         if (!file.type.startsWith('image/')) {
+            event.target.value = '';
+            toast.error('Please select a valid image file.');
             return;
         }
 
@@ -22,6 +48,7 @@ const AddBookModal = ({isAddBookModal, setIsAddBookModal}) => {
             URL.revokeObjectURL(previewUrl);
         }
 
+        setCoverImage(file);
         setPreviewUrl(URL.createObjectURL(file));
     }
 
@@ -33,6 +60,7 @@ const AddBookModal = ({isAddBookModal, setIsAddBookModal}) => {
             URL.revokeObjectURL(previewUrl);
         }
 
+        setCoverImage(null);
         setPreviewUrl('');
 
         if (fileInputRef.current) {
@@ -42,6 +70,36 @@ const AddBookModal = ({isAddBookModal, setIsAddBookModal}) => {
 
     function openFileSelector() {
         fileInputRef.current?.click();
+    }
+
+    const handleSave = async (e) => {
+        e.preventDefault();
+        setIsButtonLoading(true);
+        const inputs = {
+            name: bookName.trim(),
+            author: authorName.trim(),
+            stock: stock.trim(),
+            shelf_no: selfNumber.trim(),
+        };
+        const formData = new FormData();
+        formData.append('inputs', JSON.stringify(inputs));
+        formData.append('cover_image', coverImage);
+        try {
+            const response = await axiosInstance.post(api.addBook, formData, {
+                params: {
+                    intent: 'add'
+                }
+            });
+            if (response.data.status === 200) {
+                toast.success(response.data.message);
+                closeModal();
+                refreshData();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsButtonLoading(false);
+        }
     }
 
     return (
@@ -73,11 +131,11 @@ const AddBookModal = ({isAddBookModal, setIsAddBookModal}) => {
                                         {previewUrl ? (
                                             <img src={previewUrl} alt="Book front cover" />
                                         ) : (
-                                            <i className="fa-solid fa-cloud-arrow-down"></i>
+                                            <i className="fa-solid fa-cloud-arrow-up"></i>
                                         )}
 
                                         {previewUrl ? (
-                                            <p>Book cover selected</p>
+                                            <p></p>
                                         ) : (
                                             <p>Upload front side of the book<a>*</a></p>
                                         )}
@@ -105,24 +163,41 @@ const AddBookModal = ({isAddBookModal, setIsAddBookModal}) => {
                             </div>
                             <div className="input_box full">
                                 <span>Book Name <p>*</p></span>
-                                <input type="text"/>
+                                <input type="text" value={bookName} onChange={(e) => setBookName(e.target.value)} />
                             </div>
                             <div className="input_box full">
                                 <span>Author Name <p>*</p></span>
-                                <input type="text"/>
+                                <input type="text" value={authorName} onChange={(e) => setAuthorName(e.target.value)} />
                             </div>
                             <div className="input_box half">
                                 <span>Stock<p>*</p></span>
-                                <input type="text"/>
+                                <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    pattern="[0-9]*"
+                                    value={stock}
+                                    onChange={(e) => setStock(e.target.value)}
+                                    onInput={(event) => {
+                                        event.currentTarget.value = event.currentTarget.value.replace(/\D/g, '');
+                                    }}
+                                />
                             </div>
                             <div className="input_box half">
                                 <span>Self Number<p>*</p></span>
-                                <input type="text"/>
+                                <input type="text" value={selfNumber} onChange={(e) => setSelfNumber(e.target.value)} />
                             </div>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Save</button>
+                        <button disabled={!isFormComplete || isButtonLoading} onClick={handleSave}>
+                            {
+                                isButtonLoading ? (
+                                    <ButtonLoader />
+                                ) : (
+                                    <>Save</>
+                                )
+                            }
+                        </button>
                     </div>
                 </div>
             </AddBookWrapper>
