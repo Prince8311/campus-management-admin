@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { LibraryMenberWrapper } from "../../../Styles/LibraryStyle";
 import MemberDetailsModal from "../../../Components/Modals/LibraryManagement/MemberDetails";
+import NewLibraryMemberModal from "../../../Components/Modals/LibraryManagement/NewLibraryMember";
+import BookIssueModal from "../../../Components/Modals/LibraryManagement/BookIssue";
 
 const LibraryMembersPage = () => {
 
     const [isOpenMemberDetailsModal, setIsOpenMemberDetailsModal] = useState(false);
+    const [isOpenNewMemberModal, setIsOpenNewMemberModal] = useState(false);
+    const [isOpenBookIssueModal, setIsOpenBookIssueModal] = useState(false);
 
     const handleOpenStudentDetailsModal = () => {
         setIsOpenMemberDetailsModal(true);
+    }
+
+    const handleOpenNewMemberModal = () => {
+        setIsOpenNewMemberModal(true);
+    }
+
+    const handleOpenBookIssueModal = () => {
+        setIsOpenBookIssueModal(true);
     }
     return (
         <>
@@ -15,8 +27,8 @@ const LibraryMembersPage = () => {
                 <div className="page_head">
                     <h2>Library Member List</h2>
                     <div className="btns_sec">
-                        <button className="issueBook"><i className="fa-solid fa-book"></i>Issue Book</button>
-                        <button className="addMember"><i className="fa-solid fa-plus"></i>Add New Member</button>
+                        <button className="issueBook" onClick={handleOpenBookIssueModal}><i className="fa-solid fa-book"></i>Issue Book</button>
+                        <button className="addMember" onClick={handleOpenNewMemberModal}><i className="fa-solid fa-plus"></i>Add New Member</button>
                     </div>
                 </div>
                 <div className="table_sec">
@@ -57,6 +69,14 @@ const LibraryMembersPage = () => {
                 <MemberDetailsModal
                     isOpenMemberDetailsModal={isOpenMemberDetailsModal}
                     setIsOpenMemberDetailsModal={setIsOpenMemberDetailsModal}
+                />
+                <NewLibraryMemberModal
+                    isOpenNewMemberModal={isOpenNewMemberModal}
+                    setIsOpenNewMemberModal={setIsOpenNewMemberModal}
+                />
+                <BookIssueModal
+                    isOpenBookIssueModal={isOpenBookIssueModal}
+                    setIsOpenBookIssueModal={setIsOpenBookIssueModal}
                 />
             </LibraryMenberWrapper>
         </>
