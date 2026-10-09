@@ -17,22 +17,37 @@ const EventDetailsPage = () => {
         <>
             <EventDetailsWrapper>
                 <div className="event_details_container">
-                    <div className="back_icon">
-                        <a onClick={handleBackToEvents}><i className="fa-solid fa-angle-left"></i></a>
-                    </div>
-                    <div className="contain_item_sec">
-                        <div className="icon">
-                            <img src="/images/event.png" alt="" />
+                    <svg className="event_waves" viewBox="0 0 1200 170" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M0 0H800C925 0 880 155 1200 170H0Z" fill="#0055c4" opacity=".38" />
+                        <path d="M760 170C935 45 1010 115 1200 155V170Z" fill="#00c5ff" opacity=".42" />
+                        <path d="M0 105C90 190 130 70 225 170H0Z" fill="#8de7ff" opacity=".35" />
+                    </svg>
+                    <button className="event_back" type="button" onClick={handleBackToEvents} aria-label="Back to events">
+                        <i className="fa-solid fa-angle-left" aria-hidden="true"></i>
+                    </button>
+                    <div className="event_summary">
+                        <span className="event_label">Event</span>
+                        <div className="event_title">
+                            <h5>Durga Puja</h5>
+                            <span className="event_status"><i className="fa-solid fa-circle" aria-hidden="true"></i>Active</span>
                         </div>
-                        <h5>Durga Puja <a><i className="fa-solid fa-circle"></i>Active</a></h5>
-                        <p>Total Cost : <span>₹50000</span></p>
+                        <p>Total Cost for this event</p>
+                        <strong className="event_cost">&#8377;50000</strong>
                     </div>
-                    <div className="top_btn">
-                        <button onClick={() => setIsAddEventExpense(true)}>
-                            <i className="fa-solid fa-plus"></i>
-                            <p>Add Event</p>
-                        </button>
+                    <div className="event_stats">
+                        <div className="event_stat">
+                            <i className="fa-solid fa-coins" aria-hidden="true"></i>
+                            <div><span>Total Items</span><strong>1</strong></div>
+                        </div>
+                        <div className="event_stat">
+                            <i className="fa-solid fa-cube" aria-hidden="true"></i>
+                            <div><span>Total Quantity</span><strong>2 kg</strong></div>
+                        </div>
                     </div>
+                    <button className="event_add" type="button" onClick={() => setIsAddEventExpense(true)}>
+                        <i className="fa-solid fa-plus" aria-hidden="true"></i>
+                        <span>Add Event</span>
+                    </button>
                 </div>
                 <div className="table_sec">
                     <table>
