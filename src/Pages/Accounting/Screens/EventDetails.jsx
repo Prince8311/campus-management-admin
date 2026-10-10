@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddEventExpenseModal from "../../../Components/Modals/ExpenseManagement/AddEventExpense";
+import AddGeneralExpenseModal from "../../../Components/Modals/ExpenseManagement/AddGeneralExpense";
 import { EventDetailsWrapper } from "../../../Styles/ExpenseStyle";
 
 const EventDetailsPage = () => {
@@ -46,7 +46,7 @@ const EventDetailsPage = () => {
                     </div>
                     <button className="event_add" type="button" onClick={() => setIsAddEventExpense(true)}>
                         <i className="fa-solid fa-plus" aria-hidden="true"></i>
-                        <span>Add Event</span>
+                        <span>Add Expense</span>
                     </button>
                 </div>
                 <div className="table_sec">
@@ -78,9 +78,9 @@ const EventDetailsPage = () => {
                     </table>
                 </div>
             </EventDetailsWrapper>
-            <AddEventExpenseModal
-                isAddEventExpense={isAddEventExpense}
-                setIsAddEventExpense={setIsAddEventExpense}
+            <AddGeneralExpenseModal
+                isAddGeneralExpense={isAddEventExpense}
+                setIsAddGeneralExpense={setIsAddEventExpense}
             />
         </>
     );

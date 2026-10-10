@@ -1,18 +1,18 @@
 import { ConfirmationWrapper } from "../../Styles/SettingModalStyle";
 
-const ConfirmationModal = () => {
+const ConfirmationModal = ({ isModalOpen = false, setIsModalOpen = () => {}, message = "Your message was sent successfully." }) => {
     return (
         <>
-            <ConfirmationWrapper>
-                <div className="modal_box">
+            <ConfirmationWrapper className={isModalOpen ? 'active' : ''}>
+                <div className={`modal_box ${isModalOpen ? 'active' : ''}`}>
                     <div className="modal_body">
                         <div className="body_inner">
-                            <p>Your messege send successfully</p>
+                            <p>{message}</p>
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button className="cancel">Cancel</button>
-                        <button className="confirm"> Confirm </button>
+                        <button className="cancel" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                        <button className="confirm" onClick={() => setIsModalOpen(false)}>Done</button>
                     </div>
                 </div>
             </ConfirmationWrapper>
