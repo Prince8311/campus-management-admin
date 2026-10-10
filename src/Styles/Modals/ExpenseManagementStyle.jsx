@@ -3,6 +3,117 @@ import { colorNames } from "../../Theme/Colors";
 const colors = colorNames();
 
 export const AddGreneralExpenseWrapper = styled('div')`
+    .modal_box .modal_body .body_inner .item_name_box {
+        .item_name_control {
+            position: relative;
+            input { padding-right: 145px; }
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            &:focus-visible { outline: 2px solid #168fff; outline-offset: 2px; }
+        }
+
+        .view_stock_btn {
+            position: absolute;
+            right: 4px;
+            top: 6px;
+            height: 31px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 10px;
+            border: 1px solid #73c5ff;
+            border-radius: 6px;
+            background: linear-gradient(120deg, #f3fbff, #deefff);
+            box-shadow: inset 0 0 0 2px #ffffff;
+            color: #008cff;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            .fa-cubes { font-size: 18px; color: #1460ff; }
+            &:hover { background: #dcefff; }
+        }
+
+        .stock_dropdown {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            width: 100%;
+            z-index: 30;
+            padding: 16px;
+            border: 1px solid ${colors.customColors.borderColor};
+            border-radius: 10px;
+            background: ${colors.customColors.whiteColor};
+            box-shadow: 0 6px 20px ${colors.boxShadowColors.shadowColor1};
+        }
+
+        .stock_header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+            h5 { margin: 0; font-size: 15px; font-weight: 600; color: ${colors.customColors.blackColor1}; }
+            button {
+                border: 0;
+                background: transparent;
+                color: ${colors.customColors.blackColor1};
+                font-size: 18px;
+                padding: 3px;
+                line-height: 1;
+            }
+        }
+
+        .stock_search {
+            display: flex;
+            align-items: center;
+            border: 1px solid ${colors.customColors.borderColor};
+            border-radius: 7px;
+            padding-left: 12px;
+            margin-bottom: 10px;
+            color: ${colors.customColors.blackColor3};
+            &:focus-within { border-color: #168fff; }
+            input { margin: 0; background: transparent; padding: 8px 10px; min-width: 0; }
+        }
+
+        .stock_list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            max-height: min(300px, 40vh);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar { display: none; }
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                min-height: 38px;
+                padding: 3px 12px;
+                border: 1px solid ${colors.customColors.borderColor};
+                border-radius: 8px;
+                background: ${colors.customColors.lightBackground3};
+                margin-bottom: 2px;
+            }
+            .stock_item_name { font-size: 13px; color: ${colors.customColors.blackColor1}; }
+            .stock_quantity {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                flex-shrink: 0;
+                line-height: 1.2;
+                strong { font-size: 14px; font-weight: 600; color: #008cff; }
+                small { font-size: 11px; color: ${colors.customColors.blackColor3}; }
+            }
+            .stock_empty { justify-content: center; font-size: 12px; color: ${colors.customColors.blackColor3}; }
+        }
+    }
+
     position: fixed;
     top: 0;
     right: 0;

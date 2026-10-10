@@ -13,11 +13,11 @@ const StockManagementPage = () => {
                             <div className="top_part">
                                 <div className="part_content">
                                     <a><i className="fa-solid fa-layer-group"></i></a>
-                                    <h6>Abc Stock</h6>
+                                    <h6>Basmoti Rice</h6>
                                     <span className="inStock">Instock</span>
                                 </div>
                                 <div className="teacher_name_sec">
-                                    <p><b>Class Teacher :</b><span>Joydeep Barik</span></p>
+                                    <p><b>Quantity :</b><span>5kg</span></p>
                                 </div>
                             </div>
                             <div className="bottom_btn">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddEventExpenseModal from "../../../Components/Modals/ExpenseManagement/AddEventExpense";
+import AddGeneralExpenseModal from "../../../Components/Modals/ExpenseManagement/AddGeneralExpense";
 import { RetailerDetailsWrapper } from "../../../Styles/ExpenseStyle";
 
 const RetailerDetailsPage = () => {
@@ -29,7 +29,7 @@ const RetailerDetailsPage = () => {
                     <div className="top_btn">
                         <button onClick={() => setIsAddRetailer(true)}>
                             <i className="fa-solid fa-plus"></i>
-                            <p>Add Retailer</p>
+                            <p>Add Expense</p>
                         </button>
                     </div>
                 </div>
@@ -123,11 +123,9 @@ const RetailerDetailsPage = () => {
                     </table>
                 </div>
             </RetailerDetailsWrapper>
-            <AddEventExpenseModal
-                isAddEventExpense={isAddRetailer}
-                setIsAddEventExpense={setIsAddRetailer}
-                nameLabel="Retailer Name"
-                title="Create retailer"
+            <AddGeneralExpenseModal
+                isAddGeneralExpense={isAddRetailer}
+                setIsAddGeneralExpense={setIsAddRetailer}
             />
         </>
     );
