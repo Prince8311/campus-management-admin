@@ -110,7 +110,6 @@ import HostelBuildingsPage from "../Pages/HostelManagement/Screens/HostelBuildin
 
 // Expense Management
 import AccountingMainPage from "../Pages/Accounting/Index";
-import AccountingOverviewPage from "../Pages/Accounting/Screens/Overview";
 import ExpenseManagementpage from "../Pages/Accounting/Screens/ExpenseManagement";
 import EventDetailsPage from "../Pages/Accounting/Screens/EventDetails";
 import RetailerDetailsPage from "../Pages/Accounting/Screens/RetailDetails";
@@ -231,7 +230,6 @@ const Routers = () => {
                             </Route>
                         </Route>
                         <Route path="accounting" element={<AccountingMainPage />}>
-                            <Route path="overview" element={<AccountingOverviewPage />} />
                             <Route path="expense-management" element={<ExpenseManagementpage />} />
                             <Route path="event-details" element={<EventDetailsPage />} />
                             <Route path="retail-details" element={<RetailerDetailsPage />} />

@@ -46,9 +46,9 @@ const Sidebar = () => {
             setActiveDropdown(6);
         } else if (path.startsWith('/admin/library-management')) {
             setActiveDropdown(7);
-        } else if (path.startsWith('/admin/settings')) {
-            setActiveDropdown(9);
         } else if (path.startsWith('/admin/accounting')) {
+            setActiveDropdown(9);
+        } else if (path.startsWith('/admin/settings')) {
             setActiveDropdown(10);
         }
         console.log("ewsgfrewgherth", path);
@@ -453,8 +453,32 @@ const Sidebar = () => {
                                         </div>
                                     </div>
                                 }
-                                <div className={`dropdown_item ${activeDropdown === 9 ? 'active' : ''}`}>
-                                    <div className="dropdown_btn" onClick={() => toggleDropdown(9)}>
+                                {
+                                    userDetails.user_type === 'inst_admin' &&
+                                    <div className={`dropdown_item ${activeDropdown === 9 ? 'active' : ''}`}>
+                                        <div className="dropdown_btn" onClick={() => toggleDropdown(9)}>
+                                            <li>
+                                                <i className="fa-solid fa-circle-dollar-to-slot prefix"></i>
+                                                <span>
+                                                    <p>Accounting</p>
+                                                    <i className="fa-solid fa-angle-right suffix"></i>
+                                                </span>
+                                            </li>
+                                        </div>
+                                        <div className="dropdown">
+                                            <NavLink to="/admin/accounting/expense-management">
+                                                <i className="fa-solid fa-receipt"></i>
+                                                <p>Expense Management</p>
+                                            </NavLink>
+                                            <NavLink to="/admin/accounting/stock-management">
+                                                <i className="fa-solid fa-boxes-stacked prefix"></i>
+                                                <p>Stock Management</p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                }
+                                <div className={`dropdown_item ${activeDropdown === 10 ? 'active' : ''}`}>
+                                    <div className="dropdown_btn" onClick={() => toggleDropdown(10)}>
                                         <li>
                                             <i className="fa-solid fa-gears prefix"></i>
                                             <span>
@@ -524,34 +548,6 @@ const Sidebar = () => {
                                         }
                                     </div>
                                 </div>
-                                {
-                                    userDetails.user_type === 'inst_admin' &&
-                                    <div className={`dropdown_item ${activeDropdown === 10 ? 'active' : ''}`}>
-                                        <div className="dropdown_btn" onClick={() => toggleDropdown(10)}>
-                                            <li>
-                                                <i className="fa-solid fa-circle-dollar-to-slot prefix"></i>
-                                                <span>
-                                                    <p>Accounting</p>
-                                                    <i className="fa-solid fa-angle-right suffix"></i>
-                                                </span>
-                                            </li>
-                                        </div>
-                                        <div className="dropdown">
-                                            <NavLink to="/admin/accounting/overview">
-                                                <i className="fa-solid fa-magnifying-glass-chart prefix"></i>
-                                                <p>Overview</p>
-                                            </NavLink>
-                                            <NavLink to="/admin/accounting/expense-management">
-                                                <i className="fa-solid fa-receipt"></i>
-                                                <p>Expense Management</p>
-                                            </NavLink>
-                                            <NavLink to="/admin/accounting/stock-management">
-                                                <i className="fa-solid fa-boxes-stacked prefix"></i>
-                                                <p>Stock Management</p>
-                                            </NavLink>
-                                        </div>
-                                    </div>
-                                }
                                 {
                                     userDetails.user_type === 'inst_admin' &&
                                     <NavLink to="/admin/billing">

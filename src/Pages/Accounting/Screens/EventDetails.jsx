@@ -36,12 +36,8 @@ const EventDetailsPage = () => {
                     </div>
                     <div className="event_stats">
                         <div className="event_stat">
-                            <i className="fa-solid fa-coins" aria-hidden="true"></i>
                             <div><span>Total Items</span><strong>1</strong></div>
-                        </div>
-                        <div className="event_stat">
-                            <i className="fa-solid fa-cube" aria-hidden="true"></i>
-                            <div><span>Total Quantity</span><strong>2 kg</strong></div>
+                            <i className="fa-solid fa-coins" aria-hidden="true"></i>
                         </div>
                     </div>
                     <button className="event_add" type="button" onClick={() => setIsAddEventExpense(true)}>

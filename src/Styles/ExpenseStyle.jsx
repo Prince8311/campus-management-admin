@@ -435,14 +435,14 @@ export const EventDetailsWrapper = styled('div')`
         .event_stat {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
+            gap: 16px;
+            padding: 8px 8px 8px 12px;
             border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 16px;
+            border-radius: 12px;
             background: linear-gradient(135deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .08));
-            i { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255, 255, 255, .12); font-size: 20px; color: #daf4ff; }
+            i { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(255, 255, 255, .12); font-size: 20px; color: #daf4ff; }
             span { display: block; font-size: 10px; white-space: nowrap; color: #e0f3ff; }
-            strong { display: block; font-size: 18px; line-height: 1.2; font-weight: 600; }
+            strong { display: block; font-size: 18px; line-height: 1.2; font-weight: 600; margin-top: 2px}
         }
         .event_add {
             margin-left: auto;
