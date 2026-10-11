@@ -356,28 +356,44 @@ export const MemberDetailsWrapper = styled('div')`
 
         .member_detalis_sec {
             position: relative;
-            width: 100%;
+            width: calc(100% - 40px);
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            margin: 15px 0;
+            gap: 14px;
+            margin: 20px;
+            padding: 16px;
+            background: ${colors.customColors.blueColorLight};
+            border: 1px solid ${colors.customColors.borderColor};
+            border-radius: 10px;
 
             .img_sec {
                 position: relative;
-                width: 140px;
-                height: 150px;
+                width: 64px;
+                height: 64px;
+                flex: 0 0 64px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 4px;
-                border: 1px dashed ${colors.customColors.borderColor1};
-                border-radius: 5px;
+                padding: 3px;
+                background: ${colors.customColors.whiteColor};
+                border: 1px solid ${colors.customColors.borderColor1};
+                border-radius: 50%;
+                overflow: hidden;
 
                 img {
                     position: relative;
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    border-radius: 50%;
+                }
+
+                h6 {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: ${colors.themeColor};
+                    text-transform: uppercase;
                 }
             }
 
@@ -385,20 +401,31 @@ export const MemberDetailsWrapper = styled('div')`
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                margin-top: 6px;
+                flex: 1;
+                min-width: 0;
+
+                .member_name {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 8px;
+
+                    span {
+                        padding: 3px 9px;
+                        border-radius: 20px;
+                        background: ${colors.themeColor};
+                        color: ${colors.customColors.whiteColor};
+                        font-size: 10px;
+                        font-weight: 600;
+                        line-height: 1.4;
+                    }
+                }
 
                 h5 {
                     position: relative;
                     font-size: 14px;
                     font-weight: 600;
                     color: ${colors.customColors.blackColor1};
-
-                    span {
-                        font-size: 11px;
-                        color: ${colors.customColors.blackColor2};
-                        font-weight: 500;
-                        margin-left: 3px;
-                    }
                 }
 
                 p {
@@ -406,6 +433,27 @@ export const MemberDetailsWrapper = styled('div')`
                     color: ${colors.customColors.blackColor1};
                     font-weight: 500;
                     margin-top: 3px;
+                }
+            }
+
+            .generate_card_btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 7px;
+                flex-shrink: 0;
+                padding: 9px 14px;
+                border: none;
+                border-radius: 6px;
+                background: ${colors.customColors.blueColor1};
+                color: ${colors.customColors.whiteColor};
+                font-size: 11px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: border-radius 0.3s ease;
+
+                &:hover {
+                    border-radius: 20px;
                 }
             }
         }
@@ -963,6 +1011,13 @@ export const NewLibraryMemberWrapper = styled('div')`
                                             display: flex;
                                             align-items: center;
                                             justify-content: center;
+                                            overflow: hidden;
+
+                                            img {
+                                                width: 100%;
+                                                height: 100%;
+                                                object-fit: cover;
+                                            }
                                             
                                             h6 {
                                                 font-size: 11px;

@@ -417,6 +417,13 @@ export const LibraryMenberWrapper = styled('div')`
                                 align-items: center;
                                 justify-content: center;
                                 background: ${colors.customColors.blueColor2};
+                                overflow: hidden;
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
 
                                 h5 {
                                     position: relative;
@@ -449,7 +456,7 @@ export const LibraryMenberWrapper = styled('div')`
 
                                     i {
                                         margin: 0 5px;
-                                        font-size: 5px;
+                                        font-size: 4px;
                                         color: ${colors.customColors.blackColor3};
                                     }
 
@@ -493,12 +500,8 @@ export const LibraryMenberWrapper = styled('div')`
                                     color: ${colors.customColors.blueColor1};
                                }
 
-                               &.edit_btn {
-                                    color: ${colors.customColors.greenColor};
-                                    margin: 0 8px;
-                               }
-
                                &.delete_btn {
+                                    margin-left: 8px;
                                     color: ${colors.customColors.redColor};
                                }
                             }

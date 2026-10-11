@@ -258,7 +258,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, residentToE
     };
 
     const handleSelectUser = (user) => {
-        if (selectedUser.user_id === user.user_id) return;
+        if (selectedUser.id === user.id) return;
         setSelectedUser(user);
         setShowUserDropdown(false);
     }
@@ -492,7 +492,7 @@ const AddResidentModal = ({ isAddResidentOpen, setIsAddResidentOpen, residentToE
                                                 {users.map((user, i) => (
                                                     <li
                                                         key={i}
-                                                        className={`user_box ${selectedUser.user_id === user.user_id ? "active" : ""}`}
+                                                        className={`user_box ${selectedUser.id === user.id ? "active" : ""}`}
                                                         onClick={() => handleSelectUser(user)}
                                                     >
                                                         <div className="box_left">

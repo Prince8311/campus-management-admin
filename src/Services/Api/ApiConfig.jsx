@@ -160,5 +160,7 @@ export const getApiEndpoints = () => {
         // Library Management
         addBook: `${apiURL}/api/library/books/insert.php`,
         fetchBooks: `${apiURL}/api/library/books/list.php`,
+        addLibraryMember: `${apiURL}/api/library/members/insert.php`,
+        fetchLibraryMembers: `${apiURL}/api/library/members/list.php`,
     };
 }

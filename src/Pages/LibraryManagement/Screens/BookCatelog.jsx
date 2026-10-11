@@ -106,11 +106,9 @@ const BookCatelogPage = () => {
                                         </tr>
                                     )
                                 ) : (
-                                    (
-                                        <tr>
-                                            <td className="empty_message">No books available.</td>
-                                        </tr>
-                                    )
+                                    <tr>
+                                        <td className="empty_message">No books available.</td>
+                                    </tr>
                                 )
                             }
                         </tbody>

@@ -1,28 +1,55 @@
+import { useState } from "react";
 import { MemberDetailsWrapper } from "../../../Styles/Modals/LibraryManagementStyle";
+import LibraryCardPreview from "./LibraryCardPreview";
 
-const MemberDetailsModal = ({isOpenMemberDetailsModal, setIsOpenMemberDetailsModal}) => {
+const MemberDetailsModal = ({ isOpenMemberDetailsModal, setIsOpenMemberDetailsModal, member }) => {
+    const [isCardOpen, setIsCardOpen] = useState(false);
 
     function closeModal() {
+        setIsCardOpen(false);
         setIsOpenMemberDetailsModal(false);
     }
+
+    const getInitials = (name) => {
+        if (!name) return "";
+        const parts = name.trim().split(" ").filter(Boolean);
+        const first = parts[0]?.[0] || "";
+        const last = parts.length > 1 ? parts[parts.length - 1]?.[0] : "";
+        return (first + last).toUpperCase();
+    };
+
     return (
         <>
             <MemberDetailsWrapper className={isOpenMemberDetailsModal ? 'active' : ''}>
                 <div className={`modal_box ${isOpenMemberDetailsModal ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Joydeep Barik</h4>
+                        <h4>Member Details</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-angle-right"></i></a>
                         </div>
                     </div>
                     <div className="member_detalis_sec">
                         <div className="img_sec">
-                            <img src="/images/profile-image.png" alt="" />
+                            {member?.image ? (
+                                <img
+                                    src={member.image}
+                                    alt={member?.name || "Library member"}
+                                />
+                            ) : (
+                                <h6>{getInitials(member?.name)}</h6>
+                            )}
                         </div>
                         <div className="details_content">
-                            <h5>Joydeep Barik <span>[Student]</span></h5>
-                            <p>Library Id : 5789412586</p>
+                            <div className="member_name">
+                                <h5>{member?.name || "-"}</h5>
+                                <span>{member?.user_type || "-"}</span>
+                            </div>
+                            <p>Library Id : {member?.library_id || "-"}</p>
                         </div>
+                        <button type="button" className="generate_card_btn" onClick={() => setIsCardOpen(true)}>
+                            <i className="fa-regular fa-id-card"></i>
+                            View library card
+                        </button>
                     </div>
                     <div className="table_section">
                         <div className="sec_inner">
@@ -48,12 +75,9 @@ const MemberDetailsModal = ({isOpenMemberDetailsModal, setIsOpenMemberDetailsMod
                             </table>
                         </div>
                     </div>
-                    <div className="modal_btn">
-                        <button onClick={closeModal}>Cancel</button>
-                        <button>Save Changes </button>
-                    </div>
                 </div>
             </MemberDetailsWrapper>
+            <LibraryCardPreview open={isOpenMemberDetailsModal && isCardOpen} onClose={() => setIsCardOpen(false)} />
         </>
     );
 }

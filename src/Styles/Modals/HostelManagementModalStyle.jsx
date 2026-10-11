@@ -951,7 +951,7 @@ export const AddResidentWrapper = styled('div')`
                                     }
                                 }
 
-                                 ul {
+                                ul {
                                     position: relative;
                                     width: 100%;
                                     display: flex;
