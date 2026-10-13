@@ -42,9 +42,9 @@ export const AddGreneralExpenseWrapper = styled('div')`
             right: 0;
             width: 100%;
             z-index: 30;
-            padding: 16px;
+            padding: 12px;
             border: 1px solid ${colors.customColors.borderColor};
-            border-radius: 10px;
+            border-radius: 6px;
             background: ${colors.customColors.whiteColor};
             box-shadow: 0 6px 20px ${colors.boxShadowColors.shadowColor1};
         }
@@ -54,35 +54,66 @@ export const AddGreneralExpenseWrapper = styled('div')`
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            margin-bottom: 12px;
-            h5 { margin: 0; font-size: 15px; font-weight: 600; color: ${colors.customColors.blackColor1}; }
+            margin-bottom: 8px;
+            h5 { margin: 0; font-size: 13px; font-weight: 500; color: ${colors.customColors.blackColor1}; }
             button {
                 border: 0;
                 background: transparent;
                 color: ${colors.customColors.blackColor1};
-                font-size: 18px;
+                font-size: 12px;
                 padding: 3px;
                 line-height: 1;
             }
         }
 
-        .stock_search {
+        .search_sec {
+            position: relative;
+            height: 32px;
+            padding: 5px 0;
             display: flex;
-            align-items: center;
             border: 1px solid ${colors.customColors.borderColor};
-            border-radius: 7px;
-            padding-left: 12px;
-            margin-bottom: 10px;
-            color: ${colors.customColors.blackColor3};
-            &:focus-within { border-color: #168fff; }
-            input { margin: 0; background: transparent; padding: 8px 10px; min-width: 0; }
+            border-radius: 6px;
+            margin-bottom: 6px;
+            background: ${colors.customColors.whiteColor};
+
+            &:focus-within { border-color: ${colors.themeColor}; }
+
+            i {
+                position: relative;
+                width: 40px;
+                flex-shrink: 0;
+                height: 100%;
+                font-size: 12px;
+                color: ${colors.customColors.blackColor3};
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-right: 1px solid ${colors.customColors.borderColor};
+            }
+
+            input {
+                position: relative;
+                width: 100%;
+                min-width: 0;
+                height: 100%;
+                border: none;
+                outline: none;
+                padding: 0 15px;
+                font-size: 11px;
+                color: ${colors.customColors.blackColor1};
+                margin-top: 0;
+                border-radius: 0;
+                background: transparent;
+
+                &::placeholder { color: #98a2b3; opacity: 1; }
+            }
         }
 
         .stock_list {
             margin: 0;
             padding: 0;
             list-style: none;
-            max-height: min(300px, 40vh);
+            max-height: min(150px, 40vh);
             overflow-y: auto;
             overscroll-behavior: contain;
             scrollbar-width: none;
@@ -93,22 +124,21 @@ export const AddGreneralExpenseWrapper = styled('div')`
                 align-items: center;
                 justify-content: space-between;
                 gap: 12px;
-                min-height: 38px;
-                padding: 3px 12px;
-                border: 1px solid ${colors.customColors.borderColor};
-                border-radius: 8px;
-                background: ${colors.customColors.lightBackground3};
-                margin-bottom: 2px;
+                padding: 8px 4px;
+                border-bottom: 1px solid ${colors.customColors.borderColor};
+                background: transparent;
+
+                &:not(.stock_empty):hover { background: ${colors.customColors.lightBackground}; border-radius: 4px; }
+                &:last-child { border-bottom: none; }
             }
-            .stock_item_name { font-size: 13px; color: ${colors.customColors.blackColor1}; }
+            .stock_item_name { font-size: 12px; font-weight: 500; line-height: 1.4; color: ${colors.customColors.blackColor1}; }
             .stock_quantity {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
                 flex-shrink: 0;
-                line-height: 1.2;
-                strong { font-size: 14px; font-weight: 600; color: #008cff; }
-                small { font-size: 11px; color: ${colors.customColors.blackColor3}; }
+                white-space: nowrap;
+                font-size: 10px;
+                font-weight: 400;
+                line-height: 1.4;
+                color: ${colors.customColors.blackColor2};
             }
             .stock_empty { justify-content: center; font-size: 12px; color: ${colors.customColors.blackColor3}; }
         }

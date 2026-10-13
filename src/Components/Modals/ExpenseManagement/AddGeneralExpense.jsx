@@ -95,16 +95,21 @@ const AddGeneralExpenseModal = ({ isAddGeneralExpense, setIsAddGeneralExpense })
                                                 stockButtonRef.current?.focus();
                                             }}><i className="fa-solid fa-xmark" aria-hidden="true"></i></button>
                                         </div>
-                                        <div className="stock_search">
+                                        <div className="search_sec">
                                             <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                                            <input autoFocus type="search" placeholder="Search items..." aria-label="Search stock items"
-                                                value={stockSearch} onChange={(event) => setStockSearch(event.target.value)} />
+                                            <input
+                                                type="text"
+                                                placeholder="Search by Item Name"
+                                                aria-label="Search by Item Name"
+                                                value={stockSearch}
+                                                onChange={(event) => setStockSearch(event.target.value)}
+                                            />
                                         </div>
                                         <ul className="stock_list">
                                             {filteredStock.map((item) => (
                                                 <li key={item.name}>
                                                     <div className="stock_item_name">{item.name}</div>
-                                                    <div className="stock_quantity"><strong>{item.quantity}</strong><small>{item.unit}</small></div>
+                                                    <div className="stock_quantity">{item.quantity} {item.unit}</div>
                                                 </li>
                                             ))}
                                             {filteredStock.length === 0 && <li className="stock_empty">No items found.</li>}
