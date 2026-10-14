@@ -47,6 +47,7 @@ const LibraryMembersPage = () => {
 
     const handleOpenStudentDetailsModal = (member) => {
         setSelectedMember({
+            id: member.id,
             name: member.name,
             user_type: member.user_type,
             library_id: member.library_id,
@@ -131,7 +132,7 @@ const LibraryMembersPage = () => {
                                                 </div>
                                             </td>
                                             <td>{member.library_id}</td>
-                                            <td>{member.total_books_issued > 0 ? member.total_books_issued : '-'}</td>
+                                            <td>{member.total_issued > 0 ? member.total_issued : '-'}</td>
                                             <td>{member.returned > 0 ? member.returned : '-'}</td>
                                             <td>
                                                 <a className="view_btn" onClick={() => handleOpenStudentDetailsModal(member)}><i className="fa-solid fa-eye"></i></a>
@@ -149,19 +150,27 @@ const LibraryMembersPage = () => {
                     </table>
                 </div>
 
+                {
+                    totalCount > 10 &&
+                    <Pagination currentPage={page} totalItems={totalCount} itemsPerPage={10} onPageChange={(newPage) => setPage(newPage)} />
+                }
+
                 <NewLibraryMemberModal
                     isOpenNewMemberModal={isOpenNewMemberModal}
                     setIsOpenNewMemberModal={setIsOpenNewMemberModal}
+                    members={members}
                     refreshData={() => fetchMembers(false, page)}
                 />
                 <MemberDetailsModal
                     isOpenMemberDetailsModal={isOpenMemberDetailsModal}
                     setIsOpenMemberDetailsModal={setIsOpenMemberDetailsModal}
                     member={selectedMember}
+                    refreshData={() => fetchMembers(false, page)}
                 />
                 <BookIssueModal
                     isOpenBookIssueModal={isOpenBookIssueModal}
                     setIsOpenBookIssueModal={setIsOpenBookIssueModal}
+                    refreshData={() => fetchMembers(false, page)}
                 />
             </LibraryMenberWrapper>
         </>

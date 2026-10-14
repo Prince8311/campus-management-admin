@@ -300,7 +300,7 @@ export const LibraryMenberWrapper = styled('div')`
 
                 i {
                     font-size: 12px;
-                    margin-right: 5px;
+                    margin-right: 6px;
                 }
 
                 &:hover {

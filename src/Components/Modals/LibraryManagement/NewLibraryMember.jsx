@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { NewLibraryMemberWrapper } from "../../../Styles/Modals/LibraryManagementStyle";
 import { toast } from "react-toastify";
 import { getApiEndpoints, profileImageBaseURL } from "../../../Services/Api/ApiConfig";
 import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
-const NewLibraryMemberModal = ({ isOpenNewMemberModal, setIsOpenNewMemberModal, refreshData }) => {
+const NewLibraryMemberModal = ({ isOpenNewMemberModal, setIsOpenNewMemberModal, members, refreshData }) => {
     const api = getApiEndpoints();
     const [users, setUsers] = useState([]);
     const [userSearchInput, setUserSearchInput] = useState('');
@@ -13,10 +13,19 @@ const NewLibraryMemberModal = ({ isOpenNewMemberModal, setIsOpenNewMemberModal, 
     const [showUserDropdown, setShowUserDropdown] = useState(false);
     const [isButtonLoading, setIsButtonLoading] = useState(false);
 
+    const availableUsers = useMemo(() => {
+        return users.filter((user) => !members?.some((member) => (
+            String(member.user_id) === String(user.id)
+            && String(member.user_type || '').trim().toLowerCase()
+                === String(user.type || '').trim().toLowerCase()
+        )));
+    }, [users, members]);
+
     function closeModal() {
         setIsOpenNewMemberModal(false);
         setSelectedUser({});
         setUserSearchInput('');
+        setShowUserDropdown(false);
     }
 
     const getInitials = (name) => {
@@ -113,9 +122,12 @@ const NewLibraryMemberModal = ({ isOpenNewMemberModal, setIsOpenNewMemberModal, 
                                                 />
                                             </div>
                                             <ul>
-                                                {users.map((user, i) => (
+                                                {availableUsers.length === 0 && (
+                                                    <li className="no_data">No users available</li>
+                                                )}
+                                                {availableUsers.map((user) => (
                                                     <li
-                                                        key={i}
+                                                        key={`${user.type}-${user.id}`}
                                                         className={`user_box ${selectedUser.id === user.id ? "active" : ""}`}
                                                         onClick={() => handleSelectUser(user)}
                                                     >
