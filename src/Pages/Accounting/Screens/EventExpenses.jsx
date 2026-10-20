@@ -1,104 +1,53 @@
 import { useNavigate } from "react-router-dom";
 import { EventExpenseWrapper } from "../../../Styles/ExpenseStyle";
 
+const eventStatuses = [
+    "active", "cancel", "conclude", "active", "cancel",
+    "conclude", "active", "conclude", "cancel",
+];
+
+const statusLabels = { active: "Active", cancel: "Cancel", conclude: "Conclude" };
+
 const EventExpensesPage = () => {
     const navigate = useNavigate();
 
-    const handleFolderClick = (event) => {
-        if (event.target.closest(".folder_box")) {
-            navigate("/admin/accounting/event-details");
-        }
-    }
-
-    return(
-        <>
-            <EventExpenseWrapper>
-                <div className="folder_section" onClick={handleFolderClick}>
-                    <div className="folder_box">
+    return (
+        <EventExpenseWrapper>
+            <div className="folder_section" aria-label="Event expense folders">
+                {eventStatuses.map((status, index) => (
+                    <button
+                        type="button"
+                        className={`folder_box ${status}`}
+                        key={index}
+                        onClick={() => navigate("/admin/accounting/event-details")}
+                        aria-label={`Open Festival event ${index + 1}, ${statusLabels[status]}`}
+                    >
                         <div className="box_inner">
-                            <div className="img_sec">
+                            <div className="folder_topline">
+                                <span className="folder_category">Event expenses</span>
+                                <span className={`folder_status ${status}`}>
+                                    <i className="fa-solid fa-circle" aria-hidden="true" />
+                                    {statusLabels[status]}
+                                </span>
+                            </div>
+                            <div className="img_sec" aria-hidden="true">
+                                <span className="folder_halo" />
                                 <img src="/images/folder1.png" alt="" />
                             </div>
-                            <p>Festival</p>
-                            <a><i className="fa-solid fa-circle"></i>Active</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
+                            <p className="folder_title">Festival</p>
+                            <span className="folder_description">Event expense collection</span>
+                            <div className="folder_footer">
+                                <span>View expenses</span>
+                                <span className="folder_arrow" aria-hidden="true">
+                                    <i className="fa-solid fa-arrow-right" />
+                                </span>
                             </div>
-                            <p>Festival</p>
-                            <a className="cancel"><i className="fa-solid fa-circle"></i>Cancel</a>
                         </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
-                            </div>
-                            <p>Festival</p>
-                            <a className="conclude"><i className="fa-solid fa-circle"></i>Conclude</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
-                            </div>
-                            <p>Festival</p>
-                            <a className="active"><i className="fa-solid fa-circle"></i>Active</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
-                            </div>
-                            <p>Festival</p>
-                            <a className="cancel"><i className="fa-solid fa-circle"></i>Cancel</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
-                            </div>
-                            <p>Festival</p>
-                            <a className="conclude"><i className="fa-solid fa-circle"></i>Conclude</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
-                            </div>
-                            <p>Festival</p>
-                            <a className="active"><i className="fa-solid fa-circle"></i>Active</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
-                            </div>
-                            <p>Festival</p>
-                            <a className="conclude"><i className="fa-solid fa-circle"></i>Conclude</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/folder1.png" alt="" />
-                            </div>
-                            <p>Festival</p>
-                            <a className="cancel"><i className="fa-solid fa-circle"></i>Cancel</a>
-                        </div>
-                    </div>
-                </div>
-            </EventExpenseWrapper>
-        </>
-    )
-}
+                    </button>
+                ))}
+            </div>
+        </EventExpenseWrapper>
+    );
+};
 
 export default EventExpensesPage;

@@ -196,7 +196,14 @@ const MemberDetailsModal = ({ isOpenMemberDetailsModal, setIsOpenMemberDetailsMo
                     }
                 </div>
             </MemberDetailsWrapper>
-            <LibraryCardPreview open={isOpenMemberDetailsModal && isCardOpen} onClose={() => setIsCardOpen(false)} />
+            <LibraryCardPreview
+                open={isOpenMemberDetailsModal && isCardOpen}
+                onClose={() => setIsCardOpen(false)}
+                memberName={member?.name}
+                memberId={member?.id}
+                libraryId={member?.library_id}
+                userType={member?.user_type}
+            />
 
             {isOpenMemberDetailsModal && returnBook && (
                 <BookReturnModal

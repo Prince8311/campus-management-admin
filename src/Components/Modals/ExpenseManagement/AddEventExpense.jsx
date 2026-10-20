@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AddEventExpenseWrapper } from "../../../Styles/Modals/ExpenseManagementStyle";
 
 const AddEventExpenseModal = ({isAddEventExpense, setIsAddEventExpense, nameLabel = "Event Name", title = "Create Event"}) => {

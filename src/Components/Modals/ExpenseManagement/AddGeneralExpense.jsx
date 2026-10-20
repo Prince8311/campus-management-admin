@@ -118,7 +118,7 @@ const AddGeneralExpenseModal = ({ isAddGeneralExpense, setIsAddGeneralExpense })
                                 )}
                             </div>
                             <div className="select_box halfwidth">
-                                <span>Creater Name <p>*</p></span>
+                                <span>Bearer Name <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn">
                                         <p>Joydeep Barik</p>

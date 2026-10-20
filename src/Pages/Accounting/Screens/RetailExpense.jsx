@@ -1,41 +1,51 @@
 import { useNavigate } from "react-router-dom";
 import { RetailExpenseWrapper } from "../../../Styles/ExpenseStyle";
 
+const retailers = [
+    { name: "Abc Retailer", status: "paid", label: "Paid" },
+    { name: "Def retail", status: "due", label: "Due" },
+];
+
 const RetailExpensePage = () => {
     const navigate = useNavigate();
 
-    const handleFolderClick = (event) => {
-        if (event.target.closest(".folder_box")) {
-            navigate("/admin/accounting/retail-details");
-        }
-    }
-
     return (
-        <>
-            <RetailExpenseWrapper>
-                <div className="folder_section" onClick={handleFolderClick}>
-                    <div className="folder_box">
+        <RetailExpenseWrapper>
+            <div className="folder_section" aria-label="Retailer expense folders">
+                {retailers.map((retailer) => (
+                    <button
+                        type="button"
+                        className={`folder_box ${retailer.status}`}
+                        key={retailer.name}
+                        onClick={() => navigate("/admin/accounting/retail-details")}
+                        aria-label={`Open ${retailer.name} expenses, ${retailer.label}`}
+                    >
                         <div className="box_inner">
-                            <div className="img_sec">
+                            <div className="folder_topline">
+                                <span className="folder_category">Retailer</span>
+                                <span className={`folder_status ${retailer.status}`}>
+                                    <i className="fa-solid fa-circle" aria-hidden="true" />
+                                    {retailer.label}
+                                </span>
+                            </div>
+                            <div className="img_sec" aria-hidden="true">
+                                <span className="folder_halo" />
                                 <img src="/images/retail.png" alt="" />
                             </div>
-                            <p>Abc Retailer</p>
-                            <a className="paid"><i className="fa-solid fa-circle"></i>Paid</a>
-                        </div>
-                    </div>
-                    <div className="folder_box">
-                        <div className="box_inner">
-                            <div className="img_sec">
-                                <img src="/images/retail.png" alt="" />
+                            <p className="folder_title">{retailer.name}</p>
+                            <span className="folder_description">Retailer expense collection</span>
+                            <div className="folder_footer">
+                                <span>View expenses</span>
+                                <span className="folder_arrow" aria-hidden="true">
+                                    <i className="fa-solid fa-arrow-right" />
+                                </span>
                             </div>
-                            <p>Def retail</p>
-                            <a className="due"><i className="fa-solid fa-circle"></i>Due</a>
                         </div>
-                    </div>
-                </div>
-            </RetailExpenseWrapper>
-        </>
+                    </button>
+                ))}
+            </div>
+        </RetailExpenseWrapper>
     );
-}
+};
 
 export default RetailExpensePage;

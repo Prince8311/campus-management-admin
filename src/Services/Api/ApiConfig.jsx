@@ -165,5 +165,6 @@ export const getApiEndpoints = () => {
         issueBook: `${apiURL}/api/library/members/issue-book.php`,
         returnBook: `${apiURL}/api/library/members/return-book.php`,
         issueBookHistory: `${apiURL}/api/library/members/member-issue-history.php`,
+        libraryCardDetails: `${apiURL}/api/library/members/library-card.php`,
     };
 }

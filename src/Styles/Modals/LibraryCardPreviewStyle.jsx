@@ -236,10 +236,12 @@ export const LibraryCardPreviewWrapper = styled(Modal)`
         background: linear-gradient(140deg, #e2eaf1, #bdcdd9);
         border: .2cqw solid #31bfce;
         border-radius: 2cqw;
+        img,
         svg {
             display: block;
             width: 100%;
             height: 100%;
+            object-fit: cover;
         }
     }
 
