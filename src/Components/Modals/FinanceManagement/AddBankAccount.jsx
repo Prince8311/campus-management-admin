@@ -120,7 +120,6 @@ const AddBankAccountModal = ({ isAddBankAccountModalOpen, setIsAddBankAccountMod
                 }
             });
             if (response.data.status === 200) {
-                console.log('bank Account saved successfully:', response.data);
                 toast.success(response.data.message);
                 resetForm();
                 refreshData();

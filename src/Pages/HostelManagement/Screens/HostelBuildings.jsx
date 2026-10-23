@@ -36,7 +36,6 @@ const HostelBuildingsPage = () => {
                 }
             });
             if (response?.data.status === 200) {
-                console.log("Hostel Buildings", response);
                 setBuildings(response?.data.buildings);
                 setTotalCount(response?.data.totalCount);
             }

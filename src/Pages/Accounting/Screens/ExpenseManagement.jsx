@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ExpenseManagementWrapper } from "../../../Styles/ExpenseStyle";
 import EventExpensesPage from "./EventExpenses";
@@ -6,13 +6,17 @@ import GeneralExpensesPage from "./GeneralExpenses";
 import AddEventExpenseModal from "../../../Components/Modals/ExpenseManagement/AddEventExpense";
 import AddGeneralExpenseModal from "../../../Components/Modals/ExpenseManagement/AddGeneralExpense";
 import RetailExpensePage from "./RetailExpense";
+import { getApiEndpoints } from "../../../Services/Api/ApiConfig";
+import { toast } from "react-toastify";
+import axiosInstance from "../../../Services/Middleware/AxiosInstance";
 
 const ExpenseManagementpage = () => {
+    const api = getApiEndpoints();
     const location = useLocation();
     const tabs = [
         { label: "General", value: "general" },
         { label: "Event", value: "event" },
-        {label: "Retailer", value: "retailer"}
+        { label: "Retailer", value: "retailer" }
     ];
     const initialTab = tabs.some((tab) => tab.value === location.state?.selectedTab)
         ? location.state.selectedTab
@@ -20,6 +24,8 @@ const ExpenseManagementpage = () => {
     const [selectedTab, setSelectedTab] = useState(initialTab);
     const [isAddGeneralExpense, setIsAddGeneralExpense] = useState(false);
     const [isAddEventExpense, setIsAddEventExpense] = useState(false);
+    const [initalLoading, setInitalLoading] = useState(false);
+    const [formats, setFormats] = useState([]);
 
     const handleOpenGeneralExpenseModal = () => {
         setIsAddGeneralExpense(true);
@@ -28,6 +34,33 @@ const ExpenseManagementpage = () => {
     const handleOpenEventExpenseModal = () => {
         setIsAddEventExpense(true);
     }
+
+    const fetchAccountFormats = useCallback(async (showSkeleton = false) => {
+        if (showSkeleton) {
+            setInitalLoading(true);
+        }
+        try {
+            const response = await axiosInstance.get(api.fetchAccountFormatList, {
+                params: {
+                    type: selectedTab,
+                }
+            });
+            if (response?.data.status === 200) {
+                setFormats(response?.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setInitalLoading(false);
+        }
+    }, [api.fetchAccountFormatList, selectedTab]);
+
+    useEffect(() => {
+        if (selectedTab === "event" || selectedTab === "retailer") {
+            fetchAccountFormats(true);
+        }
+    }, [selectedTab, fetchAccountFormats]);
+
     return (
         <>
             <ExpenseManagementWrapper>
@@ -66,12 +99,15 @@ const ExpenseManagementpage = () => {
                     <GeneralExpensesPage />
                 )}
                 {selectedTab === "event" && (
-                    <EventExpensesPage />
+                    <EventExpensesPage 
+                        initalLoading={initalLoading}
+                        data={formats}
+                    />
                 )}
                 {selectedTab === "retailer" && (
                     <RetailExpensePage />
                 )}
-                
+
                 <AddGeneralExpenseModal
                     isAddGeneralExpense={isAddGeneralExpense}
                     setIsAddGeneralExpense={setIsAddGeneralExpense}
@@ -79,6 +115,7 @@ const ExpenseManagementpage = () => {
                 <AddEventExpenseModal
                     isAddEventExpense={isAddEventExpense}
                     setIsAddEventExpense={setIsAddEventExpense}
+                    type={selectedTab}
                     nameLabel={selectedTab === "retailer" ? "Retailer Name" : "Event Name"}
                     title={selectedTab === "retailer" ? "Create retailer" : "Create Event"}
                 />

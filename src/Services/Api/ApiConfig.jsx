@@ -166,5 +166,9 @@ export const getApiEndpoints = () => {
         returnBook: `${apiURL}/api/library/members/return-book.php`,
         issueBookHistory: `${apiURL}/api/library/members/member-issue-history.php`,
         libraryCardDetails: `${apiURL}/api/library/members/library-card.php`,
+
+        // Accounting
+        createAccountFormat: `${apiURL}/api/accounting/create-accounting-format.php`,
+        fetchAccountFormatList: `${apiURL}/api/accounting/accounting-format-list.php`,
     };
 }

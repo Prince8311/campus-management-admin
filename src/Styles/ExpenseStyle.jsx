@@ -294,13 +294,13 @@ export const EventExpenseWrapper = styled('div')`
         font-family: inherit;
         cursor: pointer;
         border: 1px solid #e3eaf3;
-        border-radius: 18px;
+        border-radius: 12px;
         background: linear-gradient(155deg, #f4f9ff 0%, #fff 60%);
         box-shadow: 0 3px 7px rgba(27, 58, 99, .025), 0 10px 26px rgba(27, 58, 99, .035);
         transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 
-        &.cancel { --status-color: #b74755; --status-bg: #fff0f2; }
-        &.conclude { --status-color: #586580; --status-bg: #edf1f7; }
+        &.Cancel { --status-color: #b74755; --status-bg: #fff0f2; }
+        &.Conclude { --status-color: #586580; --status-bg: #edf1f7; }
         &:hover {
             transform: translateY(-4px);
             border-color: #9dc9fa;
@@ -310,21 +310,67 @@ export const EventExpenseWrapper = styled('div')`
         &:active { transform: translateY(-1px); }
 
         .box_inner { display: flex; flex-direction: column; align-items: center; padding: 18px 18px 0; }
-        .folder_topline { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; }
+        .folder_open {
+            width: 100%;
+            box-sizing: border-box;
+            border: 0;
+            background: transparent;
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+        }
+        .folder_open:focus-visible, .folder_action:focus-visible {
+            outline: 2px solid #1976d2;
+            outline-offset: -3px;
+        }
+        .folder_actions {
+            display: flex;
+            gap: 8px;
+            padding: 0 14px 14px;
+        }
+        .folder_action {
+            display: inline-flex;
+            flex: 1;
+            margin-top: 3px;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 30px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s ease, border-color .2s ease;
+            &.edit_action {
+                color: #2268b3;
+                background: #edf5ff;
+                &:hover { background: #dfedff; border-color: #b7d5fa; }
+            }
+            &.delete_action {
+                color: #b43c4c;
+                background: #fff0f2;
+                &:hover { background: #ffe1e6; border-color: #f3bdc6; }
+            }
+        }
         .folder_category { font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: #728198; }
         .folder_status {
+            position: absolute;
+            top: 8px;
+            right: 8px;
             display: inline-flex;
             align-items: center;
             gap: 5px;
             padding: 5px 8px;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             line-height: 1.2;
             white-space: nowrap;
             color: var(--status-color);
             background: var(--status-bg);
-            i { font-size: 5px; }
+            i { font-size: 6px; }
         }
         .img_sec {
             position: relative;
@@ -333,7 +379,6 @@ export const EventExpenseWrapper = styled('div')`
             justify-content: center;
             width: 112px;
             height: 102px;
-            margin-top: 17px;
             .folder_halo {
                 position: absolute;
                 width: 88px;
@@ -352,15 +397,15 @@ export const EventExpenseWrapper = styled('div')`
             }
         }
         &:hover .img_sec img { transform: translateY(-3px) rotate(-4deg); }
-        .folder_title { margin: 10px 0 5px; font-size: 17px; line-height: 1.3; font-weight: 700; color: #243752; }
-        .folder_description { font-size: 11px; color: #738198; line-height: 1.5; }
+        .folder_title { margin-top: 6px; font-size: 13px; line-height: 1.3; font-weight: 600; color: #243752; }
+        .folder_description { margin-top: 3px; font-size: 11px; color: #738198; line-height: 1.5; }
         .folder_footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            margin-top: 22px;
-            padding: 12px 0;
+            margin-top: 8px;
+            padding: 8px 0;
             border-top: 1px solid #eaf0f7;
             color: #52759f;
             font-size: 11px;

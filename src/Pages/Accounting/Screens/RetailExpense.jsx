@@ -13,16 +13,17 @@ const RetailExpensePage = () => {
         <RetailExpenseWrapper>
             <div className="folder_section" aria-label="Retailer expense folders">
                 {retailers.map((retailer) => (
-                    <button
-                        type="button"
+                    <article
                         className={`folder_box ${retailer.status}`}
                         key={retailer.name}
-                        onClick={() => navigate("/admin/accounting/retail-details")}
-                        aria-label={`Open ${retailer.name} expenses, ${retailer.label}`}
                     >
-                        <div className="box_inner">
+                        <button
+                            type="button"
+                            className="box_inner folder_open"
+                            onClick={() => navigate("/admin/accounting/retail-details")}
+                            aria-label={`Open ${retailer.name} expenses, ${retailer.label}`}
+                        >
                             <div className="folder_topline">
-                                <span className="folder_category">Retailer</span>
                                 <span className={`folder_status ${retailer.status}`}>
                                     <i className="fa-solid fa-circle" aria-hidden="true" />
                                     {retailer.label}
@@ -40,8 +41,18 @@ const RetailExpensePage = () => {
                                     <i className="fa-solid fa-arrow-right" />
                                 </span>
                             </div>
+                        </button>
+                        <div className="folder_actions" role="group" aria-label={`Actions for ${retailer.name}`}>
+                            <button type="button" className="folder_action edit_action" aria-label={`Edit ${retailer.name}`}>
+                                <i className="fa-solid fa-pen-to-square" aria-hidden="true" />
+                                <span>Edit</span>
+                            </button>
+                            <button type="button" className="folder_action delete_action" aria-label={`Delete ${retailer.name}`}>
+                                <i className="fa-solid fa-trash-can" aria-hidden="true" />
+                                <span>Delete</span>
+                            </button>
                         </div>
-                    </button>
+                    </article>
                 ))}
             </div>
         </RetailExpenseWrapper>
