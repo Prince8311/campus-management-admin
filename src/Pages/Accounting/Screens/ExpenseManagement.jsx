@@ -99,13 +99,16 @@ const ExpenseManagementpage = () => {
                     <GeneralExpensesPage />
                 )}
                 {selectedTab === "event" && (
-                    <EventExpensesPage 
+                    <EventExpensesPage
                         initalLoading={initalLoading}
                         data={formats}
                     />
                 )}
                 {selectedTab === "retailer" && (
-                    <RetailExpensePage />
+                    <RetailExpensePage
+                        initalLoading={initalLoading}
+                        data={formats}
+                    />
                 )}
 
                 <AddGeneralExpenseModal

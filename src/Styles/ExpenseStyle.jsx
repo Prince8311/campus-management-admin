@@ -284,8 +284,6 @@ export const EventExpenseWrapper = styled('div')`
     }
 
     .folder_box {
-        --status-color: #137950;
-        --status-bg: #e9f8f0;
         position: relative;
         min-width: 0;
         padding: 0;
@@ -299,8 +297,6 @@ export const EventExpenseWrapper = styled('div')`
         box-shadow: 0 3px 7px rgba(27, 58, 99, .025), 0 10px 26px rgba(27, 58, 99, .035);
         transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 
-        &.Cancel { --status-color: #b74755; --status-bg: #fff0f2; }
-        &.Conclude { --status-color: #586580; --status-bg: #edf1f7; }
         &:hover {
             transform: translateY(-4px);
             border-color: #9dc9fa;
@@ -365,12 +361,16 @@ export const EventExpenseWrapper = styled('div')`
             padding: 5px 8px;
             border-radius: 20px;
             font-size: 9px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.2;
             white-space: nowrap;
             color: var(--status-color);
             background: var(--status-bg);
             i { font-size: 6px; }
+
+            &.active { --status-color: #137950; --status-bg: #e9f8f0; }
+            &.cancel { --status-color: #b74755; --status-bg: #fff0f2; }
+            &.conclude, &.not_started { --status-color: #586580; --status-bg: #edf1f7; }
         }
         .img_sec {
             position: relative;
@@ -423,6 +423,30 @@ export const EventExpenseWrapper = styled('div')`
             transition: background .2s ease, color .2s ease;
         }
         &:hover .folder_arrow { background: #2677cf; color: #fff; }
+    }
+
+    .empty_messege {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+        margin-top: 60px;
+
+        img {
+            position: relative;
+            width: 300px;
+            opacity: 0.5;
+        }
+
+        p {
+            position: relative;
+            font-size: 13px;
+            margin-top: 10px;
+            color: ${colors.customColors.blackColor3};
+        }
     }
 
     @media (max-width: 575px) {
