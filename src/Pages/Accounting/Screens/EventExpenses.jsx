@@ -11,11 +11,15 @@ const EventExpensesPage = ({ initalLoading, data }) => {
         <EventExpenseWrapper>
             {
                 initalLoading ? (
-                    Array.from({ length: 4 }).map((_, i) => (
-                        <div key={i} className="sec_item">
-                            <SkeletonLoader width="100%" height="210px" />
-                        </div>
-                    ))
+                    <div className="folder_section" aria-label="Retailer expense folders">
+                        {
+                            Array.from({ length: 4 }).map((_, i) => (
+                                <div key={i} className="sec_item">
+                                    <SkeletonLoader width="100%" height="210px" />
+                                </div>
+                            ))
+                        }
+                    </div>
                 ) : data.length > 0 ? (
                     <div className="folder_section" aria-label="Event expense folders">
                         {
