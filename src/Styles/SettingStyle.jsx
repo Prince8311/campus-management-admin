@@ -5016,3 +5016,277 @@ export const AccountSettingWrapper = styled('div')`
         .form_actions > div { justify-content: flex-end; }
     }
 `;
+
+export const PriceSettingWrapper = styled('div')`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .page_head {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding: 0 15px;
+
+        h2 {
+            position: relative;
+            font-size: 21px;
+            font-weight: 600;
+            color: ${colors.customColors.blackColor};
+            font-family: "SUSE", sans-serif;
+        }
+    }
+
+    .tab_sec {
+        position: relative;
+        margin-top: 25px;
+        width: 100%;
+        padding: 0 15px;
+
+        .tab_inner {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid ${colors.themeColor};
+
+            li {
+                position: relative;
+                list-style: none;
+                height: 100%;
+                padding: 0 20px;
+                padding-top: 2px;
+                display: flex;
+                align-items: center;
+                font-size: 12.5px;
+                color: ${colors.customColors.blackColor1};
+                border-radius: 6px 6px 0 0;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                
+                &:hover {
+                    color: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+                
+                &.active {
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.themeColor};
+                    transition: all 0.5s ease;
+                }
+            }
+        }
+    }
+`;
+
+export const ModulePriceWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .Module_price_sec {
+        position: relative;
+        margin-top: 15px;
+        width: 100%;
+        padding: 0 5px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .module_box {
+            position: relative;
+            width: 33.33%;
+            /* max-width: 302.75px; */
+            max-height: 135px;
+            padding: 10px;
+
+            .box_inner {
+                position: relative;
+                width: 100%;
+                padding: 12px;
+                padding-left: 15px;
+                background: ${colors.customColors.whiteColor};
+                border: 1px solid ${colors.customColors.borderColor};
+                border-left: 4px solid ${colors.customColors.blueColor1};
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 4px 4px 10px ${colors.boxShadowColors.shadowColor2},
+                            -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+
+                .top_part {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                    .part_content {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        
+                        a {
+                            position: relative;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: ${colors.customColors.blueColorLight};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 13px;
+                            color: ${colors.customColors.blueColor1};
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                        
+                        h6 {
+                            position: relative;
+                            padding-left: 12px;
+                            max-width: calc(100% - 32px);
+                            font-size: 13.5px;
+                            font-style: italic;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor};
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+
+                        span {
+                            position: relative;
+                            width: max-content;
+                            display: flex;
+                            font-size: 10px;
+                            color: ${colors.customColors.greenColor};
+                            margin-top: 2px;
+                            background: ${colors.customColors.greenColorLight};
+                            border-radius: 25px;
+                            padding: 3px 15px;
+                            margin-left: auto;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .description_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        margin-top: 5px;
+
+                        p {
+                            position: relative;
+                            display: flex;
+                            width: 100%;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+
+                    .sub_module_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 5px;
+
+                        h6 {
+                            position: relative;
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor};
+                        }
+
+                        ul {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: wrap;
+
+                            li {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                margin-top: 4px;
+                                list-style: none;
+
+                                i {
+                                    font-size: 5px;
+                                    color: ${colors.customColors.blackColor2};
+                                }
+
+                                span {
+                                    position: relative;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor1};
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .bottom_part {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 8px;
+
+                    h5 {
+                        position: relative;
+                        font-size: 13px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor};
+                        display: flex;
+                        align-items: center;
+
+                        span {
+                            margin-left: 8px;
+                            color: ${colors.customColors.blueColor4};
+                            font-weight: 500;
+                            font-size: 13px;
+                        }
+                    }
+
+                    .bottom_btn {
+                        position: relative;
+                        display: flex;
+                        margin-left: auto;
+
+                        button {
+                            position: relative;
+                            width: max-content;
+                            height: 25px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border: none;
+                            padding: 0 12px;
+                            background: ${colors.customColors.blueColor2};
+                            color: ${colors.customColors.whiteColor};
+                            font-size: 10px;
+                            cursor: pointer;
+                            font-weight: 500;
+                            border-radius: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const DocumentationWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;

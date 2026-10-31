@@ -247,6 +247,10 @@ export const AddGreneralExpenseWrapper = styled('div')`
                         width: 48.5%;
                     }
 
+                    &.thirdwidth {
+                        width: 31.5%;
+                    }
+
                     input {
                         position: relative;
                         width: 100%;
@@ -286,6 +290,10 @@ export const AddGreneralExpenseWrapper = styled('div')`
 
                     &.halfwidth {
                         width: 48.5%;
+                    }
+
+                    &.thirdwidth {
+                        width: 31.5%;
                     }
 
                     span {

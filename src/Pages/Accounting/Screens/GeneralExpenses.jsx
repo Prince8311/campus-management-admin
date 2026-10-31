@@ -11,7 +11,7 @@ const GeneralExpensesPage = () => {
                                 <th>Item Name</th>
                                 <th>Total Amount</th>
                                 <th>Quantity</th>
-                                <th>Beerar Name</th>
+                                <th>Bearar Name</th>
                                 <th>Date</th>
                                 <th>Action</th>
                             </tr>

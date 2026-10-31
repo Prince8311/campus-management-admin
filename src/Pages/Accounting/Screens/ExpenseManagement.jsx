@@ -120,7 +120,7 @@ const ExpenseManagementpage = () => {
                     setIsAddEventExpense={setIsAddEventExpense}
                     type={selectedTab}
                     nameLabel={selectedTab === "retailer" ? "Retailer Name" : "Event Name"}
-                    title={selectedTab === "retailer" ? "Create retailer" : "Create Event"}
+                    title={selectedTab === "retailer" ? "Create Retailer" : "Create Event"}
                 />
             </ExpenseManagementWrapper>
         </>

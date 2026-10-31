@@ -77,6 +77,7 @@ const EventDetailsPage = () => {
             <AddGeneralExpenseModal
                 isAddGeneralExpense={isAddEventExpense}
                 setIsAddGeneralExpense={setIsAddEventExpense}
+                title="Add Event"
             />
         </>
     );

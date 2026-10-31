@@ -13,7 +13,12 @@ const demoStockItems = [
     { name: "Printer Ink", quantity: 8, unit: "pcs" },
 ];
 
-const AddGeneralExpenseModal = ({ isAddGeneralExpense, setIsAddGeneralExpense }) => {
+const AddGeneralExpenseModal = ({
+    isAddGeneralExpense,
+    setIsAddGeneralExpense,
+    title = "Add General Expense",
+    showPaymentDropdown = false
+}) => {
     const [isStockOpen, setIsStockOpen] = useState(false);
     const [stockSearch, setStockSearch] = useState("");
     const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
@@ -64,7 +69,7 @@ const AddGeneralExpenseModal = ({ isAddGeneralExpense, setIsAddGeneralExpense })
             <AddGreneralExpenseWrapper className={isAddGeneralExpense ? 'active' : ''}>
                 <div className={`modal_box ${isAddGeneralExpense ? 'active' : ''}`}>
                     <div className="modal_head">
-                        <h4>Add General Expense</h4>
+                        <h4>{title}</h4>
                         <div className="close_sec">
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
@@ -118,7 +123,7 @@ const AddGeneralExpenseModal = ({ isAddGeneralExpense, setIsAddGeneralExpense })
                                 )}
                             </div>
                             <div className="select_box halfwidth">
-                                <span>Bearer Name <p>*</p></span>
+                                <span>Bearar Name <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn">
                                         <p>Joydeep Barik</p>
@@ -137,11 +142,29 @@ const AddGeneralExpenseModal = ({ isAddGeneralExpense, setIsAddGeneralExpense })
                                 <span>Total Amount <p>*</p></span>
                                 <input type="text" />
                             </div>
-                            <div className="input_box halfwidth">
+                            <div className={`input_box ${showPaymentDropdown ? "thirdwidth" : "halfwidth"}`}>
                                 <span>Quantity <p>*</p></span>
                                 <input type="text" />
                             </div>
-                            <div className="select_box halfwidth">
+                            {showPaymentDropdown && (
+                                <div className="select_box thirdwidth">
+                                    <span>Payment <p>*</p></span>
+                                    <div className="dropdown_sec">
+                                        <div className="dropdown_btn">
+                                            <p>Due</p>
+                                            <i className="fa-solid fa-angle-down"></i>
+                                        </div>
+                                        <div className="dropdown">
+                                            <div className="dropdown_inner">
+                                                <ul>
+                                                    <li></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            <div className={`select_box ${showPaymentDropdown ? "thirdwidth" : "halfwidth"}`}>
                                 <span>Quantity Unit <p>*</p></span>
                                 <div className="dropdown_sec">
                                     <div className="dropdown_btn">

@@ -535,6 +535,13 @@ const Sidebar = () => {
                                                 <p>State & Cities</p>
                                             </NavLink>
                                         }
+                                        {
+                                            userDetails.user_type === 'super_admin' &&
+                                            <NavLink to="/admin/settings/price-setting">
+                                                <i className="fa-solid fa-money-bills prefix"></i>
+                                                <p>Price Setting</p>
+                                            </NavLink>
+                                        }
                                         <NavLink to="/admin/settings/roles-permissions">
                                             <i className="fa-solid fa-file-shield prefix"></i>
                                             <p>Roles & Permissions</p>

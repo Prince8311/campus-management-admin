@@ -42,7 +42,7 @@ const RetailerDetailsPage = () => {
                             <div className="price_content">
                                 <h6>Total Amount</h6>
                                 <h3>₹50,000</h3>
-                                <p>Total budget for this retailer</p>
+                                <p>Total budget assigned to this retailer</p>
                             </div>
                             <svg className="price_graph" viewBox="0 0 170 70" aria-hidden="true">
                                 <path d="M2 50 C35 68, 48 8, 85 16 S126 57, 168 30" />
@@ -59,9 +59,9 @@ const RetailerDetailsPage = () => {
                                 <i className="fa-solid fa-coins"></i>
                             </div>
                             <div className="price_content">
-                                <h6>Burn Amount</h6>
+                                <h6>Total Due Amount</h6>
                                 <h3>₹5,000</h3>
-                                <p>Total spent till now</p>
+                                <p>Total due till now</p>
                             </div>
                             <svg className="price_graph" viewBox="0 0 170 70" aria-hidden="true">
                                 <path d="M2 52 C28 68, 48 25, 78 37 S119 50, 139 15 S162 10, 168 19" />
@@ -79,9 +79,9 @@ const RetailerDetailsPage = () => {
                                 <i className="fa-solid fa-wallet"></i>
                             </div>
                             <div className="price_content">
-                                <h6>Remaining Amount</h6>
+                                <h6>Total Paid Amount</h6>
                                 <h3>₹45,000</h3>
-                                <p>Amount left to spend</p>
+                                <p>Total paid till now</p>
                             </div>
                             <svg className="price_graph" viewBox="0 0 170 70" aria-hidden="true">
                                 <path d="M2 49 C34 68, 48 23, 79 31 S121 45, 145 12 S163 6, 168 3" />
@@ -101,7 +101,8 @@ const RetailerDetailsPage = () => {
                                 <th>Item Name</th>
                                 <th>Total Amount</th>
                                 <th>Quantity</th>
-                                <th>Beerar Name</th>
+                                <th>Bearar Name</th>
+                                <th>Payment</th>
                                 <th>Date</th>
                                 <th>Action</th>
                             </tr>
@@ -112,6 +113,9 @@ const RetailerDetailsPage = () => {
                                 <td>5000</td>
                                 <td>2kg</td>
                                 <td>Joydeep Barik</td>
+                                <td>
+                                    <p className="paid">Paid</p>
+                                </td>
                                 <td>12 sept, 2026</td>
                                 <td>
                                     <a className="view_btn"><i className="fa-solid fa-eye"></i></a>
@@ -126,6 +130,8 @@ const RetailerDetailsPage = () => {
             <AddGeneralExpenseModal
                 isAddGeneralExpense={isAddRetailer}
                 setIsAddGeneralExpense={setIsAddRetailer}
+                title="Add Retailer"
+                showPaymentDropdown
             />
         </>
     );

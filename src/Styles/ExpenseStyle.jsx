@@ -1083,7 +1083,7 @@ export const RetailerDetailsWrapper = styled('div')`
                     font-weight: 600;
 
                     &:nth-of-type(1) {
-                        width: 20%;
+                        width: 16%;
                     }
 
                     &:nth-of-type(2) {
@@ -1091,17 +1091,21 @@ export const RetailerDetailsWrapper = styled('div')`
                         justify-content: center;
                     }
                     &:nth-of-type(3) {
-                        width: 15%;
+                        width: 12%;
                         justify-content: center;
                     }
                     &:nth-of-type(4) {
-                        width: 20%;
+                        width: 14%;
                     }
                     &:nth-of-type(5) {
-                        width: 15%;
+                        width: 13%;
                         justify-content: center;
                     }
                     &:nth-of-type(6) {
+                        width: 15%;
+                        justify-content: center;
+                    }
+                    &:nth-of-type(7) {
                         width: 15%;
                         justify-content: center;
                     }
@@ -1138,7 +1142,7 @@ export const RetailerDetailsWrapper = styled('div')`
                         line-height: 1.5;
 
                         &:nth-of-type(1) {
-                            width: 20%;
+                            width: 16%;
                             display: flex;
                         }
 
@@ -1148,20 +1152,41 @@ export const RetailerDetailsWrapper = styled('div')`
                             justify-content: center;
                         }
                         &:nth-of-type(3) {
-                            width: 15%;
+                            width: 12%;
                             align-items: center;
                             justify-content: center;
                         }
                         &:nth-of-type(4) {
-                            width: 20%;
+                            width: 14%;
                             align-items: center;
                         }
                         &:nth-of-type(5) {
+                            width: 13%;
+                            align-items: center;
+                            justify-content: center;
+
+                            p {
+                                position: relative;
+                                padding: 3px 10px;
+                                border-radius: 25px;
+                                font-size: 11px;
+
+                                &.paid {
+                                    background: ${colors.customColors.greenColorLight};
+                                    color: ${colors.customColors.greenColor1};
+                                }
+                                &.due {
+                                    background: ${colors.customColors.redColorLight};
+                                    color: ${colors.customColors.redColor};
+                                }
+                            }
+                        }
+                        &:nth-of-type(6) {
                             width: 15%;
                             align-items: center;
                             justify-content: center;
                         }
-                        &:nth-of-type(6) {
+                        &:nth-of-type(7) {
                             width: 15%;
                             align-items: center;
                             justify-content: center;
