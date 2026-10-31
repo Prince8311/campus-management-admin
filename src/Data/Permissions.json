@@ -44,6 +44,7 @@
             {
                 "id": 1,
                 "name": "Reports",
+                "desc": "View and analyze school performance, student attendance, academic progress, and fee reports.",
                 "icon": "fa-chart-bar",
                 "sub_modules": [
                     {
@@ -71,6 +72,7 @@
             {
                 "id": 2,
                 "name": "Academics",
+                "desc": "Manage student information, classrooms, attendance records, and academic report cards",
                 "icon": "fa-book",
                 "sub_modules": [
                     {
@@ -94,6 +96,7 @@
             {
                 "id": 3,
                 "name": "Finance Management",
+                "desc": "Manage fee collection, payment transactions, fee structures, and bank accounts.",
                 "icon": "fa-sack-dollar",
                 "sub_modules": [
                     {
@@ -117,6 +120,7 @@
             {
                 "id": 4,
                 "name": "Communication",
+                "desc": "Manage school communications and send messages to students, parents, and staff.",
                 "icon": "fa-headphones",
                 "sub_modules": [
                     {
@@ -128,6 +132,7 @@
             {
                 "id": 5,
                 "name": "Staff Management",
+                "desc": "Manage staff profiles, employee information, and attendance records.",
                 "icon": "fa-users-gear",
                 "sub_modules": [
                     {
@@ -143,6 +148,7 @@
             {
                 "id": 6,
                 "name": "Hostel Management",
+                "desc": "Residential boarding governance convering room allocations, dining charges, security logs, and curfew verifications.",
                 "icon": "fa-building-user",
                 "sub_modules": [
                     {
@@ -166,6 +172,7 @@
             {
                 "id": 7,
                 "name": "Administration",
+                "desc": "Manage student certificates, ID cards, and school transportation services.",
                 "icon": "fa-user-shield",
                 "sub_modules": [
                     {
@@ -185,6 +192,7 @@
             {
                 "id": 8,
                 "name": "Settings",
+                "desc": "Configure device, profile, subjects, timetables, general settings, user roles, permissions, and system preferences.",
                 "icon": "fa-gears",
                 "sub_modules": [
                     {
@@ -220,6 +228,7 @@
             {
                 "id": 9,
                 "name": "Extras",
+                "desc": "Manage billing operations and maintain alumni records and engagement.",
                 "icon": "fa-star",
                 "sub_modules": [
                     {

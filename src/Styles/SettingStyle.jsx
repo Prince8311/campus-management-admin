@@ -5098,12 +5098,14 @@ export const ModulePriceWrapper = styled('div')`
             position: relative;
             width: 33.33%;
             /* max-width: 302.75px; */
-            max-height: 135px;
+            height: 260px;
             padding: 10px;
 
             .box_inner {
                 position: relative;
                 width: 100%;
+                height: 100%;
+                box-sizing: border-box;
                 padding: 12px;
                 padding-left: 15px;
                 background: ${colors.customColors.whiteColor};
@@ -5120,6 +5122,9 @@ export const ModulePriceWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     flex-direction: column;
+                    flex: 1;
+                    min-height: 0;
+                    overflow: hidden;
                     padding-bottom: 8px;
                     border-bottom: 1px solid ${colors.customColors.borderColor};
 
@@ -5192,6 +5197,8 @@ export const ModulePriceWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         flex-direction: column;
+                        flex: 1;
+                        min-height: 0;
                         margin-top: 5px;
 
                         h6 {
@@ -5204,9 +5211,20 @@ export const ModulePriceWrapper = styled('div')`
                         ul {
                             position: relative;
                             width: 100%;
+                            flex: 1;
+                            min-height: 0;
+                            max-height: 120px;
+                            overflow-y: auto;
+                            overflow-x: hidden;
+                            scrollbar-width: none;
+                            -ms-overflow-style: none;
                             display: flex;
                             flex-direction: column;
-                            flex-wrap: wrap;
+                            flex-wrap: nowrap;
+
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
 
                             li {
                                 position: relative;
@@ -5238,6 +5256,7 @@ export const ModulePriceWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     align-items: center;
+                    flex-shrink: 0;
                     margin-top: 8px;
 
                     h5 {
